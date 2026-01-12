@@ -1,0 +1,119 @@
+{
+  "name": "debuggatha",
+  "displayName": "Debuggatha",
+  "description": "AI-powered debugging witch assistant with personality-driven interactions",
+  "version": "1.0.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Debuggers",
+    "Programming Languages",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onView:debuggatha.chatView"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "debuggatha",
+          "title": "Debuggatha",
+          "icon": "media/witch-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "debuggatha": [
+        {
+          "type": "webview",
+          "id": "debuggatha.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "debuggatha.openPanel",
+        "title": "Open Debuggatha Chat",
+        "category": "Debuggatha"
+      },
+      {
+        "command": "debuggatha.setApiKey",
+        "title": "Set Gemini API Key",
+        "category": "Debuggatha"
+      },
+      {
+        "command": "debuggatha.clearChat",
+        "title": "Clear Chat History",
+        "category": "Debuggatha"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Debuggatha",
+      "properties": {
+        "debuggatha.aiModel": {
+          "type": "string",
+          "default": "gemini-pro",
+          "enum": [
+            "gemini-pro",
+            "gemini-pro-vision",
+            "gemini-ultra"
+          ],
+          "enumDescriptions": [
+            "Gemini Pro - Fast and efficient",
+            "Gemini Pro Vision - Supports images",
+            "Gemini Ultra - Most capable"
+          ],
+          "description": "AI model to use for debugging assistance"
+        },
+        "debuggatha.defaultPersonality": {
+          "type": "string",
+          "default": "kind",
+          "enum": [
+            "angry",
+            "kind",
+            "wise"
+          ],
+          "enumDescriptions": [
+            "Angry Witch - Harsh but technically correct",
+            "Kind Witch - Empathetic and supportive",
+            "Wise Witch - Professional and architectural"
+          ],
+          "description": "Default witch personality"
+        },
+        "debuggatha.maxFileSize": {
+          "type": "number",
+          "default": 100000,
+          "description": "Maximum file size in bytes to send to AI (default: 100KB)"
+        },
+        "debuggatha.maxFilesPerRequest": {
+          "type": "number",
+          "default": 5,
+          "description": "Maximum number of files to include per request"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.0"
+  }
+}
