@@ -1,76 +1,65 @@
 import * as vscode from 'vscode';
 import { DebuggathaPanel } from './panels/DebuggathaPanel';
+import { LLMClientManager, LLM_PROVIDERS } from './services/LLMClientManager';
+import { LLMProvider } from './types';
 
 /**
- * Extension activation entry point
- * Called when the extension is activated
+ * Extension activation
  */
 export function activate(context: vscode.ExtensionContext) {
     console.log('Debuggatha extension is now active');
 
-    // Register command to open the chat panel
-    const openPanelCommand = vscode.commands.registerCommand(
-        'debuggatha.openPanel',
-        () => {
+    const llm = new LLMClientManager(context);
+
+    // ── Commands ─────────────────────────────────────────────
+
+    // Open as standalone panel
+    context.subscriptions.push(
+        vscode.commands.registerCommand('debuggatha.openPanel', () => {
             DebuggathaPanel.render(context);
-        }
+        }),
     );
 
-    // Register command to set API key
-    const setApiKeyCommand = vscode.commands.registerCommand(
-        'debuggatha.setApiKey',
-        async () => {
-            const apiKey = await vscode.window.showInputBox({
-                prompt: 'Enter your Gemini API Key',
-                password: true,
-                placeHolder: 'AIza...',
-                ignoreFocusOut: true
+    // Configure API key (provider picker → input box → SecretStorage)
+    context.subscriptions.push(
+        vscode.commands.registerCommand('debuggatha.configureApiKey', async () => {
+            const items = LLM_PROVIDERS.map(p => ({ label: p.label, id: p.id }));
+            const picked = await vscode.window.showQuickPick(items, {
+                placeHolder: 'Select AI provider to configure',
             });
-
-            if (apiKey) {
-                await context.secrets.store('debuggatha.geminiApiKey', apiKey);
-                vscode.window.showInformationMessage('Gemini API Key saved securely!');
+            if (picked) {
+                await llm.promptForApiKey(picked.id as LLMProvider);
             }
-        }
+        }),
     );
 
-    // Register command to clear chat history
-    const clearChatCommand = vscode.commands.registerCommand(
-        'debuggatha.clearChat',
-        () => {
+    // Clear output history
+    context.subscriptions.push(
+        vscode.commands.registerCommand('debuggatha.clearOutput', () => {
             DebuggathaPanel.clearHistory();
-            vscode.window.showInformationMessage('Chat history cleared');
-        }
+            vscode.window.showInformationMessage('Debuggatha output cleared.');
+        }),
     );
 
-    // Register the webview view provider for the sidebar
+    // ── Sidebar view provider ────────────────────────────────
+
     const provider = new DebuggathaViewProvider(context);
     context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(
-            'debuggatha.chatView',
-            provider
-        )
-    );
-
-    context.subscriptions.push(
-        openPanelCommand,
-        setApiKeyCommand,
-        clearChatCommand
+        vscode.window.registerWebviewViewProvider('debuggatha.chatView', provider),
     );
 }
 
 /**
- * Webview View Provider for the sidebar
+ * Sidebar webview view provider
  */
 class DebuggathaViewProvider implements vscode.WebviewViewProvider {
     constructor(private readonly context: vscode.ExtensionContext) {}
 
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
-        _context: vscode.WebviewViewResolveContext,
-        _token: vscode.CancellationToken
+        _ctx: vscode.WebviewViewResolveContext,
+        _token: vscode.CancellationToken,
     ) {
-        // Initialize the webview through DebuggathaPanel
         DebuggathaPanel.renderInView(webviewView, this.context);
     }
 }

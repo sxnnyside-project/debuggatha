@@ -1,158 +1,171 @@
 // @ts-check
+/* ═══════════════════════════════════════════════════════════
+   Debuggatha — Webview script
+   Action-based UI with personality selector and multi-model support
+   ═══════════════════════════════════════════════════════════ */
 
 (function () {
-    // Get VS Code API
     const vscode = acquireVsCodeApi();
 
-    // State
+    // ── State ────────────────────────────────────────────────
     let currentPersonality = 'kind';
-    let currentModel = 'gemini-pro';
+    let currentProvider = '';
+    let currentModel = '';
+    let providers = [];
     let selectedFiles = [];
     let isLoading = false;
 
-    // DOM Elements
-    const chatArea = document.getElementById('chat-area');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
-    const pickFilesBtn = document.getElementById('pick-files-btn');
-    const selectedFilesContainer = document.getElementById('selected-files');
-    const apiKeyWarning = document.getElementById('api-key-warning');
-    const personalityButtons = document.querySelectorAll('.personality-btn');
-    const modelSelect = document.getElementById('model-select');
-    const fileCount = document.getElementById('file-count');
+    // ── DOM refs ─────────────────────────────────────────────
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
 
-    // Initialize
+    const outputArea       = $('#output-area');
+    const userInput        = $('#user-input');
+    const sendBtn          = $('#send-btn');
+    const pickFilesBtn     = $('#pick-files-btn');
+    const fileCountBadge   = $('#file-count');
+    const selectedFilesEl  = $('#selected-files');
+    const providerSelect   = $('#provider-select');
+    const modelSelect      = $('#model-select');
+    const apiKeyBanner     = $('#api-key-banner');
+    const apiKeyMsg        = $('#api-key-msg');
+    const configureKeyBtn  = $('#configure-key-btn');
+    const personalityBtns  = $$('.personality-btn');
+    const actionBtns       = $$('.action-btn');
+
+    // ── Init ─────────────────────────────────────────────────
     init();
 
     function init() {
-        // Set up event listeners
         sendBtn.addEventListener('click', handleSend);
         userInput.addEventListener('keydown', handleKeyDown);
         userInput.addEventListener('input', autoResize);
-        pickFilesBtn.addEventListener('click', handlePickFiles);
-        modelSelect.addEventListener('change', handleModelChange);
+        pickFilesBtn.addEventListener('click', () => vscode.postMessage({ type: 'pickFiles' }));
+        configureKeyBtn.addEventListener('click', () => vscode.postMessage({ type: 'configureApiKey' }));
 
-        personalityButtons.forEach(btn => {
-            btn.addEventListener('click', () => handlePersonalityChange(btn.dataset.personality));
+        providerSelect.addEventListener('change', () => {
+            vscode.postMessage({ type: 'changeProvider', provider: providerSelect.value });
+        });
+        modelSelect.addEventListener('change', () => {
+            vscode.postMessage({ type: 'changeModel', model: modelSelect.value });
         });
 
-        // Check API key status
-        vscode.postMessage({ type: 'checkApiKey' });
+        personalityBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentPersonality = btn.dataset.personality;
+                vscode.postMessage({ type: 'changePersonality', personality: currentPersonality });
+                updatePersonalityUI();
+            });
+        });
 
-        // Focus input
-        userInput.focus();
+        actionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (isLoading) { return; }
+                vscode.postMessage({
+                    type: 'executeAction',
+                    action: btn.dataset.action,
+                    personality: currentPersonality,
+                });
+            });
+        });
+
+        // Tell extension we're ready
+        vscode.postMessage({ type: 'ready' });
     }
 
-    // Handle messages from extension
-    window.addEventListener('message', event => {
-        const message = event.data;
-
-        switch (message.type) {
+    // ── Incoming messages ────────────────────────────────────
+    window.addEventListener('message', (event) => {
+        const msg = event.data;
+        switch (msg.type) {
             case 'init':
-                currentPersonality = message.personality;
-                currentModel = message.model || 'gemini-pro';
-                modelSelect.value = currentModel;
+                currentPersonality = msg.personality;
+                currentProvider = msg.provider;
+                currentModel = msg.model;
+                providers = msg.providers || [];
+                selectedFiles = msg.files || [];
+                buildProviderDropdown();
+                buildModelDropdown();
                 updatePersonalityUI();
-                if (message.history && message.history.length > 0) {
-                    message.history.forEach(msg => {
-                        if (msg.role === 'user') {
-                            addUserMessage(msg.content);
-                        } else {
-                            addAssistantMessage(msg.content, msg.personality);
-                        }
-                    });
-                }
-                break;
-
-            case 'userMessage':
-                addUserMessage(message.message.content);
+                updateFilesUI();
                 break;
 
             case 'assistantMessage':
-                addAssistantMessage(message.message.content, message.message.personality);
+                addOutputBlock(msg.message);
                 break;
 
             case 'loading':
-                setLoading(message.isLoading);
+                setLoading(msg.isLoading, msg.label);
                 break;
 
             case 'error':
-                addErrorMessage(message.message);
+                addErrorBlock(msg.message);
                 setLoading(false);
                 break;
 
             case 'filesSelected':
-                selectedFiles = message.files;
-                updateSelectedFilesUI();
+                selectedFiles = msg.files || [];
+                updateFilesUI();
+                break;
+
+            case 'fileRemoved':
+                selectedFiles = msg.files || [];
+                updateFilesUI();
                 break;
 
             case 'personalityChanged':
-                currentPersonality = message.personality;
+                currentPersonality = msg.personality;
                 updatePersonalityUI();
                 break;
 
+            case 'providerChanged':
+                currentProvider = msg.provider;
+                providerSelect.value = currentProvider;
+                // Rebuild model dropdown with new provider's models
+                if (msg.models) {
+                    const prov = providers.find(p => p.id === currentProvider);
+                    if (prov) { prov.models = msg.models; }
+                }
+                buildModelDropdown();
+                break;
+
             case 'modelChanged':
-                currentModel = message.model;
+                currentModel = msg.model;
                 modelSelect.value = currentModel;
                 break;
 
             case 'apiKeyStatus':
-                if (!message.hasKey) {
-                    apiKeyWarning.style.display = 'block';
+                if (!msg.hasKey) {
+                    apiKeyBanner.style.display = 'flex';
+                    apiKeyMsg.textContent = `No API key for ${providerLabel(msg.provider)}.`;
                 } else {
-                    apiKeyWarning.style.display = 'none';
+                    apiKeyBanner.style.display = 'none';
                 }
                 break;
 
-            case 'clearChat':
-                chatArea.innerHTML = '';
+            case 'clearOutput':
+                outputArea.innerHTML = '<div class="output-empty"><p>Select files and run an action to begin.</p></div>';
                 break;
         }
     });
 
+    // ── Send follow-up ───────────────────────────────────────
     function handleSend() {
         const text = userInput.value.trim();
-        if (!text || isLoading) {
-            return;
-        }
-
+        if (!text || isLoading) { return; }
         vscode.postMessage({
-            type: 'sendMessage',
-            text: text,
-            files: selectedFiles,
-            personality: currentPersonality
+            type: 'sendFollowUp',
+            text,
+            personality: currentPersonality,
         });
-
         userInput.value = '';
         userInput.style.height = 'auto';
     }
 
-    function handleKeyDown(event) {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
+    function handleKeyDown(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
             handleSend();
         }
-    }
-
-    function handlePickFiles() {
-        vscode.postMessage({ type: 'pickFiles' });
-    }
-
-    function handlePersonalityChange(personality) {
-        currentPersonality = personality;
-        vscode.postMessage({
-            type: 'changePersonality',
-            personality: personality
-        });
-        updatePersonalityUI();
-    }
-
-    function handleModelChange() {
-        currentModel = modelSelect.value;
-        vscode.postMessage({
-            type: 'changeModel',
-            model: currentModel
-        });
     }
 
     function autoResize() {
@@ -160,149 +173,153 @@
         userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
     }
 
-    function updatePersonalityUI() {
-        personalityButtons.forEach(btn => {
-            if (btn.dataset.personality === currentPersonality) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
+    // ── Dropdowns ────────────────────────────────────────────
+    function buildProviderDropdown() {
+        providerSelect.innerHTML = '';
+        providers.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.label;
+            if (p.id === currentProvider) { opt.selected = true; }
+            providerSelect.appendChild(opt);
         });
     }
 
-    function updateSelectedFilesUI() {
+    function buildModelDropdown() {
+        modelSelect.innerHTML = '';
+        const prov = providers.find(p => p.id === currentProvider);
+        if (!prov) { return; }
+        prov.models.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.id;
+            opt.textContent = m.label;
+            if (m.id === currentModel) { opt.selected = true; }
+            modelSelect.appendChild(opt);
+        });
+        // If current model isn't in the list, select the first one
+        if (prov.models.length > 0 && !prov.models.find(m => m.id === currentModel)) {
+            currentModel = prov.models[0].id;
+            modelSelect.value = currentModel;
+        }
+    }
+
+    function providerLabel(id) {
+        const p = providers.find(pr => pr.id === id);
+        return p ? p.label : id;
+    }
+
+    // ── Personality UI ───────────────────────────────────────
+    function updatePersonalityUI() {
+        personalityBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.personality === currentPersonality);
+        });
+    }
+
+    // ── File UI ──────────────────────────────────────────────
+    function updateFilesUI() {
+        fileCountBadge.textContent = selectedFiles.length > 0 ? String(selectedFiles.length) : '';
+
         if (selectedFiles.length === 0) {
-            selectedFilesContainer.innerHTML = '';
-            fileCount.textContent = '';
+            selectedFilesEl.innerHTML = '';
             return;
         }
 
-        fileCount.textContent = `(${selectedFiles.length})`;
+        selectedFilesEl.innerHTML = selectedFiles
+            .map((f, i) => {
+                const name = f.split('/').pop() || f;
+                return `<div class="file-tag"><span title="${esc(f)}">${esc(name)}</span><button class="file-tag-remove" data-index="${i}">&times;</button></div>`;
+            })
+            .join('');
 
-        selectedFilesContainer.innerHTML = selectedFiles.map((file, index) => {
-            const fileName = file.split('/').pop() || file.split('\\').pop() || file;
-            return `
-                <div class="file-tag">
-                    <span>${fileName}</span>
-                    <button class="file-tag-remove" data-index="${index}">×</button>
-                </div>
-            `;
-        }).join('');
-
-        // Add remove listeners
-        document.querySelectorAll('.file-tag-remove').forEach(btn => {
+        selectedFilesEl.querySelectorAll('.file-tag-remove').forEach(btn => {
             btn.addEventListener('click', () => {
-                const index = parseInt(btn.dataset.index);
-                selectedFiles.splice(index, 1);
-                updateSelectedFilesUI();
+                vscode.postMessage({ type: 'removeFile', index: parseInt(btn.dataset.index, 10) });
             });
         });
     }
 
-    function addUserMessage(content) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message message-user';
-        messageDiv.innerHTML = `
-            <div class="message-header">You</div>
-            <div class="message-content">${escapeHtml(content)}</div>
-            <div class="message-timestamp">${getTimeString()}</div>
+    // ── Output rendering ─────────────────────────────────────
+    function clearEmpty() {
+        const empty = outputArea.querySelector('.output-empty');
+        if (empty) { empty.remove(); }
+    }
+
+    function addOutputBlock(message) {
+        clearEmpty();
+
+        const actionLabels = { report: 'Report', audit: 'Audit', analysis: 'Analysis' };
+        const personalityLabels = { kind: 'Kind Witch', wise: 'Technical Witch', angry: 'Mean Witch' };
+
+        const block = document.createElement('div');
+        block.className = 'output-block';
+
+        const headerParts = [];
+        if (message.action) { headerParts.push(`<span class="action-label">${actionLabels[message.action] || ''}</span>`); }
+        if (message.personality) { headerParts.push(personalityLabels[message.personality] || ''); }
+        headerParts.push(timeStr());
+
+        block.innerHTML = `
+            <div class="output-header">${headerParts.join(' · ')}</div>
+            <div class="output-content">${renderMarkdown(message.content)}</div>
         `;
-        chatArea.appendChild(messageDiv);
+        outputArea.appendChild(block);
         scrollToBottom();
     }
 
-    function addAssistantMessage(content, personality) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message message-assistant';
-        
-        // Render markdown
-        const renderedContent = renderMarkdown(content);
-        
-        const personalityLabel = {
-            angry: 'Direct',
-            kind: 'Supportive',
-            wise: 'Architectural'
-        }[personality] || 'Assistant';
-        
-        messageDiv.innerHTML = `
-            <div class="message-header">${personalityLabel}</div>
-            <div class="message-content">${renderedContent}</div>
-            <div class="message-timestamp">${getTimeString()}</div>
+    function addErrorBlock(text) {
+        clearEmpty();
+        const block = document.createElement('div');
+        block.className = 'output-block output-error';
+        block.innerHTML = `
+            <div class="output-header">Error · ${timeStr()}</div>
+            <div class="output-content">${renderMarkdown(text)}</div>
         `;
-        chatArea.appendChild(messageDiv);
+        outputArea.appendChild(block);
         scrollToBottom();
     }
 
-    function addErrorMessage(content) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message message-assistant';
-        messageDiv.innerHTML = `
-            <div class="message-header">Error</div>
-            <div class="message-content" style="color: var(--error-color);">${renderMarkdown(content)}</div>
-            <div class="message-timestamp">${getTimeString()}</div>
-        `;
-        chatArea.appendChild(messageDiv);
-        scrollToBottom();
-    }
-
-    function setLoading(loading) {
+    // ── Loading ──────────────────────────────────────────────
+    function setLoading(loading, label) {
         isLoading = loading;
         sendBtn.disabled = loading;
-        
-        // Remove existing loading indicator
-        const existingLoader = chatArea.querySelector('.loading-indicator');
-        if (existingLoader) {
-            existingLoader.remove();
-        }
+        actionBtns.forEach(b => (b.disabled = loading));
+
+        const existing = outputArea.querySelector('.loading-indicator');
+        if (existing) { existing.remove(); }
 
         if (loading) {
-            const loaderDiv = document.createElement('div');
-            loaderDiv.className = 'loading-indicator';
-            loaderDiv.innerHTML = `
-                <span>Processing...</span>
-                <div class="loading-dots">
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                    <div class="loading-dot"></div>
-                </div>
-            `;
-            chatArea.appendChild(loaderDiv);
+            clearEmpty();
+            const el = document.createElement('div');
+            el.className = 'loading-indicator';
+            el.innerHTML = `<span>${esc(label || 'Processing…')}</span>
+                <div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>`;
+            outputArea.appendChild(el);
             scrollToBottom();
         }
     }
 
-    function getPersonalityEmoji(personality) {
-        const emojis = {
-            angry: '😠',
-            kind: '😊',
-            wise: '🧙‍♀️'
-        };
-        return emojis[personality] || '🧙‍♀️';
-    }
-
-    function getTimeString() {
-        const now = new Date();
-        return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // ── Utilities ────────────────────────────────────────────
+    function timeStr() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
     function scrollToBottom() {
-        chatArea.scrollTop = chatArea.scrollHeight;
+        outputArea.scrollTop = outputArea.scrollHeight;
     }
 
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+    function esc(text) {
+        const d = document.createElement('div');
+        d.textContent = text;
+        return d.innerHTML;
     }
 
-    // Simple markdown renderer
+    // ── Markdown renderer ────────────────────────────────────
     function renderMarkdown(text) {
-        let html = escapeHtml(text);
+        let html = esc(text);
 
-        // Code blocks
-        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-            return `<pre><code>${code.trim()}</code></pre>`;
-        });
+        // Fenced code blocks
+        html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) =>
+            `<pre><code>${code.trim()}</code></pre>`);
 
         // Inline code
         html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -320,16 +337,14 @@
         html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
         html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
 
-        // Line breaks
+        // Paragraphs
         html = html.replace(/\n\n/g, '</p><p>');
         html = '<p>' + html + '</p>';
 
-        // Clean up empty paragraphs
+        // Clean up
         html = html.replace(/<p><\/p>/g, '');
-        html = html.replace(/<p>(<[uo]l>)/g, '$1');
-        html = html.replace(/(<\/[uo]l>)<\/p>/g, '$1');
-        html = html.replace(/<p>(<h[1-6]>)/g, '$1');
-        html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+        html = html.replace(/<p>(<[uoh])/g, '$1');
+        html = html.replace(/(<\/[uoh][l1-6]?>)<\/p>/g, '$1');
         html = html.replace(/<p>(<pre>)/g, '$1');
         html = html.replace(/(<\/pre>)<\/p>/g, '$1');
 
