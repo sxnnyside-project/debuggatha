@@ -3,7 +3,13 @@
   "displayName": "Debuggatha",
   "description": "AI-powered linter, code auditor, and bad practices analyzer for VS Code",
   "version": "2.0.0",
-  "publisher": "your-name",
+  "publisher": "Sxnnyside-Project",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HoujouSxnnyside/Debuggatha"
+  },
+  "icon": "assets/icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -30,6 +36,7 @@
     "views": {
       "debuggatha": [
         {
+          "icon": "media/debuggatha-icon.svg",
           "type": "webview",
           "id": "debuggatha.chatView",
           "name": "Debuggatha"
