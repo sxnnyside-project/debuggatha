@@ -1,0 +1,14 @@
+{
+  "name": "@debuggatha/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'docs site not yet implemented — see CLAUDE.md'",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "typecheck": "echo 'no TypeScript here yet'",
+    "test": "echo 'no tests here yet'",
+    "clean": "rm -rf dist"
+  }
+}

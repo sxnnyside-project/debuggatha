@@ -1,123 +1,32 @@
 {
   "name": "debuggatha",
-  "displayName": "Debuggatha",
-  "description": "AI-powered linter, code auditor, and bad practices analyzer for VS Code",
-  "version": "2.0.0",
-  "publisher": "Sxnnyside-Project",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/HoujouSxnnyside/Debuggatha"
-  },
-  "icon": "assets/icon.png",
-  "engines": {
-    "vscode": "^1.80.0"
-  },
-  "categories": [
-    "Linters",
-    "Programming Languages",
-    "Other"
+  "private": true,
+  "packageManager": "bun@1.2.20",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
   ],
-  "activationEvents": [
-    "onView:debuggatha.chatView"
-  ],
-  "main": "./dist/extension.js",
-  "l10n": "./l10n",
-  "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "debuggatha",
-          "title": "Debuggatha",
-          "icon": "media/debuggatha-icon.svg"
-        }
-      ]
-    },
-    "views": {
-      "debuggatha": [
-        {
-          "icon": "media/debuggatha-icon.svg",
-          "type": "webview",
-          "id": "debuggatha.chatView",
-          "name": "Debuggatha"
-        }
-      ]
-    },
-    "commands": [
-      {
-        "command": "debuggatha.openPanel",
-        "title": "Open Debuggatha",
-        "category": "Debuggatha"
-      },
-      {
-        "command": "debuggatha.configureApiKey",
-        "title": "Configure API Key",
-        "category": "Debuggatha"
-      },
-      {
-        "command": "debuggatha.clearOutput",
-        "title": "Clear Output",
-        "category": "Debuggatha"
-      }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "Debuggatha",
-      "properties": {
-        "debuggatha.provider": {
-          "type": "string",
-          "default": "gemini",
-          "enum": ["gemini", "claude", "openai", "grok"],
-          "enumDescriptions": [
-            "Google Gemini",
-            "Anthropic Claude",
-            "OpenAI / ChatGPT",
-            "xAI Grok"
-          ],
-          "description": "Default AI provider"
-        },
-        "debuggatha.model": {
-          "type": "string",
-          "default": "gemini-2.0-flash",
-          "description": "Default model ID for the selected provider"
-        },
-        "debuggatha.defaultPersonality": {
-          "type": "string",
-          "default": "kind",
-          "enum": ["angry", "kind", "wise"],
-          "enumDescriptions": [
-            "Mean Witch — Sharp, sarcastic, brutal",
-            "Kind Witch — Patient, encouraging, clear",
-            "Technical Witch — Precise, structured, professional"
-          ],
-          "description": "Default personality mode"
-        },
-        "debuggatha.maxFileSize": {
-          "type": "number",
-          "default": 100000,
-          "description": "Maximum file size in bytes to send to the AI (default: 100 KB)"
-        },
-        "debuggatha.maxFilesPerRequest": {
-          "type": "number",
-          "default": 10,
-          "description": "Maximum number of files to include per request"
-        }
-      }
-    }
-  },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "lint": "eslint src --ext ts"
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "check": "turbo run check",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "changeset": "changeset",
+    "prepare": "husky"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^18.x",
-    "@types/vscode": "^1.80.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
-    "@typescript-eslint/parser": "^6.7.0",
-    "eslint": "^8.50.0",
-    "typescript": "^5.2.0"
+    "@biomejs/biome": "^2.0.0",
+    "@changesets/cli": "^2.27.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0",
+    "tsup": "^8.0.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
   }
 }
