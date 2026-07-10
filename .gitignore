@@ -1,9 +1,15 @@
 # Dependencies
 node_modules/
+**/node_modules/
+
+# Monorepo tooling
+.turbo/
+**/.turbo/
 
 # Build outputs
 out/
 dist/
+**/dist/
 *.vsix
 
 # VS Code extension testing

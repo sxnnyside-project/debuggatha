@@ -1,8 +1,0 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Wise Witch: Eye with crosshair — precision, analysis, clarity -->
-  <ellipse cx="8" cy="8" rx="6" ry="4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/>
-  <circle cx="8" cy="8" r="0.75" fill="currentColor"/>
-  <line x1="8" y1="2" x2="8" y2="4" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"/>
-  <line x1="8" y1="12" x2="8" y2="14" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"/>
-</svg>

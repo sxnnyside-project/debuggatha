@@ -1,0 +1,36 @@
+{
+  "name": "@debuggatha/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@debuggatha/findings-ledger": "workspace:*",
+    "@debuggatha/knowledge-system": "workspace:*",
+    "@debuggatha/policies": "workspace:*",
+    "@debuggatha/repository-intelligence": "workspace:*",
+    "@debuggatha/review-engine": "workspace:*",
+    "@debuggatha/skills": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "name": "debuggatha",
+  "displayName": "Debuggatha",
+  "description": "A senior code reviewer, not a chat wrapper.",
+  "version": "0.1.0",
+  "publisher": "debuggatha",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debuggatha/debuggatha.git"
+  },
+  "license": "MIT",
+  "icon": "icon.png",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Linters",
+    "Testing",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "review",
+    "security",
+    "architecture",
+    "debuggatha"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/index.cjs",
+  "scripts": {
+    "build": "tsup",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "clean": "rm -rf dist"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "debuggatha.reviewWorkspace",
+        "title": "Debuggatha: Review Entire Workspace",
+        "icon": "$(search-view-icon)"
+      },
+      {
+        "command": "debuggatha.reviewActiveFile",
+        "title": "Debuggatha: Review Current File",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "debuggatha.reviewSelection",
+        "title": "Debuggatha: Review Selection",
+        "icon": "$(selection)"
+      },
+      {
+        "command": "debuggatha.reviewDiff",
+        "title": "Debuggatha: Review Pending Changes",
+        "icon": "$(git-compare)"
+      },
+      {
+        "command": "debuggatha.openFinding",
+        "title": "Debuggatha: Open Finding Detail",
+        "icon": "$(preview)"
+      },
+      {
+        "command": "debuggatha.resolveFinding",
+        "title": "Resolve Finding",
+        "icon": "$(check)"
+      },
+      {
+        "command": "debuggatha.dismissFinding",
+        "title": "Dismiss Finding",
+        "icon": "$(close)"
+      },
+      {
+        "command": "debuggatha.reopenFinding",
+        "title": "Reopen Finding",
+        "icon": "$(reply)"
+      },
+      {
+        "command": "debuggatha.toggleResolvedFindings",
+        "title": "Toggle Resolved Findings",
+        "icon": "$(filter)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "debuggatha.toggleResolvedFindings",
+          "when": "view == debuggatha-findings",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "debuggatha.resolveFinding",
+          "when": "view == debuggatha-findings && viewItem == finding-open || viewItem == finding-dismissed",
+          "group": "inline"
+        },
+        {
+          "command": "debuggatha.dismissFinding",
+          "when": "view == debuggatha-findings && viewItem == finding-open || viewItem == finding-resolved",
+          "group": "inline"
+        },
+        {
+          "command": "debuggatha.reopenFinding",
+          "when": "view == debuggatha-findings && viewItem == finding-resolved || viewItem == finding-dismissed",
+          "group": "inline"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "debuggatha-explorer",
+          "title": "Debuggatha",
+          "icon": "$(check-all)"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "debuggatha-findings",
+        "contents": "No findings found.\n\n[Review Entire Workspace](command:debuggatha.reviewWorkspace)\n[Review Pending Diff](command:debuggatha.reviewDiff)"
+      },
+      {
+        "view": "debuggatha-intelligence",
+        "contents": "Repository not yet analyzed.\n\n[Analyze Repository](command:debuggatha.reviewWorkspace)"
+      }
+    ],
+    "views": {
+      "debuggatha-explorer": [
+        {
+          "id": "debuggatha-intelligence",
+          "name": "Repository Intelligence",
+          "type": "tree"
+        },
+        {
+          "id": "debuggatha-findings",
+          "name": "Findings Ledger",
+          "type": "tree"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Debuggatha",
+      "properties": {
+        "debuggatha.reviewDepth": {
+          "type": "string",
+          "enum": [
+            "quick",
+            "full",
+            "architectural"
+          ],
+          "default": "full",
+          "description": "The depth of the review to perform."
+        },
+        "debuggatha.defaultReviewPacks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "debuggatha/typescript",
+            "debuggatha/react",
+            "debuggatha/owasp"
+          ],
+          "description": "The default review packs to apply if none are specified."
+        },
+        "debuggatha.logLevel": {
+          "type": "string",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "default": "info",
+          "description": "The minimum log level for the Debuggatha output channel."
+        },
+        "debuggatha.runtime": {
+          "type": "string",
+          "enum": [
+            "mcp",
+            "local"
+          ],
+          "default": "mcp",
+          "description": "The runtime execution mode for reviews."
+        },
+        "debuggatha.transport": {
+          "type": "string",
+          "enum": [
+            "stdio",
+            "sse"
+          ],
+          "default": "stdio",
+          "description": "The MCP transport to use when runtime is mcp."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "debuggatha.welcome",
+        "title": "Welcome to Debuggatha",
+        "description": "A senior code reviewer, not a chat wrapper.",
+        "steps": [
+          {
+            "id": "debuggatha.welcome.intro",
+            "title": "Get Started",
+            "description": "Debuggatha acts as a dedicated engineering reviewer that points out architectural flaws, security issues, and logical errors in your code.\n\n[Review Workspace](command:debuggatha.reviewWorkspace)",
+            "media": {
+              "markdown": "media/welcome.md"
+            }
+          },
+          {
+            "id": "debuggatha.welcome.settings",
+            "title": "Configure Review Packs",
+            "description": "Debuggatha uses Review Packs to understand how to review your code. By default, it detects your stack and loads the appropriate Foundation bundles.\n\n[Open Settings](command:workbench.action.openSettings?%22debuggatha%22)",
+            "media": {
+              "markdown": "media/settings.md"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "dependencies": {
+    "@debuggatha/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0"
+  }
+}

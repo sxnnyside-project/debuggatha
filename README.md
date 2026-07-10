@@ -1,237 +1,102 @@
-# DEBUGGATHA
+# Debuggatha
 
-[![VS Code Version](https://img.shields.io/badge/VS%20Code-1.80%2B-blue.svg)](https://code.visualstudio.com/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178c6.svg)](https://www.typescriptlang.org/)
+![Banner](debuggatha-banner.png)
 
-**AI-Powered Code Auditor for Visual Studio Code**
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+[![CI](https://github.com/sxnnyside-project/debuggatha/workflows/CI/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions)
 
-Debuggatha is a static analysis and code review tool that uses large language models to identify bad practices, antipatterns, and technical debt in your workspace. Think of it as an opinionated linter with personality—choose between harsh critique, gentle mentorship, or architectural wisdom.
+<p align="center">
+  <strong>Contextual ✦ Deterministic ✦ Extensible</strong><br>
+  <em>A senior code reviewer, not a chat wrapper.</em>
+</p>
 
----
-
-## What It Does
-
-Debuggatha performs three types of analysis on your code:
-
-### 🔍 Generate Report
-**Fast, high-level scan of selected files.**
-
-- Identifies obvious issues (unused imports, magic numbers, naming violations)
-- Flags common antipatterns (god objects, deep nesting, hardcoded secrets)
-- Lists technical debt at a glance
-- No deep architectural analysis—just the low-hanging fruit
-
-**Use when:** You want a quick health check before commit/PR.
-
-### 🛡️ Generate Audit
-**Comprehensive security and quality audit.**
-
-- Security vulnerabilities (injection risks, insecure dependencies, auth flaws)
-- Performance bottlenecks (O(n²) algorithms, unnecessary re-renders, memory leaks)
-- Code smells (tight coupling, lack of error handling, mutable global state)
-- SOLID principle violations
-- Accessibility issues (in UI code)
-
-**Use when:** Preparing for production, reviewing legacy code, or conducting formal code review.
-
-### 🧠 Deep Analysis
-**Architectural critique and refactoring guidance.**
-
-- Design pattern violations
-- Abstraction leaks and tight coupling
-- Scalability concerns
-- Testability issues
-- Refactoring roadmap with prioritized changes
-
-**Use when:** Planning a refactor, evaluating architectural decisions, or mentoring junior developers.
+<p align="center">
+  <a href="#about">About</a> ✦
+  <a href="#features">Features</a> ✦
+  <a href="#installation">Installation</a> ✦
+  <a href="#usage">Usage</a> ✦
+  <a href="#architecture">Architecture</a> ✦
+  <a href="#contributing">Contributing</a>
+</p>
 
 ---
 
-## Personality System
+## About
 
-Debuggatha delivers analysis in three distinct tones:
+**Debuggatha** acts as a dedicated engineering reviewer that points out architectural flaws, security issues, and logical errors in your code.
 
-| Personality | Style | Best For |
-|-------------|-------|----------|
-| **Angry Witch** | Harsh, sarcastic, technically correct. Mocks bad code while providing solutions. | Experienced developers who want unfiltered truth. |
-| **Kind Witch** | Empathetic, supportive, educational. Explains *why* something is wrong. | Beginners, stressful deadlines, or learning new tech. |
-| **Wise Witch** | Professional, architectural, strategic. Focuses on long-term maintainability. | Senior reviews, design discussions, refactoring plans. |
+It exists to move beyond chat-wrapper AI reviews. Debuggatha understands a repository's context — stack, architecture, and its own stated rules — before it reviews anything, ensuring every finding it produces traces back to a real source.
 
-Select personality from the dropdown in the Debuggatha sidebar. It applies to all actions (Report/Audit/Analysis).
+Debuggatha is a modular platform built on top of four core pillars: Repository Intelligence, the Review Engine, the Knowledge System, and the Findings Ledger.
 
----
+### Philosophy
 
-## Multi-Model Support
+> *"A senior code reviewer, not a chat wrapper."*
 
-Debuggatha works with **four AI providers** via native `fetch()` calls (no vendor SDKs):
+This is a Sxnnyside Project.
 
-- **Google Gemini** (gemini-1.5-pro, gemini-1.5-flash)
-- **Anthropic Claude** (claude-3-5-sonnet-20241022, claude-3-5-haiku-20241022)
-- **OpenAI GPT** (gpt-4o, gpt-4o-mini, gpt-4-turbo)
-- **xAI Grok** (grok-beta)
+## Features
 
-Configure via:
-1. **Command Palette**: `Debuggatha: Configure API Key` → Select provider → Enter key
-2. **Settings UI**: Search for `debuggatha` → Set provider/model
-3. **settings.json**: 
-   ```json
-   {
-     "debuggatha.provider": "claude",
-     "debuggatha.model": "claude-3-5-sonnet-20241022"
-   }
-   ```
-
-API keys are stored in VS Code SecretStorage (encrypted, never in plaintext).
-
----
+- **Repository Intelligence**: Automatically detects the stack, dependencies, and local documentation to understand the environment.
+- **Review Engine**: Manages the review domain model, ensuring findings are strongly typed, located, and substantiated by evidence.
+- **Knowledge System**: Manages Review Packs and Rules to dynamically assemble the context the agent uses to review code.
+- **Findings Ledger**: An immutable, version-controlled history that tracks findings across review sessions with a strict 5-state lifecycle.
 
 ## Installation
 
+### Prerequisites
+
+- Bun (latest)
+- Node.js (>= 20)
+
 ### From Source
-```bash
-git clone https://github.com/HoujouSxnnyside/Debuggatha.git
-cd Debuggatha
-npm install
-npm run compile
-code --install-extension .
-```
 
-### From VSIX (future)
 ```bash
-code --install-extension debuggatha-2.0.0.vsix
-```
+git clone https://github.com/sxnnyside-project/debuggatha.git
+cd debuggatha
 
----
+bun install
+bun run build
+```
 
 ## Usage
 
-### Quick Start
+```bash
+# Check formatting and typing
+bun run check
+bun run typecheck
 
-1. Open Debuggatha sidebar (witch icon in activity bar)
-2. Configure API key: `Cmd/Ctrl+Shift+P` → `Debuggatha: Configure API Key`
-3. Select personality (Angry/Kind/Wise)
-4. Select provider and model from dropdowns
-5. Select files from your workspace (max 10 files, 100KB each by default)
-6. Click **Generate Report**, **Generate Audit**, or **Deep Analysis**
+# Run unit tests across packages
+bun run test
+```
 
-### File Selection
-
-Debuggatha only reads files from your current workspace—**no OS file picker dialogs**.
-
-- Click "Select Files from Workspace"
-- Multi-select with `Cmd/Ctrl` (up to `debuggatha.maxFilesPerRequest`)
-- Files are displayed in the sidebar with remove buttons
-- Only workspace files are shown (respects `.gitignore`)
-
-This prevents accidental leakage of files outside your project (e.g., system files, sensitive configs).
-
-### Follow-Up Questions
-
-After receiving analysis, use the input field to ask follow-up questions:
-
-- "Show me how to refactor the `UserService` class"
-- "Explain the O(n²) issue in more detail"
-- "What's the security risk with line 45?"
-
-Follow-ups maintain context from the original analysis.
-
----
-
-## Configuration
-
-### Extension Settings
-
-- `debuggatha.provider` - AI provider (`gemini`, `claude`, `openai`, `grok`)
-- `debuggatha.model` - Model to use (provider-specific, see dropdown)
-- `debuggatha.defaultPersonality` - Default personality (`angry`, `kind`, `wise`)
-- `debuggatha.maxFileSize` - Max file size in bytes (default: 102400 = 100KB)
-- `debuggatha.maxFilesPerRequest` - Max files per action (default: 10)
-
-### Commands
-
-- `Debuggatha: Configure API Key` - Set/update API key for selected provider
-- `Debuggatha: Clear Output` - Reset the analysis panel
-
----
-
-## Security
-
-### Data Handling
-
-- **API keys**: Stored in VS Code SecretStorage (OS keychain/credential manager), never in plaintext
-- **Code transmission**: Your code is sent to the selected AI provider's API. Review their privacy policies (Gemini, Claude, OpenAI, Grok).
-- **No telemetry**: Debuggatha does not collect or transmit usage data to the extension author
-- **Workspace-only**: File picker is restricted to workspace folders (cannot access system files)
-
-### Vulnerability Reporting
-
-**DO NOT open public issues for security vulnerabilities.**
-
-Email: **security.sxnnyside@sxnnysideproject.com**
-
-We will respond within 48 hours. See [SECURITY.md](SECURITY.md) for full policy.
-
----
-
-## Support
-
-- **Bug reports**: [GitHub Issues](https://github.com/HoujouSxnnyside/Debuggatha/issues)
-- **Questions**: support.sxnnyside@sxnnysideproject.com
-- **Security issues**: security.sxnnyside@sxnnysideproject.com
-
----
-
-## Roadmap
-
-- [ ] Export audit reports as Markdown/PDF
-- [ ] Batch analysis (analyze entire workspace with one click)
-- [ ] Custom rule engine (define project-specific antipatterns)
-- [ ] Integration with ESLint/TSLint output
-- [ ] Diff mode (analyze only changed files since last commit)
-- [ ] Ollama support (local LLMs)
-
----
+For the CLI and VS Code Client specifics, refer to their respective app-level instructions.
 
 ## Architecture
 
 ```
-src/
-  ├── extension.ts                # Entry point, command registration
-  ├── types.ts                    # Shared type definitions
-  ├── panels/
-  │   └── DebuggathaPanel.ts      # Webview lifecycle, message router
-  └── services/
-      ├── LLMClientManager.ts     # Multi-provider abstraction (fetch-based)
-      ├── PromptBuilder.ts        # Action-specific prompt engineering
-      └── WorkspaceFileService.ts # File picker, reader
-
-webview/
-  ├── script.js                   # UI logic (action buttons, dropdowns)
-  └── styles.css                  # VS Code-native styling (CSS variables)
-
-media/
-  ├── debuggatha-icon.svg         # Activity bar icon
-  ├── angry-witch.svg             # Angry personality icon
-  ├── kind-witch.svg              # Kind personality icon
-  └── wise-witch.svg              # Wise personality icon
-
-prompts/
-  └── personalities.json          # Personality tone definitions
+debuggatha/
+├── apps/         # VS Code client and docs
+├── packages/     # The core engines, intelligence, ledger, and knowledge systems
+└── scripts/      # Build and deployment utilities
 ```
 
-**Zero runtime dependencies.** All AI API calls use native `fetch()`.
+For a detailed breakdown, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
----
+## Contributing
+
+Contributions are accepted. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+Before contributing, read the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
-MIT License - See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Credits
-
-Built with TypeScript and the VS Code Extension API. No external AI SDKs.
-
-For contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+<p align="center">
+  <strong>Debuggatha</strong> — A Sxnnyside Project<br>
+  <em>&copy; 2026 Sxnnyside Project</em>
+</p>

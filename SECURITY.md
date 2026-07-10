@@ -1,82 +1,52 @@
-# Security Policy
+# Security
 
-## Reporting Vulnerabilities
+## Reporting a Vulnerability
 
-Debuggatha handles sensitive information (API keys, workspace source code) and must maintain strict security standards. We take vulnerability reports seriously.
+If you find a security vulnerability in **Debuggatha**, report it privately before disclosing it publicly.
 
-### How to Report
+**Preferred channel:**
+Email — `legal.sxnnyside@sxnnysideproject.com`
 
-**Do NOT open public GitHub issues for security vulnerabilities.**
-
-Instead, email: **security.sxnnyside@sxnnysideproject.com**
-
-### Required Information
-
-Include in your report:
-
-1. **Description**  
-   Clear explanation of the vulnerability
-
-2. **Impact**  
-   What can an attacker do? What data is at risk?
-
-3. **Reproduction Steps**  
-   Step-by-step instructions to trigger the issue
-
-4. **Environment**  
-   - VS Code version  
-   - Debuggatha version  
-   - Operating system  
-   - AI provider (if relevant)
-
-5. **Suggested Fix** (optional)  
-   Proposed mitigation or patch
-
-### Response Timeline
-
-- **Acknowledgment**: Within 48 hours
-- **Initial Assessment**: Within 5 business days
-- **Coordinated Disclosure**: We will work with you on a reasonable timeline
-
-### What Qualifies as a Security Issue?
-
-- API key exposure or leakage
-- Credential storage vulnerabilities
-- Code injection via prompt manipulation
-- Remote code execution
-- Privilege escalation within VS Code
-- Unsafe file read/write operations
-- Cross-site scripting (XSS) in webview
-- Sensitive data logging or telemetry
-
-### Out of Scope
-
-The following are NOT considered security vulnerabilities:
-
-- AI model hallucinations or incorrect code suggestions
-- Rate limiting bypass (this is an API provider concern)
-- Performance issues or resource exhaustion without security impact
-- UI rendering bugs without data exposure
-- Third-party AI provider vulnerabilities (report to them directly)
-
-### Safe Harbor
-
-We will not pursue legal action against security researchers who:
-
-- Report vulnerabilities responsibly via the designated channel
-- Do not exploit vulnerabilities beyond proof-of-concept
-- Do not disclose vulnerabilities publicly before coordinated release
-- Do not access or modify data that is not their own
-
-### Supported Versions
-
-We provide security updates for:
-
-- Latest stable release (currently v2.x)
-- Previous major version for 6 months after new major release
-
-Older versions are not supported. Please upgrade.
+**Alternative:**
+[GitHub Private Security Advisory](https://github.com/sxnnyside-project/debuggatha/security/advisories/new)
 
 ---
 
-**Thank you for helping keep Debuggatha secure.**
+## What to Include
+
+- Description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Your suggested fix, if you have one
+
+The more context you provide, the faster it gets resolved.
+
+---
+
+## Response Time
+
+Expect an initial response within **2–5 calendar days**.
+
+This is a solo-maintained project. That window reflects reality, not indifference.
+
+---
+
+## Process
+
+1. You report privately.
+2. The vulnerability is confirmed or dismissed with an explanation.
+3. If confirmed, a fix is developed and shipped.
+4. You're credited in the changelog unless you prefer otherwise.
+
+Public disclosure is expected after a fix is available. If a fix isn't possible, that will be communicated directly.
+
+---
+
+## Scope
+
+This policy covers the **Debuggatha** repository only.
+For ecosystem-wide security concerns, use the email above.
+
+---
+
+*Debuggatha is A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com).*
