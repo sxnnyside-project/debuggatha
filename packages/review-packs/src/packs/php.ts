@@ -81,36 +81,54 @@ export const phpPack: ReviewPack = {
       externalRefs: [
         "https://www.php.net/manual/en/language.types.declarations.php#language.types.declarations.strict",
       ],
+      limitations: [
+        "`strict_types` is file-scoped, not project-wide — a file that omits the declaration is still valid PHP and calls into strict-typed files still get coerced at the call boundary unless the callee itself also declares it, so flagging every file without the declaration as equally risky ignores that the practical exposure depends on what that file actually accepts as input.",
+      ],
     },
     {
       id: "know-php-eval",
       title: "Eval is Evil",
       body: "`eval()` executes an arbitrary string as PHP code. If any part of that string is influenced by user input, it results in complete Remote Code Execution (RCE) on the server.",
       externalRefs: ["https://www.php.net/manual/en/function.eval.php"],
+      limitations: [
+        "A hardcoded, developer-authored string passed to `eval()` (e.g. a code-golf trick or a template-compilation step with no user input in the string) is not RCE-vulnerable — the danger is specifically user-influenced input reaching `eval()`, not the mere presence of the call.",
+      ],
     },
     {
       id: "know-php-sql-injection",
       title: "SQL Injection Prevention",
       body: "Concatenating strings into SQL queries allows attackers to break out of the string boundary and execute arbitrary SQL commands. PDO prepared statements send the query and the data separately, neutralizing the threat.",
       externalRefs: ["https://www.php.net/manual/en/pdo.prepared-statements.php"],
+      limitations: [
+        "String concatenation used to build a query from fixed, developer-controlled identifiers (e.g. selecting a table name from an internal allowlist enum, not user input) is not injectable — a naive text scan for `.` or string interpolation next to `SELECT`/`INSERT` will false-positive on concatenation that never touches untrusted data.",
+      ],
     },
     {
       id: "know-php-passwords",
       title: "Cryptographic Password Hashing",
       body: "`password_hash()` utilizes strong, natively supported hashing algorithms (like bcrypt or Argon2) with built-in salting and stretching, making it resilient against rainbow tables and brute force attacks.",
       externalRefs: ["https://www.php.net/manual/en/function.password-hash.php"],
+      limitations: [
+        "`md5()`/`sha1()` calls used for non-password purposes (ETags, cache keys, checksums, deduplication hashes) are not a violation of this rule — the concern is specifically about hashing credentials, and a scan matching any `md5(`/`sha1(` call regardless of context will false-positive on those legitimate uses.",
+      ],
     },
     {
       id: "know-php-globals",
       title: "Global State Entanglement",
       body: "Using `global` creates invisible dependencies across the application. It breaks encapsulation, makes unit testing extremely difficult, and leads to unpredictable mutations.",
       externalRefs: ["https://phptherightway.com/#dependency_injection"],
+      limitations: [
+        "Reading well-known PHP superglobals (`$_SERVER`, `$_ENV`, `$_GET`) is a different concern from the `global` keyword or `$GLOBALS` array this rule targets — flagging any superglobal access under this rule conflates request/environment data access with actual cross-scope variable injection.",
+      ],
     },
     {
       id: "know-php-type-hints",
       title: "Explicit Typings",
       body: "Using property, argument, and return type declarations creates a self-documenting API contract that the PHP runtime enforces, drastically reducing `null` checks and unexpected object shapes.",
       externalRefs: ["https://www.php.net/manual/en/language.types.declarations.php"],
+      limitations: [
+        "Variadic parameters (`...$args`), `mixed`-by-design container/serialization functions, and magic methods like `__call`/`__get` often cannot carry a meaningful specific type hint without defeating their purpose — flagging every untyped parameter uniformly misses that some are untyped by legitimate design, not oversight.",
+      ],
     },
   ],
 };

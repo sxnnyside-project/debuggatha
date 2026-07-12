@@ -113,6 +113,9 @@ export const typescriptPack: ReviewPack = {
       title: "The Danger of `any`",
       body: "The `any` type completely disables TypeScript's type checking for that value, propagating untyped data throughout the system. The `unknown` type is the type-safe counterpart; it requires explicit narrowing (via `typeof`, `instanceof`, or custom type guards) before use.",
       externalRefs: ["https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any"],
+      limitations: [
+        "`any` used deliberately at a narrow, well-justified boundary — e.g. typing a third-party library's untyped callback payload before immediately narrowing it, or in a `.d.ts` shim for a JS module with no types — is a defensible escape hatch, not a defect; a blanket textual scan for `: any` cannot distinguish that from uncontrolled `any` propagation through business logic.",
+      ],
     },
     {
       id: "know-typescript-nullability",
@@ -121,12 +124,18 @@ export const typescriptPack: ReviewPack = {
       externalRefs: [
         "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator",
       ],
+      limitations: [
+        "A `!` immediately after a runtime check TypeScript's narrowing can't follow (e.g. `array[i]!` right after confirming `i < array.length`, or a value just validated by a Zod/Joi schema the compiler doesn't see) is a legitimate, safe use — flagging every `!` occurrence as unsafe without tracing whether a prior guard makes it provably non-null produces false positives.",
+      ],
     },
     {
       id: "know-typescript-promises",
       title: "Floating Promises",
       body: "An unhandled promise rejection in Node.js can crash the process. Fire-and-forget promises that are not awaited and lack a `.catch()` block will silently fail, obscuring critical errors in asynchronous operations.",
       externalRefs: ["https://typescript-eslint.io/rules/no-floating-promises/"],
+      limitations: [
+        "A promise deliberately left unawaited for fire-and-forget fan-out (e.g. `void sendAnalyticsEvent(...)` explicitly marked with `void` and backed by an internal catch-all handler) is an intentional pattern, not a floating promise — a rule that flags any unawaited call without recognizing the `void` operator or an upstream global rejection handler will false-positive.",
+      ],
     },
     {
       id: "know-typescript-type-imports",
@@ -135,12 +144,18 @@ export const typescriptPack: ReviewPack = {
       externalRefs: [
         "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export",
       ],
+      limitations: [
+        "An import used for both a type and a runtime value in the same statement (e.g. a class imported both as a type annotation and instantiated with `new`) legitimately cannot use `import type`, and with `isolatedModules`/decorator metadata reliant on the runtime import, forcing `import type` there would break the build rather than improve it.",
+      ],
     },
     {
       id: "know-typescript-return-types",
       title: "Explicit Return Types for Public APIs",
       body: "While type inference is powerful, relying on it for exported API surfaces can inadvertently expose internal types or cause downstream compilation errors if the implementation changes. Explicit return types enforce the API contract.",
       externalRefs: ["https://typescript-eslint.io/rules/explicit-module-boundary-types/"],
+      limitations: [
+        "Small internal-only helper functions re-exported transitively through a package's public barrel file purely as an artifact of a wildcard `export *`, without being part of the package's intended public API, can trigger this rule even though annotating them adds no real contract value — the rule can't distinguish intentional API surface from incidental re-export.",
+      ],
     },
     {
       id: "know-typescript-immutability",
@@ -148,6 +163,9 @@ export const typescriptPack: ReviewPack = {
       body: "Marking object properties, arrays, and tuples as `readonly` provides compile-time guarantees against accidental mutation. This is particularly important for state management in reactive frameworks (like React or Redux).",
       externalRefs: [
         "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#readonly-and-const",
+      ],
+      limitations: [
+        "`readonly` is shallow — it prevents reassigning the property itself but does not deep-freeze nested objects/arrays, so a reviewer relying on this rule to guarantee full immutability of a nested structure will miss that inner properties remain mutable unless each nested level is separately marked `readonly` or wrapped in `Readonly<T>`/`ReadonlyArray<T>` recursively.",
       ],
     },
     {
@@ -157,12 +175,18 @@ export const typescriptPack: ReviewPack = {
       externalRefs: [
         "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing",
       ],
+      limitations: [
+        'Code that intentionally wants falsy values like `0`, `""`, or `false` to also fall through to the default (e.g. treating an empty string form field the same as an absent one) is correctly using `||`, not misusing it — swapping it for `??` there would silently change behavior rather than fix a bug.',
+      ],
     },
     {
       id: "know-typescript-enums",
       title: "TypeScript Enum Pitfalls",
       body: "Numeric enums without explicit initializers are fundamentally unsafe in TypeScript. They allow reverse mapping and permit arbitrary numbers to be assigned to them, breaking type safety. String union types (`type Direction = 'UP' | 'DOWN'`) are significantly safer.",
       externalRefs: ["https://www.typescriptlang.org/docs/handbook/enums.html"],
+      limitations: [
+        "Numeric enums are sometimes required for interop with an external system that has its own numeric protocol (e.g. a C-style FFI boundary, a binary wire format, or a database column storing legacy integer codes) — in that case a string union type isn't a viable substitute, and flagging the numeric enum as a violation ignores the interop constraint.",
+      ],
     },
     {
       id: "know-typescript-as-const",
@@ -170,6 +194,9 @@ export const typescriptPack: ReviewPack = {
       body: 'The `as const` assertion tells the compiler to infer the most specific literal type possible, making properties `readonly` and preventing widening (e.g., inferring `"GET"` instead of `string`). This heavily reduces boilerplate.',
       externalRefs: [
         "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions",
+      ],
+      limitations: [
+        "When the literal union is intended to be a widened, mutable, reusable type shared across a public API surface (e.g. a parameter meant to accept any `string`, not just the specific literals used at the definition site), applying `as const` there over-narrows the type and can cause spurious downstream assignability errors — it isn't universally preferable to an explicit literal union type.",
       ],
     },
   ],

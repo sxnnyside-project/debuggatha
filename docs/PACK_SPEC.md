@@ -46,6 +46,7 @@ The underlying justification for a rule. **"No source, no finding."**
 - **`title`**: Summary of the engineering concept.
 - **`body`**: Detailed rationale, implementation guidance, and context. Must explain the *why*, not just the *what*.
 - **`externalRefs`**: Optional array of URLs pointing to official docs, RFCs, or established community guidelines.
+- **`limitations`**: REQUIRED, non-empty array of plain-prose strings. At least one concrete scenario where a Rule citing this entry produces a false positive or false negative — where the rule's `statement` does not actually hold. This is the mechanism §6's "MUST document known heuristic limitations" resolves to; a Knowledge Entry with an empty `limitations` array fails `validateReviewPack`. If no limitation is currently known, state that explicitly (e.g. `["No known false-positive scenario; flag any exception found in review as a pack update, not a silent suppression."]`) rather than leaving the array empty.
 
 ## 5. Evidence Schema
 When the Review Engine produces a `Finding` based on a Rule, the finding must provide:
@@ -55,5 +56,5 @@ When the Review Engine produces a `Finding` based on a Rule, the finding must pr
 ## 6. Development and Maintenance Expectations
 - **No Placeholders**: A rule without actionable criteria is invalid and must not be committed.
 - **No Empty Packs**: A Review Pack must contain at least one Rule and one Knowledge Entry.
-- **False Positives/Negatives**: Packs MUST document known heuristic limitations in their Knowledge Entries.
+- **False Positives/Negatives**: Packs MUST document known heuristic limitations in their Knowledge Entries — via the required `limitations` field (§4), not prose buried in `body`.
 - **Testing**: Every pack must pass `@debuggatha/knowledge-system`'s `validateReviewPack` before registration.

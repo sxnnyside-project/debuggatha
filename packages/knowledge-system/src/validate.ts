@@ -57,6 +57,12 @@ export function validateReviewPack(pack: ReviewPack): void {
       issues.push(`duplicate knowledge entry id "${entry.id}" within pack "${pack.id}"`);
     }
     knowledgeIds.add(entry.id);
+
+    if (entry.limitations.length === 0) {
+      issues.push(
+        `knowledge entry "${entry.id}" has no limitations — every entry must document at least one known heuristic limitation (PACK_SPEC.md §4/§6)`,
+      );
+    }
   }
 
   for (const dependency of pack.dependsOn) {

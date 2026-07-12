@@ -47,18 +47,27 @@ export const honoPack: ReviewPack = {
       title: "Context Object Ergonomics",
       body: "While Hono fully supports returning raw Web Standard `Response` objects, the `c` Context object provides highly optimized helpers that automatically set the correct headers and handle serialization.",
       externalRefs: ["https://hono.dev/api/context"],
+      limitations: [
+        "Returning a raw `Response` is required, not a style violation, when streaming a body, proxying an upstream `fetch()` response through unmodified, or setting headers/status combinations `c.json()`/`c.text()` don't support directly — flagging every raw `Response` return as a finding ignores these legitimate cases.",
+      ],
     },
     {
       id: "know-hono-validator",
       title: "Type-Safe RPC",
       body: "When using Zod validation middleware in Hono, the inferred types of the request body and query parameters are automatically passed through to the handler, and can be shared with a frontend client using `hono/client`.",
       externalRefs: ["https://hono.dev/guides/validation"],
+      limitations: [
+        "An internal-only route with no external client (e.g. a health-check or metrics endpoint with no meaningful input) has no real need for `@hono/zod-validator`, and a pure backend-for-backend service with no `hono/client` consumer gets no RPC type-sharing benefit either — flagging its absence uniformly across all routes overstates the case for routes where neither justification applies.",
+      ],
     },
     {
       id: "know-hono-edge",
       title: "Edge First Design",
       body: "Hono relies on Web Standards (`Request`, `Response`, `fetch`). Importing Node-specific modules destroys the portability of the application, preventing deployment to Cloudflare Workers or Deno.",
       externalRefs: ["https://hono.dev/getting-started/basic"],
+      limitations: [
+        "A Hono app explicitly targeting the Node.js adapter (`@hono/node-server`) as its only intended deployment target has no portability requirement to preserve, so importing `fs` or `crypto` there is a legitimate architectural choice, not a violation — this rule applies specifically to apps intended for edge/multi-runtime deployment.",
+      ],
     },
   ],
 };
