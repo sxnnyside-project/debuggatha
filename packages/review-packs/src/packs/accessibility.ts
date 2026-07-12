@@ -58,24 +58,36 @@ export const accessibilityPack: ReviewPack = {
       title: "Alternative Text for Images",
       body: "Screen readers rely entirely on the `alt` attribute to describe images to visually impaired users. Omitting the attribute causes the screen reader to read the image filename instead, providing a terrible user experience.",
       externalRefs: ["https://www.w3.org/WAI/tutorials/images/"],
+      limitations: [
+        'SVG icons and CSS `background-image` decorative graphics don\'t use `<img>` at all, so this rule cannot catch a missing accessible name on an `<svg role="img">` icon-button or a CSS-only background image conveying meaning — those need a separate check.',
+      ],
     },
     {
       id: "know-a11y-roles",
       title: "Semantic HTML over ARIA",
       body: "Adding `role=\"button\"` to a `div` tells screen readers it is a button, but does not provide keyboard focus (`tabindex`) or trigger on Enter/Space key presses. Native `<button>` elements provide this for free. 'No ARIA is better than bad ARIA.'",
       externalRefs: ["https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/"],
+      limitations: [
+        'A `<div role="button">` that already has both `tabindex="0"` and `keydown`/`keyup` handlers wired up (a legitimate pattern when a native `<button>` can\'t be styled to spec, e.g. certain custom dropdown triggers) is fully accessible despite matching the surface pattern this rule flags — a naive scan for the role alone, without checking for the accompanying handlers, produces a false positive.',
+      ],
     },
     {
       id: "know-a11y-labels",
       title: "Accessible Forms",
       body: "Placeholders are not a substitute for labels. Screen readers cannot reliably associate placeholders with inputs. Labels ensure the input purpose is announced and they vastly increase the clickable hit area.",
       externalRefs: ["https://www.w3.org/WAI/tutorials/forms/labels/"],
+      limitations: [
+        "An input can be accessibly labeled without a `<label>` element at all via `aria-label` or `aria-labelledby` pointing at another element's text — a rule that only looks for a `for`/nesting relationship to a `<label>` tag will false-positive on these otherwise-compliant ARIA-labeling patterns.",
+      ],
     },
     {
       id: "know-a11y-focus",
       title: "Keyboard Focus Indicators",
       body: "Users who rely on keyboards must visually see which element has focus. Removing the default browser outline without providing a custom styling makes the application completely unusable for keyboard navigators.",
       externalRefs: ["https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html"],
+      limitations: [
+        "Using `outline: none` paired with an equivalent custom indicator applied only via the `:focus-visible` pseudo-class (so it shows for keyboard users but not mouse clicks) is the modern best practice, not a violation — a rule that flags any `outline: none` regardless of an accompanying `:focus`/`:focus-visible` style block will false-positive on this correct pattern.",
+      ],
     },
   ],
 };

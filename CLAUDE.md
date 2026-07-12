@@ -78,12 +78,64 @@ README/package.json as historical, not as a spec to preserve.
   `ReviewPackReference`/`ReviewPolicyReference` stand-ins, not real pack
   content. See that package's own README for the architecture summary,
   persistence format, technical decisions, and risks.
-- **Not started:** anything that actually *runs* a review — real Review
-  Pack content (Rust, React/TS, Kotlin, OWASP...) and the logic inside
-  `reviewArchitecture`/`reviewDiff` are both still deferred to a later
-  epic. Nothing yet calls `synchronizeReviewResult` — no MCP/CLI/VS Code
-  adapter exists to produce a `ReviewResult` in the first place.
-- Everything else in "Deferred (not v1)" below is still deferred.
+- **Epic 5 — MCP Server: implemented.** Lives in `packages/mcp`
+  (`@debuggatha/mcp`). Thin adapter — every tool handler delegates to
+  `@debuggatha/core` via an injected `DomainDeps`, no business logic in
+  this package (confirmed: zero reverse imports from any domain package).
+  Tools: `review_diff`, `review_files`, `review_workspace`,
+  `list_findings`, `get_finding`, `update_finding`, `repository_context`,
+  `repository_summary`. Resources: repository context/summary, ledger,
+  ledger history. Prompts: `review-flow`, `triage-findings`. Errors are
+  sanitized before reaching the client (raw fs paths/stack traces never
+  leak — see `errors.ts`).
+- **Epic 6 — CLI: implemented, partial.** Lives in `packages/cli`
+  (`@debuggatha/cli`). Correctly delegates to `@debuggatha/core` (no
+  reimplemented domain logic). `init`, `findings` (list/show/resolve/
+  dismiss/reopen/summary), `repository`, `packs`, `doctor` are real.
+  Known gaps, not yet closed: `review` has no `files` subcommand (core's
+  `reviewFiles` is exported but unused by the CLI); `policies` returns a
+  hardcoded single-entry list instead of querying the real registry;
+  `doctor` covers only 3 of the ~6 checks originally scoped; exit codes
+  are undifferentiated (`0`/`1` only, no distinct code for
+  findings-detected/invalid-config/repo-not-found).
+- **Epic 6.5 — Audit Closure: implemented.** `docs/PACK_SPEC.md`
+  is the canonical Review Pack spec. `@debuggatha/review-packs` now ships
+  29 real Foundation Bundle packs (see "Review Packs" below), replacing
+  the single example pack referenced above. Of the five architectural
+  findings from the audit: Capability Registry, Shared Domain Vocabulary,
+  File Review readiness, and Knowledge System extension points are
+  resolved; the Git Abstraction (`RepositoryProvider` in
+  `packages/core/src/provider.ts`) exists and is used by the CLI, but
+  `apps/vscode`'s own git provider does not yet go through it — still
+  shells out to git directly.
+- **Epic 7 — VS Code Client: implemented, partial.** Lives in
+  `apps/vscode`. Thin adapter over `@debuggatha/core`, native VS Code
+  components only (tree views, status bar, codicons — no custom webview
+  UI). Repository Intelligence view, Findings Ledger view (resolve/
+  dismiss/reopen), review commands (workspace/diff/file), settings, and
+  a welcome walkthrough all ship. Known gap: "Review Selection" has no
+  selection-scoped logic yet and falls back to reviewing the whole file
+  (`debuggatha.reviewSelection` in `src/index.ts`) — this is a real TODO,
+  not a hidden defect.
+- **Epic 8 — User Experience: partial.** Onboarding (VS Code walkthrough,
+  `debuggatha doctor`'s actionable diagnostics) and terminology
+  consistency are solid. Progressive disclosure (settings/flags are flat,
+  no basic/advanced tiering) and some empty-state coverage (CLI has none;
+  VS Code has it only via `viewsWelcome`) are not yet addressed.
+- **Epic 9 — Hardening: in progress.** Build/typecheck/full test suite
+  are green across every package. Weakest test coverage:
+  `packages/core` (0 tests — currently a thin re-export façade),
+  `packages/review-packs` (1 test for 29 pack files — schema/loading is
+  covered, individual pack content is not), `packages/cli` and
+  `apps/vscode` (smoke tests only, no mocked-domain adapter tests).
+  This document itself was the largest hardening gap found (see below).
+- **Still a stub regardless of adapter wiring:** `reviewArchitecture`,
+  `reviewDiff`, and `reviewFiles` in `packages/skills/src/review/*` are
+  still typed throw/empty-array stubs. Every adapter (MCP, CLI, VS Code)
+  now calls them end-to-end and correctly writes an empty `ReviewResult`
+  into the ledger — the pipeline is real, but no adapter can produce an
+  actual finding yet because the analysis logic itself hasn't been
+  implemented. Do not read "MCP/CLI/VS Code exist" as "reviews work."
 
 ## Non-negotiable
 
@@ -182,10 +234,18 @@ This hierarchy is **implemented** as of Epic 3 in
 types, the `CapabilityRegistry`, `resolvePolicy` (Rule Resolution), and
 `ReviewPolicy`/`ConflictRecord` all ship for real. See that package's own
 README for the domain model, technical decisions, and risks — don't
-duplicate that detail here. Real Stack/Concern pack *content* (the actual
-Rust/React/Kotlin/OWASP rule catalog) is still deferred to a later epic;
-`@debuggatha/review-packs` today only ships the schema plus one trivial
-example pack proving the pipeline works end to end.
+duplicate that detail here. As of Epic 6.5, `@debuggatha/review-packs`
+ships the real Foundation Bundle: 29 packs spanning languages
+(TypeScript, JavaScript, Rust, Go, Kotlin, Dart, PHP), runtime (Bun,
+Node.js), frontend (React, Vue, Svelte, Astro, Lit), backend (Express,
+Fastify, Hono, Elysia, Laravel, ASP.NET Core), desktop/mobile (Tauri,
+Electron, Flutter), and concern packs (OWASP, Accessibility, Performance,
+Architecture, DX, Release). Conforms to `docs/PACK_SPEC.md`.
+Coverage depth varies by pack — 21 are substantive with multiple
+technology-specific rules citing authoritative sources; 8 (`hono`,
+`elysia`, `owasp`, `accessibility`, `performance`, `architecture`, `dx`)
+are schema-conformant but thin (3-4 rules each) and are the natural next
+target for expansion, not a defect.
 
 ## Vocabulary
 
@@ -202,12 +262,18 @@ example pack proving the pipeline works end to end.
 - Do not bring back a personality selector. One identity, always.
 - Do not let a Review Skill run before Core Skills have oriented on the repo.
 - Do not ship a finding with no citable source — no source, no finding.
-- Do not build the full Review Pack catalog before v1 validates the core
-  hypothesis.
-- Do not build the VS Code/Open VSX panel before the engine works headless
-  via MCP.
 - Do not make any Core Skill depend on a specific model provider.
 - Do not market or design around "MCP server" as the pitch — it's plumbing.
+
+Two rules from this section's original v1 revision were deliberately
+overridden by later epics, not violated by accident — recorded here so
+the reversal is a decision, not drift:
+- ~~"Do not build the full Review Pack catalog before v1 validates the
+  core hypothesis."~~ Epic 6.5 built the full Foundation Bundle (29
+  packs) explicitly, ahead of the original v1 gate.
+- ~~"Do not build the VS Code/Open VSX panel before the engine works
+  headless via MCP."~~ Both shipped together — Epic 5 (MCP) and Epic 7
+  (VS Code) — rather than strictly sequenced.
 
 ## v1 scope
 
@@ -222,39 +288,53 @@ Ships:
 - **Core Skills**: all four (Stack Detection, Criteria Resolution,
   Documentation Context, Repository Understanding) — **shipped**, see
   "Implementation status."
-- **Review Skills**: Diff Review + Architecture Review only.
-- **Review Packs**: 2–3, anchored in Sxnnyside's own stack — React/TS Pack,
-  Kotlin Pack, plus one concern pack (OWASP or DX). Validate against
-  Animoria and Sxnnyside's own repos before asking a stranger to trust it.
+- **Review Skills**: Diff Review + Architecture Review only — still stubs,
+  see "Implementation status."
+- **Review Packs**: originally scoped as 2–3 (React/TS, Kotlin, one
+  concern pack); Epic 6.5 shipped the full 29-pack Foundation Bundle
+  instead — see "What NOT to do" for why that's a recorded decision, not
+  scope creep. Validating against Animoria and Sxnnyside's own repos is
+  still outstanding regardless of catalog size.
 - **Distribution**: MCP server, sampling-first (uses the host's
   already-configured model — Claude Code, Claude Desktop, Cursor, Copilot
   agent mode). No key management for the default path.
 
 ## Deferred (not v1)
 
-- Full Review Pack catalog (Flutter, Tauri, Accessibility, Performance,
-  Release packs, etc.)
 - Analysis Skills tier entirely (Dependency Graph, Module Boundaries,
   Ownership Detection, Change Impact)
-- VS Code / Open VSX visual panel — always a client of the engine, never
-  built first
-- Standalone CLI for CI usage
-- Direct/local model runtime (Ollama, LM Studio) — opt-in, advanced, after
-  sampling-first is proven
+- Direct/local model runtime (Ollama, LM Studio) — `debuggatha.runtime`
+  exposes a `local` option in VS Code settings, but nothing behind it is
+  implemented yet; `mcp` is the only working runtime today
 
-## MCP surface (distribution layer — reference only)
+Shipped ahead of this section's original scope (update this list, don't
+trust it blindly): the Review Pack catalog (29 packs, Epic 6.5), the
+VS Code/Open VSX visual panel (Epic 7), and the standalone CLI (Epic 6)
+all now exist — this section originally deferred all three past v1, but
+implementation moved faster than this document was updated. See
+"Implementation status" above for their actual state.
+
+## MCP surface (distribution layer)
+
+**Implemented** as of Epic 5 in `@debuggatha/mcp`. Tool names below match
+the shipped implementation, not the earlier draft naming in this section's
+prior revision (`resolve_finding` was renamed to `update_finding`;
+`set_voice` was not built — depth/voice are still request parameters on
+the review tools, not a separate tool).
 
 - `review_diff` — default mode, audits what changed since last commit / a
   base branch.
 - `review_files` — explicit paths, no artificial file cap.
 - `review_workspace` — full sweep, meant to run once and seed the ledger.
-- `list_findings` / `resolve_finding` — read/update finding state. The
-  ledger these need is implemented (`@debuggatha/findings-ledger`, Epic 4:
-  `listEntries`/`updateFindingStatus`) — what's still missing is the MCP
-  tool itself calling them, since no MCP server exists yet.
-- `set_voice` — **not** a personality selector. Adjusts `depth`
-  (quick/full/architectural) and `voice` (direct/teaching/formal) as call
-  parameters, not branded personas.
+- `list_findings` / `get_finding` / `update_finding` — read/update finding
+  state via `@debuggatha/findings-ledger`.
+- `repository_context` / `repository_summary` — expose Repository
+  Intelligence without running a review.
+
+All three review tools call through to the still-stubbed
+`reviewDiff`/`reviewFiles`/`reviewArchitecture` skills (see "Implementation
+status") — the MCP plumbing around them is real and tested, but they
+currently sync an empty `ReviewResult` into the ledger.
 
 ## Model strategy
 
@@ -290,9 +370,11 @@ Do not confuse this with `@debuggatha/repository-intelligence`'s
 This ledger is a *persistent record of review findings* across sessions.
 Different subsystem, different lifetime, both deliberately separate.
 
-Nothing calls `synchronizeReviewResult` yet — no MCP/CLI/VS Code adapter
-exists to produce a `ReviewResult` in the first place. The ledger is
-ready to be driven; it doesn't drive anything itself.
+As of Epic 5-7, all three adapters (MCP, CLI, VS Code) call
+`synchronizeReviewResult` on every review run. What they synchronize is
+still an empty `ReviewResult` today, since the Review Skills underneath
+are stubs (see "Implementation status") — the ledger is being driven,
+just with no findings to record yet.
 
 ## Origin
 
@@ -301,6 +383,10 @@ Design produced across a 2026-07 audit + product redesign session:
 repositioning proposal, (3) the identity/skills redesign this file
 consolidates, (4) Epic 1 (Repository Intelligence), (5) Epic 2 (Review
 Engine domain), (6) Epic 3 (Knowledge System), (7) Epic 4 (Findings
-Ledger). Treat this file as the living summary — update it directly when
-a decision here changes, rather than accumulating a new document per
-session.
+Ledger), (8) Epic 5 (MCP Server), (9) Epic 6 (CLI), (10) Epic 6.5 (Audit
+Closure — PACK_SPEC.md + Foundation Bundle), (11) Epic 7 (VS Code
+Client), (12) Epic 8 (User Experience, partial), (13) Epic 9 (Hardening,
+in progress — this document's Epic 5-9 status was itself the largest gap
+found during that pass, corrected 2026-07-11). Treat this file as the
+living summary — update it directly when a decision here changes, rather
+than accumulating a new document per session.

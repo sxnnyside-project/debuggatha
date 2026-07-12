@@ -1,7 +1,5 @@
 # Debuggatha
 
-![Banner](debuggatha-banner.png)
-
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![CI](https://github.com/sxnnyside-project/debuggatha/workflows/CI/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions)
@@ -77,12 +75,12 @@ For the CLI and VS Code Client specifics, refer to their respective app-level in
 
 ```
 debuggatha/
-├── apps/         # VS Code client and docs
+├── apps/         # VS Code client and docs site
 ├── packages/     # The core engines, intelligence, ledger, and knowledge systems
-└── scripts/      # Build and deployment utilities
+└── docs/         # Architecture notes, ADRs, and the Review Pack spec
 ```
 
-For a detailed breakdown, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For a detailed breakdown, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Contributing
 

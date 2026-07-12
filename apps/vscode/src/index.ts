@@ -1,5 +1,5 @@
 import type { Finding } from "@debuggatha/core";
-import { ledgerFilePath, loadLedger } from "@debuggatha/core";
+import { loadLedger } from "@debuggatha/core";
 import * as vscode from "vscode";
 import { registerLifecycleCommands } from "./commands/lifecycle.js";
 import { executeReview } from "./commands/review.js";
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
     const rootDir = folders[0]?.uri?.fsPath;
     if (!rootDir) return;
     try {
-      const ledger = loadLedger(ledgerFilePath(rootDir));
+      const ledger = loadLedger(rootDir);
       const ledgerFindings = ledger.entries.map((e: any) => e.latestFinding);
       findingsProvider.refresh(ledgerFindings);
       // Wait to populate diagnostics maybe? Or do it directly

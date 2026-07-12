@@ -6,8 +6,10 @@ import {
   createReviewSession,
   type Finding,
   loadLedger,
+  type ReviewScope,
   reviewArchitecture,
   reviewDiff,
+  reviewFiles,
   saveLedger,
   synchronizeReviewResult,
   transitionSession,
@@ -21,6 +23,7 @@ export function registerReviewCommand(program: Command) {
     .command("review")
     .description("Run a smart review. Detects context automatically or delegates to subcommands.")
     .option("--diff <string>", "Explicitly review a specific diff")
+    .option("--files <path...>", "Review specific files instead of a diff or the whole workspace")
     .option("--policy <id>", "Override default policy")
     .option("--pack <id...>", "Add specific review packs")
     .action(async (options, command) => {
@@ -32,27 +35,36 @@ export function registerReviewCommand(program: Command) {
         const repoContext = await buildRepositoryContext(cwd);
         logger.debug(`Repository context built for ${repoContext.rootDir}`);
 
-        let diff = options.diff;
+        const filePaths: string[] | undefined =
+          options.files && options.files.length > 0 ? options.files : undefined;
+
+        let diff: string | undefined = options.diff;
         let isDiff = !!diff;
 
-        if (!diff) {
-          logger.debug("Checking for git diff...");
-          const git = new LocalGitProvider(cwd);
-          diff = await git.getDiff();
-          if (diff) {
-            logger.info("Detected local git diff. Running diff review.");
-            isDiff = true;
+        if (!filePaths) {
+          if (!diff) {
+            logger.debug("Checking for git diff...");
+            const git = new LocalGitProvider(cwd);
+            diff = await git.getDiff();
+            if (diff) {
+              logger.info("Detected local git diff. Running diff review.");
+              isDiff = true;
+            } else {
+              logger.info("No git diff detected. Running workspace review.");
+              isDiff = false;
+            }
           } else {
-            logger.info("No git diff detected. Running workspace review.");
-            isDiff = false;
+            logger.info("Running explicit diff review.");
           }
         } else {
-          logger.info("Running explicit diff review.");
+          logger.info(`Running review scoped to ${filePaths.length} file(s).`);
         }
 
-        const requestScope = isDiff
-          ? { kind: "diff" as const, base: undefined }
-          : { kind: "workspace" as const };
+        const requestScope: ReviewScope = filePaths
+          ? { kind: "files", paths: filePaths }
+          : isDiff
+            ? { kind: "diff", base: undefined }
+            : { kind: "workspace" };
 
         const requestInput = {
           scope: requestScope,
@@ -79,7 +91,9 @@ export function registerReviewCommand(program: Command) {
 
         let findings: Finding[];
         try {
-          if (isDiff) {
+          if (filePaths) {
+            findings = reviewFiles(filePaths, policy);
+          } else if (isDiff) {
             findings = reviewDiff(diff as string, policy);
           } else {
             findings = reviewArchitecture(repoContext.rootDir, policy);
@@ -98,12 +112,14 @@ export function registerReviewCommand(program: Command) {
         const result = createReviewResult({ session, findings });
 
         const ledger = loadLedger(repoContext.rootDir);
-        const syncScope = isDiff
-          ? {
-              kind: "files" as const,
-              files: [...new Set(findings.flatMap((f) => f.locations.map((l) => l.file)))],
-            }
-          : { kind: "workspace" as const };
+        const syncScope = filePaths
+          ? { kind: "files" as const, files: filePaths }
+          : isDiff
+            ? {
+                kind: "files" as const,
+                files: [...new Set(findings.flatMap((f) => f.locations.map((l) => l.file)))],
+              }
+            : { kind: "workspace" as const };
 
         const { ledger: updatedLedger, report } = synchronizeReviewResult(
           ledger,

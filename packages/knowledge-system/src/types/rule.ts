@@ -20,6 +20,17 @@ export interface KnowledgeEntry {
   title: string;
   body: string;
   externalRefs: string[] | undefined;
+  /**
+   * Known heuristic limitations — scenarios where the Rule(s) citing this
+   * entry produce a false positive or false negative (PACK_SPEC.md §4,
+   * "MUST document known heuristic limitations"). Required, not optional:
+   * every entry must name at least one concrete case where the rule it
+   * backs does not hold, or explicitly state none is currently known.
+   * Deliberately plain prose, not a machine-checkable exception list — the
+   * Review Skill consuming this is still a human-facing citation, not an
+   * automated suppression mechanism.
+   */
+  limitations: string[];
 }
 
 /**

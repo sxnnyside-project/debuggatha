@@ -42,6 +42,7 @@ export function fixtureKnowledgeEntry(overrides: Partial<KnowledgeEntry> = {}): 
     title: "Test knowledge entry",
     body: "The underlying domain expertise a rule derives from.",
     externalRefs: undefined,
+    limitations: ["Fixture-only entry; not a real heuristic limitation."],
     ...overrides,
   };
 }

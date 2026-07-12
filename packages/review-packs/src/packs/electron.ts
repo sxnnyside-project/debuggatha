@@ -70,30 +70,45 @@ export const electronPack: ReviewPack = {
       externalRefs: [
         "https://www.electronjs.org/docs/latest/tutorial/security#2-do-not-enable-nodejs-integration-for-remote-content",
       ],
+      limitations: [
+        "A trusted, fully offline utility BrowserWindow that never loads remote or user-supplied content (e.g. an internal devtools panel rendering only bundled app HTML) has a much smaller risk surface from `nodeIntegration: true` than one that loads remote URLs — flagging every occurrence identically regardless of what content the window actually loads overstates risk for the narrow trusted-content case, though disabling it remains best practice regardless.",
+      ],
     },
     {
       id: "know-electron-context-isolation",
       title: "Context Isolation",
       body: "Without `contextIsolation`, the renderer's JavaScript environment (window) is shared with the preload script. An attacker can use Prototype Pollution to intercept or alter the behavior of native APIs exposed by the preload script.",
       externalRefs: ["https://www.electronjs.org/docs/latest/tutorial/context-isolation"],
+      limitations: [
+        "Detecting `contextIsolation` from source alone can miss the effective value when it's set conditionally at runtime (e.g. derived from an environment variable or config file read at window-creation time) rather than as a literal `true`/`false` in the `webPreferences` object — a static scan sees no explicit `false` and may not flag a runtime path that resolves to unsafe.",
+      ],
     },
     {
       id: "know-electron-remote",
       title: "The Remote Module is Dangerous",
       body: "The remote module allows the renderer process to invoke methods on main process objects directly. This creates a massive attack surface and causes severe performance bottlenecks due to synchronous IPC blocking.",
       externalRefs: ["https://nvd.nist.gov/vuln/detail/CVE-2022-29247"],
+      limitations: [
+        "A dependency that merely has `@electron/remote` in its transitive dependency tree, without the app itself calling `require('@electron/remote')` or enabling the `enable-remote-module` webPreference, isn't actually using the dangerous surface — flagging based on the package appearing in `package.json`/lockfile alone, rather than actual usage in the app's own code, produces a false positive.",
+      ],
     },
     {
       id: "know-electron-ipc",
       title: "Untrusted Renderer Process",
       body: "The renderer process must be treated exactly like a remote client hitting a web server. If `ipcMain.handle('delete-file', (e, path) => fs.unlinkSync(path))` is implemented without validation, any script in the renderer can delete arbitrary files.",
       externalRefs: ["https://www.electronjs.org/docs/latest/tutorial/ipc"],
+      limitations: [
+        "An IPC handler whose argument is validated inside a shared helper function called from within the handler body (rather than inline at the top of the `ipcMain.handle` callback) is still safe — a rule that only looks for validation code textually inside the handler literal, and doesn't trace calls into helper functions, will false-positive on this indirection.",
+      ],
     },
     {
       id: "know-electron-sandbox",
       title: "Chromium Sandbox",
       body: "The sandbox limits the actions the renderer process can perform at the OS level, isolating it from the filesystem and restricting its capabilities even if the V8 engine is completely compromised.",
       externalRefs: ["https://www.electronjs.org/docs/latest/tutorial/sandbox"],
+      limitations: [
+        "A preload script that itself needs full Node.js API access to bridge functionality to the renderer (a legitimate, common pattern) cannot run under `sandbox: true` in older Electron versions without restructuring — flagging `sandbox` omission without accounting for Electron-version-dependent preload sandboxing support (sandboxed preloads became more capable in Electron 20+) can misjudge older, still-supportable codebases.",
+      ],
     },
   ],
 };
