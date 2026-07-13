@@ -1,9 +1,9 @@
 {
   "name": "debuggatha",
   "displayName": "Debuggatha",
-  "description": "A senior code reviewer, not a chat wrapper.",
+  "description": "The engineering reviewer that remembers — every finding traced to a real rule, tracked from open to resolved, judged against the repo you actually wrote.",
   "version": "0.1.0",
-  "publisher": "debuggatha",
+  "publisher": "SxnnysideProject",
   "repository": {
     "type": "git",
     "url": "https://github.com/sxnnyside-project/debuggatha.git"
@@ -28,7 +28,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsup",
     "lint": "biome lint .",
@@ -205,7 +205,7 @@
       {
         "id": "debuggatha.welcome",
         "title": "Welcome to Debuggatha",
-        "description": "A senior code reviewer, not a chat wrapper.",
+        "description": "The engineering reviewer that remembers — every finding traced to a real rule, tracked from open to resolved, judged against the repo you actually wrote.",
         "steps": [
           {
             "id": "debuggatha.welcome.intro",

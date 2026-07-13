@@ -17,7 +17,7 @@ export function registerFindingsCommand(program: Command) {
     .command("list")
     .description("List open findings")
     .action(async (_options, command) => {
-      const logger = command.parent?.logger as CliLogger;
+      const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       try {
         const ledger = loadLedger(cwd);
@@ -42,7 +42,7 @@ export function registerFindingsCommand(program: Command) {
     .command("show <id>")
     .description("Show details of a specific finding")
     .action(async (id, _options, command) => {
-      const logger = command.parent?.logger as CliLogger;
+      const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       try {
         const ledger = loadLedger(cwd);
@@ -79,7 +79,7 @@ export function registerFindingsCommand(program: Command) {
     });
 
   const transitionCommand = async (id: string, status: FindingLifecycleStatus, command: any) => {
-    const logger = command.parent?.logger as CliLogger;
+    const logger = command.logger as CliLogger;
     const cwd = program.opts().cwd as string;
     try {
       const ledger = loadLedger(cwd);
@@ -127,7 +127,7 @@ export function registerFindingsCommand(program: Command) {
     .command("summary")
     .description("Print findings ledger summary")
     .action(async (_options, command) => {
-      const logger = command.parent?.logger as CliLogger;
+      const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       try {
         const ledger = loadLedger(cwd);

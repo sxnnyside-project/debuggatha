@@ -104,8 +104,11 @@ it does not participate in the `resolvePolicy` pipeline itself.
 - **`@debuggatha/skills`** — `reviewArchitecture`/`reviewDiff`'s type
   imports migrated off `@debuggatha/shared`'s legacy `Finding`/
   `ReviewPolicy` onto `@debuggatha/review-engine`'s `Finding` and this
-  package's richer `ReviewPolicy`. Still throw-stubs — only the imports
-  changed, not the (still unimplemented) logic.
+  package's richer `ReviewPolicy`. At the time of this epic, both were
+  still throw-stubs — only the imports changed, not the logic. **(Epic
+  16B update: no longer true — Epic 11 replaced both, and
+  `reviewFiles`, with a real deterministic engine; see
+  `packages/skills/README.md`.)**
 
 ## Deferred (explicitly out of scope for this epic)
 
@@ -125,8 +128,10 @@ it does not participate in the `resolvePolicy` pipeline itself.
 - A `SkillDescriptor` catalog for `@debuggatha/skills`' two existing Skill
   functions — `@debuggatha/policies`' registry is populated with an empty
   skills list for now (see Risks).
-- Anything that actually *runs* a review — `reviewArchitecture`/
-  `reviewDiff` still throw; only their type imports changed this epic.
+- Anything that actually *runs* a review — at the time of this epic,
+  `reviewArchitecture`/`reviewDiff` still threw; only their type imports
+  changed. **(Epic 16B update: resolved by Epic 11 — see
+  `packages/skills/README.md`.)**
 
 ## Technical decisions
 
@@ -211,11 +216,13 @@ it does not participate in the `resolvePolicy` pipeline itself.
   slightly larger than a literal reading of the ADR suggests. Revisit if
   `CriteriaRule` ever gains a `category`/`appliesTo`-equivalent.
 - **`@debuggatha/policies`' default registry has an empty Skill list.**
-  `@debuggatha/skills` doesn't export a `SkillDescriptor` catalog yet
-  (only its two throw-stub functions) — a future pack declaring a
-  `{ skillId }` dependency will fail closed (correctly, per §9) until that
-  catalog exists. Not a bug, but worth knowing before wiring a
-  Skill-dependent pack.
+  `@debuggatha/skills` still doesn't export a `SkillDescriptor` catalog
+  (its Review Skill functions are real as of Epic 11, but nothing
+  registers them as `SkillDescriptor`s) — a future pack declaring a
+  `{ skillId }` dependency will fail closed (correctly, per §9) until
+  that catalog exists. Not a bug, but worth knowing before wiring a
+  Skill-dependent pack. **(Confirmed still accurate as of Epic 16A's
+  audit — this is the one part of this Risk that hasn't been resolved.)**
 - **`compareVersions`/`satisfiesRange` (`src/internal/semver.ts`) is not a
   full semver implementation.** No prerelease/build-metadata handling, no
   `>=`/`<`/range-set syntax beyond `^`/`~`/exact/`*`. Sufficient for a

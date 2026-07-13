@@ -23,11 +23,15 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@debuggatha/analysis-engine": "workspace:*",
+    "@debuggatha/context-intelligence": "workspace:*",
     "@debuggatha/findings-ledger": "workspace:*",
     "@debuggatha/knowledge-system": "workspace:*",
     "@debuggatha/policies": "workspace:*",
     "@debuggatha/repository-intelligence": "workspace:*",
+    "@debuggatha/repository-memory": "workspace:*",
     "@debuggatha/review-engine": "workspace:*",
+    "@debuggatha/runtime-engine": "workspace:*",
     "@debuggatha/skills": "workspace:*"
   },
   "devDependencies": {

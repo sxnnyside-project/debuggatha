@@ -23,6 +23,9 @@ export interface DomainDeps {
   getEntry: typeof core.getEntry;
   updateFindingStatus: typeof core.updateFindingStatus;
   summarizeLedger: typeof core.summarizeLedger;
+  summarizeCapabilities: typeof core.summarizeCapabilities;
+  loadMemoryStore: typeof core.loadMemoryStore;
+  filterSuppressedFindings: typeof core.filterSuppressedFindings;
 }
 
 export function createDefaultDomainDeps(): DomainDeps {
@@ -43,5 +46,8 @@ export function createDefaultDomainDeps(): DomainDeps {
     getEntry: core.getEntry,
     updateFindingStatus: core.updateFindingStatus,
     summarizeLedger: core.summarizeLedger,
+    summarizeCapabilities: core.summarizeCapabilities,
+    loadMemoryStore: core.loadMemoryStore,
+    filterSuppressedFindings: core.filterSuppressedFindings,
   };
 }

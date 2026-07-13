@@ -19,6 +19,9 @@ function fixtureContext(): RepositoryContext {
       workspaceEvidence: [],
       manifests: [],
     },
+    capabilities: [
+      { id: "typescript", kind: "language", confidence: "high", evidence: [], origin: "manifest" },
+    ],
     dependencies: { lockfiles: [], declaredVersions: {}, runtimeConstraints: {} },
     documentation: { sources: [], summary: "" },
     criteria: { rules: [], sources: [] },

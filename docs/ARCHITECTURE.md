@@ -15,13 +15,17 @@ debuggatha/
 │   ├── review-engine/     — Epic 2: review domain (Request/Session/Finding/Result)
 │   ├── knowledge-system/ — Epic 3: Skills/Packs/Policies domain (Registry, resolvePolicy, assembleContext)
 │   ├── findings-ledger/   — Epic 4: persistent history of findings (lifecycle, matching, sync)
-│   ├── core/              — façade: re-exports all four epics; orchestrates them together
-│   ├── skills/             — Review / Analysis skill implementations (Core Skills moved to repository-intelligence)
+│   ├── skills/             — Epic 11: Review / Analysis skill implementations (Core Skills moved to repository-intelligence)
+│   ├── analysis-engine/  — Epic 12: deterministic module boundaries/dependency graph/dead code/ownership pipeline
+│   ├── context-intelligence/ — Epic 14: documentation intent, workflow, ownership, metadata, git context (ContextItem[])
+│   ├── repository-memory/ — Epic 15: long-term engineering knowledge (suppressions, deviations, conventions, decisions)
+│   ├── runtime-engine/   — Epic 13: provider-agnostic semantic review execution (Ollama, LM Studio)
 │   ├── review-packs/    — Review Pack content conforming to knowledge-system's schema
 │   ├── policies/          — thin wiring: calls knowledge-system's resolvePolicy against a registry populated from review-packs
+│   ├── core/              — façade: re-exports every domain package; orchestrates them together (executeReview)
+│   ├── infrastructure/   — concrete RepositoryProvider implementations (LocalGitProvider)
 │   ├── mcp/                — MCP server (distribution layer only)
 │   ├── cli/                 — standalone CLI, for CI usage
-│   ├── shared/            — legacy shared types, superseded by review-engine/knowledge-system
 │   └── testing/           — test fixtures shared across packages
 │
 ├── turbo.json

@@ -9,9 +9,83 @@
  * packages. This is exports only; the multi-step orchestration (build a
  * RepositoryContext, assemble a policy, run a Skill, sync the result into
  * a Ledger) is composed by whatever calls these functions — today that's
- * `@debuggatha/mcp`'s tool handlers, not this package.
+ * `@debuggatha/mcp`'s tool handlers, not this package. Epic 12 adds
+ * `@debuggatha/analysis-engine`'s deterministic repository analysis
+ * pipeline to this façade the same way.
  */
 
+export type {
+  AnalysisCache,
+  AnalysisCacheEntry,
+  AnalysisFingerprint,
+  AnalysisResult,
+  ChangeImpact,
+  DeadCodeFinding,
+  DeadCodeKind,
+  DependencyCycle,
+  DependencyEdge,
+  DependencyGraph,
+  LayerModel,
+  LayerName,
+  LayerViolation,
+  ModuleBoundary,
+  ModuleKind,
+  OwnershipSignal,
+  OwnershipSource,
+  PublicApiSurface,
+  PublicApiSymbol,
+  RunAnalysisOptions,
+} from "@debuggatha/analysis-engine";
+export {
+  buildAnalysisFingerprint,
+  buildDependencyGraph,
+  buildLayerModel,
+  buildPublicApiSurface,
+  createInMemoryAnalysisCache,
+  detectCycles,
+  detectDeadCode,
+  detectLayerViolations,
+  detectOwnership,
+  estimateChangeImpact,
+  fingerprintChanged,
+  inferModuleBoundaries,
+  LAYER_ORDER,
+  runAnalysis,
+} from "@debuggatha/analysis-engine";
+export type {
+  BuildContextIntelligenceOptions,
+  CapabilityContextItem,
+  ContextCategory,
+  ContextConfidence,
+  ContextEvidence,
+  ContextFingerprint,
+  ContextIntelligenceCache,
+  ContextIntelligenceCacheEntry,
+  ContextIntelligenceResult,
+  ContextItem,
+  DocumentationContextItem,
+  EngineeringConventionItem,
+  GitContextItem,
+  GitContextKey,
+  OwnershipContextItem,
+  ProjectMetadataItem,
+  WorkflowContextItem,
+  WorkflowKind,
+} from "@debuggatha/context-intelligence";
+export {
+  buildCapabilityItems as buildContextCapabilityItems,
+  buildContextFingerprint,
+  buildContextIntelligence,
+  buildConventionItems,
+  buildDocumentationItems as buildDocumentationContextItems,
+  buildGitContextItems,
+  buildOwnershipItems as buildOwnershipContextItems,
+  buildProjectMetadataItems,
+  conventionsToPolicyStatements,
+  createInMemoryContextCache,
+  detectWorkflow,
+  hasContextFingerprintChanged,
+} from "@debuggatha/context-intelligence";
 export type {
   FindingFingerprint,
   FindingLifecycleStatus,
@@ -79,6 +153,10 @@ export {
 export { assemblePolicy, defaultCapabilityRegistry } from "@debuggatha/policies";
 export type {
   BuildRepositoryContextOptions,
+  Capability,
+  CapabilityConfidence,
+  CapabilityKind,
+  CapabilityOrigin,
   CriteriaProfile,
   CriteriaRule,
   DependencyProfile,
@@ -93,7 +171,52 @@ export type {
 export {
   buildRepositoryContext,
   createInMemoryCache,
+  deriveCapabilities,
+  summarizeCapabilities,
 } from "@debuggatha/repository-intelligence";
+export type {
+  AcceptedDeviationItem,
+  ConventionItem,
+  CreateMemoryItemInput,
+  DecisionItem,
+  ExceptionItem,
+  ExceptionKind,
+  FilterFindingsResult,
+  MemoryCategory,
+  MemoryConfidence,
+  MemoryEvidence,
+  MemoryHistoryEvent,
+  MemoryItem,
+  MemoryLifecycleStatus,
+  MemoryOrigin,
+  MemoryStore,
+  ReviewHistoryNoteItem,
+  SuppressedFinding,
+  SuppressionItem,
+} from "@debuggatha/repository-memory";
+export {
+  acceptedDeviationMatches,
+  activateMemory,
+  addMemoryItem,
+  archiveMemory,
+  canTransitionMemory,
+  confirmMemory,
+  createEmptyMemoryStore,
+  createMemoryItem,
+  deprecateMemory,
+  exceptionMatches,
+  filterSuppressedFindings,
+  isActiveMemoryStatus,
+  loadMemoryStore,
+  MEMORY_LIFECYCLE_STATUSES,
+  reactivateMemory,
+  rejectMemory,
+  removeMemoryItem,
+  saveMemoryStore,
+  suggestMemory,
+  suppressionMatches,
+  transitionMemory,
+} from "@debuggatha/repository-memory";
 export type {
   Category,
   Confidence,
@@ -127,5 +250,50 @@ export {
   summarizeFindings,
   transitionSession,
 } from "@debuggatha/review-engine";
-export { reviewArchitecture, reviewDiff, reviewFiles } from "@debuggatha/skills";
+export type {
+  ContextBudget,
+  HealthStatus,
+  ModelInfo,
+  PromptBudgetResult,
+  Provider,
+  ProviderRegistry,
+  ResolvedRuntime,
+  RunSemanticReviewInput,
+  RunSemanticReviewOutput,
+  RuntimeEngine,
+  RuntimeExecutionMetadata,
+  RuntimeSelection,
+  SemanticConfidence,
+  SemanticEvidence,
+  SemanticExecutionRequest,
+  SemanticFindingCandidate,
+  SemanticReviewResult,
+  SemanticSourceUnit,
+  SemanticStreamEvent,
+  StreamSemanticReviewOutput,
+} from "@debuggatha/runtime-engine";
+export {
+  budgetSourceUnits,
+  chunkSourceUnit,
+  consumeToCompletion,
+  createLMStudioProvider,
+  createOllamaProvider,
+  createProviderRegistry,
+  createRuntimeEngine,
+  estimateTokens,
+  parseSemanticResponse,
+  RuntimeSelectionError,
+} from "@debuggatha/runtime-engine";
+export {
+  reviewArchitecture,
+  reviewDiff,
+  reviewFiles,
+  runSemanticFindings,
+} from "@debuggatha/skills";
+export type {
+  ReviewPipelineInput,
+  ReviewPipelineOutput,
+  ReviewPipelineScope,
+} from "./pipeline.js";
+export { executeReview } from "./pipeline.js";
 export type { RepositoryProvider } from "./provider.js";

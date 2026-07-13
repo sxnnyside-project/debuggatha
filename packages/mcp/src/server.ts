@@ -214,6 +214,8 @@ export function createServer(
       return jsonResult({
         rootDir: resolvedRoot,
         stack: repoContext.stack,
+        capabilities: repoContext.capabilities,
+        summary: ctx.deps.summarizeCapabilities(repoContext.capabilities),
         dependencies: repoContext.dependencies,
         criteria: repoContext.criteria,
         ledgerSummary,

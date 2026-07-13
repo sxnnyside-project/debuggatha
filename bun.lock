@@ -31,6 +31,16 @@
         "@types/vscode": "^1.90.0",
       },
     },
+    "packages/analysis-engine": {
+      "name": "@debuggatha/analysis-engine",
+      "version": "0.1.0",
+      "dependencies": {
+        "@debuggatha/repository-intelligence": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^22.0.0",
+      },
+    },
     "packages/cli": {
       "name": "@debuggatha/cli",
       "version": "0.1.0",
@@ -48,15 +58,31 @@
         "@types/node": "^22.0.0",
       },
     },
+    "packages/context-intelligence": {
+      "name": "@debuggatha/context-intelligence",
+      "version": "0.1.0",
+      "dependencies": {
+        "@debuggatha/analysis-engine": "workspace:*",
+        "@debuggatha/repository-intelligence": "workspace:*",
+      },
+      "devDependencies": {
+        "@debuggatha/testing": "workspace:*",
+        "@types/node": "^22.0.0",
+      },
+    },
     "packages/core": {
       "name": "@debuggatha/core",
       "version": "0.1.0",
       "dependencies": {
+        "@debuggatha/analysis-engine": "workspace:*",
+        "@debuggatha/context-intelligence": "workspace:*",
         "@debuggatha/findings-ledger": "workspace:*",
         "@debuggatha/knowledge-system": "workspace:*",
         "@debuggatha/policies": "workspace:*",
         "@debuggatha/repository-intelligence": "workspace:*",
+        "@debuggatha/repository-memory": "workspace:*",
         "@debuggatha/review-engine": "workspace:*",
+        "@debuggatha/runtime-engine": "workspace:*",
         "@debuggatha/skills": "workspace:*",
       },
       "devDependencies": {
@@ -134,6 +160,17 @@
         "@types/node": "^22.0.0",
       },
     },
+    "packages/repository-memory": {
+      "name": "@debuggatha/repository-memory",
+      "version": "0.1.0",
+      "dependencies": {
+        "@debuggatha/findings-ledger": "workspace:*",
+        "@debuggatha/review-engine": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^22.0.0",
+      },
+    },
     "packages/review-engine": {
       "name": "@debuggatha/review-engine",
       "version": "0.1.0",
@@ -155,12 +192,21 @@
         "@types/node": "^22.0.0",
       },
     },
+    "packages/runtime-engine": {
+      "name": "@debuggatha/runtime-engine",
+      "version": "0.1.0",
+      "devDependencies": {
+        "@types/node": "^22.0.0",
+      },
+    },
     "packages/skills": {
       "name": "@debuggatha/skills",
       "version": "0.1.0",
       "dependencies": {
+        "@debuggatha/analysis-engine": "workspace:*",
         "@debuggatha/knowledge-system": "workspace:*",
         "@debuggatha/review-engine": "workspace:*",
+        "@debuggatha/runtime-engine": "workspace:*",
       },
       "devDependencies": {
         "@types/node": "^22.0.0",
@@ -267,7 +313,11 @@
 
     "@commitlint/types": ["@commitlint/types@19.8.1", "", { "dependencies": { "@types/conventional-commits-parser": "^5.0.0", "chalk": "^5.3.0" } }, "sha512-/yCrWGCoA1SVKOks25EGadP9Pnj0oAIHGpl2wH2M2Y46dPM2ueb8wyCVOD7O3WCTkaJ0IkKvzhl1JY7+uCT2Dw=="],
 
+    "@debuggatha/analysis-engine": ["@debuggatha/analysis-engine@workspace:packages/analysis-engine"],
+
     "@debuggatha/cli": ["@debuggatha/cli@workspace:packages/cli"],
+
+    "@debuggatha/context-intelligence": ["@debuggatha/context-intelligence@workspace:packages/context-intelligence"],
 
     "@debuggatha/core": ["@debuggatha/core@workspace:packages/core"],
 
@@ -285,9 +335,13 @@
 
     "@debuggatha/repository-intelligence": ["@debuggatha/repository-intelligence@workspace:packages/repository-intelligence"],
 
+    "@debuggatha/repository-memory": ["@debuggatha/repository-memory@workspace:packages/repository-memory"],
+
     "@debuggatha/review-engine": ["@debuggatha/review-engine@workspace:packages/review-engine"],
 
     "@debuggatha/review-packs": ["@debuggatha/review-packs@workspace:packages/review-packs"],
+
+    "@debuggatha/runtime-engine": ["@debuggatha/runtime-engine@workspace:packages/runtime-engine"],
 
     "@debuggatha/skills": ["@debuggatha/skills@workspace:packages/skills"],
 

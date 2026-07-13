@@ -1,32 +1,61 @@
+import {
+  assemblePolicy,
+  buildRepositoryContext,
+  createReviewRequest,
+  defaultCapabilityRegistry,
+} from "@debuggatha/core";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 
+/**
+ * Assembles and displays the real `ReviewPolicy` for the current
+ * repository — a Review Policy in this architecture is always dynamic
+ * (Rule Resolution against the repository's own detected capabilities/
+ * criteria, never a static catalog entry — see `@debuggatha/knowledge-system`),
+ * so this queries the actual registry/resolver instead of printing a
+ * hardcoded placeholder (Epic 16B: closed as part of the Deferred
+ * Inventory's CLI gaps).
+ */
 export function registerPoliciesCommand(program: Command) {
   program
     .command("policies")
-    .description("List available Review Policies")
+    .description("Show the Review Policy Debuggatha would assemble for this repository right now")
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
-      logger.info("Listing available Review Policies...");
+      const cwd = program.opts().cwd as string;
+      logger.info("Assembling the current Review Policy...");
 
-      const policies = [
-        {
-          id: "default",
-          description:
-            "Dynamically resolves all relevant rules from detected stack criteria and requested packs.",
-        },
-      ];
+      try {
+        const context = buildRepositoryContext(cwd);
+        const requestedPackIds = defaultCapabilityRegistry.listPacks().map((pack) => pack.id);
+        const request = createReviewRequest({
+          scope: { kind: "workspace" },
+          depth: "full",
+          requestedPackIds,
+        });
+        const policy = assemblePolicy(context, request);
 
-      if (logger.isJson) {
-        logger.json(policies);
-      } else {
-        logger.success(`Found ${policies.length} standard policies.`);
-        for (const policy of policies) {
-          logger.log(`- [${policy.id}]: ${policy.description}`);
+        if (logger.isJson) {
+          logger.json(policy);
+        } else {
+          logger.success(
+            `Policy "${policy.id}" — ${policy.rules.length} rule(s) from ${policy.packRefs.length} pack(s).`,
+          );
+          for (const packRef of policy.packRefs) {
+            logger.log(`- [${packRef.id}] v${packRef.version}`);
+          }
+          if (policy.conflicts.length > 0) {
+            logger.warn(
+              `${policy.conflicts.length} rule conflict(s) resolved — see 'debuggatha repository' for detail.`,
+            );
+          }
+          logger.info(
+            "Note: this policy is assembled dynamically from the repository's detected capabilities and every registered Review Pack — it is not a fixed catalog entry.",
+          );
         }
-        logger.info(
-          "Note: Policies in Debuggatha are dynamically assembled based on the repository context at runtime.",
-        );
+      } catch (err: unknown) {
+        logger.error("Failed to assemble Review Policy.", err);
+        process.exit(1);
       }
     });
 }

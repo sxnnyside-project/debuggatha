@@ -13,11 +13,11 @@ export type { CapabilityRegistry, ReviewPolicy } from "@debuggatha/knowledge-sys
 /**
  * The one populated `CapabilityRegistry` instance for v1 (ADR-0004),
  * constructed once at module load from `@debuggatha/review-packs`'
- * static catalog. `@debuggatha/skills` does not yet export a
- * `SkillDescriptor` catalog — only its two still-throwing Skill
- * functions — so no skills are registered yet; a pack declaring a
- * `{ skillId }` dependency will fail closed until that catalog exists
- * (see README "Deferred").
+ * static catalog. `@debuggatha/skills`' Review Skill functions are real
+ * (Epic 11), but that package still doesn't export a `SkillDescriptor`
+ * catalog — so no skills are registered here; a pack declaring a
+ * `{ skillId }` dependency will still fail closed until that catalog
+ * exists (see `@debuggatha/knowledge-system`'s README "Risks").
  */
 export const defaultCapabilityRegistry: CapabilityRegistry = createInMemoryRegistry(
   [...reviewPacks],
