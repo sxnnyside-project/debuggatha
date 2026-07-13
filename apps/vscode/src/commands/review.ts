@@ -2,17 +2,10 @@ import {
   assemblePolicy,
   buildRepositoryContext,
   createReviewRequest,
-  createReviewResult,
-  createReviewSession,
-  type Finding,
   loadLedger,
-  reviewArchitecture,
-  reviewDiff,
-  reviewFiles,
-  type SyncScope,
-  saveLedger,
-  synchronizeReviewResult,
-  transitionSession,
+  type ReviewPipelineScope,
+  type ReviewScope,
+  executeReview as runReviewPipeline,
 } from "@debuggatha/core";
 import * as vscode from "vscode";
 import { getSettings } from "../config/settings.js";
@@ -22,6 +15,17 @@ import { VSCodeGitProvider } from "../providers/gitProvider.js";
 import type { IntelligenceProvider } from "../providers/intelligenceProvider.js";
 import { updateStatusBarStatus } from "../status/statusBar.js";
 
+/**
+ * Thin adapter over `@debuggatha/core`'s `executeReview` (Epic 11) — the
+ * same pipeline `@debuggatha/mcp` and `@debuggatha/cli` run instead of a
+ * third hand-rolled copy of the request/session/skill/ledger sequence.
+ * This command still builds its own `RepositoryContext`/`ReviewPolicy`
+ * once up front (`assemblePolicy` below) purely so the Repository
+ * Intelligence tree view can refresh *before* the review runs — that's a
+ * UI-ordering need, not a second orchestration path; `executeReview`
+ * builds its own context/policy again internally as part of the one
+ * shared pipeline.
+ */
 export async function executeReview(
   scope: "workspace" | "diff" | "file",
   findingsProvider: FindingsProvider,
@@ -50,88 +54,67 @@ export async function executeReview(
       try {
         progress.report({ message: "Building Context..." });
         const gitProvider = new VSCodeGitProvider();
-
-        const context = await buildRepositoryContext(rootDir);
-
-        progress.report({ message: "Assembling Policy..." });
-        // 2. Assemble policy
         const settings = getSettings();
-        const scopeObj =
-          scope === "diff"
-            ? { kind: "diff", base: undefined }
-            : scope === "workspace"
-              ? { kind: "workspace" }
-              : {
-                  kind: "files",
-                  paths: [vscode.window.activeTextEditor?.document.uri.fsPath || ""],
-                };
-        const request = createReviewRequest({
-          scope: scopeObj as any,
-          depth: settings.reviewDepth as any,
-          requestedPackIds: settings.defaultReviewPacks,
-        });
-        const policy = assemblePolicy(context, request);
+        const depth = settings.reviewDepth as "quick" | "full" | "architectural";
 
-        // Refresh intelligence tree
-        intelligenceProvider.refresh(context, policy);
-
-        // 3. Create Session
-        let session = createReviewSession({ request, repositoryContext: context });
-        session = transitionSession(session, "running");
-
-        // 4. Run Review
-        progress.report({ message: `Analyzing ${scope}...` });
-        let findings: Finding[] = [];
+        let pipelineScope: ReviewPipelineScope;
+        let requestScope: ReviewScope;
         if (scope === "diff") {
-          const diff = await gitProvider.getDiff(rootDir);
-          if (diff) {
-            findings = await reviewDiff(diff, policy);
-          }
+          const diff = (await gitProvider.getDiff(rootDir)) ?? "";
+          pipelineScope = { kind: "diff", base: undefined, diff };
+          requestScope = { kind: "diff", base: undefined };
         } else if (scope === "workspace") {
-          findings = await reviewArchitecture(rootDir, policy);
-        } else if (scope === "file") {
+          pipelineScope = { kind: "workspace" };
+          requestScope = { kind: "workspace" };
+        } else {
           const activeEditor = vscode.window.activeTextEditor;
           if (!activeEditor) {
             vscode.window.showErrorMessage("No active file to review.");
             return;
           }
-          const activeFilePath = activeEditor.document.uri.fsPath;
-          findings = await reviewFiles([activeFilePath], policy);
+          const paths = [activeEditor.document.uri.fsPath];
+          pipelineScope = { kind: "files", paths };
+          requestScope = { kind: "files", paths };
         }
 
-        session = transitionSession(session, "completed");
+        progress.report({ message: "Assembling Policy..." });
+        const context = buildRepositoryContext(rootDir);
+        const previewRequest = createReviewRequest({
+          scope: requestScope,
+          depth,
+          requestedPackIds: settings.defaultReviewPacks,
+        });
+        const policy = assemblePolicy(context, previewRequest);
+        intelligenceProvider.refresh(context, policy);
 
-        // Determine sync scope
-        const syncScope: SyncScope =
-          scope === "workspace"
-            ? { kind: "workspace" }
-            : scope === "file"
-              ? { kind: "files", files: [vscode.window.activeTextEditor!.document.uri.fsPath] }
-              : { kind: "files", files: gitProvider.getUncommittedFiles(rootDir) };
+        progress.report({ message: `Analyzing ${scope}...` });
+        const { result } = runReviewPipeline({
+          rootDir,
+          scope: pipelineScope,
+          depth,
+          packIds: settings.defaultReviewPacks,
+          policyId: undefined,
+          sourceName: "vscode",
+        });
 
-        // 5. Synchronize Ledger
-        const result = createReviewResult({ session, findings });
-        let ledger = loadLedger(rootDir);
-        const syncReport = synchronizeReviewResult(ledger, result, context, syncScope);
-        ledger = syncReport.ledger;
-        saveLedger(ledger);
+        const ledger = loadLedger(rootDir);
+        findingsProvider.refresh(ledger.entries);
 
-        // 6. Update UI
-        const ledgerEntries = ledger.entries;
-        findingsProvider.refresh(ledgerEntries);
-
-        // Diagnostics should only show open findings
         const openFindings = ledger.entries
           .filter((e) => e.status === "open")
           .map((e) => e.latestFinding);
         updateDiagnostics(openFindings);
 
         vscode.window.showInformationMessage(
-          `Debuggatha review complete. Found ${findings.length} findings.`,
+          `Debuggatha review complete. Found ${result.findings.length} findings.`,
         );
-      } catch (err: any) {
-        const msg = `Debuggatha review failed: ${err.message}`;
-        const action = await vscode.window.showErrorMessage(msg, "Open Settings", "Retry");
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : String(err);
+        const action = await vscode.window.showErrorMessage(
+          `Debuggatha review failed: ${message}`,
+          "Open Settings",
+          "Retry",
+        );
 
         if (action === "Open Settings") {
           vscode.commands.executeCommand("workbench.action.openSettings", "debuggatha");

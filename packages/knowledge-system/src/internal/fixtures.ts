@@ -28,6 +28,10 @@ export function fixtureRepositoryContext(
       workspaceEvidence: [],
       manifests: ["package.json"],
     },
+    capabilities: [
+      { id: "typescript", kind: "language", confidence: "high", evidence: [], origin: "manifest" },
+      { id: "react", kind: "framework", confidence: "high", evidence: [], origin: "manifest" },
+    ],
     dependencies: { lockfiles: [], declaredVersions: {}, runtimeConstraints: {} },
     documentation: { sources: [], summary: "" },
     criteria: { rules: [], sources: [] },

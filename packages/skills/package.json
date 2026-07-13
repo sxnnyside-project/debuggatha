@@ -23,8 +23,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@debuggatha/analysis-engine": "workspace:*",
     "@debuggatha/knowledge-system": "workspace:*",
-    "@debuggatha/review-engine": "workspace:*"
+    "@debuggatha/review-engine": "workspace:*",
+    "@debuggatha/runtime-engine": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.0.0"

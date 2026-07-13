@@ -72,7 +72,7 @@ already established. Nothing in this package mutates a `Ledger`,
 ## Deferred (explicitly out of scope for this epic)
 
 - Cloud synchronization, multi-user collaboration, GitHub integration, PR annotations, remote storage, telemetry — epic's explicit "Out of Scope" list.
-- Any consumer: MCP, CLI, VS Code wiring — nothing here is called by anything yet.
+- ~~Any consumer: MCP, CLI, VS Code wiring — nothing here is called by anything yet.~~ **Resolved — Epics 5-7 wired all three adapters, and Epic 11's shared `executeReview` pipeline (`@debuggatha/core`) now calls `synchronizeReviewResult` on every review run.**
 - A smarter default `FindingMatcher` (AST diffing, embedding similarity) — the interface exists for this; the implementation doesn't need to yet.
 - Pruning/archival of very old resolved/dismissed entries — the ledger only grows in v1.
 - A real schema migration (`migrateLedger` has the shape but no logic — only `CURRENT_SCHEMA_VERSION` is accepted today).
@@ -129,7 +129,7 @@ change if that becomes a real pain point — deferred, not designed away.
 
 ## Risks
 
-- **A multi-file finding's identity ignores every location after the first.** If two different multi-file findings happen to share the same first `(file, ruleId)` pair but differ elsewhere, they'll incorrectly match. Not expected to matter until multi-location findings are common in practice (they aren't yet — nothing produces real findings today).
+- **A multi-file finding's identity ignores every location after the first.** If two different multi-file findings happen to share the same first `(file, ruleId)` pair but differ elsewhere, they'll incorrectly match. This was written when nothing produced real findings yet; as of Epic 11, real findings do exist, so this risk is now live rather than theoretical — still not commonly hit in practice (most findings from `packages/skills`' detector engine are single-location), but worth re-assessing if multi-location findings (e.g. Epic 12's dependency-cycle findings, which do cite several files) start showing up frequently in ledger entries.
 - **The default matcher's `(file, category)` fallback (when no `ruleId` is available) is coarse.** Two unrelated findings in the same file and category with no rule evidence will match each other, potentially merging distinct issues into one ledger entry. Acceptable because most findings are expected to carry rule-shaped evidence (`review-pack-rule` or `criteria`) once Review Packs ship real content; this fallback only matters for Core-Skill-produced findings with no rule behind them.
 - **`RepositorySnapshotRef.fingerprint` covers `stack`/`dependencies`/`documentation`/`criteria` but not `generatedAt`/`hasGit`.** Two scans of an unchanged repository at different times produce the same fingerprint (intentional — the fingerprint is about *content*, not *when it was scanned*) but this means `repositorySnapshot.fingerprint` alone can't be used to detect "this is definitely the exact same scan," only "this is the same repository content."
 - **No enforcement that `latestFinding.id` values are ever cleaned up or deduplicated across history.** Every refresh replaces `latestFinding` wholesale; the ledger does not retain *every* `Finding` object ever produced for an entry, only the most recent one plus the `HistoryEvent` trail of status changes. A full finding-by-finding audit trail (not just status transitions) would need a different, richer history shape — deferred as speculative until a real use case asks for it.

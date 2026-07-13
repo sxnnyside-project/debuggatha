@@ -35,6 +35,30 @@ export interface StackProfile {
   manifests: string[];
 }
 
+/**
+ * Repository Capability Resolution (Epic 12.5). Additive, never
+ * mutually exclusive — a repository can carry `"typescript"`,
+ * `"javascript"`, `"react"`, `"bun"`, `"turborepo"`, and `"tauri"`
+ * capabilities simultaneously; nothing here collapses them into one
+ * "stack" label. This is the canonical, machine-matchable contract Review
+ * Pack resolution/Review Policy assembly consume — `StackProfile` above
+ * remains the display-oriented, human-readable representation (kept for
+ * backwards compatibility — nothing about it changed), generated from
+ * these same underlying signals, not the other way around.
+ */
+export type CapabilityKind = "language" | "framework" | "platform" | "tooling" | "characteristic";
+export type CapabilityConfidence = "high" | "medium" | "low";
+export type CapabilityOrigin = "manifest" | "lockfile" | "config" | "convention";
+
+export interface Capability {
+  /** Normalized (lowercase, alphanumeric-only) — e.g. "typescript", "react", "aspnetcore". */
+  id: string;
+  kind: CapabilityKind;
+  confidence: CapabilityConfidence;
+  evidence: Evidence[];
+  origin: CapabilityOrigin;
+}
+
 export interface DependencyProfile {
   lockfiles: Evidence[];
   declaredVersions: Record<string, string>;
@@ -96,6 +120,7 @@ export interface RepositoryContext {
   readonly generatedAt: string;
   readonly hasGit: boolean;
   readonly stack: StackProfile;
+  readonly capabilities: readonly Capability[];
   readonly dependencies: DependencyProfile;
   readonly documentation: DocumentationProfile;
   readonly criteria: CriteriaProfile;

@@ -149,6 +149,17 @@ describe("MCP Server", () => {
         activeBySeverity: { info: 0, low: 0, medium: 0, high: 1, critical: 0 },
         activeByCategory: { security: 1 },
       }),
+      summarizeCapabilities: vi.fn().mockReturnValue("Languages: TypeScript"),
+      loadMemoryStore: vi.fn().mockReturnValue({
+        schemaVersion: 1,
+        repositoryRoot: "/repo",
+        items: [],
+        createdAt: "t",
+        updatedAt: "t",
+      }),
+      filterSuppressedFindings: vi
+        .fn()
+        .mockImplementation((findings) => ({ findings, suppressed: [] })),
     };
   });
 

@@ -42,6 +42,72 @@ cheaply re-checked (stat calls, not re-reading file contents) and the
 cached `RepositoryContext` is returned unchanged — verified in tests by
 referential equality (`result2 === result1`), not by inspecting internals.
 
+## Repository Capability Resolution (Epic 12.5)
+
+`RepositoryContext.capabilities` (`Capability[]`, via
+`deriveCapabilities` in `capabilities.ts`) is the canonical,
+machine-matchable contract Review Pack resolution and Review Policy
+assembly consume — `StackProfile` above remains a human-readable,
+display-oriented representation kept for backwards compatibility, but it
+is no longer what capability matching resolves against.
+
+```text
+scanStack → StackScan (StackProfile + parsed package.json/Cargo.toml/pubspec.yaml)
+        │
+        ▼
+deriveCapabilities(rootDir, rootEntries, stackScan)
+        │  normalizes each StackSignal into a lowercase, alphanumeric-only id
+        │  ("React" -> "react", "Next.js" -> "nextjs", "ASP.NET Core" -> "aspnetcore")
+        │  splits StackProfile's single "JavaScript/TypeScript" signal into two
+        │  independent capabilities (see "The Epic 11 fix" below)
+        │  adds capabilities StackProfile never tracked: PHP/Laravel (composer.json),
+        │  a VS Code Extension platform (package.json engines.vscode), tooling
+        │  (biome/eslint/vitest config files), and repository characteristics
+        │  (monorepo/package-based/feature-based/layered)
+        ▼
+Capability[] { id, kind, confidence, evidence, origin }
+        │
+        ▼
+resolvePolicy (@debuggatha/knowledge-system) matches each Rule's
+`requires-language`/`requires-framework` scope against this flat id set
+        │
+        ▼
+summarizeCapabilities(capabilities) → human-readable summary string
+(grouped by kind, sorted — the display label is now an *output* of the
+capability model, never its input)
+```
+
+**Additive, never mutually exclusive** — a repository with TypeScript,
+JavaScript, React, Bun, Turborepo, and Tauri gets six independent
+`Capability` entries, not one chosen "stack" label. This is a load-bearing
+design constraint, not an implementation detail: it's what lets a
+polyglot or hybrid repository (multiple languages, multiple frameworks,
+a monorepo containing several stacks at once) resolve every applicable
+Review Pack simultaneously instead of collapsing to a single guess.
+
+**The Epic 11 fix.** Epic 11's Architecture Review surfaced that the
+`debuggatha/typescript`/`debuggatha/javascript` stack packs' rules could
+never resolve for any real repository: `StackProfile.languages` carries
+one combined `"JavaScript/TypeScript"` signal (a `package.json`'s mere
+presence), but the packs declare separate `requires-language: "typescript"`
+/`"javascript"` scopes, and the old exact (case-insensitive) string match
+against `stack.languages` never equaled either. `deriveCapabilities`
+splits this signal: every `package.json`-containing repo gets a
+`"javascript"` capability unconditionally, and a `"typescript"`
+capability *additionally* when `tsconfig.json` is present (confidence
+`"high"`) or `"typescript"` is a declared dependency (confidence
+`"medium"`) — never both, and never neither when there's no evidence.
+`packages/core/src/pipeline.test.ts`'s "Epic 12.5 capability fix" test
+proves this end-to-end: `no-explicit-any` (a `debuggatha/typescript`
+rule) now actually produces a `Finding` against a real TypeScript file.
+
+**Confidence and "unknown is preferable to incorrect."** Every
+`Capability` carries its own `confidence` independent of the others —
+`detectTypeScript`'s medium-vs-high split above is the clearest example.
+A capability with no supporting evidence is never emitted at all (there
+is no `"unknown"` capability value — absence *is* the "unknown" signal),
+matching Stack Detection's own evidence discipline from Epic 1.
+
 ## Implemented capabilities
 
 - **Stack Detection** — languages, frameworks, build systems, package
@@ -149,3 +215,21 @@ referential equality (`result2 === result1`), not by inspecting internals.
   scope ("Correctness is more important than performance" — a disk-backed
   cache introduces its own correctness questions, like stale cache
   surviving a `git checkout`, that are better solved deliberately later).
+- **(Epic 12.5) Capability derivation still covers a subset of the
+  Foundation Bundle's frameworks.** ASP.NET Core (`aspnetcore`) has no
+  detector at all — .NET project files (`.csproj`) aren't scanned by
+  Stack Detection or `deriveCapabilities`, so any pack rule scoped
+  `requires-framework: "aspnetcore"` still never resolves. PHP/Laravel
+  detection reads `composer.json` directly in `capabilities.ts` rather
+  than through `scanStack`/`StackScan` (Stack Detection itself has no
+  PHP/Composer awareness) — functionally correct, but a source of
+  Composer parsing living outside Epic 1's own scanner, worth folding in
+  if PHP/Laravel support needs to grow further.
+- **Characteristic detection (monorepo/package-based/feature-based/
+  layered) is directory-name-based, not structural** — the same
+  limitation `@debuggatha/analysis-engine`'s Module Boundaries (Epic 12)
+  fully documents for its own, more thorough version of this same
+  heuristic. This package's version is intentionally shallow (one level
+  of `src/*` inspection) since Repository Intelligence's job is fast
+  capability resolution, not deep structural analysis — that's Epic 12's
+  job.

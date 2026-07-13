@@ -1,23 +1,16 @@
-import {
-  assemblePolicy,
-  buildRepositoryContext,
-  createReviewRequest,
-  createReviewResult,
-  createReviewSession,
-  type Finding,
-  loadLedger,
-  type ReviewScope,
-  reviewArchitecture,
-  reviewDiff,
-  reviewFiles,
-  saveLedger,
-  synchronizeReviewResult,
-  transitionSession,
-} from "@debuggatha/core";
+import { executeReview } from "@debuggatha/core";
 import { LocalGitProvider } from "@debuggatha/infrastructure";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 
+/**
+ * Detects scope (explicit files > explicit diff > local git diff >
+ * workspace) then delegates the entire nine-step orchestration to
+ * `@debuggatha/core`'s `executeReview` — the same pipeline
+ * `@debuggatha/mcp` runs (Epic 11). This command used to hand-roll that
+ * sequence itself; it now only does what's genuinely CLI-specific:
+ * option parsing, git-diff auto-detection, and result formatting.
+ */
 export function registerReviewCommand(program: Command) {
   program
     .command("review")
@@ -32,110 +25,55 @@ export function registerReviewCommand(program: Command) {
       logger.info("Running smart review...");
 
       try {
-        const repoContext = await buildRepositoryContext(cwd);
-        logger.debug(`Repository context built for ${repoContext.rootDir}`);
-
         const filePaths: string[] | undefined =
           options.files && options.files.length > 0 ? options.files : undefined;
 
         let diff: string | undefined = options.diff;
-        let isDiff = !!diff;
 
-        if (!filePaths) {
-          if (!diff) {
-            logger.debug("Checking for git diff...");
-            const git = new LocalGitProvider(cwd);
-            diff = await git.getDiff();
-            if (diff) {
-              logger.info("Detected local git diff. Running diff review.");
-              isDiff = true;
-            } else {
-              logger.info("No git diff detected. Running workspace review.");
-              isDiff = false;
-            }
-          } else {
-            logger.info("Running explicit diff review.");
-          }
-        } else {
+        if (!filePaths && !diff) {
+          logger.debug("Checking for git diff...");
+          const git = new LocalGitProvider(cwd);
+          diff = await git.getDiff();
+          logger.info(
+            diff
+              ? "Detected local git diff. Running diff review."
+              : "No git diff detected. Running workspace review.",
+          );
+        } else if (filePaths) {
           logger.info(`Running review scoped to ${filePaths.length} file(s).`);
+        } else {
+          logger.info("Running explicit diff review.");
         }
 
-        const requestScope: ReviewScope = filePaths
-          ? { kind: "files", paths: filePaths }
-          : isDiff
-            ? { kind: "diff", base: undefined }
-            : { kind: "workspace" };
+        const scope = filePaths
+          ? ({ kind: "files", paths: filePaths } as const)
+          : diff
+            ? ({ kind: "diff", base: undefined, diff } as const)
+            : ({ kind: "workspace" } as const);
 
-        const requestInput = {
-          scope: requestScope,
-          depth: "full" as const,
-          requestedPackIds: options.pack || [],
-          ...(options.policy !== undefined ? { requestedPolicyId: options.policy } : {}),
-        };
-
-        const request = createReviewRequest(requestInput);
-        const policy = assemblePolicy(repoContext, request);
-
-        let session = createReviewSession({
-          request,
-          repositoryContext: repoContext,
-          selectedPolicy: { id: policy.id },
-          selectedPacks: policy.packRefs,
+        const { result, syncReport } = executeReview({
+          rootDir: cwd,
+          scope,
+          depth: "full",
+          packIds: options.pack || [],
+          policyId: options.policy,
+          sourceName: "debuggatha-cli",
         });
 
-        session = transitionSession(session, "prepared");
-        session = transitionSession(session, "running", {
-          source: { kind: "deterministic-analyzer", name: "debuggatha-cli" },
-          startedAt: new Date().toISOString(),
-        });
-
-        let findings: Finding[];
-        try {
-          if (filePaths) {
-            findings = reviewFiles(filePaths, policy);
-          } else if (isDiff) {
-            findings = reviewDiff(diff as string, policy);
-          } else {
-            findings = reviewArchitecture(repoContext.rootDir, policy);
-          }
-        } catch (err: unknown) {
-          session = transitionSession(session, "failed", {
-            completedAt: new Date().toISOString(),
-            error: err instanceof Error ? err.message : String(err),
-          });
-          throw err;
-        }
-
-        session = transitionSession(session, "completed", {
-          completedAt: new Date().toISOString(),
-        });
-        const result = createReviewResult({ session, findings });
-
-        const ledger = loadLedger(repoContext.rootDir);
-        const syncScope = filePaths
-          ? { kind: "files" as const, files: filePaths }
-          : isDiff
-            ? {
-                kind: "files" as const,
-                files: [...new Set(findings.flatMap((f) => f.locations.map((l) => l.file)))],
-              }
-            : { kind: "workspace" as const };
-
-        const { ledger: updatedLedger, report } = synchronizeReviewResult(
-          ledger,
-          result,
-          repoContext,
-          syncScope,
-        );
-        saveLedger(updatedLedger);
-
-        logger.success(`Review complete. ${findings.length} findings found.`);
+        logger.success(`Review complete. ${result.findings.length} findings found.`);
         if (logger.isJson) {
-          logger.json({ status: "success", reviewResult: result, syncReport: report });
+          logger.json({ status: "success", reviewResult: result, syncReport });
         } else {
           logger.info(
-            `Sync Report: ${report.newEntryIds.length} created, ${report.autoResolvedEntryIds.length} resolved, ${report.unchangedEntryIds.length + report.changedEntryIds.length} unresolved.`,
+            `Sync Report: ${syncReport.newEntryIds.length} created, ${syncReport.autoResolvedEntryIds.length} resolved, ${syncReport.unchangedEntryIds.length + syncReport.changedEntryIds.length} unresolved.`,
           );
+        }
+        // Distinct exit codes (Epic 16B): 0 = success, no active findings;
+        // 2 = success, but the review found something; 1 (below) = the
+        // review itself failed to run. Lets CI treat "found findings" and
+        // "crashed" differently instead of collapsing both into `1`.
+        if (result.findings.length > 0) {
+          process.exitCode = 2;
         }
       } catch (err: unknown) {
         logger.error("Review failed.", err);

@@ -1,4 +1,4 @@
-import type { RepositoryContext, StackProfile } from "@debuggatha/repository-intelligence";
+import type { Capability, RepositoryContext } from "@debuggatha/repository-intelligence";
 import type {
   Category,
   ReviewPackReference,
@@ -43,7 +43,7 @@ export function resolvePolicy(
   const packCandidates: Candidate[] = [];
   for (const pack of resolved) {
     for (const rule of pack.rules) {
-      if (!ruleApplies(rule.appliesTo, context.stack)) continue;
+      if (!ruleApplies(rule.appliesTo, context.capabilities)) continue;
       packCandidates.push({
         id: rule.id,
         statement: rule.statement,
@@ -110,25 +110,35 @@ export function resolvePolicy(
 
 // --- Rule scope matching -----------------------------------------------
 
+/** Same normalization `@debuggatha/repository-intelligence`'s capability derivation applies to a `Capability.id` — so a Rule's authored `"React"`/`"Node.js"` string matches the capability id `"react"`/`"nodejs"` without either side needing to agree on casing or punctuation up front. */
+function normalizeCapabilityId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 /**
  * `glob` is deliberately not filtered here — Rule Resolution only has
- * `RepositoryContext.stack`, not a concrete file list, to check against.
- * A glob-scoped rule always survives Rule Resolution; matching it against
- * files actually in a review's scope is left to whatever Skill executes
- * per file (see package README "Technical decisions").
+ * `RepositoryContext.capabilities`, not a concrete file list, to check
+ * against. A glob-scoped rule always survives Rule Resolution; matching
+ * it against files actually in a review's scope is left to whatever
+ * Skill executes per file (see package README "Technical decisions").
+ *
+ * `requires-framework`/`requires-language` both resolve against the same
+ * flat `Capability[]` set (Epic 12.5) rather than
+ * `StackProfile.frameworks`/`StackProfile.languages` — capabilities are
+ * additive and not partitioned by `RuleScope`'s two kinds (some packs,
+ * e.g. the Foundation Bundle's `bun`/`nodejs` rules, declare a runtime as
+ * `requires-language` on purpose; that's a pack-authoring choice this
+ * resolver doesn't second-guess, it just matches by id regardless of a
+ * capability's own `kind`).
  */
-function ruleApplies(scope: RuleScope, stack: StackProfile): boolean {
+function ruleApplies(scope: RuleScope, capabilities: readonly Capability[]): boolean {
   switch (scope.kind) {
     case "always":
       return true;
     case "requires-framework":
-      return stack.frameworks.some(
-        (signal) => signal.value.toLowerCase() === scope.framework.toLowerCase(),
-      );
+      return capabilities.some((cap) => cap.id === normalizeCapabilityId(scope.framework));
     case "requires-language":
-      return stack.languages.some(
-        (signal) => signal.value.toLowerCase() === scope.language.toLowerCase(),
-      );
+      return capabilities.some((cap) => cap.id === normalizeCapabilityId(scope.language));
     case "glob":
       return true;
   }

@@ -116,21 +116,22 @@ covers AI/deterministic/custom-skill/human equally).
 
 ## Risks
 
-- **`@debuggatha/shared` now has two competing, unreconciled domain
-  vocabularies.** Its original `Finding`, `Severity`, `Category`,
-  `ReviewPolicy`, `PolicyRule`, `ReviewDepth`, `ReviewVoice` types are
-  still referenced by `packages/skills`' stub signatures, `packages/policies`,
-  and `packages/review-packs` — none of which this epic touched, since
-  Review Packs/Policies/Review Skills were explicitly out of scope. When
-  those epics are implemented, they will need to migrate onto
-  `@debuggatha/review-engine`'s richer types instead, and `shared`'s
-  overlapping types should be removed at that point. Until then, a reader
-  encountering `Finding` in `shared` versus `Finding` in `review-engine`
-  needs to know which one is current (this one).
-- **No cross-session/result persistence.** Sessions and Results are
-  plain in-memory objects; nothing here writes them anywhere. The
-  "findings ledger" concept in CLAUDE.md is a distinct, still-unbuilt
-  concern that would consume `ReviewResult` objects.
+*(Epic 16B update: two items below were historical — accurate when this
+README was originally written, stale by the time Epics 4 and 11-15
+shipped. Corrected in place rather than left to mislead a reader of
+current state; see CLAUDE.md's Epic 16A/16B entries for the audit that
+caught this.)*
+
+- ~~`@debuggatha/shared` now has two competing, unreconciled domain
+  vocabularies.~~ **Resolved — `@debuggatha/shared` no longer exists in
+  this monorepo.** `packages/skills` migrated its stub signatures onto
+  `@debuggatha/review-engine`/`@debuggatha/knowledge-system` types back
+  in Epic 3, and every package now depends on this package's `Finding`/
+  `Severity`/`Category` directly. No competing vocabulary remains.
+- ~~No cross-session/result persistence... the "findings ledger" concept
+  in CLAUDE.md is a distinct, still-unbuilt concern.~~ **Resolved —
+  `@debuggatha/findings-ledger` (Epic 4) persists exactly this, and has
+  been wired into every review path since Epic 11's `executeReview`.**
 - **`transitionSession`'s `patch` argument is a blunt instrument.**
   Any caller can set `execution.error` while transitioning to
   `"completed"`, or omit `error` while transitioning to `"failed"` — the

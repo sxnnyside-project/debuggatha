@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { registerDoctorCommand } from "./commands/doctor.js";
 import { registerFindingsCommand } from "./commands/findings.js";
 import { registerInitCommand } from "./commands/init.js";
+import { registerMemoryCommand } from "./commands/memory.js";
 import { registerPacksCommand } from "./commands/packs.js";
 import { registerPoliciesCommand } from "./commands/policies.js";
 import { registerRepositoryCommand } from "./commands/repository.js";
@@ -47,6 +48,7 @@ export function createCli(): Command {
   registerInitCommand(program);
   registerReviewCommand(program);
   registerFindingsCommand(program);
+  registerMemoryCommand(program);
   registerRepositoryCommand(program);
   registerPacksCommand(program);
   registerPoliciesCommand(program);

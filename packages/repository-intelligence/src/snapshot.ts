@@ -2,6 +2,7 @@ import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { buildFingerprint, hasFingerprintChanged } from "./cache/fingerprint.js";
 import type { RepositoryContextCache } from "./cache/index.js";
+import { deriveCapabilities } from "./capabilities.js";
 import { deepFreeze } from "./internal/deep-freeze.js";
 import type { DirListing } from "./internal/scan-result.js";
 import { scanCriteria } from "./scanners/criteria.js";
@@ -40,6 +41,7 @@ export function buildRepositoryContext(
   const rootListing: DirListing = { dir: rootDir, entries: rootEntries };
 
   const stack = scanStack(rootDir, rootEntries);
+  const capabilities = deriveCapabilities(rootDir, rootEntries, stack);
   const dependencies = scanDependencies(rootEntries, stack);
   const documentation = scanDocumentation(rootDir, rootEntries);
   const criteria = scanCriteria(rootDir, rootEntries);
@@ -55,6 +57,7 @@ export function buildRepositoryContext(
     generatedAt: new Date().toISOString(),
     hasGit: existsSync(join(rootDir, ".git")),
     stack: stack.profile,
+    capabilities,
     dependencies: dependencies.profile,
     documentation: documentation.profile,
     criteria: criteria.profile,

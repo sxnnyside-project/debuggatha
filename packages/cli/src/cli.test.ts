@@ -13,6 +13,26 @@ describe("Debuggatha CLI", () => {
     expect(commandNames).toContain("packs");
     expect(commandNames).toContain("policies");
     expect(commandNames).toContain("doctor");
+    expect(commandNames).toContain("memory");
+  });
+
+  it("registers every memory subcommand", () => {
+    const cli = createCli();
+    const memory = cli.commands.find((c) => c.name() === "memory");
+    expect(memory).toBeDefined();
+    const subcommandNames = memory?.commands.map((c) => c.name());
+    expect(subcommandNames).toEqual(
+      expect.arrayContaining([
+        "list",
+        "suggest",
+        "confirm",
+        "activate",
+        "reject",
+        "deprecate",
+        "archive",
+        "remove",
+      ]),
+    );
   });
 
   it("parses global options correctly", () => {
