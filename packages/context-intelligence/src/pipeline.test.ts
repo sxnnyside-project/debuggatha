@@ -1,8 +1,8 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildRepositoryContext } from "@debuggatha/repository-intelligence";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { createInMemoryContextCache } from "./cache.js";
 import { buildContextIntelligence } from "./pipeline.js";
 

@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { createReviewRequest } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { assembleContext } from "./assemble.js";
 import { fixturePack, fixtureRepositoryContext } from "./internal/fixtures.js";
 import { createInMemoryRegistry } from "./registry.js";

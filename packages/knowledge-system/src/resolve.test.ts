@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { createReviewRequest, type ReviewRequest } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { fixturePack, fixtureRepositoryContext, fixtureRule } from "./internal/fixtures.js";
 import { createInMemoryRegistry } from "./registry.js";
 import { resolvePolicy } from "./resolve.js";

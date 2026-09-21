@@ -1,7 +1,7 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { buildFingerprint, hasFingerprintChanged } from "./fingerprint.js";
 
 describe("fingerprint", () => {

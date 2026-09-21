@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { budgetSourceUnits, chunkSourceUnit, estimateTokens } from "./context-budget.js";
 
 describe("estimateTokens", () => {

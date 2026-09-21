@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { createFinding } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { acceptedDeviationMatches, exceptionMatches, suppressionMatches } from "./matching.js";
 import type { AcceptedDeviationItem, ExceptionItem, SuppressionItem } from "./types/item.js";
 

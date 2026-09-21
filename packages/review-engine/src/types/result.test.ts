@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { buildRepositoryContext } from "@debuggatha/repository-intelligence";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { CATEGORIES } from "./category.js";
 import { createFinding } from "./finding.js";
 import { createReviewRequest } from "./request.js";

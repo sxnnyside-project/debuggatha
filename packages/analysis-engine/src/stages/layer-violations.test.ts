@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { DependencyGraph, LayerModel } from "../types.js";
 import { detectLayerViolations } from "./layer-violations.js";
 

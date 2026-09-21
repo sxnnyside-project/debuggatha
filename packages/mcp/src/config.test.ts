@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { loadConfig, resolveRepositoryRoot } from "./config.js";
 
 describe("loadConfig", () => {

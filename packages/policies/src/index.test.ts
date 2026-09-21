@@ -1,6 +1,6 @@
+import { describe, expect, it } from "bun:test";
 import type { RepositoryContext } from "@debuggatha/repository-intelligence";
 import { createReviewRequest } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { assemblePolicy, defaultCapabilityRegistry } from "./index.js";
 
 function fixtureContext(): RepositoryContext {

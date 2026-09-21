@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { CURRENT_SCHEMA_VERSION, createEmptyLedger } from "../types/ledger.js";
 import { deserializeLedger, serializeLedger } from "./serialize.js";
 

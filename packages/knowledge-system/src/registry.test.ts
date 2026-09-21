@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { fixturePack } from "./internal/fixtures.js";
 import { createInMemoryRegistry } from "./registry.js";
 import type { SkillDescriptor } from "./types/skill.js";

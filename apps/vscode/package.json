@@ -12,7 +12,8 @@
   "icon": "icon.png",
   "private": true,
   "engines": {
-    "vscode": "^1.90.0"
+    "vscode": "^1.90.0",
+    "node": ">=22"
   },
   "categories": [
     "Linters",
@@ -30,13 +31,15 @@
   ],
   "main": "./dist/index.js",
   "scripts": {
-    "build": "tsup",
+    "build": "node esbuild.config.mjs",
+    "dev": "node esbuild.config.mjs --watch",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
-    "clean": "rm -rf dist"
+    "package": "vsce package --no-dependencies",
+    "clean": "rm -rf dist *.vsix"
   },
   "contributes": {
     "commands": [
@@ -227,11 +230,15 @@
       }
     ]
   },
-  "dependencies": {
-    "@debuggatha/core": "workspace:*"
-  },
   "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@debuggatha/core": "link:../../packages/core",
     "@types/node": "^22.0.0",
-    "@types/vscode": "^1.90.0"
-  }
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  },
+  "packageManager": "pnpm@11.5.2"
 }

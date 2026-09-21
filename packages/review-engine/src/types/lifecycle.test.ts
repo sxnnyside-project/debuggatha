@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { canTransition, isTerminal, REVIEW_LIFECYCLE_STATUSES } from "./lifecycle.js";
 
 describe("review lifecycle", () => {

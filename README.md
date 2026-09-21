@@ -55,35 +55,39 @@ This is a Sxnnyside Project.
 
 **Prerequisites**
 
-- Bun (latest)
-- Node.js (>= 20)
+- [Bun](https://bun.sh) (see `.bun-version`) — packages, CLI, MCP server, docs
+- [Node.js](https://nodejs.org) (see `apps/vscode/.node-version`) and [pnpm](https://pnpm.io) — VS Code extension only
+- [just](https://github.com/casey/just) — the command surface for the whole repo
 
 ```bash
 git clone https://github.com/sxnnyside-project/debuggatha.git
 cd debuggatha
 
-bun install
-bun run build
+just install
+just build
 ```
 
 ## Usage
 
 ```bash
-# Check formatting and typing
-bun run check
-bun run typecheck
-
-# Run unit tests across packages
-bun run test
+just            # list every recipe
+just dev        # rebuild packages and watch the extension
+just check      # format check, lint, typecheck, test, build — what CI runs
+just format     # apply formatting and import organization
+just package    # build the .vsix
 ```
 
 For the CLI and VS Code Client specifics, refer to their respective app-level instructions.
 
 ## Architecture
 
+This is a multi-package repository (a workspace, not a single deployable). Packages and
+`apps/docs` run on Bun; `apps/vscode` is Node + pnpm because the VS Code extension host requires it,
+and it bundles the built packages with esbuild.
+
 ```
 debuggatha/
-├── apps/         # VS Code client and docs site
+├── apps/         # VS Code client (Node/pnpm) and docs site (Bun)
 ├── packages/     # The core engines, intelligence, ledger, and knowledge systems
 └── docs/         # Architecture notes, ADRs, and the Review Pack spec
 ```

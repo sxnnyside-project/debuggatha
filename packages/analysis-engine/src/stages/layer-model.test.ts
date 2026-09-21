@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { ModuleBoundary } from "../types.js";
 import { buildLayerModel } from "./layer-model.js";
 

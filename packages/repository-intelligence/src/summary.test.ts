@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { summarizeCapabilities } from "./summary.js";
 import type { Capability } from "./types.js";
 

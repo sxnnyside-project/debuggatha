@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { createLMStudioProvider } from "./lmstudio.js";
 
 function sseResponse(chunks: unknown[]): Response {

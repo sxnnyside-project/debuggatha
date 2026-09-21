@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { conventionsToPolicyStatements } from "./policy-statements.js";
 import type { ContextItem } from "./types.js";
 

@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { buildRepositoryContext } from "@debuggatha/repository-intelligence";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { buildCapabilityItems } from "./capabilities.js";
 
 let cleanup: (() => void) | undefined;

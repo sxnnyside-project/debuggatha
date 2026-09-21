@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import type { PolicyRule, ReviewPolicy } from "@debuggatha/knowledge-system";
-import { describe, expect, it } from "vitest";
 import { runReviewSkillsEngine } from "./run.js";
 
 function policyFor(rules: PolicyRule[]): ReviewPolicy {

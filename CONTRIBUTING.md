@@ -33,6 +33,20 @@ For larger features, an issue discussion first avoids wasted effort on both side
 
 ---
 
+## Local Setup
+
+You need Bun, Node.js with pnpm (VS Code extension only), and `just`. Then:
+
+```bash
+just install
+just check   # the same gate CI runs
+```
+
+`just` lists all recipes. Git hooks are installed automatically by `just install`
+and check formatting, commit messages, types, and tests before your changes leave your machine.
+
+---
+
 ## Workflow
 
 1. Fork the repository and create a branch from `main`.
@@ -46,7 +60,7 @@ For larger features, an issue discussion first avoids wasted effort on both side
 
 Before submitting:
 
-- [ ] The project builds without errors
+- [ ] `just check` passes
 - [ ] Changes are described in [CHANGELOG.md](CHANGELOG.md) under `[Unreleased]`
 - [ ] The PR description explains what changed and why
 - [ ] New behavior is covered by tests where applicable

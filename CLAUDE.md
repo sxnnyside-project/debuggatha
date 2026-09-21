@@ -350,6 +350,20 @@ README/package.json as historical, not as a spec to preserve.
   providers, no subsystem redesign); this is flagged as the top item
   for the next roadmap.
 
+## Repository layout and tooling
+
+Multi-package workspace, two toolchains behind one command surface:
+
+- `packages/*` and `apps/docs` — **Bun** (workspaces + Turborepo, tsup, `bun test`, Biome).
+- `apps/vscode` — **Node + pnpm** (esbuild bundle, vitest, `vsce`). It is deliberately *not* a
+  Bun workspace member; it links `@debuggatha/core` from `packages/core` and bundles it. Read
+  `apps/vscode/CLAUDE.md` before touching it.
+- Everything is driven from the root `Justfile`: `just install | dev | build | test | typecheck |
+  lint | format | check | clean`. `just check` is the full gate and is exactly what CI runs.
+  Prefer `just` over calling `bun`/`pnpm` directly.
+- Hooks (Husky): pre-commit runs lint-staged, pre-push runs typecheck and tests, commit-msg
+  enforces Conventional Commits.
+
 ## Non-negotiable
 
 MCP is distribution only, not the value proposition. Debuggatha is a

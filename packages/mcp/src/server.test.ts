@@ -1,7 +1,7 @@
+import { beforeEach, describe, expect, it, vi } from "bun:test";
 import type { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { JSONRPCMessage } from "@modelcontextprotocol/sdk/types.js";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { loadConfig } from "./config.js";
 import type { DomainDeps } from "./domain-deps.js";
 import { createLogger } from "./logging.js";

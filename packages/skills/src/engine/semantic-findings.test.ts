@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from "bun:test";
 import type { ReviewPolicy } from "@debuggatha/knowledge-system";
 import type { RuntimeEngine } from "@debuggatha/runtime-engine";
-import { describe, expect, it, vi } from "vitest";
 import { runSemanticFindings } from "./semantic-findings.js";
 
 const policy: ReviewPolicy = {

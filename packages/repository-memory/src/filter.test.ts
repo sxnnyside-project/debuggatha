@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { createFinding } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { filterSuppressedFindings } from "./filter.js";
 import type { SuppressionItem } from "./types/item.js";
 import { createEmptyMemoryStore } from "./types/store.js";

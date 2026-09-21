@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { canTransitionMemory, isActiveMemoryStatus } from "./lifecycle.js";
 
 describe("canTransitionMemory", () => {

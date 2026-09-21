@@ -1,7 +1,7 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { buildGitContextItems } from "./git.js";
 
 let cleanup: (() => void) | undefined;

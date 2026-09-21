@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "bun:test";
 import { createRuntimeEngine, RuntimeSelectionError } from "./engine.js";
 import type { Provider } from "./provider.js";
 import { createProviderRegistry } from "./registry.js";

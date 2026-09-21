@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { readdirSync } from "node:fs";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { scanStack } from "./stack.js";
 
 function scan(root: string) {

@@ -22,7 +22,7 @@
     "format": "biome format --write .",
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "bun test --pass-with-no-tests",
     "clean": "rm -rf dist"
   },
   "dependencies": {

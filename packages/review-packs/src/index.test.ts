@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { validateReviewPack } from "@debuggatha/knowledge-system";
-import { describe, expect, it } from "vitest";
 import { reviewPacks } from "./index.js";
 
 describe("reviewPacks catalog", () => {

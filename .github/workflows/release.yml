@@ -20,19 +20,28 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.2.20
+          bun-version-file: .bun-version
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: apps/vscode/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: apps/vscode/.node-version
+          cache: pnpm
+          cache-dependency-path: apps/vscode/pnpm-lock.yaml
+
+      - name: Setup just
+        uses: extractions/setup-just@v2
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: just install
 
-      - name: Build all packages
-        run: bun run build
-
-      - name: Run tests
-        run: bun run test
-
-      - name: Install vsce and ovsx
-        run: npm install -g @vscode/vsce ovsx
+      - name: Quality gate
+        run: just check
 
       - name: Extract version from tag
         id: version
@@ -49,17 +58,17 @@ jobs:
 
       - name: Package extension
         working-directory: apps/vscode
-        run: vsce package --no-dependencies -o debuggatha-${{ steps.version.outputs.VERSION }}.vsix
+        run: pnpm exec vsce package --no-dependencies -o debuggatha-${{ steps.version.outputs.VERSION }}.vsix
 
       - name: Publish to VS Code Marketplace
         working-directory: apps/vscode
-        run: vsce publish --no-dependencies --packagePath debuggatha-${{ steps.version.outputs.VERSION }}.vsix
+        run: pnpm exec vsce publish --no-dependencies --packagePath debuggatha-${{ steps.version.outputs.VERSION }}.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
       - name: Publish to Open VSX Registry
         working-directory: apps/vscode
-        run: ovsx publish debuggatha-${{ steps.version.outputs.VERSION }}.vsix -p ${{ secrets.OVSX_PAT }}
+        run: pnpm dlx ovsx publish debuggatha-${{ steps.version.outputs.VERSION }}.vsix -p ${{ secrets.OVSX_PAT }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

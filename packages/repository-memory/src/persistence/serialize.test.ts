@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { createEmptyMemoryStore } from "../types/store.js";
 import { deserializeMemoryStore, serializeMemoryStore } from "./serialize.js";
 

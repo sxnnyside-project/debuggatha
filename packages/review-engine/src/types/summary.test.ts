@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { CATEGORIES } from "./category.js";
 import { createFinding } from "./finding.js";
 import { summarizeFindings } from "./summary.js";

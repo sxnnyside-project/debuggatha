@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { CATEGORIES, createFinding } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { getEntry, getHistory, listEntries, updateFindingStatus } from "./api.js";
 import { createLedgerEntry } from "./types/entry.js";
 import { computeFindingFingerprint } from "./types/fingerprint.js";

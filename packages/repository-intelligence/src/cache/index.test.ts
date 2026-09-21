@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { CacheEntry } from "./index.js";
 import { createInMemoryCache } from "./index.js";
 

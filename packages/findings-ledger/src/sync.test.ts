@@ -1,3 +1,4 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { buildRepositoryContext } from "@debuggatha/repository-intelligence";
 import {
   CATEGORIES,
@@ -6,7 +7,6 @@ import {
   type ReviewResult,
 } from "@debuggatha/review-engine";
 import { withTempRepo } from "@debuggatha/testing";
-import { afterEach, describe, expect, it } from "vitest";
 import { synchronizeReviewResult } from "./sync.js";
 import { createEmptyLedger } from "./types/ledger.js";
 

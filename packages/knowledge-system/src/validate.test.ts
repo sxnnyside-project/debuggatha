@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { fixtureKnowledgeEntry, fixturePack, fixtureRule } from "./internal/fixtures.js";
 import { validateReviewPack } from "./validate.js";
 

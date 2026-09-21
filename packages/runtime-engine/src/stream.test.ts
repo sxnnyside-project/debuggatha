@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { parseSemanticResponse } from "./parse-response.js";
 import { consumeToCompletion } from "./stream.js";
 import type { SemanticStreamEvent } from "./types.js";

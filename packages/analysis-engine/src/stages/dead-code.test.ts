@@ -1,7 +1,7 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
 import { detectDeadCode } from "./dead-code.js";
 import { inferModuleBoundaries } from "./module-boundaries.js";
 import { buildPublicApiSurface } from "./public-api.js";

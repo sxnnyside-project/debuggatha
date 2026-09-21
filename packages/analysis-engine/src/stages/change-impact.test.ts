@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import type { DependencyGraph, ModuleBoundary, PublicApiSurface } from "../types.js";
 import { estimateChangeImpact } from "./change-impact.js";
 

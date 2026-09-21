@@ -1,8 +1,8 @@
+import { afterEach, describe, expect, it } from "bun:test";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { ReviewPolicy } from "@debuggatha/knowledge-system";
-import { afterEach, describe, expect, it } from "vitest";
 import { reviewArchitecture } from "./architecture-review.js";
 
 const emptyPolicy: ReviewPolicy = { id: "policy-1", rules: [], packRefs: [], conflicts: [] };

@@ -10,7 +10,7 @@ import { readServerSentEvents } from "./http-stream.js";
 export interface LMStudioProviderOptions {
   baseUrl?: string;
   /** Injectable for testing — defaults to the global `fetch`. */
-  fetchImpl?: typeof fetch;
+  fetchImpl?: (input: string | URL, init?: RequestInit) => Promise<Response>;
 }
 
 interface LMStudioModelsResponse {

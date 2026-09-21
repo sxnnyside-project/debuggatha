@@ -1,5 +1,5 @@
+import { describe, expect, it } from "bun:test";
 import { CATEGORIES, createFinding } from "@debuggatha/review-engine";
-import { describe, expect, it } from "vitest";
 import { computeFindingFingerprint } from "./fingerprint.js";
 
 describe("computeFindingFingerprint", () => {
