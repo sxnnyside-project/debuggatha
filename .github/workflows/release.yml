@@ -6,6 +6,11 @@ on:
       - 'v*.*.*'
       - 'cli-v*.*.*'
       - 'mcp-v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to publish (v0.2.0, cli-v0.2.0 or mcp-v0.2.0). Steps that already published are skipped.'
+        required: true
 
 permissions:
   contents: write
@@ -14,12 +19,16 @@ permissions:
 jobs:
   extension:
     name: Publish VS Code Extension
-    if: startsWith(github.ref_name, 'v')
+    if: startsWith(inputs.tag || github.ref_name, 'v')
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.TAG }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -49,7 +58,7 @@ jobs:
 
       - name: Extract version from tag
         id: version
-        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+        run: echo "VERSION=${TAG#v}" >> "$GITHUB_OUTPUT"
 
       - name: Verify package.json version matches tag
         run: |
@@ -66,17 +75,18 @@ jobs:
 
       - name: Publish to VS Code Marketplace
         working-directory: apps/vscode
-        run: pnpm exec vsce publish --no-dependencies --packagePath debuggatha-${{ steps.version.outputs.VERSION }}.vsix
+        run: pnpm exec vsce publish --skip-duplicate --no-dependencies --packagePath debuggatha-${{ steps.version.outputs.VERSION }}.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
       - name: Publish to Open VSX Registry
         working-directory: apps/vscode
-        run: pnpm dlx ovsx publish debuggatha-${{ steps.version.outputs.VERSION }}.vsix -p ${{ secrets.OVSX_PAT }}
+        run: pnpm dlx ovsx publish debuggatha-${{ steps.version.outputs.VERSION }}.vsix --skip-duplicate -p ${{ secrets.OVSX_PAT }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.TAG }}
           files: |
             apps/vscode/debuggatha-${{ steps.version.outputs.VERSION }}.vsix
           generate_release_notes: true
@@ -96,11 +106,15 @@ jobs:
 
   cli:
     name: Publish CLI
-    if: startsWith(github.ref_name, 'cli-v')
+    if: startsWith(inputs.tag || github.ref_name, 'cli-v')
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.TAG }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -122,7 +136,7 @@ jobs:
       - name: Verify package version matches tag
         run: |
           PKG_VERSION=$(node -p "require('./packages/cli/package.json').version")
-          TAG_VERSION=${GITHUB_REF_NAME#cli-v}
+          TAG_VERSION=${TAG#cli-v}
           if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "Version mismatch: package.json=$PKG_VERSION tag=$TAG_VERSION"
             exit 1
@@ -130,7 +144,7 @@ jobs:
 
       - name: Build, test, and smoke-test the installed package
         run: |
-          just test
+          bun run test
           just smoke
 
       - name: Publish to npm
@@ -145,6 +159,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.TAG }}
           files: dist/binaries/*
           generate_release_notes: true
         env:
@@ -152,11 +167,15 @@ jobs:
 
   mcp:
     name: Publish MCP server
-    if: startsWith(github.ref_name, 'mcp-v')
+    if: startsWith(inputs.tag || github.ref_name, 'mcp-v')
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.TAG }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -178,7 +197,7 @@ jobs:
       - name: Verify package version matches tag
         run: |
           PKG_VERSION=$(node -p "require('./packages/mcp/package.json').version")
-          TAG_VERSION=${GITHUB_REF_NAME#mcp-v}
+          TAG_VERSION=${TAG#mcp-v}
           if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
             echo "Version mismatch: package.json=$PKG_VERSION tag=$TAG_VERSION"
             exit 1
@@ -186,7 +205,7 @@ jobs:
 
       - name: Build, test, and smoke-test the installed package
         run: |
-          just test
+          bun run test
           just smoke
 
       - name: Publish to npm
@@ -198,6 +217,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.TAG }}
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
