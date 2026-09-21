@@ -89,6 +89,24 @@ async function reset() {
   rmSync(pidFile, { force: true });
 }
 
+// VS Code cancels a code-action request when the document changes under it (its file watcher may
+// still be applying what `reset` wrote), so ask again.
+async function codeActionsAt(range: vscode.Range): Promise<vscode.CodeAction[]> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return (await vscode.commands.executeCommand(
+        "vscode.executeCodeActionProvider",
+        badUri,
+        range,
+        vscode.CodeActionKind.QuickFix.value,
+      )) as vscode.CodeAction[];
+    } catch (error) {
+      if (attempt >= 5 || !String(error).includes("Canceled")) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 300));
+    }
+  }
+}
+
 suite("Debuggatha in a real VS Code", () => {
   suiteSetup(async () => {
     const extension = vscode.extensions.getExtension(EXTENSION_ID);
@@ -181,23 +199,7 @@ suite("Debuggatha in a real VS Code", () => {
     await review();
     const { document } = await openBad();
     const line = new vscode.Range(0, 0, 0, 3);
-    // VS Code cancels a code-action request when the document changes under it (its file watcher
-    // may still be applying what `reset` wrote), so ask again.
-    const actionsAt = async (): Promise<vscode.CodeAction[]> => {
-      for (let attempt = 0; ; attempt++) {
-        try {
-          return (await vscode.commands.executeCommand(
-            "vscode.executeCodeActionProvider",
-            badUri,
-            line,
-            vscode.CodeActionKind.QuickFix.value,
-          )) as vscode.CodeAction[];
-        } catch (error) {
-          if (attempt >= 5 || !String(error).includes("Canceled")) throw error;
-          await new Promise((resolve) => setTimeout(resolve, 300));
-        }
-      }
-    };
+    const actionsAt = () => codeActionsAt(line);
 
     const fix = (await actionsAt()).find((a) => a.edit && a.isPreferred);
     assert.ok(fix, "no preferred quick fix on `var`");
@@ -216,14 +218,7 @@ suite("Debuggatha in a real VS Code", () => {
   test("the lightbulb also offers to accept, resolve, and dismiss a finding", async () => {
     await review();
     await openBad();
-    const titles = (
-      (await vscode.commands.executeCommand(
-        "vscode.executeCodeActionProvider",
-        badUri,
-        new vscode.Range(1, 0, 1, 40),
-        vscode.CodeActionKind.QuickFix.value,
-      )) as vscode.CodeAction[]
-    ).map((a) => a.title);
+    const titles = (await codeActionsAt(new vscode.Range(1, 0, 1, 40))).map((a) => a.title);
     assert.ok(
       titles.some((t) => t.includes("accept no-eval here")),
       titles.join("\n"),
