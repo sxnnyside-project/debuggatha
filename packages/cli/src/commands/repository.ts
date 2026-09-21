@@ -1,4 +1,4 @@
-import { buildRepositoryContext } from "@debuggatha/core";
+import { buildRepositoryContext } from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 

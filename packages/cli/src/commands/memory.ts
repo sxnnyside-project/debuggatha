@@ -9,15 +9,14 @@ import {
   removeMemoryItem,
   saveMemoryStore,
   suggestMemory,
-} from "@debuggatha/core";
+} from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 
 /**
- * Repository Memory adapter surface (Epic 16B, closing Epic 15's own
- * "no user-facing inspect/confirm/reject/remove surface" gap). Thin
+ * Repository Memory adapter surface (inspect, confirm, reject, remove). Thin
  * wiring only — every action below delegates directly to
- * `@debuggatha/repository-memory`'s already-tested API via
+ * `core/repository-memory`'s already-tested API via
  * `@debuggatha/core`; this file adds no lifecycle logic of its own.
  */
 function describeItem(item: MemoryItem): string {

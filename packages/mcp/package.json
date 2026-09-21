@@ -1,20 +1,39 @@
 {
   "name": "@debuggatha/mcp",
   "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "bin": {
-    "debuggatha-mcp": "./dist/index.js"
+  "description": "MCP server exposing Debuggatha code review, findings ledger, and repository intelligence to any MCP host.",
+  "license": "MIT",
+  "author": "Sxnnyside Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxnnyside-project/debuggatha.git",
+    "directory": "packages/mcp"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "homepage": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "bugs": {
+    "url": "https://github.com/sxnnyside-project/debuggatha/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "code-review",
+    "debuggatha"
+  ],
+  "type": "module",
+  "mcpName": "io.github.sxnnyside-project/debuggatha",
+  "bin": {
+    "debuggatha-mcp": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsup",
@@ -26,12 +45,11 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@debuggatha/core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.12.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@debuggatha/testing": "workspace:*",
+    "@debuggatha/engine": "workspace:*",
     "@types/node": "^22.0.0"
   }
 }

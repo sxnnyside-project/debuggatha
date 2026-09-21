@@ -1,5 +1,9 @@
-import type { Finding } from "@debuggatha/core";
+import type { Severity } from "@debuggatha/engine";
 import * as vscode from "vscode";
+import type { FindingIndex, IndexedFinding } from "../findings/index.js";
+import { provenanceOf, ruleOf } from "../findings/present.js";
+
+export const DIAGNOSTIC_SOURCE = "Debuggatha";
 
 let diagnosticCollection: vscode.DiagnosticCollection;
 
@@ -8,53 +12,40 @@ export function initializeDiagnostics(context: vscode.ExtensionContext) {
   context.subscriptions.push(diagnosticCollection);
 }
 
-export function updateDiagnostics(findings: Finding[]) {
-  // Group findings by file URI
-  const findingsByFile = new Map<string, Finding[]>();
+const SEVERITY: Record<Severity, vscode.DiagnosticSeverity> = {
+  critical: vscode.DiagnosticSeverity.Error,
+  high: vscode.DiagnosticSeverity.Error,
+  medium: vscode.DiagnosticSeverity.Warning,
+  low: vscode.DiagnosticSeverity.Information,
+  informational: vscode.DiagnosticSeverity.Hint,
+};
 
-  for (const finding of findings) {
-    if (!finding.locations || finding.locations.length === 0) continue;
-    const loc = finding.locations[0];
-    if (!loc || !loc.file) continue;
-
-    const file = loc.file;
-    const fileFindings = findingsByFile.get(file) || [];
-    fileFindings.push(finding);
-    findingsByFile.set(file, fileFindings);
+/** The rule id is the diagnostic's code, and links to the rule's page when its tool has one. */
+function codeOf(indexed: IndexedFinding): string | { value: string; target: vscode.Uri } {
+  const finding = indexed.entry.latestFinding;
+  const provenance = provenanceOf(finding);
+  const value = ruleOf(finding);
+  if (provenance.kind === "analyzer" && provenance.url) {
+    return { value, target: vscode.Uri.parse(provenance.url) };
   }
+  return value;
+}
 
-  // Clear existing diagnostics before setting new ones
+export function toDiagnostic(indexed: IndexedFinding): vscode.Diagnostic {
+  const { span } = indexed;
+  const range = new vscode.Range(span.line, span.startChar, span.line, span.endChar ?? 1_000_000);
+  const finding = indexed.entry.latestFinding;
+  const diagnostic = new vscode.Diagnostic(range, finding.title, SEVERITY[finding.severity]);
+  diagnostic.source = DIAGNOSTIC_SOURCE;
+  diagnostic.code = codeOf(indexed);
+  return diagnostic;
+}
+
+/** Puts what the index holds into the Problems panel and the editor, replacing what was there. */
+export function updateDiagnostics(index: FindingIndex) {
   diagnosticCollection.clear();
-
-  // Create vscode diagnostics
-  for (const [file, fileFindings] of findingsByFile.entries()) {
-    const uri = vscode.Uri.file(file);
-    const diagnostics = fileFindings.map((finding) => {
-      // VS Code is 0-indexed for lines, finding locations are 1-indexed
-      const loc = finding.locations && finding.locations[0];
-      const line = Math.max(0, (loc?.lines?.start || 1) - 1);
-
-      // Default to highlighting the whole line or just start of it
-      const range = new vscode.Range(line, 0, line, 100);
-
-      const severity =
-        finding.severity === "critical" || finding.severity === "high"
-          ? vscode.DiagnosticSeverity.Error
-          : finding.severity === "medium"
-            ? vscode.DiagnosticSeverity.Warning
-            : vscode.DiagnosticSeverity.Information;
-
-      const diagnostic = new vscode.Diagnostic(range, `[Debuggatha] ${finding.title}`, severity);
-
-      diagnostic.source = "Debuggatha";
-      if (finding.appliedPolicy) {
-        diagnostic.code = finding.appliedPolicy.id;
-      }
-
-      return diagnostic;
-    });
-
-    diagnosticCollection.set(uri, diagnostics);
+  for (const file of index.files()) {
+    diagnosticCollection.set(vscode.Uri.file(file), index.inFile(file).map(toDiagnostic));
   }
 }
 

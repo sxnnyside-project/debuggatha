@@ -1,0 +1,80 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///repo/kt/Main.kt"
+                },
+                "region": {
+                  "endColumn": 15,
+                  "endLine": 3,
+                  "startColumn": 9,
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Private property `unused` is unused."
+          },
+          "ruleId": "detekt.style.UnusedPrivateProperty"
+        },
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///repo/kt/Main.kt"
+                },
+                "region": {
+                  "endColumn": 10,
+                  "endLine": 4,
+                  "startColumn": 9,
+                  "startLine": 4
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Private property `x` is unused."
+          },
+          "ruleId": "detekt.style.UnusedPrivateProperty"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "downloadUri": "https://github.com/detekt/detekt/releases/download/v1.23.8/detekt",
+          "fullName": "detekt",
+          "guid": "022ca8c2-f6a2-4c95-b107-bb72c43263f3",
+          "informationUri": "https://detekt.dev",
+          "language": "en",
+          "name": "detekt",
+          "organization": "detekt",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://detekt.dev/style.html#unusedprivateproperty",
+              "id": "detekt.style.UnusedPrivateProperty",
+              "name": "UnusedPrivateProperty",
+              "shortDescription": {
+                "text": "Property is unused and should be removed."
+              }
+            }
+          ],
+          "semanticVersion": "1.23.8",
+          "version": "1.23.8"
+        }
+      }
+    }
+  ]
+}

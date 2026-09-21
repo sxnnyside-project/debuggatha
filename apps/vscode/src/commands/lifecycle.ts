@@ -1,70 +1,62 @@
-import { loadLedger, saveLedger, transitionFinding } from "@debuggatha/core";
+import { getEntry, loadLedger, saveLedger, updateFindingStatus } from "@debuggatha/engine";
 import * as vscode from "vscode";
-import { updateDiagnostics } from "../diagnostics/diagnostics.js";
 import type { FindingsProvider, FindingTreeItem } from "../providers/findingsProvider.js";
+import type { Services } from "../services.js";
 
+type Target = "reopened" | "resolved" | "dismissed";
+
+/**
+ * Moving a finding through its lifecycle, from the tree (`item`) or from the editor (`ById`, in
+ * a hover or the lightbulb). Both end at the ledger, then at `refreshFromLedger`, so the tree,
+ * the squiggles, and the status bar cannot disagree.
+ */
 export function registerLifecycleCommands(
   context: vscode.ExtensionContext,
+  services: Services,
   findingsProvider: FindingsProvider,
 ) {
+  const fromTree = (target: Target) => async (item: FindingTreeItem) => {
+    if (item.entry) await changeFindingStatus(services, item.entry.id, target);
+  };
+  const byId = (target: Target) => (id: string) => changeFindingStatus(services, id, target);
+
   context.subscriptions.push(
     vscode.commands.registerCommand("debuggatha.toggleResolvedFindings", () => {
       findingsProvider.toggleResolved();
     }),
-
-    vscode.commands.registerCommand("debuggatha.resolveFinding", async (item: FindingTreeItem) => {
-      if (!item.entry) return;
-      await changeFindingStatus(item.entry.id, "resolved", findingsProvider);
-    }),
-
-    vscode.commands.registerCommand("debuggatha.dismissFinding", async (item: FindingTreeItem) => {
-      if (!item.entry) return;
-      await changeFindingStatus(item.entry.id, "dismissed", findingsProvider);
-    }),
-
-    vscode.commands.registerCommand("debuggatha.reopenFinding", async (item: FindingTreeItem) => {
-      if (!item.entry) return;
-      await changeFindingStatus(item.entry.id, "open", findingsProvider);
-    }),
+    vscode.commands.registerCommand("debuggatha.resolveFinding", fromTree("resolved")),
+    vscode.commands.registerCommand("debuggatha.dismissFinding", fromTree("dismissed")),
+    vscode.commands.registerCommand("debuggatha.reopenFinding", fromTree("reopened")),
+    vscode.commands.registerCommand("debuggatha.resolveFindingById", byId("resolved")),
+    vscode.commands.registerCommand("debuggatha.dismissFindingById", byId("dismissed")),
   );
 }
 
-async function changeFindingStatus(
+export async function changeFindingStatus(
+  services: Services,
   id: string,
-  status: "open" | "resolved" | "dismissed",
-  findingsProvider: FindingsProvider,
-) {
-  const folders = vscode.workspace.workspaceFolders || [];
-  const rootDir = folders[0]?.uri?.fsPath;
+  status: Target,
+): Promise<void> {
+  const rootDir = services.rootDir;
   if (!rootDir) return;
 
   try {
     const ledger = loadLedger(rootDir);
-
-    const entryIndex = ledger.entries.findIndex((e) => e.id === id);
-    if (entryIndex === -1) {
+    const entry = getEntry(ledger, id);
+    if (!entry) {
       vscode.window.showErrorMessage("Finding not found in ledger.");
       return;
     }
-
-    const entry = ledger.entries[entryIndex];
-    if (!entry) return;
     if (entry.status === status) return;
 
-    // A prompt for comment could be added here in the future
-    const newEntry = transitionFinding(entry, status, { kind: "manual", actor: "vscode" });
-    ledger.entries[entryIndex] = newEntry;
-
-    saveLedger(ledger);
-
-    findingsProvider.refresh(ledger.entries);
-
-    // Also update diagnostics to remove resolved ones from editor
-    const openFindings = ledger.entries
-      .filter((e) => e.status === "open")
-      .map((e) => e.latestFinding);
-    updateDiagnostics(openFindings);
-  } catch (err: any) {
-    vscode.window.showErrorMessage(`Failed to update finding status: ${err.message}`);
+    // The ledger is immutable: the update returns a new ledger to persist.
+    saveLedger(updateFindingStatus(ledger, id, status, { kind: "manual", actor: "vscode" }));
+    services.logger.info("Finding status changed", { id, status });
+    // Resolved and dismissed findings leave the editor's problem list.
+    services.refreshFromLedger();
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    services.logger.error("Could not change a finding's status", { id, reason: message });
+    vscode.window.showErrorMessage(`Failed to update finding status: ${message}`);
   }
 }

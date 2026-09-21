@@ -29,3 +29,11 @@ jobs:
       - uses: extractions/setup-just@v2
       - run: just install
       - run: just check
+      - run: just smoke
+      - uses: actions/cache@v4
+        with:
+          path: apps/vscode/.vscode-test
+          key: vscode-test-${{ runner.os }}-1.90.2
+      - run: xvfb-run -a just test-vscode
+      # The current stable release too: the manifest promises the oldest, users run the newest.
+      - run: xvfb-run -a just test-vscode-stable

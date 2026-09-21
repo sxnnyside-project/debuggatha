@@ -2,7 +2,7 @@
 
 This document defines the canonical engineering standard for all Debuggatha Review Packs. A Review Pack is a declarative knowledge artifact. It contains Rules and Knowledge Entries that are strictly consumed by the Review Engine. 
 
-**Review Packs NEVER execute code.** They are schema-driven catalogs (similar to a Terraform provider schema or an ESLint plugin manifest). The execution logic lives entirely within `@debuggatha/skills`.
+**Review Packs NEVER execute code.** They are schema-driven catalogs (similar to a Terraform provider schema or an ESLint plugin manifest). The execution logic lives entirely within `engine/skills`.
 
 ---
 
@@ -17,7 +17,7 @@ Every Review Pack MUST declare a strict identity.
   - `concern`: Broad engineering principles (e.g., Security, Accessibility, Architecture).
 
 ## 2. Dependencies and Compatibility
-Review Packs form a DAG. There are NO optional dependencies in v1.
+Review Packs form a DAG. There are no optional dependencies.
 
 - **`dependsOn`**: Array of strict dependencies.
   - `packId` & `versionRange`: Depends on another pack (e.g., the React pack depends on the TypeScript pack).
@@ -57,4 +57,4 @@ When the Review Engine produces a `Finding` based on a Rule, the finding must pr
 - **No Placeholders**: A rule without actionable criteria is invalid and must not be committed.
 - **No Empty Packs**: A Review Pack must contain at least one Rule and one Knowledge Entry.
 - **False Positives/Negatives**: Packs MUST document known heuristic limitations in their Knowledge Entries — via the required `limitations` field (§4), not prose buried in `body`.
-- **Testing**: Every pack must pass `@debuggatha/knowledge-system`'s `validateReviewPack` before registration.
+- **Testing**: Every pack must pass `core/knowledge-system`'s `validateReviewPack` before registration.

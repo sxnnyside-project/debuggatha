@@ -5,6 +5,9 @@ tsconfig.json
 esbuild.config.mjs
 pnpm-lock.yaml
 pnpm-workspace.yaml
+vitest.config.ts
+dist-test/**
+.vscode-test/**
 **/*.map
 **/tsconfig.json
 .gitignore
@@ -19,3 +22,5 @@ CONTRIBUTING.md
 SECURITY.md
 SUPPORT.md
 CODE_OF_CONDUCT.md
+CLAUDE.md
+.node-version

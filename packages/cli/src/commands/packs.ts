@@ -1,4 +1,4 @@
-import { defaultCapabilityRegistry } from "@debuggatha/core";
+import { defaultCapabilityRegistry } from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 

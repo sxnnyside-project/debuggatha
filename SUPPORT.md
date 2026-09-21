@@ -10,6 +10,8 @@ For bugs or unexpected behavior, open an [issue](https://github.com/sxnnyside-pr
 ## Before Asking
 
 - Check the [README](README.md) — installation, usage, and architecture are documented there.
+- Run `debuggatha doctor` and `debuggatha --help`; they report the setup and every command and flag.
+- Check the package guides: [CLI](packages/cli/README.md), [MCP server](packages/mcp/README.md), [VS Code extension](apps/vscode/README.md).
 - Search existing [issues](https://github.com/sxnnyside-project/debuggatha/issues) before opening a new one.
 
 ---

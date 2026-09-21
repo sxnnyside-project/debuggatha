@@ -6,7 +6,7 @@ import {
   saveLedger,
   summarizeLedger,
   updateFindingStatus,
-} from "@debuggatha/core";
+} from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 

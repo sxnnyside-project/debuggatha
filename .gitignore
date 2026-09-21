@@ -14,6 +14,7 @@ dist/
 
 # VS Code extension testing
 .vscode-test/
+dist-test/
 .vscode-test-web/
 
 # Environment and secrets
@@ -53,3 +54,6 @@ coverage/
 tmp/
 temp/
 *.tmp
+
+# Animoria cache & staged cleanup
+.animoria/

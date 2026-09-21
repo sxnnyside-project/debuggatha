@@ -1,4 +1,4 @@
-import type { RepositoryContext, ReviewPolicy } from "@debuggatha/core";
+import type { RepositoryContext, ReviewPolicy } from "@debuggatha/engine";
 import * as vscode from "vscode";
 
 export class IntelligenceProvider implements vscode.TreeDataProvider<IntelligenceTreeItem> {
@@ -70,7 +70,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
             r.id,
             vscode.TreeItemCollapsibleState.None,
             undefined,
-            r.description.substring(0, 50) + "...",
+            r.description.length > 50 ? `${r.description.slice(0, 50)}...` : r.description,
           ),
       );
       return Promise.resolve(items);

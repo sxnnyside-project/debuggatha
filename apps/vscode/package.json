@@ -10,25 +10,44 @@
   },
   "license": "MIT",
   "icon": "icon.png",
-  "private": true,
+  "homepage": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "bugs": {
+    "url": "https://github.com/sxnnyside-project/debuggatha/issues"
+  },
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.90.0",
     "node": ">=22"
   },
   "categories": [
     "Linters",
-    "Testing",
-    "Machine Learning"
+    "Testing"
   ],
   "keywords": [
-    "review",
+    "code review",
+    "static analysis",
     "security",
     "architecture",
+    "linter",
+    "sarif",
     "debuggatha"
   ],
   "activationEvents": [
     "onStartupFinished"
   ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In a workspace you have not trusted, only the built-in detectors run. External analyzers are programs found in the workspace, so they stay off until you trust it."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Debuggatha reads files and runs git on disk, which a virtual workspace does not have."
+    }
+  },
   "main": "./dist/index.js",
   "scripts": {
     "build": "node esbuild.config.mjs",
@@ -38,8 +57,9 @@
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
+    "test:integration": "node esbuild.config.mjs && node esbuild.config.mjs --tests && node dist-test/run.js",
     "package": "vsce package --no-dependencies",
-    "clean": "rm -rf dist *.vsix"
+    "clean": "rm -rf dist dist-test .vscode-test *.vsix"
   },
   "contributes": {
     "commands": [
@@ -52,11 +72,6 @@
         "command": "debuggatha.reviewActiveFile",
         "title": "Debuggatha: Review Current File",
         "icon": "$(file-code)"
-      },
-      {
-        "command": "debuggatha.reviewSelection",
-        "title": "Debuggatha: Review Selection",
-        "icon": "$(selection)"
       },
       {
         "command": "debuggatha.reviewDiff",
@@ -87,9 +102,94 @@
         "command": "debuggatha.toggleResolvedFindings",
         "title": "Toggle Resolved Findings",
         "icon": "$(filter)"
+      },
+      {
+        "command": "debuggatha.reviewSelection",
+        "title": "Debuggatha: Review Selection",
+        "icon": "$(selection)"
+      },
+      {
+        "command": "debuggatha.reviewActiveFileWithModel",
+        "title": "Debuggatha: Review Current File with a Local Model",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "debuggatha.cancelReview",
+        "title": "Debuggatha: Cancel Review",
+        "icon": "$(stop-circle)"
+      },
+      {
+        "command": "debuggatha.showLog",
+        "title": "Debuggatha: Show Log",
+        "icon": "$(output)"
+      },
+      {
+        "command": "debuggatha.openFindingById",
+        "title": "Open Finding Detail"
+      },
+      {
+        "command": "debuggatha.resolveFindingById",
+        "title": "Resolve Finding"
+      },
+      {
+        "command": "debuggatha.dismissFindingById",
+        "title": "Dismiss Finding"
+      },
+      {
+        "command": "debuggatha.suppressInline",
+        "title": "Accept Finding in Code"
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "debuggatha.cancelReview",
+          "when": "debuggatha.reviewing"
+        },
+        {
+          "command": "debuggatha.reviewSelection",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "debuggatha.openFinding",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.resolveFinding",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.dismissFinding",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.reopenFinding",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.openFindingById",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.resolveFindingById",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.dismissFindingById",
+          "when": "false"
+        },
+        {
+          "command": "debuggatha.suppressInline",
+          "when": "false"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "debuggatha.reviewSelection",
+          "when": "editorHasSelection && resourceScheme == file",
+          "group": "debuggatha"
+        }
+      ],
       "view/title": [
         {
           "command": "debuggatha.toggleResolvedFindings",
@@ -100,17 +200,17 @@
       "view/item/context": [
         {
           "command": "debuggatha.resolveFinding",
-          "when": "view == debuggatha-findings && viewItem == finding-open || viewItem == finding-dismissed",
+          "when": "view == debuggatha-findings && (viewItem == finding-open || viewItem == finding-acknowledged || viewItem == finding-reopened)",
           "group": "inline"
         },
         {
           "command": "debuggatha.dismissFinding",
-          "when": "view == debuggatha-findings && viewItem == finding-open || viewItem == finding-resolved",
+          "when": "view == debuggatha-findings && (viewItem == finding-open || viewItem == finding-acknowledged || viewItem == finding-reopened)",
           "group": "inline"
         },
         {
           "command": "debuggatha.reopenFinding",
-          "when": "view == debuggatha-findings && viewItem == finding-resolved || viewItem == finding-dismissed",
+          "when": "view == debuggatha-findings && (viewItem == finding-resolved || viewItem == finding-dismissed)",
           "group": "inline"
         }
       ]
@@ -151,6 +251,14 @@
     "configuration": {
       "title": "Debuggatha",
       "properties": {
+        "debuggatha.extraReviewPacks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Review Packs to apply on top of the ones Debuggatha detects for your stack. Listed packs take precedence when rules conflict."
+        },
         "debuggatha.reviewDepth": {
           "type": "string",
           "enum": [
@@ -158,49 +266,79 @@
             "full",
             "architectural"
           ],
-          "default": "full",
-          "description": "The depth of the review to perform."
-        },
-        "debuggatha.defaultReviewPacks": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "default": [
-            "debuggatha/typescript",
-            "debuggatha/react",
-            "debuggatha/owasp"
+          "enumDescriptions": [
+            "The built-in detectors only. Fastest.",
+            "The built-in detectors, plus the external analyzers installed on this machine (Ruff, Biome, gitleaks, ktlint...).",
+            "Everything in full, and a review of the whole repository including its architecture (dependency cycles, layer violations, dead code), whichever command you run."
           ],
-          "description": "The default review packs to apply if none are specified."
+          "default": "full",
+          "description": "How much a review does."
+        },
+        "debuggatha.reviewOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Review a file when you save it. Only that file is reviewed, quietly, and never widened by reviewDepth."
+        },
+        "debuggatha.minimumSeverity": {
+          "type": "string",
+          "enum": [
+            "informational",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "default": "informational",
+          "description": "The lowest severity shown in the editor (underlines and the Problems panel). The Findings view always lists everything."
         },
         "debuggatha.logLevel": {
           "type": "string",
           "enum": [
-            "debug",
+            "off",
+            "error",
             "info",
-            "warn",
-            "error"
+            "debug"
           ],
           "default": "info",
-          "description": "The minimum log level for the Debuggatha output channel."
+          "description": "How much the Debuggatha output channel records. The log says what happened and how long it took; it never contains your code."
         },
-        "debuggatha.runtime": {
+        "debuggatha.enabledAnalyzers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "eslint",
+              "phpstan",
+              "clippy",
+              "osv-scanner"
+            ]
+          },
+          "default": [],
+          "scope": "machine",
+          "markdownDescription": "Analyzers that run code from the project (`eslint`, `phpstan`, `clippy`) or send package names to a service (`osv-scanner`). Off unless listed here. This can only be set in your own user settings, not by a workspace, so a repository cannot switch it on."
+        },
+        "debuggatha.semantic.provider": {
           "type": "string",
           "enum": [
-            "mcp",
-            "local"
+            "off",
+            "ollama",
+            "lmstudio"
           ],
-          "default": "mcp",
-          "description": "The runtime execution mode for reviews."
+          "default": "off",
+          "scope": "machine",
+          "markdownDescription": "The model on this machine used by **Debuggatha: Review Current File with a Local Model**. Nothing is sent to a model unless you run that command, and only ever to localhost."
         },
-        "debuggatha.transport": {
+        "debuggatha.semantic.model": {
           "type": "string",
-          "enum": [
-            "stdio",
-            "sse"
-          ],
-          "default": "stdio",
-          "description": "The MCP transport to use when runtime is mcp."
+          "default": "",
+          "scope": "machine",
+          "description": "The model to use. Empty: the first one the runtime has."
+        },
+        "debuggatha.semantic.url": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Where the runtime listens (only localhost is accepted). Empty: the runtime's default address."
         }
       }
     },
@@ -232,11 +370,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
-    "@debuggatha/core": "link:../../packages/core",
+    "@debuggatha/engine": "link:../../packages/engine",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^22.0.0",
     "@types/vscode": "^1.90.0",
+    "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.0.0",
     "esbuild": "^0.25.0",
+    "mocha": "^10.8.2",
     "typescript": "^5.6.0",
     "vitest": "^2.0.0"
   },

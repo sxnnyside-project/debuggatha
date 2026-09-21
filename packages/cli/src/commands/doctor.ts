@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { buildRepositoryContext } from "@debuggatha/core";
+import { buildRepositoryContext } from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 

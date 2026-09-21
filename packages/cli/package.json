@@ -1,13 +1,40 @@
 {
   "name": "@debuggatha/cli",
   "version": "0.1.0",
-  "private": true,
+  "description": "Terminal and CI front end for Debuggatha: a senior code reviewer that cites a real source for every finding.",
+  "license": "MIT",
+  "author": "Sxnnyside Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxnnyside-project/debuggatha.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "bugs": {
+    "url": "https://github.com/sxnnyside-project/debuggatha/issues"
+  },
+  "keywords": [
+    "code-review",
+    "cli",
+    "ci",
+    "static-analysis",
+    "debuggatha"
+  ],
   "type": "module",
   "bin": {
-    "debuggatha": "./dist/index.js"
+    "debuggatha": "./dist/bin.js"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "lint": "biome lint .",
@@ -18,13 +45,12 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@debuggatha/core": "workspace:*",
-    "@debuggatha/infrastructure": "workspace:*",
     "commander": "^15.0.0",
     "picocolors": "^1.1.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@debuggatha/engine": "workspace:*",
     "@types/node": "^22.0.0"
   }
 }

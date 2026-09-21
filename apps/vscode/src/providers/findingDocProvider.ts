@@ -1,4 +1,4 @@
-import type { Finding } from "@debuggatha/core";
+import type { Finding } from "@debuggatha/engine";
 import * as vscode from "vscode";
 
 export class FindingDocProvider implements vscode.TextDocumentContentProvider {

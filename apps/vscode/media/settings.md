@@ -1,11 +1,13 @@
 # Configuring Debuggatha
 
-Debuggatha is designed to be zero-configuration for standard projects. It uses the `Foundation Bundle` to automatically detect your tech stack (e.g., React, Go, Kotlin) and apply the correct semantic rules.
+Debuggatha needs no configuration for a standard project: it detects your stack and applies the
+matching Review Packs.
 
-However, you can configure its behavior directly through VS Code Settings.
+## Settings
 
-## Available Settings
-
-- **Review Depth**: Choose between Quick, Full, or Architectural reviews depending on how deep you want the context window to go.
-- **Default Review Packs**: Manually define fallback Review Packs if auto-detection fails.
-- **Runtime**: Run the review engine completely locally (Local) or connect to an enterprise MCP server (MCP).
+- **Review Depth** (`debuggatha.reviewDepth`): `quick` runs only the built-in detectors; `full` (default) also runs the analyzers installed on your machine; `architectural` also reviews the whole repository, architecture included.
+- **Review on Save** (`debuggatha.reviewOnSave`): review a file when you save it, quietly, in the status bar.
+- **Minimum Severity** (`debuggatha.minimumSeverity`): the lowest severity shown as underlines and in Problems. The Findings view lists everything.
+- **Extra Review Packs** (`debuggatha.extraReviewPacks`): packs applied on top of the ones detected for your stack. Listed packs win when rules conflict.
+- **Enabled Analyzers** (`debuggatha.enabledAnalyzers`): analyzers that run project code or use the network. Off until you list them here.
+- **Log Level** (`debuggatha.logLevel`): what the Output channel records. It never contains code.

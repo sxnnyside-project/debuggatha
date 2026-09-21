@@ -1,25 +1,63 @@
+import type { Severity } from "@debuggatha/engine";
 import * as vscode from "vscode";
 
+/**
+ * How much a review does:
+ *   quick          the built-in detectors only
+ *   full           also the external analyzers installed on this machine
+ *   architectural  also the whole-repository architecture pass (dependency cycles, layer
+ *                  violations, dead code), whatever the command was
+ */
+export type ReviewDepth = "quick" | "full" | "architectural";
+export type LogLevel = "off" | "error" | "info" | "debug";
+export type SemanticProviderName = "off" | "ollama" | "lmstudio";
+
+export const REVIEW_DEPTHS: readonly ReviewDepth[] = ["quick", "full", "architectural"];
+export const LOG_LEVELS: readonly LogLevel[] = ["off", "error", "info", "debug"];
+export const SEVERITY_LEVELS: readonly Severity[] = [
+  "informational",
+  "low",
+  "medium",
+  "high",
+  "critical",
+];
+
 export interface ExtensionSettings {
-  reviewDepth: "quick" | "full" | "architectural";
-  defaultReviewPacks: string[];
-  logLevel: "debug" | "info" | "warn" | "error";
-  runtime: "mcp" | "local";
-  transport: "stdio" | "sse";
+  extraReviewPacks: string[];
+  reviewDepth: ReviewDepth;
+  logLevel: LogLevel;
+  reviewOnSave: boolean;
+  /** Lowest severity shown as a squiggle and in Problems; the findings view lists everything. */
+  minimumSeverity: Severity;
+  /** Analyzers that run project code or use the network, which only the user's own settings can enable. */
+  enabledAnalyzers: string[];
+  semantic: { provider: SemanticProviderName; model: string | undefined; url: string | undefined };
+}
+
+function pick<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
+  return typeof value === "string" && (allowed as readonly string[]).includes(value)
+    ? (value as T)
+    : fallback;
 }
 
 export function getSettings(): ExtensionSettings {
   const config = vscode.workspace.getConfiguration("debuggatha");
+  const text = (key: string) => {
+    const value = config.get<string>(key);
+    return value?.trim() ? value.trim() : undefined;
+  };
   return {
-    reviewDepth: config.get("reviewDepth") || "full",
-    defaultReviewPacks: config.get("defaultReviewPacks") || [
-      "debuggatha/typescript",
-      "debuggatha/react",
-      "debuggatha/owasp",
-    ],
-    logLevel: config.get("logLevel") || "info",
-    runtime: config.get("runtime") || "mcp",
-    transport: config.get("transport") || "stdio",
+    extraReviewPacks: config.get<string[]>("extraReviewPacks") ?? [],
+    reviewDepth: pick(config.get<string>("reviewDepth"), REVIEW_DEPTHS, "full"),
+    logLevel: pick(config.get<string>("logLevel"), LOG_LEVELS, "info"),
+    reviewOnSave: config.get<boolean>("reviewOnSave") === true,
+    minimumSeverity: pick(config.get<string>("minimumSeverity"), SEVERITY_LEVELS, "informational"),
+    enabledAnalyzers: config.get<string[]>("enabledAnalyzers") ?? [],
+    semantic: {
+      provider: pick(config.get<string>("semantic.provider"), ["off", "ollama", "lmstudio"], "off"),
+      model: text("semantic.model"),
+      url: text("semantic.url"),
+    },
   };
 }
 

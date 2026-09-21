@@ -27,8 +27,6 @@ The more context you provide, the faster it gets resolved.
 
 Expect an initial response within **2–5 calendar days**.
 
-This is a solo-maintained project. That window reflects reality, not indifference.
-
 ---
 
 ## Process
@@ -46,6 +44,16 @@ Public disclosure is expected after a fix is available. If a fix isn't possible,
 
 This policy covers the **Debuggatha** repository only.
 For ecosystem-wide security concerns, use the email above.
+
+Of particular interest:
+
+- Reading or writing outside the repository root (path handling in reviews, the ledger, and the MCP server).
+- Command injection through git refs, analyzer arguments, or file names.
+- Enabling an analyzer that runs project code or uses the network, or the semantic pass, from a repository file or a tool call rather than from the person's own flag, environment, or user settings.
+- Secrets reaching a report, the ledger, or a model.
+- Source code sent anywhere other than `localhost` or the connected client's own model.
+
+Vulnerabilities in a third-party analyzer belong to that project; Debuggatha never bundles one.
 
 ---
 

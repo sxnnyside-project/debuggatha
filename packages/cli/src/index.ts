@@ -1,4 +1,8 @@
 import { Command } from "commander";
+import pkg from "../package.json" with { type: "json" };
+import { registerAnalyzersCommand } from "./commands/analyzers.js";
+import { registerBaselineCommand } from "./commands/baseline.js";
+import { registerCompletionCommand } from "./commands/completion.js";
 import { registerDoctorCommand } from "./commands/doctor.js";
 import { registerFindingsCommand } from "./commands/findings.js";
 import { registerInitCommand } from "./commands/init.js";
@@ -7,6 +11,7 @@ import { registerPacksCommand } from "./commands/packs.js";
 import { registerPoliciesCommand } from "./commands/policies.js";
 import { registerRepositoryCommand } from "./commands/repository.js";
 import { registerReviewCommand } from "./commands/review.js";
+import { registerTrendsCommand } from "./commands/trends.js";
 import { CliLogger } from "./utils/logger.js";
 
 /**
@@ -15,7 +20,6 @@ import { CliLogger } from "./utils/logger.js";
  * Architecture Principle: This is purely an application/integration layer.
  * It strictly orchestrates `@debuggatha/core` services without duplicating
  * any business logic, domain constraints, or review generation.
- * (See CLAUDE.md "Deferred (not v1)" / "Epic 6").
  */
 export function createCli(): Command {
   const program = new Command();
@@ -23,7 +27,7 @@ export function createCli(): Command {
   program
     .name("debuggatha")
     .description("Debuggatha CLI - Advanced Code Review & Intelligence")
-    .version("0.1.0");
+    .version(pkg.version);
 
   program
     .option("--json", "Output strictly in JSON format", false)
@@ -47,18 +51,16 @@ export function createCli(): Command {
   // Register Commands
   registerInitCommand(program);
   registerReviewCommand(program);
+  registerBaselineCommand(program);
+  registerAnalyzersCommand(program);
   registerFindingsCommand(program);
+  registerTrendsCommand(program);
   registerMemoryCommand(program);
   registerRepositoryCommand(program);
   registerPacksCommand(program);
   registerPoliciesCommand(program);
   registerDoctorCommand(program);
+  registerCompletionCommand(program);
 
   return program;
-}
-
-// Ensure it only runs automatically if invoked as a script
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const cli = createCli();
-  cli.parse(process.argv);
 }

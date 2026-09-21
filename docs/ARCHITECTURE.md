@@ -1,47 +1,80 @@
 # Architecture
 
-Debuggatha is a Bun + Turborepo monorepo. The engine is distributed as an MCP server first; a VS Code panel is a client of that engine, built last, not first.
+Debuggatha is a Bun + Turborepo monorepo of five packages and one app. The review pipeline lives in one engine; MCP, the CLI, and the VS Code extension are thin adapters over it.
 
 ## Structure
 
 ```text
 debuggatha/
 ├── apps/
-│   ├── vscode/          — VS Code client of @debuggatha/core
-│   └── docs/             — docs site (not yet implemented)
+│   └── vscode/              — VS Code extension (Node + pnpm), adapter over @debuggatha/engine
 │
 ├── packages/
-│   ├── repository-intelligence/ — Epic 1: RepositoryContext (stack, deps, docs, criteria)
-│   ├── review-engine/     — Epic 2: review domain (Request/Session/Finding/Result)
-│   ├── knowledge-system/ — Epic 3: Skills/Packs/Policies domain (Registry, resolvePolicy, assembleContext)
-│   ├── findings-ledger/   — Epic 4: persistent history of findings (lifecycle, matching, sync)
-│   ├── skills/             — Epic 11: Review / Analysis skill implementations (Core Skills moved to repository-intelligence)
-│   ├── analysis-engine/  — Epic 12: deterministic module boundaries/dependency graph/dead code/ownership pipeline
-│   ├── context-intelligence/ — Epic 14: documentation intent, workflow, ownership, metadata, git context (ContextItem[])
-│   ├── repository-memory/ — Epic 15: long-term engineering knowledge (suppressions, deviations, conventions, decisions)
-│   ├── runtime-engine/   — Epic 13: provider-agnostic semantic review execution (Ollama, LM Studio)
-│   ├── review-packs/    — Review Pack content conforming to knowledge-system's schema
-│   ├── policies/          — thin wiring: calls knowledge-system's resolvePolicy against a registry populated from review-packs
-│   ├── core/              — façade: re-exports every domain package; orchestrates them together (executeReview)
-│   ├── infrastructure/   — concrete RepositoryProvider implementations (LocalGitProvider)
-│   ├── mcp/                — MCP server (distribution layer only)
-│   ├── cli/                 — standalone CLI, for CI usage
-│   └── testing/           — test fixtures shared across packages
+│   ├── core/                — the review domain; depends on nothing else in the repo
+│   │   └── src/
+│   │       ├── repository-intelligence/ — RepositoryContext (stack, capabilities, deps, docs, criteria)
+│   │       ├── review-engine/           — review domain (Request/Session/Finding/Result)
+│   │       ├── knowledge-system/        — Skills/Packs/Policies domain (Registry, resolvePolicy, assembleContext)
+│   │       ├── findings-ledger/         — persistent history of findings (lifecycle, matching, sync)
+│   │       ├── repository-memory/       — long-term engineering knowledge (suppressions, deviations, decisions)
+│   │       └── testing/                 — fixture helpers, exported as @debuggatha/core/testing
+│   ├── packs/               — Review Pack content, conforming to core's ReviewPack schema
+│   ├── engine/              — runs reviews; depends on core and packs
+│   │   └── src/
+│   │       ├── pipeline.ts, provider.ts — executeReview and RepositoryProvider
+│   │       ├── skills/                  — Review Skills and rule detectors
+│   │       ├── analysis-engine/         — deterministic dependency graph, cycles, layers, dead code, ownership
+│   │       ├── analyzers/               — external analyzers run as separate processes
+│   │       ├── semantic/                — optional model pass, grounded and loopback-only
+│   │       ├── runtime-engine/          — Ollama and LM Studio providers
+│   │       ├── policies/                — assemblePolicy against the pack registry
+│   │       ├── scan-scope/              — what counts as the project's own code
+│   │       ├── baseline.ts              — known findings, for adoption mode
+│   │       └── infrastructure/          — LocalGitProvider
+│   ├── mcp/                 — MCP server, published on its own
+│   └── cli/                 — CLI for terminals and CI, published on its own
 │
-├── turbo.json
-└── bun.lock
+├── docs/                    — this file, the Review Pack spec, and ADRs
+├── scripts/                 — license gate, pack smoke test, release tooling
+└── Justfile                 — the command surface for the whole repository
 ```
 
-Cross-package imports use short aliases (`@core`, `@skills`, `@packs`, `@policies`, `@mcp`, `@cli`, `@shared`, `@repo-intel`, `@review-engine`, `@knowledge-system`, `@ledger`) configured in `tsconfig.base.json`, backed by real workspace package names (`@debuggatha/*`) for Bun's module resolution.
+Dependency direction: `core` ← `packs` ← `engine` ← (`cli`, `mcp`, `apps/vscode`). `cli` and `mcp` bundle everything they depend on, so what is published depends only on third-party packages. Modules inside a package import each other by relative path through each module's `index.ts`.
 
-## Subsystems Overview
+## The review pipeline
 
-**Repository Intelligence** (`@debuggatha/repository-intelligence`): Stack Detection, Dependency Context, Documentation Context, Criteria Resolution, Repository Understanding, the immutable `RepositoryContext` snapshot, and its fingerprint-based cache.
+`executeReview` is `analyzeReview` followed by `concludeReview`:
 
-**Review Engine domain** (`@debuggatha/review-engine`): the review domain model — `ReviewRequest`, `ReviewSession` with an enforced lifecycle, `Finding` (can't be constructed without evidence and a location), `Evidence`, `Category`, `Severity`/`Confidence`, `Recommendation`, `ReviewResult`, `ReviewSummary`.
+1. Build the `RepositoryContext` (Core Skills: stack and capabilities, dependencies, documentation, criteria).
+2. Request the registered packs; Rule Resolution keeps the rules whose scope matches the detected capabilities and records conflicts.
+3. Assemble the `ReviewPolicy` (its id is deterministic, see ADR-0005).
+4. Run the Review Skill for the scope (file, diff, or architecture) over the project's own code.
+5. Run the enabled external analyzers as separate processes and merge their findings, labeled with tool, version, and license.
+6. Apply inline suppressions and active Repository Memory; suppressed findings are reported, never hidden.
+7. Synchronize into the Findings Ledger, apply the baseline, and report what the change introduced, fixed, and reopened.
 
-**Knowledge System** (`@debuggatha/knowledge-system`): the Skill/Review Pack/Review Policy domain — `SkillDescriptor`, `ReviewPack`/ `Rule`/`KnowledgeEntry`, an injectable `CapabilityRegistry`, `resolvePolicy` (Rule Resolution, pure, fail-closed on missing dependencies), `assembleContext` (→ `SkillContext`), `ReviewPolicy`/ `ConflictRecord` (conflicts recorded with fixed precedence, never silently dropped), and `validateReviewPack`. `@debuggatha/review-packs` ships the real `ReviewPack` type plus example packs; `@debuggatha/policies`' `assemblePolicy` really calls `resolvePolicy`.
+`executeReviewWithSemantics` runs the same pipeline and then an optional model pass whose claims are kept only when they quote the line they are about; the pass never closes, hides, or lowers a finding.
 
-**Findings Ledger** (`@debuggatha/findings-ledger`): the persistent history of every finding across review sessions — `Ledger`/`LedgerEntry` (immutable), a five-state lifecycle (open/acknowledged/resolved/dismissed/reopened, enforced), append-only `HistoryEvent[]`, Finding Identity via `computeFindingFingerprint` (file + rule id + content anchor, never line number alone), a pluggable `FindingMatcher`, `synchronizeReviewResult` (new/matched/auto-resolved/reopened, scoped to what a review actually covered), `summarizeLedger`, and deterministic versioned persistence at `.debuggatha/ledger.json`.
+## Subsystems
 
-**Core** (`@debuggatha/core`) re-exports all four as the stable façade other packages depend on.
+**Repository Intelligence** (`core/repository-intelligence`): Stack Detection, Dependency Context, Documentation Context, Criteria Resolution, Repository Understanding, the additive `Capability[]` set rules match against, the immutable `RepositoryContext` snapshot, and its fingerprint-based cache.
+
+**Review Engine domain** (`core/review-engine`): `ReviewRequest`, `ReviewSession` with an enforced lifecycle, `Finding` (cannot be constructed without evidence and a location), `Evidence`, `Category`, independent `Severity` and `Confidence`, `Recommendation`, `ReviewResult`, `ReviewSummary`.
+
+**Knowledge System** (`core/knowledge-system`): `SkillDescriptor`, `ReviewPack`/`Rule`/`KnowledgeEntry`, an injectable `CapabilityRegistry`, `resolvePolicy` (pure, fail-closed on missing dependencies), `assembleContext`, `ReviewPolicy`/`ConflictRecord` (conflicts recorded with fixed precedence, never dropped), and `validateReviewPack`.
+
+**Findings Ledger** (`core/findings-ledger`): immutable `Ledger`/`LedgerEntry`, a five-state lifecycle, append-only history, finding identity via `computeFindingFingerprint` (file + rule id + content anchor, never line number alone), a pluggable `FindingMatcher`, `synchronizeReviewResult` (new, matched, auto-resolved, reopened, scoped to what a review covered), and deterministic versioned persistence at `.debuggatha/ledger.json`, written atomically.
+
+**Repository Memory** (`core/repository-memory`): structured engineering decisions with their own lifecycle; only active items filter findings.
+
+**Analysis Engine** (`engine/analysis-engine`): a deterministic, model-free pipeline over module boundaries, dependency graph, layer model and violations, cycles, public API surface, dead code, ownership, and change impact. Architecture Review consumes it.
+
+**Analyzers** (`engine/analyzers`): adapters for external tools, each with a trust class (`safe`, `runs-project-code`, `network`). Only the person running the review can enable the last two.
+
+**Semantic layer** (`engine/semantic`, `engine/runtime-engine`): optional, off by default, loopback-only, grounded.
+
+**Engine** (`@debuggatha/engine`) is the one entry point for the adapters: `executeReview` plus the public surface of `core` they need.
+
+## Local state
+
+Everything Debuggatha persists lives in `.debuggatha/` at the repository root: `ledger.json`, `memory.json`, `baseline.json`, and the optional `config.json`. All are deterministic, human-readable JSON; versioned files fail closed on a schema version they do not recognize.

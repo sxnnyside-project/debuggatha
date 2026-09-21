@@ -1,4 +1,4 @@
-import * as core from "@debuggatha/core";
+import * as core from "@debuggatha/engine";
 
 /**
  * Every domain function a tool handler is allowed to call, bundled as one

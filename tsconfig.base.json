@@ -21,32 +21,6 @@
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-
-    "baseUrl": ".",
-    "paths": {
-      "@shared": ["packages/shared/src/index.ts"],
-      "@shared/*": ["packages/shared/src/*"],
-      "@core": ["packages/core/src/index.ts"],
-      "@core/*": ["packages/core/src/*"],
-      "@repo-intel": ["packages/repository-intelligence/src/index.ts"],
-      "@repo-intel/*": ["packages/repository-intelligence/src/*"],
-      "@review-engine": ["packages/review-engine/src/index.ts"],
-      "@review-engine/*": ["packages/review-engine/src/*"],
-      "@knowledge-system": ["packages/knowledge-system/src/index.ts"],
-      "@knowledge-system/*": ["packages/knowledge-system/src/*"],
-      "@ledger": ["packages/findings-ledger/src/index.ts"],
-      "@ledger/*": ["packages/findings-ledger/src/*"],
-      "@skills": ["packages/skills/src/index.ts"],
-      "@skills/*": ["packages/skills/src/*"],
-      "@packs": ["packages/review-packs/src/index.ts"],
-      "@packs/*": ["packages/review-packs/src/*"],
-      "@policies": ["packages/policies/src/index.ts"],
-      "@policies/*": ["packages/policies/src/*"],
-      "@mcp": ["packages/mcp/src/index.ts"],
-      "@mcp/*": ["packages/mcp/src/*"],
-      "@cli": ["packages/cli/src/index.ts"],
-      "@cli/*": ["packages/cli/src/*"]
-    }
+    "noUnusedParameters": true
   }
 }

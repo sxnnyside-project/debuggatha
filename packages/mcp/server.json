@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.sxnnyside-project/debuggatha",
+  "title": "Debuggatha",
+  "description": "Senior code reviewer that understands repository context; every finding cites a real source.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/sxnnyside-project/debuggatha",
+    "source": "github",
+    "subfolder": "packages/mcp"
+  },
+  "websiteUrl": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@debuggatha/mcp",
+      "version": "0.1.0",
+      "runtimeHint": "npx",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "DEBUGGATHA_REPOSITORY_ROOT",
+          "description": "Default repository to review when a tool call does not pass rootDir.",
+          "isRequired": false
+        },
+        {
+          "name": "DEBUGGATHA_LOG_LEVEL",
+          "description": "Minimum log level written to stderr.",
+          "isRequired": false,
+          "choices": ["debug", "info", "warn", "error"],
+          "default": "info"
+        },
+        {
+          "name": "DEBUGGATHA_CACHE_ENABLED",
+          "description": "Cache the resolved repository context between tool calls.",
+          "isRequired": false,
+          "choices": ["true", "false"],
+          "default": "true"
+        }
+      ]
+    }
+  ]
+}

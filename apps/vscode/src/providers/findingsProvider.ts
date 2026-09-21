@@ -1,4 +1,4 @@
-import type { LedgerEntry } from "@debuggatha/core";
+import { isActiveFindingStatus, type LedgerEntry } from "@debuggatha/engine";
 import * as vscode from "vscode";
 
 export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem> {
@@ -21,7 +21,9 @@ export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem
   }
 
   private getVisibleEntries(): LedgerEntry[] {
-    return this.showResolved ? this.entries : this.entries.filter((e) => e.status === "open");
+    return this.showResolved
+      ? this.entries
+      : this.entries.filter((e) => isActiveFindingStatus(e.status));
   }
 
   getTreeItem(element: FindingTreeItem): vscode.TreeItem {
@@ -79,11 +81,6 @@ export class FindingTreeItem extends vscode.TreeItem {
 
     if (finding && entry) {
       this.description = `${finding.severity} • ${entry.status}`;
-
-      // Just use the description for status
-      if (entry.status !== "open") {
-        this.description += " (Resolved)";
-      }
 
       this.iconPath = new vscode.ThemeIcon(this.getIconForSeverity(finding.severity));
 

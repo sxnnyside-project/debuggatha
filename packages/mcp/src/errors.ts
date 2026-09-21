@@ -46,6 +46,7 @@ export function classifyError(error: unknown): ClassifiedError {
 }
 
 export interface ToolErrorResult {
+  [key: string]: unknown;
   content: [{ type: "text"; text: string }];
   isError: true;
 }

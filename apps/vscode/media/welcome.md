@@ -1,14 +1,12 @@
 # Welcome to Debuggatha
 
-Debuggatha is a new breed of AI integration. It is not an autocomplete engine. It is not a chat wrapper.
+Debuggatha is a senior engineering reviewer. It is not an autocomplete engine and not a chat wrapper.
 
-It is a **Senior Engineering Reviewer**.
-
-It natively understands your repository architecture and enforces organizational constraints via **Review Packs**. You don't need to prompt it, just ask for a review and let it do the hard work.
+It reads your repository first and enforces what it finds through **Review Packs**. You do not prompt it; you ask for a review.
 
 ## How it works
 
-1. **Context Discovery**: Debuggatha analyzes your `.git` history, package managers, and directory structures to understand your stack.
-2. **Policy Assembly**: It matches your stack against its registry of Review Packs to figure out what rules to enforce.
-3. **Deep Analysis**: It reviews your pending diffs or workspace files to uncover architectural flaws and vulnerabilities.
-4. **Ledger Synchronization**: Findings are deduplicated and tracked over time, avoiding annoying repetitive alerts.
+1. **Context discovery**: it reads your package manifests, config files, documentation, and directory structure to understand your stack.
+2. **Policy assembly**: it matches your stack against its Review Packs to decide which rules apply.
+3. **Review**: it checks your pending changes, a file, a selection, or the workspace, and runs the analyzers installed on your machine.
+4. **Ledger**: findings are deduplicated and tracked over time, so you are not alerted twice for the same thing.

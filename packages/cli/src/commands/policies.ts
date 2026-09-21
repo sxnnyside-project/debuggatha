@@ -2,8 +2,8 @@ import {
   assemblePolicy,
   buildRepositoryContext,
   createReviewRequest,
-  defaultCapabilityRegistry,
-} from "@debuggatha/core";
+  resolveRequestedPackIds,
+} from "@debuggatha/engine";
 import type { Command } from "commander";
 import type { CliLogger } from "../utils/logger.js";
 
@@ -11,10 +11,9 @@ import type { CliLogger } from "../utils/logger.js";
  * Assembles and displays the real `ReviewPolicy` for the current
  * repository — a Review Policy in this architecture is always dynamic
  * (Rule Resolution against the repository's own detected capabilities/
- * criteria, never a static catalog entry — see `@debuggatha/knowledge-system`),
+ * criteria, never a static catalog entry — see `core/knowledge-system`),
  * so this queries the actual registry/resolver instead of printing a
- * hardcoded placeholder (Epic 16B: closed as part of the Deferred
- * Inventory's CLI gaps).
+ * fixed list.
  */
 export function registerPoliciesCommand(program: Command) {
   program
@@ -27,7 +26,7 @@ export function registerPoliciesCommand(program: Command) {
 
       try {
         const context = buildRepositoryContext(cwd);
-        const requestedPackIds = defaultCapabilityRegistry.listPacks().map((pack) => pack.id);
+        const requestedPackIds = resolveRequestedPackIds([]);
         const request = createReviewRequest({
           scope: { kind: "workspace" },
           depth: "full",
