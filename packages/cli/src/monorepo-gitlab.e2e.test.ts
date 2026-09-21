@@ -227,7 +227,7 @@ describe("GitLab", () => {
       when: "always",
       reports: { codequality: "gl-code-quality-report.json" },
     });
-    expect(job.script.join("\n")).toContain("@debuggatha/cli@1.2.3");
+    expect(job.script.join("\n")).toContain("@sxnnyside/debuggatha-cli@1.2.3");
     expect(job.script.join("\n")).toContain("--fail-on high");
   });
 
@@ -342,7 +342,7 @@ describe("GitLab", () => {
     return {
       reviewArgs(target: string, output: string) {
         const rest = (script as string)
-          .replace(/^npx --yes @debuggatha\/cli@\S+ /, "")
+          .replace(/^npx --yes @sxnnyside\/debuggatha-cli@\S+ /, "")
           .replace('"origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"', target)
           .replace("gl-code-quality-report.json", output);
         return rest.split(/\s+/).filter(Boolean);

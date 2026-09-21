@@ -1,4 +1,4 @@
-# @debuggatha/cli
+# @sxnnyside/debuggatha-cli
 
 The standalone `debuggatha` command: terminal and CI usage, no editor required. It runs the same
 reviews as the MCP server and the VS Code extension and reads and writes the same ledger.
@@ -79,11 +79,11 @@ debuggatha init                   # config + CI workflow (GitHub Actions or GitL
 ## Install
 
 ```bash
-bunx @debuggatha/cli review          # no install
-bun add --global @debuggatha/cli
+bunx @sxnnyside/debuggatha-cli review          # no install
+bun add --global @sxnnyside/debuggatha-cli
 ```
 
-The bundle also runs on Node 20+: `npx @debuggatha/cli review`. Standalone executables for macOS,
+The bundle also runs on Node 20+: `npx @sxnnyside/debuggatha-cli review`. Standalone executables for macOS,
 Linux, and Windows (arm64/x64) are attached to each `cli-v*` release; build them with
 `just binaries`.
 

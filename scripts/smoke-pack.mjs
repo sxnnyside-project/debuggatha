@@ -1,4 +1,4 @@
-// Packs @debuggatha/cli and @debuggatha/mcp, installs the tarballs into an empty
+// Packs @sxnnyside/debuggatha-cli and @sxnnyside/debuggatha-mcp, installs the tarballs into an empty
 // project, and runs the installed binaries under both Node and Bun (npx and bunx
 // users get the same bundle) — proving each package is self-contained.
 import { execFileSync, spawn } from "node:child_process";
@@ -21,7 +21,9 @@ const mcpPkg = read("packages/mcp/package.json");
 const server = read("packages/mcp/server.json");
 
 if (server.version !== mcpPkg.version || server.packages[0].version !== mcpPkg.version) {
-  fail(`server.json versions (${server.version}) must equal @debuggatha/mcp ${mcpPkg.version}`);
+  fail(
+    `server.json versions (${server.version}) must equal @sxnnyside/debuggatha-mcp ${mcpPkg.version}`,
+  );
 }
 if (server.name !== mcpPkg.mcpName) fail("server.json name must equal package.json mcpName");
 
@@ -93,7 +95,8 @@ try {
   run("npm", ["init", "-y"], app);
   run("npm", ["install", "--silent", "--no-audit", "--no-fund", ...packed], app);
 
-  const installed = (pkg) => join(app, "node_modules", "@debuggatha", pkg, "dist", "bin.js");
+  const installed = (pkg) =>
+    join(app, "node_modules", "@sxnnyside", `debuggatha-${pkg}`, "dist", "bin.js");
 
   for (const runtime of RUNTIMES) {
     const version = run(runtime, [installed("cli"), "--version"], app);

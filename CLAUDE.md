@@ -169,12 +169,12 @@ Conventional Commits.
 
 ## Interfaces
 
-- **MCP** (`@debuggatha/mcp`): review tools (`review_changes`, `review_diff`, `review_files`,
+- **MCP** (`@sxnnyside/debuggatha-mcp`): review tools (`review_changes`, `review_diff`, `review_files`,
   `review_workspace`), ledger tools (`list_findings`, `get_finding`, `update_finding`,
   `explain_finding`, `suppress_finding`, `create_baseline`), and context tools
   (`repository_context`, `repository_summary`, `list_analyzers`). Stdio and Streamable HTTP.
   Prompts: `review-flow`, `fix-findings`, `triage-findings`. Every handler delegates to the engine.
-- **CLI** (`@debuggatha/cli`): `review`, `baseline`, `findings`, `memory`, `repository`, `packs`,
+- **CLI** (`@sxnnyside/debuggatha-cli`): `review`, `baseline`, `findings`, `memory`, `repository`, `packs`,
   `policies`, `analyzers`, `init`, `trends`, `doctor`, `completion`. Exit codes: `0` clean, `2`
   findings at or above the threshold, `1` error.
 - **VS Code** (`apps/vscode`): native components only (diagnostics, tree views, status bar, hover,

@@ -32,8 +32,8 @@ import type { InlineSuppression } from "./skills/engine/suppress.js";
  * The one orchestration pipeline every review-shaped entry point runs —
  * Architecture Review, Diff Review, and File Review differ only in
  * `scope`, never in the steps below ("the review scope changes,
- * the review engine does not"). Before this, `@debuggatha/mcp`'s
- * `runReview` and `@debuggatha/cli`'s `review` command each hand-rolled
+ * the review engine does not"). Before this, `@sxnnyside/debuggatha-mcp`'s
+ * `runReview` and `@sxnnyside/debuggatha-cli`'s `review` command each hand-rolled
  * the same nine-step sequence (build context → assemble policy → create
  * request/session → run a Skill → transition the session → build a
  * result → sync the ledger); this function is that sequence, written
@@ -108,7 +108,7 @@ export interface ReviewPipelineOutput {
 /**
  * The subset of `@debuggatha/core`'s façade this pipeline calls.
  * Adapters that already mock the domain for their own tests (e.g.
- * `@debuggatha/mcp`'s `DomainDeps`) can pass their mock bundle straight
+ * `@sxnnyside/debuggatha-mcp`'s `DomainDeps`) can pass their mock bundle straight
  * through here — it's a structural superset of this interface — instead
  * of maintaining a second orchestration path just to stay testable.
  * Defaults to the real `@debuggatha/core` functions.

@@ -54,7 +54,7 @@ jobs:
         id: review
         run: |
           set +e
-          npx --yes @debuggatha/cli@${version} review \\
+          npx --yes @sxnnyside/debuggatha-cli@${version} review \\
             --changed-since "origin/\${{ github.base_ref }}" \\
             --fail-on-new --fail-on ${failOn} --no-persist \\
             --format markdown --output debuggatha-report.md
@@ -87,7 +87,7 @@ jobs:
  * findings in the job log, since the report itself is JSON for GitLab, not for people.
  */
 export function gitlabPipeline(failOn: string, version: string): string {
-  const review = `npx --yes @debuggatha/cli@${version} review --changed-since "origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" --fail-on-new --no-persist`;
+  const review = `npx --yes @sxnnyside/debuggatha-cli@${version} review --changed-since "origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" --fail-on-new --no-persist`;
   return `# Written by \`debuggatha init\`. Safe to edit.
 debuggatha:
   image: node:22
@@ -135,7 +135,7 @@ fi
 if command -v debuggatha >/dev/null 2>&1; then
   exec debuggatha review --fail-on-new --fail-on ${failOn} --no-persist --quiet
 fi
-echo "debuggatha: not installed here, so the pre-commit review was skipped (npm install --save-dev @debuggatha/cli)." >&2
+echo "debuggatha: not installed here, so the pre-commit review was skipped (npm install --save-dev @sxnnyside/debuggatha-cli)." >&2
 exit 0
 `;
 }

@@ -1,6 +1,6 @@
 # @debuggatha/engine
 
-Runs reviews. The one package every adapter (`@debuggatha/mcp`, `@debuggatha/cli`, `apps/vscode`)
+Runs reviews. The one package every adapter (`@sxnnyside/debuggatha-mcp`, `@sxnnyside/debuggatha-cli`, `apps/vscode`)
 depends on: it orchestrates the review pipeline on top of the domain in `@debuggatha/core` and the
 rules in `@debuggatha/packs`, and re-exports the public surface adapters need.
 

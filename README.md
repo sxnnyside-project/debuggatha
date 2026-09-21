@@ -66,8 +66,8 @@ just build
 ### From a Registry
 
 - **VS Code / Cursor**: install the [Debuggatha extension](https://marketplace.visualstudio.com/items?itemName=SxnnysideProject.debuggatha) from the Marketplace, or from [Open VSX](https://open-vsx.org/extension/SxnnysideProject/debuggatha). See [apps/vscode/README.md](apps/vscode/README.md).
-- **MCP host** (Claude Code, Claude Desktop, Cursor): `claude mcp add debuggatha -- bunx @debuggatha/mcp` (`npx -y` works too). See [packages/mcp/README.md](packages/mcp/README.md).
-- **Terminal / CI**: `bunx @debuggatha/cli review` (or `npx`), or a standalone executable from the releases page. See [packages/cli/README.md](packages/cli/README.md).
+- **MCP host** (Claude Code, Claude Desktop, Cursor): `claude mcp add debuggatha -- bunx @sxnnyside/debuggatha-mcp` (`npx -y` works too). See [packages/mcp/README.md](packages/mcp/README.md).
+- **Terminal / CI**: `bunx @sxnnyside/debuggatha-cli review` (or `npx`), or a standalone executable from the releases page. See [packages/cli/README.md](packages/cli/README.md).
 
 ## Usage
 

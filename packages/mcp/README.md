@@ -1,4 +1,4 @@
-# @debuggatha/mcp
+# @sxnnyside/debuggatha-mcp
 
 The Debuggatha MCP server, for hosts that speak MCP (Claude Code, Claude Desktop, Cursor, Copilot
 agent mode). It exposes the review engine as tools, resources, and prompts; it adds no review logic
@@ -39,7 +39,7 @@ authentication**, so keep it on localhost or behind an authenticating proxy.
 Claude Code:
 
 ```bash
-claude mcp add debuggatha -- bunx @debuggatha/mcp
+claude mcp add debuggatha -- bunx @sxnnyside/debuggatha-mcp
 ```
 
 Any host that reads an `mcpServers` config (Claude Desktop, Cursor):
@@ -49,14 +49,14 @@ Any host that reads an `mcpServers` config (Claude Desktop, Cursor):
   "mcpServers": {
     "debuggatha": {
       "command": "bunx",
-      "args": ["@debuggatha/mcp"],
+      "args": ["@sxnnyside/debuggatha-mcp"],
       "env": { "DEBUGGATHA_REPOSITORY_ROOT": "/path/to/your/repo" }
     }
   }
 }
 ```
 
-Without Bun, use Node: `npx -y @debuggatha/mcp`. The bundle runs the same on both; `just smoke`
+Without Bun, use Node: `npx -y @sxnnyside/debuggatha-mcp`. The bundle runs the same on both; `just smoke`
 checks each. `server.json` is the MCP Registry manifest; its version and `mcpName` must match
 `package.json` (`just smoke` enforces it).
 

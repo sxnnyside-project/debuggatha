@@ -13,7 +13,7 @@
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@debuggatha/mcp",
+      "identifier": "@sxnnyside/debuggatha-mcp",
       "version": "0.2.0",
       "runtimeHint": "npx",
       "transport": { "type": "stdio" },

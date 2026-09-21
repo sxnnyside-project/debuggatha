@@ -1,5 +1,5 @@
 {
-  "name": "@debuggatha/mcp",
+  "name": "@sxnnyside/debuggatha-mcp",
   "version": "0.2.0",
   "description": "MCP server exposing Debuggatha code review, findings ledger, and repository intelligence to any MCP host.",
   "license": "MIT",

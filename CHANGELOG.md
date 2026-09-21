@@ -30,6 +30,7 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `debuggatha init` (config, GitHub Actions or GitLab pipeline, optional pre-commit hook), `trends`, `doctor`, `packs`, `policies`, `memory`, `findings`, `repository`, and `completion` commands, and standalone executables (`just binaries`).
 - MCP server with titled, annotated tools that have output schemas, stdio and Streamable HTTP transports, workspace roots, and sampling; `review_changes` reports what a change introduced, fixed, and reopened, alongside `explain_finding`, `suppress_finding`, and the `review-flow` and `fix-findings` prompts. An MCP Registry manifest and `just smoke` check the packed CLI and MCP under Node and Bun.
 - VS Code extension with diagnostics, a findings view, hover, quick fixes, a status bar item, reviews in their own cancellable process, and the settings `reviewDepth`, `reviewOnSave`, `minimumSeverity`, `logLevel`, `extraReviewPacks`, and `enabledAnalyzers`. In an untrusted workspace only built-in detectors run, and analyzer and local-model settings are machine scope.
+- The CLI and MCP server publish to npm as `@sxnnyside/debuggatha-cli` and `@sxnnyside/debuggatha-mcp`.
 - Integration guide for coding agents (`docs/INTEGRATIONS.md`), `just install-cli`, and a launch configuration to run the extension from source.
 
 ### Security

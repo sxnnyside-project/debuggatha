@@ -21,8 +21,8 @@ import type { ToolRuntimeContext } from "./shared.js";
  * hand-roll that whole sequence itself; it now only translates this
  * package's own `RunReviewInput`/`DomainDeps` shapes into
  * `executeReview`'s, so the actual orchestration lives in exactly one
- * place instead of being duplicated between `@debuggatha/mcp` and
- * `@debuggatha/cli`.
+ * place instead of being duplicated between `@sxnnyside/debuggatha-mcp` and
+ * `@sxnnyside/debuggatha-cli`.
  */
 
 export type RunReviewScope =

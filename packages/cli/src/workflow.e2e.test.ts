@@ -386,7 +386,7 @@ describe("init", () => {
     expect(workflow).toContain("--changed-since");
     expect(workflow).toContain("--fail-on-new");
     expect(workflow).toContain("--fail-on high");
-    expect(workflow).toMatch(/@debuggatha\/cli@\d+\.\d+\.\d+/);
+    expect(workflow).toMatch(/@sxnnyside\/debuggatha-cli@\d+\.\d+\.\d+/);
     expect(existsSync(join(repo, ".git/hooks/pre-commit"))).toBe(false);
   });
 
@@ -407,8 +407,9 @@ describe("init", () => {
     // Take the command from the workflow itself, with `main` where GitHub puts the base branch.
     const workflow = githubWorkflow("high", "0.0.0");
     const command =
-      /npx --yes @debuggatha\/cli@\S+ (review[\s\S]*?debuggatha-report\.md)/.exec(workflow)?.[1] ??
-      "";
+      /npx --yes @sxnnyside\/debuggatha-cli@\S+ (review[\s\S]*?debuggatha-report\.md)/.exec(
+        workflow,
+      )?.[1] ?? "";
     expect(command).not.toBe("");
     const args = command
       .replaceAll("\\\n", " ")

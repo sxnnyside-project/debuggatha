@@ -66,8 +66,8 @@ this machine.
 
 ## Also available as
 
-- **MCP server** (`@debuggatha/mcp`) for Claude Code, Claude Desktop, or any MCP host.
-- **CLI** (`@debuggatha/cli`) for terminals and CI, no editor required.
+- **MCP server** (`@sxnnyside/debuggatha-mcp`) for Claude Code, Claude Desktop, or any MCP host.
+- **CLI** (`@sxnnyside/debuggatha-cli`) for terminals and CI, no editor required.
 
 See the [project README](https://github.com/sxnnyside-project/debuggatha#readme), or
 [CONTRIBUTING.md](https://github.com/sxnnyside-project/debuggatha/blob/main/CONTRIBUTING.md) to work

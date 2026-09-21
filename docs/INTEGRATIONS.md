@@ -8,12 +8,12 @@ reviews, and the findings land in the same ledger the CLI and the editor read.
 
 | Install | Command the host runs |
 | --- | --- |
-| No install (published package) | `bunx @debuggatha/mcp` or `npx -y @debuggatha/mcp` |
+| No install (published package) | `bunx @sxnnyside/debuggatha-mcp` or `npx -y @sxnnyside/debuggatha-mcp` |
 | Installed from this checkout | `debuggatha-mcp` (after `just install-cli`) |
-| Installed from a registry | `debuggatha-mcp` (after `bun add --global @debuggatha/mcp` or `npm install --global @debuggatha/mcp`) |
+| Installed from a registry | `debuggatha-mcp` (after `bun add --global @sxnnyside/debuggatha-mcp` or `npm install --global @sxnnyside/debuggatha-mcp`) |
 
-The examples below use `debuggatha-mcp`; substitute `bunx` with `["@debuggatha/mcp"]` or `npx` with
-`["-y", "@debuggatha/mcp"]` if you did not install it. A host that starts from a GUI may not see your
+The examples below use `debuggatha-mcp`; substitute `bunx` with `["@sxnnyside/debuggatha-mcp"]` or `npx` with
+`["-y", "@sxnnyside/debuggatha-mcp"]` if you did not install it. A host that starts from a GUI may not see your
 shell `PATH`; use the absolute path (`which debuggatha-mcp`) if it cannot find the command.
 
 Every host needs the same three things: a name (`debuggatha`), a command with its arguments, and

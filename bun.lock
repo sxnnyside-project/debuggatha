@@ -17,7 +17,7 @@
       },
     },
     "packages/cli": {
-      "name": "@debuggatha/cli",
+      "name": "@sxnnyside/debuggatha-cli",
       "version": "0.2.0",
       "bin": {
         "debuggatha": "./dist/bin.js",
@@ -51,7 +51,7 @@
       },
     },
     "packages/mcp": {
-      "name": "@debuggatha/mcp",
+      "name": "@sxnnyside/debuggatha-mcp",
       "version": "0.2.0",
       "bin": {
         "debuggatha-mcp": "./dist/bin.js",
@@ -133,13 +133,13 @@
 
     "@commitlint/types": ["@commitlint/types@19.8.1", "", { "dependencies": { "@types/conventional-commits-parser": "^5.0.0", "chalk": "^5.3.0" } }, "sha512-/yCrWGCoA1SVKOks25EGadP9Pnj0oAIHGpl2wH2M2Y46dPM2ueb8wyCVOD7O3WCTkaJ0IkKvzhl1JY7+uCT2Dw=="],
 
-    "@debuggatha/cli": ["@debuggatha/cli@workspace:packages/cli"],
+    "@sxnnyside/debuggatha-cli": ["@sxnnyside/debuggatha-cli@workspace:packages/cli"],
 
     "@debuggatha/core": ["@debuggatha/core@workspace:packages/core"],
 
     "@debuggatha/engine": ["@debuggatha/engine@workspace:packages/engine"],
 
-    "@debuggatha/mcp": ["@debuggatha/mcp@workspace:packages/mcp"],
+    "@sxnnyside/debuggatha-mcp": ["@sxnnyside/debuggatha-mcp@workspace:packages/mcp"],
 
     "@debuggatha/packs": ["@debuggatha/packs@workspace:packages/packs"],
 
@@ -741,7 +741,7 @@
 
     "zod-to-json-schema": ["zod-to-json-schema@3.25.2", "", { "peerDependencies": { "zod": "^3.25.28 || ^4" } }, "sha512-O/PgfnpT1xKSDeQYSCfRI5Gy3hPf91mKVDuYLUHZJMiDFptvP41MSnWofm8dnCm0256ZNfZIM7DSzuSMAFnjHA=="],
 
-    "@debuggatha/mcp/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
+    "@sxnnyside/debuggatha-mcp/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
 
     "@modelcontextprotocol/sdk/zod": ["zod@3.25.76", "", {}, "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="],
 
