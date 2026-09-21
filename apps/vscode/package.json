@@ -2,7 +2,7 @@
   "name": "debuggatha",
   "displayName": "Debuggatha",
   "description": "The engineering reviewer that remembers — every finding traced to a real rule, tracked from open to resolved, judged against the repo you actually wrote.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "SxnnysideProject",
   "repository": {
     "type": "git",

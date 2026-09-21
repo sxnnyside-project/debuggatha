@@ -46,7 +46,9 @@ coverage/
 *.tsbuildinfo
 
 # Editor artifacts
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 .idea/
 *.code-workspace
 

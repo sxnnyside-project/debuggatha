@@ -18,7 +18,7 @@
     },
     "packages/cli": {
       "name": "@debuggatha/cli",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "bin": {
         "debuggatha": "./dist/bin.js",
       },
@@ -34,14 +34,14 @@
     },
     "packages/core": {
       "name": "@debuggatha/core",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "devDependencies": {
         "@types/node": "^22.0.0",
       },
     },
     "packages/engine": {
       "name": "@debuggatha/engine",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@debuggatha/core": "workspace:*",
         "@debuggatha/packs": "workspace:*",
@@ -52,7 +52,7 @@
     },
     "packages/mcp": {
       "name": "@debuggatha/mcp",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "bin": {
         "debuggatha-mcp": "./dist/bin.js",
       },
@@ -67,7 +67,7 @@
     },
     "packages/packs": {
       "name": "@debuggatha/packs",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@debuggatha/core": "workspace:*",
       },

@@ -76,9 +76,20 @@ binaries: build-packages
             --outfile "dist/binaries/debuggatha-$target$ext"
     done
 
+# Put `debuggatha` and `debuggatha-mcp` on your PATH from this checkout (Bun links them globally); undo with `just uninstall-cli`.
+install-cli: build-packages
+    cd packages/cli && bun link
+    cd packages/mcp && bun link
+    @echo "Installed. Make sure ~/.bun/bin is on your PATH, then run: debuggatha --version"
+
+uninstall-cli:
+    -cd packages/cli && bun unlink
+    -cd packages/mcp && bun unlink
+
 # Package the extension into a .vsix.
 package: build
     pnpm --dir {{vscode}} run package
+
 
 clean:
     rm -rf dist

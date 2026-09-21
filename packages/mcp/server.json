@@ -3,7 +3,7 @@
   "name": "io.github.sxnnyside-project/debuggatha",
   "title": "Debuggatha",
   "description": "Senior code reviewer that understands repository context; every finding cites a real source.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": {
     "url": "https://github.com/sxnnyside-project/debuggatha",
     "source": "github",
@@ -14,7 +14,7 @@
     {
       "registryType": "npm",
       "identifier": "@debuggatha/mcp",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "runtimeHint": "npx",
       "transport": { "type": "stdio" },
       "environmentVariables": [

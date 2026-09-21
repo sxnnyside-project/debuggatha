@@ -1,6 +1,6 @@
 {
   "name": "@debuggatha/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Terminal and CI front end for Debuggatha: a senior code reviewer that cites a real source for every finding.",
   "license": "MIT",
   "author": "Sxnnyside Project",

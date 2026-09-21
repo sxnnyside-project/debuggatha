@@ -37,14 +37,8 @@ For larger features, an issue discussion first avoids wasted effort on both side
 
 1. Fork the repository and create a branch from `main`.
 2. Name your branch descriptively — `fix/crash-on-empty-input`, `feat/offline-mode`.
-3. Set up the toolchains: `just install` (needs [Bun](https://bun.sh), Node with [pnpm](https://pnpm.io), and [just](https://github.com/casey/just)).
-4. Make your changes, with tests. `just check` runs what CI runs: format check, lint, typecheck, tests, build, and the license gate.
-5. When a change touches the CLI or MCP packaging, run `just smoke`; when it touches the extension, run `just test-vscode`.
-6. Open a pull request against `main` with a clear description of what changed and why.
-
-Git hooks (installed with the dependencies) format staged files on commit, run typecheck and tests on push, and check the commit message.
-
-Read [CLAUDE.md](CLAUDE.md) first if you change how findings are produced: every finding must cite evidence, and adapters import only `@debuggatha/engine`.
+3. Make your changes.
+4. Open a pull request against `main` with a clear description of what changed and why.
 
 ---
 
@@ -52,7 +46,7 @@ Read [CLAUDE.md](CLAUDE.md) first if you change how findings are produced: every
 
 Before submitting:
 
-- [ ] `just check` passes
+- [ ] The project builds without errors
 - [ ] Changes are described in [CHANGELOG.md](CHANGELOG.md) under `[Unreleased]`
 - [ ] The PR description explains what changed and why
 - [ ] New behavior is covered by tests where applicable

@@ -1,6 +1,6 @@
 # Debuggatha
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.2.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![CI](https://github.com/sxnnyside-project/debuggatha/workflows/CI/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions)
 
@@ -22,33 +22,28 @@
 
 ## About
 
-**Debuggatha** is a senior code reviewer that runs as an MCP server, a CLI, and a VS Code extension. Point it at a diff, a file, or a repository; it reads the code against your repository's own stack, conventions, and documented rules, and returns findings that cite exactly why each one exists.
+**Debuggatha** is a senior code reviewer that runs as an MCP server, a CLI, and a VS Code extension. It reads a diff, a file, or a repository against the repository's own stack, conventions, and documented rules, and returns findings that cite exactly why each one exists.
 
-It never writes a line of your code. It has one job, review, and it does that job by first understanding the repository (stack detection, lint and config conventions, ADRs, README intent) instead of pattern-matching from general training data. Every finding cites a source: a rule in a Review Pack, a convention the repository declares, a recognized standard such as OWASP, the output of an installed analyzer, or evidence in the code itself. No source, no finding.
+Copilot, Cursor, and Claude Code write code; Debuggatha never writes a line of yours. It has one job, review, and it does it by first understanding the repository (stack, lint and config conventions, ADRs, README intent) instead of pattern-matching from general training data. Every finding cites a source: a rule in a Review Pack, a convention the repository declares, a recognized standard such as OWASP, the output of an installed analyzer, or evidence in the code itself. No source, no finding.
 
-Findings persist in a versioned ledger with a real lifecycle (open, acknowledged, resolved, dismissed, reopened), so a review is a project you can track rather than a wall of text you re-read.
-
-The deterministic core does not depend on any model. A language model is an optional extra, kept on a short leash (see [Semantic pass](#semantic-pass)).
+Findings persist in a versioned ledger with a real lifecycle (open, acknowledged, resolved, dismissed, reopened), so a review is a project you can track. The deterministic core does not depend on any model; a local model is an optional extra that can raise suspicions but never closes, hides, or lowers a finding.
 
 ### Philosophy
 
 > *"A senior code reviewer, not a chat wrapper."*
 
+This is a Sxnnyside Project.
+
 ## Features
 
-- **Repository-aware**: detects the stack, dependencies, conventions, and local documentation, and resolves the rules that apply to this repository.
-- **Evidence for every finding**: severity and confidence follow a documented rubric; findings carry the column, why it matters, a concrete fix, and the same code before and after. Some carry an exact edit marked `safe` or `review`.
-- **Review Packs**: rule content for TypeScript, JavaScript, React, Vue, Svelte, Node.js, Bun, Express, Electron, Tauri, Go, Rust, Kotlin, PHP, Dart, ASP.NET Core, OWASP, performance, accessibility, and more.
-- **External analyzers**: gitleaks, Biome, ESLint, Ruff, ktlint, detekt, PHPStan, Clippy, and OSV-Scanner run as separate processes and land in the same ledger, labeled with tool, version, and license. Tools that execute project code or use the network run only when you enable them.
-- **Findings Ledger**: `.debuggatha/ledger.json` tracks findings across sessions and clients; baselines let a repository adopt Debuggatha and fail only on what is new.
+- **Repository-aware**: detects the stack, dependencies, conventions, and documentation, and resolves the rules that apply.
+- **Evidence for every finding**: a rubric-based severity and confidence, the column, why it matters, a concrete fix, and the code before and after.
+- **Review Packs**: rule content for TypeScript, JavaScript, React, Vue, Svelte, Node.js, Bun, Electron, Tauri, Go, Rust, Kotlin, PHP, Dart, OWASP, performance, accessibility, and more.
+- **External analyzers**: gitleaks, Biome, ESLint, Ruff, ktlint, detekt, PHPStan, Clippy, and OSV-Scanner run as separate processes; tools that run project code or use the network run only when you enable them.
+- **Findings Ledger**: `.debuggatha/ledger.json` tracks findings across sessions and clients, with baselines for adopting an existing repository.
 - **Suppression and memory**: inline `debuggatha-ignore` comments and repository memory accept a finding durably, with a required reason.
-- **CI ready**: `--changed-since`, `--fail-on-new`, and `--format text|json|sarif|github|markdown|gitlab`; `debuggatha init` writes a config and a GitHub Actions or GitLab pipeline.
-- **Monorepo aware**: `ignore` and per-path `overrides` in `.debuggatha/config.json`.
-- **Three surfaces, one engine**: MCP server, CLI, and VS Code extension share the same pipeline and the same ledger.
-
-### Semantic pass
-
-An optional pass has a local model (Ollama or LM Studio, or the MCP client's own model through sampling) read the changed code for defects no analyzer sees. Its claims are labeled suspicions at low confidence, are kept only when they quote the line they are about, and never close, hide, or lower a finding. Code goes only to `localhost`; secrets never leave. It is off unless you ask for it.
+- **CI ready**: `--changed-since`, `--fail-on-new`, SARIF, GitHub, GitLab, and Markdown reports; `debuggatha init` writes a config and a pipeline.
+- **Three surfaces, one engine**: MCP server, CLI, and VS Code extension share one pipeline and one ledger.
 
 ## Installation
 
@@ -77,25 +72,14 @@ just build
 ## Usage
 
 ```bash
-debuggatha review                          # review what changed since the last commit
-debuggatha review --all                    # review the whole repository
-debuggatha review --changed-since main --fail-on-new --fail-on high
-debuggatha baseline create                 # adopt: report only what is new from here on
-debuggatha init                            # write a config and a CI workflow
-debuggatha analyzers                       # what is installed and what a review would run
-debuggatha doctor                          # diagnose the setup
+debuggatha review                        # review what changed since the last commit
+debuggatha review --all                  # review the whole repository
+debuggatha baseline create               # adopt: report only what is new from here on
+debuggatha init                          # write a config and a CI workflow
+debuggatha doctor                        # diagnose the setup
 ```
 
-Working on the repository itself:
-
-```bash
-just            # list every recipe
-just dev        # rebuild packages and watch the extension
-just check      # format check, lint, typecheck, test, build, license gate: what CI runs
-just smoke      # install the packed CLI and MCP into an empty project and run them
-just format     # apply formatting and import organization
-just package    # build the .vsix
-```
+To connect a coding agent (Claude Code, Qwen Code, Cursor, and others), see [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md). For every command and flag, run `debuggatha --help`.
 
 ## Architecture
 
@@ -103,11 +87,10 @@ just package    # build the .vsix
 debuggatha/
 ├── apps/         # The VS Code extension (Node + pnpm)
 ├── packages/     # core, packs, and engine, plus the published cli and mcp
-├── docs/         # Architecture notes, ADRs, and the Review Pack spec
-└── scripts/      # License gate and release tooling
+└── docs/         # Architecture notes, ADRs, integrations, and the Review Pack spec
 ```
 
-`core` is the review domain, `engine` runs reviews, `packs` holds rule content, and the three adapters (`cli`, `mcp`, the extension) import only `@debuggatha/engine`. For a detailed breakdown, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+For a detailed breakdown, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Contributing
 

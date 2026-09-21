@@ -9,54 +9,31 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+---
+
+## [0.2.0] — 2026-09-21
+
 ### Added
 
-**Review**
-- Review Skills for files, diffs, and architecture, over a shared detector engine; Review Packs for many ecosystems; Criteria Resolution against the repository's own stack, conventions, and documentation.
-- Findings carry the column, a rubric-based severity and confidence, why the pattern matters, a concrete fix, and the code before and after. Some carry an exact edit marked `safe` or `review`.
-- Detectors read code, not text: strings and comments do not match. Secret detection flags known credential formats and high-entropy values assigned to secret-named variables; a found secret is redacted in reports and in the ledger.
+- Review Skills for files, diffs, and architecture over one shared detector engine, with Review Packs for many ecosystems and Criteria Resolution against the repository's own stack, conventions, and documentation.
+- Findings carry the column, a rubric-based severity and confidence, why the pattern matters, a concrete fix, the code before and after, and, for some rules, an exact edit marked `safe` or `review`.
+- Code-aware detectors: patterns inside strings and comments do not match, and secret detection flags known credential formats and high-entropy values assigned to secret-named variables.
 - Reviews skip code the project does not own: dependencies, build output, generated and minified files, and anything `.gitignore` excludes.
-- `review --all`, `--changed-since <ref>`, `--base`, and `--diff -`; `--fail-on-new` fails only on findings on lines a change added.
-
-**Ledger, baseline, and suppression**
-- Findings Ledger in `.debuggatha/ledger.json`: a lifecycle (open, acknowledged, resolved, dismissed, reopened), repository-relative locations, and atomic writes shared by the CLI, MCP server, and editor.
-- Baseline (`baseline create|show|clear`, MCP `create_baseline`): later reviews report and fail on only what is new; `--include-baselined` shows everything.
-- Inline suppression with `debuggatha-ignore`, `-next-line`, and `-file`, with rule ids and a reason; reviews report what a comment hid.
-- Repository Memory: accepted deviations and exceptions with a required reason, kept in `.debuggatha/memory.json`.
-- `debuggatha trends`: how findings are moving, from the ledger's history.
-
-**External analyzers**
-- gitleaks, Biome, ESLint, Ruff, ktlint, detekt, PHPStan, Clippy, and OSV-Scanner run as separate processes and add findings labeled with the tool, version, and license. Tools that only read source run by default; those that run project code or use the network run only when enabled with `--analyzer <id>` or `DEBUGGATHA_ANALYZERS`, never by a repository file or a tool call.
-- A missing, failing, or hung tool is reported and never fails a review; its earlier findings are not called fixed while it did not run. A linter's finding replaces a built-in detector's for the same rule.
-- `debuggatha analyzers` and MCP `list_analyzers`; `--analyzer`, `--no-analyzers`, `--analyzer-timeout`.
-- A license gate (`just licenses`, part of `just check`): everything that ships is permissively licensed and no published package depends on or contains an analyzer.
-
-**Semantic pass (optional)**
-- `--semantic ollama|lmstudio` and MCP `semantic: true` have a local model read changed code. Claims are labeled suspicions at low confidence, kept only when they quote the line they are about, and never close, hide, or lower a finding. Code goes only to `localhost` or the connected client's own model; secret lines and secret files are never sent. Verification is off by default.
-- `just semantic-eval` measures a model on a labeled set and reports precision and recall per category against benchmark marks.
-
-**CLI**
-- `review` formats `text`, `json`, `sarif`, `github`, `markdown` (a pull-request comment), and `gitlab` (Code Quality); `--fail-on`, `--output`, `--no-persist`.
-- `.debuggatha/config.json` with `review` and `analyzers` defaults, monorepo `ignore` and per-path `overrides`; the nearest config at or above the working directory applies. A config can make a review stricter or quieter but cannot enable an analyzer that runs project code or uses the network, or the semantic pass.
-- `debuggatha init` writes a config and a GitHub Actions or GitLab pipeline, and with `--hooks` a pre-commit hook; it never overwrites a file it did not write and recognizes monorepos.
-- `doctor`, `packs`, `policies`, `memory`, `findings`, `repository`, and `completion`; standalone executables (`just binaries`).
-
-**MCP server**
-- Tools with titles, annotations, and output schemas; stdio and Streamable HTTP; workspace `roots` as the default repository; sampling for the semantic pass.
-- The agent loop: `review_changes` reports what a change introduced, fixed, and reopened; `explain_finding` and `suppress_finding` close it. Prompts `review-flow` and `fix-findings`, and server instructions that teach the loop.
-- A registry manifest (`packages/mcp/server.json`) and `just smoke`, which installs the packed tarballs into an empty project and runs the installed binaries under Node and Bun.
-
-**VS Code extension**
-- Diagnostics, a findings view, and a status bar item; hover with the rule, why it matters, and the fix; quick fixes that apply the engine's exact edit and accept a finding in code with a reason.
-- Reviews run in their own process and can be cancelled; the extension host is never blocked.
-- Settings `reviewDepth` (`quick`, `full`, `architectural`), `reviewOnSave`, `minimumSeverity`, `logLevel`, `extraReviewPacks`, and `enabledAnalyzers`; commands to review the file, selection, or workspace, cancel a review, and show the log.
-- In a workspace you have not trusted only built-in detectors run; analyzer and local-model settings are machine scope, so a repository cannot switch them on.
-- Integration tests run in the oldest supported VS Code (1.90.2) and the current stable.
-
-**Tooling**
-- Turborepo and Bun workspaces (`core`, `engine`, `packs`, `cli`, `mcp`) beside the extension (Node, pnpm, esbuild); a root `Justfile`; CI runs `just check`.
+- Findings Ledger in `.debuggatha/ledger.json` with a five-state lifecycle, repository-relative locations, and atomic writes shared by the CLI, MCP server, and editor.
+- Baseline (`baseline create|show|clear`, MCP `create_baseline`) so later reviews report only what is new, and `--include-baselined` to see everything.
+- Inline suppression with `debuggatha-ignore`, `-next-line`, and `-file` comments and a required reason, and Repository Memory for accepted deviations and exceptions in `.debuggatha/memory.json`.
+- External analyzers run as separate processes: gitleaks, Biome, ESLint, Ruff, ktlint, detekt, PHPStan, Clippy, and OSV-Scanner. Each finding is labeled with the tool, version, and license; tools that run project code or use the network run only when enabled with `--analyzer` or `DEBUGGATHA_ANALYZERS`.
+- `debuggatha analyzers` and the MCP `list_analyzers` tool, and a license gate (`just licenses`) that runs in `just check` and CI.
+- Optional semantic pass (`--semantic ollama|lmstudio`, MCP `semantic: true`): a local model raises suspicions labeled with the model, at low confidence, kept only when they quote the line they are about. Code goes only to `localhost` or the connected client's own model through sampling. `just semantic-eval` measures a model on a labeled set.
+- CLI `review` options `--all`, `--changed-since`, `--base`, `--diff -`, `--fail-on`, `--fail-on-new`, `--output`, and `--no-persist`, with formats `text`, `json`, `sarif`, `github`, `markdown`, and `gitlab`.
+- `.debuggatha/config.json` with `review` and `analyzers` defaults and monorepo `ignore` and per-path `overrides`; a config can make a review stricter or quieter but cannot enable an analyzer that runs project code or uses the network, or the semantic pass.
+- `debuggatha init` (config, GitHub Actions or GitLab pipeline, optional pre-commit hook), `trends`, `doctor`, `packs`, `policies`, `memory`, `findings`, `repository`, and `completion` commands, and standalone executables (`just binaries`).
+- MCP server with titled, annotated tools that have output schemas, stdio and Streamable HTTP transports, workspace roots, and sampling; `review_changes` reports what a change introduced, fixed, and reopened, alongside `explain_finding`, `suppress_finding`, and the `review-flow` and `fix-findings` prompts. An MCP Registry manifest and `just smoke` check the packed CLI and MCP under Node and Bun.
+- VS Code extension with diagnostics, a findings view, hover, quick fixes, a status bar item, reviews in their own cancellable process, and the settings `reviewDepth`, `reviewOnSave`, `minimumSeverity`, `logLevel`, `extraReviewPacks`, and `enabledAnalyzers`. In an untrusted workspace only built-in detectors run, and analyzer and local-model settings are machine scope.
+- Integration guide for coding agents (`docs/INTEGRATIONS.md`), `just install-cli`, and a launch configuration to run the extension from source.
 
 ### Security
+
 - Git refs are validated and passed to git without a shell.
 - Secrets are redacted before they reach reports, the ledger, or a model.
 - Analyzers that run project code or use the network, and the semantic pass, can be enabled only by the person running the review.
@@ -71,5 +48,6 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-[Unreleased]: https://github.com/sxnnyside-project/debuggatha/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/sxnnyside-project/debuggatha/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/sxnnyside-project/debuggatha/releases/tag/v0.2.0
 [0.1.0]: https://github.com/sxnnyside-project/debuggatha/releases/tag/v0.1.0
