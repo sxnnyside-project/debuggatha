@@ -24,7 +24,7 @@ clap = { version = "4", default-features = false, features = ["std", "derive", "
 schemars = { version = "1", features = ["indexmap2"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }
-sha2 = "0.10"
+sha2 = "0.11"
 uuid = { version = "1", default-features = false, features = ["v4"] }
 
 [workspace.lints.rust]
