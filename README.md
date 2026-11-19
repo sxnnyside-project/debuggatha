@@ -5,6 +5,11 @@
 ![Version](https://img.shields.io/badge/version-0.3.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 [![CI](https://github.com/sxnnyside-project/debuggatha/actions/workflows/ci.yml/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@sxnnyside/debuggatha-cli)](https://www.npmjs.com/package/@sxnnyside/debuggatha-cli)
+[![crates.io](https://img.shields.io/crates/v/debuggatha-cli)](https://crates.io/crates/debuggatha-cli)
+[![Open VSX](https://img.shields.io/open-vsx/v/SxnnysideProject/debuggatha)](https://open-vsx.org/extension/SxnnysideProject/debuggatha)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2)](https://discord.gg/h3hhNY8VTE)
+[![Patreon](https://img.shields.io/badge/Patreon-SxnnysideProject-F96854)](https://www.patreon.com/SxnnysideProject)
 
 <p align="center">
   <strong>Contextual ✦ Deterministic ✦ Extensible</strong><br>
