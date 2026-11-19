@@ -1,4 +1,4 @@
-import type { MemoryItem } from "./item.js";
+import type { MemoryItem } from './item.js';
 
 /** Bumped whenever the persisted shape changes in a way old data can't be read as-is — see `persistence/serialize.ts`. */
 export const CURRENT_SCHEMA_VERSION = 1;

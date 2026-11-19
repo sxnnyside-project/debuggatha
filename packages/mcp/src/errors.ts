@@ -28,9 +28,9 @@ interface ErrnoLike {
 export function classifyError(error: unknown): ClassifiedError {
   if (error instanceof Error) {
     const code = (error as Error & ErrnoLike).code;
-    if (typeof code === "string") {
+    if (typeof code === 'string') {
       return {
-        clientMessage: "A filesystem error occurred while accessing the repository.",
+        clientMessage: 'A filesystem error occurred while accessing the repository.',
         logDetail: { message: error.message, code, stack: error.stack },
       };
     }
@@ -40,18 +40,18 @@ export function classifyError(error: unknown): ClassifiedError {
     };
   }
   return {
-    clientMessage: "An unexpected error occurred.",
+    clientMessage: 'An unexpected error occurred.',
     logDetail: { value: String(error) },
   };
 }
 
 export interface ToolErrorResult {
   [key: string]: unknown;
-  content: [{ type: "text"; text: string }];
+  content: [{ type: 'text'; text: string }];
   isError: true;
 }
 
 export function toToolErrorResult(error: unknown): ToolErrorResult {
   const { clientMessage } = classifyError(error);
-  return { content: [{ type: "text", text: clientMessage }], isError: true };
+  return { content: [{ type: 'text', text: clientMessage }], isError: true };
 }

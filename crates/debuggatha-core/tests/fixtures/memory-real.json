@@ -1,0 +1,195 @@
+{
+  "createdAt": "2026-11-10T18:01:26.557Z",
+  "items": [
+    {
+      "category": "accepted-deviation",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.557Z",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.557Z"
+        },
+        {
+          "newState": "suggested",
+          "origin": {
+            "kind": "detection",
+            "sessionId": "sess"
+          },
+          "previousState": "detected",
+          "timestamp": "2026-11-10T18:01:26.561Z"
+        },
+        {
+          "newState": "confirmed",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "previousState": "suggested",
+          "timestamp": "2026-11-10T18:01:26.563Z"
+        },
+        {
+          "newState": "active",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "previousState": "confirmed",
+          "timestamp": "2026-11-10T18:01:26.563Z"
+        }
+      ],
+      "id": "m1",
+      "rationale": "r",
+      "ruleId": "no-var",
+      "status": "active",
+      "updatedAt": "2026-11-10T18:01:26.563Z"
+    },
+    {
+      "category": "suppression",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.560Z",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "fingerprintCategory": "correctness",
+      "fingerprintFile": "a.ts",
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.560Z"
+        }
+      ],
+      "id": "m2",
+      "rationale": "r",
+      "status": "detected",
+      "updatedAt": "2026-11-10T18:01:26.560Z"
+    },
+    {
+      "category": "exception",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.561Z",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "exceptionKind": "other",
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.561Z"
+        }
+      ],
+      "id": "m3",
+      "rationale": "r",
+      "ruleId": "x",
+      "scopeFile": "a.ts",
+      "status": "detected",
+      "updatedAt": "2026-11-10T18:01:26.561Z"
+    },
+    {
+      "category": "convention",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.561Z",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.561Z"
+        }
+      ],
+      "id": "m4",
+      "rationale": "r",
+      "rule": "use tabs",
+      "status": "detected",
+      "updatedAt": "2026-11-10T18:01:26.561Z"
+    },
+    {
+      "category": "review-history",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.561Z",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.561Z"
+        }
+      ],
+      "id": "m5",
+      "ledgerEntryId": "abc",
+      "note": "n",
+      "rationale": "r",
+      "status": "detected",
+      "updatedAt": "2026-11-10T18:01:26.561Z"
+    },
+    {
+      "category": "decision",
+      "confidence": "inferred",
+      "createdAt": "2026-11-10T18:01:26.561Z",
+      "decision": "d",
+      "evidence": [
+        {
+          "detail": "why",
+          "file": "a.ts"
+        }
+      ],
+      "history": [
+        {
+          "newState": "detected",
+          "origin": {
+            "actor": "me",
+            "kind": "user"
+          },
+          "timestamp": "2026-11-10T18:01:26.561Z"
+        }
+      ],
+      "id": "m6",
+      "rationale": "r",
+      "status": "detected",
+      "updatedAt": "2026-11-10T18:01:26.561Z"
+    }
+  ],
+  "repositoryRoot": "/repo",
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-10T18:01:26.563Z"
+}

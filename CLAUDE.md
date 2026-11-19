@@ -137,6 +137,35 @@ Review Pack
 - Do not put business logic in an adapter.
 - Do not market or design around "MCP server" as the pitch.
 
+## Direction: native Rust engine (ADR-0006, accepted)
+
+The engine is moving from TypeScript to a native Rust workspace (`debuggatha-core`,
+`debuggatha-engine`, `debuggatha-cli`) that is the single engine; the CLI, MCP server and editor
+extensions become clients of it over Protocol v1 ([docs/PROTOCOL.md](docs/PROTOCOL.md)). The plan,
+gates and measured spike results are in [docs/ROADMAP.md](docs/ROADMAP.md); contracts are in
+[docs/schemas/](docs/schemas/README.md).
+
+What this means while the migration is in progress:
+
+- **Everything below describes the code as it is today.** The TypeScript engine stays the shipped
+  engine until the cutover gate, and it is kept in step as the **parity reference**: fix bugs and
+  keep its tests green, but do not build new syntax-tree capabilities in TypeScript. Those are
+  written once, in Rust, and validated against the fixtures and the corpus in `corpus/`.
+- **The core is language-agnostic by design.** No detector or analysis is written against one
+  language's syntax tree: they read a language-neutral semantic model that per-language adapters fill, and rules
+  name concepts that data tables bind to each language. JavaScript is one adapter among many; parity with the
+  TypeScript engine is a regression check for JavaScript, never the scope of a stage.
+- **No regex is added to stand in for a parser.** A rule that needs scope, call structure or data
+  flow waits for the syntax layer; it is not approximated.
+- **A review must say what it could not check.** "0 findings" never stands for "clean" when a
+  language had no parser or a rule had no detector.
+- **Parity is differential.** A ported module must give identical findings on the golden corpus
+  (`corpus/golden/`) unless a divergence is listed with its reason. The ledger fingerprint must be
+  byte-identical.
+- JS/TS use `oxc`; other languages use tree-sitter. Packs are JSON (TOML for authoring).
+- When a rule above conflicts with this direction (for example, the semantic layer over MCP, below),
+  the trust boundary stays and the mechanism changes; see ADR-0006 and PROTOCOL.md section 7.
+
 ## Repository layout and tooling
 
 Two toolchains behind one command surface:
@@ -160,12 +189,28 @@ relative path through each module's `index.ts`. Each module's README records its
 and limitations.
 
 Everything is driven from the root `Justfile`: `just install | dev | build | test | typecheck |
-lint | format | check | smoke | test-vscode | test-vscode-stable | licenses | semantic-eval |
-package | binaries | clean`. `just check` is the full gate and is exactly what CI runs. Prefer
-`just` over calling `bun` or `pnpm` directly.
+lint | format | format-check | check | bench | smoke | test-vscode | test-vscode-stable | licenses |
+semantic-eval | package | binaries | clean`. `just check` is the full gate and is exactly what CI runs.
+Prefer `just` over calling `bun` or `pnpm` directly.
 
-Hooks (Husky): pre-commit runs lint-staged, pre-push runs typecheck and tests, commit-msg enforces
+Hooks (Husky): pre-commit runs `just check` (the full quality gate), commit-msg enforces
 Conventional Commits.
+
+Domain glossary: see [docs/glossary.md](docs/glossary.md).
+
+## Where things go
+
+| Kind | Location | Naming |
+|---|---|---|
+| Core intelligence & domain | `packages/core/src/` | kebab-case modules, PascalCase types |
+| Review rule packs | `packages/packs/src/packs/` | kebab-case pack files |
+| Review execution & analyzers | `packages/engine/src/` | kebab-case directories, index.ts entry |
+| CLI commands & adapters | `packages/cli/src/commands/` | kebab-case command files |
+| MCP tools & server | `packages/mcp/src/tools/` | kebab-case tool handlers |
+| VS Code extension | `apps/vscode/src/` | kebab-case modules |
+| Tests | Beside source or `tests/` | `<name>.test.ts`, `<name>.itest.ts` |
+| Scripts | `scripts/` | kebab-case scripts (`.sh`, `.mjs`) |
+| Docs & ADRs | `docs/`, `docs/adr/`, `docs/glossary.md` | kebab-case or SCREAMING_SNAKE |
 
 ## Interfaces
 
@@ -184,6 +229,8 @@ Conventional Commits.
 
 - Default: no model. Deterministic detectors plus installed analyzers.
 - Optional semantic pass: a local runtime (Ollama, LM Studio) or, over MCP, the connected client's
-  own model through sampling. See the trust boundaries above.
+  own model through sampling. See the trust boundaries above. Sampling is deprecated in MCP
+  2026-07-28, which forbids server-to-client requests; the Rust engine adds an input-required and
+  resume path for those hosts (PROTOCOL.md, section 7).
 
 Update this file directly when a decision here changes.

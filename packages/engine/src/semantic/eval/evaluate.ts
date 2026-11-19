@@ -1,17 +1,17 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
-import { type Finding, ruleIdFromEvidence } from "@debuggatha/core";
-import { executeReview } from "../../pipeline.js";
-import { detectionPrompt, detectionsFrom, judge, windowAround } from "../judge.js";
-import type { SemanticProvider } from "../types.js";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { type Finding, ruleIdFromEvidence } from '@debuggatha/core';
+import { executeReview } from '../../pipeline.js';
+import { detectionPrompt, detectionsFrom, judge, windowAround } from '../judge.js';
+import type { SemanticProvider } from '../types.js';
 import {
   DETECTION,
   type DetectionCase,
   type Stack,
   VERIFICATION,
   type VerificationCase,
-} from "./dataset.js";
+} from './dataset.js';
 
 /**
  * Reference marks for lightweight models, not a pass/fail gate. They say where a small local
@@ -34,19 +34,19 @@ export const BENCHMARK = {
 
 const MANIFESTS: Record<Stack, Record<string, string>> = {
   ts: {
-    "package.json": JSON.stringify({
-      name: "fixture",
-      dependencies: { react: "^18.0.0", express: "^4.0.0" },
-      devDependencies: { typescript: "^5.0.0" },
+    'package.json': JSON.stringify({
+      name: 'fixture',
+      dependencies: { react: '^18.0.0', express: '^4.0.0' },
+      devDependencies: { typescript: '^5.0.0' },
     }),
   },
-  python: { "requirements.txt": "flask\n" },
-  rust: { "Cargo.toml": '[package]\nname = "fixture"\nversion = "0.1.0"\nedition = "2021"\n' },
-  go: { "go.mod": "module fixture\n\ngo 1.22\n" },
+  python: { 'requirements.txt': 'flask\n' },
+  rust: { 'Cargo.toml': '[package]\nname = "fixture"\nversion = "0.1.0"\nedition = "2021"\n' },
+  go: { 'go.mod': 'module fixture\n\ngo 1.22\n' },
 };
 
 function makeRepo(stack: Stack, file: string, code: string): string {
-  const dir = mkdtempSync(join(tmpdir(), "debuggatha-semantic-eval-"));
+  const dir = mkdtempSync(join(tmpdir(), 'debuggatha-semantic-eval-'));
   for (const [name, content] of Object.entries(MANIFESTS[stack])) {
     writeFileSync(join(dir, name), content);
   }
@@ -59,26 +59,26 @@ function makeRepo(stack: Stack, file: string, code: string): string {
 function builtInFinding(testCase: VerificationCase, dir: string): Finding | undefined {
   const { result } = executeReview({
     rootDir: dir,
-    scope: { kind: "files", paths: [join(dir, testCase.file)] },
-    depth: "full",
+    scope: { kind: 'files', paths: [join(dir, testCase.file)] },
+    depth: 'full',
     packIds: [],
     policyId: undefined,
-    sourceName: "semantic-eval",
+    sourceName: 'semantic-eval',
     persist: false,
   });
-  const lines = readFileSync(join(dir, testCase.file), "utf8").split("\n");
+  const lines = readFileSync(join(dir, testCase.file), 'utf8').split('\n');
   return result.findings.find((finding) => {
     if (ruleIdFromEvidence(finding.evidence) !== testCase.rule) return false;
     const line = finding.locations[0]?.lines?.start;
-    return line !== undefined && (lines[line - 1] ?? "").includes(testCase.flagged);
+    return line !== undefined && (lines[line - 1] ?? '').includes(testCase.flagged);
   });
 }
 
 export interface VerificationOutcome {
   id: string;
   category: string;
-  truth: "real" | "false_positive";
-  verdict: "confirmed" | "doubtful" | "unsure" | "failed" | "no-finding";
+  truth: 'real' | 'false_positive';
+  verdict: 'confirmed' | 'doubtful' | 'unsure' | 'failed' | 'no-finding';
   reason: string;
 }
 
@@ -107,22 +107,22 @@ export function scoreVerification(outcomes: readonly VerificationOutcome[]): {
   const score = (subset: readonly VerificationOutcome[]): CategoryScores => {
     const count = (predicate: (o: VerificationOutcome) => boolean) =>
       subset.filter(predicate).length;
-    const doubted = count((o) => o.verdict === "doubtful");
-    const doubtedRight = count((o) => o.verdict === "doubtful" && o.truth === "false_positive");
-    const real = count((o) => o.truth === "real");
-    const falsePositive = count((o) => o.truth === "false_positive");
+    const doubted = count((o) => o.verdict === 'doubtful');
+    const doubtedRight = count((o) => o.verdict === 'doubtful' && o.truth === 'false_positive');
+    const real = count((o) => o.truth === 'real');
+    const falsePositive = count((o) => o.truth === 'false_positive');
     return {
       cases: subset.length,
       real,
       falsePositive,
-      confirmed: count((o) => o.verdict === "confirmed"),
+      confirmed: count((o) => o.verdict === 'confirmed'),
       doubtful: doubted,
-      unsure: count((o) => o.verdict === "unsure"),
-      failed: count((o) => o.verdict === "failed" || o.verdict === "no-finding"),
+      unsure: count((o) => o.verdict === 'unsure'),
+      failed: count((o) => o.verdict === 'failed' || o.verdict === 'no-finding'),
       doubtPrecision: ratio(doubtedRight, doubted),
       falsePositiveRecall: ratio(doubtedRight, falsePositive),
       realRetained: ratio(
-        real - count((o) => o.verdict === "doubtful" && o.truth === "real"),
+        real - count((o) => o.verdict === 'doubtful' && o.truth === 'real'),
         real,
       ),
     };
@@ -151,10 +151,10 @@ export async function evaluateVerification(
       if (!finding) {
         outcomes.push({
           id: testCase.id,
-          category: "unknown",
+          category: 'unknown',
           truth: testCase.truth,
-          verdict: "no-finding",
-          reason: "no detector finding",
+          verdict: 'no-finding',
+          reason: 'no detector finding',
         });
         continue;
       }
@@ -162,7 +162,7 @@ export async function evaluateVerification(
       const view = windowAround(dir, testCase.file, line);
       const base = { id: testCase.id, category: finding.category, truth: testCase.truth };
       if (!view) {
-        outcomes.push({ ...base, verdict: "failed", reason: "file missing" });
+        outcomes.push({ ...base, verdict: 'failed', reason: 'file missing' });
         continue;
       }
       try {
@@ -170,10 +170,10 @@ export async function evaluateVerification(
         outcomes.push(
           verification
             ? { ...base, verdict: verification.verdict, reason: verification.reason }
-            : { ...base, verdict: "failed", reason: "unusable answer" },
+            : { ...base, verdict: 'failed', reason: 'unusable answer' },
         );
       } catch (error) {
-        outcomes.push({ ...base, verdict: "failed", reason: String(error) });
+        outcomes.push({ ...base, verdict: 'failed', reason: String(error) });
       }
     } finally {
       rmSync(dir, { recursive: true, force: true });
@@ -216,7 +216,7 @@ export async function evaluateDetection(
 ): Promise<DetectionOutcome[]> {
   const outcomes: DetectionOutcome[] = [];
   for (const testCase of cases) {
-    const lines = testCase.code.split("\n");
+    const lines = testCase.code.split('\n');
     const view = {
       file: testCase.file,
       lines: lines.map((text, index) => ({ n: index + 1, text })),
@@ -227,7 +227,7 @@ export async function evaluateDetection(
     }));
     try {
       const reply = await provider.complete(detectionPrompt(view, new Set()));
-      const { accepted, rejected } = detectionsFrom(reply, view, provider, "eval");
+      const { accepted, rejected } = detectionsFrom(reply, view, provider, 'eval');
       const hits = (line: number) =>
         plantedLines.some((planted) => Math.abs(planted.line - line) <= 2);
       outcomes.push({
@@ -261,7 +261,7 @@ export function scoreDetection(outcomes: readonly DetectionOutcome[]): Detection
   const planted = outcomes.flatMap((o) => o.planted);
   const raised = outcomes.reduce((sum, o) => sum + o.raised, 0);
   const onPlanted = outcomes.reduce((sum, o) => sum + o.onPlanted, 0);
-  const byCategory: DetectionScores["byCategory"] = {};
+  const byCategory: DetectionScores['byCategory'] = {};
   for (const item of planted) {
     const entry = byCategory[item.category] ?? { planted: 0, found: 0, recall: undefined };
     byCategory[item.category] = entry;
@@ -289,7 +289,7 @@ export function scoreDetection(outcomes: readonly DetectionOutcome[]): Detection
 }
 
 const pct = (value: number | undefined) =>
-  value === undefined ? "  n/a" : `${(value * 100).toFixed(0).padStart(3)}%`;
+  value === undefined ? '  n/a' : `${(value * 100).toFixed(0).padStart(3)}%`;
 
 export function formatReport(
   model: string,
@@ -298,14 +298,14 @@ export function formatReport(
 ): string {
   const v = scoreVerification(verification);
   const d = scoreDetection(detection);
-  const rows = [["overall", v.overall] as const, ...Object.entries(v.byCategory)];
+  const rows = [['overall', v.overall] as const, ...Object.entries(v.byCategory)];
   const out: string[] = [
     `Model: ${model}`,
-    "",
-    "Verification: does the model recognize false positives without doubting real findings?",
+    '',
+    'Verification: does the model recognize false positives without doubting real findings?',
   ];
   out.push(
-    "category          cases real  fp  | confirmed doubtful unsure failed | doubt-precision fp-recall real-retained",
+    'category          cases real  fp  | confirmed doubtful unsure failed | doubt-precision fp-recall real-retained',
   );
   for (const [name, s] of rows) {
     out.push(
@@ -317,11 +317,11 @@ export function formatReport(
     `Benchmark: doubt-precision >= ${vt.doubtPrecision * 100}% and real-retained >= ${vt.realRetained * 100}%  ->  ${
       (v.overall.doubtPrecision ?? 1) >= vt.doubtPrecision &&
       (v.overall.realRetained ?? 1) >= vt.realRetained
-        ? "reached"
-        : "below"
+        ? 'reached'
+        : 'below'
     }`,
   );
-  out.push("", "Detection: what a model finds in code the analyzers passed.");
+  out.push('', 'Detection: what a model finds in code the analyzers passed.');
   out.push(
     `planted ${d.planted}, found ${d.found} (recall ${pct(d.recall).trim()}), raised ${d.raised}, on a planted defect ${d.onPlanted} (precision ${pct(d.precision).trim()}), false alarms ${d.falseAlarms} (${d.cleanFileAlarms} in clean files), ungrounded and dropped ${d.ungrounded}, failed calls ${d.failed}`,
   );
@@ -332,7 +332,7 @@ export function formatReport(
   }
   const dt = BENCHMARK.detection;
   out.push(
-    `Benchmark: precision >= ${dt.precision * 100}%  ->  ${(d.precision ?? 1) >= dt.precision ? "reached" : "below"}`,
+    `Benchmark: precision >= ${dt.precision * 100}%  ->  ${(d.precision ?? 1) >= dt.precision ? 'reached' : 'below'}`,
   );
-  return out.join("\n");
+  return out.join('\n');
 }

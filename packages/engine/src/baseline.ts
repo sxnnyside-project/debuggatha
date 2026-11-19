@@ -1,6 +1,6 @@
-import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { computeFindingFingerprint, type Finding } from "@debuggatha/core";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { computeFindingFingerprint, type Finding } from '@debuggatha/core';
 
 /**
  * Adoption mode. A repository that has never been reviewed shows hundreds of
@@ -9,7 +9,7 @@ import { computeFindingFingerprint, type Finding } from "@debuggatha/core";
  * tracks everything, so nothing is forgotten, only quieted.
  */
 
-export const BASELINE_FILE = join(".debuggatha", "baseline.json");
+export const BASELINE_FILE = join('.debuggatha', 'baseline.json');
 const SCHEMA_VERSION = 1;
 
 export interface BaselineEntry {
@@ -30,7 +30,7 @@ export interface Baseline {
 /** A finding's identity for baselining: where it is, which rule, and the code it is about; never a line number, so unrelated edits do not resurface it. */
 export function baselineKey(finding: Finding): string {
   const fingerprint = computeFindingFingerprint(finding);
-  return [fingerprint.file, fingerprint.ruleId, fingerprint.contentAnchor ?? ""].join("::");
+  return [fingerprint.file, fingerprint.ruleId, fingerprint.contentAnchor ?? ''].join('::');
 }
 
 export function baselinePath(rootDir: string): string {
@@ -42,7 +42,7 @@ export function loadBaseline(rootDir: string): Baseline | undefined {
   if (!existsSync(path)) return undefined;
   let parsed: unknown;
   try {
-    parsed = JSON.parse(readFileSync(path, "utf8"));
+    parsed = JSON.parse(readFileSync(path, 'utf8'));
   } catch {
     throw new Error(
       `${BASELINE_FILE} is not valid JSON. Delete it or recreate it with a new baseline.`,
@@ -70,7 +70,7 @@ export function createBaselineFrom(findings: readonly Finding[]): Baseline {
     entries.set(key, {
       key,
       file: fingerprint.file,
-      ruleId: fingerprint.ruleId ?? "",
+      ruleId: fingerprint.ruleId ?? '',
       title: finding.title,
       count: 1,
     });

@@ -1,0 +1,813 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ReviewJobResult": {
+      "additionalProperties": false,
+      "description": "What a review reports back. The findings themselves are in the ledger the review wrote.",
+      "properties": {
+        "analyzers": {
+          "items": {
+            "$ref": "#/definitions/AnalyzerRun"
+          },
+          "type": "array"
+        },
+        "changes": {
+          "additionalProperties": false,
+          "properties": {
+            "fixed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "introduced": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "reopened": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": ["introduced", "fixed", "reopened"],
+          "type": "object"
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "semantic": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/SemanticRun"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "coverage": {
+          "$ref": "#/definitions/Coverage"
+        },
+        "findingsPage": {
+          "additionalProperties": false,
+          "description": "First page of findings, highest severity first, for clients that want one round trip. The rest are read with findings/list.",
+          "properties": {
+            "findings": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Finding"
+              }
+            },
+            "truncated": {
+              "type": "boolean"
+            }
+          },
+          "required": ["findings", "truncated"],
+          "type": "object"
+        }
+      },
+      "required": ["findings", "analyzers", "semantic", "changes", "durationMs"],
+      "type": "object"
+    },
+    "AnalyzerRun": {
+      "additionalProperties": false,
+      "description": "What happened to one analyzer in one review, reported whether or not it found anything.",
+      "properties": {
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "id": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "reason": {
+          "description": "Why it did not run or failed; absent when it ran.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/AnalyzerStatus"
+        },
+        "trust": {
+          "$ref": "#/definitions/AnalyzerTrust"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "license", "trust", "status", "findings", "durationMs"],
+      "type": "object"
+    },
+    "AnalyzerStatus": {
+      "enum": ["ran", "skipped", "failed"],
+      "type": "string"
+    },
+    "AnalyzerTrust": {
+      "description": "What running an analyzer can do to the machine, and so whether it may run without being asked:   safe               reads source files only (a formatter, a secret scanner)   runs-project-code  loads code the repository controls: a lint config that is                      JavaScript, a build script, a PHP bootstrap file   network            sends data (package names and versions) to a service Only `safe` analyzers run by default. The others need to be enabled by name, by the person running Debuggatha: never by a tool argument or repository file.",
+      "enum": ["safe", "runs-project-code", "network"],
+      "type": "string"
+    },
+    "SemanticRun": {
+      "additionalProperties": false,
+      "description": "What the semantic pass did in one review, reported whether or not it found anything.",
+      "properties": {
+        "confirmed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "detected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "doubtful": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "description": "Calls that failed or answered with something unusable.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "model": {
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "rejected": {
+          "description": "Claims the model made that did not match the code, and were dropped.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsure": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "provider",
+        "verified",
+        "confirmed",
+        "doubtful",
+        "unsure",
+        "detected",
+        "rejected",
+        "failed",
+        "notes",
+        "durationMs"
+      ],
+      "type": "object"
+    },
+    "Category": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/KnownCategory"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "description": "`string & {}` keeps editor autocomplete for KnownCategory while still accepting any string."
+    },
+    "Confidence": {
+      "enum": ["high", "medium", "low"],
+      "type": "string"
+    },
+    "Evidence": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "excerpt": {
+              "type": "string"
+            },
+            "file": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "documentation",
+              "type": "string"
+            }
+          },
+          "required": ["kind", "file", "excerpt"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "criteria",
+              "type": "string"
+            },
+            "ruleId": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "ruleId", "source"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "review-pack-rule",
+              "type": "string"
+            },
+            "packId": {
+              "type": "string"
+            },
+            "ruleId": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "packId", "ruleId"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "framework": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "framework-convention",
+              "type": "string"
+            }
+          },
+          "required": ["kind", "framework", "detail"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "detail": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "language-convention",
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "language", "detail"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "excerpt": {
+              "type": "string"
+            },
+            "file": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "code",
+              "type": "string"
+            },
+            "lines": {
+              "$ref": "#/definitions/LineRange"
+            }
+          },
+          "required": ["kind", "file"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "external-analyzer",
+              "description": "A finding an external analyzer reported; Debuggatha ran the tool and read its output, it did not judge the code itself.",
+              "type": "string"
+            },
+            "license": {
+              "description": "The tool's own license, shown next to what it found.",
+              "type": "string"
+            },
+            "ruleId": {
+              "type": "string"
+            },
+            "tool": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "tool", "ruleId", "license"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "semantic-review",
+              "description": "A language model looked at this. As `verification` it judged a finding another detector made; as `detection` it raised the finding itself, and `topic` names it. A model's opinion is evidence to weigh, never a reason to close a finding.",
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "provider": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "role": {
+              "enum": ["verification", "detection"],
+              "type": "string"
+            },
+            "topic": {
+              "type": "string"
+            },
+            "verdict": {
+              "description": "Verification only: `confirmed` (looks real), `doubtful` (looks like a false positive), or `unsure`.",
+              "enum": ["confirmed", "doubtful", "unsure"],
+              "type": "string"
+            }
+          },
+          "required": ["kind", "role", "provider", "reason"],
+          "type": "object"
+        }
+      ],
+      "description": "Machine-readable evidence — a discriminated union, not free text. This mirrors the evidence-trail pattern `core/repository-intelligence` already uses for stack/criteria facts, applied here to review findings (see CLAUDE.md \"never opine without evidence\")."
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "A finding is a first-class domain object, never a bare string.",
+      "properties": {
+        "appliedPolicy": {
+          "$ref": "#/definitions/ReviewPolicyReference"
+        },
+        "category": {
+          "$ref": "#/definitions/Category"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          },
+          "type": "array",
+          "minItems": 1
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "locations": {
+          "items": {
+            "$ref": "#/definitions/FindingLocation"
+          },
+          "type": "array",
+          "minItems": 1
+        },
+        "originatingPack": {
+          "$ref": "#/definitions/ReviewPackReference"
+        },
+        "recommendations": {
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          },
+          "type": "array"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "explanation",
+        "severity",
+        "confidence",
+        "category",
+        "locations",
+        "evidence",
+        "recommendations"
+      ],
+      "type": "object"
+    },
+    "FindingLocation": {
+      "additionalProperties": false,
+      "description": "A finding's occurrence: a file, and optionally a specific line range and the columns it spans on it.",
+      "properties": {
+        "columns": {
+          "$ref": "#/definitions/LineRange",
+          "description": "1-based columns of the match on its first line (`start`) and just past its end (`end`), when the detector knows them."
+        },
+        "file": {
+          "type": "string"
+        },
+        "lines": {
+          "$ref": "#/definitions/LineRange"
+        }
+      },
+      "required": ["file"],
+      "type": "object"
+    },
+    "KnownCategory": {
+      "enum": [
+        "architecture",
+        "security",
+        "performance",
+        "reliability",
+        "accessibility",
+        "maintainability",
+        "developer-experience",
+        "documentation"
+      ],
+      "type": "string"
+    },
+    "LineRange": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["start", "end"],
+      "type": "object"
+    },
+    "Recommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/RecommendationAction"
+        },
+        "edit": {
+          "$ref": "#/definitions/RecommendationEdit",
+          "description": "An exact text replacement, when the fix is mechanical enough to state precisely."
+        },
+        "example": {
+          "$ref": "#/definitions/RecommendationExample",
+          "description": "The same code before and after the fix, when the rule can show one."
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "targetFile": {
+          "type": "string"
+        },
+        "targetLines": {
+          "$ref": "#/definitions/LineRange"
+        }
+      },
+      "required": ["id", "action", "summary"],
+      "type": "object"
+    },
+    "RecommendationAction": {
+      "enum": ["replace", "remove", "add", "refactor", "configure", "document", "investigate"],
+      "type": "string"
+    },
+    "RecommendationEdit": {
+      "additionalProperties": false,
+      "description": "Replace the text between two columns of one line. `safe` means the replacement cannot change what the code does (`var` to `let`); `review` means it is the right direction but a person or agent should check the result still compiles and behaves (`any` to `unknown`).",
+      "properties": {
+        "endColumn": {
+          "description": "1-based, just past the last replaced character.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "replacement": {
+          "type": "string"
+        },
+        "safety": {
+          "enum": ["safe", "review"],
+          "type": "string"
+        },
+        "startColumn": {
+          "description": "1-based, inclusive.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["line", "startColumn", "endColumn", "replacement", "safety"],
+      "type": "object"
+    },
+    "RecommendationExample": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "type": "string"
+        },
+        "before": {
+          "type": "string"
+        }
+      },
+      "required": ["before", "after"],
+      "type": "object"
+    },
+    "ReviewPackReference": {
+      "additionalProperties": false,
+      "description": "A pack pinned by id and version (packs are versioned independently, ADR-0002).",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "version"],
+      "type": "object"
+    },
+    "ReviewPolicyReference": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": ["id"],
+      "type": "object"
+    },
+    "Severity": {
+      "enum": ["critical", "high", "medium", "low", "informational"],
+      "type": "string"
+    },
+    "Coverage": {
+      "additionalProperties": false,
+      "description": "What the review looked at and what it could not check. `complete` is true only when every language was fully parsed, no rule has a gap (except `disabled-by-config`, the person's own choice) and no file was skipped for a reason that hides code (`too-large`, `unreadable`, `not-utf8`; `ignored`, `binary`, `generated` and `symlink-outside-root` are scope decisions). An empty findings list means 'clean' only for what is listed as checked. Always emitted by the native engine; absent in reports of the TypeScript reference engine.",
+      "properties": {
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageCoverage"
+          },
+          "description": "One entry per language found in the reviewed scope."
+        },
+        "ruleGaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleGap"
+          },
+          "description": "Rules of the active packs that could not be evaluated in this review."
+        },
+        "skippedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkippedFiles"
+          },
+          "description": "Files in scope that were not read, grouped by reason."
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "Derived from the other fields by the engine; a client may recompute it."
+        },
+        "checkedRules": {
+          "type": "array",
+          "description": "Rules that were evaluated, per pack. With `ruleGaps` this accounts for every rule of the active packs.",
+          "items": {
+            "$ref": "#/definitions/CheckedRules"
+          }
+        }
+      },
+      "required": ["complete", "languages", "checkedRules", "ruleGaps", "skippedFiles"],
+      "type": "object"
+    },
+    "LanguageCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Files of this language in the reviewed scope."
+        },
+        "filesWithErrors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Files parsed with syntax errors: intact subtrees were analyzed, the broken regions were not."
+        },
+        "status": {
+          "enum": ["parsed", "parsed-with-errors", "parsed-limited", "not-parsed"],
+          "type": "string",
+          "description": "parsed: every file fully parsed. parsed-with-errors: some files have syntax errors (intact subtrees analyzed, broken regions not). parsed-limited: the parser supports only part of the language (see `reason`). not-parsed: no parser, only text-level rules ran."
+        },
+        "parser": {
+          "enum": ["oxc", "tree-sitter", "none"],
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "fileDetails": {
+          "type": "array",
+          "description": "Present only when the job asked for `coverageDetail: \"files\"`: one entry per file of this language.",
+          "items": {
+            "$ref": "#/definitions/FileCoverage"
+          }
+        }
+      },
+      "required": ["language", "files", "filesWithErrors", "status", "parser"],
+      "type": "object"
+    },
+    "RuleGap": {
+      "additionalProperties": false,
+      "properties": {
+        "packId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "no-detector",
+            "needs-type-information",
+            "needs-repository-files",
+            "language-not-parsed",
+            "analyzer-not-installed",
+            "analyzer-not-enabled",
+            "analyzer-failed",
+            "timeout",
+            "disabled-by-config"
+          ],
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "required": ["packId", "ruleId", "reason"],
+      "type": "object"
+    },
+    "SkippedFiles": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "enum": [
+            "ignored",
+            "binary",
+            "generated",
+            "symlink-outside-root",
+            "too-large",
+            "unreadable",
+            "not-utf8"
+          ],
+          "type": "string"
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5
+        }
+      },
+      "required": ["reason", "files"],
+      "type": "object"
+    },
+    "ReviewInputRequired": {
+      "additionalProperties": false,
+      "description": "The review is suspended until the client answers the inputs and calls review/resume (PROTOCOL.md section 7). Nothing has been written to the ledger.",
+      "properties": {
+        "status": {
+          "const": "input_required",
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "kind": {
+                "const": "model/complete",
+                "type": "string"
+              },
+              "params": {
+                "type": "object"
+              }
+            },
+            "required": ["id", "kind", "params"],
+            "type": "object"
+          }
+        }
+      },
+      "required": ["status", "token", "expiresAt", "inputs"],
+      "type": "object"
+    },
+    "CheckedRules": {
+      "additionalProperties": false,
+      "properties": {
+        "packId": {
+          "type": "string"
+        },
+        "packVersion": {
+          "type": "string"
+        },
+        "ruleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["packId", "packVersion", "ruleIds"],
+      "type": "object"
+    },
+    "FileCoverage": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["parsed", "parsed-with-errors", "parsed-limited", "not-parsed"],
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": ["path", "status"],
+      "type": "object"
+    }
+  },
+  "title": "ReviewJobResult",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/ReviewJobResult"
+    },
+    {
+      "$ref": "#/definitions/ReviewInputRequired"
+    }
+  ]
+}

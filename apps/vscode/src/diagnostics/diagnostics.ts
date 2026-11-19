@@ -1,14 +1,14 @@
-import type { Severity } from "@debuggatha/engine";
-import * as vscode from "vscode";
-import type { FindingIndex, IndexedFinding } from "../findings/index.js";
-import { provenanceOf, ruleOf } from "../findings/present.js";
+import type { Severity } from '@debuggatha/engine';
+import * as vscode from 'vscode';
+import type { FindingIndex, IndexedFinding } from '../findings/index.js';
+import { provenanceOf, ruleOf } from '../findings/present.js';
 
-export const DIAGNOSTIC_SOURCE = "Debuggatha";
+export const DIAGNOSTIC_SOURCE = 'Debuggatha';
 
 let diagnosticCollection: vscode.DiagnosticCollection;
 
 export function initializeDiagnostics(context: vscode.ExtensionContext) {
-  diagnosticCollection = vscode.languages.createDiagnosticCollection("debuggatha");
+  diagnosticCollection = vscode.languages.createDiagnosticCollection('debuggatha');
   context.subscriptions.push(diagnosticCollection);
 }
 
@@ -25,7 +25,7 @@ function codeOf(indexed: IndexedFinding): string | { value: string; target: vsco
   const finding = indexed.entry.latestFinding;
   const provenance = provenanceOf(finding);
   const value = ruleOf(finding);
-  if (provenance.kind === "analyzer" && provenance.url) {
+  if (provenance.kind === 'analyzer' && provenance.url) {
     return { value, target: vscode.Uri.parse(provenance.url) };
   }
   return value;

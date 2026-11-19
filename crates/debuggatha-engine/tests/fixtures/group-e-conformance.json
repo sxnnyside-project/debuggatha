@@ -1,0 +1,1143 @@
+{
+  "rules": [
+    "no-hardcoded-secrets"
+  ],
+  "cases": [
+    {
+      "name": "aws-key",
+      "file": "a.ts",
+      "source": "const k = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const k = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "github-token",
+      "file": "a.js",
+      "source": "const t = 'ghp_aB3dE6gH9jK2mN5pQ8sT1vW4yZ7bC0eF3hJ6';\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 52,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const t = '[redacted]';"
+        }
+      ]
+    },
+    {
+      "name": "jwt",
+      "file": "a.js",
+      "source": "const t = \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dBjftJeZ4CVPmB92K27uhbUJU1p1r\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 90,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const t = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "pem-with-body",
+      "file": "a.txt",
+      "source": "-----BEGIN RSA PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC7VJTUt9Us8cKj\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 1,
+          "end": 32,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "[redacted]"
+        }
+      ]
+    },
+    {
+      "name": "pem-header-alone",
+      "file": "a.kt",
+      "source": "append(\"-----BEGIN RSA PRIVATE KEY-----\\n\")\nappend(base64Encoded)\n",
+      "why": "a header written by code that generates a key is not a key: it counts when a base64 body follows",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 9,
+          "end": 40,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "append(\"[redacted]\\n\")"
+        }
+      ]
+    },
+    {
+      "name": "token-in-comment",
+      "file": "a.ts",
+      "source": "// AKIAQWERTYUIOPASDFGH\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 4,
+          "end": 24,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "// [redacted]"
+        }
+      ]
+    },
+    {
+      "name": "token-unparsed-file",
+      "file": "a.yaml",
+      "source": "key: AKIAQWERTYUIOPASDFGH\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 6,
+          "end": 26,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "key: [redacted]"
+        }
+      ]
+    },
+    {
+      "name": "token-example-skipped",
+      "file": "a.ts",
+      "source": "const k = \"AKIAIOSFODNN7EXAMPLE\";\n",
+      "ts": []
+    },
+    {
+      "name": "token-two-on-a-line",
+      "file": "a.ts",
+      "source": "const a = \"AKIAQWERTYUIOPASDFGH\", b = \"ghp_aB3dE6gH9jK2mN5pQ8sT1vW4yZ7bC0eF3hJ6\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const a = \"[redacted]\", b = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-unicode-before",
+      "file": "a.ts",
+      "source": "const s = \"😀\"; const k = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 28,
+          "end": 48,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const s = \"😀\"; const k = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-crlf",
+      "file": "a.ts",
+      "source": "const a = 1;\r\nconst k = \"AKIAQWERTYUIOPASDFGH\";\r\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 2,
+          "start": 12,
+          "end": 32,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const k = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-long-line-excerpt",
+      "file": "a.ts",
+      "source": "const k = \"AKIAQWERTYUIOPASDFGH\"; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const k = \"[redacted]\"; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "name": "token-in-test-file",
+      "file": "a.test.ts",
+      "source": "const k = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "medium",
+          "severity": "medium",
+          "excerpt": "const k = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-in-test-dir",
+      "file": "tests/a.ts",
+      "source": "const k = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "medium",
+          "severity": "medium",
+          "excerpt": "const k = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-synthetic-in-test",
+      "file": "a.test.ts",
+      "source": "const k = \"AKIA1234567890ABCDEF\";\n",
+      "ts": []
+    },
+    {
+      "name": "token-fixture-line-in-test",
+      "file": "a.test.ts",
+      "source": "const fixture = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": []
+    },
+    {
+      "name": "token-python",
+      "file": "a.py",
+      "source": "KEY = \"AKIAQWERTYUIOPASDFGH\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 8,
+          "end": 28,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "KEY = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "password-weak",
+      "file": "a.js",
+      "source": "const password = \"hunter2hunter2\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 34,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "apikey-strong",
+      "file": "a.js",
+      "source": "const apiKey = \"a8Kd93jfL0zQ7xPw\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 16,
+          "end": 34,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const apiKey = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "property",
+      "file": "a.ts",
+      "source": "const o = { token: \"abcdEFGH1234ijkl\" };\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 20,
+          "end": 38,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const o = { token: \"[redacted]\" };"
+        }
+      ]
+    },
+    {
+      "name": "quoted-key",
+      "file": "a.ts",
+      "source": "const o = { \"password\": \"abcdefgh1234\" };\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 25,
+          "end": 39,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const o = { \"password\": \"[redacted]\" };"
+        }
+      ]
+    },
+    {
+      "name": "arrow-name",
+      "file": "a.ts",
+      "source": "const f = password => \"abcdefgh1234\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 23,
+          "end": 37,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const f = password => \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "too-short",
+      "file": "a.js",
+      "source": "const password = \"abc12\";\n",
+      "ts": []
+    },
+    {
+      "name": "placeholder-changeme",
+      "file": "a.js",
+      "source": "const password = \"changeme123\";\n",
+      "ts": []
+    },
+    {
+      "name": "placeholder-your",
+      "file": "a.js",
+      "source": "const apiKey = \"your-api-key-here\";\n",
+      "ts": []
+    },
+    {
+      "name": "placeholder-interpolation",
+      "file": "a.js",
+      "source": "const password = \"${PASSWORD}ab\";\n",
+      "ts": []
+    },
+    {
+      "name": "placeholder-xs",
+      "file": "a.js",
+      "source": "const password = \"xxxxxxxx\";\n",
+      "ts": []
+    },
+    {
+      "name": "words",
+      "file": "a.js",
+      "source": "const password = \"Invalid password\";\n",
+      "ts": []
+    },
+    {
+      "name": "snake-words",
+      "file": "a.js",
+      "source": "const token = \"access_token\";\n",
+      "ts": []
+    },
+    {
+      "name": "url",
+      "file": "a.js",
+      "source": "const apiToken = \"https://example.org/x\";\n",
+      "ts": []
+    },
+    {
+      "name": "path",
+      "file": "a.js",
+      "source": "const secretFile = \"/etc/secret.key\";\n",
+      "ts": []
+    },
+    {
+      "name": "value-is-name",
+      "file": "a.js",
+      "source": "const authKey = \"authkey\";\n",
+      "ts": []
+    },
+    {
+      "name": "name-not-secret",
+      "file": "a.js",
+      "source": "const name = \"qwertyuiop12345\";\n",
+      "ts": []
+    },
+    {
+      "name": "strong-needed-for-non-password",
+      "file": "a.js",
+      "source": "const authKey = \"abcabcabcabc\";\n",
+      "ts": []
+    },
+    {
+      "name": "strong-entropy-exactly-three",
+      "file": "a.js",
+      "source": "const authKey = \"a1b2c3d4a1b2c3d4\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 17,
+          "end": 35,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const authKey = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "single-word",
+      "file": "a.js",
+      "source": "const password = \"abcdefghij\";\n",
+      "ts": []
+    },
+    {
+      "name": "long-single-word",
+      "file": "a.js",
+      "source": "const password = \"abcdefghijklmnopqrstuvwxyzab\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 48,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "value-is-name-with-digit",
+      "file": "a.js",
+      "source": "const password1 = \"password1\";\n",
+      "ts": []
+    },
+    {
+      "name": "weak-value-non-password-name",
+      "file": "a.js",
+      "source": "const apiKey = \"abc123def456\";\n",
+      "ts": []
+    },
+    {
+      "name": "rust-error-region",
+      "file": "a.rs",
+      "source": "fn f( { let password = \"hunter2hunter2\"; }\nfn g() {}\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 24,
+          "end": 40,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "fn f( { let password = \"[redacted]\"; }"
+        }
+      ]
+    },
+    {
+      "name": "strong-non-password",
+      "file": "a.js",
+      "source": "const authKey = \"a8Kd93jfL0zQ7xPw\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 17,
+          "end": 35,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const authKey = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "test-file-skips-assignments",
+      "file": "a.test.ts",
+      "source": "const password = \"hunter2hunter2\";\n",
+      "ts": []
+    },
+    {
+      "name": "two-on-a-line",
+      "file": "a.js",
+      "source": "const password = \"hunter2hunter2\", token = \"abcdEFGH1234ijkl\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 34,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\", token = \"abcdEFGH1234ijkl\";"
+        }
+      ]
+    },
+    {
+      "name": "after-known-token-on-line",
+      "file": "a.js",
+      "source": "const password = \"AKIAQWERTYUIOPASDFGH\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 19,
+          "end": 39,
+          "confidence": "high",
+          "severity": "critical",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "in-comment",
+      "file": "a.js",
+      "source": "// password = \"hunter2hunter2\"\n",
+      "ts": []
+    },
+    {
+      "name": "escaped-quote",
+      "file": "a.js",
+      "source": "const password = \"ab\\\"cdefgh1234\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 34,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "astral-value",
+      "file": "a.js",
+      "source": "const password = \"😀😀😀😀😀😀\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 32,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "unicode-before",
+      "file": "a.js",
+      "source": "const s = \"😀\"; const password = \"hunter2hunter2\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 34,
+          "end": 50,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const s = \"😀\"; const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "excerpt-redacts-value",
+      "file": "a.ts",
+      "source": "const password = \"hunter2hunter2\"; // keep\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 34,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\"; // keep"
+        }
+      ]
+    },
+    {
+      "name": "python",
+      "file": "a.py",
+      "source": "password = \"hunter2hunter2\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 28,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "password = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "python-dict",
+      "file": "a.py",
+      "source": "cfg = {\"password\": \"hunter2hunter2\"}\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 20,
+          "end": 36,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "cfg = {\"password\": \"[redacted]\"}"
+        }
+      ]
+    },
+    {
+      "name": "python-triple",
+      "file": "a.py",
+      "source": "password = \"\"\"hunter2hunter2\"\"\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 32,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "password = \"\"\"[redacted]\"\"\""
+        }
+      ]
+    },
+    {
+      "name": "java",
+      "file": "A.java",
+      "source": "class A { String password = \"hunter2hunter2\"; }\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 29,
+          "end": 45,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "class A { String password = \"[redacted]\"; }"
+        }
+      ]
+    },
+    {
+      "name": "csharp",
+      "file": "A.cs",
+      "source": "class A { string password = \"hunter2hunter2\"; }\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 29,
+          "end": 45,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "class A { string password = \"[redacted]\"; }"
+        }
+      ]
+    },
+    {
+      "name": "rust",
+      "file": "a.rs",
+      "source": "fn f() { let password = \"hunter2hunter2\"; }\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 25,
+          "end": 41,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "fn f() { let password = \"[redacted]\"; }"
+        }
+      ]
+    },
+    {
+      "name": "go-short-declaration-not-matched",
+      "file": "a.go",
+      "source": "package m\nfunc f() { password := \"hunter2hunter2\" }\n",
+      "ts": []
+    },
+    {
+      "name": "go-var",
+      "file": "a.go",
+      "source": "package m\nvar password = \"hunter2hunter2\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 2,
+          "start": 16,
+          "end": 32,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "var password = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "php",
+      "file": "a.php",
+      "source": "<?php\n$password = \"hunter2hunter2\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 2,
+          "start": 13,
+          "end": 29,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "$password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "ruby",
+      "file": "a.rb",
+      "source": "password = \"hunter2hunter2\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 12,
+          "end": 28,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "password = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "kotlin",
+      "file": "a.kt",
+      "source": "val password = \"hunter2hunter2\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 16,
+          "end": 32,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "val password = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "dart",
+      "file": "a.dart",
+      "source": "final password = 'hunter2hunter2';\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 34,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "final password = '[redacted]';"
+        }
+      ]
+    },
+    {
+      "name": "swift",
+      "file": "a.swift",
+      "source": "let password = \"hunter2hunter2\"\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 16,
+          "end": 32,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "let password = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "fatal-parse-has-no-literals",
+      "file": "a.ts",
+      "source": "const o = { password => \"abcdefgh1234\" };\n",
+      "why": "a file the parser could not read at all has no string literals to judge (a known format is still found)",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 25,
+          "end": 39,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const o = { password => \"[redacted]\" };"
+        }
+      ]
+    },
+    {
+      "name": "multiline-value-is-redacted",
+      "file": "a.js",
+      "source": "const password = `abcdefgh\n1234`;\n",
+      "why": "the old excerpt kept the start of a value that runs over lines, which put part of a secret in the ledger",
+      "rust": [
+        [
+          "no-hardcoded-secrets",
+          1,
+          18
+        ]
+      ],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 33,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "const password = `abcdefgh"
+        }
+      ]
+    },
+    {
+      "name": "ui-text-accented",
+      "file": "a.js",
+      "source": "const confirmPassword = \"Confirmar Contraseña\";\n",
+      "why": "the word check knew only A-Z, so interface text with an accent looked like a secret",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 25,
+          "end": 47,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const confirmPassword = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "ui-sentence-with-comma",
+      "file": "a.js",
+      "source": "const passwordHint = \"If omitted, the application key is used\";\n",
+      "why": "a sentence of five words or more is interface text, commas included",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 22,
+          "end": 63,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const passwordHint = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "pipe-separated-secret",
+      "file": "a.js",
+      "source": "const apiKey = \"8kd93|jf9l0|zq7xp|w2rm5v\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 16,
+          "end": 42,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const apiKey = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "short-phrase-with-comma-stays",
+      "file": "a.js",
+      "source": "const secret = \"shhhh, very secret\";\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 16,
+          "end": 36,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const secret = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "regex-shaped-value",
+      "file": "a.js",
+      "source": "const TOKEN = \"([a-zA-Z0-9-!#$%&'*+.^_{|}~]+)\";\n",
+      "why": "a character class with a quantifier is a regular expression",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 15,
+          "end": 47,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const TOKEN = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "token-prefix",
+      "file": "a.js",
+      "source": "const AUTH_TOKEN_PREFIX = \"base64url.bearer.phx.\";\n",
+      "why": "a value ending in a dot is a prefix to be completed, not a token",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 27,
+          "end": 50,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const AUTH_TOKEN_PREFIX = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "validation-rule-list",
+      "file": "a.php",
+      "source": "<?php\n$rules = ['password' => 'required|string|current_password'];\n",
+      "why": "a list of validation rules is not a password",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 2,
+          "start": 25,
+          "end": 59,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "$rules = ['password' => '[redacted]'];"
+        }
+      ]
+    },
+    {
+      "name": "password-hash",
+      "file": "a.js",
+      "source": "const password = \"$argon2id$v=19$m=65536,t=3,p=4$wagCPXjifgvUFBzq4hqe3w$CYaIb8sB\";\n",
+      "why": "a password hash is not a credential",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 82,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const password = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "ui-question",
+      "file": "a.js",
+      "source": "const forgotPassword = \"Forgot your password?\";\n",
+      "why": "a question mark ends a label; it is not part of a secret",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 24,
+          "end": 47,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const forgotPassword = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "ui-question-spanish",
+      "file": "a.js",
+      "source": "const forgotPassword = \"¿Olvidaste tu contraseña?\";\n",
+      "why": "the opening question mark is punctuation",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 24,
+          "end": 51,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const forgotPassword = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "ui-label-with-parentheses",
+      "file": "a.js",
+      "source": "const passwordLabel = \"Contraseña (opcional)\";\n",
+      "why": "a label with a parenthesis is words",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 23,
+          "end": 46,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "const passwordLabel = \"[redacted]\";"
+        }
+      ]
+    },
+    {
+      "name": "cli-flag",
+      "file": "a.php",
+      "source": "<?php\n$args = ['password' => '--password=' . $connection['password']];\n",
+      "why": "a command-line flag is not a credential",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 2,
+          "start": 24,
+          "end": 37,
+          "confidence": "low",
+          "severity": "high",
+          "excerpt": "$args = ['password' => '[redacted]' . $connection['password']];"
+        }
+      ]
+    },
+    {
+      "name": "kotlin-interpolation",
+      "file": "a.kt",
+      "source": "val usernameAndPassword = \"$username:$password\"\n",
+      "why": "a Kotlin string built with interpolation is computed, not hard-coded",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 27,
+          "end": 48,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "val usernameAndPassword = \"[redacted]\""
+        }
+      ]
+    },
+    {
+      "name": "dart-interpolation",
+      "file": "a.dart",
+      "source": "String get storageToken => '$storagePrefix$id';\n",
+      "why": "a Dart string built with interpolation is computed, not hard-coded",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 28,
+          "end": 47,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "String get storageToken => '[redacted]';"
+        }
+      ]
+    },
+    {
+      "name": "dart-dollar-not-interpolation",
+      "file": "a.dart",
+      "source": "final password = 'ab9Xk$%2fQz7Lm!pR';\n",
+      "ts": [
+        {
+          "rule": "no-hardcoded-secrets",
+          "line": 1,
+          "start": 18,
+          "end": 37,
+          "confidence": "medium",
+          "severity": "high",
+          "excerpt": "final password = '[redacted]';"
+        }
+      ]
+    },
+    {
+      "name": "python-fstring-prefix-not-judged",
+      "file": "a.py",
+      "source": "password = f\"hunter2hunter2\"\n",
+      "ts": []
+    },
+    {
+      "name": "rust-raw-string-not-judged",
+      "file": "a.rs",
+      "source": "fn f() { let password = r\"hunter2hunter2\"; }\n",
+      "ts": []
+    },
+    {
+      "name": "dart-raw-character-table",
+      "file": "a.dart",
+      "source": "const _tokenChars = r\"!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`\"\n",
+      "ts": []
+    },
+    {
+      "name": "vue-script",
+      "file": "a.vue",
+      "source": "<script>\nconst password = \"hunter2hunter2\";\n</script>\n",
+      "why": "the old lexer knew no component syntax and found no strings; the script is code",
+      "rust": [
+        [
+          "no-hardcoded-secrets",
+          2,
+          18
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "mts-extension",
+      "file": "a.mts",
+      "source": "const password = \"hunter2hunter2\";\n",
+      "why": "the old lexer did not know .mts",
+      "rust": [
+        [
+          "no-hardcoded-secrets",
+          1,
+          18
+        ]
+      ],
+      "ts": []
+    }
+  ]
+}

@@ -1,9 +1,9 @@
-import { spawnSync } from "node:child_process";
-import { accessSync, constants, existsSync, readFileSync, statSync } from "node:fs";
-import { delimiter, isAbsolute, join } from "node:path";
-import { createFinding, type Finding } from "@debuggatha/core";
-import { isIgnoredPath, listScanFiles } from "../scan-scope/index.js";
-import { ADAPTERS } from "./adapters.js";
+import { spawnSync } from 'node:child_process';
+import { accessSync, constants, existsSync, readFileSync, statSync } from 'node:fs';
+import { delimiter, isAbsolute, join } from 'node:path';
+import { createFinding, type Finding } from '@debuggatha/core';
+import { isIgnoredPath, listScanFiles } from '../scan-scope/index.js';
+import { ADAPTERS } from './adapters.js';
 import type {
   AnalyzerAdapter,
   AnalyzerFinding,
@@ -11,13 +11,13 @@ import type {
   AnalyzerRun,
   AnalyzerTrust,
   RepoFacts,
-} from "./types.js";
+} from './types.js';
 
 const DEFAULT_TIMEOUT_SECONDS = 300;
 
-const TRUST_REASON: Record<Exclude<AnalyzerTrust, "safe">, string> = {
-  "runs-project-code": "it runs code the repository controls",
-  network: "it sends package names and versions to a service",
+const TRUST_REASON: Record<Exclude<AnalyzerTrust, 'safe'>, string> = {
+  'runs-project-code': 'it runs code the repository controls',
+  network: 'it sends package names and versions to a service',
 };
 
 function isExecutable(path: string): boolean {
@@ -36,7 +36,7 @@ export function findExecutable(rootDir: string, adapter: AnalyzerAdapter): strin
     const path = join(rootDir, local);
     if (isExecutable(path)) return path;
   }
-  const directories = (process.env.PATH ?? "").split(delimiter).filter(Boolean);
+  const directories = (process.env.PATH ?? '').split(delimiter).filter(Boolean);
   for (const name of adapter.binaries.names) {
     for (const directory of directories) {
       const path = join(directory, name);
@@ -53,9 +53,9 @@ function readVersion(
 ): string | undefined {
   const result = spawnSync(executable, [...(adapter.prefix ?? []), ...adapter.versionArgs], {
     cwd: rootDir,
-    encoding: "utf8",
+    encoding: 'utf8',
     timeout: 30_000,
-    stdio: ["ignore", "pipe", "pipe"],
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
   if (result.error || result.status !== 0) return undefined;
   return /\d+\.\d+(?:\.\d+)?(?:[-+.\w]*)/.exec(`${result.stdout}\n${result.stderr}`)?.[0];
@@ -88,11 +88,11 @@ function gate(
   applies: boolean,
   installed: boolean,
 ): string | undefined {
-  if (options.mode === "off") return "analyzers are turned off";
+  if (options.mode === 'off') return 'analyzers are turned off';
   if (options.disable?.includes(adapter.id)) return "disabled in the repository's configuration";
-  if (!applies) return "this repository has nothing it analyzes";
-  if (!installed) return "not installed";
-  if (adapter.trust !== "safe" && !options.enable?.includes(adapter.id)) {
+  if (!applies) return 'this repository has nothing it analyzes';
+  if (!installed) return 'not installed';
+  if (adapter.trust !== 'safe' && !options.enable?.includes(adapter.id)) {
     const how = options.enableHint?.(adapter.id) ?? `enable "${adapter.id}" explicitly`;
     return `${TRUST_REASON[adapter.trust]}; ${how}`;
   }
@@ -154,7 +154,7 @@ export function runAnalyzers(input: {
   const adapters = input.adapters ?? ADAPTERS;
   const runs: AnalyzerRun[] = [];
   const results: AnalyzerFindings[] = [];
-  if (options.mode === "off") return { runs, results };
+  if (options.mode === 'off') return { runs, results };
 
   const facts = repoFacts(rootDir);
   const inScope = files ? new Set(files) : undefined;
@@ -172,7 +172,7 @@ export function runAnalyzers(input: {
     const executable = findExecutable(rootDir, adapter);
     const blocked = gate(adapter, options, adapter.applies(facts), executable !== undefined);
     if (blocked !== undefined || executable === undefined) {
-      runs.push({ ...base, status: "skipped", reason: blocked ?? "not installed" });
+      runs.push({ ...base, status: 'skipped', reason: blocked ?? 'not installed' });
       continue;
     }
 
@@ -183,9 +183,9 @@ export function runAnalyzers(input: {
       targets = files
         // A file the review names may be gone (a deletion): there is nothing left to analyze.
         .filter((file) => filter.test(file) && existsSync(join(rootDir, file)))
-        .map((file) => (file.startsWith("-") ? `./${file}` : file));
+        .map((file) => (file.startsWith('-') ? `./${file}` : file));
       if (targets.length === 0) {
-        runs.push({ ...base, status: "skipped", reason: "no matching files in this review" });
+        runs.push({ ...base, status: 'skipped', reason: 'no matching files in this review' });
         continue;
       }
     }
@@ -196,19 +196,19 @@ export function runAnalyzers(input: {
       const version = readVersion(executable, adapter, rootDir);
       const spawned = spawnSync(executable, [...(adapter.prefix ?? []), ...command.args], {
         cwd: rootDir,
-        encoding: "utf8",
+        encoding: 'utf8',
         timeout,
         maxBuffer: 512 * 1024 * 1024,
-        stdio: ["ignore", "pipe", "pipe"],
+        stdio: ['ignore', 'pipe', 'pipe'],
       });
       const durationMs = Date.now() - started;
 
       if (spawned.error) {
-        const timedOut = (spawned.error as NodeJS.ErrnoException).code === "ETIMEDOUT";
+        const timedOut = (spawned.error as NodeJS.ErrnoException).code === 'ETIMEDOUT';
         runs.push({
           ...base,
           durationMs,
-          status: "failed",
+          status: 'failed',
           reason: timedOut
             ? `timed out after ${timeout / 1000}s`
             : `could not start: ${spawned.error.message}`,
@@ -216,12 +216,12 @@ export function runAnalyzers(input: {
         continue;
       }
       if (spawned.status === null || !adapter.okExitCodes.includes(spawned.status)) {
-        const detail = (spawned.stderr || spawned.stdout).trim().split("\n").find(Boolean) ?? "";
+        const detail = (spawned.stderr || spawned.stdout).trim().split('\n').find(Boolean) ?? '';
         runs.push({
           ...base,
           durationMs,
-          status: "failed",
-          reason: `exited with code ${spawned.status ?? "?"}${detail ? `: ${detail.slice(0, 200)}` : ""}`,
+          status: 'failed',
+          reason: `exited with code ${spawned.status ?? '?'}${detail ? `: ${detail.slice(0, 200)}` : ''}`,
         });
         continue;
       }
@@ -233,7 +233,7 @@ export function runAnalyzers(input: {
         runs.push({
           ...base,
           durationMs,
-          status: "failed",
+          status: 'failed',
           reason: `output not understood: ${error instanceof Error ? error.message : String(error)}`,
         });
         continue;
@@ -246,7 +246,7 @@ export function runAnalyzers(input: {
       runs.push({
         ...base,
         durationMs,
-        status: "ran",
+        status: 'ran',
         findings: kept.length,
         ...(version ? { version } : {}),
       });
@@ -269,7 +269,7 @@ export class SourceLines {
     if (line === undefined || isAbsolute(file)) return undefined;
     if (!this.cache.has(file)) {
       try {
-        this.cache.set(file, readFileSync(join(this.rootDir, file), "utf8").split("\n"));
+        this.cache.set(file, readFileSync(join(this.rootDir, file), 'utf8').split('\n'));
       } catch {
         this.cache.set(file, undefined);
       }
@@ -301,15 +301,15 @@ export function toFinding(
 
   return createFinding({
     title: found.message,
-    explanation: `${adapter.name} rule ${found.ruleId}${found.url ? ` (${found.url})` : ""}. Debuggatha ran ${adapter.name} and reports what it found; the repository's own configuration decides which rules apply.`,
+    explanation: `${adapter.name} rule ${found.ruleId}${found.url ? ` (${found.url})` : ''}. Debuggatha ran ${adapter.name} and reports what it found; the repository's own configuration decides which rules apply.`,
     severity: found.severity,
-    confidence: "high",
+    confidence: 'high',
     category: found.category,
     locations: [{ file: found.file, lines: range, ...(columns ? { columns } : {}) }],
     evidence: [
-      { kind: "code", file: found.file, lines: range, excerpt },
+      { kind: 'code', file: found.file, lines: range, excerpt },
       {
-        kind: "external-analyzer",
+        kind: 'external-analyzer',
         tool: adapter.id,
         ruleId: found.ruleId,
         version,
@@ -321,7 +321,7 @@ export function toFinding(
     recommendations: [
       {
         id: `${adapter.id}-${found.ruleId}-${found.file}-${found.line ?? 0}`,
-        action: "investigate",
+        action: 'investigate',
         summary: `Resolve ${adapter.name} ${found.ruleId}: ${found.message}`,
         rationale: found.url ? `See ${found.url}` : undefined,
         targetFile: found.file,

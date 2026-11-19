@@ -1,0 +1,495 @@
+{
+ "engine": "typescript 0.2.0 + phase 1 detectors",
+ "command": "review --all --format json --no-persist --no-analyzers --fail-on none",
+ "note": "Timings are informational and machine-dependent; the per-repository files in golden/ts-engine are the reference.",
+ "repositories": [
+  {
+   "name": "animoria",
+   "commit": "c1a6dcd277fd72b5170e0b37715eea5e0d9a0a2f",
+   "status": "ok",
+   "findings": 33,
+   "ms": 376,
+   "policy": "88b59579492e25d6"
+  },
+  {
+   "name": "astro-preset",
+   "commit": "61ca046aee041f0b73e4c3ad952777138dafd668",
+   "status": "ok",
+   "findings": 0,
+   "ms": 140,
+   "policy": null
+  },
+  {
+   "name": "betterbattleorientation",
+   "commit": "09de33ff07f1bc99bfa76f8a80ff9585c885d8c4",
+   "status": "ok",
+   "findings": 0,
+   "ms": 102,
+   "policy": null
+  },
+  {
+   "name": "bubble-catcher",
+   "commit": "b9c063c84b6a5d0b83c23bff85e09ed923c75285",
+   "status": "ok",
+   "findings": 23,
+   "ms": 177,
+   "policy": "07644a4c0046bb0f"
+  },
+  {
+   "name": "circe",
+   "commit": "e77e771e899e27e0bc02cd08c719ec2f7abef11d",
+   "status": "ok",
+   "findings": 12,
+   "ms": 242,
+   "policy": "5b2d24918ac1ee26"
+  },
+  {
+   "name": "client-server-4-students",
+   "commit": "b09c9bb51c1bc4892e90c3990b90695cc6e05d34",
+   "status": "ok",
+   "findings": 0,
+   "ms": 161,
+   "policy": null
+  },
+  {
+   "name": "colossal-conversor",
+   "commit": "bc9cf5a45d5ccb8e04de2ca70e2a2d8a2fff367c",
+   "status": "ok",
+   "findings": 0,
+   "ms": 129,
+   "policy": null
+  },
+  {
+   "name": "dart-sei",
+   "commit": "c941d586fa2d798b53b2ea21f4b5a3c428646997",
+   "status": "ok",
+   "findings": 19,
+   "ms": 109,
+   "policy": "4442b63ca731005e"
+  },
+  {
+   "name": "emerald-essentials",
+   "commit": "766b6b23638d6ed5442e968a11ebb1360b3c44ce",
+   "status": "ok",
+   "findings": 0,
+   "ms": 140,
+   "policy": null
+  },
+  {
+   "name": "flutter-sei",
+   "commit": "6e2cd6c59e7eeacad2b8f91c21c172038381b2d3",
+   "status": "ok",
+   "findings": 0,
+   "ms": 115,
+   "policy": null
+  },
+  {
+   "name": "gameswap-recorder",
+   "commit": "2f33dbd5441a08dab4f2b6f5ab94f4e30a6679aa",
+   "status": "ok",
+   "findings": 74,
+   "ms": 124,
+   "policy": "990890f910c8755d"
+  },
+  {
+   "name": "homebrew-tap",
+   "commit": "0c064cabe2be11e8669dbb65dce738df7f5bb92f",
+   "status": "ok",
+   "findings": 0,
+   "ms": 107,
+   "policy": null
+  },
+  {
+   "name": "kolibri-pulse",
+   "commit": "b4d64ce3bb713949d71293aff6938d7334087998",
+   "status": "ok",
+   "findings": 0,
+   "ms": 103,
+   "policy": null
+  },
+  {
+   "name": "lacuna-cli",
+   "commit": "a803fb54c3a52c7e0492490f996887b32cc72339",
+   "status": "ok",
+   "findings": 0,
+   "ms": 103,
+   "policy": null
+  },
+  {
+   "name": "mc-automatic-package",
+   "commit": "8723eef2f190f5ec71bcaf282e3a8e8e2ba4a0c1",
+   "status": "ok",
+   "findings": 0,
+   "ms": 123,
+   "policy": null
+  },
+  {
+   "name": "obfusku",
+   "commit": "aca67f046de79dd3c146556bc7a6c1c1951fa2d1",
+   "status": "ok",
+   "findings": 158,
+   "ms": 184,
+   "policy": "b5915c034619cc1a"
+  },
+  {
+   "name": "obfusku-vscode",
+   "commit": "7d9a7951bf2a9e90215253760d00d726b47eee6a",
+   "status": "ok",
+   "findings": 0,
+   "ms": 129,
+   "policy": null
+  },
+  {
+   "name": "ontara",
+   "commit": "b23e1b8bba7cd43dc05f1153d7785354e5d785c8",
+   "status": "ok",
+   "findings": 0,
+   "ms": 309,
+   "policy": null
+  },
+  {
+   "name": "orph-cli",
+   "commit": "9db634a9c4b710756c7999a41281e4d590624f7a",
+   "status": "ok",
+   "findings": 63,
+   "ms": 147,
+   "policy": "fc2779f1a5d28d0a"
+  },
+  {
+   "name": "ouroboros-cli",
+   "commit": "9cc7ba374c6385409c6959cce24ff8fdca776a25",
+   "status": "ok",
+   "findings": 0,
+   "ms": 110,
+   "policy": null
+  },
+  {
+   "name": "pm2-eid-is-discord",
+   "commit": "8903e7744671a1874fb2c32a17086ee21738f7e4",
+   "status": "ok",
+   "findings": 21,
+   "ms": 126,
+   "policy": "3f2f8fc9e122cb90"
+  },
+  {
+   "name": "pollux-fs-interpose-poc",
+   "commit": "8f4dcdc381125ff8aead2b8ccc6c5b5ca6d732c5",
+   "status": "ok",
+   "findings": 14,
+   "ms": 113,
+   "policy": "304c60c811df1fbe"
+  },
+  {
+   "name": "pollux-polyglot-dot-net",
+   "commit": "30f07b94111e4760056dc632669ef9dfb8ae98d7",
+   "status": "ok",
+   "findings": 0,
+   "ms": 111,
+   "policy": null
+  },
+  {
+   "name": "pollux-polyglot-flutter-adapter",
+   "commit": "ab948f677eed43e75717cd573998e663144e98cc",
+   "status": "ok",
+   "findings": 5,
+   "ms": 108,
+   "policy": "9a97fe0373c5d32e"
+  },
+  {
+   "name": "pollux-polyglot-js",
+   "commit": "bf39582c6b636ed7f487eee25873362b34e1b15c",
+   "status": "ok",
+   "findings": 15,
+   "ms": 116,
+   "policy": "023b4cd149dc34c5"
+  },
+  {
+   "name": "pollux-polyglot-jvm",
+   "commit": "9a21a1bfa6a718da99dd479ab6be1b86ff8836df",
+   "status": "ok",
+   "findings": 0,
+   "ms": 110,
+   "policy": null
+  },
+  {
+   "name": "pollux-polyglot-native-bridge",
+   "commit": "5f670e0f4c9c9ea1f7fe55522d9d55388709a451",
+   "status": "ok",
+   "findings": 35,
+   "ms": 112,
+   "policy": "02f75eba41462e00"
+  },
+  {
+   "name": "pollux-polyglot-swift",
+   "commit": "b7fa4dc29fc0fc33a572790b63215664bef8bcc4",
+   "status": "ok",
+   "findings": 0,
+   "ms": 101,
+   "policy": null
+  },
+  {
+   "name": "promediatum",
+   "commit": "ff269640ba9f42f2b2699f4749486bcd535e60d2",
+   "status": "ok",
+   "findings": 46,
+   "ms": 195,
+   "policy": "7538d19b6d7bdf79"
+  },
+  {
+   "name": "psychoquine-cli",
+   "commit": "9ee740905b3802c92d355a4a8512e2a142ad03b3",
+   "status": "ok",
+   "findings": 0,
+   "ms": 124,
+   "policy": null
+  },
+  {
+   "name": "sei-swift",
+   "commit": "cb9f43be9fb76f148ab7ce6ceb78b9f61fcd1c88",
+   "status": "ok",
+   "findings": 0,
+   "ms": 114,
+   "policy": null
+  },
+  {
+   "name": "somnia",
+   "commit": "50cc647366d2944a97ae0501ef4e896ac43b363b",
+   "status": "ok",
+   "findings": 0,
+   "ms": 108,
+   "policy": null
+  },
+  {
+   "name": "sxnnyergo",
+   "commit": "4786d5ad99937673a9c8f25c81eb9b1492339b66",
+   "status": "ok",
+   "findings": 0,
+   "ms": 103,
+   "policy": null
+  },
+  {
+   "name": "syntaxeon",
+   "commit": "dc05be788ed61c614c585f5e0db90bed3c14c580",
+   "status": "ok",
+   "findings": 18,
+   "ms": 149,
+   "policy": "f075de1c643c653d"
+  },
+  {
+   "name": "tensorsuggestlite",
+   "commit": "73a90baf4948ff5a7c44d425b35e97f13609c9ac",
+   "status": "ok",
+   "findings": 0,
+   "ms": 118,
+   "policy": null
+  },
+  {
+   "name": "Alamofire",
+   "commit": "6c2892ea5adb5a03fa81c510933dd782c5ddd9cb",
+   "status": "ok",
+   "findings": 0,
+   "ms": 131,
+   "policy": null
+  },
+  {
+   "name": "bat",
+   "commit": "8cf33bdde9a6e4c11d0f866415b1fc867df0cd40",
+   "status": "ok",
+   "findings": 166,
+   "ms": 227,
+   "policy": "f2fc345af9d7056b"
+  },
+  {
+   "name": "bloc",
+   "commit": "b9be1e252ee24ffbe9f2fb629edc7624b2cfbf05",
+   "status": "ok",
+   "findings": 1,
+   "ms": 253,
+   "policy": "cff83fc2a55b65b0"
+  },
+  {
+   "name": "clap",
+   "commit": "ec93e71255c0b833a34f50662a3fdb22f53f6ded",
+   "status": "ok",
+   "findings": 248,
+   "ms": 286,
+   "policy": "b8e2ae37284a671e"
+  },
+  {
+   "name": "cobra",
+   "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+   "status": "ok",
+   "findings": 9,
+   "ms": 138,
+   "policy": "b31b2926c0ab3839"
+  },
+  {
+   "name": "eShop",
+   "commit": "913acea66708a59595351174cee9b29f37179d29",
+   "status": "ok",
+   "findings": 13,
+   "ms": 217,
+   "policy": "4ae3d287ae91e31b"
+  },
+  {
+   "name": "express",
+   "commit": "43fca52d28a422c8be48fd489cbd4f2d6152bab6",
+   "status": "ok",
+   "findings": 1975,
+   "ms": 234,
+   "policy": "b996a6e20e29a9ed"
+  },
+  {
+   "name": "fastapi",
+   "commit": "af628068e772b05bb56bf050cc99f2817b9020f9",
+   "status": "ok",
+   "findings": 16,
+   "ms": 541,
+   "policy": "62840af931468d4b"
+  },
+  {
+   "name": "fastify",
+   "commit": "0b076ca595d19951c536daf515c778b38cf6ba69",
+   "status": "ok",
+   "findings": 333,
+   "ms": 441,
+   "policy": "1f8df9a06a6f5c24"
+  },
+  {
+   "name": "flask",
+   "commit": "49943b5a94413a530761350f04e896f76e8d620e",
+   "status": "ok",
+   "findings": 0,
+   "ms": 152,
+   "policy": null
+  },
+  {
+   "name": "fmt",
+   "commit": "e7e6e3f71033fbfc71eba1709789328bcb0ceb28",
+   "status": "ok",
+   "findings": 0,
+   "ms": 112,
+   "policy": null
+  },
+  {
+   "name": "framework",
+   "commit": "753f33ea6d105909732d42f4334682989288ef5c",
+   "status": "ok",
+   "findings": 43,
+   "ms": 1121,
+   "policy": "821d104bbe166fce"
+  },
+  {
+   "name": "gin",
+   "commit": "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646",
+   "status": "ok",
+   "findings": 23,
+   "ms": 175,
+   "policy": "7b0239c01f70f21c"
+  },
+  {
+   "name": "godot-steering-ai-framework",
+   "commit": "9d7cf0deff805d8f2a5316c33f3c85cffa3376a7",
+   "status": "ok",
+   "findings": 0,
+   "ms": 112,
+   "policy": null
+  },
+  {
+   "name": "hono",
+   "commit": "61f7c59e50244ab4d2dd83c151928cf7ea448510",
+   "status": "ok",
+   "findings": 572,
+   "ms": 993,
+   "policy": "2acb780437146b2b"
+  },
+  {
+   "name": "http",
+   "commit": "2bac218a1115a58addd140d7a7eaabf803d57631",
+   "status": "ok",
+   "findings": 0,
+   "ms": 235,
+   "policy": null
+  },
+  {
+   "name": "kit",
+   "commit": "014dfec3df98be8edf6e217e98309c12ba51b4cf",
+   "status": "ok",
+   "findings": 211,
+   "ms": 2675,
+   "policy": "e0214d55a340b4ac"
+  },
+  {
+   "name": "okhttp",
+   "commit": "d16191b6792e3bc72781e5bf45193951b52adc4e",
+   "status": "ok",
+   "findings": 8,
+   "ms": 441,
+   "policy": "8b113f283adb52f1"
+  },
+  {
+   "name": "phoenix",
+   "commit": "b74bd220f683e483bab59f75f4957c3bfa507647",
+   "status": "ok",
+   "findings": 115,
+   "ms": 194,
+   "policy": "c004ca4fb955a239"
+  },
+  {
+   "name": "pinia",
+   "commit": "05ece25e563d15dd1187fd30b4e5a833e9aefd78",
+   "status": "ok",
+   "findings": 147,
+   "ms": 222,
+   "policy": "7b148900ed1914de"
+  },
+  {
+   "name": "requests",
+   "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+   "status": "ok",
+   "findings": 0,
+   "ms": 158,
+   "policy": null
+  },
+  {
+   "name": "ripgrep",
+   "commit": "178cc027e283fd965cb72d0a7395b219eada170c",
+   "status": "ok",
+   "findings": 1103,
+   "ms": 248,
+   "policy": "da4dc7dcef982e0b"
+  },
+  {
+   "name": "sinatra",
+   "commit": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+   "status": "ok",
+   "findings": 0,
+   "ms": 107,
+   "policy": null
+  },
+  {
+   "name": "spring-petclinic",
+   "commit": "500158f732419217507c7656904b8e6aa1bcc0d6",
+   "status": "ok",
+   "findings": 0,
+   "ms": 128,
+   "policy": null
+  },
+  {
+   "name": "starlight",
+   "commit": "22ee803927db52ef2c38847d93471c3752dab6a1",
+   "status": "ok",
+   "findings": 78,
+   "ms": 383,
+   "policy": "dc39df385ed40558"
+  },
+  {
+   "name": "zod",
+   "commit": "19c40d2072288b4cafec851e9d056a72a88e5973",
+   "status": "ok",
+   "findings": 2139,
+   "ms": 2547,
+   "policy": "17bea03a2fa3c4ed"
+  }
+ ]
+}

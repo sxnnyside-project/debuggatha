@@ -1,0 +1,37 @@
+id = "debuggatha/phoenix"
+version = "1.0.0"
+kind = "stack"
+displayName = "Phoenix"
+dependsOn = []
+
+[[rules]]
+id = "ecto-fragment-interpolation"
+packId = "debuggatha/phoenix"
+statement = "Do not interpolate values into an Ecto `fragment`; pass them as `?` parameters."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-ecto-fragment-interpolation"]
+appliesTo = { kind = "requires-framework", framework = "phoenix" }
+
+[[rules]]
+id = "phoenix-check-origin-off"
+packId = "debuggatha/phoenix"
+statement = "Do not set `check_origin: false` on an endpoint or a socket; list the origins."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-phoenix-check-origin-off"]
+appliesTo = { kind = "requires-framework", framework = "phoenix" }
+
+[[knowledge]]
+id = "know-ecto-fragment-interpolation"
+title = "SQL fragment built by interpolation"
+body = "`fragment(\"... #{value}\")` puts the value into the SQL text."
+externalRefs = ["https://hexdocs.pm/ecto/Ecto.Query.API.html#fragment/1", "https://cwe.mitre.org/data/definitions/89.html"]
+limitations = ["A value known to be a constant or a column name from a fixed list is reported too."]
+
+[[knowledge]]
+id = "know-phoenix-check-origin-off"
+title = "Origin check off"
+body = "Without the origin check any web page can open a WebSocket as the visitor."
+externalRefs = ["https://hexdocs.pm/phoenix/Phoenix.Endpoint.html#module-runtime-configuration", "https://cwe.mitre.org/data/definitions/1385.html"]
+limitations = ["A development configuration is reported too."]

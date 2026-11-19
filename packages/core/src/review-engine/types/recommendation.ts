@@ -1,4 +1,4 @@
-import type { LineRange } from "./location.js";
+import type { LineRange } from './location.js';
 
 /**
  * Structured, not a prompt — "future providers may generate different
@@ -7,13 +7,13 @@ import type { LineRange } from "./location.js";
  * outside this engine.
  */
 export const RECOMMENDATION_ACTIONS = [
-  "replace",
-  "remove",
-  "add",
-  "refactor",
-  "configure",
-  "document",
-  "investigate",
+  'replace',
+  'remove',
+  'add',
+  'refactor',
+  'configure',
+  'document',
+  'investigate',
 ] as const;
 export type RecommendationAction = (typeof RECOMMENDATION_ACTIONS)[number];
 
@@ -48,5 +48,5 @@ export interface RecommendationEdit {
   /** 1-based, just past the last replaced character. */
   endColumn: number;
   replacement: string;
-  safety: "safe" | "review";
+  safety: 'safe' | 'review';
 }

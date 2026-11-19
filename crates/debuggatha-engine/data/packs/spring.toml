@@ -1,0 +1,53 @@
+id = "debuggatha/spring"
+version = "1.0.0"
+kind = "stack"
+displayName = "Spring"
+dependsOn = []
+
+[[rules]]
+id = "spring-csrf-disabled"
+packId = "debuggatha/spring"
+statement = "Do not disable CSRF protection (`http.csrf().disable()`) for applications that use browser sessions."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-spring-csrf-disabled"]
+appliesTo = { kind = "requires-framework", framework = "spring" }
+
+[[rules]]
+id = "spring-permit-all-requests"
+packId = "debuggatha/spring"
+statement = "Do not end a security chain with `anyRequest().permitAll()`; require authentication by default."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-spring-permit-all-requests"]
+appliesTo = { kind = "requires-framework", framework = "spring" }
+
+[[rules]]
+id = "spring-field-injection"
+packId = "debuggatha/spring"
+statement = "Do not inject dependencies into fields with `@Autowired`; use constructor injection."
+category = "architecture"
+defaultSeverity = "low"
+knowledgeRefs = ["know-spring-field-injection"]
+appliesTo = { kind = "requires-framework", framework = "spring" }
+
+[[knowledge]]
+id = "know-spring-csrf-disabled"
+title = "CSRF protection disabled"
+body = "Without the token check another site can make the browser send state-changing requests."
+externalRefs = ["https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html", "https://cwe.mitre.org/data/definitions/352.html"]
+limitations = ["A stateless API that authenticates every request with a bearer token does not need it and is reported.", "The lambda form `csrf(c -> c.disable())` is not read."]
+
+[[knowledge]]
+id = "know-spring-permit-all-requests"
+title = "Everything permitted"
+body = "A catch-all that permits every request leaves any route you forgot to list open."
+externalRefs = ["https://docs.spring.io/spring-security/reference/servlet/authorization/authorize-http-requests.html", "https://cwe.mitre.org/data/definitions/862.html"]
+limitations = ["A chain for a public site, or for static resources only, is reported too."]
+
+[[knowledge]]
+id = "know-spring-field-injection"
+title = "Field injection"
+body = "Field injection hides the dependencies, cannot be used without a container and keeps them mutable."
+externalRefs = ["https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html"]
+limitations = ["A test class or a configuration class that Spring builds is reported too."]

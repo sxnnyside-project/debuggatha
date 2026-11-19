@@ -1,4 +1,4 @@
-import type { Comment } from "./lex.js";
+import type { Comment } from './lex.js';
 
 /**
  * Inline suppression: a comment that says, in the code itself, that a finding
@@ -11,7 +11,7 @@ import type { Comment } from "./lex.js";
  * With no rule ids the directive covers every rule on its target.
  */
 
-export type DirectiveScope = "line" | "next-line" | "file";
+export type DirectiveScope = 'line' | 'next-line' | 'file';
 
 export interface Directive {
   scope: DirectiveScope;
@@ -40,13 +40,13 @@ export function parseDirectives(comments: readonly Comment[]): Directive[] {
     if (!match) continue;
     const suffix = match[1];
     const scope: DirectiveScope =
-      suffix === "-next-line" ? "next-line" : suffix === "-file" ? "file" : "line";
+      suffix === '-next-line' ? 'next-line' : suffix === '-file' ? 'file' : 'line';
 
-    const [rulePart = "", ...reasonParts] = (match[2] ?? "").split(/\s--\s|\s—\s/);
+    const [rulePart = '', ...reasonParts] = (match[2] ?? '').split(/\s--\s|\s—\s/);
     const reason =
       reasonParts
-        .join(" -- ")
-        .replace(/\*\/\s*$/, "")
+        .join(' -- ')
+        .replace(/\*\/\s*$/, '')
         .trim() || undefined;
     const ids = rulePart
       .split(/[\s,:]+/)
@@ -56,7 +56,7 @@ export function parseDirectives(comments: readonly Comment[]): Directive[] {
     directives.push({
       scope,
       line: comment.line,
-      ruleIds: ids.length === 0 || ids.includes("*") ? undefined : ids,
+      ruleIds: ids.length === 0 || ids.includes('*') ? undefined : ids,
       reason,
     });
   }
@@ -86,8 +86,8 @@ export function findDirective(
 ): Directive | undefined {
   return directives.find((directive) => {
     if (directive.ruleIds && !directive.ruleIds.includes(ruleId)) return false;
-    if (directive.scope === "file") return true;
-    if (directive.scope === "line") return directive.line === line;
+    if (directive.scope === 'file') return true;
+    if (directive.scope === 'line') return directive.line === line;
     return directive.line + 1 === line;
   });
 }

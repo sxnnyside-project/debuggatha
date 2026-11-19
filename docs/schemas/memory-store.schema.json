@@ -1,0 +1,516 @@
+{
+  "$ref": "#/definitions/MemoryStore",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AcceptedDeviationItem": {
+      "additionalProperties": false,
+      "description": "A ruleId is required — an accepted deviation always names what it deviates from. `scopeFile: undefined` means repository-wide.",
+      "properties": {
+        "category": {
+          "const": "accepted-deviation",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "scopeFile": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "evidence",
+        "history",
+        "id",
+        "rationale",
+        "ruleId",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    },
+    "ConventionItem": {
+      "additionalProperties": false,
+      "description": "Repository-specific convention — \"complements Review Packs rather than replace them\": never a substitute for pack content, an addition to it.",
+      "properties": {
+        "category": {
+          "const": "convention",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "rule": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "evidence",
+        "history",
+        "id",
+        "rationale",
+        "rule",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    },
+    "DecisionItem": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "const": "decision",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string"
+        },
+        "documentationRef": {
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "decision",
+        "evidence",
+        "history",
+        "id",
+        "rationale",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    },
+    "ExceptionItem": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "const": "exception",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "exceptionKind": {
+          "$ref": "#/definitions/ExceptionKind"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "ruleId": {
+          "description": "The rule this exception applies to — undefined means \"every rule\" within `scopeFile` (e.g. a whole legacy integration directory is exempted).",
+          "type": "string"
+        },
+        "scopeFile": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "evidence",
+        "exceptionKind",
+        "history",
+        "id",
+        "rationale",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    },
+    "ExceptionKind": {
+      "enum": ["layer-crossing", "compatibility-workaround", "legacy-integration", "other"],
+      "type": "string"
+    },
+    "MemoryConfidence": {
+      "description": "Never conflated with `engine/context-intelligence`'s `ContextConfidence`: this is memory's own three levels, because memory is about engineering *decisions*, not just extracted facts. `\"user-confirmed\"` is the strongest — a human explicitly said \"yes, remember this\" (via `confirmMemory`, the only path that can ever produce it). `\"inferred\"` is never promoted to `\"user-confirmed\"` automatically; only an actual user action (lifecycle transition to `\"confirmed\"`) does that.",
+      "enum": ["inferred", "documented", "user-confirmed"],
+      "type": "string"
+    },
+    "MemoryEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        }
+      },
+      "required": ["file", "detail"],
+      "type": "object"
+    },
+    "MemoryHistoryEvent": {
+      "additionalProperties": false,
+      "description": "One immutable record of a state change — append-only, same discipline as the Findings Ledger's `HistoryEvent`.",
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "newState": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "origin": {
+          "$ref": "#/definitions/MemoryOrigin"
+        },
+        "previousState": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": ["timestamp", "newState", "origin"],
+      "type": "object"
+    },
+    "MemoryItem": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/AcceptedDeviationItem"
+        },
+        {
+          "$ref": "#/definitions/SuppressionItem"
+        },
+        {
+          "$ref": "#/definitions/ExceptionItem"
+        },
+        {
+          "$ref": "#/definitions/ConventionItem"
+        },
+        {
+          "$ref": "#/definitions/ReviewHistoryNoteItem"
+        },
+        {
+          "$ref": "#/definitions/DecisionItem"
+        }
+      ]
+    },
+    "MemoryLifecycleStatus": {
+      "enum": ["detected", "suggested", "confirmed", "active", "deprecated", "archived"],
+      "type": "string"
+    },
+    "MemoryOrigin": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "detection",
+              "type": "string"
+            },
+            "sessionId": {
+              "type": "string"
+            }
+          },
+          "required": ["kind", "sessionId"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "actor": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "user",
+              "type": "string"
+            }
+          },
+          "required": ["kind", "actor"],
+          "type": "object"
+        }
+      ],
+      "description": "What triggered a transition — mirrors `core/findings-ledger`'s `TransitionOrigin`. `\"detection\"` is a deterministic pass creating/advancing an item automatically; `\"user\"` is an explicit human action (confirm/reject/archive — see `api.ts`) and is the only origin that can ever move an item into `\"confirmed\"`, keeping \"user-confirmed\" confidence honest."
+    },
+    "MemoryStore": {
+      "additionalProperties": false,
+      "description": "The persisted store of everything Repository Memory remembers for one repository. Immutable, same discipline as `Ledger` (`core/findings-ledger`) — every operation in this package returns a *new* `MemoryStore`.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/definitions/MemoryItem"
+          },
+          "type": "array"
+        },
+        "repositoryRoot": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["schemaVersion", "repositoryRoot", "items", "createdAt", "updatedAt"],
+      "type": "object"
+    },
+    "ReviewHistoryNoteItem": {
+      "additionalProperties": false,
+      "description": "Enriches the Findings Ledger — never duplicates it. `ledgerEntryId` links back to a real `LedgerEntry.id` this item is annotating; this package never stores its own copy of a finding's detection history (first/last detected, resolved, reopened — that's the Ledger's job, see `core/findings-ledger`'s `HistoryEvent[]`).",
+      "properties": {
+        "category": {
+          "const": "review-history",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ledgerEntryId": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "evidence",
+        "history",
+        "id",
+        "ledgerEntryId",
+        "note",
+        "rationale",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    },
+    "SuppressionItem": {
+      "additionalProperties": false,
+      "description": "A recurring false positive a repository wants suppressed. `fingerprint` intentionally mirrors `core/findings-ledger`'s `FindingFingerprint` shape (file + ruleId/category + optional content anchor) — reused for matching (`matching.ts`), never redefined, so suppression matching stays consistent with how the Ledger itself recognizes \"the same finding.\"",
+      "properties": {
+        "category": {
+          "const": "suppression",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/definitions/MemoryConfidence"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/MemoryEvidence"
+          },
+          "type": "array"
+        },
+        "fingerprintCategory": {
+          "type": "string"
+        },
+        "fingerprintFile": {
+          "type": "string"
+        },
+        "fingerprintRuleId": {
+          "type": "string"
+        },
+        "history": {
+          "items": {
+            "$ref": "#/definitions/MemoryHistoryEvent"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Required, never optional — \"users should always understand why Debuggatha remembers something\".",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MemoryLifecycleStatus"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "category",
+        "confidence",
+        "createdAt",
+        "evidence",
+        "fingerprintCategory",
+        "fingerprintFile",
+        "history",
+        "id",
+        "rationale",
+        "status",
+        "updatedAt"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "MemoryStore"
+}

@@ -1,6 +1,6 @@
-import * as vscode from "vscode";
-import type { FindingIndex } from "../findings/index.js";
-import { hoverMarkdown } from "../findings/present.js";
+import * as vscode from 'vscode';
+import type { FindingIndex } from '../findings/index.js';
+import { hoverMarkdown } from '../findings/present.js';
 
 /** What a person sees when pointing at a squiggle: the rule, where the claim comes from, why, and the fix. */
 export class FindingHoverProvider implements vscode.HoverProvider {
@@ -22,10 +22,10 @@ export class FindingHoverProvider implements vscode.HoverProvider {
       // Only Debuggatha's own commands may run from a link in this text, which comes from a repository.
       markdown.isTrusted = {
         enabledCommands: [
-          "debuggatha.openFindingById",
-          "debuggatha.resolveFindingById",
-          "debuggatha.dismissFindingById",
-          "debuggatha.suppressInline",
+          'debuggatha.openFindingById',
+          'debuggatha.resolveFindingById',
+          'debuggatha.dismissFindingById',
+          'debuggatha.suppressInline',
         ],
       };
       return markdown;

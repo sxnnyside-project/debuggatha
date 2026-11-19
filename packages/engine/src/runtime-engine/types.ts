@@ -27,22 +27,22 @@ export interface SemanticEvidence {
   excerpt: string;
 }
 
-export type SemanticConfidence = "high" | "medium" | "low";
+export type SemanticConfidence = 'high' | 'medium' | 'low';
 
 export interface SemanticFindingCandidate {
   title: string;
   explanation: string;
   confidence: SemanticConfidence;
-  severityHint: "critical" | "high" | "medium" | "low" | "informational" | undefined;
+  severityHint: 'critical' | 'high' | 'medium' | 'low' | 'informational' | undefined;
   evidence: SemanticEvidence[];
   recommendation: string | undefined;
 }
 
 export type SemanticStreamEvent =
-  | { kind: "token"; text: string }
-  | { kind: "result"; result: SemanticReviewResult }
-  | { kind: "error"; message: string }
-  | { kind: "done" };
+  | { kind: 'token'; text: string }
+  | { kind: 'result'; result: SemanticReviewResult }
+  | { kind: 'error'; message: string }
+  | { kind: 'done' };
 
 export interface SemanticExecutionRequest {
   model: string;

@@ -1,9 +1,9 @@
-import { afterEach, describe, expect, it, vi } from "bun:test";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import * as real from "./index.js";
-import { executeReview, toRepoRelative } from "./pipeline.js";
+import { afterEach, describe, expect, it, vi } from 'bun:test';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import * as real from './index.js';
+import { executeReview, toRepoRelative } from './pipeline.js';
 
 let dir: string | undefined;
 
@@ -13,14 +13,14 @@ afterEach(() => {
 });
 
 function mktemp(): string {
-  return mkdtempSync(join(tmpdir(), "debuggatha-pipeline-"));
+  return mkdtempSync(join(tmpdir(), 'debuggatha-pipeline-'));
 }
 
-describe("executeReview", () => {
-  it("runs a real files review end-to-end and persists the ledger", () => {
+describe('executeReview', () => {
+  it('runs a real files review end-to-end and persists the ledger', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     // "release"'s `no-hardcoded-secrets` is `appliesTo: { kind: "always" }` —
     // unlike the stack packs (javascript/typescript), it doesn't depend on
     // Stack Detection emitting a language string the pack's `RuleScope`
@@ -32,129 +32,129 @@ describe("executeReview", () => {
 
     const { result, syncReport } = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/release"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/release'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     expect(result.findings.length).toBeGreaterThan(0);
-    expect(result.findings.some((f) => f.locations[0]?.file === "config.js")).toBe(true);
+    expect(result.findings.some((f) => f.locations[0]?.file === 'config.js')).toBe(true);
     expect(syncReport.newEntryIds.length).toBe(result.findings.length);
 
-    const ledgerPath = join(dir, ".debuggatha", "ledger.json");
-    const persisted = JSON.parse(readFileSync(ledgerPath, "utf8"));
+    const ledgerPath = join(dir, '.debuggatha', 'ledger.json');
+    const persisted = JSON.parse(readFileSync(ledgerPath, 'utf8'));
     expect(persisted.entries.length).toBe(result.findings.length);
   });
 
-  it("tracks one finding once, whichever scope or path form found it", () => {
+  it('tracks one finding once, whichever scope or path form found it', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     writeFileSync(target, 'const apiKey = "sk_live_1234567890abcdef";\n');
-    const review = (scope: Parameters<typeof executeReview>[0]["scope"]) =>
+    const review = (scope: Parameters<typeof executeReview>[0]['scope']) =>
       executeReview({
         rootDir: dir as string,
         scope,
-        depth: "full",
-        packIds: ["debuggatha/release"],
+        depth: 'full',
+        packIds: ['debuggatha/release'],
         policyId: undefined,
-        sourceName: "test",
+        sourceName: 'test',
       });
 
-    const first = review({ kind: "files", paths: [target] });
-    review({ kind: "workspace" });
-    review({ kind: "files", paths: [target] });
+    const first = review({ kind: 'files', paths: [target] });
+    review({ kind: 'workspace' });
+    review({ kind: 'files', paths: [target] });
 
-    const persisted = JSON.parse(readFileSync(join(dir, ".debuggatha", "ledger.json"), "utf8"));
+    const persisted = JSON.parse(readFileSync(join(dir, '.debuggatha', 'ledger.json'), 'utf8'));
     expect(persisted.entries.length).toBe(first.result.findings.length);
-    expect(persisted.entries.every((e: { status: string }) => e.status === "open")).toBe(true);
+    expect(persisted.entries.every((e: { status: string }) => e.status === 'open')).toBe(true);
   });
 
-  it("keeps a file outside the repository absolute", () => {
-    expect(toRepoRelative("/repo", "/elsewhere/a.ts")).toBe("/elsewhere/a.ts");
-    expect(toRepoRelative("/repo", "src/a.ts")).toBe("src/a.ts");
+  it('keeps a file outside the repository absolute', () => {
+    expect(toRepoRelative('/repo', '/elsewhere/a.ts')).toBe('/elsewhere/a.ts');
+    expect(toRepoRelative('/repo', 'src/a.ts')).toBe('src/a.ts');
   });
 
-  it("detects applicable packs on its own when none are named", () => {
+  it('detects applicable packs on its own when none are named', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     writeFileSync(target, 'const apiKey = "sk_live_1234567890abcdef";\n');
 
     const { result } = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
       packIds: [],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     expect(result.summary.appliedPacks.length).toBeGreaterThan(0);
     expect(result.findings.length).toBeGreaterThan(0);
   });
 
-  it("leaves the ledger untouched when persist is false", () => {
+  it('leaves the ledger untouched when persist is false', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     writeFileSync(target, 'const apiKey = "sk_live_1234567890abcdef";\n');
 
     const { result, syncReport } = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
       packIds: [],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
       persist: false,
     });
 
     expect(result.findings.length).toBeGreaterThan(0);
     expect(syncReport.newEntryIds.length).toBe(result.findings.length);
-    expect(existsSync(join(dir, ".debuggatha", "ledger.json"))).toBe(false);
+    expect(existsSync(join(dir, '.debuggatha', 'ledger.json'))).toBe(false);
   });
 
-  it("puts explicitly named packs ahead of detected ones", () => {
-    const ids = real.resolveRequestedPackIds(["debuggatha/owasp"]);
-    expect(ids[0]).toBe("debuggatha/owasp");
+  it('puts explicitly named packs ahead of detected ones', () => {
+    const ids = real.resolveRequestedPackIds(['debuggatha/owasp']);
+    expect(ids[0]).toBe('debuggatha/owasp');
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids.length).toBeGreaterThan(1);
   });
 
-  it("runs a workspace review producing no findings for a clean, unmatched pack list", () => {
+  it('runs a workspace review producing no findings for a clean, unmatched pack list', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    mkdirSync(join(dir, "src"));
-    writeFileSync(join(dir, "src", "clean.js"), "const x = 1;\n");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    mkdirSync(join(dir, 'src'));
+    writeFileSync(join(dir, 'src', 'clean.js'), 'const x = 1;\n');
 
     const { result } = executeReview({
       rootDir: dir,
-      scope: { kind: "workspace" },
-      depth: "full",
+      scope: { kind: 'workspace' },
+      depth: 'full',
       packIds: [],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     expect(result.findings).toEqual([]);
   });
 
-  it("uses injected deps instead of the real skill functions when provided", () => {
+  it('uses injected deps instead of the real skill functions when provided', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
 
     const fakeReviewFiles = vi.fn().mockReturnValue([]);
     const { result } = executeReview(
       {
         rootDir: dir,
-        scope: { kind: "files", paths: [join(dir, "package.json")] },
-        depth: "full",
+        scope: { kind: 'files', paths: [join(dir, 'package.json')] },
+        depth: 'full',
         packIds: [],
         policyId: undefined,
-        sourceName: "test",
+        sourceName: 'test',
       },
       {
         buildRepositoryContext: real.buildRepositoryContext,
@@ -179,129 +179,129 @@ describe("executeReview", () => {
   });
 });
 
-describe("executeReview — capabilities", () => {
-  it("resolves both javascript and typescript stack pack rules for a real TS repo (previously impossible)", () => {
+describe('executeReview — capabilities', () => {
+  it('resolves both javascript and typescript stack pack rules for a real TS repo (previously impossible)', () => {
     dir = mktemp();
     writeFileSync(
-      join(dir, "package.json"),
-      JSON.stringify({ name: "fixture", devDependencies: { typescript: "^5.0.0" } }),
+      join(dir, 'package.json'),
+      JSON.stringify({ name: 'fixture', devDependencies: { typescript: '^5.0.0' } }),
     );
-    writeFileSync(join(dir, "tsconfig.json"), "{}");
-    const target = join(dir, "risky.ts");
-    writeFileSync(target, "var x: any = eval(userInput);\n");
+    writeFileSync(join(dir, 'tsconfig.json'), '{}');
+    const target = join(dir, 'risky.ts');
+    writeFileSync(target, 'var x: any = eval(userInput);\n');
 
     const { result } = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/typescript", "debuggatha/javascript"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/typescript', 'debuggatha/javascript'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     const ruleIds = new Set(
       result.findings.flatMap((f) =>
-        f.evidence.flatMap((e) => (e.kind === "review-pack-rule" ? [e.ruleId] : [])),
+        f.evidence.flatMap((e) => (e.kind === 'review-pack-rule' ? [e.ruleId] : [])),
       ),
     );
-    expect(ruleIds.has("no-explicit-any")).toBe(true);
+    expect(ruleIds.has('no-explicit-any')).toBe(true);
   });
 });
 
-describe("executeReview — Repository Memory", () => {
-  it("suppresses a finding matched by an active memory suppression, automatically, with no caller changes", () => {
+describe('executeReview — Repository Memory', () => {
+  it('suppresses a finding matched by an active memory suppression, automatically, with no caller changes', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     writeFileSync(target, 'const apiKey = "sk_live_1234567890abcdef";\n');
 
     const before = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/release"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/release'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
     expect(before.result.findings.length).toBeGreaterThan(0);
     expect(before.suppressedFindings).toEqual([]);
 
     const [firstFinding] = before.result.findings;
-    if (!firstFinding) throw new Error("expected at least one finding");
+    if (!firstFinding) throw new Error('expected at least one finding');
     const fingerprint = real.computeFindingFingerprint(firstFinding);
     let store = real.createEmptyMemoryStore(dir);
     const item = real.createMemoryItem({
-      category: "suppression",
-      confidence: "user-confirmed",
-      rationale: "Confirmed test fixture, not a real secret.",
-      evidence: [{ file: target, detail: "reviewed by alice" }],
+      category: 'suppression',
+      confidence: 'user-confirmed',
+      rationale: 'Confirmed test fixture, not a real secret.',
+      evidence: [{ file: target, detail: 'reviewed by alice' }],
       fingerprintFile: fingerprint.file,
       fingerprintRuleId: fingerprint.ruleId,
       fingerprintCategory: fingerprint.category,
-      origin: { kind: "user", actor: "alice" },
+      origin: { kind: 'user', actor: 'alice' },
     });
     store = real.addMemoryItem(store, item);
-    store = real.suggestMemory(store, item.id, "session-1");
-    store = real.confirmMemory(store, item.id, "alice");
-    store = real.activateMemory(store, item.id, "alice");
+    store = real.suggestMemory(store, item.id, 'session-1');
+    store = real.confirmMemory(store, item.id, 'alice');
+    store = real.activateMemory(store, item.id, 'alice');
     real.saveMemoryStore(store);
 
     const after = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/release"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/release'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     expect(after.result.findings).toEqual([]);
     expect(after.suppressedFindings).toHaveLength(1);
     expect(after.suppressedFindings[0]).toMatchObject({
       memoryItemId: item.id,
-      reason: "suppression",
+      reason: 'suppression',
     });
   });
 
-  it("never suppresses using a merely-detected (unconfirmed) memory item", () => {
+  it('never suppresses using a merely-detected (unconfirmed) memory item', () => {
     dir = mktemp();
-    writeFileSync(join(dir, "package.json"), JSON.stringify({ name: "fixture" }));
-    const target = join(dir, "config.js");
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    const target = join(dir, 'config.js');
     writeFileSync(target, 'const apiKey = "sk_live_1234567890abcdef";\n');
 
     const first = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/release"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/release'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
     const [firstFinding] = first.result.findings;
-    if (!firstFinding) throw new Error("expected at least one finding");
+    if (!firstFinding) throw new Error('expected at least one finding');
     const fingerprint = real.computeFindingFingerprint(firstFinding);
 
     let store = real.createEmptyMemoryStore(dir);
     const item = real.createMemoryItem({
-      category: "suppression",
-      confidence: "inferred",
-      rationale: "Looked like a fixture, unconfirmed.",
-      evidence: [{ file: target, detail: "auto-detected" }],
+      category: 'suppression',
+      confidence: 'inferred',
+      rationale: 'Looked like a fixture, unconfirmed.',
+      evidence: [{ file: target, detail: 'auto-detected' }],
       fingerprintFile: fingerprint.file,
       fingerprintRuleId: fingerprint.ruleId,
       fingerprintCategory: fingerprint.category,
-      origin: { kind: "detection", sessionId: "s" },
+      origin: { kind: 'detection', sessionId: 's' },
     });
     store = real.addMemoryItem(store, item); // left at "detected" — never suggested/confirmed/activated
     real.saveMemoryStore(store);
 
     const second = executeReview({
       rootDir: dir,
-      scope: { kind: "files", paths: [target] },
-      depth: "full",
-      packIds: ["debuggatha/release"],
+      scope: { kind: 'files', paths: [target] },
+      depth: 'full',
+      packIds: ['debuggatha/release'],
       policyId: undefined,
-      sourceName: "test",
+      sourceName: 'test',
     });
 
     expect(second.result.findings.length).toBeGreaterThan(0);

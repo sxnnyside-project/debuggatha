@@ -1,25 +1,25 @@
-import { build, context } from "esbuild";
+import { build, context } from 'esbuild';
 
-const watch = process.argv.includes("--watch");
-const tests = process.argv.includes("--tests");
+const watch = process.argv.includes('--watch');
+const tests = process.argv.includes('--tests');
 
 const shared = {
   bundle: true,
-  platform: "node",
-  format: "cjs",
+  platform: 'node',
+  format: 'cjs',
   // VS Code 1.90, the oldest supported host, runs Node 20.
-  target: "node20",
+  target: 'node20',
   sourcemap: true,
-  logLevel: "info",
+  logLevel: 'info',
 };
 
 /** @type {import("esbuild").BuildOptions} */
 const extension = {
   ...shared,
-  entryPoints: ["src/index.ts"],
-  outfile: "dist/index.js",
+  entryPoints: ['src/index.ts'],
+  outfile: 'dist/index.js',
   minify: !watch,
-  external: ["vscode"],
+  external: ['vscode'],
 };
 
 // The process a review runs in, so a slow analyzer cannot freeze the editor and a review can be
@@ -27,8 +27,8 @@ const extension = {
 /** @type {import("esbuild").BuildOptions} */
 const worker = {
   ...shared,
-  entryPoints: ["src/runner/worker.ts"],
-  outfile: "dist/review-worker.js",
+  entryPoints: ['src/runner/worker.ts'],
+  outfile: 'dist/review-worker.js',
   minify: !watch,
 };
 
@@ -38,12 +38,12 @@ const worker = {
 const integration = {
   ...shared,
   entryPoints: [
-    "src/test/integration/run.ts",
-    "src/test/integration/suite.ts",
-    "src/test/integration/extension.itest.ts",
+    'src/test/integration/run.ts',
+    'src/test/integration/suite.ts',
+    'src/test/integration/extension.itest.ts',
   ],
-  outdir: "dist-test",
-  external: ["vscode", "mocha", "@vscode/test-electron"],
+  outdir: 'dist-test',
+  external: ['vscode', 'mocha', '@vscode/test-electron'],
 };
 
 if (watch) {

@@ -9,7 +9,7 @@ reviews, and the findings land in the same ledger the CLI and the editor read.
 | Install | Command the host runs |
 | --- | --- |
 | No install (published package) | `bunx @sxnnyside/debuggatha-mcp` or `npx -y @sxnnyside/debuggatha-mcp` |
-| Installed from this checkout | `debuggatha-mcp` (after `just install-cli`) |
+| Installed from this checkout | `debuggatha mcp` (after `just install-cli`) |
 | Installed from a registry | `debuggatha-mcp` (after `bun add --global @sxnnyside/debuggatha-mcp` or `npm install --global @sxnnyside/debuggatha-mcp`) |
 
 The examples below use `debuggatha-mcp`; substitute `bunx` with `["@sxnnyside/debuggatha-mcp"]` or `npx` with
@@ -155,9 +155,10 @@ See [packages/cli/README.md](../packages/cli/README.md) for every command and fl
 ## 6. Installing from a checkout
 
 ```bash
-just install          # toolchains
-just install-cli      # puts debuggatha and debuggatha-mcp on your PATH (needs ~/.bun/bin on PATH)
+just install          # fetch the crates
+just install-cli      # puts debuggatha on your PATH (needs ~/.cargo/bin on PATH); MCP hosts run `debuggatha mcp`
 just uninstall-cli    # undoes install-cli
+just parity-install   # JavaScript toolchains, for the extension
 just dev              # rebuilds the packages and watches the extension
 ```
 

@@ -1,6 +1,6 @@
-import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { execFileSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import {
   addedLinesByFile,
   createLocalProvider,
@@ -15,10 +15,10 @@ import {
   type SemanticRun,
   summarizeFindings,
   toRepoRelative,
-} from "@debuggatha/engine";
-import { type Command, Option } from "commander";
-import { loadConfig } from "../config.js";
-import { pathPolicy } from "../path-policy.js";
+} from '@debuggatha/engine';
+import { type Command, Option } from 'commander';
+import { loadConfig } from '../config.js';
+import { pathPolicy } from '../path-policy.js';
 import {
   exceedsThreshold,
   formatGithub,
@@ -29,10 +29,10 @@ import {
   type ReportFormat,
   SEVERITY_ORDER,
   type SeverityName,
-} from "../report.js";
-import { toSarif } from "../sarif.js";
-import { CliLogger } from "../utils/logger.js";
-import { addAnalyzerOptions, analyzerOptionsFrom, describeRuns } from "./analyzers.js";
+} from '../report.js';
+import { toSarif } from '../sarif.js';
+import { CliLogger } from '../utils/logger.js';
+import { addAnalyzerOptions, analyzerOptionsFrom, describeRuns } from './analyzers.js';
 
 interface ReviewOptions {
   all?: boolean;
@@ -42,7 +42,7 @@ interface ReviewOptions {
   policy?: string;
   pack?: string[];
   format: ReportFormat;
-  failOn: SeverityName | "none";
+  failOn: SeverityName | 'none';
   output?: string;
   persist: boolean;
   includeBaselined?: boolean;
@@ -60,9 +60,9 @@ interface ReviewOptions {
 type ReviewOutput = ReturnType<typeof executeReview> & { semantic?: SemanticRun };
 
 function describeSemantic(run: SemanticRun): string[] {
-  const who = `${run.provider}${run.model ? ` ${run.model}` : ""}`;
+  const who = `${run.provider}${run.model ? ` ${run.model}` : ''}`;
   const lines = [
-    `Semantic pass (${who}): ${run.detected} suspected ${run.detected === 1 ? "issue" : "issues"} raised, ${run.rejected} dropped for not matching the code${run.verified > 0 ? `, ${run.verified} findings commented on` : ""}.`,
+    `Semantic pass (${who}): ${run.detected} suspected ${run.detected === 1 ? 'issue' : 'issues'} raised, ${run.rejected} dropped for not matching the code${run.verified > 0 ? `, ${run.verified} findings commented on` : ''}.`,
   ];
   for (const note of run.notes) lines.push(`Semantic pass: ${note}`);
   return lines;
@@ -77,64 +77,64 @@ function describeSemantic(run: SemanticRun): string[] {
  */
 export function registerReviewCommand(program: Command) {
   const review = program
-    .command("review")
+    .command('review')
     .description(
       "Review the given files, a diff, or the working tree against the packs that match the repository's stack.",
     )
     .addOption(
-      new Option("--all", "Review the whole repository, even with uncommitted changes").conflicts([
-        "files",
-        "diff",
-        "base",
-        "changedSince",
+      new Option('--all', 'Review the whole repository, even with uncommitted changes').conflicts([
+        'files',
+        'diff',
+        'base',
+        'changedSince',
       ]),
     )
-    .option("--diff <diff>", 'A unified diff to review; "-" reads it from stdin')
-    .option("--files <path...>", "Review whole files instead of a diff")
-    .option("--base <ref>", "Review the changes since this git ref (e.g. origin/main...HEAD)")
+    .option('--diff <diff>', 'A unified diff to review; "-" reads it from stdin')
+    .option('--files <path...>', 'Review whole files instead of a diff')
+    .option('--base <ref>', 'Review the changes since this git ref (e.g. origin/main...HEAD)')
     .addOption(
       new Option(
-        "--changed-since <ref>",
-        "Review whole files changed since this git ref (e.g. origin/main), including new ones",
-      ).conflicts(["files", "diff", "base"]),
+        '--changed-since <ref>',
+        'Review whole files changed since this git ref (e.g. origin/main), including new ones',
+      ).conflicts(['files', 'diff', 'base']),
     )
     .option(
-      "--fail-on-new",
-      "Fail only on findings on lines you changed (since --changed-since, --base, or HEAD); the rest are reported but do not affect the exit code",
+      '--fail-on-new',
+      'Fail only on findings on lines you changed (since --changed-since, --base, or HEAD); the rest are reported but do not affect the exit code',
     )
-    .option("--policy <id>", "Assert the review policy id a previous review reported")
-    .option("--pack <id...>", "Extra Review Packs on top of the detected ones")
+    .option('--policy <id>', 'Assert the review policy id a previous review reported')
+    .option('--pack <id...>', 'Extra Review Packs on top of the detected ones')
     .addOption(
-      new Option("--format <format>", "Report format")
+      new Option('--format <format>', 'Report format')
         .choices(REPORT_FORMATS)
-        .default("text" satisfies ReportFormat),
+        .default('text' satisfies ReportFormat),
     )
     .addOption(
-      new Option("--fail-on <severity>", "Lowest severity that makes the run exit with 2")
-        .choices([...SEVERITY_ORDER, "none"])
-        .default("informational" satisfies SeverityName),
+      new Option('--fail-on <severity>', 'Lowest severity that makes the run exit with 2')
+        .choices([...SEVERITY_ORDER, 'none'])
+        .default('informational' satisfies SeverityName),
     )
-    .option("--output <file>", "Write the report to a file instead of stdout")
-    .option("--no-persist", "Do not record findings in .debuggatha/ledger.json")
+    .option('--output <file>', 'Write the report to a file instead of stdout')
+    .option('--no-persist', 'Do not record findings in .debuggatha/ledger.json')
     .option(
-      "--include-baselined",
-      "Also report findings the baseline accepted (see `debuggatha baseline`)",
+      '--include-baselined',
+      'Also report findings the baseline accepted (see `debuggatha baseline`)',
     );
   addAnalyzerOptions(review)
     .addOption(
       new Option(
-        "--semantic <provider>",
-        "Also ask a model on this machine to read the changed code (ollama or lmstudio)",
+        '--semantic <provider>',
+        'Also ask a model on this machine to read the changed code (ollama or lmstudio)',
       ).choices(LOCAL_PROVIDERS),
     )
-    .option("--semantic-model <name>", "The model to ask (default: the first one the runtime has)")
-    .option("--semantic-url <url>", "Where the runtime listens; only localhost is accepted")
+    .option('--semantic-model <name>', 'The model to ask (default: the first one the runtime has)')
+    .option('--semantic-url <url>', 'Where the runtime listens; only localhost is accepted')
     .option(
-      "--semantic-verify",
+      '--semantic-verify',
       "Also attach the model's opinion to findings the detectors are unsure of (off: not reliable enough on small models)",
     )
     .addHelpText(
-      "after",
+      'after',
       `
 Analyzers: tools installed on this machine (Ruff, Biome, gitleaks, ktlint...) run as separate
 processes and their findings join the review, each labeled with the tool and its license.
@@ -164,31 +164,31 @@ Exit codes:
       const asJson = Boolean(program.opts().json);
       const base = command.logger as CliLogger;
       const quiet = new CliLogger({ json: false, verbose: false, quiet: true });
-      const fromDefault = (name: string) => command.getOptionValueSource(name) === "default";
-      let format: ReportFormat = asJson ? "json" : options.format;
+      const fromDefault = (name: string) => command.getOptionValueSource(name) === 'default';
+      let format: ReportFormat = asJson ? 'json' : options.format;
       // Machine formats own stdout, so progress messages are silenced for them.
-      let logger = format === "text" ? base : quiet;
+      let logger = format === 'text' ? base : quiet;
 
       try {
         // What the flags leave unsaid comes from the repository's config, then the defaults.
         const loaded = loadConfig(cwd);
         const configured = loaded.config.review;
-        if (!asJson && fromDefault("format") && configured.format) {
+        if (!asJson && fromDefault('format') && configured.format) {
           format = configured.format as ReportFormat;
-          logger = format === "text" ? base : quiet;
+          logger = format === 'text' ? base : quiet;
         }
         const failOn = (
-          fromDefault("failOn") && configured.failOn ? configured.failOn : options.failOn
-        ) as SeverityName | "none";
+          fromDefault('failOn') && configured.failOn ? configured.failOn : options.failOn
+        ) as SeverityName | 'none';
         for (const warning of loaded.warnings) logger.warn(warning);
 
         const git = new LocalGitProvider(cwd);
         const filePaths = options.files?.map((file) => resolve(cwd, file));
-        let diff = options.diff === "-" ? readStdin() : options.diff;
+        let diff = options.diff === '-' ? readStdin() : options.diff;
         let changedFiles: string[] | undefined;
 
         if (options.all) {
-          logger.info("Reviewing the whole repository.");
+          logger.info('Reviewing the whole repository.');
         } else if (options.changedSince) {
           const changes = listChangedFiles(cwd, options.changedSince);
           changedFiles = [...changes.changed, ...changes.deleted];
@@ -202,8 +202,8 @@ Exit codes:
           }
           logger.info(
             diff
-              ? "Reviewing the changes in your working tree (use --all for the whole repository)."
-              : "No changes detected; reviewing the whole repository.",
+              ? 'Reviewing the changes in your working tree (use --all for the whole repository).'
+              : 'No changes detected; reviewing the whole repository.',
           );
         }
 
@@ -217,22 +217,22 @@ Exit codes:
         }
 
         const scope = options.all
-          ? ({ kind: "workspace" } as const)
+          ? ({ kind: 'workspace' } as const)
           : changedFiles
-            ? ({ kind: "files", paths: changedFiles.map((file) => resolve(cwd, file)) } as const)
+            ? ({ kind: 'files', paths: changedFiles.map((file) => resolve(cwd, file)) } as const)
             : filePaths
-              ? ({ kind: "files", paths: filePaths } as const)
+              ? ({ kind: 'files', paths: filePaths } as const)
               : diff
-                ? ({ kind: "diff", base: options.base, diff } as const)
-                : ({ kind: "workspace" } as const);
+                ? ({ kind: 'diff', base: options.base, diff } as const)
+                : ({ kind: 'workspace' } as const);
 
         const reviewInput: ReviewPipelineInput = {
           rootDir: cwd,
           scope,
-          depth: "full",
+          depth: 'full',
           packIds: [...(configured.packs ?? []), ...(options.pack ?? [])],
           policyId: options.policy,
-          sourceName: "debuggatha-cli",
+          sourceName: 'debuggatha-cli',
           persist: options.persist,
           includeBaselined: Boolean(options.includeBaselined),
           analyzers: analyzerOptionsFrom(options, loaded.config.analyzers),
@@ -270,7 +270,7 @@ Exit codes:
         // With --fail-on-new only what this change touched can fail the run.
         let counted: readonly Finding[] = result.findings;
         if (options.failOnNew) {
-          const ref = options.changedSince ?? options.base ?? "HEAD";
+          const ref = options.changedSince ?? options.base ?? 'HEAD';
           counted = await onChangedLines(cwd, ref, result.findings);
         }
         const outside = result.findings.length - counted.length;
@@ -281,7 +281,7 @@ Exit codes:
         ];
         const uncountedNote =
           outside > 0
-            ? `${outside} more ${outside === 1 ? "finding is" : "findings are"} outside the lines this change touched and ${outside === 1 ? "does" : "do"} not affect the result.`
+            ? `${outside} more ${outside === 1 ? 'finding is' : 'findings are'} outside the lines this change touched and ${outside === 1 ? 'does' : 'do'} not affect the result.`
             : undefined;
         const report = render(format, cwd, output, options, {
           notes,
@@ -310,13 +310,13 @@ Exit codes:
           logger.info(`${suppressedInline.length} findings hidden by debuggatha-ignore comments.`);
         }
         const fails = counted.some((finding) => {
-          const bar = policy.failOnFor(finding.locations[0]?.file ?? "") ?? failOn;
-          return exceedsThreshold([finding], bar as SeverityName | "none");
+          const bar = policy.failOnFor(finding.locations[0]?.file ?? '') ?? failOn;
+          return exceedsThreshold([finding], bar as SeverityName | 'none');
         });
         if (fails) process.exitCode = 2;
       } catch (err: unknown) {
-        if (format === "text") {
-          base.error("Review failed.", err);
+        if (format === 'text') {
+          base.error('Review failed.', err);
         } else {
           process.stderr.write(
             `Review failed: ${err instanceof Error ? err.message : String(err)}\n`,
@@ -330,12 +330,12 @@ Exit codes:
 /** The untracked files git would add: wholly new to the change, with no diff lines of their own. */
 function untrackedFiles(cwd: string): Set<string> {
   try {
-    const listed = execFileSync("git", ["ls-files", "-z", "--others", "--exclude-standard"], {
+    const listed = execFileSync('git', ['ls-files', '-z', '--others', '--exclude-standard'], {
       cwd,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
     });
-    return new Set(listed.split("\0").filter(Boolean));
+    return new Set(listed.split('\0').filter(Boolean));
   } catch {
     return new Set();
   }
@@ -364,20 +364,20 @@ async function onChangedLines(
 
 function renderEmpty(format: ReportFormat, cwd: string, note: string): string {
   switch (format) {
-    case "json":
+    case 'json':
       return JSON.stringify(
-        { status: "success", reviewResult: { findings: [] }, note, analyzers: [], semantic: null },
+        { status: 'success', reviewResult: { findings: [] }, note, analyzers: [], semantic: null },
         null,
         2,
       );
-    case "sarif":
+    case 'sarif':
       return JSON.stringify(toSarif([], cwd), null, 2);
-    case "markdown":
+    case 'markdown':
       return formatMarkdown([], cwd, { notes: [note] });
-    case "gitlab":
-      return "[]";
+    case 'gitlab':
+      return '[]';
     default:
-      return "";
+      return '';
   }
 }
 
@@ -390,10 +390,10 @@ function render(
 ): string {
   const { result } = output;
   switch (format) {
-    case "json":
+    case 'json':
       return JSON.stringify(
         {
-          status: "success",
+          status: 'success',
           reviewResult: result,
           syncReport: output.syncReport,
           suppressedFindings: output.suppressedFindings,
@@ -407,24 +407,24 @@ function render(
         null,
         2,
       );
-    case "sarif":
+    case 'sarif':
       return JSON.stringify(toSarif(result.findings, cwd), null, 2);
-    case "github":
+    case 'github':
       return formatGithub(result.findings, cwd);
-    case "markdown":
+    case 'markdown':
       return formatMarkdown(result.findings, cwd, {
         notes: context.notes,
         ...(context.uncounted ? { uncounted: context.uncounted } : {}),
       });
-    case "gitlab":
+    case 'gitlab':
       return formatGitlab(result.findings, cwd);
-    case "text":
+    case 'text':
       return formatText(result.findings, cwd);
   }
 }
 
 function readStdin(): string {
-  const text = readFileSync(0, "utf8");
-  if (!text.trim()) throw new Error("--diff - expected a diff on stdin, but stdin was empty.");
+  const text = readFileSync(0, 'utf8');
+  if (!text.trim()) throw new Error('--diff - expected a diff on stdin, but stdin was empty.');
   return text;
 }

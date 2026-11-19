@@ -1,8 +1,8 @@
-import type { RepositoryContext } from "../types.js";
-import type { Fingerprint } from "./fingerprint.js";
+import type { RepositoryContext } from '../types.js';
+import type { Fingerprint } from './fingerprint.js';
 
-export type { FileStamp, Fingerprint } from "./fingerprint.js";
-export { buildFingerprint, hasFingerprintChanged } from "./fingerprint.js";
+export type { FileStamp, Fingerprint } from './fingerprint.js';
+export { buildFingerprint, hasFingerprintChanged } from './fingerprint.js';
 
 export interface CacheEntry {
   context: RepositoryContext;

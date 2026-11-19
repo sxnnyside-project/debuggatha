@@ -1,13 +1,13 @@
-import type { RepositoryContext, ReviewRequest } from "@debuggatha/core";
+import type { RepositoryContext, ReviewRequest } from '@debuggatha/core';
 import {
   type CapabilityRegistry,
   createInMemoryRegistry,
   type ReviewPolicy,
   resolvePolicy,
-} from "@debuggatha/core";
-import { reviewPacks } from "@debuggatha/packs";
+} from '@debuggatha/core';
+import { reviewPacks } from '@debuggatha/packs';
 
-export type { CapabilityRegistry, ReviewPolicy } from "@debuggatha/core";
+export type { CapabilityRegistry, ReviewPolicy } from '@debuggatha/core';
 
 /**
  * The one populated `CapabilityRegistry` instance for v1 (ADR-0004),

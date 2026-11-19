@@ -1,0 +1,624 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReviewSession",
+  "description": "The traceable record of one review in progress: the (immutable) repository context, which\npolicy and packs were selected, and the lifecycle status.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "request": {
+      "$ref": "#/definitions/ReviewRequest"
+    },
+    "repositoryContext": {
+      "$ref": "#/definitions/RepositoryContext"
+    },
+    "selectedPolicy": {
+      "$ref": "#/definitions/PolicyReference"
+    },
+    "selectedPacks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PackReference"
+      }
+    },
+    "status": {
+      "$ref": "#/definitions/ReviewLifecycleStatus"
+    },
+    "execution": {
+      "$ref": "#/definitions/ExecutionMetadata"
+    }
+  },
+  "required": [
+    "id",
+    "createdAt",
+    "request",
+    "repositoryContext",
+    "selectedPacks",
+    "status",
+    "execution"
+  ],
+  "definitions": {
+    "ReviewRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/ReviewScope"
+        },
+        "depth": {
+          "$ref": "#/definitions/ReviewDepth"
+        },
+        "requestedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestedPackIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestedPolicyId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "scope",
+        "depth",
+        "requestedAt",
+        "requestedPackIds"
+      ],
+      "additionalProperties": false
+    },
+    "ReviewScope": {
+      "description": "One scope model: a diff, a list of files and a workspace review differ only in *what* is\nreviewed, not in what a review request is.",
+      "oneOf": [
+        {
+          "description": "No `base` means \"since the last commit\".",
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "diff"
+            },
+            "base": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "files"
+            },
+            "paths": {
+              "description": "At least one; `create_review_request` refuses an empty list.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "kind",
+            "paths"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "workspace"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ReviewDepth": {
+      "type": "string",
+      "enum": [
+        "quick",
+        "full",
+        "architectural"
+      ]
+    },
+    "RepositoryContext": {
+      "description": "One normalized, immutable description of a repository. Everything downstream consumes this\ninstead of touching the file system.",
+      "type": "object",
+      "properties": {
+        "rootDir": {
+          "type": "string"
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hasGit": {
+          "type": "boolean"
+        },
+        "stack": {
+          "$ref": "#/definitions/StackProfile"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "dependencies": {
+          "$ref": "#/definitions/DependencyProfile"
+        },
+        "documentation": {
+          "$ref": "#/definitions/DocumentationProfile"
+        },
+        "criteria": {
+          "$ref": "#/definitions/CriteriaProfile"
+        },
+        "understanding": {
+          "$ref": "#/definitions/UnderstandingProfile"
+        }
+      },
+      "required": [
+        "rootDir",
+        "generatedAt",
+        "hasGit",
+        "stack",
+        "capabilities",
+        "dependencies",
+        "documentation",
+        "criteria",
+        "understanding"
+      ],
+      "additionalProperties": false
+    },
+    "StackProfile": {
+      "type": "object",
+      "properties": {
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackSignal"
+          }
+        },
+        "frameworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackSignal"
+          }
+        },
+        "buildSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackSignal"
+          }
+        },
+        "packageManagers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackSignal"
+          }
+        },
+        "runtimes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackSignal"
+          }
+        },
+        "platformTargets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformTarget"
+          }
+        },
+        "workspaceType": {
+          "$ref": "#/definitions/WorkspaceType"
+        },
+        "workspaceEvidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          }
+        },
+        "manifests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "languages",
+        "frameworks",
+        "buildSystems",
+        "packageManagers",
+        "runtimes",
+        "platformTargets",
+        "workspaceType",
+        "workspaceEvidence",
+        "manifests"
+      ],
+      "additionalProperties": false
+    },
+    "StackSignal": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          }
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "Evidence": {
+      "description": "A fact and where it comes from. Every claim Debuggatha makes about a repository carries one.",
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "detail"
+      ],
+      "additionalProperties": false
+    },
+    "PlatformTarget": {
+      "type": "string",
+      "enum": [
+        "desktop",
+        "mobile",
+        "web"
+      ]
+    },
+    "WorkspaceType": {
+      "type": "string",
+      "enum": [
+        "single-package",
+        "monorepo"
+      ]
+    },
+    "Capability": {
+      "description": "What the repository is, in normalized terms packs can match on (`typescript`, `react`, ...).",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CapabilityKind"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          }
+        },
+        "origin": {
+          "$ref": "#/definitions/CapabilityOrigin"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "confidence",
+        "evidence",
+        "origin"
+      ],
+      "additionalProperties": false
+    },
+    "CapabilityKind": {
+      "type": "string",
+      "enum": [
+        "language",
+        "framework",
+        "platform",
+        "tooling",
+        "characteristic"
+      ]
+    },
+    "Confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "CapabilityOrigin": {
+      "type": "string",
+      "enum": [
+        "manifest",
+        "lockfile",
+        "config",
+        "convention"
+      ]
+    },
+    "DependencyProfile": {
+      "type": "object",
+      "properties": {
+        "lockfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          }
+        },
+        "declaredVersions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "runtimeConstraints": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "lockfiles",
+        "declaredVersions",
+        "runtimeConstraints"
+      ],
+      "additionalProperties": false
+    },
+    "DocumentationProfile": {
+      "type": "object",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentationSource"
+          }
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sources",
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "DocumentationSource": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/DocumentationKind"
+        },
+        "title": {
+          "type": "string"
+        },
+        "wordCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "file",
+        "kind",
+        "wordCount"
+      ],
+      "additionalProperties": false
+    },
+    "DocumentationKind": {
+      "type": "string",
+      "enum": [
+        "readme",
+        "claude-memory",
+        "contributing",
+        "architecture",
+        "adr",
+        "prd",
+        "roadmap",
+        "other"
+      ]
+    },
+    "CriteriaProfile": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CriteriaRule"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "rules",
+        "sources"
+      ],
+      "additionalProperties": false
+    },
+    "CriteriaRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/Evidence"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "UnderstandingProfile": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "openQuestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenQuestion"
+          }
+        }
+      },
+      "required": [
+        "confidence",
+        "openQuestions"
+      ],
+      "additionalProperties": false
+    },
+    "OpenQuestion": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "question",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "PackReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "ReviewLifecycleStatus": {
+      "description": "The complete, enforced lifecycle of a review. `can_transition` is the single source of truth\nfor what is allowed; nothing outside this file encodes lifecycle logic.",
+      "type": "string",
+      "enum": [
+        "requested",
+        "prepared",
+        "running",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "ExecutionMetadata": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ReviewSource"
+        },
+        "startedAt": {
+          "type": "string"
+        },
+        "completedAt": {
+          "type": "string"
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReviewSource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SourceKind"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "SourceKind": {
+      "type": "string",
+      "enum": [
+        "ai-provider",
+        "deterministic-analyzer",
+        "custom-skill",
+        "human-review"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,277 @@
+id = "debuggatha/engineering"
+version = "1.0.0"
+kind = "concern"
+displayName = "Engineering"
+dependsOn = []
+
+[[rules]]
+id = "no-debug-output"
+packId = "debuggatha/engineering"
+statement = "Do not leave debug output (`print`, `println`, `console.log`, `dd`, `IO.inspect`...) in production code; use the project logger."
+category = "style"
+defaultSeverity = "low"
+knowledgeRefs = ["know-no-debug-output"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-weak-random"
+packId = "debuggatha/engineering"
+statement = "Do not use a pseudo-random generator (`random`, `rand`, `Math.random`, `Random.nextInt`) for tokens, identifiers, passwords or anything an attacker could predict; use the platform CSPRNG."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-weak-random"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-path-traversal"
+packId = "debuggatha/engineering"
+statement = "Do not open, read, write or delete a path built from a request value without resolving it and checking it stays inside the intended directory."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-path-traversal"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-swallowed-error"
+packId = "debuggatha/engineering"
+statement = "Do not leave an error handler empty (`catch`, `except`, `rescue`): handle the error, log it, or re-raise it."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-swallowed-error"]
+appliesTo = { kind = "always" }
+
+[[knowledge]]
+id = "know-no-debug-output"
+title = "Debug output left in code"
+body = "Output meant for the person debugging reaches users, logs without a level and, sometimes, secrets. Use the project logger and remove the call before it ships."
+externalRefs = ["https://cwe.mitre.org/data/definitions/489.html", "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"]
+limitations = ["A command-line tool prints its output on purpose and is reported too; test code is not."]
+
+[[knowledge]]
+id = "know-no-weak-random"
+title = "Predictable random numbers"
+body = "General-purpose generators are fast and statistically even, but their output can be predicted from a few samples. A value that guards something must come from the operating system generator."
+externalRefs = ["https://cwe.mitre.org/data/definitions/338.html", "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html"]
+limitations = ["What the value is used for is not visible: shuffling, jitter and sampling are reported at low confidence.", "A generator chosen through an alias or a wrapper is not seen."]
+
+[[knowledge]]
+id = "know-no-path-traversal"
+title = "Path traversal"
+body = "A path taken from a request can carry `..` or an absolute path and reach files outside the directory the program meant to serve. Resolve it and compare it with the base directory, or map an identifier to a fixed path."
+externalRefs = ["https://cwe.mitre.org/data/definitions/22.html", "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"]
+limitations = ["Only input that reaches the call by name in the same file is seen.", "A path checked by resolving it and comparing it with a base directory is reported unless a cleaner is named like one."]
+
+[[knowledge]]
+id = "know-no-swallowed-error"
+title = "An error that is swallowed"
+body = "An empty handler turns a failure into silence: the program goes on with state it did not expect and nobody learns why. Handle the case, record it or let it propagate; if ignoring it is right, say why in a comment."
+externalRefs = ["https://cwe.mitre.org/data/definitions/390.html"]
+limitations = ["A handler with a comment in it is taken as a decision and is not reported.", "Go and Rust (errors as values) and Elixir (`rescue`) are not read."]
+
+[[rules]]
+id = "no-weak-cipher"
+packId = "debuggatha/engineering"
+statement = "Do not use DES, 3DES, RC2, RC4 or XOR as a cipher; use AES-GCM or ChaCha20-Poly1305."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-weak-cipher"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-open-redirect"
+packId = "debuggatha/engineering"
+statement = "Do not redirect to a URL taken from a request without checking it against an allowlist of paths or hosts."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-open-redirect"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-template-injection"
+packId = "debuggatha/engineering"
+statement = "Do not build a template from request data; pass the data to a fixed template as variables."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-template-injection"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-unsafe-reflection"
+packId = "debuggatha/engineering"
+statement = "Do not select a class, function or method by a name taken from a request; map the request value to a fixed set of names."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unsafe-reflection"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-regex-from-input"
+packId = "debuggatha/engineering"
+statement = "Do not compile a regular expression from request data; escape it or match with a fixed pattern."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-regex-from-input"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-unsafe-xml-parser"
+packId = "debuggatha/engineering"
+statement = "Create XML parsers with external entities and DTDs disabled before parsing data that is not yours."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unsafe-xml-parser"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-process-exit"
+packId = "debuggatha/engineering"
+statement = "Do not end the process from library code (`exit`, `System.exit`, `os.Exit`, `log.Fatal`); return an error and let `main` decide."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-process-exit"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-type-punning"
+packId = "debuggatha/engineering"
+statement = "Do not reinterpret memory as another type (`transmute`, `unsafeBitCast`, `unsafe.Pointer`, `reinterpret_cast`); use a checked conversion."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-type-punning"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-catch-all"
+packId = "debuggatha/engineering"
+statement = "Do not catch the base exception type (`Exception`, `Throwable`, a bare `except`, `catch (...)`); catch the errors the code can handle."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-catch-all"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-insecure-tls"
+packId = "debuggatha/engineering"
+statement = "Do not turn off certificate or host-name verification (`verify=False`, `InsecureSkipVerify`, `VERIFY_NONE`)."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-insecure-tls"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-permissive-file-mode"
+packId = "debuggatha/engineering"
+statement = "Do not create or change files with a world-writable mode (`0777`, `0666`)."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-permissive-file-mode"]
+appliesTo = { kind = "always" }
+
+[[rules]]
+id = "no-unfinished-code"
+packId = "debuggatha/engineering"
+statement = "Do not leave `todo!`, `unimplemented!` or `TODO()` in code that ships."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-unfinished-code"]
+appliesTo = { kind = "always" }
+
+[[knowledge]]
+id = "know-no-weak-cipher"
+title = "Broken ciphers"
+body = "DES and RC4 have practical attacks and short keys. Authenticated modern ciphers are in every standard library."
+externalRefs = ["https://cwe.mitre.org/data/definitions/327.html", "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html"]
+limitations = ["Only the cipher named in the call is read; one chosen by a string, as in `Cipher.getInstance(\"DES\")`, is not."]
+
+[[knowledge]]
+id = "know-no-open-redirect"
+title = "Open redirect"
+body = "A redirect target from the request lets an attacker send a victim to a page that looks like yours. Redirect to a fixed path, or check the target against known ones."
+externalRefs = ["https://cwe.mitre.org/data/definitions/601.html", "https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html"]
+limitations = ["Only input that reaches the call by name in the same file is seen.", "A target checked by a function not named like a cleaner is reported."]
+
+[[knowledge]]
+id = "know-no-template-injection"
+title = "Server-side template injection"
+body = "A template assembled from request text runs the engine's expression language on attacker input, which usually reaches code execution."
+externalRefs = ["https://cwe.mitre.org/data/definitions/1336.html", "https://cheatsheetseries.owasp.org/cheatsheets/Injection_Prevention_Cheat_Sheet.html"]
+limitations = ["Only input that reaches the call by name in the same file is seen."]
+
+[[knowledge]]
+id = "know-no-unsafe-reflection"
+title = "Unsafe reflection"
+body = "A name from the request chooses what code runs, so an attacker can reach classes and methods the program never meant to expose."
+externalRefs = ["https://cwe.mitre.org/data/definitions/470.html"]
+limitations = ["Only input that reaches the call by name in the same file is seen.", "A name looked up in an allowlist first is reported unless the check is a cleaner by name."]
+
+[[knowledge]]
+id = "know-no-regex-from-input"
+title = "Regular expression from input"
+body = "A pattern chosen by the caller can be built to backtrack for minutes (ReDoS) or to match more than intended."
+externalRefs = ["https://cwe.mitre.org/data/definitions/1333.html", "https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS"]
+limitations = ["An engine with linear-time guarantees (RE2) is not vulnerable to backtracking.", "Input passed through an escape function is not reported."]
+
+[[knowledge]]
+id = "know-no-unsafe-xml-parser"
+title = "XML external entities"
+body = "A parser that resolves external entities reads local files and makes requests on behalf of the document's author."
+externalRefs = ["https://cwe.mitre.org/data/definitions/611.html", "https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html"]
+limitations = ["A factory hardened right after it is created is reported too (low confidence): the configuration is not read."]
+
+[[knowledge]]
+id = "know-no-process-exit"
+title = "Exiting the process"
+body = "Exiting skips deferred cleanup and takes down whatever embeds the code; the caller cannot recover or test it."
+externalRefs = ["https://pkg.go.dev/os#Exit", "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/System.html#exit(int)"]
+limitations = ["A command-line entry point may exit; files named like the entry point and `bin`, `cmd`, `scripts` and `tools` directories are left out."]
+
+[[knowledge]]
+id = "know-no-type-punning"
+title = "Type confusion"
+body = "Reading memory as a type it does not hold is undefined behaviour and the usual route from a bad length to a memory-safety bug."
+externalRefs = ["https://cwe.mitre.org/data/definitions/843.html", "https://doc.rust-lang.org/std/mem/fn.transmute.html"]
+limitations = ["Foreign-function and serialization code needs the cast; it is reported and should carry the reason in a comment.", "Reading the bytes of an object through a `char*` cast is the standard idiom of `ostream::write` and is reported too."]
+
+[[knowledge]]
+id = "know-no-catch-all"
+title = "Catching everything"
+body = "A handler for the base type also catches programmer errors and conditions it cannot handle, and hides them."
+externalRefs = ["https://cwe.mitre.org/data/definitions/396.html"]
+limitations = ["A top-level handler that logs and exits is reported too.", "Go and Rust (errors as values) and Elixir are not read."]
+
+[[knowledge]]
+id = "know-no-insecure-tls"
+title = "Certificate verification disabled"
+body = "Without verification any party on the path can impersonate the server, so the encryption protects nothing."
+externalRefs = ["https://cwe.mitre.org/data/definitions/295.html", "https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html"]
+limitations = ["A test double or a development flag set from configuration is reported too."]
+
+[[knowledge]]
+id = "know-no-permissive-file-mode"
+title = "World-writable files"
+body = "Any local user can then replace the file or put code in the directory."
+externalRefs = ["https://cwe.mitre.org/data/definitions/732.html"]
+limitations = ["Only a literal mode is read; one built from a variable is not."]
+
+[[knowledge]]
+id = "know-no-unfinished-code"
+title = "Unfinished code"
+body = "These calls panic when reached. A path that is not written should be an error the caller can handle, or should not exist."
+externalRefs = ["https://doc.rust-lang.org/std/macro.todo.html", "https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-t-o-d-o.html"]
+limitations = ["A trait method whose default must be overridden is reported."]
+
+[[rules]]
+id = "no-open-cors"
+packId = "debuggatha/engineering"
+statement = "Do not allow every origin (`allow_origins=[\"*\"]`, `AllowAnyOrigin`, `@CrossOrigin(\"*\")`); list the origins."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-open-cors"]
+appliesTo = { kind = "always" }
+
+[[knowledge]]
+id = "know-no-open-cors"
+title = "Cross-origin access for everyone"
+body = "A wildcard lets any web page read the responses with the visitor's credentials once cookies are allowed."
+externalRefs = ["https://cwe.mitre.org/data/definitions/942.html", "https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html#cross-origin-resource-sharing"]
+limitations = ["A public read-only API without credentials is reported too."]

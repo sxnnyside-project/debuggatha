@@ -10,20 +10,20 @@
  * findings came back") that collapsing it into "open" would lose.
  */
 export const FINDING_LIFECYCLE_STATUSES = [
-  "open",
-  "acknowledged",
-  "resolved",
-  "dismissed",
-  "reopened",
+  'open',
+  'acknowledged',
+  'resolved',
+  'dismissed',
+  'reopened',
 ] as const;
 export type FindingLifecycleStatus = (typeof FINDING_LIFECYCLE_STATUSES)[number];
 
 const LEGAL_TRANSITIONS: Record<FindingLifecycleStatus, readonly FindingLifecycleStatus[]> = {
-  open: ["acknowledged", "resolved", "dismissed"],
-  acknowledged: ["resolved", "dismissed"],
-  resolved: ["reopened"],
-  dismissed: ["reopened"],
-  reopened: ["acknowledged", "resolved", "dismissed"],
+  open: ['acknowledged', 'resolved', 'dismissed'],
+  acknowledged: ['resolved', 'dismissed'],
+  resolved: ['reopened'],
+  dismissed: ['reopened'],
+  reopened: ['acknowledged', 'resolved', 'dismissed'],
 };
 
 export function canTransitionFinding(
@@ -35,5 +35,5 @@ export function canTransitionFinding(
 
 /** Entries in these statuses are candidates for re-matching against a new review's findings. */
 export function isActiveFindingStatus(status: FindingLifecycleStatus): boolean {
-  return status === "open" || status === "acknowledged" || status === "reopened";
+  return status === 'open' || status === 'acknowledged' || status === 'reopened';
 }

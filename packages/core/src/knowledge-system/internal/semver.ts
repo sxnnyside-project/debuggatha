@@ -39,18 +39,18 @@ export function compareVersions(a: string, b: string): number {
  */
 export function satisfiesRange(version: string, range: string): boolean {
   const trimmed = range.trim();
-  if (trimmed === "*" || trimmed === "") return true;
+  if (trimmed === '*' || trimmed === '') return true;
 
   const parsedVersion = parseVersion(version);
   if (!parsedVersion) return false;
 
-  if (trimmed.startsWith("^")) {
+  if (trimmed.startsWith('^')) {
     const base = parseVersion(trimmed.slice(1));
     if (!base) return false;
     return parsedVersion.major === base.major && compareVersions(version, trimmed.slice(1)) >= 0;
   }
 
-  if (trimmed.startsWith("~")) {
+  if (trimmed.startsWith('~')) {
     const base = parseVersion(trimmed.slice(1));
     if (!base) return false;
     return (

@@ -1,0 +1,133 @@
+id = "debuggatha/cpp"
+version = "1.0.0"
+kind = "stack"
+displayName = "C++"
+dependsOn = []
+
+[[rules]]
+id = "no-unbounded-c-string"
+packId = "debuggatha/cpp"
+statement = "Do not use `gets`, `strcpy`, `strcat` or `sprintf`; use calls that take the size of the destination."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unbounded-c-string"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[knowledge]]
+id = "know-no-unbounded-c-string"
+title = "String functions without a size"
+body = "`gets`, `strcpy`, `strcat` and `sprintf` write without knowing the size of the destination, so long input overruns the buffer. Use the functions that take a size, or `std::string`."
+externalRefs = ["https://cwe.mitre.org/data/definitions/120.html", "https://cwe.mitre.org/data/definitions/676.html"]
+limitations = ["A copy whose source is a constant shorter than the destination is safe and is reported too."]
+
+[[rules]]
+id = "no-raw-new-delete"
+packId = "debuggatha/cpp"
+statement = "Do not call `new` and `delete` explicitly; own memory with `std::unique_ptr`, `std::make_unique` or a container."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-raw-new-delete"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[rules]]
+id = "no-malloc-free"
+packId = "debuggatha/cpp"
+statement = "Do not use `malloc`, `calloc`, `realloc` or `free` in C++ code; use a container or a smart pointer."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-malloc-free"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[rules]]
+id = "no-using-namespace-in-header"
+packId = "debuggatha/cpp"
+statement = "Do not write `using namespace` at global scope in a header."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-using-namespace-in-header"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[knowledge]]
+id = "know-no-raw-new-delete"
+title = "Raw new and delete"
+body = "A raw `new` leaks on the path that forgets the `delete` or leaves through an exception. A smart pointer or a container releases it on every path."
+externalRefs = ["https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r11-avoid-calling-new-and-delete-explicitly"]
+limitations = ["Placement new, and a `new` handed to a smart pointer constructor, are reported too."]
+
+[[knowledge]]
+id = "know-no-malloc-free"
+title = "C allocation"
+body = "`malloc` and `free` know nothing about constructors, destructors or exceptions. Containers and smart pointers do."
+externalRefs = ["https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#r10-avoid-malloc-and-free"]
+limitations = ["Code that calls a C library that owns the memory through `free` is reported."]
+
+[[knowledge]]
+id = "know-no-using-namespace-in-header"
+title = "Using directive in a header"
+body = "Every file that includes the header inherits the directive, and a name collision appears far from its cause."
+externalRefs = ["https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#sf7-dont-write-using-namespace-at-global-scope-in-a-header-file"]
+limitations = ["A `using namespace` inside a function or a namespace of the header is reported too."]
+
+[[rules]]
+id = "no-c-style-cast"
+packId = "debuggatha/cpp"
+statement = "Do not use C-style casts; use `static_cast` or another named cast."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-c-style-cast"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[rules]]
+id = "no-format-string"
+packId = "debuggatha/cpp"
+statement = "Do not pass input as the format string of `printf`; use `\"%s\"` and pass it as an argument."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-format-string"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[knowledge]]
+id = "know-no-c-style-cast"
+title = "C-style cast"
+body = "A C-style cast silently becomes a `reinterpret_cast` or drops `const` when the types change."
+externalRefs = ["https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es49-if-you-must-use-a-cast-use-a-named-cast"]
+limitations = ["Casts in C headers shared with C code are reported."]
+
+[[knowledge]]
+id = "know-no-format-string"
+title = "Format string"
+body = "A `%n` or `%s` in the format reads or writes memory."
+externalRefs = ["https://cwe.mitre.org/data/definitions/134.html"]
+limitations = ["Only input that reaches the call by name in the same file is seen."]
+
+[[rules]]
+id = "no-shell-interpolation"
+packId = "debuggatha/cpp"
+statement = "Do not build a shell command from interpolated or concatenated text; pass the arguments separately."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-no-shell-interpolation"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[rules]]
+id = "no-weak-hash"
+packId = "debuggatha/cpp"
+statement = "Do not use MD5, SHA-1 or DES for anything a person could attack; use SHA-256 or stronger."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-weak-hash"]
+appliesTo = { kind = "requires-language", language = "cpp" }
+
+[[knowledge]]
+id = "know-no-shell-interpolation"
+title = "Shell command built from text"
+body = "A command line assembled by interpolation or concatenation is read by a shell, so a value with a quote or a separator becomes a second command. Pass the program and its arguments as separate values."
+externalRefs = ["https://cwe.mitre.org/data/definitions/78.html"]
+limitations = ["Only a command built in the same file and reached by name is seen; a command assembled in another function or module is not, and a variable that only ever holds constants is reported."]
+
+[[knowledge]]
+id = "know-no-weak-hash"
+title = "Broken hash or cipher"
+body = "MD5, SHA-1 and DES have practical collision or brute-force attacks. Use SHA-256 or stronger, and a password hash for passwords."
+externalRefs = ["https://cwe.mitre.org/data/definitions/327.html"]
+limitations = ["The use of the hash is not visible: checksums and cache keys are reported with low confidence.", "A digest chosen by name at run time, such as getInstance(\"MD5\"), is not read."]

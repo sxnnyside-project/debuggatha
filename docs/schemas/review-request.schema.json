@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReviewRequest",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "scope": {
+      "$ref": "#/definitions/ReviewScope"
+    },
+    "depth": {
+      "$ref": "#/definitions/ReviewDepth"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requestedPackIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requestedPolicyId": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "scope",
+    "depth",
+    "requestedAt",
+    "requestedPackIds"
+  ],
+  "definitions": {
+    "ReviewScope": {
+      "description": "One scope model: a diff, a list of files and a workspace review differ only in *what* is\nreviewed, not in what a review request is.",
+      "oneOf": [
+        {
+          "description": "No `base` means \"since the last commit\".",
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "diff"
+            },
+            "base": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "files"
+            },
+            "paths": {
+              "description": "At least one; `create_review_request` refuses an empty list.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "kind",
+            "paths"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "workspace"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ReviewDepth": {
+      "type": "string",
+      "enum": [
+        "quick",
+        "full",
+        "architectural"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

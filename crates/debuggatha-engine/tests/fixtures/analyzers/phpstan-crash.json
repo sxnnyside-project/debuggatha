@@ -1,0 +1,1 @@
+{"tool":"phpstan","result":"failed","errors":1,"general_errors":["Child process error: PHPStan process crashed because it reached configured PHP memory limit: 128M\nIncrease your memory limit in php.ini or run PHPStan with --memory-limit CLI option.\n while running parallel worker"]}

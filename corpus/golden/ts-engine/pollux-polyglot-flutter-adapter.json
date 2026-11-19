@@ -1,0 +1,86 @@
+{
+ "name": "pollux-polyglot-flutter-adapter",
+ "commit": "ab948f677eed43e75717cd573998e663144e98cc",
+ "findings": [
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/main.dart",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/main.dart",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/main.dart",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/main.dart",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/main.dart",
+   "lines": {
+    "start": 34,
+    "end": 34
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

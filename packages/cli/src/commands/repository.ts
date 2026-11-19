@@ -1,11 +1,11 @@
-import { buildRepositoryContext } from "@debuggatha/engine";
-import type { Command } from "commander";
-import type { CliLogger } from "../utils/logger.js";
+import { buildRepositoryContext } from '@debuggatha/engine';
+import type { Command } from 'commander';
+import type { CliLogger } from '../utils/logger.js';
 
 export function registerRepositoryCommand(program: Command) {
   program
-    .command("repository")
-    .description("Inspect Repository Intelligence (stack, criteria, docs)")
+    .command('repository')
+    .description('Inspect Repository Intelligence (stack, criteria, docs)')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
@@ -16,7 +16,7 @@ export function registerRepositoryCommand(program: Command) {
         if (logger.isJson) {
           logger.json(context);
         } else {
-          logger.success("Repository context built successfully.");
+          logger.success('Repository context built successfully.');
           const totalSignals =
             context.stack.languages.length +
             context.stack.frameworks.length +
@@ -34,7 +34,7 @@ export function registerRepositoryCommand(program: Command) {
           );
         }
       } catch (err) {
-        logger.error("Failed to build repository context.", err);
+        logger.error('Failed to build repository context.', err);
         process.exit(1);
       }
     });

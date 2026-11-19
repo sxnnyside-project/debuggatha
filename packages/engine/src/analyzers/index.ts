@@ -1,11 +1,11 @@
-import { type Finding, ruleIdFromEvidence } from "@debuggatha/core";
-import { ADAPTERS } from "./adapters.js";
-import { type AnalyzerFindings, SourceLines, toFinding } from "./run.js";
+import { type Finding, ruleIdFromEvidence } from '@debuggatha/core';
+import { ADAPTERS } from './adapters.js';
+import { type AnalyzerFindings, SourceLines, toFinding } from './run.js';
 
-export { ADAPTERS } from "./adapters.js";
-export type { AnalyzerInventoryEntry, AnalyzerRunResult } from "./run.js";
-export { findExecutable, inventoryAnalyzers, runAnalyzers } from "./run.js";
-export { parseSarif } from "./sarif.js";
+export { ADAPTERS } from './adapters.js';
+export type { AnalyzerInventoryEntry, AnalyzerRunResult } from './run.js';
+export { findExecutable, inventoryAnalyzers, runAnalyzers } from './run.js';
+export { parseSarif } from './sarif.js';
 export type {
   AnalyzerAdapter,
   AnalyzerFinding,
@@ -13,7 +13,7 @@ export type {
   AnalyzerRun,
   AnalyzerStatus,
   AnalyzerTrust,
-} from "./types.js";
+} from './types.js';
 
 /**
  * Adds what the analyzers found to what the built-in detectors found, without

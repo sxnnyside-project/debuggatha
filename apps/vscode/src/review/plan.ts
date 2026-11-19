@@ -1,12 +1,12 @@
-import type { AnalyzerOptions, ReviewPipelineScope } from "@debuggatha/engine";
-import type { ExtensionSettings } from "../config/settings.js";
+import type { AnalyzerOptions, ReviewPipelineScope } from '@debuggatha/engine';
+import type { ExtensionSettings } from '../config/settings.js';
 
 /** What the person asked for, before depth and trust decide how much of it happens. */
 export type ReviewRequest =
-  | { kind: "workspace" }
-  | { kind: "diff"; diff: string }
-  | { kind: "file"; path: string }
-  | { kind: "selection"; diff: string; path: string };
+  | { kind: 'workspace' }
+  | { kind: 'diff'; diff: string }
+  | { kind: 'file'; path: string }
+  | { kind: 'selection'; diff: string; path: string };
 
 export interface ReviewPlan {
   scope: ReviewPipelineScope;
@@ -30,7 +30,7 @@ export interface ReviewPlan {
  */
 export function planReview(
   request: ReviewRequest,
-  settings: Pick<ExtensionSettings, "reviewDepth" | "enabledAnalyzers">,
+  settings: Pick<ExtensionSettings, 'reviewDepth' | 'enabledAnalyzers'>,
   trusted: boolean,
   { widen = true }: { widen?: boolean } = {},
 ): ReviewPlan {
@@ -38,27 +38,27 @@ export function planReview(
 
   let analyzers: AnalyzerOptions;
   if (!trusted) {
-    analyzers = { mode: "off" };
+    analyzers = { mode: 'off' };
     notes.push(
-      "This workspace is not trusted, so only the built-in detectors ran; external analyzers are off until you trust it.",
+      'This workspace is not trusted, so only the built-in detectors ran; external analyzers are off until you trust it.',
     );
-  } else if (settings.reviewDepth === "quick") {
-    analyzers = { mode: "off" };
+  } else if (settings.reviewDepth === 'quick') {
+    analyzers = { mode: 'off' };
   } else {
-    analyzers = { mode: "auto", enable: settings.enabledAnalyzers };
+    analyzers = { mode: 'auto', enable: settings.enabledAnalyzers };
   }
 
-  const widened = widen && settings.reviewDepth === "architectural" && request.kind !== "workspace";
+  const widened = widen && settings.reviewDepth === 'architectural' && request.kind !== 'workspace';
   if (widened) {
     notes.push(
-      "reviewDepth is architectural, so the whole repository was reviewed, architecture included.",
+      'reviewDepth is architectural, so the whole repository was reviewed, architecture included.',
     );
   }
 
   let scope: ReviewPipelineScope;
-  if (widened || request.kind === "workspace") scope = { kind: "workspace" };
-  else if (request.kind === "file") scope = { kind: "files", paths: [request.path] };
-  else scope = { kind: "diff", base: undefined, diff: request.diff };
+  if (widened || request.kind === 'workspace') scope = { kind: 'workspace' };
+  else if (request.kind === 'file') scope = { kind: 'files', paths: [request.path] };
+  else scope = { kind: 'diff', base: undefined, diff: request.diff };
 
   return { scope, analyzers, widened, notes };
 }
@@ -68,12 +68,12 @@ export function planReview(
  * change: the engine reads only added lines and keeps their real line numbers.
  */
 export function selectionDiff(file: string, startLine: number, lines: readonly string[]): string {
-  const path = file.split("\\").join("/");
+  const path = file.split('\\').join('/');
   return [
     `--- a/${path}`,
     `+++ b/${path}`,
     `@@ -0,0 +${startLine},${lines.length} @@`,
     ...lines.map((line) => `+${line}`),
-    "",
-  ].join("\n");
+    '',
+  ].join('\n');
 }

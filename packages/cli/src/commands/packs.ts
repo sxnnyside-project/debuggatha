@@ -1,14 +1,14 @@
-import { defaultCapabilityRegistry } from "@debuggatha/engine";
-import type { Command } from "commander";
-import type { CliLogger } from "../utils/logger.js";
+import { defaultCapabilityRegistry } from '@debuggatha/engine';
+import type { Command } from 'commander';
+import type { CliLogger } from '../utils/logger.js';
 
 export function registerPacksCommand(program: Command) {
   program
-    .command("packs")
-    .description("List available Review Packs")
+    .command('packs')
+    .description('List available Review Packs')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
-      logger.info("Listing available Review Packs...");
+      logger.info('Listing available Review Packs...');
       const packs = defaultCapabilityRegistry.listPacks();
 
       if (logger.isJson) {

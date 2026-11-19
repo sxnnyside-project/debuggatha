@@ -3,7 +3,7 @@ import type {
   ModelInfo,
   SemanticExecutionRequest,
   SemanticStreamEvent,
-} from "./types.js";
+} from './types.js';
 
 /** A local model runtime. Every provider streams; a caller wanting one answer drains the iterable. */
 export interface Provider {

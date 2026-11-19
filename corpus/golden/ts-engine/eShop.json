@@ -1,0 +1,214 @@
+{
+ "name": "eShop",
+ "commit": "913acea66708a59595351174cee9b29f37179d29",
+ "findings": [
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/Identity.API/wwwroot/js/signout-redirect.js",
+   "lines": {
+    "start": 2,
+    "end": 2
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/cart-quantity.js",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/cart-quantity.js",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/cart-quantity.js",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/cart-quantity.js",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/cart-quantity.js",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 103,
+    "end": 103
+   },
+   "columns": {
+    "start": 40,
+    "end": 50
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 117,
+    "end": 117
+   },
+   "columns": {
+    "start": 24,
+    "end": 32
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 118,
+    "end": 118
+   },
+   "columns": {
+    "start": 23,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 161,
+    "end": 161
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 79,
+    "end": 86
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-dock.js",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/WebApp/wwwroot/js/chat-eyes.js",
+   "lines": {
+    "start": 64,
+    "end": 64
+   },
+   "columns": {
+    "start": 13,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  }
+ ]
+}

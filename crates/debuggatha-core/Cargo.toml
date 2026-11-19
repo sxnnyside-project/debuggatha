@@ -1,0 +1,31 @@
+[package]
+name = "debuggatha-core"
+description = "Debuggatha core: a senior code reviewer that cites a real source for every finding."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+icu_collator = "2"
+icu_locale_core = "2"
+indexmap = { version = "2", features = ["serde"] }
+regress = "0.12"
+ryu-js = "1"
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+flate2 = "1"
+jsonschema = { version = "0.61.1", default-features = false }

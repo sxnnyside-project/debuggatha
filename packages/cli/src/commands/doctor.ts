@@ -1,17 +1,17 @@
-import fs from "node:fs";
-import path from "node:path";
-import { buildRepositoryContext } from "@debuggatha/engine";
-import type { Command } from "commander";
-import type { CliLogger } from "../utils/logger.js";
+import fs from 'node:fs';
+import path from 'node:path';
+import { buildRepositoryContext } from '@debuggatha/engine';
+import type { Command } from 'commander';
+import type { CliLogger } from '../utils/logger.js';
 
 export function registerDoctorCommand(program: Command) {
   program
-    .command("doctor")
-    .description("Verify repository health, configuration, and environment")
+    .command('doctor')
+    .description('Verify repository health, configuration, and environment')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
-      logger.info("Running diagnostics...");
+      logger.info('Running diagnostics...');
 
       const diagnostics = {
         environment: { nodeVersion: process.version },
@@ -23,33 +23,33 @@ export function registerDoctorCommand(program: Command) {
       logger.success(`Node Version: ${process.version}`);
 
       // 2. Repository checks
-      const isGit = fs.existsSync(path.join(cwd, ".git"));
+      const isGit = fs.existsSync(path.join(cwd, '.git'));
       diagnostics.repository.isGit = isGit;
-      if (isGit) logger.success("Git repository detected.");
-      else logger.warn("No .git directory found. Some features may be limited.");
+      if (isGit) logger.success('Git repository detected.');
+      else logger.warn('No .git directory found. Some features may be limited.');
 
-      const hasDebuggathaDir = fs.existsSync(path.join(cwd, ".debuggatha"));
+      const hasDebuggathaDir = fs.existsSync(path.join(cwd, '.debuggatha'));
       diagnostics.repository.hasDebuggathaDir = hasDebuggathaDir;
-      if (hasDebuggathaDir) logger.success(".debuggatha directory found.");
+      if (hasDebuggathaDir) logger.success('.debuggatha directory found.');
       else logger.warn("No .debuggatha directory found. Run 'debuggatha init'.");
 
       // 3. Context validation
       try {
         await buildRepositoryContext(cwd);
         diagnostics.context.valid = true;
-        logger.success("Repository Context successfully built.");
+        logger.success('Repository Context successfully built.');
       } catch (err: unknown) {
         diagnostics.context.error = err instanceof Error ? err.message : String(err);
-        logger.error("Failed to build Repository Context.", err);
+        logger.error('Failed to build Repository Context.', err);
       }
 
       const isHealthy = diagnostics.context.valid;
 
       if (logger.isJson) {
-        logger.json({ status: isHealthy ? "success" : "error", diagnostics });
+        logger.json({ status: isHealthy ? 'success' : 'error', diagnostics });
       } else {
-        if (isHealthy) logger.success("Diagnostics passed. Debuggatha is ready to roll!");
-        else logger.error("Diagnostics failed. See above for details.");
+        if (isHealthy) logger.success('Diagnostics passed. Debuggatha is ready to roll!');
+        else logger.error('Diagnostics failed. See above for details.');
       }
 
       if (!isHealthy) {

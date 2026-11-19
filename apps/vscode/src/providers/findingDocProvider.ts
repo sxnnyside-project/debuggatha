@@ -1,8 +1,8 @@
-import type { Finding } from "@debuggatha/engine";
-import * as vscode from "vscode";
+import type { Finding } from '@debuggatha/engine';
+import * as vscode from 'vscode';
 
 export class FindingDocProvider implements vscode.TextDocumentContentProvider {
-  static scheme = "debuggatha-finding";
+  static scheme = 'debuggatha-finding';
 
   private _onDidChange = new vscode.EventEmitter<vscode.Uri>();
   readonly onDidChange = this._onDidChange.event;
@@ -15,11 +15,11 @@ export class FindingDocProvider implements vscode.TextDocumentContentProvider {
   }
 
   provideTextDocumentContent(uri: vscode.Uri): string {
-    const id = uri.path.replace(".md", "");
+    const id = uri.path.replace('.md', '');
     const finding = this.findingsMap.get(id);
 
     if (!finding) {
-      return "# Finding Not Found";
+      return '# Finding Not Found';
     }
 
     let md = `# [${finding.severity.toUpperCase()}] ${finding.title}\n\n`;
@@ -30,25 +30,25 @@ export class FindingDocProvider implements vscode.TextDocumentContentProvider {
 
     if (finding.locations && finding.locations.length > 0) {
       const loc = finding.locations[0];
-      if (loc && loc.file) {
-        md += `**Location**: \`${loc.file}${loc.lines ? `:${loc.lines.start}` : ""}\`\n\n`;
+      if (loc?.file) {
+        md += `**Location**: \`${loc.file}${loc.lines ? `:${loc.lines.start}` : ''}\`\n\n`;
       }
     }
 
     if (finding.evidence) {
       md += `## Evidence\n\n`;
       for (const e of finding.evidence) {
-        if ("excerpt" in e && e.excerpt) {
+        if ('excerpt' in e && e.excerpt) {
           md += `- ${e.excerpt}\n`;
-        } else if ("detail" in e) {
+        } else if ('detail' in e) {
           md += `- ${e.detail}\n`;
-        } else if ("source" in e) {
+        } else if ('source' in e) {
           md += `- ${e.source}\n`;
         } else {
           md += `- ${e.kind}\n`;
         }
       }
-      md += "\n";
+      md += '\n';
     }
 
     if (finding.recommendations && finding.recommendations.length > 0) {

@@ -1,9 +1,9 @@
-import type { RepositoryContext } from "../../repository-intelligence/index.js";
-import { randomId } from "../internal/ids.js";
-import { type ExecutionMetadata, initialExecutionMetadata } from "./execution.js";
-import { canTransition, type ReviewLifecycleStatus } from "./lifecycle.js";
-import type { ReviewPackReference, ReviewPolicyReference } from "./reference.js";
-import type { ReviewRequest } from "./request.js";
+import type { RepositoryContext } from '../../repository-intelligence/index.js';
+import { randomId } from '../internal/ids.js';
+import { type ExecutionMetadata, initialExecutionMetadata } from './execution.js';
+import { canTransition, type ReviewLifecycleStatus } from './lifecycle.js';
+import type { ReviewPackReference, ReviewPolicyReference } from './reference.js';
+import type { ReviewRequest } from './request.js';
 
 /**
  * The traceable record of one review in progress. Holds the
@@ -39,7 +39,7 @@ export function createReviewSession(input: CreateReviewSessionInput): ReviewSess
     repositoryContext: input.repositoryContext,
     selectedPolicy: input.selectedPolicy,
     selectedPacks: input.selectedPacks ?? [],
-    status: "requested",
+    status: 'requested',
     execution: initialExecutionMetadata(),
   };
 }

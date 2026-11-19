@@ -1,6 +1,6 @@
-import * as vscode from "vscode";
-import { canSuppressInline, suppressionEdit } from "../findings/present.js";
-import type { Services } from "../services.js";
+import * as vscode from 'vscode';
+import { canSuppressInline, suppressionEdit } from '../findings/present.js';
+import type { Services } from '../services.js';
 
 /**
  * Accepts a finding in the code itself, with a reason that stays beside it. The reason is
@@ -15,13 +15,13 @@ export async function suppressInline(
   const entry = services.index.entry(id);
   const rootDir = services.rootDir;
   if (!entry || !rootDir) {
-    vscode.window.showErrorMessage("That finding is no longer in the ledger.");
+    vscode.window.showErrorMessage('That finding is no longer in the ledger.');
     return false;
   }
   const finding = entry.latestFinding;
   if (!canSuppressInline(finding)) {
     vscode.window.showInformationMessage(
-      "A comment cannot silence this finding, because it comes from an external tool. Dismiss it instead.",
+      'A comment cannot silence this finding, because it comes from an external tool. Dismiss it instead.',
     );
     return false;
   }
@@ -29,9 +29,9 @@ export async function suppressInline(
   const text =
     reason ??
     (await vscode.window.showInputBox({
-      title: "Accept this finding in code",
-      prompt: "Why is this acceptable here? The reason is kept in a comment beside the code.",
-      validateInput: (value) => (value.trim() ? undefined : "A reason is required."),
+      title: 'Accept this finding in code',
+      prompt: 'Why is this acceptable here? The reason is kept in a comment beside the code.',
+      validateInput: (value) => (value.trim() ? undefined : 'A reason is required.'),
     }));
   if (!text?.trim()) return false;
 
@@ -48,6 +48,6 @@ export async function suppressInline(
   const edit = new vscode.WorkspaceEdit();
   edit.insert(document.uri, new vscode.Position(at, 0), comment);
   const applied = await vscode.workspace.applyEdit(edit);
-  services.logger.info("Finding accepted in code", { id, applied });
+  services.logger.info('Finding accepted in code', { id, applied });
   return applied;
 }

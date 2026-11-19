@@ -1,7 +1,7 @@
-import type { Severity } from "../../review-engine/index.js";
-import { SEVERITIES } from "../../review-engine/index.js";
-import type { Ledger } from "./ledger.js";
-import type { FindingLifecycleStatus } from "./lifecycle.js";
+import type { Severity } from '../../review-engine/index.js';
+import { SEVERITIES } from '../../review-engine/index.js';
+import type { Ledger } from './ledger.js';
+import type { FindingLifecycleStatus } from './lifecycle.js';
 
 /**
  * Repository-level summary (epic §7) — reusable by any future adapter
@@ -33,7 +33,7 @@ export function summarizeLedger(ledger: Ledger): LedgerSummary {
   for (const entry of ledger.entries) {
     countsByStatus[entry.status] += 1;
 
-    if (entry.status === "open" || entry.status === "acknowledged" || entry.status === "reopened") {
+    if (entry.status === 'open' || entry.status === 'acknowledged' || entry.status === 'reopened') {
       activeBySeverity[entry.latestFinding.severity] += 1;
       activeByCategory[entry.latestFinding.category] =
         (activeByCategory[entry.latestFinding.category] ?? 0) + 1;

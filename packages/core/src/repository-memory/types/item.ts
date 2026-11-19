@@ -1,6 +1,6 @@
-import { randomId } from "../internal/ids.js";
-import type { MemoryHistoryEvent, MemoryOrigin } from "./history.js";
-import { canTransitionMemory, type MemoryLifecycleStatus } from "./lifecycle.js";
+import { randomId } from '../internal/ids.js';
+import type { MemoryHistoryEvent, MemoryOrigin } from './history.js';
+import { canTransitionMemory, type MemoryLifecycleStatus } from './lifecycle.js';
 
 /**
  * Never conflated with `engine/context-intelligence`'s
@@ -12,15 +12,15 @@ import { canTransitionMemory, type MemoryLifecycleStatus } from "./lifecycle.js"
  * is never promoted to `"user-confirmed"` automatically; only an actual
  * user action (lifecycle transition to `"confirmed"`) does that.
  */
-export type MemoryConfidence = "inferred" | "documented" | "user-confirmed";
+export type MemoryConfidence = 'inferred' | 'documented' | 'user-confirmed';
 
 export type MemoryCategory =
-  | "accepted-deviation"
-  | "suppression"
-  | "exception"
-  | "convention"
-  | "review-history"
-  | "decision";
+  | 'accepted-deviation'
+  | 'suppression'
+  | 'exception'
+  | 'convention'
+  | 'review-history'
+  | 'decision';
 
 export interface MemoryEvidence {
   file: string;
@@ -41,7 +41,7 @@ interface MemoryItemBase {
 
 /** A ruleId is required — an accepted deviation always names what it deviates from. `scopeFile: undefined` means repository-wide. */
 export interface AcceptedDeviationItem extends MemoryItemBase {
-  category: "accepted-deviation";
+  category: 'accepted-deviation';
   ruleId: string;
   scopeFile: string | undefined;
 }
@@ -55,20 +55,20 @@ export interface AcceptedDeviationItem extends MemoryItemBase {
  * recognizes "the same finding."
  */
 export interface SuppressionItem extends MemoryItemBase {
-  category: "suppression";
+  category: 'suppression';
   fingerprintFile: string;
   fingerprintRuleId: string | undefined;
   fingerprintCategory: string;
 }
 
 export type ExceptionKind =
-  | "layer-crossing"
-  | "compatibility-workaround"
-  | "legacy-integration"
-  | "other";
+  | 'layer-crossing'
+  | 'compatibility-workaround'
+  | 'legacy-integration'
+  | 'other';
 
 export interface ExceptionItem extends MemoryItemBase {
-  category: "exception";
+  category: 'exception';
   exceptionKind: ExceptionKind;
   /** The rule this exception applies to — undefined means "every rule" within `scopeFile` (e.g. a whole legacy integration directory is exempted). */
   ruleId: string | undefined;
@@ -77,7 +77,7 @@ export interface ExceptionItem extends MemoryItemBase {
 
 /** Repository-specific convention — "complements Review Packs rather than replace them": never a substitute for pack content, an addition to it. */
 export interface ConventionItem extends MemoryItemBase {
-  category: "convention";
+  category: 'convention';
   rule: string;
 }
 
@@ -89,13 +89,13 @@ export interface ConventionItem extends MemoryItemBase {
  * see `core/findings-ledger`'s `HistoryEvent[]`).
  */
 export interface ReviewHistoryNoteItem extends MemoryItemBase {
-  category: "review-history";
+  category: 'review-history';
   ledgerEntryId: string;
   note: string;
 }
 
 export interface DecisionItem extends MemoryItemBase {
-  category: "decision";
+  category: 'decision';
   decision: string;
   documentationRef: string | undefined;
 }
@@ -109,22 +109,22 @@ export type MemoryItem =
   | DecisionItem;
 
 export type CreateMemoryItemInput =
-  | (Omit<AcceptedDeviationItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<AcceptedDeviationItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     })
-  | (Omit<SuppressionItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<SuppressionItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     })
-  | (Omit<ExceptionItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<ExceptionItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     })
-  | (Omit<ConventionItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<ConventionItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     })
-  | (Omit<ReviewHistoryNoteItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<ReviewHistoryNoteItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     })
-  | (Omit<DecisionItem, "id" | "status" | "history" | "createdAt" | "updatedAt"> & {
+  | (Omit<DecisionItem, 'id' | 'status' | 'history' | 'createdAt' | 'updatedAt'> & {
       origin: MemoryOrigin;
     });
 
@@ -136,7 +136,7 @@ export function createMemoryItem(input: CreateMemoryItemInput): MemoryItem {
   const event: MemoryHistoryEvent = {
     timestamp: now,
     previousState: undefined,
-    newState: "detected",
+    newState: 'detected',
     origin,
     comment: undefined,
   };
@@ -144,7 +144,7 @@ export function createMemoryItem(input: CreateMemoryItemInput): MemoryItem {
   return {
     ...rest,
     id: randomId(),
-    status: "detected",
+    status: 'detected',
     history: [event],
     createdAt: now,
     updatedAt: now,

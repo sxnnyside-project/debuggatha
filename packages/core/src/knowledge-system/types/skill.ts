@@ -7,7 +7,7 @@
  * thing* produced a Finding — a Review Skill can be backed by any
  * `ReviewSource` (Architecture doc §3 domain-model table).
  */
-export const SKILL_TIERS = ["core", "review", "analysis"] as const;
+export const SKILL_TIERS = ['core', 'review', 'analysis'] as const;
 export type SkillTier = (typeof SKILL_TIERS)[number];
 
 export interface SkillDescriptor {

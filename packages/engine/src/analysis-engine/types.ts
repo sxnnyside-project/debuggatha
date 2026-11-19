@@ -8,7 +8,7 @@
  * overlap, used to key the two independently.
  */
 
-export type ModuleKind = "package" | "workspace" | "feature" | "domain" | "adapter" | "layer";
+export type ModuleKind = 'package' | 'workspace' | 'feature' | 'domain' | 'adapter' | 'layer';
 
 export interface ModuleBoundary {
   /** Stable id — the module's directory, relative to `rootDir`. */
@@ -22,7 +22,7 @@ export interface ModuleBoundary {
   files: string[];
 }
 
-export type DependencyEdgeKind = "declared" | "import";
+export type DependencyEdgeKind = 'declared' | 'import';
 
 export interface DependencyEdge {
   from: string; // ModuleBoundary.id
@@ -38,7 +38,7 @@ export interface DependencyGraph {
 }
 
 /** A conventional layer name a module boundary's own name/path was matched against — see `LAYER_VOCABULARY`. */
-export type LayerName = (typeof LAYER_ORDER)[number] | "unknown";
+export type LayerName = (typeof LAYER_ORDER)[number] | 'unknown';
 
 /**
  * Outermost (depended-on-by-everything) first. A dependency from a lower
@@ -50,11 +50,11 @@ export type LayerName = (typeof LAYER_ORDER)[number] | "unknown";
  * architectural style").
  */
 export const LAYER_ORDER = [
-  "domain",
-  "application",
-  "adapter",
-  "infrastructure",
-  "presentation",
+  'domain',
+  'application',
+  'adapter',
+  'infrastructure',
+  'presentation',
 ] as const;
 
 export interface LayerModel {
@@ -68,7 +68,7 @@ export interface LayerViolation {
   toLayer: LayerName;
   /** Every violation explains both sides — "every finding must explain both sides of the violation". */
   explanation: string;
-  evidence: DependencyEdge["evidence"];
+  evidence: DependencyEdge['evidence'];
 }
 
 export interface DependencyCycle {
@@ -76,10 +76,10 @@ export interface DependencyCycle {
   modules: string[];
   /** The shortest edge sequence closing the cycle. */
   shortestCycle: string[];
-  impact: "high" | "medium" | "low";
+  impact: 'high' | 'medium' | 'low';
 }
 
-export type ApiStability = "stable" | "unstable" | "unknown";
+export type ApiStability = 'stable' | 'unstable' | 'unknown';
 
 export interface PublicApiSymbol {
   name: string;
@@ -96,18 +96,18 @@ export interface PublicApiSurface {
   unexpectedlyExposed: PublicApiSymbol[];
 }
 
-export type DeadCodeKind = "unreachable" | "unreferenced" | "exported-but-unused" | "probably-dead";
+export type DeadCodeKind = 'unreachable' | 'unreferenced' | 'exported-but-unused' | 'probably-dead';
 
 export interface DeadCodeFinding {
   file: string;
   symbol: string;
   line: number;
   kind: DeadCodeKind;
-  confidence: "high" | "medium" | "low";
+  confidence: 'high' | 'medium' | 'low';
   rationale: string;
 }
 
-export type OwnershipSource = "codeowners" | "convention" | "unknown";
+export type OwnershipSource = 'codeowners' | 'convention' | 'unknown';
 
 export interface OwnershipSignal {
   moduleId: string;
@@ -121,8 +121,16 @@ export interface ChangeImpact {
   /** Modules not directly changed but depending (transitively) on a changed module. */
   downstreamModules: string[];
   affectedPublicApi: PublicApiSymbol[];
-  confidence: "high" | "medium" | "low";
+  confidence: 'high' | 'medium' | 'low';
   rationale: string;
+}
+
+export interface EnvDrift {
+  variable: string;
+  /** The `.env.example`-style file the variable is missing from. */
+  exampleFile: string;
+  /** Where the code reads it (first few). */
+  locations: { file: string; line: number; excerpt: string }[];
 }
 
 export interface AnalysisResult {
@@ -136,4 +144,5 @@ export interface AnalysisResult {
   publicApi: PublicApiSurface[];
   deadCode: DeadCodeFinding[];
   ownership: OwnershipSignal[];
+  envDrift: EnvDrift[];
 }

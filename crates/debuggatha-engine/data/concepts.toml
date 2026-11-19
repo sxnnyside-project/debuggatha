@@ -1,0 +1,386 @@
+[dynamic-eval]
+skip_tests = true
+php = { calls = ["eval"] }
+python = { calls = ["eval", "exec"] }
+ruby = { calls = ["eval"] }
+elixir = { calls = ["Code.eval_string", "Code.eval_quoted", "Code.eval_file"] }
+go = { not_applicable = true }
+rust = { not_applicable = true }
+dart = { not_applicable = true }
+swift = { not_applicable = true }
+cpp = { not_applicable = true }
+javascript = { calls = ["eval", "Function"] }
+
+[panic]
+skip_tests = true
+rust = { calls = ["panic!", "std.panic!", "core.panic!"], skip_files = ["build.rs"] }
+go = { calls = ["panic"] }
+
+[shell-sink]
+skip_tests = true
+php = { calls = ["system", "exec", "shell_exec", "passthru", "popen", "proc_open"] }
+python = { calls = ["os.system", "os.popen"] }
+ruby = { calls = ["system", "exec", "Kernel.system", "Kernel.exec"] }
+java = { calls = ["Runtime.getRuntime().exec"] }
+kotlin = { calls = ["Runtime.getRuntime().exec"] }
+elixir = { calls = ["System.shell", ":os.cmd"] }
+javascript = { calls = ["exec", "execSync", "{child_process,childProcess,cp}.{exec,execSync}"] }
+cpp = { calls = ["system", "std.system", "popen", "_popen"] }
+dart = { calls = ["Process.run", "Process.start", "Process.runSync"] }
+go = { calls = ["exec.Command"] }
+csharp = { calls = ["Process.Start"] }
+swift = { calls = ["Process.run"] }
+
+[data-query]
+skip_tests = true
+python = { calls = ["cursor.execute", "cur.execute", "conn.execute", "connection.execute", "session.query", "session.execute", "session.get", "*.session.query", "*.session.execute", "*.objects.get", "*.objects.filter", "*.objects.all", "*.objects.count"] }
+ruby = { calls = ["*.find_by", "*.find_by!", "*.where", "*.pluck", "*.find_by_sql", "connection.execute"] }
+php = { calls = ["$pdo.query", "$pdo.prepare", "$pdo.exec", "$db.query", "$stmt.execute", "mysqli_query", "DB.table", "DB.select", "DB.statement"] }
+java = { calls = ["jdbcTemplate.query", "jdbcTemplate.queryForObject", "jdbcTemplate.queryForList", "jdbcTemplate.update", "entityManager.find", "entityManager.createQuery", "em.find", "em.createQuery", "session.get", "session.createQuery", "*Repository.findById", "*Repository.findBy*", "*Repository.getById", "*Repository.existsById"] }
+kotlin = { calls = ["jdbcTemplate.query", "jdbcTemplate.queryForObject", "jdbcTemplate.queryForList", "jdbcTemplate.update", "entityManager.find", "entityManager.createQuery", "em.find", "em.createQuery", "*Repository.findById", "*Repository.findBy*", "*Repository.getById", "*Repository.existsById"] }
+go = { calls = ["db.Query", "db.QueryRow", "db.Exec", "db.QueryContext", "db.QueryRowContext", "db.ExecContext", "tx.Query", "tx.QueryRow", "tx.Exec", "tx.QueryContext", "tx.QueryRowContext", "tx.ExecContext", "db.First", "db.Find", "db.Where", "db.Take"] }
+csharp = { calls = ["*Context.Find", "*Context.FindAsync", "context.Find", "context.FindAsync", "_context.Find", "_context.FindAsync", "*.ExecuteSqlRaw", "*.FromSqlRaw", "*.ExecuteReader", "*.ExecuteScalar", "*.ExecuteNonQuery", "*.ExecuteReaderAsync"] }
+elixir = { calls = ["Repo.get", "Repo.get!", "Repo.get_by", "Repo.get_by!", "Repo.one", "Repo.all", "Repo.exists?", "Repo.aggregate"] }
+dart = { calls = ["db.query", "db.rawQuery", "database.query", "database.rawQuery"] }
+rust = { calls = ["sqlx.query", "sqlx.query_as", "sqlx.query_scalar", "diesel.sql_query"] }
+javascript = { calls = ["{prisma,db,database,knex,sequelize,sql,pool,connection,conn,trx,tx,transaction,entityManager,em,manager,queryRunner,repo,repository,orm,dataSource}*.{query,execute,raw,$queryRaw,$executeRaw,findMany,findUnique,findUniqueOrThrow,findFirst,findFirstOrThrow,findOne,findOneBy,findBy,findById,findByPk,findAll,find,findOneOrFail,findAndCount,count,countDocuments,aggregate,groupBy,create,createMany,update,updateMany,delete,deleteMany,upsert,insert,save,remove,first,select,where,del,pluck}", "*.{prisma,db,database,knex,sequelize,sql,pool,connection,conn,trx,tx,transaction,entityManager,em,manager,queryRunner,repo,repository,orm,dataSource}*.{query,execute,raw,$queryRaw,$executeRaw,findMany,findUnique,findUniqueOrThrow,findFirst,findFirstOrThrow,findOne,findOneBy,findBy,findById,findByPk,findAll,find,findOneOrFail,findAndCount,count,countDocuments,aggregate,groupBy,create,createMany,update,updateMany,delete,deleteMany,upsert,insert,save,remove,first,select,where,del,pluck}", "*{Repository,Repo,Dao,Model,Db}.{query,execute,raw,$queryRaw,$executeRaw,findMany,findUnique,findUniqueOrThrow,findFirst,findFirstOrThrow,findOne,findOneBy,findBy,findById,findByPk,findAll,find,findOneOrFail,findAndCount,count,countDocuments,aggregate,groupBy,create,createMany,update,updateMany,delete,deleteMany,upsert,insert,save,remove,first,select,where,del,pluck}", "Class.{findOne,findById,findByPk,findAll,findOneBy,findBy,findMany,findUnique,findFirst,findAndCountAll,countDocuments,updateOne,deleteOne,insertOne,findOneAndUpdate,findByIdAndUpdate}", "sql"] }
+
+[untrusted-input]
+cpp = { calls = ["getenv", "std.getenv", "fgets", "recv", "getline", "std.getline"] }
+python = { calls = ["request.args*", "request.form*", "request.values*", "request.json", "request.get_json", "request.data", "request.cookies*", "request.headers*", "request.GET*", "request.POST*", "request.body", "request.COOKIES*", "request.META*", "sys.argv*", "input"] }
+php = { calls = ["$_GET*", "$_POST*", "$_REQUEST*", "$_COOKIE*", "$request.input", "$request.query", "$request.get", "$request.post", "$request.all", "$request.cookie", "$request.header"] }
+go = { calls = ["*.FormValue", "*.PostFormValue", "*.URL.Query().Get", "*.URL.Query", "*.URL.RawQuery", "c.Query", "c.Param", "c.PostForm", "c.QueryParam", "c.DefaultQuery", "c.GetHeader", "os.Args*"] }
+java = { calls = ["*.getParameter", "*.getParameterValues", "*.getParameterMap", "*.getHeader", "*.getQueryString", "*.getCookies"] }
+kotlin = { calls = ["*.getParameter", "*.getHeader", "*.getQueryString", "call.parameters*", "call.request.queryParameters*"] }
+ruby = { calls = ["params*", "request.params*", "request.query_parameters*", "cookies*", "ARGV*"] }
+csharp = { calls = ["Request.Query*", "Request.Form*", "Request.Headers*", "Request.Cookies*", "Request.QueryString*", "*.Request.Query*", "*.Request.Form*", "Console.ReadLine"] }
+elixir = { calls = ["conn.params*", "conn.query_params*", "conn.body_params*", "params"] }
+dart = { calls = ["request.uri.queryParameters*", "request.url.queryParameters*", "request.headers*", "stdin.readLineSync"] }
+rust = { calls = ["*.query_string", "*.match_info*", "std.env.args"] }
+javascript = { calls = ["{req,request}.{body,query,params,headers,cookies}*", "{req,request}.{json,text,formData}", "ctx.{query,params,headers,cookies}*", "ctx.{request,req}.{body,query,params}*", "c.req.{json,query,param,header,parseBody,text,formData}", "process.argv*"] }
+swift = { calls = ["CommandLine.arguments*", "ProcessInfo.processInfo.environment*", "req.query*", "req.parameters*", "req.content*", "request.query*", "request.parameters*"] }
+
+[sanitizer]
+python = { calls = ["int", "float", "bool", "escape", "html.escape", "quote", "shlex.quote", "markupsafe.escape", "bleach.clean", "uuid.UUID", "*.escape", "*.quote"] }
+php = { calls = ["intval", "floatval", "escapeshellarg", "escapeshellcmd", "htmlspecialchars", "addslashes", "mysqli_real_escape_string", "filter_var", "$pdo.quote", "$mysqli.real_escape_string"] }
+go = { calls = ["strconv.Atoi", "strconv.ParseInt", "strconv.ParseFloat", "strconv.ParseBool", "html.EscapeString", "url.QueryEscape", "*.Quote"] }
+java = { calls = ["Integer.parseInt", "Long.parseLong", "Double.parseDouble", "Integer.valueOf", "Long.valueOf", "UUID.fromString", "StringEscapeUtils.escapeSql", "*.encodeForSQL"] }
+kotlin = { calls = ["Integer.parseInt", "Long.parseLong", "Double.parseDouble", "UUID.fromString", "*.toInt", "*.toLong", "*.toIntOrNull", "*.toDouble"] }
+ruby = { calls = ["Integer", "Float", "*.to_i", "*.to_f", "Shellwords.escape", "Shellwords.shellescape", "*.shellescape", "ERB.Util.html_escape", "*.sanitize", "*.quote"] }
+csharp = { calls = ["int.Parse", "int.TryParse", "long.Parse", "double.Parse", "Convert.ToInt32", "Convert.ToInt64", "Guid.Parse"] }
+elixir = { calls = ["String.to_integer", "String.to_float", "Integer.parse", "Float.parse", "Ecto.UUID.cast"] }
+dart = { calls = ["int.parse", "int.tryParse", "double.parse", "double.tryParse", "Uri.encodeComponent"] }
+rust = { calls = ["*.parse.<i*", "*.parse.<u*", "*.parse.<f*", "*.parse.<bool>"] }
+javascript = { calls = ["Number", "parseInt", "parseFloat", "Boolean", "Math.*", "encodeURIComponent", "encodeURI", "escape", "*.escape", "*.sanitize*", "sanitize*", "*.quote", "*chema.parse", "*chema.safeParse", "validate*", "*.validate*"] }
+
+[sql-sink]
+skip_tests = true
+python = { calls = ["cursor.execute", "cur.execute", "conn.execute", "connection.execute", "session.execute", "db.session.execute", "db.execute", "engine.execute", "text", "sqlalchemy.text", "*.objects.raw", "*.objects.extra"] }
+php = { calls = ["$pdo.query", "$pdo.exec", "$pdo.prepare", "$db.query", "$conn.query", "$mysqli.query", "mysqli_query@1", "DB.select", "DB.statement", "DB.raw", "DB.unprepared", "*.whereRaw", "*.selectRaw", "*.orderByRaw", "*.havingRaw"] }
+go = { calls = ["db.Query", "db.QueryRow", "db.Exec", "db.Prepare", "db.Raw", "tx.Query", "tx.QueryRow", "tx.Exec", "db.QueryContext@1", "db.QueryRowContext@1", "db.ExecContext@1", "tx.QueryContext@1", "tx.QueryRowContext@1", "tx.ExecContext@1"] }
+java = { calls = ["*.executeQuery", "*.executeUpdate", "statement.execute", "stmt.execute", "*.createQuery", "*.createNativeQuery", "*.prepareStatement", "jdbcTemplate.query", "jdbcTemplate.queryForObject", "jdbcTemplate.queryForList", "jdbcTemplate.update", "jdbcTemplate.execute"] }
+kotlin = { calls = ["*.executeQuery", "*.executeUpdate", "statement.execute", "stmt.execute", "*.createQuery", "*.createNativeQuery", "*.prepareStatement", "jdbcTemplate.query", "jdbcTemplate.queryForObject", "jdbcTemplate.queryForList", "jdbcTemplate.update", "jdbcTemplate.execute"] }
+ruby = { calls = ["connection.execute", "ActiveRecord.Base.connection.execute", "*.find_by_sql", "*.exec_query", "*.select_all", "*.select_one"] }
+csharp = { calls = ["*.ExecuteSqlRaw", "*.FromSqlRaw", "*.ExecuteSqlCommand", "*.SqlQuery"] }
+elixir = { calls = ["Repo.query", "Repo.query!", "Ecto.Adapters.SQL.query@1", "Ecto.Adapters.SQL.query!@1"] }
+dart = { calls = ["db.rawQuery", "db.execute", "database.rawQuery", "database.execute", "db.rawInsert", "db.rawUpdate", "db.rawDelete"] }
+rust = { calls = ["sqlx.query", "sqlx.query_as", "sqlx.query_scalar", "diesel.sql_query", "conn.execute"] }
+javascript = { calls = ["{prisma,db,database,knex,sequelize,sql,pool,connection,conn,trx,tx,transaction,entityManager,em,manager,queryRunner,repo,repository,orm,dataSource}*.{query,execute,raw,run,exec,prepare}", "*.{prisma,db,database,knex,sequelize,sql,pool,connection,conn,trx,tx,transaction,entityManager,em,manager,queryRunner,repo,repository,orm,dataSource}*.{query,execute,raw,run,exec,prepare}", "*{Repository,Repo,Dao,Model,Db}.{query,execute,raw}", "*.$queryRawUnsafe", "*.$executeRawUnsafe"] }
+
+[iteration-call]
+kotlin = { calls = ["*.forEach", "*.forEachIndexed", "*.map", "*.mapNotNull", "*.flatMap", "*.filter", "*.filterNot", "*.onEach", "*.fold", "*.reduce", "*.any", "*.all", "*.none", "*.groupBy", "*.associate", "*.sumOf"] }
+java = { calls = ["*.forEach", "*.map", "*.flatMap", "*.filter", "*.peek", "*.anyMatch", "*.allMatch", "*.noneMatch", "*.mapToInt", "*.reduce", "*.removeIf"] }
+ruby = { calls = ["*.each", "*.each_with_index", "*.each_with_object", "*.each_pair", "*.each_key", "*.map", "*.collect", "*.flat_map", "*.select", "*.filter", "*.reject", "*.find_all", "*.reduce", "*.inject", "*.times", "*.group_by", "*.any?", "*.all?"] }
+rust = { calls = ["*.for_each", "*.map", "*.filter_map", "*.flat_map", "*.filter", "*.fold", "*.try_for_each", "*.inspect", "*.any", "*.all"] }
+csharp = { calls = ["*.ForEach", "*.Select", "*.SelectMany", "*.Where", "*.Any", "*.All", "*.Aggregate"] }
+dart = { calls = ["*.forEach", "*.map", "*.where", "*.expand", "*.fold", "*.reduce", "*.any", "*.every"] }
+elixir = { calls = ["Enum.each", "Enum.map", "Enum.flat_map", "Enum.filter", "Enum.reject", "Enum.reduce", "Stream.map", "Stream.each", "Task.async_stream"] }
+php = { calls = ["array_map", "array_walk", "array_filter", "array_reduce", "*.each", "*.map", "*.filter"] }
+javascript = { calls = ["*.{forEach,map,flatMap,filter,reduce,reduceRight,some,every,find,findIndex,findLast}"] }
+
+[entry-point]
+go = { calls = ["main", "init", "Test*", "Benchmark*", "Example*", "Fuzz*", "TestMain"] }
+python = { calls = ["main", "__*__", "setUp", "tearDown", "setup", "teardown", "test_*"] }
+java = { calls = ["main", "run", "toString", "equals", "hashCode", "compareTo", "close"] }
+kotlin = { calls = ["main", "invoke", "toString", "equals", "hashCode", "compareTo", "close"] }
+csharp = { calls = ["Main", "Dispose", "ToString", "Equals", "GetHashCode", "Configure", "ConfigureServices"] }
+php = { calls = ["__*", "handle", "boot", "register", "up", "down", "main"] }
+dart = { calls = ["main", "build", "createState", "initState", "dispose", "toString", "noSuchMethod"] }
+elixir = { calls = ["init", "start", "start_link", "child_spec", "handle_*", "terminate", "code_change", "mount", "render", "call", "changeset", "main", "run", "__*__"] }
+ruby = { calls = ["initialize", "method_missing", "respond_to_missing?", "call", "run", "perform", "to_s", "inspect", "main"] }
+
+[dynamic-dispatch]
+python = { calls = ["getattr", "setattr", "globals", "locals", "__import__", "importlib.import_module", "eval", "exec"] }
+ruby = { calls = ["send", "public_send", "__send__", "*.send", "*.public_send", "*.__send__", "method", "*.const_get", "*.instance_variable_get", "*.define_method", "eval"] }
+java = { calls = ["*.getMethod", "*.getDeclaredMethod", "Class.forName", "*.invoke", "*.newInstance"] }
+kotlin = { calls = ["*.getMethod", "*.getDeclaredMethod", "Class.forName", "*.invoke", "*.newInstance"] }
+csharp = { calls = ["*.GetMethod", "*.GetMethods", "Activator.CreateInstance", "*.Invoke"] }
+php = { calls = ["call_user_func", "call_user_func_array", "method_exists", "is_callable", "forward_static_call"] }
+elixir = { calls = ["apply", "Kernel.apply", "String.to_atom", "String.to_existing_atom"] }
+go = { calls = ["reflect.ValueOf", "*.MethodByName"] }
+dart = { calls = ["*.noSuchMethod", "Function.apply"] }
+javascript = { calls = ["eval", "Function", "Reflect.apply", "require"] }
+
+[unsafe-deserialization]
+skip_tests = true
+php = { calls = ["unserialize"] }
+python = { calls = ["pickle.load", "pickle.loads", "cPickle.load", "cPickle.loads", "marshal.load", "marshal.loads", "yaml.unsafe_load", "yaml.unsafe_load_all"] }
+java = { calls = ["*.readObject", "*.readUnshared"] }
+kotlin = { calls = ["*.readObject", "*.readUnshared"] }
+csharp = { calls = ["*Formatter.Deserialize", "*formatter.Deserialize"] }
+ruby = { calls = ["Marshal.load", "Marshal.restore", "YAML.unsafe_load"] }
+swift = { calls = ["NSKeyedUnarchiver.unarchiveObject", "NSKeyedUnarchiver.unarchiveTopLevelObjectWithData"] }
+elixir = { calls = [":erlang.binary_to_term"] }
+
+[weak-hash]
+skip_tests = true
+python = { calls = ["hashlib.md5", "hashlib.sha1"] }
+java = { calls = ["DigestUtils.md5", "DigestUtils.md5Hex", "DigestUtils.sha1", "DigestUtils.sha1Hex"] }
+kotlin = { calls = ["DigestUtils.md5", "DigestUtils.md5Hex", "DigestUtils.sha1", "DigestUtils.sha1Hex"] }
+csharp = { calls = ["MD5.Create", "SHA1.Create", "DES.Create", "MD5.HashData", "SHA1.HashData"] }
+go = { calls = ["md5.New", "md5.Sum", "sha1.New", "sha1.Sum", "des.NewCipher"] }
+cpp = { calls = ["MD5", "MD5_Init", "SHA1", "SHA1_Init", "EVP_md5", "EVP_sha1"] }
+swift = { calls = ["Insecure.MD5.hash", "Insecure.SHA1.hash", "CC_MD5", "CC_SHA1"] }
+ruby = { calls = ["Digest.MD5.hexdigest", "Digest.SHA1.hexdigest", "Digest.MD5.new", "Digest.SHA1.new"] }
+dart = { calls = ["md5.convert", "sha1.convert"] }
+
+[stack-trace-print]
+skip_tests = true
+java = { calls = ["*.printStackTrace"] }
+kotlin = { calls = ["*.printStackTrace"] }
+python = { calls = ["traceback.print_exc", "traceback.print_exception"] }
+
+[crash-call]
+skip_tests = true
+swift = { calls = ["fatalError", "preconditionFailure"] }
+
+[raw-markup]
+skip_tests = true
+python = { calls = ["mark_safe", "Markup", "markupsafe.Markup"] }
+elixir = { calls = ["raw"] }
+ruby = { calls = ["raw", "*.html_safe"] }
+
+[permit-all]
+skip_tests = true
+ruby = { calls = ["*.permit!"] }
+
+[atom-from-string]
+skip_tests = true
+elixir = { calls = ["String.to_atom", "List.to_atom", ":erlang.binary_to_atom"] }
+
+[unbounded-c-string]
+skip_tests = true
+cpp = { calls = ["gets", "strcpy", "strcat", "sprintf", "vsprintf", "std.gets", "std.strcpy", "std.strcat", "std.sprintf"] }
+
+[debug-output]
+skip_tests = true
+skip_dirs = ["example", "examples", "sample", "samples", "script", "scripts", "tool", "tools", "bin", "demo", "docs", "docs_src", "benchmarks", "cmd", "cli", "commands", "daemon", "task", "tasks"]
+python = { calls = ["print", "pprint.pprint", "breakpoint", "pdb.set_trace"] }
+java = { calls = ["System.out.println", "System.out.print", "System.err.println", "System.err.print"] }
+kotlin = { calls = ["println", "print", "System.out.println", "System.err.println"] }
+csharp = { calls = ["Console.WriteLine", "Console.Write", "Debug.WriteLine"] }
+go = { calls = ["fmt.Println", "fmt.Printf", "fmt.Print", "println"] }
+ruby = { calls = ["puts", "p", "pp", "print"] }
+php = { calls = ["var_dump", "print_r", "dd", "dump"] }
+elixir = { calls = ["IO.puts", "IO.inspect", "IO.write", "dbg"] }
+swift = { calls = ["print", "debugPrint", "dump", "NSLog"] }
+cpp = { calls = ["printf", "puts", "std.printf", "std.puts"] }
+rust = { calls = ["dbg!", "std.dbg!", "println!", "print!", "eprintln!", "eprint!"], skip_files = ["main.rs", "build.rs"] }
+javascript = { calls = ["console.log", "console.debug", "console.dir"] }
+
+[weak-random]
+skip_tests = true
+python = { calls = ["random.random", "random.randint", "random.choice", "random.randrange", "random.shuffle", "random.sample"] }
+java = { calls = ["Math.random"] }
+kotlin = { calls = ["Random.nextInt", "Random.nextBytes", "Random.nextLong", "Math.random"] }
+csharp = { calls = ["Random.Shared.Next", "Random.Shared.NextBytes"] }
+php = { calls = ["rand", "mt_rand", "srand", "mt_srand"] }
+ruby = { calls = ["rand", "Random.rand"] }
+elixir = { calls = [":rand.uniform", ":rand.bytes"] }
+cpp = { calls = ["rand", "std.rand"] }
+javascript = { calls = ["Math.random"] }
+go = { calls = ["rand.Intn", "rand.Int63", "rand.Int31n", "rand.Float64", "rand.Seed", "rand.Shuffle", "rand.Perm"] }
+dart = { calls = ["Random"] }
+
+[http-client]
+skip_tests = true
+python = { calls = ["requests.get", "requests.post", "requests.put", "requests.delete", "requests.head", "httpx.get", "httpx.post", "urllib.request.urlopen", "urlopen"] }
+php = { calls = ["file_get_contents", "curl_init"] }
+java = { calls = ["*.getForObject", "*.getForEntity", "*.postForObject", "*.postForEntity"] }
+kotlin = { calls = ["*.getForObject", "*.getForEntity", "*.postForObject", "*.postForEntity"] }
+go = { calls = ["http.Get", "http.Post", "http.Head", "http.NewRequest@1", "http.NewRequestWithContext@2"] }
+csharp = { calls = ["*.GetAsync", "*.GetStringAsync", "*.GetStreamAsync", "*.GetByteArrayAsync", "*.PostAsync", "*.PutAsync", "*.DeleteAsync"] }
+ruby = { calls = ["URI.open", "Net.HTTP.get", "Net.HTTP.get_response", "HTTParty.get", "Faraday.get"] }
+elixir = { calls = ["HTTPoison.get", "HTTPoison.get!", "HTTPoison.post", "Req.get", "Req.get!"] }
+dart = { calls = ["http.get", "http.post", "http.head", "http.delete"] }
+rust = { calls = ["reqwest.get", "reqwest.blocking.get", "ureq.get", "ureq.post"] }
+javascript = { calls = ["fetch", "axios", "axios.get", "axios.post", "axios.put", "axios.delete", "got", "got.get", "got.post", "http.get", "https.get", "http.request", "https.request"] }
+swift = { calls = ["URLSession.shared.dataTask", "URLSession.shared.data", "URLSession.shared.downloadTask"] }
+
+[file-open]
+skip_tests = true
+python = { calls = ["open", "os.open", "io.open", "send_file"] }
+php = { calls = ["file_get_contents", "fopen", "readfile", "file", "unlink", "file_put_contents"] }
+java = { calls = ["Files.readAllBytes", "Files.readString", "Files.readAllLines", "Files.newInputStream", "Files.newBufferedReader", "Files.delete", "Paths.get", "Path.of"] }
+kotlin = { calls = ["Files.readAllBytes", "Files.readString", "Files.readAllLines", "Files.newInputStream", "Files.delete", "Paths.get", "Path.of"] }
+csharp = { calls = ["File.ReadAllText", "File.ReadAllBytes", "File.ReadAllLines", "File.OpenRead", "File.Open", "File.Delete", "File.WriteAllText"] }
+go = { calls = ["os.Open", "os.ReadFile", "ioutil.ReadFile", "os.OpenFile", "os.Remove", "os.Create"] }
+ruby = { calls = ["File.read", "File.open", "File.delete", "IO.read", "send_file"] }
+elixir = { calls = ["File.read", "File.read!", "File.stream!", "File.rm", "File.rm!", "File.write", "File.write!"] }
+rust = { calls = ["std.fs.read_to_string", "fs.read_to_string", "fs.read", "fs.remove_file", "File.open", "File.create"] }
+javascript = { calls = ["fs.readFile", "fs.readFileSync", "fs.createReadStream", "fs.promises.readFile", "fs.unlink", "fs.unlinkSync", "fs.writeFile", "fs.writeFileSync", "res.sendFile"] }
+cpp = { calls = ["fopen", "std.fopen", "open", "remove", "std.remove"] }
+dart = { calls = ["File", "Directory"] }
+swift = { calls = ["FileManager.default.contents", "FileManager.default.removeItem"] }
+
+[env-helper]
+skip_tests = true
+skip_dirs = ["config", "config-stubs"]
+php = { calls = ["env"] }
+
+[task-wait]
+csharp = { calls = ["*.Wait"] }
+
+[weak-cipher]
+skip_tests = true
+python = { calls = ["DES.new", "DES3.new", "ARC4.new", "ARC2.new", "Blowfish.new", "XOR.new"] }
+csharp = { calls = ["DES.Create", "RC2.Create", "TripleDES.Create"] }
+php = { calls = ["mcrypt_encrypt", "mcrypt_decrypt", "mcrypt_generic", "mcrypt_module_open"] }
+go = { calls = ["rc4.NewCipher", "des.NewTripleDESCipher"] }
+cpp = { calls = ["DES_ecb_encrypt", "DES_set_key", "RC4", "EVP_des_cbc", "EVP_rc4"] }
+
+[redirect]
+skip_tests = true
+python = { calls = ["redirect", "flask.redirect", "HttpResponseRedirect"] }
+java = { calls = ["*.sendRedirect"] }
+kotlin = { calls = ["*.sendRedirect"] }
+csharp = { calls = ["Redirect", "*.Redirect", "*.RedirectPermanent"] }
+ruby = { calls = ["redirect_to"] }
+go = { calls = ["http.Redirect@2"] }
+elixir = { calls = ["redirect"] }
+javascript = { calls = ["res.redirect", "response.redirect", "ctx.redirect"] }
+
+[template-sink]
+skip_tests = true
+python = { calls = ["render_template_string", "jinja2.Template", "Template", "*.from_string"] }
+ruby = { calls = ["ERB.new"] }
+elixir = { calls = ["EEx.eval_string", "EEx.compile_string"] }
+php = { calls = ["*.createTemplate"] }
+
+[reflection-sink]
+skip_tests = true
+python = { calls = ["getattr@1", "importlib.import_module", "import_module", "__import__"] }
+php = { calls = ["call_user_func", "call_user_func_array"] }
+ruby = { calls = ["*.send", "*.public_send", "*.constantize", "const_get", "Object.const_get"] }
+java = { calls = ["Class.forName", "*.getMethod", "*.getDeclaredMethod"] }
+kotlin = { calls = ["Class.forName", "*.getMethod", "*.getDeclaredMethod"] }
+csharp = { calls = ["Type.GetType", "Activator.CreateInstance", "Assembly.Load", "*.GetMethod"] }
+elixir = { calls = ["apply", "Kernel.apply", "Module.concat"] }
+swift = { calls = ["NSClassFromString", "NSSelectorFromString"] }
+cpp = { calls = ["dlopen", "dlsym"] }
+
+[regex-sink]
+skip_tests = true
+python = { calls = ["re.compile", "re.match", "re.search", "re.fullmatch", "re.findall", "re.sub"] }
+java = { calls = ["Pattern.compile"] }
+kotlin = { calls = ["Regex", "Pattern.compile"] }
+csharp = { calls = ["Regex", "Regex.IsMatch@1", "Regex.Match@1", "Regex.Replace@1"] }
+php = { calls = ["preg_match", "preg_match_all", "preg_replace", "preg_split"] }
+ruby = { calls = ["Regexp.new", "Regexp.compile"] }
+elixir = { calls = ["Regex.compile", "Regex.compile!"] }
+dart = { calls = ["RegExp"] }
+javascript = { calls = ["RegExp"] }
+
+[xml-parser]
+skip_tests = true
+python = { calls = ["xml.etree.ElementTree.parse", "xml.etree.ElementTree.fromstring", "ElementTree.parse", "ElementTree.fromstring", "ET.parse", "ET.fromstring", "minidom.parse", "minidom.parseString", "xml.dom.minidom.parse", "xml.sax.parse", "xml.sax.parseString", "etree.parse", "etree.fromstring"] }
+java = { calls = ["DocumentBuilderFactory.newInstance", "SAXParserFactory.newInstance", "XMLInputFactory.newInstance", "TransformerFactory.newInstance", "XMLReaderFactory.createXMLReader"] }
+kotlin = { calls = ["DocumentBuilderFactory.newInstance", "SAXParserFactory.newInstance", "XMLInputFactory.newInstance", "TransformerFactory.newInstance"] }
+php = { calls = ["simplexml_load_string", "simplexml_load_file", "xml_parse"] }
+csharp = { calls = ["XmlReader.Create"] }
+
+[process-exit]
+skip_tests = true
+skip_dirs = ["bin", "cmd", "cli", "commands", "daemon", "mix", "script", "scripts", "task", "tasks", "tool", "tools"]
+python = { calls = ["sys.exit", "os._exit", "exit", "quit"], skip_files = ["__main__.py", "manage.py", "setup.py", "conftest.py"] }
+java = { calls = ["System.exit", "Runtime.getRuntime().halt", "Runtime.getRuntime().exit"], skip_files = ["Main.java", "App.java"] }
+kotlin = { calls = ["exitProcess", "System.exit"], skip_files = ["Main.kt", "App.kt"] }
+csharp = { calls = ["Environment.Exit"], skip_files = ["Program.cs"] }
+go = { calls = ["os.Exit", "log.Fatal", "log.Fatalf", "log.Fatalln"], skip_files = ["main.go"] }
+rust = { calls = ["std.process.exit", "process.exit"], skip_files = ["main.rs", "build.rs"] }
+dart = { calls = ["exit"] }
+swift = { calls = ["exit"], skip_files = ["main.swift"] }
+cpp = { calls = ["exit", "std.exit", "abort", "std.abort", "_Exit"], skip_files = ["main.cpp", "main.cc"] }
+ruby = { calls = ["exit", "exit!", "abort"] }
+elixir = { calls = ["System.halt"] }
+
+[type-punning]
+skip_tests = true
+rust = { calls = ["mem.transmute", "std.mem.transmute", "core.mem.transmute", "transmute", "mem.transmute_copy"] }
+swift = { calls = ["unsafeBitCast", "unsafeDowncast", "withUnsafeBytes", "withUnsafeMutableBytes", "withUnsafePointer"] }
+go = { calls = ["unsafe.Pointer", "unsafe.Slice", "unsafe.String"] }
+csharp = { calls = ["Unsafe.As", "Unsafe.AsPointer", "Marshal.PtrToStructure"] }
+
+[http-no-timeout]
+skip_tests = true
+python = { calls = ["requests.get", "requests.post", "requests.put", "requests.delete", "requests.head", "requests.patch", "requests.request"] }
+
+[format-sink]
+skip_tests = true
+cpp = { calls = ["printf", "std.printf", "fprintf@1", "sprintf@1", "snprintf@2", "syslog@1", "vprintf"] }
+
+[variable-extraction]
+skip_tests = true
+php = { calls = ["extract"] }
+
+[legacy-db-api]
+php = { calls = ["mysql_connect", "mysql_query", "mysql_fetch_array", "mysql_fetch_assoc", "mysql_real_escape_string", "mysql_select_db", "mysql_close"] }
+
+[coroutine-leak]
+skip_tests = true
+kotlin = { calls = ["GlobalScope.launch", "GlobalScope.async"] }
+
+[run-blocking]
+skip_tests = true
+kotlin = { calls = ["runBlocking"] }
+
+[gc-collect]
+skip_tests = true
+csharp = { calls = ["GC.Collect"] }
+java = { calls = ["System.gc", "Runtime.getRuntime().gc"] }
+kotlin = { calls = ["System.gc"] }
+
+[main-sync]
+skip_tests = true
+swift = { calls = ["DispatchQueue.main.sync"] }
+
+[unfinished-code]
+skip_tests = true
+rust = { calls = ["todo!", "unimplemented!", "std.todo!", "std.unimplemented!"] }
+kotlin = { calls = ["TODO"] }
+
+[env-mutation]
+skip_tests = true
+rust = { calls = ["std.env.set_var", "env.set_var", "std.env.remove_var", "env.remove_var"] }
+
+[memory-leak]
+skip_tests = true
+rust = { calls = ["mem.forget", "std.mem.forget", "core.mem.forget", "Box.leak"] }
+
+[csrf-disable]
+skip_tests = true
+java = { calls = ["*.csrf().disable"] }
+kotlin = { calls = ["*.csrf().disable"] }
+
+[permit-all-requests]
+skip_tests = true
+java = { calls = ["*.anyRequest().permitAll"] }
+kotlin = { calls = ["*.anyRequest().permitAll"] }
+
+[developer-errors]
+skip_tests = true
+csharp = { calls = ["*.UseDeveloperExceptionPage"] }
+
+[open-cors-call]
+skip_tests = true
+csharp = { calls = ["*.AllowAnyOrigin"] }

@@ -17,10 +17,10 @@ export async function* readTextChunks(response: Response): AsyncGenerator<string
 
 /** Ollama's `/api/generate` stream: one JSON object per newline-delimited line. */
 export async function* readNdjsonLines(response: Response): AsyncGenerator<unknown> {
-  let buffer = "";
+  let buffer = '';
   for await (const chunk of readTextChunks(response)) {
     buffer += chunk;
-    let newlineIndex = buffer.indexOf("\n");
+    let newlineIndex = buffer.indexOf('\n');
     while (newlineIndex !== -1) {
       const line = buffer.slice(0, newlineIndex).trim();
       buffer = buffer.slice(newlineIndex + 1);
@@ -31,7 +31,7 @@ export async function* readNdjsonLines(response: Response): AsyncGenerator<unkno
           // A partial/malformed line — skip it rather than aborting the whole stream.
         }
       }
-      newlineIndex = buffer.indexOf("\n");
+      newlineIndex = buffer.indexOf('\n');
     }
   }
   const rest = buffer.trim();
@@ -46,17 +46,17 @@ export async function* readNdjsonLines(response: Response): AsyncGenerator<unkno
 
 /** OpenAI-compatible SSE stream (LM Studio, and any future OpenAI-compatible provider): lines of `data: {...}`, terminated by `data: [DONE]`. */
 export async function* readServerSentEvents(response: Response): AsyncGenerator<unknown> {
-  let buffer = "";
+  let buffer = '';
   for await (const chunk of readTextChunks(response)) {
     buffer += chunk;
-    let newlineIndex = buffer.indexOf("\n");
+    let newlineIndex = buffer.indexOf('\n');
     while (newlineIndex !== -1) {
       const line = buffer.slice(0, newlineIndex).trim();
       buffer = buffer.slice(newlineIndex + 1);
-      newlineIndex = buffer.indexOf("\n");
-      if (!line.startsWith("data:")) continue;
-      const payload = line.slice("data:".length).trim();
-      if (payload === "[DONE]") return;
+      newlineIndex = buffer.indexOf('\n');
+      if (!line.startsWith('data:')) continue;
+      const payload = line.slice('data:'.length).trim();
+      if (payload === '[DONE]') return;
       try {
         yield JSON.parse(payload);
       } catch {

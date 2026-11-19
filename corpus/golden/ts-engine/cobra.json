@@ -1,0 +1,150 @@
+{
+ "name": "cobra",
+ "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+ "findings": [
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "cobra.go",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "command.go",
+   "lines": {
+    "start": 1209,
+    "end": 1209
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "command.go",
+   "lines": {
+    "start": 1345,
+    "end": 1345
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 54,
+    "end": 54
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 58,
+    "end": 58
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 70,
+    "end": 70
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "flag_groups.go",
+   "lines": {
+    "start": 74,
+    "end": 74
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

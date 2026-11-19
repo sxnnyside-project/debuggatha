@@ -1,0 +1,3376 @@
+{
+ "name": "kit",
+ "commit": "014dfec3df98be8edf6e217e98309c12ba51b4cf",
+ "findings": [
+  {
+   "rule": null,
+   "pack": null,
+   "file": "packages/adapter-auto",
+   "lines": null,
+   "columns": null,
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 29,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 69,
+    "end": 74
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 6,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 387,
+    "end": 387
+   },
+   "columns": {
+    "start": 20,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 39,
+    "end": 39
+   },
+   "columns": {
+    "start": 77,
+    "end": 83
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/adapter.spec.ts",
+   "lines": {
+    "start": 442,
+    "end": 442
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/handler.spec.ts",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 35,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/handler.spec.ts",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 57,
+    "end": 62
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/handler.spec.ts",
+   "lines": {
+    "start": 253,
+    "end": 253
+   },
+   "columns": {
+    "start": 45,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/handler.spec.ts",
+   "lines": {
+    "start": 259,
+    "end": 259
+   },
+   "columns": {
+    "start": 56,
+    "end": 62
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-bun/test/start.spec.ts",
+   "lines": {
+    "start": 227,
+    "end": 227
+   },
+   "columns": {
+    "start": 64,
+    "end": 69
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-cloudflare/files/worker.js",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 57,
+    "end": 69
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-cloudflare/files/worker.js",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 64,
+    "end": 76
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-cloudflare/index.js",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 64,
+    "end": 71
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-node/src/static.js",
+   "lines": {
+    "start": 155,
+    "end": 155
+   },
+   "columns": {
+    "start": 60,
+    "end": 67
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-node/src/static.spec.ts",
+   "lines": {
+    "start": 196,
+    "end": 196
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-node/src/utils.js",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 27,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-static/platforms.js",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-vercel/index.js",
+   "lines": {
+    "start": 321,
+    "end": 321
+   },
+   "columns": {
+    "start": 12,
+    "end": 19
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/adapter-vercel/index.js",
+   "lines": {
+    "start": 437,
+    "end": 437
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-vercel/test/apps/basic/test/test.ts",
+   "lines": {
+    "start": 166,
+    "end": 166
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-vercel/test/apps/basic/test/test.ts",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 38,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-vercel/test/apps/basic/test/test.ts",
+   "lines": {
+    "start": 56,
+    "end": 56
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-vercel/test/apps/basic/test/test.ts",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 38,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/adapter-vercel/test/apps/basic/test/test.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 35,
+    "end": 35
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/adapter-vercel/utils.spec.js",
+   "lines": {
+    "start": 39,
+    "end": 39
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 124,
+    "end": 124
+   },
+   "columns": {
+    "start": 15,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 127,
+    "end": 127
+   },
+   "columns": {
+    "start": 15,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 155,
+    "end": 155
+   },
+   "columns": {
+    "start": 49,
+    "end": 72
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 372,
+    "end": 372
+   },
+   "columns": {
+    "start": 18,
+    "end": 25
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 388,
+    "end": 388
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/enhanced-img/src/vite-plugin.js",
+   "lines": {
+    "start": 422,
+    "end": 422
+   },
+   "columns": {
+    "start": 4,
+    "end": 11
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/adapt/builder.spec.js",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 10,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/adapt/builder.spec.js",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 10,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/adapt/builder.spec.js",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 24,
+    "end": 34
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/adapt/builder.spec.js",
+   "lines": {
+    "start": 110,
+    "end": 110
+   },
+   "columns": {
+    "start": 24,
+    "end": 34
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/postbuild/fallback.js",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 45,
+    "end": 55
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/postbuild/prerender.js",
+   "lines": {
+    "start": 688,
+    "end": 688
+   },
+   "columns": {
+    "start": 27,
+    "end": 34
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/postbuild/prerender.js",
+   "lines": {
+    "start": 719,
+    "end": 719
+   },
+   "columns": {
+    "start": 40,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/create_manifest_data/conflict.js",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 57,
+    "end": 62
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/create_manifest_data/index.js",
+   "lines": {
+    "start": 329,
+    "end": 329
+   },
+   "columns": {
+    "start": 8,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/create_manifest_data/index.js",
+   "lines": {
+    "start": 340,
+    "end": 340
+   },
+   "columns": {
+    "start": 8,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/create_manifest_data/index.spec.js",
+   "lines": {
+    "start": 1003,
+    "end": 1003
+   },
+   "columns": {
+    "start": 17,
+    "end": 32
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/create_manifest_data/index.spec.js",
+   "lines": {
+    "start": 999,
+    "end": 999
+   },
+   "columns": {
+    "start": 29,
+    "end": 44
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_app_types.js",
+   "lines": {
+    "start": 160,
+    "end": 160
+   },
+   "columns": {
+    "start": 15,
+    "end": 22
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_app_types.js",
+   "lines": {
+    "start": 61,
+    "end": 61
+   },
+   "columns": {
+    "start": 18,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_app_types.js",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 18,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_tsconfig/index.js",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 18,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_tsconfig/index.js",
+   "lines": {
+    "start": 260,
+    "end": 260
+   },
+   "columns": {
+    "start": 25,
+    "end": 32
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_tsconfig/index.js",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 11,
+    "end": 18
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_tsconfig/validate.js",
+   "lines": {
+    "start": 107,
+    "end": 107
+   },
+   "columns": {
+    "start": 43,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_types/index.js",
+   "lines": {
+    "start": 182,
+    "end": 182
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_types/index.js",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 3,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/core/sync/write_types/index.js",
+   "lines": {
+    "start": 356,
+    "end": 356
+   },
+   "columns": {
+    "start": 4,
+    "end": 44
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-object-spread",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/node/index.js",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 13,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "medium",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/src/exports/url.spec.js",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/dev/generate_manifest.js",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 11,
+    "end": 22
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/dev/index.js",
+   "lines": {
+    "start": 167,
+    "end": 167
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/dev/index.js",
+   "lines": {
+    "start": 349,
+    "end": 349
+   },
+   "columns": {
+    "start": 21,
+    "end": 49
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/plugins/remote.js",
+   "lines": {
+    "start": 225,
+    "end": 225
+   },
+   "columns": {
+    "start": 36,
+    "end": 84
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/preview/index.js",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 20,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/preview/index.js",
+   "lines": {
+    "start": 175,
+    "end": 175
+   },
+   "columns": {
+    "start": 25,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/preview/index.js",
+   "lines": {
+    "start": 176,
+    "end": 176
+   },
+   "columns": {
+    "start": 18,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 131,
+    "end": 131
+   },
+   "columns": {
+    "start": 36,
+    "end": 44
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 20,
+    "end": 27
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 208,
+    "end": 208
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 215,
+    "end": 215
+   },
+   "columns": {
+    "start": 19,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 216,
+    "end": 216
+   },
+   "columns": {
+    "start": 19,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 331,
+    "end": 331
+   },
+   "columns": {
+    "start": 68,
+    "end": 75
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/exports/vite/utils.js",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 14,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/messages/internal/matchers.spec.js",
+   "lines": {
+    "start": 116,
+    "end": 116
+   },
+   "columns": {
+    "start": 8,
+    "end": 61
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/paths/client.js",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": {
+    "start": 28,
+    "end": 35
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/paths/client.js",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 42,
+    "end": 61
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/paths/server.js",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 61,
+    "end": 68
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/paths/server.js",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 14,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/server/index.js",
+   "lines": {
+    "start": 61,
+    "end": 61
+   },
+   "columns": {
+    "start": 44,
+    "end": 54
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/server/index.js",
+   "lines": {
+    "start": 72,
+    "end": 72
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/server/remote/form.js",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 11,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/app/server/remote/form.js",
+   "lines": {
+    "start": 248,
+    "end": 248
+   },
+   "columns": {
+    "start": 24,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/client/client.js",
+   "lines": {
+    "start": 980,
+    "end": 980
+   },
+   "columns": {
+    "start": 57,
+    "end": 65
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/client/remote-functions/form.svelte.js",
+   "lines": {
+    "start": 80,
+    "end": 80
+   },
+   "columns": {
+    "start": 31,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/client/remote-functions/form.svelte.js",
+   "lines": {
+    "start": 81,
+    "end": 81
+   },
+   "columns": {
+    "start": 18,
+    "end": 32
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/src/runtime/client/remote-functions/form.svelte.spec.js",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 17,
+    "end": 24
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 33,
+    "end": 33
+   },
+   "columns": {
+    "start": 46,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 580,
+    "end": 580
+   },
+   "columns": {
+    "start": 33,
+    "end": 40
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 32,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 607,
+    "end": 607
+   },
+   "columns": {
+    "start": 34,
+    "end": 41
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 817,
+    "end": 817
+   },
+   "columns": {
+    "start": 57,
+    "end": 64
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.js",
+   "lines": {
+    "start": 948,
+    "end": 948
+   },
+   "columns": {
+    "start": 40,
+    "end": 47
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/form-utils.spec.js",
+   "lines": {
+    "start": 195,
+    "end": 195
+   },
+   "columns": {
+    "start": 15,
+    "end": 25
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/pathname.js",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 52,
+    "end": 62
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/cookie.js",
+   "lines": {
+    "start": 286,
+    "end": 286
+   },
+   "columns": {
+    "start": 27,
+    "end": 34
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/cookie.js",
+   "lines": {
+    "start": 299,
+    "end": 299
+   },
+   "columns": {
+    "start": 25,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/data/index.js",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 21,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/fetch.js",
+   "lines": {
+    "start": 110,
+    "end": 110
+   },
+   "columns": {
+    "start": 27,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/internal.js",
+   "lines": {
+    "start": 117,
+    "end": 117
+   },
+   "columns": {
+    "start": 27,
+    "end": 34
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/page/actions.js",
+   "lines": {
+    "start": 86,
+    "end": 86
+   },
+   "columns": {
+    "start": 5,
+    "end": 13
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/page/data_serializer.js",
+   "lines": {
+    "start": 211,
+    "end": 211
+   },
+   "columns": {
+    "start": 18,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/page/render.js",
+   "lines": {
+    "start": 631,
+    "end": 631
+   },
+   "columns": {
+    "start": 35,
+    "end": 50
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/remote-functions.js",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 49,
+    "end": 61
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/respond.js",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 53,
+    "end": 61
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/respond.js",
+   "lines": {
+    "start": 225,
+    "end": 225
+   },
+   "columns": {
+    "start": 25,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/respond.js",
+   "lines": {
+    "start": 397,
+    "end": 397
+   },
+   "columns": {
+    "start": 50,
+    "end": 58
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/server/respond.js",
+   "lines": {
+    "start": 814,
+    "end": 814
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/runtime/shared.js",
+   "lines": {
+    "start": 347,
+    "end": 347
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/filesystem.spec.js",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 23,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/filesystem.spec.js",
+   "lines": {
+    "start": 230,
+    "end": 230
+   },
+   "columns": {
+    "start": 23,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/filesystem.spec.js",
+   "lines": {
+    "start": 239,
+    "end": 239
+   },
+   "columns": {
+    "start": 23,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/filesystem.spec.js",
+   "lines": {
+    "start": 245,
+    "end": 245
+   },
+   "columns": {
+    "start": 23,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/filesystem.spec.js",
+   "lines": {
+    "start": 251,
+    "end": 251
+   },
+   "columns": {
+    "start": 23,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/regex.js",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 55,
+    "end": 63
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/routing.js",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/routing.js",
+   "lines": {
+    "start": 313,
+    "end": 313
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/url.js",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 16,
+    "end": 52
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/src/utils/url.js",
+   "lines": {
+    "start": 82,
+    "end": 82
+   },
+   "columns": {
+    "start": 10,
+    "end": 18
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/async/src/lib/index.js",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 10,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/async/src/routes/remote/dev/preload/example.remote.js",
+   "lines": {
+    "start": 6,
+    "end": 6
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/async/src/routes/remote/form/preflight-pending/form.remote.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 9,
+    "end": 24
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/async/src/routes/remote/prerender/prerender.remote.js",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 5,
+    "end": 82
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/async/test/test.js",
+   "lines": {
+    "start": 389,
+    "end": 389
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/async/test/test.js",
+   "lines": {
+    "start": 398,
+    "end": 398
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/async/test/test.js",
+   "lines": {
+    "start": 411,
+    "end": 411
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/async/test/test.js",
+   "lines": {
+    "start": 420,
+    "end": 420
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/async/test/test.js",
+   "lines": {
+    "start": 433,
+    "end": 433
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/hooks.server.js",
+   "lines": {
+    "start": 160,
+    "end": 160
+   },
+   "columns": {
+    "start": 19,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/hooks.server.js",
+   "lines": {
+    "start": 163,
+    "end": 163
+   },
+   "columns": {
+    "start": 19,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/lib/index.js",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 10,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/actions/enhance/+page.server.js",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 12,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/actions/enhance/+page.server.js",
+   "lines": {
+    "start": 33,
+    "end": 33
+   },
+   "columns": {
+    "start": 12,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/actions/enhance/+page.server.js",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/actions/enhance/+page.server.js",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 13,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/encoded/redirect/+page.js",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 16,
+    "end": 42
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/load/fetch-request-empty-headers/+page.js",
+   "lines": {
+    "start": 3,
+    "end": 3
+   },
+   "columns": {
+    "start": 38,
+    "end": 52
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/load/serialization-post-request/+page.js",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 31,
+    "end": 45
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/src/routes/load/state.js",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 4,
+    "end": 74
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/client.test.js",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/client.test.js",
+   "lines": {
+    "start": 633,
+    "end": 633
+   },
+   "columns": {
+    "start": 34,
+    "end": 45
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/client.test.js",
+   "lines": {
+    "start": 659,
+    "end": 659
+   },
+   "columns": {
+    "start": 34,
+    "end": 45
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 1111,
+    "end": 1111
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 1260,
+    "end": 1260
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 190,
+    "end": 190
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 202,
+    "end": 202
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 208,
+    "end": 208
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 224,
+    "end": 224
+   },
+   "columns": {
+    "start": 4,
+    "end": 15
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 249,
+    "end": 249
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 258,
+    "end": 258
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 688,
+    "end": 688
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/client.test.js",
+   "lines": {
+    "start": 856,
+    "end": 856
+   },
+   "columns": {
+    "start": 27,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/test.js",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/test.js",
+   "lines": {
+    "start": 856,
+    "end": 856
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/test.js",
+   "lines": {
+    "start": 859,
+    "end": 859
+   },
+   "columns": {
+    "start": 76,
+    "end": 78
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/test.js",
+   "lines": {
+    "start": 893,
+    "end": 893
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/kit/test/apps/basics/test/playwright/cross-platform/test.js",
+   "lines": {
+    "start": 930,
+    "end": 930
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/basics/vite.config.js",
+   "lines": {
+    "start": 73,
+    "end": 73
+   },
+   "columns": {
+    "start": 23,
+    "end": 47
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/options-2/src/lib/index.js",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 10,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/options-3/src/lib/index.js",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 10,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/apps/writes/test/test.js",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 18,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/kit/test/prerendering/basics/src/routes/fetch-image/[...slug]/+server.js",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 20,
+    "end": 32
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/actions.test.ts",
+   "lines": {
+    "start": 10,
+    "end": 10
+   },
+   "columns": {
+    "start": 46,
+    "end": 52
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/actions.test.ts",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 48,
+    "end": 54
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/actions.test.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 48,
+    "end": 54
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/actions.test.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/load.test.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 53,
+    "end": 59
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 47,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 56,
+    "end": 62
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 68,
+    "end": 74
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 63,
+    "end": 69
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 66,
+    "end": 72
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 70,
+    "end": 76
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 73,
+    "end": 79
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 419,
+    "end": 419
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 455,
+    "end": 455
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 491,
+    "end": 491
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 505,
+    "end": 505
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 533,
+    "end": 533
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 549,
+    "end": 549
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 581,
+    "end": 581
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 605,
+    "end": 605
+   },
+   "columns": {
+    "start": 9,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 611,
+    "end": 611
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 644,
+    "end": 644
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 665,
+    "end": 665
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 679,
+    "end": 679
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 688,
+    "end": 688
+   },
+   "columns": {
+    "start": 32,
+    "end": 38
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 706,
+    "end": 706
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/kit/test/types/remote.test.ts",
+   "lines": {
+    "start": 748,
+    "end": 748
+   },
+   "columns": {
+    "start": 24,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/package/src/typescript.js",
+   "lines": {
+    "start": 278,
+    "end": 278
+   },
+   "columns": {
+    "start": 19,
+    "end": 45
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/package/src/utils.js",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 53,
+    "end": 61
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 131,
+    "end": 131
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 135,
+    "end": 135
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 139,
+    "end": 139
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 143,
+    "end": 143
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 166,
+    "end": 166
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 171,
+    "end": 171
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 175,
+    "end": 175
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 179,
+    "end": 179
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 184,
+    "end": 184
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 188,
+    "end": 188
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 288,
+    "end": 288
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 308,
+    "end": 308
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 365,
+    "end": 365
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 386,
+    "end": 386
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 502,
+    "end": 502
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/package/test/index.spec.js",
+   "lines": {
+    "start": 543,
+    "end": 543
+   },
+   "columns": {
+    "start": 1,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  }
+ ]
+}

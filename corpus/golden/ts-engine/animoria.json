@@ -1,0 +1,525 @@
+{
+ "name": "animoria",
+ "commit": "c1a6dcd277fd72b5170e0b37715eea5e0d9a0a2f",
+ "findings": [
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "apps/animoria-sandbox/src/components/sandbox-app.ts",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 36,
+    "end": 38
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "apps/animoria-sandbox/src/host/rust-daemon-client.ts",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "apps/animoria-sandbox/src/host/rust-daemon-client.ts",
+   "lines": {
+    "start": 91,
+    "end": 91
+   },
+   "columns": {
+    "start": 32,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "apps/animoria-sandbox/vite.config.ts",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "apps/animoria-sandbox/vite.config.ts",
+   "lines": {
+    "start": 71,
+    "end": 71
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/bridge/types.ts",
+   "lines": {
+    "start": 301,
+    "end": 301
+   },
+   "columns": {
+    "start": 71,
+    "end": 73
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-asset-stage.ts",
+   "lines": {
+    "start": 58,
+    "end": 58
+   },
+   "columns": {
+    "start": 45,
+    "end": 47
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-asset-stage.ts",
+   "lines": {
+    "start": 71,
+    "end": 71
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-asset-stage.ts",
+   "lines": {
+    "start": 72,
+    "end": 72
+   },
+   "columns": {
+    "start": 44,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-asset-stage.ts",
+   "lines": {
+    "start": 73,
+    "end": 73
+   },
+   "columns": {
+    "start": 44,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-asset-stage.ts",
+   "lines": {
+    "start": 74,
+    "end": 74
+   },
+   "columns": {
+    "start": 48,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-ui/src/components/animoria-snippet-panel.ts",
+   "lines": {
+    "start": 157,
+    "end": 157
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/src/daemon/daemon-client.ts",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 31,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/src/daemon/daemon-client.ts",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 32,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/src/extension.ts",
+   "lines": {
+    "start": 798,
+    "end": 798
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/src/providers/animoria-tree-provider.ts",
+   "lines": {
+    "start": 320,
+    "end": 320
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/logging/output-channel-logger.test.ts",
+   "lines": {
+    "start": 34,
+    "end": 34
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/logging/output-channel-logger.test.ts",
+   "lines": {
+    "start": 55,
+    "end": 55
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/logging/output-channel-logger.test.ts",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/bridge-daemon.e2e.test.ts",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/bridge-daemon.e2e.test.ts",
+   "lines": {
+    "start": 77,
+    "end": 77
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/bridge-daemon.e2e.test.ts",
+   "lines": {
+    "start": 78,
+    "end": 78
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/bridge-daemon.e2e.test.ts",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 21,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/bridge-daemon.e2e.test.ts",
+   "lines": {
+    "start": 91,
+    "end": 91
+   },
+   "columns": {
+    "start": 76,
+    "end": 78
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 155,
+    "end": 155
+   },
+   "columns": {
+    "start": 56,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 168,
+    "end": 168
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 194,
+    "end": 194
+   },
+   "columns": {
+    "start": 16,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 207,
+    "end": 207
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 217,
+    "end": 217
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 250,
+    "end": 250
+   },
+   "columns": {
+    "start": 19,
+    "end": 21
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 333,
+    "end": 333
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 336,
+    "end": 336
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/animoria-vscode/tests/panels/workflow-settlement.test.ts",
+   "lines": {
+    "start": 338,
+    "end": 338
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  }
+ ]
+}

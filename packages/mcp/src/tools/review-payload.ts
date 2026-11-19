@@ -1,4 +1,4 @@
-import type { RunReviewOutput } from "./run-review.js";
+import type { RunReviewOutput } from './run-review.js';
 
 /**
  * What every review tool returns. Findings carry `ledgerId`, the identity that

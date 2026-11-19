@@ -1,12 +1,12 @@
-import { parseArgs } from "node:util";
-import { createInMemoryCache } from "@debuggatha/engine";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import pkg from "../package.json" with { type: "json" };
-import { loadConfig } from "./config.js";
-import { createDefaultDomainDeps } from "./domain-deps.js";
-import { startHttpServer } from "./http.js";
-import { createLogger } from "./logging.js";
-import { createServer } from "./server.js";
+import { parseArgs } from 'node:util';
+import { createInMemoryCache } from '@debuggatha/engine';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import pkg from '../package.json' with { type: 'json' };
+import { loadConfig } from './config.js';
+import { createDefaultDomainDeps } from './domain-deps.js';
+import { startHttpServer } from './http.js';
+import { createLogger } from './logging.js';
+import { createServer } from './server.js';
 
 const USAGE = `debuggatha-mcp ${pkg.version}
 
@@ -30,11 +30,11 @@ Environment:
 async function run() {
   const { values } = parseArgs({
     options: {
-      http: { type: "boolean", default: false },
-      host: { type: "string", default: "127.0.0.1" },
-      port: { type: "string", default: "3333" },
-      version: { type: "boolean", short: "v", default: false },
-      help: { type: "boolean", short: "h", default: false },
+      http: { type: 'boolean', default: false },
+      host: { type: 'string', default: '127.0.0.1' },
+      port: { type: 'string', default: '3333' },
+      version: { type: 'boolean', short: 'v', default: false },
+      help: { type: 'boolean', short: 'h', default: false },
     },
   });
 
@@ -47,8 +47,8 @@ async function run() {
   const cache = config.cache.enabled ? createInMemoryCache() : undefined;
   const build = () => createServer(deps, config, logger, cache);
 
-  logger.info("server.starting", {
-    transport: values.http ? "http" : "stdio",
+  logger.info('server.starting', {
+    transport: values.http ? 'http' : 'stdio',
     defaultRepositoryRoot: config.defaultRepositoryRoot,
     cacheEnabled: config.cache.enabled,
     logLevel: config.logLevel,
@@ -65,24 +65,24 @@ async function run() {
       logger,
       createServer: build,
     });
-    logger.info("server.running", { url: `http://${values.host}:${port}/mcp` });
+    logger.info('server.running', { url: `http://${values.host}:${port}/mcp` });
     const stop = () => httpServer.close(() => process.exit(0));
-    process.on("SIGINT", stop);
-    process.on("SIGTERM", stop);
+    process.on('SIGINT', stop);
+    process.on('SIGTERM', stop);
     return;
   }
 
   const server = build();
   const stop = async (signal: string) => {
-    logger.info("server.shutdown.signal", { signal });
+    logger.info('server.shutdown.signal', { signal });
     await server.close();
     process.exit(0);
   };
-  process.on("SIGINT", () => void stop("SIGINT"));
-  process.on("SIGTERM", () => void stop("SIGTERM"));
+  process.on('SIGINT', () => void stop('SIGINT'));
+  process.on('SIGTERM', () => void stop('SIGTERM'));
 
   await server.connect(new StdioServerTransport());
-  logger.info("server.running");
+  logger.info('server.running');
 }
 
 run().catch((error) => {

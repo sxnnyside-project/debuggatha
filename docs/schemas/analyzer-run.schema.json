@@ -1,0 +1,54 @@
+{
+  "$ref": "#/definitions/AnalyzerRun",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AnalyzerRun": {
+      "additionalProperties": false,
+      "description": "What happened to one analyzer in one review, reported whether or not it found anything.",
+      "properties": {
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "findings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "id": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "reason": {
+          "description": "Why it did not run or failed; absent when it ran.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/AnalyzerStatus"
+        },
+        "trust": {
+          "$ref": "#/definitions/AnalyzerTrust"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "license", "trust", "status", "findings", "durationMs"],
+      "type": "object"
+    },
+    "AnalyzerStatus": {
+      "enum": ["ran", "skipped", "failed"],
+      "type": "string"
+    },
+    "AnalyzerTrust": {
+      "description": "What running an analyzer can do to the machine, and so whether it may run without being asked:   safe               reads source files only (a formatter, a secret scanner)   runs-project-code  loads code the repository controls: a lint config that is                      JavaScript, a build script, a PHP bootstrap file   network            sends data (package names and versions) to a service Only `safe` analyzers run by default. The others need to be enabled by name, by the person running Debuggatha: never by a tool argument or repository file.",
+      "enum": ["safe", "runs-project-code", "network"],
+      "type": "string"
+    }
+  },
+  "title": "AnalyzerRun"
+}

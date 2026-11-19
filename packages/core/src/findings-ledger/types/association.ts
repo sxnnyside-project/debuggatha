@@ -1,10 +1,10 @@
-import type { RepositoryContext } from "../../repository-intelligence/index.js";
+import type { RepositoryContext } from '../../repository-intelligence/index.js';
 import type {
   ReviewPackReference,
   ReviewPolicyReference,
   ReviewResult,
-} from "../../review-engine/index.js";
-import { canonicalStringify, sha256Hex } from "../internal/hash.js";
+} from '../../review-engine/index.js';
+import { canonicalStringify, sha256Hex } from '../internal/hash.js';
 
 /**
  * A lightweight reference to the repository state a finding was produced

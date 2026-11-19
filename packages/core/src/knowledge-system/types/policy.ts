@@ -1,4 +1,4 @@
-import type { Category, ReviewPackReference, Severity } from "../../review-engine/index.js";
+import type { Category, ReviewPackReference, Severity } from '../../review-engine/index.js';
 
 /**
  * Where a `PolicyRule` came from — a Pack's `Rule` or the repository's own
@@ -7,8 +7,8 @@ import type { Category, ReviewPackReference, Severity } from "../../review-engin
  * table: "tagging each with provenance").
  */
 export type PolicyRuleOrigin =
-  | { kind: "pack"; packId: string; packVersion: string }
-  | { kind: "criteria" };
+  | { kind: 'pack'; packId: string; packVersion: string }
+  | { kind: 'criteria' };
 
 /**
  * The unified shape `ReviewPolicy.rules` carries, regardless of whether it

@@ -1,5 +1,5 @@
-import { readdirSync, statSync } from "node:fs";
-import type { DirListing } from "../internal/scan-result.js";
+import { readdirSync, statSync } from 'node:fs';
+import type { DirListing } from '../internal/scan-result.js';
 
 /**
  * What a scan actually read: every directory it listed and every file it

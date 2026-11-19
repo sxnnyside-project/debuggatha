@@ -1,0 +1,133 @@
+id = "debuggatha/swift"
+version = "1.0.0"
+kind = "stack"
+displayName = "Swift"
+dependsOn = []
+
+[[rules]]
+id = "no-fatal-error"
+packId = "debuggatha/swift"
+statement = "Do not end the app with `fatalError` or `preconditionFailure` on a failure a caller can meet; throw or return an error."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-fatal-error"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[knowledge]]
+id = "know-no-fatal-error"
+title = "Ending the app on a failure"
+body = "`fatalError` stops the process with no way to recover. A failure a caller can plausibly meet should be thrown or returned."
+externalRefs = ["https://developer.apple.com/documentation/swift/fatalerror(_:file:line:)", "https://www.swift.org/documentation/api-design-guidelines/"]
+limitations = ["`fatalError` is the accepted way to mark an unreachable state or an abstract method, and those uses are reported too."]
+
+[[rules]]
+id = "no-force-try"
+packId = "debuggatha/swift"
+statement = "Do not use `try!`; handle the error with `do`/`catch` or propagate it with `try`."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-force-try"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[rules]]
+id = "no-force-cast"
+packId = "debuggatha/swift"
+statement = "Do not use `as!`; use `as?` and handle the `nil` case."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-force-cast"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[rules]]
+id = "no-force-unwrap"
+packId = "debuggatha/swift"
+statement = "Do not force-unwrap an optional with `!`; use `if let`, `guard let` or `??`."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-force-unwrap"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[knowledge]]
+id = "know-no-force-try"
+title = "Forced try"
+body = "`try!` ends the app when the call throws. A failure a caller can meet should be handled or propagated."
+externalRefs = ["https://docs.swift.org/swift-book/documentation/the-swift-programming-language/errorhandling/"]
+limitations = ["`try!` on a call that cannot fail at run time (a bundled resource, a constant pattern) is reported too."]
+
+[[knowledge]]
+id = "know-no-force-cast"
+title = "Forced cast"
+body = "`as!` ends the app when the value is not of the type. A conditional cast with a handled `nil` states what happens instead."
+externalRefs = ["https://docs.swift.org/swift-book/documentation/the-swift-programming-language/typecasting/"]
+limitations = ["A cast the surrounding code has just proven by `is` is reported too."]
+
+[[knowledge]]
+id = "know-no-force-unwrap"
+title = "Forced unwrap"
+body = "`!` ends the app when the optional is `nil`. Binding it states what happens in that case."
+externalRefs = ["https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/#Optionals"]
+limitations = ["An optional just checked against `nil` and an `IBOutlet` are reported too."]
+
+[[rules]]
+id = "no-dispatch-main-sync"
+packId = "debuggatha/swift"
+statement = "Do not call `DispatchQueue.main.sync`; use `async`."
+category = "architecture"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-dispatch-main-sync"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[knowledge]]
+id = "know-no-dispatch-main-sync"
+title = "Main queue sync"
+body = "Called from the main thread it deadlocks."
+externalRefs = ["https://developer.apple.com/documentation/dispatch/dispatchqueue"]
+limitations = ["Code that is known to run off the main thread is reported."]
+
+[[rules]]
+id = "no-shell-interpolation"
+packId = "debuggatha/swift"
+statement = "Do not build a shell command from interpolated or concatenated text; pass the arguments separately."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-no-shell-interpolation"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[rules]]
+id = "no-unsafe-deserialization"
+packId = "debuggatha/swift"
+statement = "Do not deserialize data that can come from outside with a format that rebuilds arbitrary objects."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unsafe-deserialization"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[rules]]
+id = "no-weak-hash"
+packId = "debuggatha/swift"
+statement = "Do not use MD5, SHA-1 or DES for anything a person could attack; use SHA-256 or stronger."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-weak-hash"]
+appliesTo = { kind = "requires-language", language = "swift" }
+
+[[knowledge]]
+id = "know-no-shell-interpolation"
+title = "Shell command built from text"
+body = "A command line assembled by interpolation or concatenation is read by a shell, so a value with a quote or a separator becomes a second command. Pass the program and its arguments as separate values."
+externalRefs = ["https://cwe.mitre.org/data/definitions/78.html"]
+limitations = ["Only a command built in the same file and reached by name is seen; a command assembled in another function or module is not, and a variable that only ever holds constants is reported."]
+
+[[knowledge]]
+id = "know-no-unsafe-deserialization"
+title = "Deserializing untrusted bytes"
+body = "Formats that rebuild arbitrary objects can run code while loading. Read data-only formats such as JSON, or restrict the classes that may be rebuilt."
+externalRefs = ["https://cwe.mitre.org/data/definitions/502.html", "https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html"]
+limitations = ["The rule cannot tell whether the bytes come from a trusted place, so data the program wrote itself is reported too.", "A call with a second argument (for example a class allowlist) is left alone; whether that argument is enough is not checked."]
+
+[[knowledge]]
+id = "know-no-weak-hash"
+title = "Broken hash or cipher"
+body = "MD5, SHA-1 and DES have practical collision or brute-force attacks. Use SHA-256 or stronger, and a password hash for passwords."
+externalRefs = ["https://cwe.mitre.org/data/definitions/327.html"]
+limitations = ["The use of the hash is not visible: checksums and cache keys are reported with low confidence.", "A digest chosen by name at run time, such as getInstance(\"MD5\"), is not read."]

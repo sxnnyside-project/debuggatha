@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { type Finding, ruleIdFromEvidence } from "@debuggatha/core";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { type Finding, ruleIdFromEvidence } from '@debuggatha/core';
 import {
   analyzeReview,
   concludeReview,
@@ -10,9 +10,9 @@ import {
   type ReviewPipelineOutput,
   type ReviewPipelineScope,
   toRepoRelative,
-} from "../pipeline.js";
-import { isIgnoredPath } from "../scan-scope/index.js";
-import { parseUnifiedDiff } from "../skills/engine/diff-parser.js";
+} from '../pipeline.js';
+import { isIgnoredPath } from '../scan-scope/index.js';
+import { parseUnifiedDiff } from '../skills/engine/diff-parser.js';
 import {
   type CodeView,
   detectionPrompt,
@@ -21,25 +21,25 @@ import {
   judge,
   windowAround,
   withVerdict,
-} from "./judge.js";
-import { DEFAULT_SEMANTIC_LIMITS, type SemanticOptions, type SemanticRun } from "./types.js";
+} from './judge.js';
+import { DEFAULT_SEMANTIC_LIMITS, type SemanticOptions, type SemanticRun } from './types.js';
 
 const CODE_FILE = /\.(m|c)?[jt]sx?$|\.(py|kts?|java|php|rs|go|rb|cs|swift|dart)$/;
-const SEVERITY_ORDER = ["critical", "high", "medium", "low", "informational"];
+const SEVERITY_ORDER = ['critical', 'high', 'medium', 'low', 'informational'];
 /** Calls in a row that may fail before the model is given up on for this review. */
 const MAX_CONSECUTIVE_FAILURES = 3;
 
 const isSecretRule = (ruleId: string | undefined) =>
-  ruleId === "no-hardcoded-secrets" || ruleId?.startsWith("gitleaks:") === true;
+  ruleId === 'no-hardcoded-secrets' || ruleId?.startsWith('gitleaks:') === true;
 
 /** The changed code a model may read: what the review was asked about, and nothing else. */
 function detectionViews(rootDir: string, scope: ReviewPipelineScope, maxLines: number): CodeView[] {
-  if (scope.kind === "workspace") return [];
-  if (scope.kind === "diff") {
+  if (scope.kind === 'workspace') return [];
+  if (scope.kind === 'diff') {
     return parseUnifiedDiff(scope.diff).map((unit) => ({
       file: unit.file,
       lines: unit.content
-        .split("\n")
+        .split('\n')
         .slice(0, maxLines)
         .map((text, index) => ({ n: unit.lineNumbers?.[index] ?? index + 1, text })),
     }));
@@ -48,11 +48,11 @@ function detectionViews(rootDir: string, scope: ReviewPipelineScope, maxLines: n
   for (const path of scope.paths) {
     const file = toRepoRelative(rootDir, path);
     try {
-      const text = readFileSync(path.startsWith("/") ? path : join(rootDir, path), "utf8");
+      const text = readFileSync(path.startsWith('/') ? path : join(rootDir, path), 'utf8');
       views.push({
         file,
         lines: text
-          .split("\n")
+          .split('\n')
           .slice(0, maxLines)
           .map((line, index) => ({ n: index + 1, text: line })),
       });
@@ -120,14 +120,14 @@ export async function refineFindings(input: {
     const candidates = findings
       .filter((finding) => {
         const ruleId = ruleIdFromEvidence(finding.evidence);
-        const file = finding.locations[0]?.file ?? "";
+        const file = finding.locations[0]?.file ?? '';
         return (
-          finding.confidence !== "high" &&
+          finding.confidence !== 'high' &&
           !isSecretRule(ruleId) &&
           !isSecretFile(file) &&
           !finding.evidence.some(
             (evidence) =>
-              evidence.kind === "external-analyzer" || evidence.kind === "semantic-review",
+              evidence.kind === 'external-analyzer' || evidence.kind === 'semantic-review',
           ) &&
           finding.locations[0]?.lines !== undefined
         );
@@ -161,12 +161,12 @@ export async function refineFindings(input: {
     findings = findings.map((finding) => verdicts.get(finding.id) ?? finding);
   }
 
-  if (options.detect !== false && scope.kind === "workspace") {
+  if (options.detect !== false && scope.kind === 'workspace') {
     run.notes.push(
-      "Detection reads changed code; a whole-repository review has none, so only candidates were verified.",
+      'Detection reads changed code; a whole-repository review has none, so only candidates were verified.',
     );
   }
-  if (options.detect !== false && scope.kind !== "workspace") {
+  if (options.detect !== false && scope.kind !== 'workspace') {
     const views = detectionViews(rootDir, scope, limits.maxLines)
       .filter(
         (view) =>
@@ -203,7 +203,7 @@ export async function refineFindings(input: {
   }
 
   if (!alive())
-    run.notes.push("The model failed repeatedly, so the rest of the semantic pass was skipped.");
+    run.notes.push('The model failed repeatedly, so the rest of the semantic pass was skipped.');
   // A host reveals its model only in its first answer.
   run.model = provider.model;
   run.durationMs = Date.now() - started;
@@ -211,8 +211,8 @@ export async function refineFindings(input: {
 }
 
 function stripUndefined(options: SemanticOptions) {
-  const limits: Partial<Record<"maxCandidates" | "maxDetectFiles" | "maxLines", number>> = {};
-  for (const key of ["maxCandidates", "maxDetectFiles", "maxLines"] as const) {
+  const limits: Partial<Record<'maxCandidates' | 'maxDetectFiles' | 'maxLines', number>> = {};
+  for (const key of ['maxCandidates', 'maxDetectFiles', 'maxLines'] as const) {
     const value = options[key];
     if (value !== undefined) limits[key] = value;
   }

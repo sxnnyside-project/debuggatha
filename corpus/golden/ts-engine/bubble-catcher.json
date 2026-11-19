@@ -1,0 +1,374 @@
+{
+ "name": "bubble-catcher",
+ "commit": "b9c063c84b6a5d0b83c23bff85e09ed923c75285",
+ "findings": [
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/en.ts",
+   "lines": {
+    "start": 748,
+    "end": 748
+   },
+   "columns": {
+    "start": 29,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/en.ts",
+   "lines": {
+    "start": 758,
+    "end": 758
+   },
+   "columns": {
+    "start": 28,
+    "end": 100
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 169,
+    "end": 169
+   },
+   "columns": {
+    "start": 15,
+    "end": 27
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 170,
+    "end": 170
+   },
+   "columns": {
+    "start": 22,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 179,
+    "end": 179
+   },
+   "columns": {
+    "start": 23,
+    "end": 54
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 36,
+    "end": 36
+   },
+   "columns": {
+    "start": 19,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 37,
+    "end": 37
+   },
+   "columns": {
+    "start": 18,
+    "end": 36
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 22,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 40,
+    "end": 40
+   },
+   "columns": {
+    "start": 20,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 472,
+    "end": 472
+   },
+   "columns": {
+    "start": 27,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 473,
+    "end": 473
+   },
+   "columns": {
+    "start": 33,
+    "end": 66
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 474,
+    "end": 474
+   },
+   "columns": {
+    "start": 23,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 475,
+    "end": 475
+   },
+   "columns": {
+    "start": 29,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 476,
+    "end": 476
+   },
+   "columns": {
+    "start": 27,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 477,
+    "end": 477
+   },
+   "columns": {
+    "start": 33,
+    "end": 64
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 478,
+    "end": 478
+   },
+   "columns": {
+    "start": 27,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 480,
+    "end": 480
+   },
+   "columns": {
+    "start": 22,
+    "end": 106
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 481,
+    "end": 481
+   },
+   "columns": {
+    "start": 23,
+    "end": 54
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 484,
+    "end": 484
+   },
+   "columns": {
+    "start": 25,
+    "end": 58
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 485,
+    "end": 485
+   },
+   "columns": {
+    "start": 28,
+    "end": 106
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 27,
+    "end": 62
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 561,
+    "end": 561
+   },
+   "columns": {
+    "start": 26,
+    "end": 60
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "frontend/src/i18n/es.ts",
+   "lines": {
+    "start": 566,
+    "end": 566
+   },
+   "columns": {
+    "start": 28,
+    "end": 82
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  }
+ ]
+}

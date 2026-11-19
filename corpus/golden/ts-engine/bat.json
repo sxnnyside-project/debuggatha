@@ -1,0 +1,2662 @@
+{
+ "name": "bat",
+ "commit": "8cf33bdde9a6e4c11d0f866415b1fc867df0cd40",
+ "findings": [
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/advanced.rs",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/buffer.rs",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/cat.rs",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/inputs.rs",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/simple.rs",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 53,
+    "end": 62
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/yaml.rs",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 47,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "examples/yaml.rs",
+   "lines": {
+    "start": 35,
+    "end": 35
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 101,
+    "end": 101
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 211,
+    "end": 211
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 394,
+    "end": 394
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 448,
+    "end": 448
+   },
+   "columns": {
+    "start": 41,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 472,
+    "end": 472
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 473,
+    "end": 473
+   },
+   "columns": {
+    "start": 52,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 478,
+    "end": 478
+   },
+   "columns": {
+    "start": 65,
+    "end": 74
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 488,
+    "end": 488
+   },
+   "columns": {
+    "start": 65,
+    "end": 74
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 508,
+    "end": 508
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 767,
+    "end": 767
+   },
+   "columns": {
+    "start": 40,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 768,
+    "end": 768
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 771,
+    "end": 771
+   },
+   "columns": {
+    "start": 45,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 787,
+    "end": 787
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 796,
+    "end": 796
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 800,
+    "end": 800
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 802,
+    "end": 802
+   },
+   "columns": {
+    "start": 37,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 821,
+    "end": 821
+   },
+   "columns": {
+    "start": 37,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 826,
+    "end": 826
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 827,
+    "end": 827
+   },
+   "columns": {
+    "start": 48,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 831,
+    "end": 831
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 847,
+    "end": 847
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 849,
+    "end": 849
+   },
+   "columns": {
+    "start": 30,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 852,
+    "end": 852
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 854,
+    "end": 854
+   },
+   "columns": {
+    "start": 32,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets.rs",
+   "lines": {
+    "start": 858,
+    "end": 858
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets/assets_metadata.rs",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 44,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets/build_assets/acknowledgements.rs",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets/build_assets/acknowledgements.rs",
+   "lines": {
+    "start": 153,
+    "end": 153
+   },
+   "columns": {
+    "start": 52,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/assets/build_assets/acknowledgements.rs",
+   "lines": {
+    "start": 156,
+    "end": 156
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 195,
+    "end": 195
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 249,
+    "end": 249
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 640,
+    "end": 640
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 676,
+    "end": 676
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 680,
+    "end": 680
+   },
+   "columns": {
+    "start": 44,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/app.rs",
+   "lines": {
+    "start": 683,
+    "end": 683
+   },
+   "columns": {
+    "start": 44,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 184,
+    "end": 184
+   },
+   "columns": {
+    "start": 37,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 190,
+    "end": 190
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 197,
+    "end": 197
+   },
+   "columns": {
+    "start": 52,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 205,
+    "end": 205
+   },
+   "columns": {
+    "start": 56,
+    "end": 65
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 219,
+    "end": 219
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 245,
+    "end": 245
+   },
+   "columns": {
+    "start": 25,
+    "end": 34
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 251,
+    "end": 251
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 254,
+    "end": 254
+   },
+   "columns": {
+    "start": 22,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 22,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 270,
+    "end": 270
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 273,
+    "end": 273
+   },
+   "columns": {
+    "start": 29,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/config.rs",
+   "lines": {
+    "start": 274,
+    "end": 274
+   },
+   "columns": {
+    "start": 49,
+    "end": 58
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/bat/directories.rs",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 108,
+    "end": 108
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 118,
+    "end": 118
+   },
+   "columns": {
+    "start": 44,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 127,
+    "end": 127
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 129,
+    "end": 129
+   },
+   "columns": {
+    "start": 42,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 139,
+    "end": 139
+   },
+   "columns": {
+    "start": 59,
+    "end": 67
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 143,
+    "end": 143
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 151,
+    "end": 151
+   },
+   "columns": {
+    "start": 59,
+    "end": 67
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 154,
+    "end": 154
+   },
+   "columns": {
+    "start": 65,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 156,
+    "end": 156
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 166,
+    "end": 166
+   },
+   "columns": {
+    "start": 54,
+    "end": 62
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 167,
+    "end": 167
+   },
+   "columns": {
+    "start": 46,
+    "end": 54
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 171,
+    "end": 171
+   },
+   "columns": {
+    "start": 57,
+    "end": 65
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 172,
+    "end": 172
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 176,
+    "end": 176
+   },
+   "columns": {
+    "start": 63,
+    "end": 71
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 177,
+    "end": 177
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 186,
+    "end": 186
+   },
+   "columns": {
+    "start": 59,
+    "end": 67
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 188,
+    "end": 188
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/diff.rs",
+   "lines": {
+    "start": 98,
+    "end": 98
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 61,
+    "end": 69
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 264,
+    "end": 264
+   },
+   "columns": {
+    "start": 30,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 406,
+    "end": 406
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 413,
+    "end": 413
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 420,
+    "end": 420
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 450,
+    "end": 450
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 482,
+    "end": 482
+   },
+   "columns": {
+    "start": 81,
+    "end": 90
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 503,
+    "end": 503
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 519,
+    "end": 519
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 526,
+    "end": 526
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 533,
+    "end": 533
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 549,
+    "end": 549
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 556,
+    "end": 556
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 563,
+    "end": 563
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 579,
+    "end": 579
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 586,
+    "end": 586
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 593,
+    "end": 593
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 609,
+    "end": 609
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 616,
+    "end": 616
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 643,
+    "end": 643
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 648,
+    "end": 648
+   },
+   "columns": {
+    "start": 47,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 669,
+    "end": 669
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 679,
+    "end": 679
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 689,
+    "end": 689
+   },
+   "columns": {
+    "start": 16,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/input.rs",
+   "lines": {
+    "start": 699,
+    "end": 699
+   },
+   "columns": {
+    "start": 17,
+    "end": 26
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lessopen.rs",
+   "lines": {
+    "start": 364,
+    "end": 364
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lessopen.rs",
+   "lines": {
+    "start": 428,
+    "end": 428
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lessopen.rs",
+   "lines": {
+    "start": 54,
+    "end": 54
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 196,
+    "end": 196
+   },
+   "columns": {
+    "start": 41,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 203,
+    "end": 203
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 210,
+    "end": 210
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 217,
+    "end": 217
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 224,
+    "end": 224
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 231,
+    "end": 231
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 253,
+    "end": 253
+   },
+   "columns": {
+    "start": 42,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 260,
+    "end": 260
+   },
+   "columns": {
+    "start": 63,
+    "end": 71
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 277,
+    "end": 277
+   },
+   "columns": {
+    "start": 42,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 284,
+    "end": 284
+   },
+   "columns": {
+    "start": 40,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 287,
+    "end": 287
+   },
+   "columns": {
+    "start": 40,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 290,
+    "end": 290
+   },
+   "columns": {
+    "start": 42,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 307,
+    "end": 307
+   },
+   "columns": {
+    "start": 41,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 314,
+    "end": 314
+   },
+   "columns": {
+    "start": 43,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 319,
+    "end": 319
+   },
+   "columns": {
+    "start": 44,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 327,
+    "end": 327
+   },
+   "columns": {
+    "start": 41,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 332,
+    "end": 332
+   },
+   "columns": {
+    "start": 41,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 43,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/line_range.rs",
+   "lines": {
+    "start": 473,
+    "end": 473
+   },
+   "columns": {
+    "start": 58,
+    "end": 67
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/output.rs",
+   "lines": {
+    "start": 36,
+    "end": 36
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/pager.rs",
+   "lines": {
+    "start": 210,
+    "end": 210
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/preprocessor.rs",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 75,
+    "end": 84
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/preprocessor.rs",
+   "lines": {
+    "start": 110,
+    "end": 110
+   },
+   "columns": {
+    "start": 80,
+    "end": 89
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/preprocessor.rs",
+   "lines": {
+    "start": 56,
+    "end": 56
+   },
+   "columns": {
+    "start": 47,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/pretty_printer.rs",
+   "lines": {
+    "start": 281,
+    "end": 281
+   },
+   "columns": {
+    "start": 13,
+    "end": 22
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/printer.rs",
+   "lines": {
+    "start": 315,
+    "end": 315
+   },
+   "columns": {
+    "start": 29,
+    "end": 37
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/printer.rs",
+   "lines": {
+    "start": 920,
+    "end": 920
+   },
+   "columns": {
+    "start": 59,
+    "end": 68
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 152,
+    "end": 152
+   },
+   "columns": {
+    "start": 76,
+    "end": 85
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 153,
+    "end": 153
+   },
+   "columns": {
+    "start": 73,
+    "end": 82
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 249,
+    "end": 249
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 269,
+    "end": 269
+   },
+   "columns": {
+    "start": 66,
+    "end": 74
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 282,
+    "end": 282
+   },
+   "columns": {
+    "start": 72,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 295,
+    "end": 295
+   },
+   "columns": {
+    "start": 58,
+    "end": 66
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 307,
+    "end": 307
+   },
+   "columns": {
+    "start": 63,
+    "end": 71
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 319,
+    "end": 319
+   },
+   "columns": {
+    "start": 57,
+    "end": 65
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 320,
+    "end": 320
+   },
+   "columns": {
+    "start": 60,
+    "end": 68
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 335,
+    "end": 335
+   },
+   "columns": {
+    "start": 64,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 336,
+    "end": 336
+   },
+   "columns": {
+    "start": 58,
+    "end": 66
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 61,
+    "end": 69
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/style.rs",
+   "lines": {
+    "start": 351,
+    "end": 351
+   },
+   "columns": {
+    "start": 62,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 275,
+    "end": 275
+   },
+   "columns": {
+    "start": 13,
+    "end": 22
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 277,
+    "end": 277
+   },
+   "columns": {
+    "start": 13,
+    "end": 22
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 279,
+    "end": 279
+   },
+   "columns": {
+    "start": 13,
+    "end": 22
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 306,
+    "end": 306
+   },
+   "columns": {
+    "start": 62,
+    "end": 71
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 326,
+    "end": 326
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 327,
+    "end": 327
+   },
+   "columns": {
+    "start": 63,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 333,
+    "end": 333
+   },
+   "columns": {
+    "start": 64,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 344,
+    "end": 344
+   },
+   "columns": {
+    "start": 57,
+    "end": 66
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 353,
+    "end": 353
+   },
+   "columns": {
+    "start": 54,
+    "end": 63
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping.rs",
+   "lines": {
+    "start": 361,
+    "end": 361
+   },
+   "columns": {
+    "start": 61,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping/builtin.rs",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 34,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping/ignored_suffixes.rs",
+   "lines": {
+    "start": 108,
+    "end": 108
+   },
+   "columns": {
+    "start": 31,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/syntax_mapping/ignored_suffixes.rs",
+   "lines": {
+    "start": 86,
+    "end": 86
+   },
+   "columns": {
+    "start": 31,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/theme.rs",
+   "lines": {
+    "start": 293,
+    "end": 293
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 41,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 376,
+    "end": 376
+   },
+   "columns": {
+    "start": 38,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 396,
+    "end": 396
+   },
+   "columns": {
+    "start": 52,
+    "end": 60
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 439,
+    "end": 439
+   },
+   "columns": {
+    "start": 64,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 509,
+    "end": 509
+   },
+   "columns": {
+    "start": 21,
+    "end": 28
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 562,
+    "end": 562
+   },
+   "columns": {
+    "start": 21,
+    "end": 28
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 574,
+    "end": 574
+   },
+   "columns": {
+    "start": 64,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/vscreen.rs",
+   "lines": {
+    "start": 618,
+    "end": 618
+   },
+   "columns": {
+    "start": 62,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

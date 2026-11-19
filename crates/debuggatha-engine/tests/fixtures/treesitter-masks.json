@@ -1,0 +1,72 @@
+[
+  {
+    "file": "a.rs",
+    "source": "// c\nlet s = \"a\\nb\"; let c = 'x'; let r = r#\"q\"#; /* b */ env::var(\"X\");\n",
+    "masked": "    \nlet s = \"    \"; let c = ' '; let r = r#\" \"#;         env::var(\" \");\n"
+  },
+  {
+    "file": "a.py",
+    "source": "# c\ns = f\"a {os.environ['X']} b\"\nt = '''doc \"q\"'''\nos.getenv('Y')\n",
+    "masked": "   \ns = f\"  {os.environ[' ']}  \"\nt = '''       '''\nos.getenv(' ')\n"
+  },
+  {
+    "file": "a.go",
+    "source": "// c\ns := \"a\\nb\"\nr := `raw`\nos.Getenv(\"X\")\n",
+    "masked": "    \ns := \"    \"\nr := `   `\nos.Getenv(\" \")\n"
+  },
+  {
+    "file": "a.php",
+    "source": "<?php\n// c\n$s = \"a $x b\"; $t = 'it';\ngetenv('X');\n",
+    "masked": "<?php\n    \n$s = \"  $x  \"; $t = '  ';\ngetenv(' ');\n"
+  },
+  {
+    "file": "A.java",
+    "source": "// c\nclass A { String s = \"a\\n\"; char c = 'x'; String t = System.getenv(\"X\"); }\n",
+    "masked": "    \nclass A { String s = \"   \"; char c = ' '; String t = System.getenv(\" \"); }\n"
+  },
+  {
+    "file": "a.cs",
+    "source": "// c\nclass A { string s = \"a\"; string i = $\"x {Env.Get(\"Y\")} z\"; }\n",
+    "masked": "    \nclass A { string s = \" \"; string i = $\"  {Env.Get(\" \")}  \"; }\n"
+  },
+  {
+    "file": "a.rb",
+    "source": "# c\ns = \"a #{ENV['X']} b\"\nt = 'it'\n",
+    "masked": "   \ns = \"  #{ENV[' ']}  \"\nt = '  '\n"
+  },
+  {
+    "file": "a.kt",
+    "source": "// c\nval s = \"a $x b ${System.getenv(\"Y\")} c\"\nval t = System.getenv(\"X\")\nval m = \"\"\"raw \"q\" ${y}\"\"\"\n",
+    "masked": "    \nval s = \"       ${System.getenv(\" \")}  \"\nval t = System.getenv(\" \")\nval m = \"\"\"        ${y}\"\"\"\n"
+  },
+  {
+    "file": "a.swift",
+    "source": "// c\nlet s = \"a \\(x) b\"\nlet t = ProcessInfo.processInfo.environment[\"X\"]\n",
+    "masked": "    \nlet s = \"    x   \"\nlet t = ProcessInfo.processInfo.environment[\" \"]\n"
+  },
+  {
+    "file": "a.dart",
+    "source": "// c\nvoid f() {\n  var s = 'a ${x} b';\n  var r = r'raw';\n  Platform.environment['X'];\n}\n",
+    "masked": "    \nvoid f() {\n  var s = '  ${x}  ';\n  var r = r'   ';\n  Platform.environment[' '];\n}\n"
+  },
+  {
+    "file": "a.ex",
+    "source": "# c\ns = \"a #{x} b\"\nSystem.get_env(\"X\")\nh = \"\"\"\nhere System.get_env(\"Z\") #{w}\n\"\"\"\n",
+    "masked": "   \ns = \"  #{x}  \"\nSystem.get_env(\" \")\nh = \"\"\"\n                         #{w}\n\"\"\"\n"
+  },
+  {
+    "file": "a.cpp",
+    "source": "// c\nconst char* s = \"a\\n\"; char c = 'x'; auto r = R\"(raw)\"; getenv(\"X\");\n",
+    "masked": "    \nconst char* s = \"   \"; char c = ' '; auto r = R\"(   )\"; getenv(\" \");\n"
+  },
+  {
+    "file": "a.gd",
+    "source": "# c\nvar s = \"a\"\nvar t = 'b'\nOS.get_environment(\"X\")\n",
+    "masked": "   \nvar s = \" \"\nvar t = ' '\nOS.get_environment(\" \")\n"
+  },
+  {
+    "file": "a.html",
+    "source": "<!-- c -->\n<a href=\"x.html\">t</a>\n",
+    "masked": "          \n<a href=\"      \">t</a>\n"
+  }
+]

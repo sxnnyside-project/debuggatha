@@ -1,6 +1,6 @@
-import type { Finding } from "../review-engine/index.js";
-import type { LedgerEntry } from "./types/entry.js";
-import { computeFindingFingerprint } from "./types/fingerprint.js";
+import type { Finding } from '../review-engine/index.js';
+import type { LedgerEntry } from './types/entry.js';
+import { computeFindingFingerprint } from './types/fingerprint.js';
 
 /**
  * Finding Matching (epic §6) — "design for future improvements": this is
@@ -11,7 +11,7 @@ import { computeFindingFingerprint } from "./types/fingerprint.js";
  * use AST diffing or embedding similarity without `synchronizeReviewResult`
  * or its callers changing at all.
  */
-export type MatchOutcome = { kind: "matched"; entryId: string; changed: boolean } | { kind: "new" };
+export type MatchOutcome = { kind: 'matched'; entryId: string; changed: boolean } | { kind: 'new' };
 
 /**
  * `candidateEntries` is every entry in the ledger, not just active ones —
@@ -47,8 +47,8 @@ export const defaultFindingMatcher: FindingMatcher = (candidate, candidateEntrie
       candidateFp.contentAnchor !== undefined &&
       entry.fingerprint.contentAnchor !== candidateFp.contentAnchor;
 
-    return { kind: "matched", entryId: entry.id, changed };
+    return { kind: 'matched', entryId: entry.id, changed };
   }
 
-  return { kind: "new" };
+  return { kind: 'new' };
 };

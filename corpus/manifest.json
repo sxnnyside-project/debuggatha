@@ -1,0 +1,664 @@
+{
+  "comment": "Reference corpus for parity and false-positive measurement (ROADMAP phase 0.1). Sources are fetched on demand at the pinned commit into a scratch directory and treated as untrusted data; nothing is vendored or executed. Third-party entries are permissively licensed. Private repositories never appear here (see ROADMAP, decision 4).",
+  "generated": "2026-11-10",
+  "repositories": [
+    {
+      "name": "animoria",
+      "url": "https://github.com/sxnnyside-project/animoria",
+      "commit": "c1a6dcd277fd72b5170e0b37715eea5e0d9a0a2f",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 624,
+        "Rust": 562,
+        "Kotlin": 343,
+        "JavaScript": 15
+      }
+    },
+    {
+      "name": "astro-preset",
+      "url": "https://github.com/sxnnyside-project/astro-preset",
+      "commit": "61ca046aee041f0b73e4c3ad952777138dafd668",
+      "license": "LicenseRef-SPL",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 99,
+        "Astro": 3,
+        "JavaScript": 0
+      }
+    },
+    {
+      "name": "betterbattleorientation",
+      "url": "https://github.com/devil-doll-entertainment/betterbattleorientation",
+      "commit": "09de33ff07f1bc99bfa76f8a80ff9585c885d8c4",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Ruby": 106
+      }
+    },
+    {
+      "name": "bubble-catcher",
+      "url": "https://github.com/sxnnyside-scholarships/bubble-catcher",
+      "commit": "b9c063c84b6a5d0b83c23bff85e09ed923c75285",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 486,
+        "Vue": 350
+      }
+    },
+    {
+      "name": "circe",
+      "url": "https://github.com/sxnnyside-project/circe",
+      "commit": "e77e771e899e27e0bc02cd08c719ec2f7abef11d",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 530,
+        "JavaScript": 13
+      }
+    },
+    {
+      "name": "client-server-4-students",
+      "url": "https://github.com/sxnnyside-scholarships/client-server-4-students",
+      "commit": "b09c9bb51c1bc4892e90c3990b90695cc6e05d34",
+      "license": "GPL-3.0-only",
+      "origin": "organization",
+      "languagesKB": {
+        "Python": 604
+      }
+    },
+    {
+      "name": "colossal-conversor",
+      "url": "https://github.com/sxnnyside-project/colossal-conversor",
+      "commit": "bc9cf5a45d5ccb8e04de2ca70e2a2d8a2fff367c",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Python": 195,
+        "C++": 104
+      }
+    },
+    {
+      "name": "dart-sei",
+      "url": "https://github.com/sxnnyside-project/dart-sei",
+      "commit": "c941d586fa2d798b53b2ea21f4b5a3c428646997",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Dart": 82
+      }
+    },
+    {
+      "name": "emerald-essentials",
+      "url": "https://github.com/devil-doll-entertainment/emerald-essentials",
+      "commit": "766b6b23638d6ed5442e968a11ebb1360b3c44ce",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Java": 226
+      }
+    },
+    {
+      "name": "flutter-sei",
+      "url": "https://github.com/sxnnyside-project/flutter-sei",
+      "commit": "6e2cd6c59e7eeacad2b8f91c21c172038381b2d3",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Dart": 15
+      }
+    },
+    {
+      "name": "gameswap-recorder",
+      "url": "https://github.com/devil-doll-entertainment/gameswap-recorder",
+      "commit": "2f33dbd5441a08dab4f2b6f5ab94f4e30a6679aa",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "JavaScript": 27,
+        "TypeScript": 1
+      }
+    },
+    {
+      "name": "homebrew-tap",
+      "url": "https://github.com/sxnnyside-project/homebrew-tap",
+      "commit": "0c064cabe2be11e8669dbb65dce738df7f5bb92f",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Ruby": 4
+      }
+    },
+    {
+      "name": "kolibri-pulse",
+      "url": "https://github.com/core-red-project/kolibri-pulse",
+      "commit": "b4d64ce3bb713949d71293aff6938d7334087998",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Assembly": 18
+      }
+    },
+    {
+      "name": "lacuna-cli",
+      "url": "https://github.com/core-red-project/lacuna-cli",
+      "commit": "a803fb54c3a52c7e0492490f996887b32cc72339",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "C++": 68
+      }
+    },
+    {
+      "name": "mc-automatic-package",
+      "url": "https://github.com/devil-doll-entertainment/mc-automatic-package",
+      "commit": "8723eef2f190f5ec71bcaf282e3a8e8e2ba4a0c1",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Java": 45
+      }
+    },
+    {
+      "name": "obfusku",
+      "url": "https://github.com/core-red-project/obfusku",
+      "commit": "aca67f046de79dd3c146556bc7a6c1c1951fa2d1",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 1062
+      }
+    },
+    {
+      "name": "obfusku-vscode",
+      "url": "https://github.com/core-red-project/obfusku-vscode",
+      "commit": "7d9a7951bf2a9e90215253760d00d726b47eee6a",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 51,
+        "JavaScript": 0
+      }
+    },
+    {
+      "name": "ontara",
+      "url": "https://github.com/sxnnyside-project/ontara",
+      "commit": "b23e1b8bba7cd43dc05f1153d7785354e5d785c8",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 1240,
+        "Svelte": 357,
+        "TypeScript": 299,
+        "JavaScript": 0
+      }
+    },
+    {
+      "name": "orph-cli",
+      "url": "https://github.com/core-red-project/orph-cli",
+      "commit": "9db634a9c4b710756c7999a41281e4d590624f7a",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 203
+      }
+    },
+    {
+      "name": "ouroboros-cli",
+      "url": "https://github.com/core-red-project/ouroboros-cli",
+      "commit": "9cc7ba374c6385409c6959cce24ff8fdca776a25",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {}
+    },
+    {
+      "name": "pm2-eid-is-discord",
+      "url": "https://github.com/core-red-project/pm2-eid-is-discord",
+      "commit": "8903e7744671a1874fb2c32a17086ee21738f7e4",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 65
+      }
+    },
+    {
+      "name": "pollux-fs-interpose-poc",
+      "url": "https://github.com/sxnnyside-project/pollux-fs-interpose-poc",
+      "commit": "8f4dcdc381125ff8aead2b8ccc6c5b5ca6d732c5",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 39
+      }
+    },
+    {
+      "name": "pollux-polyglot-dot-net",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-dot-net",
+      "commit": "30f07b94111e4760056dc632669ef9dfb8ae98d7",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "C#": 31
+      }
+    },
+    {
+      "name": "pollux-polyglot-flutter-adapter",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-flutter-adapter",
+      "commit": "ab948f677eed43e75717cd573998e663144e98cc",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Dart": 28
+      }
+    },
+    {
+      "name": "pollux-polyglot-js",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-js",
+      "commit": "bf39582c6b636ed7f487eee25873362b34e1b15c",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "TypeScript": 37,
+        "JavaScript": 0
+      }
+    },
+    {
+      "name": "pollux-polyglot-jvm",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-jvm",
+      "commit": "9a21a1bfa6a718da99dd479ab6be1b86ff8836df",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Java": 25,
+        "Kotlin": 5
+      }
+    },
+    {
+      "name": "pollux-polyglot-native-bridge",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-native-bridge",
+      "commit": "5f670e0f4c9c9ea1f7fe55522d9d55388709a451",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 41
+      }
+    },
+    {
+      "name": "pollux-polyglot-swift",
+      "url": "https://github.com/sxnnyside-project/pollux-polyglot-swift",
+      "commit": "b7fa4dc29fc0fc33a572790b63215664bef8bcc4",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Swift": 23
+      }
+    },
+    {
+      "name": "promediatum",
+      "url": "https://github.com/sxnnyside-scholarships/promediatum",
+      "commit": "ff269640ba9f42f2b2699f4749486bcd535e60d2",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Vue": 701,
+        "PHP": 463,
+        "TypeScript": 112,
+        "Rust": 28
+      }
+    },
+    {
+      "name": "psychoquine-cli",
+      "url": "https://github.com/core-red-project/psychoquine-cli",
+      "commit": "9ee740905b3802c92d355a4a8512e2a142ad03b3",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 99
+      }
+    },
+    {
+      "name": "sei-swift",
+      "url": "https://github.com/sxnnyside-project/sei-swift",
+      "commit": "cb9f43be9fb76f148ab7ce6ceb78b9f61fcd1c88",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Swift": 26
+      }
+    },
+    {
+      "name": "somnia",
+      "url": "https://github.com/core-red-project/somnia",
+      "commit": "50cc647366d2944a97ae0501ef4e896ac43b363b",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "C++": 122,
+        "Python": 5,
+        "C/C++ header": 1
+      }
+    },
+    {
+      "name": "sxnnyergo",
+      "url": "https://github.com/sxnnyside-project/sxnnyergo",
+      "commit": "4786d5ad99937673a9c8f25c81eb9b1492339b66",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Swift": 194
+      }
+    },
+    {
+      "name": "syntaxeon",
+      "url": "https://github.com/core-red-project/syntaxeon",
+      "commit": "dc05be788ed61c614c585f5e0db90bed3c14c580",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Rust": 467
+      }
+    },
+    {
+      "name": "tensorsuggestlite",
+      "url": "https://github.com/core-red-project/tensorsuggestlite",
+      "commit": "73a90baf4948ff5a7c44d425b35e97f13609c9ac",
+      "license": "MIT",
+      "origin": "organization",
+      "languagesKB": {
+        "Python": 109
+      }
+    },
+    {
+      "name": "Alamofire",
+      "url": "https://github.com/Alamofire/Alamofire",
+      "commit": "6c2892ea5adb5a03fa81c510933dd782c5ddd9cb",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Swift": 1817,
+        "JavaScript": 384
+      }
+    },
+    {
+      "name": "bat",
+      "url": "https://github.com/sharkdp/bat",
+      "commit": "8cf33bdde9a6e4c11d0f866415b1fc867df0cd40",
+      "license": "MIT OR Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Rust": 679,
+        "Python": 342,
+        "JavaScript": 296,
+        "Swift": 55
+      }
+    },
+    {
+      "name": "bloc",
+      "url": "https://github.com/felangel/bloc",
+      "commit": "b9be1e252ee24ffbe9f2fb629edc7624b2cfbf05",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Dart": 1371,
+        "Astro": 91,
+        "TypeScript": 52,
+        "Kotlin": 50
+      }
+    },
+    {
+      "name": "clap",
+      "url": "https://github.com/clap-rs/clap",
+      "commit": "ec93e71255c0b833a34f50662a3fdb22f53f6ded",
+      "license": "MIT OR Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Rust": 2595,
+        "Python": 1
+      }
+    },
+    {
+      "name": "cobra",
+      "url": "https://github.com/spf13/cobra",
+      "commit": "adbc8813901bba65827259daa8e22ff94ec1f30e",
+      "license": "Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Go": 512
+      }
+    },
+    {
+      "name": "eShop",
+      "url": "https://github.com/dotnet/eShop",
+      "commit": "913acea66708a59595351174cee9b29f37179d29",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "C#": 929,
+        "JavaScript": 44,
+        "TypeScript": 7
+      }
+    },
+    {
+      "name": "express",
+      "url": "https://github.com/expressjs/express",
+      "commit": "43fca52d28a422c8be48fd489cbd4f2d6152bab6",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "JavaScript": 564
+      }
+    },
+    {
+      "name": "fastapi",
+      "url": "https://github.com/tiangolo/fastapi",
+      "commit": "af628068e772b05bb56bf050cc99f2817b9020f9",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Python": 4621,
+        "JavaScript": 23
+      }
+    },
+    {
+      "name": "fastify",
+      "url": "https://github.com/fastify/fastify",
+      "commit": "0b076ca595d19951c536daf515c778b38cf6ba69",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "JavaScript": 1950,
+        "TypeScript": 343
+      }
+    },
+    {
+      "name": "flask",
+      "url": "https://github.com/pallets/flask",
+      "commit": "49943b5a94413a530761350f04e896f76e8d620e",
+      "license": "BSD-3-Clause",
+      "origin": "third-party",
+      "languagesKB": {
+        "Python": 591
+      }
+    },
+    {
+      "name": "fmt",
+      "url": "https://github.com/fmtlib/fmt",
+      "commit": "e7e6e3f71033fbfc71eba1709789328bcb0ceb28",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "C/C++ header": 1599,
+        "C++": 989,
+        "Python": 49,
+        "C": 3
+      }
+    },
+    {
+      "name": "framework",
+      "url": "https://github.com/laravel/framework",
+      "commit": "753f33ea6d105909732d42f4334682989288ef5c",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "PHP": 18422,
+        "JavaScript": 716
+      }
+    },
+    {
+      "name": "gin",
+      "url": "https://github.com/gin-gonic/gin",
+      "commit": "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Go": 705
+      }
+    },
+    {
+      "name": "godot-steering-ai-framework",
+      "url": "https://github.com/GDQuest/godot-steering-ai-framework",
+      "commit": "9d7cf0deff805d8f2a5316c33f3c85cffa3376a7",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "GDScript": 96
+      }
+    },
+    {
+      "name": "hono",
+      "url": "https://github.com/honojs/hono",
+      "commit": "61f7c59e50244ab4d2dd83c151928cf7ea448510",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "TypeScript": 2944,
+        "JavaScript": 1
+      }
+    },
+    {
+      "name": "http",
+      "url": "https://github.com/dart-lang/http",
+      "commit": "2bac218a1115a58addd140d7a7eaabf803d57631",
+      "license": "BSD-3-Clause",
+      "origin": "third-party",
+      "languagesKB": {
+        "Dart": 4190,
+        "C++": 17,
+        "Kotlin": 17,
+        "C/C++ header": 6
+      }
+    },
+    {
+      "name": "kit",
+      "url": "https://github.com/sveltejs/kit",
+      "commit": "014dfec3df98be8edf6e217e98309c12ba51b4cf",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "JavaScript": 2690,
+        "TypeScript": 519,
+        "Svelte": 212
+      }
+    },
+    {
+      "name": "okhttp",
+      "url": "https://github.com/lysine-dev/okhttp",
+      "commit": "d16191b6792e3bc72781e5bf45193951b52adc4e",
+      "license": "Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Kotlin": 4533,
+        "Java": 150
+      }
+    },
+    {
+      "name": "phoenix",
+      "url": "https://github.com/phoenixframework/phoenix",
+      "commit": "b74bd220f683e483bab59f75f4957c3bfa507647",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Elixir": 1711,
+        "JavaScript": 455
+      }
+    },
+    {
+      "name": "pinia",
+      "url": "https://github.com/vuejs/pinia",
+      "commit": "05ece25e563d15dd1187fd30b4e5a833e9aefd78",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "TypeScript": 399,
+        "Vue": 90,
+        "JavaScript": 9
+      }
+    },
+    {
+      "name": "requests",
+      "url": "https://github.com/psf/requests",
+      "commit": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+      "license": "Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Python": 407
+      }
+    },
+    {
+      "name": "ripgrep",
+      "url": "https://github.com/BurntSushi/ripgrep",
+      "commit": "178cc027e283fd965cb72d0a7395b219eada170c",
+      "license": "Unlicense OR MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Rust": 1881,
+        "Ruby": 0
+      }
+    },
+    {
+      "name": "sinatra",
+      "url": "https://github.com/sinatra/sinatra",
+      "commit": "cb22afd7902b566b6eaba6c4ea89739494a65d12",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "Ruby": 678
+      }
+    },
+    {
+      "name": "spring-petclinic",
+      "url": "https://github.com/spring-projects/spring-petclinic",
+      "commit": "500158f732419217507c7656904b8e6aa1bcc0d6",
+      "license": "Apache-2.0",
+      "origin": "third-party",
+      "languagesKB": {
+        "Java": 141
+      }
+    },
+    {
+      "name": "starlight",
+      "url": "https://github.com/withastro/starlight",
+      "commit": "22ee803927db52ef2c38847d93471c3752dab6a1",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "TypeScript": 1180,
+        "Astro": 161,
+        "JavaScript": 36
+      }
+    },
+    {
+      "name": "zod",
+      "url": "https://github.com/colinhacks/zod",
+      "commit": "19c40d2072288b4cafec851e9d056a72a88e5973",
+      "license": "MIT",
+      "origin": "third-party",
+      "languagesKB": {
+        "TypeScript": 3584,
+        "JavaScript": 20
+      }
+    }
+  ]
+}

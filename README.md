@@ -43,15 +43,15 @@ This is a Sxnnyside Project.
 - **Findings Ledger**: `.debuggatha/ledger.json` tracks findings across sessions and clients, with baselines for adopting an existing repository.
 - **Suppression and memory**: inline `debuggatha-ignore` comments and repository memory accept a finding durably, with a required reason.
 - **CI ready**: `--changed-since`, `--fail-on-new`, SARIF, GitHub, GitLab, and Markdown reports; `debuggatha init` writes a config and a pipeline.
-- **Three surfaces, one engine**: MCP server, CLI, and VS Code extension share one pipeline and one ledger.
+- **Three surfaces, one engine**: the Rust binary is the CLI, the daemon, and the MCP server; the VS Code extension is its client. They share one pipeline and one ledger.
 
 ## Installation
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) (see `.bun-version`): packages, CLI, and MCP server
-- [Node.js](https://nodejs.org) (see `apps/vscode/.node-version`) and [pnpm](https://pnpm.io): VS Code extension only
+- [Rust](https://rustup.rs) (the toolchain is pinned in `rust-toolchain.toml`) and [cargo-deny](https://github.com/EmbarkStudios/cargo-deny): the engine, CLI, daemon, and MCP server
 - [just](https://github.com/casey/just): command surface for the whole repository
+- [Bun](https://bun.sh) (see `.bun-version`), [Node.js](https://nodejs.org) (see `apps/vscode/.node-version`) and [pnpm](https://pnpm.io): only for the VS Code extension and the TypeScript parity reference (`just parity-install`)
 
 ### From Source
 
@@ -59,9 +59,13 @@ This is a Sxnnyside Project.
 git clone https://github.com/sxnnyside-project/debuggatha.git
 cd debuggatha
 
-just install
-just build
+just install       # fetch the crates
+just build         # target/release/debuggatha
+just install-cli   # put `debuggatha` on your PATH
+just check         # the full gate: native, then the TypeScript parity reference
 ```
+
+`just --list` shows every recipe. The unprefixed ones drive the Rust workspace; `parity-*` drive the TypeScript reference.
 
 ### From a Registry
 
@@ -85,9 +89,11 @@ To connect a coding agent (Claude Code, Qwen Code, Cursor, and others), see [doc
 
 ```
 debuggatha/
-├── apps/         # The VS Code extension (Node + pnpm)
-├── packages/     # core, packs, and engine, plus the published cli and mcp
-└── docs/         # Architecture notes, ADRs, integrations, and the Review Pack spec
+├── crates/       # The Rust engine: core (domain), engine (reviews, daemon), cli (the `debuggatha` binary, daemon, MCP)
+├── apps/         # The VS Code extension (Node + pnpm), a client of the binary
+├── packages/     # The TypeScript engine, kept as the parity reference until the cutover
+├── scripts/      # Gates, and scripts/parity for the fixture generators
+└── docs/         # Architecture, Protocol v1, parity, roadmap, ADRs, integrations, and the Review Pack spec
 ```
 
 For a detailed breakdown, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

@@ -1,5 +1,5 @@
-import type { RepositoryContext, ReviewPolicy } from "@debuggatha/engine";
-import * as vscode from "vscode";
+import type { RepositoryContext, ReviewPolicy } from '@debuggatha/engine';
+import * as vscode from 'vscode';
 
 export class IntelligenceProvider implements vscode.TreeDataProvider<IntelligenceTreeItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<IntelligenceTreeItem | undefined | void> =
@@ -28,22 +28,22 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
     if (!element) {
       // Root nodes
       return Promise.resolve([
-        new IntelligenceTreeItem("Stack", vscode.TreeItemCollapsibleState.Expanded, "stack"),
+        new IntelligenceTreeItem('Stack', vscode.TreeItemCollapsibleState.Expanded, 'stack'),
         new IntelligenceTreeItem(
-          "Documentation",
+          'Documentation',
           vscode.TreeItemCollapsibleState.Collapsed,
-          "docs",
+          'docs',
         ),
-        new IntelligenceTreeItem("Criteria", vscode.TreeItemCollapsibleState.Collapsed, "criteria"),
+        new IntelligenceTreeItem('Criteria', vscode.TreeItemCollapsibleState.Collapsed, 'criteria'),
         new IntelligenceTreeItem(
-          "Active Review Policy",
+          'Active Review Policy',
           vscode.TreeItemCollapsibleState.Collapsed,
-          "policy",
+          'policy',
         ),
       ]);
     }
 
-    if (element.nodeId === "stack") {
+    if (element.nodeId === 'stack') {
       const allSignals = [
         ...this.context.stack.languages,
         ...this.context.stack.frameworks,
@@ -55,7 +55,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
       return Promise.resolve(items);
     }
 
-    if (element.nodeId === "docs") {
+    if (element.nodeId === 'docs') {
       const items = this.context.documentation.sources.map(
         (d) =>
           new IntelligenceTreeItem(d.kind, vscode.TreeItemCollapsibleState.None, undefined, d.file),
@@ -63,7 +63,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
       return Promise.resolve(items);
     }
 
-    if (element.nodeId === "criteria") {
+    if (element.nodeId === 'criteria') {
       const items = this.context.criteria.rules.map(
         (r) =>
           new IntelligenceTreeItem(
@@ -76,7 +76,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
       return Promise.resolve(items);
     }
 
-    if (element.nodeId === "policy") {
+    if (element.nodeId === 'policy') {
       const items = this.policy.packRefs.map(
         (p) =>
           new IntelligenceTreeItem(
@@ -104,9 +104,9 @@ export class IntelligenceTreeItem extends vscode.TreeItem {
     if (nodeId) this.id = nodeId;
     if (descriptionStr) this.description = descriptionStr;
 
-    if (nodeId === "stack") this.iconPath = new vscode.ThemeIcon("layers");
-    if (nodeId === "docs") this.iconPath = new vscode.ThemeIcon("book");
-    if (nodeId === "criteria") this.iconPath = new vscode.ThemeIcon("checklist");
-    if (nodeId === "policy") this.iconPath = new vscode.ThemeIcon("shield");
+    if (nodeId === 'stack') this.iconPath = new vscode.ThemeIcon('layers');
+    if (nodeId === 'docs') this.iconPath = new vscode.ThemeIcon('book');
+    if (nodeId === 'criteria') this.iconPath = new vscode.ThemeIcon('checklist');
+    if (nodeId === 'policy') this.iconPath = new vscode.ThemeIcon('shield');
   }
 }

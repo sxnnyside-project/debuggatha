@@ -34,21 +34,21 @@
  * so there's nothing to deprecate.
  */
 export const MEMORY_LIFECYCLE_STATUSES = [
-  "detected",
-  "suggested",
-  "confirmed",
-  "active",
-  "deprecated",
-  "archived",
+  'detected',
+  'suggested',
+  'confirmed',
+  'active',
+  'deprecated',
+  'archived',
 ] as const;
 export type MemoryLifecycleStatus = (typeof MEMORY_LIFECYCLE_STATUSES)[number];
 
 const LEGAL_TRANSITIONS: Record<MemoryLifecycleStatus, readonly MemoryLifecycleStatus[]> = {
-  detected: ["suggested", "archived"],
-  suggested: ["confirmed", "archived"],
-  confirmed: ["active", "archived"],
-  active: ["deprecated", "archived"],
-  deprecated: ["active", "archived"],
+  detected: ['suggested', 'archived'],
+  suggested: ['confirmed', 'archived'],
+  confirmed: ['active', 'archived'],
+  active: ['deprecated', 'archived'],
+  deprecated: ['active', 'archived'],
   archived: [],
 };
 
@@ -61,5 +61,5 @@ export function canTransitionMemory(
 
 /** Only `active` memory is ever consulted when filtering findings (see `filter.ts`) — every other status is inert with respect to reviews. */
 export function isActiveMemoryStatus(status: MemoryLifecycleStatus): boolean {
-  return status === "active";
+  return status === 'active';
 }

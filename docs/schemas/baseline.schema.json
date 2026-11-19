@@ -1,0 +1,52 @@
+{
+  "$ref": "#/definitions/Baseline",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Baseline": {
+      "additionalProperties": false,
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "entries": {
+          "items": {
+            "$ref": "#/definitions/BaselineEntry"
+          },
+          "type": "array"
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["schemaVersion", "createdAt", "entries"],
+      "type": "object"
+    },
+    "BaselineEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "description": "How many identical findings (same file, rule, and code) were accepted.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "file": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": ["key", "file", "ruleId", "title", "count"],
+      "type": "object"
+    }
+  },
+  "title": "Baseline"
+}

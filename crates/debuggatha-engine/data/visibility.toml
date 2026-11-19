@@ -1,0 +1,49 @@
+[go]
+by_name = "capitalized"
+
+[python]
+by_name = "underscore-module"
+
+[dart]
+by_name = "underscore-package"
+
+[java]
+default = "package"
+public = ["public"]
+private = ["private"]
+module = ["protected"]
+wired = ["abstract"]
+
+[kotlin]
+default = "public"
+private = ["private"]
+module = ["internal", "protected"]
+wired = ["override", "abstract", "open"]
+
+[csharp]
+default = "module"
+member_default = "private"
+public = ["public"]
+private = ["private"]
+module = ["internal", "protected"]
+wired = ["override", "virtual", "abstract"]
+
+[php]
+default = "public"
+private = ["private"]
+module = ["protected"]
+wired = ["abstract"]
+
+[elixir]
+default = "public"
+private = ["defp", "defmacrop", "defguardp"]
+
+[ruby]
+default = "public"
+
+[swift]
+default = "module"
+public = ["public", "open"]
+private = ["private", "fileprivate"]
+module = ["internal", "package"]
+wired = ["override", "open"]

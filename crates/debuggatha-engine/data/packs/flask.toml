@@ -1,0 +1,21 @@
+id = "debuggatha/flask"
+version = "1.0.0"
+kind = "stack"
+displayName = "Flask"
+dependsOn = []
+
+[[rules]]
+id = "flask-secret-key-in-code"
+packId = "debuggatha/flask"
+statement = "Do not write `app.secret_key` in code; read it from the environment or a secret store."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-flask-secret-key-in-code"]
+appliesTo = { kind = "requires-framework", framework = "flask" }
+
+[[knowledge]]
+id = "know-flask-secret-key-in-code"
+title = "Secret key in code"
+body = "Anyone with the repository can forge session cookies."
+externalRefs = ["https://flask.palletsprojects.com/en/stable/config/#SECRET_KEY", "https://cwe.mitre.org/data/definitions/798.html"]
+limitations = ["A throwaway key in a test is reported too; `app.config[\"SECRET_KEY\"]` is not read."]

@@ -1,6 +1,6 @@
-import type { KnowledgeEntry, Rule } from "./rule.js";
+import type { KnowledgeEntry, Rule } from './rule.js';
 
-export type ReviewPackKind = "stack" | "concern";
+export type ReviewPackKind = 'stack' | 'concern';
 
 /**
  * A hard dependency (§9): either on another pack at a version range, or on

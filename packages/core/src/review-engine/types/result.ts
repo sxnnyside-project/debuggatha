@@ -1,9 +1,9 @@
-import type { ExecutionMetadata } from "./execution.js";
-import type { Finding } from "./finding.js";
-import type { Recommendation } from "./recommendation.js";
-import type { ReviewSession } from "./session.js";
-import type { ReviewSummary } from "./summary.js";
-import { summarizeFindings } from "./summary.js";
+import type { ExecutionMetadata } from './execution.js';
+import type { Finding } from './finding.js';
+import type { Recommendation } from './recommendation.js';
+import type { ReviewSession } from './session.js';
+import type { ReviewSummary } from './summary.js';
+import { summarizeFindings } from './summary.js';
 
 /**
  * The structured deliverable, separate from ReviewSession (the traceable
@@ -30,7 +30,7 @@ export interface CreateReviewResultInput {
 }
 
 export function createReviewResult(input: CreateReviewResultInput): ReviewResult {
-  if (input.session.status !== "completed") {
+  if (input.session.status !== 'completed') {
     throw new Error(
       `Cannot create a Review Result from a session with status "${input.session.status}" — only a "completed" session produces a result.`,
     );

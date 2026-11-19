@@ -1,16 +1,20 @@
-import { describe, expect, it } from "bun:test";
-import { validateReviewPack } from "@debuggatha/core";
-import { reviewPacks } from "./index.js";
+import { describe, expect, it } from 'bun:test';
+import { validateReviewPack } from '@debuggatha/core';
+import { reviewPacks } from './index.js';
 
-describe("reviewPacks catalog", () => {
-  it("every registered pack passes structural validation", () => {
+describe('reviewPacks catalog', () => {
+  it('every registered pack passes structural validation', () => {
     for (const pack of reviewPacks) {
       expect(() => validateReviewPack(pack)).not.toThrow();
     }
   });
 
-  it("exports typescriptPack as part of the catalog", () => {
-    expect(reviewPacks.some((p) => p.id === "debuggatha/typescript")).toBe(true);
+  it('exports typescriptPack as part of the catalog', () => {
+    expect(reviewPacks.some((p) => p.id === 'debuggatha/typescript')).toBe(true);
+  });
+
+  it('exports testingPack as part of the catalog', () => {
+    expect(reviewPacks.some((p) => p.id === 'debuggatha/testing')).toBe(true);
   });
 
   // `validateReviewPack` already
@@ -19,12 +23,12 @@ describe("reviewPacks catalog", () => {
   // `core/knowledge-system`'s `validate.ts`). What it can't check,
   // because it only ever sees one pack at a time, is catalog-wide
   // consistency — added here rather than duplicating any of its logic.
-  it("has no duplicate pack ids across the whole catalog", () => {
+  it('has no duplicate pack ids across the whole catalog', () => {
     const ids = reviewPacks.map((p) => p.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("every pack declares a non-empty displayName and at least one rule", () => {
+  it('every pack declares a non-empty displayName and at least one rule', () => {
     for (const pack of reviewPacks) {
       expect(
         pack.displayName.trim().length,
@@ -34,7 +38,7 @@ describe("reviewPacks catalog", () => {
     }
   });
 
-  it("every rule statement is non-empty prose, not a placeholder", () => {
+  it('every rule statement is non-empty prose, not a placeholder', () => {
     for (const pack of reviewPacks) {
       for (const rule of pack.rules) {
         expect(

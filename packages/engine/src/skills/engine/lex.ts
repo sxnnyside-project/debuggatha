@@ -37,9 +37,9 @@ interface Syntax {
 }
 
 const C_LIKE: Syntax = {
-  lineComments: ["//"],
-  block: ["/*", "*/"],
-  quotes: "\"'",
+  lineComments: ['//'],
+  block: ['/*', '*/'],
+  quotes: '"\'',
   backtick: false,
   tripleQuotes: false,
   regexLiterals: false,
@@ -62,20 +62,20 @@ const SYNTAX_BY_EXTENSION: Record<string, Syntax> = {
   dart: { ...C_LIKE, tripleQuotes: true },
   go: { ...C_LIKE, quotes: '"', backtick: true },
   rs: { ...C_LIKE, quotes: '"', charLiteralQuote: true },
-  php: { ...C_LIKE, lineComments: ["//", "#"] },
+  php: { ...C_LIKE, lineComments: ['//', '#'] },
   py: {
-    lineComments: ["#"],
+    lineComments: ['#'],
     block: undefined,
-    quotes: "\"'",
+    quotes: '"\'',
     backtick: false,
     tripleQuotes: true,
     regexLiterals: false,
     charLiteralQuote: false,
   },
   rb: {
-    lineComments: ["#"],
+    lineComments: ['#'],
     block: undefined,
-    quotes: "\"'",
+    quotes: '"\'',
     backtick: false,
     tripleQuotes: false,
     regexLiterals: false,
@@ -84,32 +84,32 @@ const SYNTAX_BY_EXTENSION: Record<string, Syntax> = {
 };
 
 const REGEX_PRECEDERS = new Set([
-  "(",
-  ",",
-  "=",
-  ":",
-  "[",
-  "!",
-  "&",
-  "|",
-  "?",
-  "{",
-  "}",
-  ";",
-  "+",
-  "-",
-  "*",
-  "%",
-  "<",
-  ">",
-  "~",
-  "^",
+  '(',
+  ',',
+  '=',
+  ':',
+  '[',
+  '!',
+  '&',
+  '|',
+  '?',
+  '{',
+  '}',
+  ';',
+  '+',
+  '-',
+  '*',
+  '%',
+  '<',
+  '>',
+  '~',
+  '^',
 ]);
 const REGEX_KEYWORDS =
   /(?:^|[^\w$])(?:return|typeof|case|in|of|do|else|void|delete|throw|yield|await)$/;
 
 function syntaxFor(file: string): Syntax | undefined {
-  const extension = file.slice(file.lastIndexOf(".") + 1).toLowerCase();
+  const extension = file.slice(file.lastIndexOf('.') + 1).toLowerCase();
   return SYNTAX_BY_EXTENSION[extension];
 }
 
@@ -118,13 +118,13 @@ export function lex(content: string, file: string): LexResult {
   const syntax = syntaxFor(file);
   if (!syntax) return { masked: content, strings: [], comments: [] };
 
-  const chars = content.split("");
+  const chars = content.split('');
   const strings: StringLiteral[] = [];
   const comments: Comment[] = [];
   const length = content.length;
 
   const lineStarts = [0];
-  for (let i = 0; i < length; i += 1) if (content[i] === "\n") lineStarts.push(i + 1);
+  for (let i = 0; i < length; i += 1) if (content[i] === '\n') lineStarts.push(i + 1);
   const lineOf = (offset: number) => {
     let low = 0;
     let high = lineStarts.length - 1;
@@ -138,18 +138,18 @@ export function lex(content: string, file: string): LexResult {
 
   const blank = (from: number, to: number) => {
     for (let i = from; i < to; i += 1) {
-      if (chars[i] !== "\n" && chars[i] !== "\r") chars[i] = " ";
+      if (chars[i] !== '\n' && chars[i] !== '\r') chars[i] = ' ';
     }
   };
 
-  let lastSignificant = "";
+  let lastSignificant = '';
   let i = 0;
   while (i < length) {
     const ch = content[i] as string;
 
     const lineComment = syntax.lineComments.find((marker) => content.startsWith(marker, i));
     if (lineComment) {
-      let end = content.indexOf("\n", i);
+      let end = content.indexOf('\n', i);
       if (end === -1) end = length;
       comments.push({ line: lineOf(i), text: content.slice(i + lineComment.length, end) });
       blank(i, end);
@@ -162,7 +162,7 @@ export function lex(content: string, file: string): LexResult {
       const end = close === -1 ? length : close + syntax.block[1].length;
       const body = content.slice(i + syntax.block[0].length, close === -1 ? length : close);
       const firstLine = lineOf(i);
-      for (const [offset, text] of body.split("\n").entries()) {
+      for (const [offset, text] of body.split('\n').entries()) {
         comments.push({ line: firstLine + offset, text });
       }
       blank(i, end);
@@ -181,7 +181,7 @@ export function lex(content: string, file: string): LexResult {
       continue;
     }
 
-    if (syntax.quotes.includes(ch) || (syntax.backtick && ch === "`")) {
+    if (syntax.quotes.includes(ch) || (syntax.backtick && ch === '`')) {
       if (
         ch === "'" &&
         syntax.charLiteralQuote &&
@@ -190,16 +190,16 @@ export function lex(content: string, file: string): LexResult {
         i += 1;
         continue;
       }
-      const multiline = ch === "`";
+      const multiline = ch === '`';
       let j = i + 1;
       while (j < length) {
         const current = content[j];
-        if (current === "\\") {
+        if (current === '\\') {
           j += 2;
           continue;
         }
         if (current === ch) break;
-        if (current === "\n" && !multiline) break;
+        if (current === '\n' && !multiline) break;
         j += 1;
       }
       const closed = content[j] === ch;
@@ -213,35 +213,35 @@ export function lex(content: string, file: string): LexResult {
 
     if (
       syntax.regexLiterals &&
-      ch === "/" &&
-      (lastSignificant === "" ||
+      ch === '/' &&
+      (lastSignificant === '' ||
         REGEX_PRECEDERS.has(lastSignificant) ||
         REGEX_KEYWORDS.test(content.slice(Math.max(0, i - 12), i).trimEnd()))
     ) {
       let j = i + 1;
       let inClass = false;
-      while (j < length && content[j] !== "\n") {
+      while (j < length && content[j] !== '\n') {
         const current = content[j];
-        if (current === "\\") {
+        if (current === '\\') {
           j += 2;
           continue;
         }
-        if (current === "[") inClass = true;
-        else if (current === "]") inClass = false;
-        else if (current === "/" && !inClass) break;
+        if (current === '[') inClass = true;
+        else if (current === ']') inClass = false;
+        else if (current === '/' && !inClass) break;
         j += 1;
       }
-      if (content[j] === "/") {
+      if (content[j] === '/') {
         blank(i + 1, j);
-        lastSignificant = "/";
+        lastSignificant = '/';
         i = j + 1;
         continue;
       }
     }
 
-    if (ch !== " " && ch !== "\t" && ch !== "\n" && ch !== "\r") lastSignificant = ch;
+    if (ch !== ' ' && ch !== '\t' && ch !== '\n' && ch !== '\r') lastSignificant = ch;
     i += 1;
   }
 
-  return { masked: chars.join(""), strings, comments };
+  return { masked: chars.join(''), strings, comments };
 }

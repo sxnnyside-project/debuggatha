@@ -1,4 +1,4 @@
-import type { ReviewSource } from "./source.js";
+import type { ReviewSource } from './source.js';
 
 export interface ExecutionMetadata {
   source: ReviewSource | undefined;

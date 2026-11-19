@@ -1,7 +1,7 @@
-import { readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
-import { IGNORED_DIRS } from "./internal/fs-walk.js";
-import type { AnalysisResult } from "./types.js";
+import { readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { IGNORED_DIRS } from './internal/fs-walk.js';
+import type { AnalysisResult } from './types.js';
 
 export interface AnalysisFileStamp {
   path: string;
@@ -43,7 +43,7 @@ export function buildAnalysisFingerprint(rootDir: string): AnalysisFingerprint {
     }
     dirs.push({ dir, entries });
     for (const entry of entries) {
-      if (IGNORED_DIRS.has(entry) || entry.startsWith(".")) continue;
+      if (IGNORED_DIRS.has(entry) || entry.startsWith('.')) continue;
       const full = join(dir, entry);
       let stat: ReturnType<typeof statSync>;
       try {

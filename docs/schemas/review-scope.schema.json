@@ -1,0 +1,57 @@
+{
+  "$ref": "#/definitions/ReviewPipelineScope",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ReviewPipelineScope": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "base": {
+              "type": "string"
+            },
+            "diff": {
+              "type": "string"
+            },
+            "kind": {
+              "const": "diff",
+              "type": "string"
+            }
+          },
+          "required": ["kind", "diff"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "files",
+              "type": "string"
+            },
+            "paths": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": ["kind", "paths"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "workspace",
+              "type": "string"
+            }
+          },
+          "required": ["kind"],
+          "type": "object"
+        }
+      ],
+      "description": "What a review covers: a diff, a list of files, or the whole workspace. The steps of the review do not change with the scope."
+    }
+  },
+  "title": "ReviewPipelineScope"
+}

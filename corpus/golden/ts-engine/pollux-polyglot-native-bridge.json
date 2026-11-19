@@ -1,0 +1,566 @@
+{
+ "name": "pollux-polyglot-native-bridge",
+ "commit": "5f670e0f4c9c9ea1f7fe55522d9d55388709a451",
+ "findings": [
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 124,
+    "end": 124
+   },
+   "columns": {
+    "start": 52,
+    "end": 60
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 126,
+    "end": 126
+   },
+   "columns": {
+    "start": 36,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 131,
+    "end": 131
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 145,
+    "end": 145
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 149,
+    "end": 149
+   },
+   "columns": {
+    "start": 23,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 170,
+    "end": 170
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 177,
+    "end": 177
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 185,
+    "end": 185
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 201,
+    "end": 201
+   },
+   "columns": {
+    "start": 33,
+    "end": 40
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 205,
+    "end": 205
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 220,
+    "end": 220
+   },
+   "columns": {
+    "start": 21,
+    "end": 28
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 29,
+    "end": 36
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 246,
+    "end": 246
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 253,
+    "end": 253
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 280,
+    "end": 280
+   },
+   "columns": {
+    "start": 35,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 302,
+    "end": 302
+   },
+   "columns": {
+    "start": 18,
+    "end": 25
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 307,
+    "end": 307
+   },
+   "columns": {
+    "start": 19,
+    "end": 26
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 310,
+    "end": 310
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 319,
+    "end": 319
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 321,
+    "end": 321
+   },
+   "columns": {
+    "start": 17,
+    "end": 24
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 331,
+    "end": 331
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 333,
+    "end": 333
+   },
+   "columns": {
+    "start": 17,
+    "end": 24
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "build.rs",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 36,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 5,
+    "end": 13
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 111,
+    "end": 111
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 152,
+    "end": 152
+   },
+   "columns": {
+    "start": 22,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 158,
+    "end": 158
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 178,
+    "end": 178
+   },
+   "columns": {
+    "start": 22,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 193,
+    "end": 193
+   },
+   "columns": {
+    "start": 22,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 225,
+    "end": 225
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 96,
+    "end": 96
+   },
+   "columns": {
+    "start": 5,
+    "end": 13
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/lib.rs",
+   "lines": {
+    "start": 98,
+    "end": 98
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

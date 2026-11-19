@@ -1,0 +1,1149 @@
+{
+  "rules": [
+    "no-unwrap-expect",
+    "no-unsafe-blocks",
+    "no-panic",
+    "avoid-print",
+    "no-eval"
+  ],
+  "cases": [
+    {
+      "name": "unwrap-basic",
+      "file": "a.rs",
+      "source": "fn f() { let x = a.unwrap(); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 19,
+          "end": 28,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-basic",
+      "file": "a.rs",
+      "source": "fn f() { let x = a.expect(\"why\"); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 19,
+          "end": 27,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-chain",
+      "file": "a.rs",
+      "source": "fn f() { let x = a.b().c.unwrap(); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 25,
+          "end": 34,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-multiline-chain",
+      "file": "a.rs",
+      "source": "fn f() {\n    let x = a\n        .unwrap();\n}\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 3,
+          "start": 9,
+          "end": 18,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-inner-space",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap( ); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-with-argument",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap(1); }\n",
+      "ts": []
+    },
+    {
+      "name": "unwrap-or-is-fine",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap_or(1); a.unwrap_or_else(|| 2); }\n",
+      "ts": []
+    },
+    {
+      "name": "unwrap-in-string-and-comment",
+      "file": "a.rs",
+      "source": "// a.unwrap()\nfn f() { let s = \"a.unwrap()\"; }\n",
+      "ts": []
+    },
+    {
+      "name": "unwrap-in-macro",
+      "file": "a.rs",
+      "source": "fn f() { println!(\"{}\", c.unwrap()); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 26,
+          "end": 35,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-in-macro",
+      "file": "a.rs",
+      "source": "fn f() { assert_eq!(a.expect(\"x\"), 1); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 22,
+          "end": 30,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-two-on-a-line",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap(); b.unwrap(); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-user-method-expect",
+      "file": "a.rs",
+      "source": "fn f() { foo.expect(x); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 13,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-test-dir",
+      "file": "tests/a.rs",
+      "source": "fn f() { a.unwrap(); }\n",
+      "ts": []
+    },
+    {
+      "name": "unwrap-not-cfg-test",
+      "file": "a.rs",
+      "source": "#[cfg(not(test))]\nfn f() { a.unwrap(); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 2,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-unicode-before",
+      "file": "a.rs",
+      "source": "fn f() { let s = \"😀\"; a.unwrap(); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 25,
+          "end": 34,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-crlf",
+      "file": "a.rs",
+      "source": "fn f() {\r\n    a.unwrap();\r\n}\r\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 2,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-py-not-scanned",
+      "file": "a.py",
+      "source": "a.unwrap()\n",
+      "ts": []
+    },
+    {
+      "name": "unwrap-error-elsewhere",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap(); }\nfn g( {\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-spaced-dot",
+      "file": "a.rs",
+      "source": "fn f() { a . unwrap(); }\n",
+      "why": "a space around the dot is still a method call",
+      "rust": [
+        [
+          "no-unwrap-expect",
+          1,
+          12
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "unwrap-in-cfg-test-module",
+      "file": "a.rs",
+      "source": "fn f() {}\n#[cfg(test)]\nmod t {\n    fn x() { a.unwrap(); }\n}\n",
+      "why": "code under #[cfg(test)] is test code, like a file under tests/",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 4,
+          "start": 15,
+          "end": 24,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-in-test-fn",
+      "file": "a.rs",
+      "source": "#[test]\nfn x() { a.unwrap(); }\n",
+      "why": "a #[test] function is test code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 2,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-in-test-fn-stacked-attributes",
+      "file": "a.rs",
+      "source": "#[test]\n#[ignore]\nfn x() { a.unwrap(); }\n",
+      "why": "a #[test] function is test code, whatever else is stacked on it",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 3,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-in-tokio-test",
+      "file": "a.rs",
+      "source": "#[tokio::test]\nasync fn x() { a.unwrap(); }\n",
+      "why": "a #[tokio::test] function is test code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 2,
+          "start": 17,
+          "end": 26,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-block",
+      "file": "a.rs",
+      "source": "fn f() { unsafe { g() } }\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 10,
+          "end": 18,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-block-tight",
+      "file": "a.rs",
+      "source": "fn f() { unsafe{ g() } }\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 10,
+          "end": 17,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-fn",
+      "file": "a.rs",
+      "source": "unsafe fn f() {}\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-pub-fn",
+      "file": "a.rs",
+      "source": "pub unsafe fn f() {}\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 5,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-pub-crate-fn",
+      "file": "a.rs",
+      "source": "pub(crate) unsafe fn f() {}\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 12,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-extern-fn-not-matched",
+      "file": "a.rs",
+      "source": "unsafe extern \"C\" fn f() {}\n",
+      "ts": []
+    },
+    {
+      "name": "unsafe-impl-not-matched",
+      "file": "a.rs",
+      "source": "unsafe impl Send for X {}\n",
+      "ts": []
+    },
+    {
+      "name": "unsafe-in-string-and-comment",
+      "file": "a.rs",
+      "source": "// unsafe { }\nfn f() { let s = \"unsafe { }\"; }\n",
+      "ts": []
+    },
+    {
+      "name": "unsafe-in-macro",
+      "file": "a.rs",
+      "source": "fn f() { println!(\"{}\", unsafe { h() }); }\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 25,
+          "end": 33,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-test-dir-still-reported",
+      "file": "tests/a.rs",
+      "source": "fn f() { unsafe { g() } }\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 1,
+          "start": 10,
+          "end": 18,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-in-cfg-test-still-reported",
+      "file": "a.rs",
+      "source": "#[cfg(test)]\nmod t { fn x() { unsafe { g() } } }\n",
+      "ts": [
+        {
+          "rule": "no-unsafe-blocks",
+          "line": 2,
+          "start": 18,
+          "end": 26,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unsafe-brace-on-next-line",
+      "file": "a.rs",
+      "source": "fn f() {\n    unsafe\n    {\n        g()\n    }\n}\n",
+      "why": "the old pattern read one line at a time",
+      "rust": [
+        [
+          "no-unsafe-blocks",
+          2,
+          5
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "rs-panic",
+      "file": "a.rs",
+      "source": "fn f() { panic!(\"x\"); }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 10,
+          "end": 17,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "rs-panic-scoped",
+      "file": "a.rs",
+      "source": "fn f() { std::panic!(\"x\"); }\n",
+      "why": "the hit covers the whole path, std::panic!, which is what the concept binds; a panic! of another crate is not the standard one", "rust": [["no-panic", 1, 10]], "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 15,
+          "end": 22,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "rs-panic-brackets-not-matched",
+      "file": "a.rs",
+      "source": "fn f() { panic![]; }\n",
+      "ts": []
+    },
+    {
+      "name": "rs-panic-in-string-and-comment",
+      "file": "a.rs",
+      "source": "// panic!(\"x\")\nfn f() { let s = \"panic!(x)\"; }\n",
+      "ts": []
+    },
+    {
+      "name": "rs-panic-test-dir",
+      "file": "tests/a.rs",
+      "source": "fn f() { panic!(\"x\"); }\n",
+      "ts": []
+    },
+    {
+      "name": "rs-panic-in-macro",
+      "file": "a.rs",
+      "source": "fn f() { vec![panic!(\"x\")]; }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 15,
+          "end": 22,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "rs-panic-unwrap-same-line",
+      "file": "a.rs",
+      "source": "fn f() { a.unwrap(); panic!(\"x\"); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 20,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 22,
+          "end": 29,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "rs-panic-in-test-fn",
+      "file": "a.rs",
+      "source": "#[test]\nfn x() { panic!(\"x\"); }\n",
+      "why": "a #[test] function is test code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 2,
+          "start": 10,
+          "end": 17,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "go-panic",
+      "file": "a.go",
+      "source": "package m\nfunc f() { panic(\"x\") }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 2,
+          "start": 12,
+          "end": 18,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "go-panic-spaced",
+      "file": "a.go",
+      "source": "package m\nfunc f() { panic (\"x\") }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 2,
+          "start": 12,
+          "end": 19,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "go-method-panic",
+      "file": "a.go",
+      "source": "package m\nfunc f() { a.panic(\"y\") }\n",
+      "ts": []
+    },
+    {
+      "name": "go-panic-in-string",
+      "file": "a.go",
+      "source": "package m\nfunc f() { s := \"panic(\" }\n",
+      "ts": []
+    },
+    {
+      "name": "go-panic-test-file",
+      "file": "a_test.go",
+      "source": "package m\nfunc f() { panic(\"x\") }\n",
+      "ts": []
+    },
+    {
+      "name": "go-panic-defer",
+      "file": "a.go",
+      "source": "package m\nfunc f() { defer func() { panic(r) }() }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 2,
+          "start": 27,
+          "end": 33,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "go-panic-declaration",
+      "file": "a.go",
+      "source": "package m\nfunc panic(s string) {}\n",
+      "why": "a declaration is not a call",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 2,
+          "start": 6,
+          "end": 12,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-two-arguments",
+      "file": "a.rs",
+      "source": "fn f() { self.expect(&kind, \"x\")?; }\n",
+      "why": "Option::expect and Result::expect take one argument: a method of the program that takes two is its own",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 14,
+          "end": 22,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-three-arguments",
+      "file": "a.rs",
+      "source": "fn f() { p.expect(a, b, c); }\n",
+      "why": "same: more than one argument is not Option::expect",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 19,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-no-arguments",
+      "file": "a.rs",
+      "source": "fn f() { p.expect(); }\n",
+      "why": "same: Option::expect always takes one argument",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 19,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-trailing-comma",
+      "file": "a.rs",
+      "source": "fn f() { a.expect(\"x\",); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 11,
+          "end": 19,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "expect-two-arguments-in-macro",
+      "file": "a.rs",
+      "source": "fn f() { println!(\"{}\", p.expect(a, b)); }\n",
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 26,
+          "end": 34,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "panic-in-build-script",
+      "file": "build.rs",
+      "source": "fn main() { panic!(\"x\"); }\n",
+      "why": "a Cargo build script fails the build by panicking",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 13,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "panic-in-nested-build-script",
+      "file": "crates/x/build.rs",
+      "source": "fn main() { panic!(\"x\"); }\n",
+      "why": "same, in a member crate",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 13,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "panic-in-file-ending-in-build",
+      "file": "src/rebuild.rs",
+      "source": "fn f() { panic!(\"x\"); }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 10,
+          "end": 17,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "panic-in-build-directory",
+      "file": "build/lib.rs",
+      "source": "fn f() { panic!(\"x\"); }\n",
+      "ts": [
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 10,
+          "end": 17,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unwrap-in-build-script-still-reported",
+      "file": "build.rs",
+      "source": "fn main() { a.unwrap(); panic!(\"x\"); }\n",
+      "why": "only the panic is exempt: the unwrap stays (its rule has no build script exemption)",
+      "rust": [
+        [
+          "no-unwrap-expect",
+          1,
+          14
+        ]
+      ],
+      "ts": [
+        {
+          "rule": "no-unwrap-expect",
+          "line": 1,
+          "start": 14,
+          "end": 23,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-panic",
+          "line": 1,
+          "start": 25,
+          "end": 32,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-example",
+      "file": "example/main.dart",
+      "source": "void main() { print('a'); }\n",
+      "why": "an example prints as its output",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-tool",
+      "file": "tool/generate.dart",
+      "source": "void main() { print('a'); }\n",
+      "why": "a tool script prints as its output",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-bin",
+      "file": "packages/cli/bin/cli.dart",
+      "source": "void main() { print('a'); }\n",
+      "why": "a Dart executable prints as its output",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-examples",
+      "file": "examples/a/main.dart",
+      "source": "void main() { print('a'); }\n",
+      "why": "same, plural",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-lib-toolbar",
+      "file": "lib/toolbar/a.dart",
+      "source": "void main() { print('a'); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-in-lib-examples-helper",
+      "file": "lib/examples_helper/a.dart",
+      "source": "void main() { print('a'); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print",
+      "file": "a.dart",
+      "source": "void main() { print('a'); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-spaced",
+      "file": "a.dart",
+      "source": "void main() { print ('a'); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 22,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-method-print",
+      "file": "a.dart",
+      "source": "void main() { a.print('b'); }\n",
+      "ts": []
+    },
+    {
+      "name": "dart-debug-print",
+      "file": "a.dart",
+      "source": "void main() { debugPrint('c'); }\n",
+      "ts": []
+    },
+    {
+      "name": "dart-myprint",
+      "file": "a.dart",
+      "source": "void main() { myprint('c'); }\n",
+      "ts": []
+    },
+    {
+      "name": "dart-print-in-string-and-comment",
+      "file": "a.dart",
+      "source": "// print('a')\nvoid main() { var s = \"print('a')\"; }\n",
+      "ts": []
+    },
+    {
+      "name": "dart-print-test-file",
+      "file": "a_test.dart",
+      "source": "void main() { print('a'); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 15,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 20,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-unicode-before",
+      "file": "a.dart",
+      "source": "void main() { var s = '😀'; print(s); }\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 29,
+          "end": 35,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 29,
+            "endColumn": 34,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-multiline",
+      "file": "a.dart",
+      "source": "void main() {\n  print(\n    'a',\n  );\n}\n",
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 2,
+          "start": 3,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 3,
+            "endColumn": 8,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "dart-print-declaration",
+      "file": "a.dart",
+      "source": "void print(String s) {}\n",
+      "why": "a declaration is not a call",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "avoid-print",
+          "line": 1,
+          "start": 6,
+          "end": 12,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 6,
+            "endColumn": 11,
+            "replacement": "debugPrint",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "php-eval",
+      "file": "a.php",
+      "source": "<?php\neval($x);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 1,
+          "end": 6,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "php-eval-spaced",
+      "file": "a.php",
+      "source": "<?php\neval ($x);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 1,
+          "end": 7,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "php-evalx",
+      "file": "a.php",
+      "source": "<?php\nevalx($x);\n",
+      "ts": []
+    },
+    {
+      "name": "php-eval-uppercase-not-matched",
+      "file": "a.php",
+      "source": "<?php\nEVAL($x);\n",
+      "ts": []
+    },
+    {
+      "name": "php-eval-in-comment-and-string",
+      "file": "a.php",
+      "source": "<?php\n// eval($x)\n$s = \"eval($x)\";\n",
+      "ts": []
+    },
+    {
+      "name": "php-eval-assigned",
+      "file": "a.php",
+      "source": "<?php\n$r = eval(\"return 1;\");\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 6,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "php-method-eval",
+      "file": "a.php",
+      "source": "<?php\n$o->eval($y);\n",
+      "why": "a method named eval is not the language construct",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 5,
+          "end": 10,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "php-static-eval",
+      "file": "a.php",
+      "source": "<?php\nFoo::eval($z);\n",
+      "why": "a static method named eval is not the language construct",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 6,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}

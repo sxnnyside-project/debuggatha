@@ -1,0 +1,9152 @@
+{
+ "name": "hono",
+ "commit": "61f7c59e50244ab4d2dd83c151928cf7ea448510",
+ "findings": [
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/aws-lambda/src/handler.test.ts",
+   "lines": {
+    "start": 549,
+    "end": 549
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/aws-lambda/src/handler.test.ts",
+   "lines": {
+    "start": 583,
+    "end": 583
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/aws-lambda/src/types.ts",
+   "lines": {
+    "start": 11,
+    "end": 11
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/bun/src/websocket.test.ts",
+   "lines": {
+    "start": 155,
+    "end": 155
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/bun/src/websocket.ts",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 48,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/cloudflare-workers/src/websocket.test.ts",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/cloudflare-workers/src/websocket.test.ts",
+   "lines": {
+    "start": 133,
+    "end": 133
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/lambda-edge/src/handler.ts",
+   "lines": {
+    "start": 117,
+    "end": 117
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/netlify/src/handler.ts",
+   "lines": {
+    "start": 6,
+    "end": 6
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/netlify/src/handler.ts",
+   "lines": {
+    "start": 7,
+    "end": 7
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/service-worker/src/types.ts",
+   "lines": {
+    "start": 10,
+    "end": 10
+   },
+   "columns": {
+    "start": 36,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "adapters/service-worker/src/types.ts",
+   "lines": {
+    "start": 3,
+    "end": 3
+   },
+   "columns": {
+    "start": 23,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "benchmarks/http-server/benchmark.ts",
+   "lines": {
+    "start": 268,
+    "end": 268
+   },
+   "columns": {
+    "start": 81,
+    "end": 91
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/page-react.tsx",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 51,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/page.tsx",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 51,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/preact.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 78,
+    "end": 84
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/react-jsx/preact.ts",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 58,
+    "end": 64
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/react-jsx/react.ts",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 58,
+    "end": 64
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "benchmarks/jsx/src/react.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 90,
+    "end": 96
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "runtime-tests/bun/index.test.tsx",
+   "lines": {
+    "start": 99,
+    "end": 99
+   },
+   "columns": {
+    "start": 8,
+    "end": 123
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "runtime-tests/deno-jsx/jsx.test.tsx",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "runtime-tests/deno-jsx/jsx.test.tsx",
+   "lines": {
+    "start": 73,
+    "end": 73
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "runtime-tests/deno/middleware.test.tsx",
+   "lines": {
+    "start": 85,
+    "end": 85
+   },
+   "columns": {
+    "start": 6,
+    "end": 121
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "runtime-tests/fastly/index.test.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "runtime-tests/node/index.test.ts",
+   "lines": {
+    "start": 96,
+    "end": 96
+   },
+   "columns": {
+    "start": 8,
+    "end": 123
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "src/adapter",
+   "lines": null,
+   "columns": null,
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/aws-lambda/handler.test.ts",
+   "lines": {
+    "start": 549,
+    "end": 549
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/aws-lambda/handler.test.ts",
+   "lines": {
+    "start": 583,
+    "end": 583
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/aws-lambda/types.ts",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/bun/websocket.test.ts",
+   "lines": {
+    "start": 154,
+    "end": 154
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/bun/websocket.ts",
+   "lines": {
+    "start": 59,
+    "end": 59
+   },
+   "columns": {
+    "start": 48,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/cloudflare-pages/handler.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/cloudflare-workers/websocket.test.ts",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/cloudflare-workers/websocket.test.ts",
+   "lines": {
+    "start": 134,
+    "end": 134
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/lambda-edge/handler.ts",
+   "lines": {
+    "start": 135,
+    "end": 135
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/netlify/handler.ts",
+   "lines": {
+    "start": 10,
+    "end": 10
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/netlify/handler.ts",
+   "lines": {
+    "start": 9,
+    "end": 9
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/service-worker/types.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 36,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/adapter/service-worker/types.ts",
+   "lines": {
+    "start": 3,
+    "end": 3
+   },
+   "columns": {
+    "start": 23,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/client.test.ts",
+   "lines": {
+    "start": 2084,
+    "end": 2084
+   },
+   "columns": {
+    "start": 61,
+    "end": 67
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 79,
+    "end": 84
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 54,
+    "end": 54
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 58,
+    "end": 58
+   },
+   "columns": {
+    "start": 14,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 62,
+    "end": 62
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 66,
+    "end": 66
+   },
+   "columns": {
+    "start": 23,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/fetch-result-please.ts",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 53,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/types.ts",
+   "lines": {
+    "start": 242,
+    "end": 242
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/types.ts",
+   "lines": {
+    "start": 268,
+    "end": 268
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/types.ts",
+   "lines": {
+    "start": 275,
+    "end": 275
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/types.ts",
+   "lines": {
+    "start": 325,
+    "end": 325
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/client/utils.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 10,
+    "end": 18
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/client/utils.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/client/utils.ts",
+   "lines": {
+    "start": 95,
+    "end": 95
+   },
+   "columns": {
+    "start": 61,
+    "end": 66
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/compose.test.ts",
+   "lines": {
+    "start": 505,
+    "end": 505
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/context.ts",
+   "lines": {
+    "start": 46,
+    "end": 46
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/context.ts",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/context.ts",
+   "lines": {
+    "start": 604,
+    "end": 604
+   },
+   "columns": {
+    "start": 17,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/context.ts",
+   "lines": {
+    "start": 738,
+    "end": 738
+   },
+   "columns": {
+    "start": 63,
+    "end": 69
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/context.ts",
+   "lines": {
+    "start": 779,
+    "end": 779
+   },
+   "columns": {
+    "start": 50,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 112,
+    "end": 112
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 128,
+    "end": 128
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 144,
+    "end": 144
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 160,
+    "end": 160
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 176,
+    "end": 176
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 201,
+    "end": 201
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 217,
+    "end": 217
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 233,
+    "end": 233
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 248,
+    "end": 248
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 64,
+    "end": 64
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 80,
+    "end": 80
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/accepts/accepts.test.ts",
+   "lines": {
+    "start": 96,
+    "end": 96
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/adapter/index.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/adapter/index.ts",
+   "lines": {
+    "start": 52,
+    "end": 52
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 112,
+    "end": 112
+   },
+   "columns": {
+    "start": 36,
+    "end": 51
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 118,
+    "end": 118
+   },
+   "columns": {
+    "start": 36,
+    "end": 49
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 35,
+    "end": 35
+   },
+   "columns": {
+    "start": 18,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 37,
+    "end": 37
+   },
+   "columns": {
+    "start": 18,
+    "end": 31
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 47,
+    "end": 47
+   },
+   "columns": {
+    "start": 14,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 18,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 65,
+    "end": 65
+   },
+   "columns": {
+    "start": 18,
+    "end": 31
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 14,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 85,
+    "end": 85
+   },
+   "columns": {
+    "start": 24,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/cookie/index.ts",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 24,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 121,
+    "end": 121
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 152,
+    "end": 152
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 165,
+    "end": 165
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 183,
+    "end": 183
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 197,
+    "end": 197
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 24,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 213,
+    "end": 213
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 229,
+    "end": 229
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 245,
+    "end": 245
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 289,
+    "end": 289
+   },
+   "columns": {
+    "start": 47,
+    "end": 49
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 314,
+    "end": 314
+   },
+   "columns": {
+    "start": 43,
+    "end": 45
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 26,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 339,
+    "end": 339
+   },
+   "columns": {
+    "start": 21,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 367,
+    "end": 367
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 392,
+    "end": 392
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 418,
+    "end": 418
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 433,
+    "end": 433
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 46,
+    "end": 46
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 465,
+    "end": 465
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 497,
+    "end": 497
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 520,
+    "end": 520
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 540,
+    "end": 540
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 541,
+    "end": 541
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 558,
+    "end": 558
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 574,
+    "end": 574
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 589,
+    "end": 589
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 70,
+    "end": 70
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.case.test.tsx",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.ts",
+   "lines": {
+    "start": 311,
+    "end": 311
+   },
+   "columns": {
+    "start": 60,
+    "end": 66
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/common.ts",
+   "lines": {
+    "start": 319,
+    "end": 319
+   },
+   "columns": {
+    "start": 35,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/css/common.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 10,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/css/common.ts",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 5,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 111,
+    "end": 111
+   },
+   "columns": {
+    "start": 47,
+    "end": 49
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 127,
+    "end": 127
+   },
+   "columns": {
+    "start": 53,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 148,
+    "end": 148
+   },
+   "columns": {
+    "start": 32,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 164,
+    "end": 164
+   },
+   "columns": {
+    "start": 65,
+    "end": 67
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 180,
+    "end": 180
+   },
+   "columns": {
+    "start": 48,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 36,
+    "end": 38
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 221,
+    "end": 221
+   },
+   "columns": {
+    "start": 38,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 316,
+    "end": 316
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 317,
+    "end": 317
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 449,
+    "end": 449
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 473,
+    "end": 473
+   },
+   "columns": {
+    "start": 38,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 491,
+    "end": 491
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 510,
+    "end": 510
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 530,
+    "end": 530
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 557,
+    "end": 557
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 580,
+    "end": 580
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 599,
+    "end": 599
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 609,
+    "end": 609
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 626,
+    "end": 626
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.test.tsx",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.ts",
+   "lines": {
+    "start": 175,
+    "end": 175
+   },
+   "columns": {
+    "start": 26,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.ts",
+   "lines": {
+    "start": 177,
+    "end": 177
+   },
+   "columns": {
+    "start": 44,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.ts",
+   "lines": {
+    "start": 188,
+    "end": 188
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/css/index.ts",
+   "lines": {
+    "start": 206,
+    "end": 206
+   },
+   "columns": {
+    "start": 11,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 110,
+    "end": 110
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 111,
+    "end": 111
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 112,
+    "end": 112
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 113,
+    "end": 113
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 114,
+    "end": 114
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 146,
+    "end": 146
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 147,
+    "end": 147
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 148,
+    "end": 148
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 149,
+    "end": 149
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 151,
+    "end": 151
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 152,
+    "end": 152
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 188,
+    "end": 188
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 189,
+    "end": 189
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 190,
+    "end": 190
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 191,
+    "end": 191
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 192,
+    "end": 192
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 193,
+    "end": 193
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 194,
+    "end": 194
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 195,
+    "end": 195
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 51,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 235,
+    "end": 235
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 236,
+    "end": 236
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 239,
+    "end": 239
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 240,
+    "end": 240
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 241,
+    "end": 241
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 242,
+    "end": 242
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 287,
+    "end": 287
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 288,
+    "end": 288
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 289,
+    "end": 289
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 290,
+    "end": 290
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 291,
+    "end": 291
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 292,
+    "end": 292
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 293,
+    "end": 293
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 294,
+    "end": 294
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 295,
+    "end": 295
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 296,
+    "end": 296
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 353,
+    "end": 353
+   },
+   "columns": {
+    "start": 70,
+    "end": 75
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 357,
+    "end": 357
+   },
+   "columns": {
+    "start": 63,
+    "end": 68
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 372,
+    "end": 372
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 44,
+    "end": 44
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 45,
+    "end": 45
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 61,
+    "end": 61
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 62,
+    "end": 62
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 64,
+    "end": 64
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 84,
+    "end": 84
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 85,
+    "end": 85
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 86,
+    "end": 86
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/factory/index.ts",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/html/index.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 33,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/helper/proxy/index.test.ts",
+   "lines": {
+    "start": 339,
+    "end": 339
+   },
+   "columns": {
+    "start": 29,
+    "end": 66
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/websocket/index.test.ts",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 10,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/helper/websocket/index.test.ts",
+   "lines": {
+    "start": 74,
+    "end": 74
+   },
+   "columns": {
+    "start": 10,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 120,
+    "end": 120
+   },
+   "columns": {
+    "start": 5,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 121,
+    "end": 121
+   },
+   "columns": {
+    "start": 6,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 122,
+    "end": 122
+   },
+   "columns": {
+    "start": 5,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 8,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 124,
+    "end": 124
+   },
+   "columns": {
+    "start": 9,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 7,
+    "end": 9
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 126,
+    "end": 126
+   },
+   "columns": {
+    "start": 7,
+    "end": 9
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 127,
+    "end": 127
+   },
+   "columns": {
+    "start": 5,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 135,
+    "end": 135
+   },
+   "columns": {
+    "start": 8,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 157,
+    "end": 157
+   },
+   "columns": {
+    "start": 21,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 172,
+    "end": 172
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 176,
+    "end": 176
+   },
+   "columns": {
+    "start": 49,
+    "end": 54
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 186,
+    "end": 186
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 245,
+    "end": 245
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 351,
+    "end": 351
+   },
+   "columns": {
+    "start": 51,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/hono-base.ts",
+   "lines": {
+    "start": 373,
+    "end": 373
+   },
+   "columns": {
+    "start": 39,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 2652,
+    "end": 2652
+   },
+   "columns": {
+    "start": 16,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 3745,
+    "end": 3745
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 3801,
+    "end": 3801
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 432,
+    "end": 432
+   },
+   "columns": {
+    "start": 21,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 441,
+    "end": 441
+   },
+   "columns": {
+    "start": 50,
+    "end": 66
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 578,
+    "end": 578
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/hono.test.ts",
+   "lines": {
+    "start": 691,
+    "end": 691
+   },
+   "columns": {
+    "start": 9,
+    "end": 16
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/base.ts",
+   "lines": {
+    "start": 304,
+    "end": 304
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/base.ts",
+   "lines": {
+    "start": 430,
+    "end": 430
+   },
+   "columns": {
+    "start": 70,
+    "end": 76
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/base.ts",
+   "lines": {
+    "start": 500,
+    "end": 500
+   },
+   "columns": {
+    "start": 13,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 369,
+    "end": 369
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 420,
+    "end": 420
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 471,
+    "end": 471
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 540,
+    "end": 540
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 570,
+    "end": 570
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 610,
+    "end": 610
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 642,
+    "end": 642
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 652,
+    "end": 652
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 679,
+    "end": 679
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 714,
+    "end": 714
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 742,
+    "end": 742
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.test.tsx",
+   "lines": {
+    "start": 770,
+    "end": 770
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/components.ts",
+   "lines": {
+    "start": 250,
+    "end": 250
+   },
+   "columns": {
+    "start": 39,
+    "end": 45
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context-isolation.test.ts",
+   "lines": {
+    "start": 330,
+    "end": 330
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context-isolation.test.ts",
+   "lines": {
+    "start": 331,
+    "end": 331
+   },
+   "columns": {
+    "start": 21,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context-isolation.test.ts",
+   "lines": {
+    "start": 352,
+    "end": 352
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context-isolation.test.ts",
+   "lines": {
+    "start": 68,
+    "end": 68
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context-isolation.test.ts",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/context.ts",
+   "lines": {
+    "start": 251,
+    "end": 251
+   },
+   "columns": {
+    "start": 13,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/client.test.tsx",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/client.ts",
+   "lines": {
+    "start": 56,
+    "end": 56
+   },
+   "columns": {
+    "start": 13,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 54,
+    "end": 59
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 15,
+    "end": 15
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 55,
+    "end": 60
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/components.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/context.ts",
+   "lines": {
+    "start": 15,
+    "end": 15
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/context.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 11,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 140,
+    "end": 140
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 202,
+    "end": 202
+   },
+   "columns": {
+    "start": 26,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 204,
+    "end": 204
+   },
+   "columns": {
+    "start": 44,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 215,
+    "end": 215
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 85,
+    "end": 85
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/css.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 50,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/hooks/index.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 17,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-extend-native",
+   "pack": "debuggatha/javascript",
+   "file": "src/jsx/dom/index.test.tsx",
+   "lines": {
+    "start": 2025,
+    "end": 2025
+   },
+   "columns": {
+    "start": 5,
+    "end": 32
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-extend-native",
+   "pack": "debuggatha/javascript",
+   "file": "src/jsx/dom/index.test.tsx",
+   "lines": {
+    "start": 2070,
+    "end": 2070
+   },
+   "columns": {
+    "start": 7,
+    "end": 34
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/index.test.tsx",
+   "lines": {
+    "start": 3678,
+    "end": 3678
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/index.ts",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 34,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.test.tsx",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 47,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 171,
+    "end": 171
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 229,
+    "end": 229
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 230,
+    "end": 230
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 266,
+    "end": 266
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 329,
+    "end": 329
+   },
+   "columns": {
+    "start": 17,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 385,
+    "end": 385
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 401,
+    "end": 401
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/intrinsic-element/components.ts",
+   "lines": {
+    "start": 420,
+    "end": 420
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 228,
+    "end": 228
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 281,
+    "end": 281
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 284,
+    "end": 284
+   },
+   "columns": {
+    "start": 18,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 305,
+    "end": 305
+   },
+   "columns": {
+    "start": 18,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 34,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 329,
+    "end": 329
+   },
+   "columns": {
+    "start": 25,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 361,
+    "end": 361
+   },
+   "columns": {
+    "start": 18,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 521,
+    "end": 521
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 523,
+    "end": 523
+   },
+   "columns": {
+    "start": 62,
+    "end": 68
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 525,
+    "end": 525
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 526,
+    "end": 526
+   },
+   "columns": {
+    "start": 16,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 548,
+    "end": 548
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 716,
+    "end": 716
+   },
+   "columns": {
+    "start": 16,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 737,
+    "end": 737
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 852,
+    "end": 852
+   },
+   "columns": {
+    "start": 66,
+    "end": 72
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/render.ts",
+   "lines": {
+    "start": 879,
+    "end": 879
+   },
+   "columns": {
+    "start": 6,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/dom/utils.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 8,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 122,
+    "end": 122
+   },
+   "columns": {
+    "start": 13,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 189,
+    "end": 189
+   },
+   "columns": {
+    "start": 13,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 228,
+    "end": 228
+   },
+   "columns": {
+    "start": 12,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 403,
+    "end": 403
+   },
+   "columns": {
+    "start": 35,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 408,
+    "end": 408
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 468,
+    "end": 468
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 511,
+    "end": 511
+   },
+   "columns": {
+    "start": 35,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/dom.test.tsx",
+   "lines": {
+    "start": 519,
+    "end": 519
+   },
+   "columns": {
+    "start": 25,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/index.ts",
+   "lines": {
+    "start": 112,
+    "end": 112
+   },
+   "columns": {
+    "start": 13,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/index.ts",
+   "lines": {
+    "start": 428,
+    "end": 428
+   },
+   "columns": {
+    "start": 58,
+    "end": 60
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/index.ts",
+   "lines": {
+    "start": 45,
+    "end": 45
+   },
+   "columns": {
+    "start": 17,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/hooks/index.ts",
+   "lines": {
+    "start": 47,
+    "end": 47
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1197,
+    "end": 1197
+   },
+   "columns": {
+    "start": 64,
+    "end": 70
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1311,
+    "end": 1311
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1333,
+    "end": 1333
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 141,
+    "end": 141
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1438,
+    "end": 1438
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1442,
+    "end": 1442
+   },
+   "columns": {
+    "start": 27,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1559,
+    "end": 1559
+   },
+   "columns": {
+    "start": 22,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1560,
+    "end": 1560
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1603,
+    "end": 1603
+   },
+   "columns": {
+    "start": 60,
+    "end": 65
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1619,
+    "end": 1619
+   },
+   "columns": {
+    "start": 60,
+    "end": 65
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 1748,
+    "end": 1748
+   },
+   "columns": {
+    "start": 29,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 501,
+    "end": 501
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 781,
+    "end": 781
+   },
+   "columns": {
+    "start": 21,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/index.test.tsx",
+   "lines": {
+    "start": 878,
+    "end": 878
+   },
+   "columns": {
+    "start": 18,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/intrinsic-element/components.ts",
+   "lines": {
+    "start": 181,
+    "end": 181
+   },
+   "columns": {
+    "start": 63,
+    "end": 69
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/intrinsic-elements.ts",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 49,
+    "end": 54
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1037,
+    "end": 1037
+   },
+   "columns": {
+    "start": 29,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1044,
+    "end": 1044
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1050,
+    "end": 1050
+   },
+   "columns": {
+    "start": 12,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1118,
+    "end": 1118
+   },
+   "columns": {
+    "start": 34,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1151,
+    "end": 1151
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 1152,
+    "end": 1152
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 121,
+    "end": 121
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 165,
+    "end": 165
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 213,
+    "end": 213
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 250,
+    "end": 250
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 268,
+    "end": 268
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 286,
+    "end": 286
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 304,
+    "end": 304
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 368,
+    "end": 368
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 37,
+    "end": 37
+   },
+   "columns": {
+    "start": 13,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 401,
+    "end": 401
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 442,
+    "end": 442
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 468,
+    "end": 468
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 493,
+    "end": 493
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 527,
+    "end": 527
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 563,
+    "end": 563
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 607,
+    "end": 607
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 654,
+    "end": 654
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 700,
+    "end": 700
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 738,
+    "end": 738
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 77,
+    "end": 77
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 783,
+    "end": 783
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 873,
+    "end": 873
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 913,
+    "end": 913
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 925,
+    "end": 925
+   },
+   "columns": {
+    "start": 38,
+    "end": 44
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.test.tsx",
+   "lines": {
+    "start": 970,
+    "end": 970
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.ts",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 52,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.ts",
+   "lines": {
+    "start": 212,
+    "end": 212
+   },
+   "columns": {
+    "start": 44,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/jsx/streaming.ts",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 55,
+    "end": 60
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 178,
+    "end": 178
+   },
+   "columns": {
+    "start": 36,
+    "end": 48
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 191,
+    "end": 191
+   },
+   "columns": {
+    "start": 36,
+    "end": 48
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 203,
+    "end": 203
+   },
+   "columns": {
+    "start": 34,
+    "end": 47
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 214,
+    "end": 214
+   },
+   "columns": {
+    "start": 30,
+    "end": 43
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 225,
+    "end": 225
+   },
+   "columns": {
+    "start": 36,
+    "end": 48
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.test.ts",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 36,
+    "end": 48
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/basic-auth/index.ts",
+   "lines": {
+    "start": 135,
+    "end": 135
+   },
+   "columns": {
+    "start": 27,
+    "end": 46
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/bearer-auth/index.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 23,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/cache/index.test.ts",
+   "lines": {
+    "start": 47,
+    "end": 47
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/middleware/compress/index.test.ts",
+   "lines": {
+    "start": 121,
+    "end": 121
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/middleware/compress/index.test.ts",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/middleware/compress/index.test.ts",
+   "lines": {
+    "start": 394,
+    "end": 394
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/compress/index.test.ts",
+   "lines": {
+    "start": 532,
+    "end": 532
+   },
+   "columns": {
+    "start": 37,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/etag/index.test.ts",
+   "lines": {
+    "start": 437,
+    "end": 437
+   },
+   "columns": {
+    "start": 46,
+    "end": 48
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/etag/index.test.ts",
+   "lines": {
+    "start": 510,
+    "end": 510
+   },
+   "columns": {
+    "start": 47,
+    "end": 49
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/ip-restriction/index.test.ts",
+   "lines": {
+    "start": 134,
+    "end": 134
+   },
+   "columns": {
+    "start": 34,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jsx-renderer/index.test.tsx",
+   "lines": {
+    "start": 312,
+    "end": 312
+   },
+   "columns": {
+    "start": 49,
+    "end": 51
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/middleware/jsx-renderer/index.test.tsx",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jsx-renderer/index.ts",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 65,
+    "end": 71
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jsx-renderer/index.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jsx-renderer/index.ts",
+   "lines": {
+    "start": 52,
+    "end": 52
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jsx-renderer/index.ts",
+   "lines": {
+    "start": 54,
+    "end": 54
+   },
+   "columns": {
+    "start": 20,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jwk/index.test.ts",
+   "lines": {
+    "start": 233,
+    "end": 233
+   },
+   "columns": {
+    "start": 9,
+    "end": 15
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jwk/index.test.ts",
+   "lines": {
+    "start": 309,
+    "end": 309
+   },
+   "columns": {
+    "start": 26,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jwk/index.test.ts",
+   "lines": {
+    "start": 338,
+    "end": 338
+   },
+   "columns": {
+    "start": 26,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/jwk/jwk.ts",
+   "lines": {
+    "start": 100,
+    "end": 100
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 144,
+    "end": 144
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 204,
+    "end": 204
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 216,
+    "end": 216
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 228,
+    "end": 228
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 241,
+    "end": 241
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 254,
+    "end": 254
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 325,
+    "end": 325
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 383,
+    "end": 383
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 398,
+    "end": 398
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 511,
+    "end": 511
+   },
+   "columns": {
+    "start": 33,
+    "end": 148
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 563,
+    "end": 563
+   },
+   "columns": {
+    "start": 26,
+    "end": 141
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 615,
+    "end": 615
+   },
+   "columns": {
+    "start": 33,
+    "end": 148
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 666,
+    "end": 666
+   },
+   "columns": {
+    "start": 26,
+    "end": 141
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 696,
+    "end": 696
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 742,
+    "end": 742
+   },
+   "columns": {
+    "start": 44,
+    "end": 49
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/middleware/jwt/index.test.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 10,
+    "end": 125
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/jwt/jwt.ts",
+   "lines": {
+    "start": 100,
+    "end": 100
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/language/index.test.ts",
+   "lines": {
+    "start": 452,
+    "end": 452
+   },
+   "columns": {
+    "start": 37,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/logger/index.ts",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 77,
+    "end": 85
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/logger/index.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 35,
+    "end": 44
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/mount/index.test.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 16,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/mount/index.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/mount/index.ts",
+   "lines": {
+    "start": 92,
+    "end": 92
+   },
+   "columns": {
+    "start": 37,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/pretty-json/index.test.ts",
+   "lines": {
+    "start": 214,
+    "end": 214
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/middleware/secure-headers/secure-headers.ts",
+   "lines": {
+    "start": 267,
+    "end": 267
+   },
+   "columns": {
+    "start": 18,
+    "end": 25
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 113,
+    "end": 113
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 139,
+    "end": 139
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 149,
+    "end": 149
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 194,
+    "end": 194
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 203,
+    "end": 203
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 249,
+    "end": 249
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 275,
+    "end": 275
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 290,
+    "end": 290
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 338,
+    "end": 338
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 355,
+    "end": 355
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 364,
+    "end": 364
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 374,
+    "end": 374
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 41,
+    "end": 41
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 69,
+    "end": 69
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/middleware/trailing-slash/index.test.ts",
+   "lines": {
+    "start": 81,
+    "end": 81
+   },
+   "columns": {
+    "start": 54,
+    "end": 56
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/request.test.ts",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 34,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/request.ts",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 26,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/request.ts",
+   "lines": {
+    "start": 124,
+    "end": 124
+   },
+   "columns": {
+    "start": 65,
+    "end": 71
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/request.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/router/linear-router/router.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 37,
+    "end": 50
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/matcher.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 41,
+    "end": 47
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/router/reg-exp-router/node.ts",
+   "lines": {
+    "start": 172,
+    "end": 172
+   },
+   "columns": {
+    "start": 12,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/javascript",
+   "file": "src/router/reg-exp-router/prepared-router.test.ts",
+   "lines": {
+    "start": 40,
+    "end": 40
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 100,
+    "end": 100
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 101,
+    "end": 101
+   },
+   "columns": {
+    "start": 28,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 133,
+    "end": 133
+   },
+   "columns": {
+    "start": 78,
+    "end": 80
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 17,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 29,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/reg-exp-router/router.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 51,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/router/trie-router/node.ts",
+   "lines": {
+    "start": 122,
+    "end": 122
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 2007,
+    "end": 2007
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 2536,
+    "end": 2536
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 2550,
+    "end": 2550
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 2557,
+    "end": 2557
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 2564,
+    "end": 2564
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 3780,
+    "end": 3780
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/types.test.ts",
+   "lines": {
+    "start": 3793,
+    "end": 3793
+   },
+   "columns": {
+    "start": 3,
+    "end": 6
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1047,
+    "end": 1047
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1053,
+    "end": 1053
+   },
+   "columns": {
+    "start": 77,
+    "end": 82
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1064,
+    "end": 1064
+   },
+   "columns": {
+    "start": 47,
+    "end": 52
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 138,
+    "end": 138
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1467,
+    "end": 1467
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1486,
+    "end": 1486
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1510,
+    "end": 1510
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 154,
+    "end": 154
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1542,
+    "end": 1542
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1585,
+    "end": 1585
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1633,
+    "end": 1633
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1686,
+    "end": 1686
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 171,
+    "end": 171
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1744,
+    "end": 1744
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1807,
+    "end": 1807
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 187,
+    "end": 187
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1875,
+    "end": 1875
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1947,
+    "end": 1947
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1965,
+    "end": 1965
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 1984,
+    "end": 1984
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2008,
+    "end": 2008
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2040,
+    "end": 2040
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2083,
+    "end": 2083
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2131,
+    "end": 2131
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 216,
+    "end": 216
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2184,
+    "end": 2184
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2242,
+    "end": 2242
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2305,
+    "end": 2305
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2373,
+    "end": 2373
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2445,
+    "end": 2445
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2463,
+    "end": 2463
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2547,
+    "end": 2547
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2548,
+    "end": 2548
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2666,
+    "end": 2666
+   },
+   "columns": {
+    "start": 47,
+    "end": 52
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2672,
+    "end": 2672
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2688,
+    "end": 2688
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2754,
+    "end": 2754
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 2760,
+    "end": 2760
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 278,
+    "end": 278
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 308,
+    "end": 308
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 353,
+    "end": 353
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 394,
+    "end": 394
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 444,
+    "end": 444
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 490,
+    "end": 490
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 545,
+    "end": 545
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 596,
+    "end": 596
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 656,
+    "end": 656
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 712,
+    "end": 712
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 777,
+    "end": 777
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 80,
+    "end": 80
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 838,
+    "end": 838
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 908,
+    "end": 908
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 94,
+    "end": 94
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/types.ts",
+   "lines": {
+    "start": 975,
+    "end": 975
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/accept.test.ts",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/accept.test.ts",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 31,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/body.test.ts",
+   "lines": {
+    "start": 67,
+    "end": 67
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/color.ts",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/color.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 36,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/crypto.ts",
+   "lines": {
+    "start": 53,
+    "end": 53
+   },
+   "columns": {
+    "start": 45,
+    "end": 53
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/filepath.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 32,
+    "end": 39
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/filepath.ts",
+   "lines": {
+    "start": 52,
+    "end": 52
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/handler.ts",
+   "lines": {
+    "start": 11,
+    "end": 11
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/handler.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 34,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/utils/html.ts",
+   "lines": {
+    "start": 172,
+    "end": 172
+   },
+   "columns": {
+    "start": 33,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 137,
+    "end": 137
+   },
+   "columns": {
+    "start": 8,
+    "end": 161
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 200,
+    "end": 200
+   },
+   "columns": {
+    "start": 8,
+    "end": 136
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 376,
+    "end": 376
+   },
+   "columns": {
+    "start": 8,
+    "end": 113
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 394,
+    "end": 394
+   },
+   "columns": {
+    "start": 8,
+    "end": 140
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 412,
+    "end": 412
+   },
+   "columns": {
+    "start": 8,
+    "end": 129
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 430,
+    "end": 430
+   },
+   "columns": {
+    "start": 8,
+    "end": 144
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 448,
+    "end": 448
+   },
+   "columns": {
+    "start": 8,
+    "end": 132
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 466,
+    "end": 466
+   },
+   "columns": {
+    "start": 8,
+    "end": 143
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 484,
+    "end": 484
+   },
+   "columns": {
+    "start": 8,
+    "end": 176
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 502,
+    "end": 502
+   },
+   "columns": {
+    "start": 8,
+    "end": 176
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 520,
+    "end": 520
+   },
+   "columns": {
+    "start": 8,
+    "end": 176
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 538,
+    "end": 538
+   },
+   "columns": {
+    "start": 8,
+    "end": 201
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 556,
+    "end": 556
+   },
+   "columns": {
+    "start": 8,
+    "end": 201
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 574,
+    "end": 574
+   },
+   "columns": {
+    "start": 8,
+    "end": 201
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 592,
+    "end": 592
+   },
+   "columns": {
+    "start": 8,
+    "end": 173
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 610,
+    "end": 610
+   },
+   "columns": {
+    "start": 8,
+    "end": 173
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 630,
+    "end": 630
+   },
+   "columns": {
+    "start": 8,
+    "end": 173
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 648,
+    "end": 648
+   },
+   "columns": {
+    "start": 8,
+    "end": 199
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 668,
+    "end": 668
+   },
+   "columns": {
+    "start": 8,
+    "end": 199
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 688,
+    "end": 688
+   },
+   "columns": {
+    "start": 8,
+    "end": 199
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 708,
+    "end": 708
+   },
+   "columns": {
+    "start": 8,
+    "end": 173
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 728,
+    "end": 728
+   },
+   "columns": {
+    "start": 8,
+    "end": 123
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 751,
+    "end": 751
+   },
+   "columns": {
+    "start": 8,
+    "end": 123
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 757,
+    "end": 757
+   },
+   "columns": {
+    "start": 42,
+    "end": 52
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 770,
+    "end": 770
+   },
+   "columns": {
+    "start": 8,
+    "end": 166
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 793,
+    "end": 793
+   },
+   "columns": {
+    "start": 8,
+    "end": 166
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 799,
+    "end": 799
+   },
+   "columns": {
+    "start": 42,
+    "end": 52
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 812,
+    "end": 812
+   },
+   "columns": {
+    "start": 8,
+    "end": 144
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 818,
+    "end": 818
+   },
+   "columns": {
+    "start": 42,
+    "end": 52
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/utils/jwt/jwt.test.ts",
+   "lines": {
+    "start": 843,
+    "end": 843
+   },
+   "columns": {
+    "start": 8,
+    "end": 123
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/stream.ts",
+   "lines": {
+    "start": 61,
+    "end": 61
+   },
+   "columns": {
+    "start": 22,
+    "end": 31
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/url.ts",
+   "lines": {
+    "start": 225,
+    "end": 225
+   },
+   "columns": {
+    "start": 19,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/url.ts",
+   "lines": {
+    "start": 234,
+    "end": 234
+   },
+   "columns": {
+    "start": 21,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "src/utils/url.ts",
+   "lines": {
+    "start": 237,
+    "end": 237
+   },
+   "columns": {
+    "start": 21,
+    "end": 28
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "src/validator/validator.test.ts",
+   "lines": {
+    "start": 1094,
+    "end": 1094
+   },
+   "columns": {
+    "start": 1,
+    "end": 4
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/validator/validator.test.ts",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 52,
+    "end": 57
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/validator/validator.test.ts",
+   "lines": {
+    "start": 314,
+    "end": 314
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "src/validator/validator.test.ts",
+   "lines": {
+    "start": 390,
+    "end": 390
+   },
+   "columns": {
+    "start": 55,
+    "end": 57
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/validator/validator.ts",
+   "lines": {
+    "start": 175,
+    "end": 175
+   },
+   "columns": {
+    "start": 59,
+    "end": 64
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/validator/validator.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 62,
+    "end": 67
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "vite.config.ts",
+   "lines": {
+    "start": 58,
+    "end": 58
+   },
+   "columns": {
+    "start": 38,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  }
+ ]
+}

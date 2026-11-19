@@ -1,0 +1,1190 @@
+{
+ "name": "gameswap-recorder",
+ "commit": "2f33dbd5441a08dab4f2b6f5ab94f4e30a6679aa",
+ "findings": [
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 135,
+    "end": 135
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 136,
+    "end": 136
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 141,
+    "end": 141
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 154,
+    "end": 154
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 162,
+    "end": 162
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 165,
+    "end": 165
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 166,
+    "end": 166
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 167,
+    "end": 167
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 171,
+    "end": 171
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 172,
+    "end": 172
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 173,
+    "end": 173
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 175,
+    "end": 175
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 176,
+    "end": 176
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 177,
+    "end": 177
+   },
+   "columns": {
+    "start": 16,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 184,
+    "end": 184
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 193,
+    "end": 193
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 194,
+    "end": 194
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 230,
+    "end": 230
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 240,
+    "end": 240
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 252,
+    "end": 252
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 256,
+    "end": 256
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 261,
+    "end": 261
+   },
+   "columns": {
+    "start": 19,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 266,
+    "end": 266
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 272,
+    "end": 272
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 280,
+    "end": 280
+   },
+   "columns": {
+    "start": 13,
+    "end": 18
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 308,
+    "end": 308
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 313,
+    "end": 313
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 322,
+    "end": 322
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 323,
+    "end": 323
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 324,
+    "end": 324
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 325,
+    "end": 325
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 332,
+    "end": 332
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 332,
+    "end": 332
+   },
+   "columns": {
+    "start": 24,
+    "end": 36
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 337,
+    "end": 337
+   },
+   "columns": {
+    "start": 19,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 381,
+    "end": 381
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 382,
+    "end": 382
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 384,
+    "end": 384
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 391,
+    "end": 391
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 406,
+    "end": 406
+   },
+   "columns": {
+    "start": 10,
+    "end": 15
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 443,
+    "end": 443
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 444,
+    "end": 444
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 451,
+    "end": 451
+   },
+   "columns": {
+    "start": 12,
+    "end": 17
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 452,
+    "end": 452
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 491,
+    "end": 491
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 501,
+    "end": 501
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 509,
+    "end": 509
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 518,
+    "end": 518
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 521,
+    "end": 521
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 530,
+    "end": 530
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 539,
+    "end": 539
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 549,
+    "end": 549
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 553,
+    "end": 553
+   },
+   "columns": {
+    "start": 7,
+    "end": 12
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 564,
+    "end": 564
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 571,
+    "end": 571
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 576,
+    "end": 576
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 577,
+    "end": 577
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 578,
+    "end": 578
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 589,
+    "end": 589
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 590,
+    "end": 590
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 591,
+    "end": 591
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 592,
+    "end": 592
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 601,
+    "end": 601
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 602,
+    "end": 602
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 609,
+    "end": 609
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 610,
+    "end": 610
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 611,
+    "end": 611
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 612,
+    "end": 612
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 621,
+    "end": 621
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 622,
+    "end": 622
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 629,
+    "end": 629
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "GameSwap_Recorder.js",
+   "lines": {
+    "start": 630,
+    "end": 630
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}

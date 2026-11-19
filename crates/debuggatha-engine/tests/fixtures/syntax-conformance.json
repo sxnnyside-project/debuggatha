@@ -1,0 +1,133 @@
+{
+  "cases": [
+    {
+      "name": "plain-code",
+      "file": "a.ts",
+      "source": "const a = 1;\nexport default a;\n",
+      "expect": "same",
+      "tsMasked": "const a = 1;\nexport default a;\n",
+      "tsComments": 0,
+      "tsStrings": 0
+    },
+    {
+      "name": "line-comment",
+      "file": "a.ts",
+      "source": "const a = 1; // process.env.X\n",
+      "expect": "same",
+      "tsMasked": "const a = 1;                 \n",
+      "tsComments": 1,
+      "tsStrings": 0
+    },
+    {
+      "name": "block-comment-multiline",
+      "file": "a.ts",
+      "source": "/* process.env.X\n  still */ const a = 1;\n",
+      "expect": "same",
+      "tsMasked": "                \n           const a = 1;\n",
+      "tsComments": 2,
+      "tsStrings": 0
+    },
+    {
+      "name": "double-quoted",
+      "file": "a.ts",
+      "source": "const s = \"process.env.X\";\n",
+      "expect": "same",
+      "tsMasked": "const s = \"             \";\n",
+      "tsComments": 0,
+      "tsStrings": 1
+    },
+    {
+      "name": "single-quoted-escape",
+      "file": "a.ts",
+      "source": "const s = 'it\\'s process.env.X';\n",
+      "expect": "same",
+      "tsMasked": "const s = '                   ';\n",
+      "tsComments": 0,
+      "tsStrings": 1
+    },
+    {
+      "name": "template-no-expr",
+      "file": "a.ts",
+      "source": "const s = `process.env.X`;\n",
+      "expect": "same",
+      "tsMasked": "const s = `             `;\n",
+      "tsComments": 0,
+      "tsStrings": 1
+    },
+    {
+      "name": "template-with-expr",
+      "file": "a.ts",
+      "source": "const s = `a ${process.env.X} b`;\n",
+      "expect": "differs",
+      "why": "the expression inside ${} is code; the lexer hides the whole template",
+      "tsMasked": "const s = `                    `;\n",
+      "tsComments": 0,
+      "tsStrings": 1
+    },
+    {
+      "name": "regex-with-quote",
+      "file": "a.ts",
+      "source": "const r = /['\"]/g; const k = process.env.K;\n",
+      "expect": "same",
+      "tsMasked": "const r = /    /g; const k = process.env.K;\n",
+      "tsComments": 0,
+      "tsStrings": 0
+    },
+    {
+      "name": "jsx-text-apostrophe",
+      "file": "a.tsx",
+      "source": "export const A = () => <p>don't process.env.X</p>;\nconst k = process.env.K;\n",
+      "expect": "differs",
+      "why": "JSX text is not a string, but an apostrophe in it opens one for the lexer",
+      "tsMasked": "export const A = () => <p>don'                    \nconst k = process.env.K;\n",
+      "tsComments": 0,
+      "tsStrings": 1
+    },
+    {
+      "name": "division-not-regex",
+      "file": "a.ts",
+      "source": "const q = a / b; const k = process.env.K; const z = c / d;\n",
+      "expect": "same",
+      "tsMasked": "const q = a / b; const k = process.env.K; const z = c / d;\n",
+      "tsComments": 0,
+      "tsStrings": 0
+    },
+    {
+      "name": "unicode-before-string",
+      "file": "a.ts",
+      "source": "const é = \"日本語 process.env.X\"; // 🚀 x\nconst k = 1;\n",
+      "expect": "same",
+      "tsMasked": "const é = \"                 \";        \nconst k = 1;\n",
+      "tsComments": 1,
+      "tsStrings": 1
+    },
+    {
+      "name": "nested-template",
+      "file": "a.ts",
+      "source": "const s = `a ${`b ${process.env.X}`} c`;\n",
+      "expect": "differs",
+      "why": "nested template expressions are code",
+      "tsMasked": "const s = `    `b ${process.env.X}`   `;\n",
+      "tsComments": 0,
+      "tsStrings": 2
+    },
+    {
+      "name": "crlf",
+      "file": "a.ts",
+      "source": "const a = \"x\";\r\n// c\r\nconst b = 2;\r\n",
+      "expect": "same",
+      "tsMasked": "const a = \" \";\r\n    \r\nconst b = 2;\r\n",
+      "tsComments": 1,
+      "tsStrings": 1
+    },
+    {
+      "name": "directive-and-import",
+      "file": "a.ts",
+      "source": "\"use strict\";\nimport x from \"pkg/process.env\";\n",
+      "expect": "same",
+      "tsMasked": "\"          \";\nimport x from \"               \";\n",
+      "tsComments": 0,
+      "tsStrings": 2
+    }
+  ]
+}

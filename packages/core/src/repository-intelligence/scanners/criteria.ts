@@ -1,7 +1,7 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import type { ScanResult } from "../internal/scan-result.js";
-import type { CriteriaProfile, CriteriaRule } from "../types.js";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { ScanResult } from '../internal/scan-result.js';
+import type { CriteriaProfile, CriteriaRule } from '../types.js';
 
 /**
  * Criteria Resolution (not "Criteria Loading" — see CLAUDE.md vocabulary).
@@ -31,15 +31,15 @@ function biomeRules(json: Record<string, unknown>, file: string): CriteriaRule[]
   const linterRules = (linter.rules ?? {}) as Record<string, unknown>;
 
   for (const [category, categoryRules] of Object.entries(linterRules)) {
-    if (category === "recommended") {
+    if (category === 'recommended') {
       out.push({
-        id: "biome:linter.recommended",
+        id: 'biome:linter.recommended',
         description: `Biome recommended lint rules: ${categoryRules}`,
         source: { file, detail: `linter.rules.recommended = ${categoryRules}` },
       });
       continue;
     }
-    if (categoryRules && typeof categoryRules === "object") {
+    if (categoryRules && typeof categoryRules === 'object') {
       for (const ruleName of Object.keys(categoryRules as Record<string, unknown>)) {
         out.push({
           id: `biome:${category}.${ruleName}`,
@@ -55,7 +55,7 @@ function biomeRules(json: Record<string, unknown>, file: string): CriteriaRule[]
 
   const formatter = (json.formatter ?? {}) as Record<string, unknown>;
   for (const [key, value] of Object.entries(formatter)) {
-    if (key === "enabled") continue;
+    if (key === 'enabled') continue;
     out.push({
       id: `biome:formatter.${key}`,
       description: `Biome formatter setting "${key}" = ${JSON.stringify(value)}`,
@@ -76,11 +76,11 @@ function prettierRules(json: Record<string, unknown>, file: string): CriteriaRul
 
 function parseEditorConfig(content: string, file: string): CriteriaRule[] {
   const rules: CriteriaRule[] = [];
-  let currentSection = "*";
+  let currentSection = '*';
 
   for (const rawLine of content.split(/\r?\n/)) {
     const line = rawLine.trim();
-    if (!line || line.startsWith("#") || line.startsWith(";")) continue;
+    if (!line || line.startsWith('#') || line.startsWith(';')) continue;
 
     const sectionMatch = line.match(/^\[(.+)\]$/);
     if (sectionMatch?.[1]) {
@@ -108,7 +108,7 @@ function parseFlatToml(content: string, file: string, idPrefix: string): Criteri
 
   for (const rawLine of content.split(/\r?\n/)) {
     const line = rawLine.trim();
-    if (!line || line.startsWith("#") || line.startsWith("[")) continue;
+    if (!line || line.startsWith('#') || line.startsWith('[')) continue;
 
     const match = line.match(/^([\w.-]+)\s*=\s*(.+)$/);
     if (match?.[1] && match[2] !== undefined) {
@@ -147,18 +147,18 @@ function extractHeadingRules(content: string, file: string): CriteriaRule[] {
 }
 
 const RULE_SHAPED_DOCS = [
-  "ARCHITECTURE.md",
-  "CONTRIBUTING.md",
-  "CLAUDE.md",
-  "UX_CRITERIA.md",
-  "UI_CRITERIA.md",
-  "DX_CRITERIA.md",
+  'ARCHITECTURE.md',
+  'CONTRIBUTING.md',
+  'CLAUDE.md',
+  'UX_CRITERIA.md',
+  'UI_CRITERIA.md',
+  'DX_CRITERIA.md',
 ];
 
 function tryParseJson(content: string): Record<string, unknown> | undefined {
   try {
     const parsed = JSON.parse(content);
-    return parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : undefined;
+    return parsed && typeof parsed === 'object' ? (parsed as Record<string, unknown>) : undefined;
   } catch {
     return undefined;
   }
@@ -176,10 +176,10 @@ export function scanCriteria(
   const readFile = (file: string): string => {
     const path = join(rootDir, file);
     filesRead.push(path);
-    return readFileSync(path, "utf8");
+    return readFileSync(path, 'utf8');
   };
 
-  const eslintFile = [".eslintrc.json", ".eslintrc"].find((file) => entries.has(file));
+  const eslintFile = ['.eslintrc.json', '.eslintrc'].find((file) => entries.has(file));
   if (eslintFile) {
     const json = tryParseJson(readFile(eslintFile));
     if (json) {
@@ -191,18 +191,18 @@ export function scanCriteria(
     }
   }
 
-  if (entries.has("biome.json")) {
-    const json = tryParseJson(readFile("biome.json"));
+  if (entries.has('biome.json')) {
+    const json = tryParseJson(readFile('biome.json'));
     if (json) {
-      const extracted = biomeRules(json, "biome.json");
+      const extracted = biomeRules(json, 'biome.json');
       if (extracted.length > 0) {
         rules.push(...extracted);
-        sources.add("biome.json");
+        sources.add('biome.json');
       }
     }
   }
 
-  const prettierFile = [".prettierrc", ".prettierrc.json"].find((file) => entries.has(file));
+  const prettierFile = ['.prettierrc', '.prettierrc.json'].find((file) => entries.has(file));
   if (prettierFile) {
     const json = tryParseJson(readFile(prettierFile));
     if (json) {
@@ -214,31 +214,31 @@ export function scanCriteria(
     }
   }
 
-  if (entries.has(".editorconfig")) {
-    const extracted = parseEditorConfig(readFile(".editorconfig"), ".editorconfig");
+  if (entries.has('.editorconfig')) {
+    const extracted = parseEditorConfig(readFile('.editorconfig'), '.editorconfig');
     if (extracted.length > 0) {
       rules.push(...extracted);
-      sources.add(".editorconfig");
+      sources.add('.editorconfig');
     }
   }
 
-  if (entries.has("rustfmt.toml")) {
-    const extracted = parseFlatToml(readFile("rustfmt.toml"), "rustfmt.toml", "rustfmt");
+  if (entries.has('rustfmt.toml')) {
+    const extracted = parseFlatToml(readFile('rustfmt.toml'), 'rustfmt.toml', 'rustfmt');
     if (extracted.length > 0) {
       rules.push(...extracted);
-      sources.add("rustfmt.toml");
+      sources.add('rustfmt.toml');
     }
   }
 
-  if (entries.has("detekt.yml")) {
-    filesRead.push(join(rootDir, "detekt.yml"));
+  if (entries.has('detekt.yml')) {
+    filesRead.push(join(rootDir, 'detekt.yml'));
     rules.push({
-      id: "detekt:present",
+      id: 'detekt:present',
       description:
-        "detekt configuration present (contents not parsed — see repository-intelligence risks)",
-      source: { file: "detekt.yml", detail: "detekt.yml present" },
+        'detekt configuration present (contents not parsed — see repository-intelligence risks)',
+      source: { file: 'detekt.yml', detail: 'detekt.yml present' },
     });
-    sources.add("detekt.yml");
+    sources.add('detekt.yml');
   }
 
   for (const file of RULE_SHAPED_DOCS) {

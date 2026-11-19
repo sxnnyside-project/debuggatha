@@ -1,13 +1,14 @@
-import { type AnalysisCache, buildAnalysisFingerprint, fingerprintChanged } from "./cache.js";
-import { detectCycles } from "./stages/cycles.js";
-import { detectDeadCode } from "./stages/dead-code.js";
-import { buildDependencyGraph } from "./stages/dependency-graph.js";
-import { buildLayerModel } from "./stages/layer-model.js";
-import { detectLayerViolations } from "./stages/layer-violations.js";
-import { inferModuleBoundaries } from "./stages/module-boundaries.js";
-import { detectOwnership } from "./stages/ownership.js";
-import { buildPublicApiSurface } from "./stages/public-api.js";
-import type { AnalysisResult } from "./types.js";
+import { type AnalysisCache, buildAnalysisFingerprint, fingerprintChanged } from './cache.js';
+import { detectCycles } from './stages/cycles.js';
+import { detectDeadCode } from './stages/dead-code.js';
+import { buildDependencyGraph } from './stages/dependency-graph.js';
+import { detectEnvDrift } from './stages/env-sync.js';
+import { buildLayerModel } from './stages/layer-model.js';
+import { detectLayerViolations } from './stages/layer-violations.js';
+import { inferModuleBoundaries } from './stages/module-boundaries.js';
+import { detectOwnership } from './stages/ownership.js';
+import { buildPublicApiSurface } from './stages/public-api.js';
+import type { AnalysisResult } from './types.js';
 
 export interface RunAnalysisOptions {
   cache?: AnalysisCache;
@@ -18,7 +19,7 @@ export interface RunAnalysisOptions {
  * previous stage's output rather than rebuilding it —
  *
  *   Module Boundaries → Dependency Graph → Layer Model → Layer Violations
- *   → Cycles → Public API Surface → Dead Code → Ownership
+ *   → Cycles → Public API Surface → Dead Code → Ownership → Env Drift
  *
  * exactly the order in the epic's diagram (Change Impact is a separate,
  * on-demand entry point — `estimateChangeImpact` — since it needs a set
@@ -45,6 +46,7 @@ export function runAnalysis(rootDir: string, options: RunAnalysisOptions = {}): 
   const publicApi = moduleBoundaries.map((boundary) => buildPublicApiSurface(rootDir, boundary));
   const deadCode = detectDeadCode(rootDir, moduleBoundaries, publicApi);
   const ownership = detectOwnership(rootDir, moduleBoundaries);
+  const envDrift = detectEnvDrift(rootDir, moduleBoundaries);
 
   const result: AnalysisResult = {
     rootDir,
@@ -57,6 +59,7 @@ export function runAnalysis(rootDir: string, options: RunAnalysisOptions = {}): 
     publicApi,
     deadCode,
     ownership,
+    envDrift,
   };
 
   if (cache) {

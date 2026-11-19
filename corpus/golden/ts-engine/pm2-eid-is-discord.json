@@ -1,0 +1,333 @@
+{
+ "name": "pm2-eid-is-discord",
+ "commit": "8903e7744671a1874fb2c32a17086ee21738f7e4",
+ "findings": [
+  {
+   "rule": null,
+   "pack": null,
+   "file": "src/infrastructure/config/env.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "src/infrastructure/config/env.ts",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": null,
+   "pack": null,
+   "file": "src/infrastructure/config/env.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": null,
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/notifications/webhook-dispatcher.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/notifications/webhook-dispatcher.ts",
+   "lines": {
+    "start": 55,
+    "end": 55
+   },
+   "columns": {
+    "start": 54,
+    "end": 59
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-bus-listener.ts",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-bus-listener.ts",
+   "lines": {
+    "start": 45,
+    "end": 45
+   },
+   "columns": {
+    "start": 38,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-bus-listener.ts",
+   "lines": {
+    "start": 70,
+    "end": 70
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-bus-listener.ts",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-bus-listener.ts",
+   "lines": {
+    "start": 93,
+    "end": 93
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/infrastructure/pm2/pm2-client.ts",
+   "lines": {
+    "start": 214,
+    "end": 214
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 101,
+    "end": 101
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 145,
+    "end": 145
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 165,
+    "end": 165
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 186,
+    "end": 186
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 207,
+    "end": 207
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 224,
+    "end": 224
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/presentation/routes/process.routes.ts",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}

@@ -1,9 +1,9 @@
-import type { ReviewPolicy } from "@debuggatha/core";
-import { createFinding, type Evidence, type Finding } from "@debuggatha/core";
-import { type DetectorInput, detectorFor } from "./detectors.js";
-import { guidanceFor } from "./guidance.js";
-import { lex } from "./lex.js";
-import { findDirective, type InlineSuppression, parseDirectives } from "./suppress.js";
+import type { ReviewPolicy } from '@debuggatha/core';
+import { createFinding, type Evidence, type Finding } from '@debuggatha/core';
+import { type DetectorInput, detectorFor } from './detectors.js';
+import { guidanceFor } from './guidance.js';
+import { lex } from './lex.js';
+import { findDirective, type InlineSuppression, parseDirectives } from './suppress.js';
 
 /** One file (or diff hunk) handed to the engine, already read/parsed by the calling Skill. */
 export interface SourceUnit {
@@ -67,16 +67,16 @@ export function runReviewSkillsEngine(
 
         const evidence: Evidence[] = [
           {
-            kind: "code",
+            kind: 'code',
             file: unit.file,
             lines: hit.lines,
             excerpt: hit.excerpt,
           },
         ];
-        if (rule.origin.kind === "pack") {
-          evidence.push({ kind: "review-pack-rule", packId: rule.origin.packId, ruleId: rule.id });
+        if (rule.origin.kind === 'pack') {
+          evidence.push({ kind: 'review-pack-rule', packId: rule.origin.packId, ruleId: rule.id });
         } else {
-          evidence.push({ kind: "criteria", ruleId: rule.id, source: unit.file });
+          evidence.push({ kind: 'criteria', ruleId: rule.id, source: unit.file });
         }
 
         const statement = rule.statement.split(/[.\n]/)[0]?.trim() || rule.statement;
@@ -84,19 +84,19 @@ export function runReviewSkillsEngine(
           createFinding({
             title: statement,
             explanation: guidance?.why ?? `Rule "${rule.id}": ${rule.statement}`,
-            severity: hit.severity ?? rule.defaultSeverity ?? "medium",
+            severity: hit.severity ?? rule.defaultSeverity ?? 'medium',
             confidence: hit.confidence,
-            category: rule.category ?? "maintainability",
+            category: rule.category ?? 'maintainability',
             locations: [{ file: unit.file, lines: hit.lines, columns: hit.columns }],
             evidence,
             appliedPolicy: { id: policy.id },
-            ...(rule.origin.kind === "pack"
+            ...(rule.origin.kind === 'pack'
               ? { originatingPack: { id: rule.origin.packId, version: rule.origin.packVersion } }
               : {}),
             recommendations: [
               {
                 id: `${rule.id}-${unit.file}-${hit.lines?.start ?? 0}`,
-                action: guidance?.action ?? "refactor",
+                action: guidance?.action ?? 'refactor',
                 summary: guidance?.fix ?? `Address "${rule.id}": ${rule.statement}`,
                 rationale: guidance?.why ?? rule.statement,
                 targetFile: unit.file,

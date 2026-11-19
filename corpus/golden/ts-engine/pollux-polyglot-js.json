@@ -1,0 +1,246 @@
+{
+ "name": "pollux-polyglot-js",
+ "commit": "bf39582c6b636ed7f487eee25873362b34e1b15c",
+ "findings": [
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/bun.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 23,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/bun.ts",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/bun.ts",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 14,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/bun.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/bun.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/deno.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 14,
+    "end": 19
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/deno.ts",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 19,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/index.ts",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/index.ts",
+   "lines": {
+    "start": 6,
+    "end": 6
+   },
+   "columns": {
+    "start": 19,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/node.ts",
+   "lines": {
+    "start": 11,
+    "end": 11
+   },
+   "columns": {
+    "start": 23,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/node.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 24,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/node.ts",
+   "lines": {
+    "start": 15,
+    "end": 15
+   },
+   "columns": {
+    "start": 19,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/node.ts",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/ffi/node.ts",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/deno.test.ts",
+   "lines": {
+    "start": 2,
+    "end": 2
+   },
+   "columns": {
+    "start": 19,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}

@@ -1,10 +1,10 @@
-import { randomId } from "../internal/ids.js";
-import type { Category } from "./category.js";
-import type { Evidence } from "./evidence.js";
-import type { FindingLocation } from "./location.js";
-import type { Recommendation } from "./recommendation.js";
-import type { ReviewPackReference, ReviewPolicyReference } from "./reference.js";
-import type { Confidence, Severity } from "./severity.js";
+import { randomId } from '../internal/ids.js';
+import type { Category } from './category.js';
+import type { Evidence } from './evidence.js';
+import type { FindingLocation } from './location.js';
+import type { Recommendation } from './recommendation.js';
+import type { ReviewPackReference, ReviewPolicyReference } from './reference.js';
+import type { Confidence, Severity } from './severity.js';
 
 /** A finding is a first-class domain object, never a bare string. */
 export interface Finding {

@@ -1,4 +1,4 @@
-import type { Severity } from "@debuggatha/core";
+import type { Severity } from '@debuggatha/core';
 
 /**
  * What running an analyzer can do to the machine, and so whether it may run
@@ -10,7 +10,7 @@ import type { Severity } from "@debuggatha/core";
  * Only `safe` analyzers run by default. The others need to be enabled by name,
  * by the person running Debuggatha: never by a tool argument or repository file.
  */
-export type AnalyzerTrust = "safe" | "runs-project-code" | "network";
+export type AnalyzerTrust = 'safe' | 'runs-project-code' | 'network';
 
 /** One finding in a common shape, whatever the tool's own format was. */
 export interface AnalyzerFinding {
@@ -81,7 +81,7 @@ export interface RepoFacts {
   has(pattern: RegExp): boolean;
 }
 
-export type AnalyzerStatus = "ran" | "skipped" | "failed";
+export type AnalyzerStatus = 'ran' | 'skipped' | 'failed';
 
 /** What happened to one analyzer in one review, reported whether or not it found anything. */
 export interface AnalyzerRun {
@@ -99,7 +99,7 @@ export interface AnalyzerRun {
 
 export interface AnalyzerOptions {
   /** `off` runs none. `auto` (the default when options are given) runs the safe ones that are installed and apply. */
-  mode?: "auto" | "off";
+  mode?: 'auto' | 'off';
   /** Analyzers to run even though they load project code or use the network: the person's explicit choice. */
   enable?: readonly string[];
   /** Analyzers to leave out, by id (a repository's own choice; it can only narrow what runs). */

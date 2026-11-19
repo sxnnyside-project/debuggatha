@@ -1,7 +1,7 @@
 // An in-memory stand-in for the slice of the `vscode` API the extension uses.
 // Unit tests alias `vscode` to this module (see vitest.config.ts); behavior that
 // depends on the real Extension Host is covered by the integration suite instead.
-import { readFileSync } from "node:fs";
+import { readFileSync } from 'node:fs';
 
 export class EventEmitter<T> {
   private handlers = new Set<(event: T) => void>();
@@ -23,11 +23,11 @@ export class Uri {
   ) {}
 
   static file(path: string): Uri {
-    return new Uri("file", path);
+    return new Uri('file', path);
   }
 
   static parse(value: string): Uri {
-    const separator = value.indexOf(":");
+    const separator = value.indexOf(':');
     return new Uri(value.slice(0, separator), value.slice(separator + 1));
   }
 
@@ -113,7 +113,7 @@ export class Hover {
   constructor(readonly contents: MarkdownString | MarkdownString[]) {}
 }
 
-export const CodeActionKind = { QuickFix: "quickfix" };
+export const CodeActionKind = { QuickFix: 'quickfix' };
 
 export class WorkspaceEdit {
   readonly replacements: { uri: Uri; range: Range; text: string }[] = [];
@@ -230,13 +230,13 @@ export function openWorkspace(root: string): void {
 
 /** A text document backed by a real file, with the two methods the extension reads. */
 export function documentFor(path: string) {
-  const lines = readFileSync(path, "utf8").split("\n");
+  const lines = readFileSync(path, 'utf8').split('\n');
   return {
     uri: Uri.file(path),
     get lineCount() {
       return lines.length;
     },
-    lineAt: (line: number) => ({ text: lines[line] ?? "" }),
+    lineAt: (line: number) => ({ text: lines[line] ?? '' }),
   };
 }
 
@@ -267,8 +267,8 @@ export const window = {
   },
   createStatusBarItem() {
     const item: StatusItem = {
-      text: "",
-      tooltip: "",
+      text: '',
+      tooltip: '',
       command: undefined,
       shown: false,
       show() {
@@ -319,7 +319,7 @@ export const workspace = {
     return { dispose() {} };
   },
   async openTextDocument(uri: Uri) {
-    return uri.scheme === "file" ? documentFor(uri.fsPath) : { uri };
+    return uri.scheme === 'file' ? documentFor(uri.fsPath) : { uri };
   },
   async applyEdit(edit: WorkspaceEdit) {
     mock.applied.push(edit);

@@ -1,7 +1,7 @@
-import { randomId } from "../internal/ids.js";
+import { randomId } from '../internal/ids.js';
 
 /** Depth is defined here, not imported from `@debuggatha/shared` — see the package README's "Technical decisions". */
-export const REVIEW_DEPTHS = ["quick", "full", "architectural"] as const;
+export const REVIEW_DEPTHS = ['quick', 'full', 'architectural'] as const;
 export type ReviewDepth = (typeof REVIEW_DEPTHS)[number];
 
 /**
@@ -11,9 +11,9 @@ export type ReviewDepth = (typeof REVIEW_DEPTHS)[number];
  * is.
  */
 export type ReviewScope =
-  | { kind: "diff"; base: string | undefined }
-  | { kind: "files"; paths: string[] }
-  | { kind: "workspace" };
+  | { kind: 'diff'; base: string | undefined }
+  | { kind: 'files'; paths: string[] }
+  | { kind: 'workspace' };
 
 export interface ReviewRequest {
   id: string;
@@ -34,8 +34,8 @@ export interface CreateReviewRequestInput {
 }
 
 export function createReviewRequest(input: CreateReviewRequestInput): ReviewRequest {
-  if (input.scope.kind === "files" && input.scope.paths.length === 0) {
-    throw new Error("A file review request must name at least one file.");
+  if (input.scope.kind === 'files' && input.scope.paths.length === 0) {
+    throw new Error('A file review request must name at least one file.');
   }
 
   return {

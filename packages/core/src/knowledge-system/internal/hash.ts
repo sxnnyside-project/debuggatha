@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash } from 'node:crypto';
 
 /**
  * Bumped whenever `Rule`/`ReviewPack`/`ReviewPolicy`'s shape changes in a
@@ -6,7 +6,7 @@ import { createHash } from "node:crypto";
  * against silently reusing an old `ReviewPolicy.id` under a changed
  * resolution algorithm (ADR-0005).
  */
-export const KNOWLEDGE_SCHEMA_VERSION = "1";
+export const KNOWLEDGE_SCHEMA_VERSION = '1';
 
 /**
  * Deterministic JSON serialization: object keys sorted recursively so two
@@ -22,7 +22,7 @@ function sortForCanonicalForm(value: unknown): unknown {
   if (Array.isArray(value)) {
     return value.map(sortForCanonicalForm);
   }
-  if (value !== null && typeof value === "object") {
+  if (value !== null && typeof value === 'object') {
     const source = value as Record<string, unknown>;
     const sorted: Record<string, unknown> = {};
     for (const key of Object.keys(source).sort()) {
@@ -34,5 +34,5 @@ function sortForCanonicalForm(value: unknown): unknown {
 }
 
 export function sha256Hex(input: string): string {
-  return createHash("sha256").update(input).digest("hex");
+  return createHash('sha256').update(input).digest('hex');
 }

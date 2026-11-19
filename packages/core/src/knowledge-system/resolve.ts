@@ -1,16 +1,16 @@
-import type { Capability, RepositoryContext } from "../repository-intelligence/index.js";
+import type { Capability, RepositoryContext } from '../repository-intelligence/index.js';
 import type {
   Category,
   ReviewPackReference,
   ReviewRequest,
   Severity,
-} from "../review-engine/index.js";
-import { deepFreeze } from "./internal/deep-freeze.js";
-import { canonicalStringify, KNOWLEDGE_SCHEMA_VERSION, sha256Hex } from "./internal/hash.js";
-import type { CapabilityRegistry } from "./registry.js";
-import type { PackDependency } from "./types/pack.js";
-import type { ConflictRecord, PolicyRule, PolicyRuleOrigin, ReviewPolicy } from "./types/policy.js";
-import type { RuleScope } from "./types/rule.js";
+} from '../review-engine/index.js';
+import { deepFreeze } from './internal/deep-freeze.js';
+import { canonicalStringify, KNOWLEDGE_SCHEMA_VERSION, sha256Hex } from './internal/hash.js';
+import type { CapabilityRegistry } from './registry.js';
+import type { PackDependency } from './types/pack.js';
+import type { ConflictRecord, PolicyRule, PolicyRuleOrigin, ReviewPolicy } from './types/policy.js';
+import type { RuleScope } from './types/rule.js';
 
 /**
  * Pure: `(RepositoryContext, ReviewRequest, CapabilityRegistry) →
@@ -30,8 +30,8 @@ export function resolvePolicy(
   if (missing.length > 0) {
     throw new Error(
       `Cannot resolve review policy: ${missing.length} unresolved dependenc${
-        missing.length === 1 ? "y" : "ies"
-      }: ${missing.map(describeDependency).join(", ")}`,
+        missing.length === 1 ? 'y' : 'ies'
+      }: ${missing.map(describeDependency).join(', ')}`,
     );
   }
 
@@ -49,7 +49,7 @@ export function resolvePolicy(
         statement: rule.statement,
         category: rule.category,
         defaultSeverity: rule.defaultSeverity,
-        origin: { kind: "pack", packId: pack.id, packVersion: pack.version },
+        origin: { kind: 'pack', packId: pack.id, packVersion: pack.version },
         contradicts: rule.contradicts ?? [],
         packRequestIndex: packRequestIndex(pack.id),
       });
@@ -61,7 +61,7 @@ export function resolvePolicy(
     statement: criteriaRule.description,
     category: undefined,
     defaultSeverity: undefined,
-    origin: { kind: "criteria" },
+    origin: { kind: 'criteria' },
     contradicts: [],
     packRequestIndex: Number.POSITIVE_INFINITY,
   }));
@@ -82,7 +82,7 @@ export function resolvePolicy(
 
   const contributingPackIds = new Set<string>();
   for (const rule of rules) {
-    if (rule.origin.kind === "pack") contributingPackIds.add(rule.origin.packId);
+    if (rule.origin.kind === 'pack') contributingPackIds.add(rule.origin.packId);
   }
 
   const packRefs: ReviewPackReference[] = resolved
@@ -112,7 +112,7 @@ export function resolvePolicy(
 
 /** Same normalization `core/repository-intelligence`'s capability derivation applies to a `Capability.id` — so a Rule's authored `"React"`/`"Node.js"` string matches the capability id `"react"`/`"nodejs"` without either side needing to agree on casing or punctuation up front. */
 function normalizeCapabilityId(value: string): string {
-  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return value.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
 /**
@@ -133,13 +133,13 @@ function normalizeCapabilityId(value: string): string {
  */
 function ruleApplies(scope: RuleScope, capabilities: readonly Capability[]): boolean {
   switch (scope.kind) {
-    case "always":
+    case 'always':
       return true;
-    case "requires-framework":
+    case 'requires-framework':
       return capabilities.some((cap) => cap.id === normalizeCapabilityId(scope.framework));
-    case "requires-language":
+    case 'requires-language':
       return capabilities.some((cap) => cap.id === normalizeCapabilityId(scope.language));
-    case "glob":
+    case 'glob':
       return true;
   }
 }
@@ -205,11 +205,11 @@ function resolveConflicts(candidates: Candidate[]): {
   // computed without inventing data Repository Intelligence doesn't provide.
   for (let i = 0; i < candidates.length; i++) {
     const candidate = candidates[i];
-    if (candidate?.origin.kind !== "pack") continue;
+    if (candidate?.origin.kind !== 'pack') continue;
     for (let j = 0; j < candidates.length; j++) {
       const other = candidates[j];
       if (i === j || !other) continue;
-      if (other.origin.kind === "criteria" && other.id === candidate.id) {
+      if (other.origin.kind === 'criteria' && other.id === candidate.id) {
         recordConflict(
           i,
           j,
@@ -230,10 +230,10 @@ function decidePrecedence(
   bIdx: number,
 ): { winner: Candidate; loser: Candidate; winnerIdx: number; loserIdx: number } {
   // The repository's own CriteriaRule always wins over any Pack Rule (ADR-0003 #2).
-  if (a.origin.kind === "criteria" && b.origin.kind === "pack") {
+  if (a.origin.kind === 'criteria' && b.origin.kind === 'pack') {
     return { winner: a, loser: b, winnerIdx: aIdx, loserIdx: bIdx };
   }
-  if (b.origin.kind === "criteria" && a.origin.kind === "pack") {
+  if (b.origin.kind === 'criteria' && a.origin.kind === 'pack') {
     return { winner: b, loser: a, winnerIdx: bIdx, loserIdx: aIdx };
   }
   // Between two Pack rules, the pack named earlier in requestedPackIds wins.
@@ -251,7 +251,7 @@ function decidePrecedence(
 // --- Helpers --------------------------------------------------------------
 
 function describeDependency(dependency: PackDependency): string {
-  if ("packId" in dependency) return `pack "${dependency.packId}" (${dependency.versionRange})`;
+  if ('packId' in dependency) return `pack "${dependency.packId}" (${dependency.versionRange})`;
   return `skill "${dependency.skillId}"`;
 }
 

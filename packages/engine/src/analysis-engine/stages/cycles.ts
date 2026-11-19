@@ -1,4 +1,4 @@
-import type { DependencyCycle, DependencyGraph } from "../types.js";
+import type { DependencyCycle, DependencyGraph } from '../types.js';
 
 /**
  * Cyclic Dependencies: Tarjan's strongly-connected-components
@@ -64,11 +64,11 @@ export function detectCycles(graph: DependencyGraph): DependencyCycle[] {
     cycles.push({
       modules,
       shortestCycle,
-      impact: modules.length >= 4 ? "high" : modules.length === 3 ? "medium" : "low",
+      impact: modules.length >= 4 ? 'high' : modules.length === 3 ? 'medium' : 'low',
     });
   }
 
-  return cycles.sort((a, b) => a.modules.join(",").localeCompare(b.modules.join(",")));
+  return cycles.sort((a, b) => a.modules.join(',').localeCompare(b.modules.join(',')));
 }
 
 /** BFS from the lexicographically-first module in the component back to itself, restricted to the component's own nodes. */

@@ -4,8 +4,8 @@ import {
   executeReviewWithSemantics,
   type ReviewPipelineInput,
   type SemanticRun,
-} from "@debuggatha/engine";
-import type { ReviewJob, ReviewJobResult } from "./protocol.js";
+} from '@debuggatha/engine';
+import type { ReviewJob, ReviewJobResult } from './protocol.js';
 
 /** Runs a job with the engine. The one place a review is executed, whichever process it is in. */
 export async function executeJob(job: ReviewJob): Promise<ReviewJobResult> {
@@ -13,10 +13,10 @@ export async function executeJob(job: ReviewJob): Promise<ReviewJobResult> {
   const input: ReviewPipelineInput = {
     rootDir: job.rootDir,
     scope: job.scope,
-    depth: "full",
+    depth: 'full',
     packIds: job.packIds,
     policyId: undefined,
-    sourceName: "vscode",
+    sourceName: 'vscode',
     analyzers: job.analyzers,
   };
 

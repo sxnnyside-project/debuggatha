@@ -1,13 +1,13 @@
-import { BASELINE_FILE, clearBaseline, createBaseline, loadBaseline } from "@debuggatha/engine";
-import type { Command } from "commander";
-import { loadConfig } from "../config.js";
-import type { CliLogger } from "../utils/logger.js";
+import { BASELINE_FILE, clearBaseline, createBaseline, loadBaseline } from '@debuggatha/engine';
+import type { Command } from 'commander';
+import { loadConfig } from '../config.js';
+import type { CliLogger } from '../utils/logger.js';
 import {
   type AnalyzerFlags,
   addAnalyzerOptions,
   analyzerOptionsFrom,
   describeRuns,
-} from "./analyzers.js";
+} from './analyzers.js';
 
 /**
  * Adoption mode: record what a repository has today so reviews report only what
@@ -16,33 +16,33 @@ import {
  */
 export function registerBaselineCommand(program: Command) {
   const baseline = program
-    .command("baseline")
-    .description("Accept the findings a repository has today, so reviews report only what is new");
+    .command('baseline')
+    .description('Accept the findings a repository has today, so reviews report only what is new');
 
   addAnalyzerOptions(
     baseline
-      .command("create")
-      .description("Review the whole repository and record every finding as accepted"),
+      .command('create')
+      .description('Review the whole repository and record every finding as accepted'),
   ).action((flags: AnalyzerFlags, command) => {
     const logger = command.logger as CliLogger;
     const cwd = program.opts().cwd as string;
     try {
       const loaded = loadConfig(cwd);
       for (const warning of loaded.warnings) logger.warn(warning);
-      logger.info("Reviewing the whole repository to record a baseline...");
+      logger.info('Reviewing the whole repository to record a baseline...');
       const {
         baseline: created,
         count,
         analyzers,
       } = createBaseline({
         rootDir: cwd,
-        sourceName: "debuggatha-cli",
+        sourceName: 'debuggatha-cli',
         // The same packs and analyzers a review will use, or its findings would all look new.
         packIds: loaded.config.review.packs ?? [],
         analyzers: analyzerOptionsFrom(flags, loaded.config.analyzers),
       });
       if (logger.isJson) {
-        logger.json({ status: "success", file: BASELINE_FILE, findings: count, analyzers });
+        logger.json({ status: 'success', file: BASELINE_FILE, findings: count, analyzers });
         return;
       }
       for (const line of describeRuns(analyzers)) logger.info(line);
@@ -53,27 +53,27 @@ export function registerBaselineCommand(program: Command) {
         `Commit ${BASELINE_FILE}. From now on \`debuggatha review\` reports only new findings; \`--include-baselined\` shows them all.`,
       );
     } catch (err: unknown) {
-      logger.error("Could not create the baseline.", err);
+      logger.error('Could not create the baseline.', err);
       process.exit(1);
     }
   });
 
   baseline
-    .command("show")
-    .description("Summarize the recorded baseline")
+    .command('show')
+    .description('Summarize the recorded baseline')
     .action((_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       try {
         const current = loadBaseline(cwd);
         if (!current) {
-          logger.info("No baseline. Create one with `debuggatha baseline create`.");
-          if (logger.isJson) logger.json({ status: "success", baseline: null });
+          logger.info('No baseline. Create one with `debuggatha baseline create`.');
+          if (logger.isJson) logger.json({ status: 'success', baseline: null });
           return;
         }
         const total = current.entries.reduce((sum, entry) => sum + entry.count, 0);
         if (logger.isJson) {
-          logger.json({ status: "success", baseline: current, findings: total });
+          logger.json({ status: 'success', baseline: current, findings: total });
           return;
         }
         const byRule = new Map<string, number>();
@@ -85,20 +85,20 @@ export function registerBaselineCommand(program: Command) {
           logger.log(`  ${String(count).padStart(5)}  ${rule}`);
         }
       } catch (err: unknown) {
-        logger.error("Could not read the baseline.", err);
+        logger.error('Could not read the baseline.', err);
         process.exit(1);
       }
     });
 
   baseline
-    .command("clear")
-    .description("Delete the baseline; reviews report everything again")
+    .command('clear')
+    .description('Delete the baseline; reviews report everything again')
     .action((_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       const removed = clearBaseline(cwd);
-      if (logger.isJson) return logger.json({ status: "success", removed });
-      if (removed) logger.success("Baseline removed.");
-      else logger.info("There was no baseline.");
+      if (logger.isJson) return logger.json({ status: 'success', removed });
+      if (removed) logger.success('Baseline removed.');
+      else logger.info('There was no baseline.');
     });
 }

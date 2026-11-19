@@ -1,0 +1,61 @@
+{
+  "$ref": "#/definitions/ReviewChanges",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "FindingRef": {
+      "additionalProperties": false,
+      "description": "A ledger entry, described enough to talk about without fetching it.",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "ledgerId": {
+          "type": "string"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["critical", "high", "medium", "low", "informational"],
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": ["ledgerId", "title", "file", "severity"],
+      "type": "object"
+    },
+    "ReviewChanges": {
+      "additionalProperties": false,
+      "description": "The delta an agent needs after acting on a review: what this review found for the first time, what it no longer finds because the code was fixed or the file removed, and what came back after having been closed. `introduced` and `reopened` leave out what the baseline hid.",
+      "properties": {
+        "fixed": {
+          "items": {
+            "$ref": "#/definitions/FindingRef"
+          },
+          "type": "array"
+        },
+        "introduced": {
+          "items": {
+            "$ref": "#/definitions/FindingRef"
+          },
+          "type": "array"
+        },
+        "reopened": {
+          "items": {
+            "$ref": "#/definitions/FindingRef"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["introduced", "fixed", "reopened"],
+      "type": "object"
+    }
+  },
+  "title": "ReviewChanges"
+}

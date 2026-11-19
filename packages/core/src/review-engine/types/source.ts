@@ -4,10 +4,10 @@
  * privileging any one kind.
  */
 export const REVIEW_SOURCE_KINDS = [
-  "ai-provider",
-  "deterministic-analyzer",
-  "custom-skill",
-  "human-review",
+  'ai-provider',
+  'deterministic-analyzer',
+  'custom-skill',
+  'human-review',
 ] as const;
 export type ReviewSourceKind = (typeof REVIEW_SOURCE_KINDS)[number];
 

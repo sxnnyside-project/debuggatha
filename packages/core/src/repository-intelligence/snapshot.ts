@@ -1,16 +1,16 @@
-import { existsSync, readdirSync } from "node:fs";
-import { join } from "node:path";
-import { buildFingerprint, hasFingerprintChanged } from "./cache/fingerprint.js";
-import type { RepositoryContextCache } from "./cache/index.js";
-import { deriveCapabilities } from "./capabilities.js";
-import { deepFreeze } from "./internal/deep-freeze.js";
-import type { DirListing } from "./internal/scan-result.js";
-import { scanCriteria } from "./scanners/criteria.js";
-import { scanDependencies } from "./scanners/dependencies.js";
-import { scanDocumentation } from "./scanners/documentation.js";
-import { scanStack } from "./scanners/stack.js";
-import { deriveUnderstanding } from "./scanners/understanding.js";
-import type { RepositoryContext } from "./types.js";
+import { existsSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { buildFingerprint, hasFingerprintChanged } from './cache/fingerprint.js';
+import type { RepositoryContextCache } from './cache/index.js';
+import { deriveCapabilities } from './capabilities.js';
+import { deepFreeze } from './internal/deep-freeze.js';
+import type { DirListing } from './internal/scan-result.js';
+import { scanCriteria } from './scanners/criteria.js';
+import { scanDependencies } from './scanners/dependencies.js';
+import { scanDocumentation } from './scanners/documentation.js';
+import { scanStack } from './scanners/stack.js';
+import { deriveUnderstanding } from './scanners/understanding.js';
+import type { RepositoryContext } from './types.js';
 
 export interface BuildRepositoryContextOptions {
   /** When provided, an unchanged repository is served from cache instead of rescanned. */
@@ -55,7 +55,7 @@ export function buildRepositoryContext(
   const context: RepositoryContext = deepFreeze({
     rootDir,
     generatedAt: new Date().toISOString(),
-    hasGit: existsSync(join(rootDir, ".git")),
+    hasGit: existsSync(join(rootDir, '.git')),
     stack: stack.profile,
     capabilities,
     dependencies: dependencies.profile,

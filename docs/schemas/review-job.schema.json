@@ -1,0 +1,127 @@
+{
+  "$ref": "#/definitions/ReviewJob",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ReviewJob": {
+      "additionalProperties": false,
+      "description": "A review as data, so it can cross into the process that runs it.",
+      "properties": {
+        "analyzers": {
+          "additionalProperties": false,
+          "properties": {
+            "disable": {
+              "description": "Analyzers to leave out, by id (a repository's own choice; it can only narrow what runs).",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "enable": {
+              "description": "Analyzers to run even though they load project code or use the network: the person's explicit choice.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "mode": {
+              "description": "`off` runs none. `auto` (the default when options are given) runs the safe ones that are installed and apply.",
+              "enum": ["auto", "off"],
+              "type": "string"
+            },
+            "timeoutSeconds": {
+              "description": "Seconds one analyzer may run before it is stopped.",
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "type": "object"
+        },
+        "packIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "rootDir": {
+          "type": "string"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "base": {
+                  "type": "string"
+                },
+                "diff": {
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "diff",
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "diff"],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "files",
+                  "type": "string"
+                },
+                "paths": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": ["kind", "paths"],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "workspace",
+                  "type": "string"
+                }
+              },
+              "required": ["kind"],
+              "type": "object"
+            }
+          ],
+          "description": "What the review covers: a diff, a list of files, or the whole workspace. The steps of the review do not change with the scope."
+        },
+        "semantic": {
+          "additionalProperties": false,
+          "description": "Also have a model on this machine read the changed code. Only ever set by an explicit command.",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "provider": {
+              "enum": ["ollama", "lmstudio"],
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": ["provider"],
+          "type": "object"
+        },
+        "coverageDetail": {
+          "enum": ["summary", "files"],
+          "type": "string",
+          "description": "`summary` (default) reports coverage per language; `files` adds one entry per file."
+        }
+      },
+      "required": ["rootDir", "scope", "packIds", "analyzers"],
+      "type": "object"
+    }
+  },
+  "title": "ReviewJob"
+}

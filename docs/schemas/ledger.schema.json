@@ -1,0 +1,672 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ledger",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "repositoryRoot": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LedgerEntry"
+      }
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "repositoryRoot",
+    "entries",
+    "createdAt",
+    "updatedAt"
+  ],
+  "definitions": {
+    "LedgerEntry": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "$ref": "#/definitions/FindingFingerprint"
+        },
+        "status": {
+          "$ref": "#/definitions/LifecycleStatus"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HistoryEvent"
+          }
+        },
+        "latestFinding": {
+          "$ref": "#/definitions/Finding"
+        },
+        "review": {
+          "$ref": "#/definitions/ReviewAssociation"
+        }
+      },
+      "required": [
+        "id",
+        "fingerprint",
+        "status",
+        "history",
+        "latestFinding",
+        "review"
+      ],
+      "additionalProperties": false
+    },
+    "FindingFingerprint": {
+      "description": "What finding matching keys off: never the line number alone.",
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "contentAnchor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "category"
+      ],
+      "additionalProperties": false
+    },
+    "LifecycleStatus": {
+      "description": "Reopened is a distinct state from open: it records that a closed finding came back.",
+      "type": "string",
+      "enum": [
+        "open",
+        "acknowledged",
+        "resolved",
+        "dismissed",
+        "reopened"
+      ]
+    },
+    "HistoryEvent": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        },
+        "previousState": {
+          "$ref": "#/definitions/LifecycleStatus"
+        },
+        "newState": {
+          "$ref": "#/definitions/LifecycleStatus"
+        },
+        "origin": {
+          "$ref": "#/definitions/TransitionOrigin"
+        },
+        "comment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp",
+        "newState",
+        "origin"
+      ],
+      "additionalProperties": false
+    },
+    "TransitionOrigin": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "review"
+            },
+            "sessionId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "sessionId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "manual"
+            },
+            "actor": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "actor"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Finding": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/Severity"
+        },
+        "confidence": {
+          "$ref": "#/definitions/Confidence"
+        },
+        "category": {
+          "type": "string"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FindingLocation"
+          },
+          "minItems": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Evidence"
+          },
+          "minItems": 1
+        },
+        "appliedPolicy": {
+          "$ref": "#/definitions/PolicyReference"
+        },
+        "originatingPack": {
+          "$ref": "#/definitions/PackReference"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recommendation"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "explanation",
+        "severity",
+        "confidence",
+        "category",
+        "locations",
+        "evidence",
+        "recommendations"
+      ],
+      "additionalProperties": false
+    },
+    "Severity": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "informational"
+      ]
+    },
+    "Confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "FindingLocation": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "lines": {
+          "$ref": "#/definitions/LineRange"
+        },
+        "columns": {
+          "$ref": "#/definitions/LineRange"
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "additionalProperties": false
+    },
+    "LineRange": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "Evidence": {
+      "description": "Machine-readable evidence: a discriminated union, never free text.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "documentation"
+            },
+            "file": {
+              "type": "string"
+            },
+            "excerpt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "file",
+            "excerpt"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "criteria"
+            },
+            "ruleId": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "ruleId",
+            "source"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "review-pack-rule"
+            },
+            "packId": {
+              "type": "string"
+            },
+            "ruleId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "packId",
+            "ruleId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "framework-convention"
+            },
+            "framework": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "framework",
+            "detail"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "language-convention"
+            },
+            "language": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "language",
+            "detail"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "code"
+            },
+            "file": {
+              "type": "string"
+            },
+            "lines": {
+              "$ref": "#/definitions/LineRange"
+            },
+            "excerpt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "file"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "external-analyzer"
+            },
+            "tool": {
+              "type": "string"
+            },
+            "ruleId": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "license": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "tool",
+            "ruleId",
+            "license"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "semantic-review"
+            },
+            "role": {
+              "$ref": "#/definitions/SemanticRole"
+            },
+            "provider": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "verdict": {
+              "$ref": "#/definitions/SemanticVerdict"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "topic": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "role",
+            "provider",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SemanticRole": {
+      "type": "string",
+      "enum": [
+        "verification",
+        "detection"
+      ]
+    },
+    "SemanticVerdict": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "doubtful",
+        "unsure"
+      ]
+    },
+    "PolicyReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "PackReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "Recommendation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/RecommendationAction"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "targetFile": {
+          "type": "string"
+        },
+        "targetLines": {
+          "$ref": "#/definitions/LineRange"
+        },
+        "example": {
+          "$ref": "#/definitions/RecommendationExample"
+        },
+        "edit": {
+          "$ref": "#/definitions/RecommendationEdit"
+        }
+      },
+      "required": [
+        "id",
+        "action",
+        "summary"
+      ],
+      "additionalProperties": false
+    },
+    "RecommendationAction": {
+      "type": "string",
+      "enum": [
+        "replace",
+        "remove",
+        "add",
+        "refactor",
+        "configure",
+        "document",
+        "investigate"
+      ]
+    },
+    "RecommendationExample": {
+      "type": "object",
+      "properties": {
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "RecommendationEdit": {
+      "type": "object",
+      "properties": {
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startColumn": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "endColumn": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "replacement": {
+          "type": "string"
+        },
+        "safety": {
+          "$ref": "#/definitions/EditSafety"
+        }
+      },
+      "required": [
+        "line",
+        "startColumn",
+        "endColumn",
+        "replacement",
+        "safety"
+      ],
+      "additionalProperties": false
+    },
+    "EditSafety": {
+      "type": "string",
+      "enum": [
+        "safe",
+        "review"
+      ]
+    },
+    "ReviewAssociation": {
+      "type": "object",
+      "properties": {
+        "createdBySessionId": {
+          "type": "string"
+        },
+        "lastUpdatedBySessionId": {
+          "type": "string"
+        },
+        "repositorySnapshot": {
+          "$ref": "#/definitions/SnapshotRef"
+        },
+        "appliedPolicy": {
+          "$ref": "#/definitions/PolicyReference"
+        },
+        "appliedPacks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PackReference"
+          }
+        }
+      },
+      "required": [
+        "createdBySessionId",
+        "lastUpdatedBySessionId",
+        "repositorySnapshot",
+        "appliedPacks"
+      ],
+      "additionalProperties": false
+    },
+    "SnapshotRef": {
+      "type": "object",
+      "properties": {
+        "generatedAt": {
+          "type": "string"
+        },
+        "fingerprint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "generatedAt",
+        "fingerprint"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

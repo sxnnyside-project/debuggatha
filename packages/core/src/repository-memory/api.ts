@@ -1,7 +1,7 @@
-import { deepFreeze } from "./internal/deep-freeze.js";
-import type { MemoryItem } from "./types/item.js";
-import { transitionMemory } from "./types/item.js";
-import type { MemoryStore } from "./types/store.js";
+import { deepFreeze } from './internal/deep-freeze.js';
+import type { MemoryItem } from './types/item.js';
+import { transitionMemory } from './types/item.js';
+import type { MemoryStore } from './types/store.js';
 
 function withItems(store: MemoryStore, items: MemoryItem[]): MemoryStore {
   return deepFreeze({ ...store, items, updatedAt: new Date().toISOString() });
@@ -32,7 +32,7 @@ export function addMemoryItem(store: MemoryStore, item: MemoryItem): MemoryStore
  */
 export function suggestMemory(store: MemoryStore, itemId: string, sessionId: string): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "suggested", { kind: "detection", sessionId }));
+  return replaceItem(store, transitionMemory(item, 'suggested', { kind: 'detection', sessionId }));
 }
 
 /**
@@ -50,13 +50,13 @@ export function confirmMemory(
   comment?: string,
 ): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "confirmed", { kind: "user", actor }, comment));
+  return replaceItem(store, transitionMemory(item, 'confirmed', { kind: 'user', actor }, comment));
 }
 
 /** `confirmed` -> `active`: starts actually influencing reviews (see `filter.ts`). */
 export function activateMemory(store: MemoryStore, itemId: string, actor: string): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "active", { kind: "user", actor }));
+  return replaceItem(store, transitionMemory(item, 'active', { kind: 'user', actor }));
 }
 
 /** User Experience: "reject memory" — a `detected`/`suggested` item a user declines goes straight to `archived`; it was never true, so there's nothing to deprecate. */
@@ -67,7 +67,7 @@ export function rejectMemory(
   comment?: string,
 ): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "archived", { kind: "user", actor }, comment));
+  return replaceItem(store, transitionMemory(item, 'archived', { kind: 'user', actor }, comment));
 }
 
 /** `active` -> `deprecated`: stops influencing new reviews but stays inspectable, e.g. when the repository changed enough that the item might no longer hold. */
@@ -78,13 +78,13 @@ export function deprecateMemory(
   comment?: string,
 ): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "deprecated", { kind: "user", actor }, comment));
+  return replaceItem(store, transitionMemory(item, 'deprecated', { kind: 'user', actor }, comment));
 }
 
 /** `deprecated` -> `active`: a deprecated item that turns out to still hold can be reactivated instead of being recreated from scratch. */
 export function reactivateMemory(store: MemoryStore, itemId: string, actor: string): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "active", { kind: "user", actor }));
+  return replaceItem(store, transitionMemory(item, 'active', { kind: 'user', actor }));
 }
 
 /** Terminal archive from any non-archived state — kept for audit, never consulted again (see `isActiveMemoryStatus`). */
@@ -95,7 +95,7 @@ export function archiveMemory(
   comment?: string,
 ): MemoryStore {
   const item = getItemOrThrow(store, itemId);
-  return replaceItem(store, transitionMemory(item, "archived", { kind: "user", actor }, comment));
+  return replaceItem(store, transitionMemory(item, 'archived', { kind: 'user', actor }, comment));
 }
 
 /**

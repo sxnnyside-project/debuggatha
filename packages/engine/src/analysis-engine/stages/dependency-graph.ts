@@ -1,12 +1,12 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   dirname as posixDirname,
   join as posixJoin,
   normalize as posixNormalize,
-} from "node:path/posix";
-import { readJson } from "../internal/fs-walk.js";
-import type { DependencyEdge, DependencyGraph, ModuleBoundary } from "../types.js";
+} from 'node:path/posix';
+import { readJson } from '../internal/fs-walk.js';
+import type { DependencyEdge, DependencyGraph, ModuleBoundary } from '../types.js';
 
 const IMPORT_SPECIFIER = /(?:from\s+|require\s*\(\s*|^import\s+)["']([^"']+)["']/gm;
 
@@ -41,7 +41,7 @@ export function buildDependencyGraph(
     return byDirPrefix.find((b) => file === b.id || file.startsWith(b.prefix))?.id;
   }
 
-  const edgeKey = (e: Pick<DependencyEdge, "from" | "to" | "kind">) =>
+  const edgeKey = (e: Pick<DependencyEdge, 'from' | 'to' | 'kind'>) =>
     `${e.kind}:${e.from}->${e.to}`;
   const edgesByKey = new Map<string, DependencyEdge>();
 
@@ -52,7 +52,7 @@ export function buildDependencyGraph(
   const upsertEdge = (
     from: string,
     to: string,
-    kind: DependencyEdge["kind"],
+    kind: DependencyEdge['kind'],
     file: string,
     detail: string,
   ) => {
@@ -68,7 +68,7 @@ export function buildDependencyGraph(
 
   // Declared edges — from each boundary's own package.json.
   for (const boundary of boundaries) {
-    const pkg = readJson(join(boundary.dir, "package.json"));
+    const pkg = readJson(join(boundary.dir, 'package.json'));
     if (!pkg) continue;
     const deps = {
       ...(pkg.dependencies as Record<string, string> | undefined),
@@ -81,8 +81,8 @@ export function buildDependencyGraph(
       upsertEdge(
         boundary.id,
         target.id,
-        "declared",
-        "package.json",
+        'declared',
+        'package.json',
         `declares dependency on "${depName}"`,
       );
     }
@@ -93,7 +93,7 @@ export function buildDependencyGraph(
     for (const file of boundary.files) {
       let content: string;
       try {
-        content = readFileSync(join(rootDir, file), "utf8");
+        content = readFileSync(join(rootDir, file), 'utf8');
       } catch {
         continue;
       }
@@ -101,12 +101,12 @@ export function buildDependencyGraph(
         const specifier = match[1];
         if (!specifier) continue;
 
-        if (specifier.startsWith(".")) {
+        if (specifier.startsWith('.')) {
           // Relative import — only matters if it crosses into another boundary's directory.
           const resolved = posixNormalize(posixJoin(posixDirname(file), specifier));
           const target = resolveModuleForFile(resolved);
           if (target && target !== boundary.id) {
-            upsertEdge(boundary.id, target, "import", file, `imports "${specifier}"`);
+            upsertEdge(boundary.id, target, 'import', file, `imports "${specifier}"`);
           }
           continue;
         }
@@ -116,7 +116,7 @@ export function buildDependencyGraph(
         );
         if (targetName) {
           const target = byName.get(targetName);
-          if (target) upsertEdge(boundary.id, target.id, "import", file, `imports "${specifier}"`);
+          if (target) upsertEdge(boundary.id, target.id, 'import', file, `imports "${specifier}"`);
         }
       }
     }

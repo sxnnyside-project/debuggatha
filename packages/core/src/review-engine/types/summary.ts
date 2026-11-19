@@ -1,6 +1,6 @@
-import type { Finding } from "./finding.js";
-import type { ReviewPackReference, ReviewPolicyReference } from "./reference.js";
-import { SEVERITIES, type Severity } from "./severity.js";
+import type { Finding } from './finding.js';
+import type { ReviewPackReference, ReviewPolicyReference } from './reference.js';
+import { SEVERITIES, type Severity } from './severity.js';
 
 /** Reusable by CLI, MCP, and VS Code alike — computed once by the engine, not per consumer. */
 export interface ReviewSummary {

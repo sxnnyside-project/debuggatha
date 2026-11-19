@@ -5,13 +5,13 @@ import {
   LocalGitProvider,
   resolveRequestedPackIds,
   toRepoRelative,
-} from "@debuggatha/engine";
-import * as vscode from "vscode";
-import { getSettings } from "../config/settings.js";
-import type { Origin } from "../review/coordinator.js";
-import { planReview, type ReviewRequest, selectionDiff } from "../review/plan.js";
-import type { ReviewJob } from "../runner/protocol.js";
-import type { Services } from "../services.js";
+} from '@debuggatha/engine';
+import * as vscode from 'vscode';
+import { getSettings } from '../config/settings.js';
+import type { Origin } from '../review/coordinator.js';
+import { planReview, type ReviewRequest, selectionDiff } from '../review/plan.js';
+import type { ReviewJob } from '../runner/protocol.js';
+import type { Services } from '../services.js';
 
 export interface ReviewOptions {
   origin: Origin;
@@ -32,7 +32,7 @@ export async function runReview(
 ): Promise<void> {
   const rootDir = services.rootDir;
   if (!rootDir) {
-    if (options.origin === "manual") vscode.window.showErrorMessage("No workspace folder open.");
+    if (options.origin === 'manual') vscode.window.showErrorMessage('No workspace folder open.');
     return;
   }
 
@@ -40,15 +40,15 @@ export async function runReview(
   const trusted = vscode.workspace.isTrusted;
   const plan = planReview(request, settings, trusted, { widen: options.widen !== false });
 
-  let semantic: ReviewJob["semantic"];
+  let semantic: ReviewJob['semantic'];
   if (options.semantic) {
-    if (settings.semantic.provider === "off") {
+    if (settings.semantic.provider === 'off') {
       const choice = await vscode.window.showInformationMessage(
-        "Choose a model on this machine (Ollama or LM Studio) to use the model review. Nothing is sent to it until you do.",
-        "Open Settings",
+        'Choose a model on this machine (Ollama or LM Studio) to use the model review. Nothing is sent to it until you do.',
+        'Open Settings',
       );
-      if (choice === "Open Settings") {
-        void vscode.commands.executeCommand("workbench.action.openSettings", "debuggatha.semantic");
+      if (choice === 'Open Settings') {
+        void vscode.commands.executeCommand('workbench.action.openSettings', 'debuggatha.semantic');
       }
       return;
     }
@@ -67,23 +67,23 @@ export async function runReview(
     ...(semantic ? { semantic } : {}),
   };
 
-  services.logger.info("Review started", {
+  services.logger.info('Review started', {
     origin: options.origin,
     request: request.kind,
     scope: plan.scope.kind,
     depth: settings.reviewDepth,
     trusted,
     analyzers: plan.analyzers.mode,
-    model: semantic?.provider ?? "none",
+    model: semantic?.provider ?? 'none',
   });
   services.status.reviewing(options.origin);
 
   const outcome =
-    options.origin === "manual"
+    options.origin === 'manual'
       ? await vscode.window.withProgress(
           {
             location: vscode.ProgressLocation.Notification,
-            title: "Debuggatha",
+            title: 'Debuggatha',
             cancellable: true,
           },
           async (progress, token) => {
@@ -95,15 +95,15 @@ export async function runReview(
           },
         )
       : await vscode.window.withProgress(
-          { location: vscode.ProgressLocation.Window, title: "Debuggatha" },
+          { location: vscode.ProgressLocation.Window, title: 'Debuggatha' },
           () => services.coordinator.run(options.origin, job),
         );
 
   switch (outcome.status) {
-    case "done": {
+    case 'done': {
       const { result } = outcome;
       services.refreshFromLedger();
-      services.logger.info("Review finished", {
+      services.logger.info('Review finished', {
         findings: result.findings,
         introduced: result.changes.introduced,
         fixed: result.changes.fixed,
@@ -111,59 +111,59 @@ export async function runReview(
         durationMs: result.durationMs,
       });
       for (const run of result.analyzers) {
-        if (run.status === "ran") {
-          services.logger.info("Analyzer ran", {
+        if (run.status === 'ran') {
+          services.logger.info('Analyzer ran', {
             id: run.id,
             findings: run.findings,
             ms: run.durationMs,
           });
-        } else if (run.status === "failed") {
-          services.logger.error("Analyzer failed", { id: run.id, reason: run.reason });
+        } else if (run.status === 'failed') {
+          services.logger.error('Analyzer failed', { id: run.id, reason: run.reason });
         } else {
-          services.logger.debug("Analyzer skipped", { id: run.id, reason: run.reason });
+          services.logger.debug('Analyzer skipped', { id: run.id, reason: run.reason });
         }
       }
       for (const note of result.semantic?.notes ?? [])
-        services.logger.info("Model review", { note });
+        services.logger.info('Model review', { note });
 
-      if (options.origin === "manual") {
-        const failed = result.analyzers.filter((run) => run.status === "failed");
+      if (options.origin === 'manual') {
+        const failed = result.analyzers.filter((run) => run.status === 'failed');
         const parts = [
           `Review complete: ${result.findings} findings`,
           result.changes.introduced + result.changes.fixed > 0
             ? `(${result.changes.introduced} new, ${result.changes.fixed} fixed)`
-            : "",
-          result.semantic ? `, ${result.semantic.detected} raised by the model` : "",
+            : '',
+          result.semantic ? `, ${result.semantic.detected} raised by the model` : '',
           failed.length > 0
-            ? `. ${failed.map((run) => run.name).join(", ")} failed; see the log`
-            : "",
-          ".",
+            ? `. ${failed.map((run) => run.name).join(', ')} failed; see the log`
+            : '',
+          '.',
         ];
-        void vscode.window.showInformationMessage(parts.join("").replace(" ,", ","));
+        void vscode.window.showInformationMessage(parts.join('').replace(' ,', ','));
         for (const note of plan.notes) void vscode.window.showInformationMessage(note);
       }
       return;
     }
-    case "cancelled":
-      services.logger.info("Review cancelled");
+    case 'cancelled':
+      services.logger.info('Review cancelled');
       services.status.ready();
-      if (options.origin === "manual")
-        void vscode.window.showInformationMessage("Review cancelled.");
+      if (options.origin === 'manual')
+        void vscode.window.showInformationMessage('Review cancelled.');
       return;
-    case "skipped":
-      services.logger.debug("Save review skipped: a review is already running");
+    case 'skipped':
+      services.logger.debug('Save review skipped: a review is already running');
       return;
-    case "failed": {
-      services.logger.error("Review failed", { reason: outcome.error });
+    case 'failed': {
+      services.logger.error('Review failed', { reason: outcome.error });
       services.status.failed(outcome.error);
-      if (options.origin !== "manual") return;
+      if (options.origin !== 'manual') return;
       const action = await vscode.window.showErrorMessage(
         `Debuggatha review failed: ${outcome.error}`,
-        "Show Log",
-        "Retry",
+        'Show Log',
+        'Retry',
       );
-      if (action === "Show Log") void vscode.commands.executeCommand("debuggatha.showLog");
-      else if (action === "Retry") void runReview(services, request, options);
+      if (action === 'Show Log') void vscode.commands.executeCommand('debuggatha.showLog');
+      else if (action === 'Retry') void runReview(services, request, options);
     }
   }
 }
@@ -171,7 +171,7 @@ export async function runReview(
 function refreshIntelligence(
   services: Services,
   rootDir: string,
-  scopeKind: "workspace" | "files" | "diff",
+  scopeKind: 'workspace' | 'files' | 'diff',
   packs: string[],
 ): void {
   try {
@@ -180,14 +180,14 @@ function refreshIntelligence(
       context,
       createReviewRequest({
         scope:
-          scopeKind === "workspace" ? { kind: "workspace" } : { kind: "diff", base: undefined },
-        depth: "full",
+          scopeKind === 'workspace' ? { kind: 'workspace' } : { kind: 'diff', base: undefined },
+        depth: 'full',
         requestedPackIds: resolveRequestedPackIds(packs),
       }),
     );
     services.intelligence.refresh(context, policy);
   } catch (error) {
-    services.logger.debug("Could not refresh Repository Intelligence", {
+    services.logger.debug('Could not refresh Repository Intelligence', {
       reason: error instanceof Error ? error.message : String(error),
     });
   }
@@ -196,12 +196,12 @@ function refreshIntelligence(
 /* ------------------------------------------------------------- what the commands ask for */
 
 export async function requestForDiff(rootDir: string): Promise<ReviewRequest> {
-  return { kind: "diff", diff: (await new LocalGitProvider(rootDir).getDiff()) ?? "" };
+  return { kind: 'diff', diff: (await new LocalGitProvider(rootDir).getDiff()) ?? '' };
 }
 
 export function requestForActiveFile(): ReviewRequest | undefined {
   const editor = vscode.window.activeTextEditor;
-  return editor ? { kind: "file", path: editor.document.uri.fsPath } : undefined;
+  return editor ? { kind: 'file', path: editor.document.uri.fsPath } : undefined;
 }
 
 /** The selected lines, whole, as a change: only they are reviewed, at their real line numbers. */
@@ -216,7 +216,7 @@ export function requestForSelection(rootDir: string): ReviewRequest | undefined 
   for (let line = first; line <= Math.max(first, last); line++)
     lines.push(document.lineAt(line).text);
   return {
-    kind: "selection",
+    kind: 'selection',
     path: document.uri.fsPath,
     diff: selectionDiff(toRepoRelative(rootDir, document.uri.fsPath), first + 1, lines),
   };

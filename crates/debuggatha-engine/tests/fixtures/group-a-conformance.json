@@ -1,0 +1,1445 @@
+{
+  "rules": [
+    "no-var",
+    "no-explicit-any",
+    "strict-null-checks",
+    "eqeqeq",
+    "no-eval",
+    "no-implied-eval",
+    "no-extend-native",
+    "prefer-object-spread",
+    "prefer-template-literals",
+    "no-dangerously-set-inner-html"
+  ],
+  "cases": [
+    {
+      "name": "var-basic",
+      "file": "a.js",
+      "source": "var a = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-indent-and-spaces",
+      "file": "a.ts",
+      "source": "    var   a = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 5,
+          "end": 12,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 5,
+            "endColumn": 8,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-for",
+      "file": "a.js",
+      "source": "for (var i = 0; i < 3; i++) {}\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 6,
+          "end": 11,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 6,
+            "endColumn": 9,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-export",
+      "file": "a.ts",
+      "source": "export var x = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 8,
+          "end": 13,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 8,
+            "endColumn": 11,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-in-comment-and-string",
+      "file": "a.js",
+      "source": "// var x = 1\nconst s = \"var x\";\n",
+      "ts": []
+    },
+    {
+      "name": "var-two-declarators-one-hit",
+      "file": "a.js",
+      "source": "var a = 1, b = 2;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-identifier-containing-var",
+      "file": "a.js",
+      "source": "const myvar = 1; const variable = 2;\n",
+      "ts": []
+    },
+    {
+      "name": "var-mjs-cjs",
+      "file": "a.mjs",
+      "source": "var a = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-unicode-before",
+      "file": "a.js",
+      "source": "const s = \"😀\"; var x = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 17,
+          "end": 22,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 17,
+            "endColumn": 20,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-dollar-underscore",
+      "file": "a.js",
+      "source": "var $a = 1; \n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-destructured-object",
+      "file": "a.js",
+      "source": "var { a } = obj;\n",
+      "why": "the old pattern needed a name after var",
+      "rust": [
+        [
+          "no-var",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "var-destructured-array",
+      "file": "a.js",
+      "source": "var [a] = arr;\n",
+      "why": "the old pattern needed a name after var",
+      "rust": [
+        [
+          "no-var",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "var-declare",
+      "file": "a.ts",
+      "source": "declare var VERSION: string;\n",
+      "why": "an ambient declaration describes a global, it is not code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 9,
+          "end": 14,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 9,
+            "endColumn": 12,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-declare-global",
+      "file": "a.ts",
+      "source": "export {};\ndeclare global {\n  var g: number;\n}\n",
+      "why": "var is the only way to declare a global",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 3,
+          "start": 3,
+          "end": 8,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "var-then-newline",
+      "file": "a.js",
+      "source": "var\n  x = 1;\n",
+      "why": "the lexer matched per line",
+      "rust": [
+        [
+          "no-var",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "var-vue-not-scanned",
+      "file": "a.vue",
+      "source": "<script>\nvar a = 1;\n</script>\n",
+      "ts": []
+    },
+    {
+      "name": "any-param",
+      "file": "a.ts",
+      "source": "function f(x: any) {}\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 13,
+          "end": 18,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 18,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-as",
+      "file": "a.ts",
+      "source": "const y = x as any;\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 13,
+          "end": 19,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 16,
+            "endColumn": 19,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-angle-assertion",
+      "file": "a.ts",
+      "source": "const z = <any>x;\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 11,
+          "end": 16,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 12,
+            "endColumn": 15,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-generic-arg",
+      "file": "a.ts",
+      "source": "const a: Array<any> = [];\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 15,
+          "end": 20,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 16,
+            "endColumn": 19,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-array",
+      "file": "a.ts",
+      "source": "let xs: any[] = [];\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 7,
+          "end": 12,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 9,
+            "endColumn": 12,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-union",
+      "file": "a.ts",
+      "source": "let u: any | null = null;\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 6,
+          "end": 11,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 8,
+            "endColumn": 11,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-catch",
+      "file": "a.ts",
+      "source": "try {} catch (e: any) {}\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 16,
+          "end": 21,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 18,
+            "endColumn": 21,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-in-string-and-comment",
+      "file": "a.ts",
+      "source": "// x: any\nconst s = \"a: any\";\n",
+      "ts": []
+    },
+    {
+      "name": "any-js-file-no-types",
+      "file": "a.js",
+      "source": "const a = 1;\n",
+      "ts": []
+    },
+    {
+      "name": "any-tsx",
+      "file": "a.tsx",
+      "source": "const f = (p: any) => <p>{p}</p>;\n",
+      "ts": [
+        {
+          "rule": "no-explicit-any",
+          "line": 1,
+          "start": 13,
+          "end": 18,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 15,
+            "endColumn": 18,
+            "replacement": "unknown",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any-unknown-not-reported",
+      "file": "a.ts",
+      "source": "let k: unknown;\nconst anyone = 1;\n",
+      "ts": []
+    },
+    {
+      "name": "any-nested-generic",
+      "file": "a.ts",
+      "source": "const p: Promise<any[]> = f();\n",
+      "why": "the old pattern knew only : any, as any and <any>",
+      "rust": [
+        [
+          "no-explicit-any",
+          1,
+          18
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "any-record",
+      "file": "a.ts",
+      "source": "type R = Record<string, any>;\n",
+      "why": "the old pattern knew only : any, as any and <any>",
+      "rust": [
+        [
+          "no-explicit-any",
+          1,
+          25
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "any-constraint",
+      "file": "a.ts",
+      "source": "function g<T extends any>(t: T) {}\n",
+      "why": "the old pattern knew only : any, as any and <any>",
+      "rust": [
+        [
+          "no-explicit-any",
+          1,
+          22
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "nonnull-member",
+      "file": "a.ts",
+      "source": "const n = user!.name;\n",
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 14,
+          "end": 16,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-paren",
+      "file": "a.ts",
+      "source": "const n = (a)!.b;\n",
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 13,
+          "end": 15,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-index",
+      "file": "a.ts",
+      "source": "const n = arr[0]!;\nconst m = x![0];\n",
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 16,
+          "end": 18,
+          "confidence": "medium"
+        },
+        {
+          "rule": "strict-null-checks",
+          "line": 2,
+          "start": 11,
+          "end": 13,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-call",
+      "file": "a.ts",
+      "source": "foo(a!);\n",
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 5,
+          "end": 7,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "not-nonnull-neq",
+      "file": "a.ts",
+      "source": "if (a !== b || c != d) {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 18,
+          "end": 20,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 18,
+            "endColumn": 20,
+            "replacement": "!==",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "not-nonnull-prefix",
+      "file": "a.ts",
+      "source": "const t = !x;\n",
+      "ts": []
+    },
+    {
+      "name": "nonnull-in-string",
+      "file": "a.ts",
+      "source": "const s = \"hello!\";\n",
+      "ts": []
+    },
+    {
+      "name": "nonnull-definite-field",
+      "file": "a.ts",
+      "source": "class A {\n  x!: string;\n}\n",
+      "why": "a definite assignment is not a non-null assertion",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 2,
+          "start": 3,
+          "end": 5,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-definite-let",
+      "file": "a.ts",
+      "source": "let v!: number;\n",
+      "why": "a definite assignment is not a non-null assertion",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 5,
+          "end": 7,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-jsx-text",
+      "file": "a.tsx",
+      "source": "const p = <p>Hello!</p>;\n",
+      "why": "text in JSX is not code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "strict-null-checks",
+          "line": 1,
+          "start": 18,
+          "end": 20,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "nonnull-space-before-bang",
+      "file": "a.ts",
+      "source": "const n = user !.name;\n",
+      "why": "the old pattern needed the name right before the bang",
+      "rust": [
+        [
+          "strict-null-checks",
+          1,
+          15
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "eq-basic",
+      "file": "a.js",
+      "source": "if (a == b) {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "neq-basic",
+      "file": "a.ts",
+      "source": "if (a != b) {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "!==",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eq-strict-ok",
+      "file": "a.js",
+      "source": "if (a === b || c !== d) {}\n",
+      "ts": []
+    },
+    {
+      "name": "eq-null-right",
+      "file": "a.js",
+      "source": "if (a == null) {}\n",
+      "ts": []
+    },
+    {
+      "name": "eq-null-left",
+      "file": "a.js",
+      "source": "if (null == a) {}\n",
+      "ts": []
+    },
+    {
+      "name": "neq-null",
+      "file": "a.js",
+      "source": "if (a != null) {}\n",
+      "ts": []
+    },
+    {
+      "name": "eq-typeof",
+      "file": "a.js",
+      "source": "if (typeof a == 'string') {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 14,
+          "end": 16,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 14,
+            "endColumn": 16,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eq-undefined-reported",
+      "file": "a.js",
+      "source": "if (a == undefined) {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eq-in-string",
+      "file": "a.js",
+      "source": "const s = \"a == b\";\n",
+      "ts": []
+    },
+    {
+      "name": "eq-two-on-a-line",
+      "file": "a.js",
+      "source": "if (a == b && c != d) {}\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eq-lte-gte-arrow",
+      "file": "a.js",
+      "source": "const f = (a) => a <= b && a >= c;\n",
+      "ts": []
+    },
+    {
+      "name": "eq-next-line",
+      "file": "a.js",
+      "source": "const x = a\n  == b;\n",
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 2,
+          "start": 3,
+          "end": 5,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 3,
+            "endColumn": 5,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eq-null-in-parens",
+      "file": "a.js",
+      "source": "if (x == (null)) {}\n",
+      "why": "null in parentheses is still null",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eval-basic",
+      "file": "a.js",
+      "source": "const v = eval(code);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 1,
+          "start": 11,
+          "end": 16,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "eval-space",
+      "file": "a.js",
+      "source": "eval (\"x\");\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 1,
+          "start": 1,
+          "end": 7,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "eval-member-not-reported",
+      "file": "a.js",
+      "source": "window.eval(x); myeval(x);\n",
+      "ts": []
+    },
+    {
+      "name": "eval-in-string-and-comment",
+      "file": "a.js",
+      "source": "// eval(x)\nconst s = \"eval(x)\";\n",
+      "ts": []
+    },
+    {
+      "name": "eval-optional-call",
+      "file": "a.js",
+      "source": "eval?.(x);\n",
+      "ts": []
+    },
+    {
+      "name": "timeout-string",
+      "file": "a.js",
+      "source": "setTimeout(\"go()\", 10);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 1,
+          "start": 1,
+          "end": 13,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "interval-template",
+      "file": "a.js",
+      "source": "setInterval(`go()`, 10);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 1,
+          "start": 1,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "timeout-function-ok",
+      "file": "a.js",
+      "source": "setTimeout(go, 10);\nsetTimeout(() => go(), 10);\n",
+      "ts": []
+    },
+    {
+      "name": "timeout-member-not-reported",
+      "file": "a.js",
+      "source": "obj.setTimeout(\"x\", 1);\n",
+      "ts": []
+    },
+    {
+      "name": "eval-in-test-file",
+      "file": "a.test.ts",
+      "source": "eval(x);\n",
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "timeout-shadowed",
+      "file": "a.js",
+      "source": "const setTimeout = fakeTimers.setTimeout;\nsetTimeout(\"x\", 1);\n",
+      "why": "a local setTimeout is not the global timer",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-eval",
+          "line": 2,
+          "start": 1,
+          "end": 13,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "new-function",
+      "file": "a.js",
+      "source": "const f = new Function(\"a\", \"return a\");\n",
+      "ts": [
+        {
+          "rule": "no-implied-eval",
+          "line": 1,
+          "start": 11,
+          "end": 24,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "new-function-spaces",
+      "file": "a.js",
+      "source": "const f = new  Function (x);\n",
+      "ts": [
+        {
+          "rule": "no-implied-eval",
+          "line": 1,
+          "start": 11,
+          "end": 26,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "function-call-not-reported",
+      "file": "a.js",
+      "source": "const f = Function(\"x\");\n",
+      "ts": []
+    },
+    {
+      "name": "new-function-no-parens",
+      "file": "a.js",
+      "source": "const f = new Function;\n",
+      "ts": []
+    },
+    {
+      "name": "new-function-in-tests-skipped",
+      "file": "a.test.js",
+      "source": "new Function(\"x\");\n",
+      "ts": []
+    },
+    {
+      "name": "new-member-function",
+      "file": "a.js",
+      "source": "new window.Function(\"x\");\n",
+      "ts": []
+    },
+    {
+      "name": "new-function-shadowed",
+      "file": "a.js",
+      "source": "class Function {}\nnew Function(1);\n",
+      "why": "a local class is not the global Function",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-implied-eval",
+          "line": 2,
+          "start": 1,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "extend-array",
+      "file": "a.js",
+      "source": "Array.prototype.last = function () {};\n",
+      "ts": [
+        {
+          "rule": "no-extend-native",
+          "line": 1,
+          "start": 1,
+          "end": 23,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "extend-string-nospace",
+      "file": "a.js",
+      "source": "String.prototype.x=1;\n",
+      "ts": [
+        {
+          "rule": "no-extend-native",
+          "line": 1,
+          "start": 1,
+          "end": 20,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "extend-other-prototype",
+      "file": "a.js",
+      "source": "Foo.prototype.x = 1;\n",
+      "ts": []
+    },
+    {
+      "name": "extend-computed",
+      "file": "a.js",
+      "source": "Array.prototype['x'] = 1;\n",
+      "ts": []
+    },
+    {
+      "name": "extend-compound",
+      "file": "a.js",
+      "source": "Array.prototype.x += 1;\n",
+      "ts": []
+    },
+    {
+      "name": "extend-comparison",
+      "file": "a.js",
+      "source": "if (Object.prototype.y == 1) {}\n",
+      "why": "a comparison is not an assignment",
+      "rust": [
+        [
+          "eqeqeq",
+          1,
+          24
+        ]
+      ],
+      "ts": [
+        {
+          "rule": "eqeqeq",
+          "line": 1,
+          "start": 24,
+          "end": 26,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 24,
+            "endColumn": 26,
+            "replacement": "===",
+            "safety": "review"
+          }
+        },
+        {
+          "rule": "no-extend-native",
+          "line": 1,
+          "start": 5,
+          "end": 25,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "assign-empty",
+      "file": "a.js",
+      "source": "const c = Object.assign({}, a);\n",
+      "ts": [
+        {
+          "rule": "prefer-object-spread",
+          "line": 1,
+          "start": 11,
+          "end": 27,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "assign-empty-spaces",
+      "file": "a.js",
+      "source": "const c = Object.assign( { } , a);\n",
+      "ts": [
+        {
+          "rule": "prefer-object-spread",
+          "line": 1,
+          "start": 11,
+          "end": 29,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "assign-only-empty",
+      "file": "a.js",
+      "source": "const c = Object.assign({});\n",
+      "ts": [
+        {
+          "rule": "prefer-object-spread",
+          "line": 1,
+          "start": 11,
+          "end": 27,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "assign-target-ok",
+      "file": "a.js",
+      "source": "Object.assign(a, b);\nObject.assign({ a: 1 }, b);\n",
+      "ts": []
+    },
+    {
+      "name": "assign-paren-empty",
+      "file": "a.js",
+      "source": "const c = Object.assign(({}), a);\n",
+      "ts": []
+    },
+    {
+      "name": "assign-next-line",
+      "file": "a.js",
+      "source": "const c = Object.assign(\n  {},\n  a,\n);\n",
+      "why": "the lexer matched per line",
+      "rust": [
+        [
+          "prefer-object-spread",
+          1,
+          11
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "concat-string-then-name",
+      "file": "a.js",
+      "source": "const s = \"a\" + b;\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 18,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-name-then-string",
+      "file": "a.js",
+      "source": "const s = a + \"b\";\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 16,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-member-then-string",
+      "file": "a.js",
+      "source": "const s = a.b + \"x\";\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 18,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-string-number",
+      "file": "a.js",
+      "source": "const s = \"a\" + 1;\n",
+      "ts": []
+    },
+    {
+      "name": "concat-two-strings",
+      "file": "a.js",
+      "source": "const s = \"a\" + \"b\";\n",
+      "ts": []
+    },
+    {
+      "name": "concat-number-string",
+      "file": "a.js",
+      "source": "const s = 1 + \"a\";\n",
+      "ts": []
+    },
+    {
+      "name": "concat-call-then-string",
+      "file": "a.js",
+      "source": "const s = f() + \"a\";\n",
+      "ts": []
+    },
+    {
+      "name": "concat-chain-one-hit",
+      "file": "a.js",
+      "source": "const s = \"a\" + b + \"c\";\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 18,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-template-then-name",
+      "file": "a.js",
+      "source": "const s = `a` + b;\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 18,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-name-then-template",
+      "file": "a.js",
+      "source": "const s = a + `b`;\n",
+      "ts": [
+        {
+          "rule": "prefer-template-literals",
+          "line": 1,
+          "start": 11,
+          "end": 16,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "concat-paren-right",
+      "file": "a.js",
+      "source": "const s = \"a\" + (b);\n",
+      "ts": []
+    },
+    {
+      "name": "concat-number-then-sum",
+      "file": "a.js",
+      "source": "const s = n + 1 + \"px\";\n",
+      "ts": []
+    },
+    {
+      "name": "concat-numbers-only",
+      "file": "a.js",
+      "source": "const n = a + b;\n",
+      "ts": []
+    },
+    {
+      "name": "concat-next-line",
+      "file": "a.js",
+      "source": "const s = \"a\" +\n  b;\n",
+      "why": "the lexer matched per line",
+      "rust": [
+        [
+          "prefer-template-literals",
+          1,
+          11
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "dangerous-jsx-attribute",
+      "file": "a.tsx",
+      "source": "const a = <div dangerouslySetInnerHTML={{ __html: x }} />;\n",
+      "ts": [
+        {
+          "rule": "no-dangerously-set-inner-html",
+          "line": 1,
+          "start": 16,
+          "end": 39,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "dangerous-object-key",
+      "file": "a.jsx",
+      "source": "const p = { dangerouslySetInnerHTML: { __html: x } };\n",
+      "ts": [
+        {
+          "rule": "no-dangerously-set-inner-html",
+          "line": 1,
+          "start": 13,
+          "end": 36,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "dangerous-in-comment-and-string",
+      "file": "a.tsx",
+      "source": "// dangerouslySetInnerHTML\nconst s = \"dangerouslySetInnerHTML\";\n",
+      "ts": []
+    },
+    {
+      "name": "dangerous-js-not-scanned",
+      "file": "a.js",
+      "source": "const p = { dangerouslySetInnerHTML: 1 };\n",
+      "ts": []
+    },
+    {
+      "name": "dangerous-ts-not-scanned",
+      "file": "a.ts",
+      "source": "const p = { dangerouslySetInnerHTML: 1 };\n",
+      "ts": []
+    },
+    {
+      "name": "dangerous-jsx-text",
+      "file": "a.tsx",
+      "source": "const a = <p>dangerouslySetInnerHTML</p>;\n",
+      "why": "text in JSX is not code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-dangerously-set-inner-html",
+          "line": 1,
+          "start": 14,
+          "end": 37,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "crlf-lines",
+      "file": "a.js",
+      "source": "var a = 1;\r\nif (a == b) {}\r\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        },
+        {
+          "rule": "eqeqeq",
+          "line": 2,
+          "start": 7,
+          "end": 9,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 7,
+            "endColumn": 9,
+            "replacement": "===",
+            "safety": "review"
+          }
+        }
+      ]
+    },
+    {
+      "name": "recoverable-error-elsewhere",
+      "file": "a.js",
+      "source": "const q;\nvar b = 1;\n",
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 2,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fatal-error-file-is-not-analyzed",
+      "file": "a.js",
+      "source": "const q = ;\nvar b = 1;\n",
+      "why": "nothing is concluded about a file the parser could not read",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-var",
+          "line": 2,
+          "start": 1,
+          "end": 6,
+          "confidence": "high",
+          "edit": {
+            "startColumn": 1,
+            "endColumn": 4,
+            "replacement": "let",
+            "safety": "safe"
+          }
+        }
+      ]
+    }
+  ]
+}

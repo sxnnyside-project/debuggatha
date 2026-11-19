@@ -1,6 +1,6 @@
-import type { ScanResult } from "../internal/scan-result.js";
-import type { DependencyProfile, Evidence } from "../types.js";
-import type { PackageJsonManifest } from "./stack.js";
+import type { ScanResult } from '../internal/scan-result.js';
+import type { DependencyProfile, Evidence } from '../types.js';
+import type { PackageJsonManifest } from './stack.js';
 
 /**
  * Dependency Context.
@@ -13,29 +13,29 @@ import type { PackageJsonManifest } from "./stack.js";
  */
 
 const LOCKFILES: Record<string, string> = {
-  "bun.lock": "bun.lock present",
-  "bun.lockb": "bun.lockb present",
-  "pnpm-lock.yaml": "pnpm-lock.yaml present",
-  "package-lock.json": "package-lock.json present",
-  "yarn.lock": "yarn.lock present",
-  "Cargo.lock": "Cargo.lock present",
-  "pubspec.lock": "pubspec.lock present",
+  'bun.lock': 'bun.lock present',
+  'bun.lockb': 'bun.lockb present',
+  'pnpm-lock.yaml': 'pnpm-lock.yaml present',
+  'package-lock.json': 'package-lock.json present',
+  'yarn.lock': 'yarn.lock present',
+  'Cargo.lock': 'Cargo.lock present',
+  'pubspec.lock': 'pubspec.lock present',
 };
 
 /** Best-effort single-line `key = "value"` extraction — not a TOML parser. */
 function extractTomlStringValue(text: string, key: string): string | undefined {
-  const match = text.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, "m"));
+  const match = text.match(new RegExp(`^\\s*${key}\\s*=\\s*"([^"]+)"`, 'm'));
   return match?.[1];
 }
 
 const TRACKED_PACKAGES = [
-  "react",
-  "next",
-  "vue",
-  "svelte",
-  "electron",
-  "@tauri-apps/api",
-  "@tauri-apps/cli",
+  'react',
+  'next',
+  'vue',
+  'svelte',
+  'electron',
+  '@tauri-apps/api',
+  '@tauri-apps/cli',
 ];
 
 export function scanDependencies(
@@ -62,15 +62,15 @@ export function scanDependencies(
     if (stack.packageJson.engines?.node) {
       runtimeConstraints.node = stack.packageJson.engines.node;
     }
-    if (typeof stack.packageJson.packageManager === "string") {
+    if (typeof stack.packageJson.packageManager === 'string') {
       runtimeConstraints.packageManager = stack.packageJson.packageManager;
     }
   }
 
   if (stack.cargoToml) {
-    const tauriVersion = extractTomlStringValue(stack.cargoToml, "tauri");
+    const tauriVersion = extractTomlStringValue(stack.cargoToml, 'tauri');
     if (tauriVersion) declaredVersions.tauri = tauriVersion;
-    const rustVersion = extractTomlStringValue(stack.cargoToml, "rust-version");
+    const rustVersion = extractTomlStringValue(stack.cargoToml, 'rust-version');
     if (rustVersion) runtimeConstraints.rust = rustVersion;
   }
 

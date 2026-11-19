@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-export const SEVERITIES = ["informational", "low", "medium", "high", "critical"] as const;
-export const STATUSES = ["open", "acknowledged", "resolved", "dismissed", "reopened"] as const;
+export const SEVERITIES = ['informational', 'low', 'medium', 'high', 'critical'] as const;
+export const STATUSES = ['open', 'acknowledged', 'resolved', 'dismissed', 'reopened'] as const;
 
 const severity = z.enum(SEVERITIES);
 const status = z.enum(STATUSES);
@@ -10,7 +10,7 @@ export const rootDir = z
   .string()
   .optional()
   .describe(
-    "Absolute path of the repository. Defaults to DEBUGGATHA_REPOSITORY_ROOT, then the first root the client shares.",
+    'Absolute path of the repository. Defaults to DEBUGGATHA_REPOSITORY_ROOT, then the first root the client shares.',
   );
 
 export const reviewInput = {
@@ -24,11 +24,11 @@ export const reviewInput = {
   policyId: z
     .string()
     .optional()
-    .describe("Assert the review policy id a previous review reported; fails if it changed."),
+    .describe('Assert the review policy id a previous review reported; fails if it changed.'),
   persist: z
     .boolean()
     .optional()
-    .describe("Record findings in .debuggatha/ledger.json. Defaults to true; false is read-only."),
+    .describe('Record findings in .debuggatha/ledger.json. Defaults to true; false is read-only.'),
   includeBaselined: z
     .boolean()
     .optional()
@@ -39,13 +39,13 @@ export const reviewInput = {
     .boolean()
     .optional()
     .describe(
-      "Also have a model read the changed code for defects analyzers do not see. Needs a model configured when the server started (DEBUGGATHA_SEMANTIC). What it raises is a labeled suspicion with low confidence, each quoting the line it is about; it never closes or hides a finding.",
+      'Also have a model read the changed code for defects analyzers do not see. Needs a model configured when the server started (DEBUGGATHA_SEMANTIC). What it raises is a labeled suspicion with low confidence, each quoting the line it is about; it never closes or hides a finding.',
     ),
   analyzers: z
     .boolean()
     .optional()
     .describe(
-      "Set false to run only the built-in detectors. Which external analyzers run otherwise is decided when the server starts (DEBUGGATHA_ANALYZERS); a call cannot enable more.",
+      'Set false to run only the built-in detectors. Which external analyzers run otherwise is decided when the server starts (DEBUGGATHA_ANALYZERS); a call cannot enable more.',
     ),
 };
 
@@ -67,8 +67,8 @@ const analyzerRun = z.object({
   id: z.string(),
   name: z.string(),
   license: z.string(),
-  trust: z.enum(["safe", "runs-project-code", "network"]),
-  status: z.enum(["ran", "skipped", "failed"]),
+  trust: z.enum(['safe', 'runs-project-code', 'network']),
+  status: z.enum(['ran', 'skipped', 'failed']),
   reason: z.string().optional(),
   version: z.string().optional(),
   findings: z.number(),
@@ -77,13 +77,13 @@ const analyzerRun = z.object({
 
 export const findingsFilterInput = {
   rootDir,
-  status: z.array(status).optional().describe("Only entries in these lifecycle states."),
-  severity: z.array(severity).optional().describe("Only entries of these severities."),
-  category: z.array(z.string()).optional().describe("Only entries in these categories."),
+  status: z.array(status).optional().describe('Only entries in these lifecycle states.'),
+  severity: z.array(severity).optional().describe('Only entries of these severities.'),
+  category: z.array(z.string()).optional().describe('Only entries in these categories.'),
   file: z
     .string()
     .optional()
-    .describe("Only entries in this file, as a repository-relative or absolute path."),
+    .describe('Only entries in this file, as a repository-relative or absolute path.'),
 };
 
 const finding = z
@@ -156,10 +156,10 @@ export const reviewOutput = {
   baselined: z.number(),
   analyzers: z
     .array(analyzerRun)
-    .describe("Every external analyzer considered: which ran, which did not, and why."),
+    .describe('Every external analyzer considered: which ran, which did not, and why.'),
   semantic: semanticRun
     .nullable()
-    .describe("What the semantic pass did, or null when it was not asked for."),
+    .describe('What the semantic pass did, or null when it was not asked for.'),
   persisted: z.boolean(),
 };
 
@@ -171,7 +171,7 @@ export const analyzersOutput = {
       license: z.string(),
       homepage: z.string(),
       covers: z.string(),
-      trust: z.enum(["safe", "runs-project-code", "network"]),
+      trust: z.enum(['safe', 'runs-project-code', 'network']),
       applies: z.boolean(),
       installed: z.boolean(),
       version: z.string().optional(),
@@ -212,7 +212,7 @@ export const explainOutput = {
       startColumn: z.number(),
       endColumn: z.number(),
       replacement: z.string(),
-      safety: z.enum(["safe", "review"]),
+      safety: z.enum(['safe', 'review']),
     })
     .optional(),
   ifYouAcceptIt: z.object({ inlineComment: z.string(), durable: z.string() }),

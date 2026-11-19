@@ -1,13 +1,13 @@
-import type { Severity } from "../review-engine/index.js";
-import { deepFreeze } from "./internal/deep-freeze.js";
-import { getEntry } from "./internal/lookup.js";
-import type { LedgerEntry } from "./types/entry.js";
-import { transitionFinding } from "./types/entry.js";
-import type { HistoryEvent, TransitionOrigin } from "./types/history.js";
-import type { Ledger } from "./types/ledger.js";
-import type { FindingLifecycleStatus } from "./types/lifecycle.js";
+import type { Severity } from '../review-engine/index.js';
+import { deepFreeze } from './internal/deep-freeze.js';
+import { getEntry } from './internal/lookup.js';
+import type { LedgerEntry } from './types/entry.js';
+import { transitionFinding } from './types/entry.js';
+import type { HistoryEvent, TransitionOrigin } from './types/history.js';
+import type { Ledger } from './types/ledger.js';
+import type { FindingLifecycleStatus } from './types/lifecycle.js';
 
-export { getEntry } from "./internal/lookup.js";
+export { getEntry } from './internal/lookup.js';
 
 export interface LedgerEntryFilter {
   status?: FindingLifecycleStatus[];

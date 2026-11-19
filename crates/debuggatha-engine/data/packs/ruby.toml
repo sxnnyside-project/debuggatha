@@ -1,0 +1,117 @@
+id = "debuggatha/ruby"
+version = "1.0.0"
+kind = "stack"
+displayName = "Ruby"
+dependsOn = []
+
+[[rules]]
+id = "no-eval"
+packId = "debuggatha/ruby"
+statement = "Never evaluate a string as code; parse the data or look the operation up in a fixed table."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-eval"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[rules]]
+id = "no-shell-interpolation"
+packId = "debuggatha/ruby"
+statement = "Do not build a shell command from interpolated or concatenated text; pass the arguments separately."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-no-shell-interpolation"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[rules]]
+id = "no-unsafe-deserialization"
+packId = "debuggatha/ruby"
+statement = "Do not deserialize data that can come from outside with a format that rebuilds arbitrary objects."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unsafe-deserialization"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[rules]]
+id = "no-raw-markup"
+packId = "debuggatha/ruby"
+statement = "Do not mark text as safe with `raw` or `html_safe`; let the view escape it or sanitize it first."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-raw-markup"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[rules]]
+id = "no-permit-all"
+packId = "debuggatha/ruby"
+statement = "Do not call `permit!`; list the parameters the action accepts."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-permit-all"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[knowledge]]
+id = "know-no-eval"
+title = "Evaluating text as code"
+body = "A function that runs a string as code lets whoever controls the string run anything the program can. Replace it with data parsing or a lookup of known operations."
+externalRefs = ["https://cwe.mitre.org/data/definitions/95.html"]
+limitations = ["A call to a project function that happens to be named like the builtin is reported, and a string built only from constants is reported too."]
+
+[[knowledge]]
+id = "know-no-shell-interpolation"
+title = "Shell command built from text"
+body = "A command line assembled by interpolation or concatenation is read by a shell, so a value with a quote or a separator becomes a second command. Pass the program and its arguments as separate values."
+externalRefs = ["https://cwe.mitre.org/data/definitions/78.html"]
+limitations = ["Only a command built in the same file and reached by name is seen; a command assembled in another function or module is not, and a variable that only ever holds constants is reported."]
+
+[[knowledge]]
+id = "know-no-unsafe-deserialization"
+title = "Deserializing untrusted bytes"
+body = "Formats that rebuild arbitrary objects can run code while loading. Read data-only formats such as JSON, or restrict the classes that may be rebuilt."
+externalRefs = ["https://cwe.mitre.org/data/definitions/502.html", "https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html"]
+limitations = ["The rule cannot tell whether the bytes come from a trusted place, so data the program wrote itself is reported too.", "A call with a second argument (for example a class allowlist) is left alone; whether that argument is enough is not checked."]
+
+[[knowledge]]
+id = "know-no-raw-markup"
+title = "Raw markup skips escaping"
+body = "`raw` and `html_safe` mark text as safe, so Rails does not escape it; if any part came from a user it is script injection. Let the view escape it or sanitize it first."
+externalRefs = ["https://cwe.mitre.org/data/definitions/79.html", "https://guides.rubyonrails.org/security.html"]
+limitations = ["Markup the program builds from constants is reported too."]
+
+[[knowledge]]
+id = "know-no-permit-all"
+title = "Accepting every parameter"
+body = "`permit!` lets a request set any attribute of the model, including ones it must not reach (roles, ownership). List the accepted parameters."
+externalRefs = ["https://cwe.mitre.org/data/definitions/915.html", "https://guides.rubyonrails.org/security.html"]
+limitations = ["A trusted internal call, such as a console or a job, is reported although the parameters never come from a request."]
+
+[[rules]]
+id = "no-csrf-skip"
+packId = "debuggatha/ruby"
+statement = "Do not skip CSRF protection (`skip_forgery_protection`); protect the actions that change state."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-csrf-skip"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[knowledge]]
+id = "know-no-csrf-skip"
+title = "CSRF protection skipped"
+body = "Without the token check, another site can make the browser submit forms on the user's behalf."
+externalRefs = ["https://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf", "https://cwe.mitre.org/data/definitions/352.html"]
+limitations = ["An API controller that authenticates with a token is reported."]
+
+[[rules]]
+id = "no-weak-hash"
+packId = "debuggatha/ruby"
+statement = "Do not use MD5, SHA-1 or DES for anything a person could attack; use SHA-256 or stronger."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-weak-hash"]
+appliesTo = { kind = "requires-language", language = "ruby" }
+
+[[knowledge]]
+id = "know-no-weak-hash"
+title = "Broken hash or cipher"
+body = "MD5, SHA-1 and DES have practical collision or brute-force attacks. Use SHA-256 or stronger, and a password hash for passwords."
+externalRefs = ["https://cwe.mitre.org/data/definitions/327.html"]
+limitations = ["The use of the hash is not visible: checksums and cache keys are reported with low confidence.", "A digest chosen by name at run time, such as getInstance(\"MD5\"), is not read."]

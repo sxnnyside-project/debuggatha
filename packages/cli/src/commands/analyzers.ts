@@ -3,11 +3,11 @@ import {
   type AnalyzerOptions,
   type AnalyzerRun,
   inventoryAnalyzers,
-} from "@debuggatha/engine";
-import { type Command, InvalidArgumentError, Option } from "commander";
-import pc from "picocolors";
-import { type DebuggathaConfig, loadConfig } from "../config.js";
-import type { CliLogger } from "../utils/logger.js";
+} from '@debuggatha/engine';
+import { type Command, InvalidArgumentError, Option } from 'commander';
+import pc from 'picocolors';
+import { type DebuggathaConfig, loadConfig } from '../config.js';
+import type { CliLogger } from '../utils/logger.js';
 
 export interface AnalyzerFlags {
   analyzer?: string[];
@@ -23,22 +23,22 @@ export function addAnalyzerOptions(command: Command): Command {
   return command
     .addOption(
       new Option(
-        "--analyzer <id...>",
-        "Also run these analyzers, including ones that run project code or use the network",
+        '--analyzer <id...>',
+        'Also run these analyzers, including ones that run project code or use the network',
       ).argParser((value: string, previous: string[] | undefined) => {
         if (!IDS.includes(value)) {
-          throw new InvalidArgumentError(`Unknown analyzer "${value}". Known: ${IDS.join(", ")}.`);
+          throw new InvalidArgumentError(`Unknown analyzer "${value}". Known: ${IDS.join(', ')}.`);
         }
         return [...(previous ?? []), value];
       }),
     )
-    .option("--no-analyzers", "Run only the built-in detectors")
+    .option('--no-analyzers', 'Run only the built-in detectors')
     .addOption(
-      new Option("--analyzer-timeout <seconds>", "Seconds one analyzer may run")
+      new Option('--analyzer-timeout <seconds>', 'Seconds one analyzer may run')
         .argParser((value: string) => {
           const seconds = Number(value);
           if (!Number.isFinite(seconds) || seconds <= 0) {
-            throw new InvalidArgumentError("Expected a number of seconds above 0.");
+            throw new InvalidArgumentError('Expected a number of seconds above 0.');
           }
           return seconds;
         })
@@ -53,14 +53,14 @@ export function addAnalyzerOptions(command: Command): Command {
  */
 export function analyzerOptionsFrom(
   flags: AnalyzerFlags,
-  config: DebuggathaConfig["analyzers"] = {},
+  config: DebuggathaConfig['analyzers'] = {},
 ): AnalyzerOptions {
-  if (!flags.analyzers) return { mode: "off" };
+  if (!flags.analyzers) return { mode: 'off' };
   const enable = flags.analyzer ?? [];
-  if (config.mode === "off" && enable.length === 0) return { mode: "off" };
+  if (config.mode === 'off' && enable.length === 0) return { mode: 'off' };
   const timeoutSeconds = flags.analyzerTimeout ?? config.timeoutSeconds;
   return {
-    mode: "auto",
+    mode: 'auto',
     enable,
     ...(config.disable?.length ? { disable: config.disable } : {}),
     enableHint: (id) => `enable it with --analyzer ${id}`,
@@ -73,12 +73,12 @@ const UNREMARKABLE = /nothing it analyzes|no matching files|turned off/;
 
 export function describeRuns(runs: readonly AnalyzerRun[]): string[] {
   return runs
-    .filter((run) => run.status !== "skipped" || !UNREMARKABLE.test(run.reason ?? ""))
+    .filter((run) => run.status !== 'skipped' || !UNREMARKABLE.test(run.reason ?? ''))
     .map((run) => {
-      if (run.status === "ran") {
-        return `${run.name}${run.version ? ` ${run.version}` : ""} ran: ${run.findings} findings.`;
+      if (run.status === 'ran') {
+        return `${run.name}${run.version ? ` ${run.version}` : ''} ran: ${run.findings} findings.`;
       }
-      if (run.status === "failed") {
+      if (run.status === 'failed') {
         return `${run.name} failed (${run.reason}); its findings are not part of this review.`;
       }
       return `${run.name} skipped: ${run.reason}.`;
@@ -88,9 +88,9 @@ export function describeRuns(runs: readonly AnalyzerRun[]): string[] {
 export function registerAnalyzersCommand(program: Command) {
   addAnalyzerOptions(
     program
-      .command("analyzers")
+      .command('analyzers')
       .description(
-        "List the external analyzers Debuggatha can run: what is installed here, its license, and what a review would run",
+        'List the external analyzers Debuggatha can run: what is installed here, its license, and what a review would run',
       ),
   ).action((flags: AnalyzerFlags, command) => {
     const logger = command.logger as CliLogger;
@@ -101,18 +101,18 @@ export function registerAnalyzersCommand(program: Command) {
     );
 
     if (logger.isJson) {
-      logger.json({ status: "success", analyzers: entries });
+      logger.json({ status: 'success', analyzers: entries });
       return;
     }
     for (const entry of entries) {
       const state = entry.willRun
-        ? pc.green("will run")
+        ? pc.green('will run')
         : !entry.applies
-          ? pc.dim("not used here")
+          ? pc.dim('not used here')
           : entry.installed
-            ? pc.yellow("not run")
-            : pc.dim("not installed");
-      const version = entry.version ? ` ${entry.version}` : "";
+            ? pc.yellow('not run')
+            : pc.dim('not installed');
+      const version = entry.version ? ` ${entry.version}` : '';
       logger.log(
         `${pc.bold(entry.id)}${version}  ${state}  ${pc.dim(`${entry.license} · ${entry.covers}`)}`,
       );
@@ -120,7 +120,7 @@ export function registerAnalyzersCommand(program: Command) {
       else if (!entry.installed && entry.applies) logger.log(`  ${pc.dim(entry.homepage)}`);
     }
     logger.info(
-      "Debuggatha runs these tools as separate processes; it does not include or install them. Each is under its own license.",
+      'Debuggatha runs these tools as separate processes; it does not include or install them. Each is under its own license.',
     );
   });
 }

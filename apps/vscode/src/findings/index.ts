@@ -1,6 +1,6 @@
-import { isActiveFindingStatus, type LedgerEntry, type Severity } from "@debuggatha/engine";
-import { SEVERITY_LEVELS } from "../config/settings.js";
-import { absolutePath, type Span, spanOf } from "./present.js";
+import { isActiveFindingStatus, type LedgerEntry, type Severity } from '@debuggatha/engine';
+import { SEVERITY_LEVELS } from '../config/settings.js';
+import { absolutePath, type Span, spanOf } from './present.js';
 
 export interface IndexedFinding {
   entry: LedgerEntry;

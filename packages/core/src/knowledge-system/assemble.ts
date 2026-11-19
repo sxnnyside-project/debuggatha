@@ -1,7 +1,7 @@
-import type { RepositoryContext } from "../repository-intelligence/index.js";
-import type { ReviewRequest } from "../review-engine/index.js";
-import type { SkillContext } from "./types/context.js";
-import type { ReviewPolicy } from "./types/policy.js";
+import type { RepositoryContext } from '../repository-intelligence/index.js';
+import type { ReviewRequest } from '../review-engine/index.js';
+import type { SkillContext } from './types/context.js';
+import type { ReviewPolicy } from './types/policy.js';
 
 /**
  * Pure: `(RepositoryContext, ReviewRequest, ReviewPolicy | undefined) →

@@ -1,0 +1,1674 @@
+{
+  "rules": [
+    "no-async-foreach",
+    "no-shell-interpolation",
+    "no-open-cors",
+    "no-error-leak",
+    "async-route-errors",
+    "no-focused-tests",
+    "no-empty-tests",
+    "no-assertionless-tests"
+  ],
+  "cases": [
+    {
+      "name": "foreach-async-arrow",
+      "file": "a.ts",
+      "source": "items.forEach(async (x) => { await f(x); });\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-async-function",
+      "file": "a.js",
+      "source": "items.forEach(async function (x) {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-async-bare-param",
+      "file": "a.js",
+      "source": "items.forEach(async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-sync",
+      "file": "a.js",
+      "source": "items.forEach((x) => f(x));\n",
+      "ts": []
+    },
+    {
+      "name": "foreach-multiline",
+      "file": "a.js",
+      "source": "items\n  .forEach(\n    async (x) => {},\n  );\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 2,
+          "start": 3,
+          "end": 12,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-optional-chain",
+      "file": "a.js",
+      "source": "items?.forEach(async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 7,
+          "end": 16,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-space-before-paren",
+      "file": "a.js",
+      "source": "items.forEach (async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 16,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-in-string-and-comment",
+      "file": "a.js",
+      "source": "// a.forEach(async x => {})\nconst s = \"a.forEach(async x => 1)\";\n",
+      "ts": []
+    },
+    {
+      "name": "foreach-test-files-are-scanned",
+      "file": "a.test.ts",
+      "source": "items.forEach(async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "foreach-vue-not-scanned",
+      "file": "a.vue",
+      "source": "<script>\nitems.forEach(async x => {});\n</script>\n",
+      "ts": []
+    },
+    {
+      "name": "foreach-second-argument-async",
+      "file": "a.js",
+      "source": "items.forEach(f, async () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "foreach-callback-named-async",
+      "file": "a.js",
+      "source": "items.forEach(async);\n",
+      "why": "async here is a name, not a function",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "exec-template",
+      "file": "a.ts",
+      "source": "exec(`ls ${dir}`);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-sync-concat",
+      "file": "a.ts",
+      "source": "execSync(\"rm -rf \" + dir);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-cp-prefix",
+      "file": "a.js",
+      "source": "cp.exec(`ls ${d}`, cb);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-child-process-prefix",
+      "file": "a.js",
+      "source": "child_process.execSync(`ls ${d}`);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 24,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-childProcess-prefix",
+      "file": "a.js",
+      "source": "childProcess.exec(\"a \" + b);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 19,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-literal-template",
+      "file": "a.js",
+      "source": "exec(`ls -la`);\n",
+      "ts": []
+    },
+    {
+      "name": "exec-plain-string",
+      "file": "a.js",
+      "source": "exec(\"ls -la\");\n",
+      "ts": []
+    },
+    {
+      "name": "exec-regex-method",
+      "file": "a.js",
+      "source": "re.exec(`a${b}`);\n",
+      "ts": []
+    },
+    {
+      "name": "exec-other-object",
+      "file": "a.js",
+      "source": "db.exec(`a${b}`);\n",
+      "ts": []
+    },
+    {
+      "name": "exec-test-file-skipped",
+      "file": "a.test.ts",
+      "source": "exec(`ls ${d}`);\n",
+      "ts": []
+    },
+    {
+      "name": "exec-multiline",
+      "file": "a.js",
+      "source": "exec(\n  `ls ${x}`,\n);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-with-options",
+      "file": "a.js",
+      "source": "exec(`ls ${d}`, { cwd });\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-only-template",
+      "file": "a.js",
+      "source": "exec(`${cmd}`);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-in-string-and-comment",
+      "file": "a.js",
+      "source": "// exec(`a${b}`)\nconst s = \"exec(`a${b}`)\";\n",
+      "ts": []
+    },
+    {
+      "name": "exec-template-plus",
+      "file": "a.js",
+      "source": "exec(`ls` + dir);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-crlf",
+      "file": "a.js",
+      "source": "exec(`ls ${d}`);\r\nexec(\"a\" + b);\r\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        },
+        {
+          "rule": "no-shell-interpolation",
+          "line": 2,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-name-first-concat",
+      "file": "a.js",
+      "source": "exec(cmd + \" -v\");\n",
+      "why": "a command built from a value is read by the shell whichever side the text is on",
+      "rust": [
+        [
+          "no-shell-interpolation",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "exec-constant-concat",
+      "file": "a.js",
+      "source": "exec(\"ls \" + \"-la\");\n",
+      "why": "two constants hold no value for a shell to read",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "exec-call-inside-interpolation",
+      "file": "a.js",
+      "source": "exec(`ls ${a(b, c)}`);\n",
+      "ts": [
+        {
+          "rule": "no-shell-interpolation",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "cors-bare",
+      "file": "a.js",
+      "source": "app.use(cors());\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 9,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-spaces",
+      "file": "a.js",
+      "source": "app.use(cors(  ));\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 9,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-comment-inside",
+      "file": "a.js",
+      "source": "app.use(cors(/* all */));\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 9,
+          "end": 14,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-with-origin",
+      "file": "a.js",
+      "source": "app.use(cors({ origin: 'https://a.com' }));\n",
+      "ts": []
+    },
+    {
+      "name": "cors-origin-star",
+      "file": "a.js",
+      "source": "app.use(cors({ origin: '*' }));\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 16,
+          "end": 27,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-origin-star-double",
+      "file": "a.js",
+      "source": "const o = { origin: \"*\" };\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 13,
+          "end": 24,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-origin-star-backtick",
+      "file": "a.js",
+      "source": "const o = { origin: `*` };\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 13,
+          "end": 24,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-origin-star-spaced",
+      "file": "a.ts",
+      "source": "const o = { origin   :   '*' };\n",
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 13,
+          "end": 29,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "cors-member-call",
+      "file": "a.js",
+      "source": "x.cors();\n",
+      "ts": []
+    },
+    {
+      "name": "cors-test-file-skipped",
+      "file": "a.test.ts",
+      "source": "app.use(cors());\n",
+      "ts": []
+    },
+    {
+      "name": "cors-origin-star-test-file-skipped",
+      "file": "a.test.ts",
+      "source": "const o = { origin: \"*\" };\n",
+      "ts": []
+    },
+    {
+      "name": "cors-quoted-key",
+      "file": "a.js",
+      "source": "const o = { \"origin\": \"*\" };\n",
+      "ts": []
+    },
+    {
+      "name": "cors-in-comment-and-string",
+      "file": "a.js",
+      "source": "// cors()\nconst s = 'cors()';\n",
+      "ts": []
+    },
+    {
+      "name": "cors-origin-other",
+      "file": "a.js",
+      "source": "const o = { origin: '*.example.com' };\n",
+      "ts": []
+    },
+    {
+      "name": "cors-origin-empty",
+      "file": "a.js",
+      "source": "const o = { origin: '' };\n",
+      "ts": []
+    },
+    {
+      "name": "cors-both-same-line",
+      "file": "a.js",
+      "source": "app.use(cors(), { origin: '*' });\n",
+      "why": "the old rule reported both on one line; a rule is reported once per line, as every other rule is, so the ledger identity of the first stays what it was",
+      "rust": [
+        [
+          "no-open-cors",
+          1,
+          9
+        ]
+      ],
+      "ts": [
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 9,
+          "end": 14,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-open-cors",
+          "line": 1,
+          "start": 19,
+          "end": 30,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-message",
+      "file": "a.js",
+      "source": "res.json({ error: err.message });\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-stack-status",
+      "file": "a.js",
+      "source": "res.status(500).json({ stack: err.stack });\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 22,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-send-e-stack",
+      "file": "a.js",
+      "source": "res.send(e.stack);\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-response-error",
+      "file": "a.js",
+      "source": "response.json(error.message);\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 15,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-ex",
+      "file": "a.js",
+      "source": "res.send(ex.message);\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-none",
+      "file": "a.js",
+      "source": "res.json({ ok: true });\n",
+      "ts": []
+    },
+    {
+      "name": "leak-first-wins-message",
+      "file": "a.js",
+      "source": "res.json({ m: err.message, s: err.stack });\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-first-wins-stack",
+      "file": "a.js",
+      "source": "res.json({ s: err.stack, m: err.message });\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-generic-message",
+      "file": "a.js",
+      "source": "res.status(500).send(\"Server error\");\n",
+      "ts": []
+    },
+    {
+      "name": "leak-test-file-skipped",
+      "file": "a.test.ts",
+      "source": "res.json(err.message);\n",
+      "ts": []
+    },
+    {
+      "name": "leak-multiline",
+      "file": "a.js",
+      "source": "res.status(500).json({\n  error: err.message,\n});\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 22,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-this-res",
+      "file": "a.js",
+      "source": "this.res.json(err.stack);\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-console",
+      "file": "a.js",
+      "source": "console.log(err.message);\n",
+      "ts": []
+    },
+    {
+      "name": "leak-messages-plural",
+      "file": "a.js",
+      "source": "res.json(err.messages);\n",
+      "ts": []
+    },
+    {
+      "name": "leak-nested-member-err",
+      "file": "a.js",
+      "source": "res.json(foo.err.message);\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "leak-status-spaced",
+      "file": "a.js",
+      "source": "res . status ( 500 ) . json ( err.stack );\n",
+      "ts": [
+        {
+          "rule": "no-error-leak",
+          "line": 1,
+          "start": 1,
+          "end": 30,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "leak-in-string",
+      "file": "a.js",
+      "source": "res.json(\"err.stack\");\n",
+      "ts": []
+    },
+    {
+      "name": "leak-status-with-call",
+      "file": "a.js",
+      "source": "res.status(code()).json({ e: err.message });\n",
+      "why": "the old pattern could not read a call inside status()",
+      "rust": [
+        [
+          "no-error-leak",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "leak-optional-chain",
+      "file": "a.js",
+      "source": "res.json({ e: err?.message });\n",
+      "why": "err?.message reads the same text",
+      "rust": [
+        [
+          "no-error-leak",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "route-async-arrow",
+      "file": "a.js",
+      "source": "app.get('/', async (req, res) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 14,
+          "end": 19,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-async-function",
+      "file": "a.js",
+      "source": "router.post('/x', async function (req, res) { await y(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 19,
+          "end": 24,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-with-try",
+      "file": "a.js",
+      "source": "app.get('/', async (req, res) => { try { await x(); } catch (e) {} });\n",
+      "ts": []
+    },
+    {
+      "name": "route-with-catch-call",
+      "file": "a.js",
+      "source": "app.get('/', async (req, res) => { x().catch(next); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-sync",
+      "file": "a.js",
+      "source": "app.get('/', (req, res) => { res.send(1); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-suffix-router",
+      "file": "a.ts",
+      "source": "userRouter.get('/', async (req, res) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 21,
+          "end": 26,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-suffix-app",
+      "file": "a.ts",
+      "source": "adminApp.put('/', async (req, res) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 19,
+          "end": 24,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-capital-router-alone",
+      "file": "a.js",
+      "source": "Router.get('/', async () => { await x(); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-other-object",
+      "file": "a.js",
+      "source": "server.get('/', async () => { await x(); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-all-method",
+      "file": "a.js",
+      "source": "app.all('*', async (req, res) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 14,
+          "end": 19,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-middleware-before",
+      "file": "a.js",
+      "source": "app.get('/x', auth, async (req, res) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 21,
+          "end": 26,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-multiline",
+      "file": "a.js",
+      "source": "app.get(\n  '/',\n  async (req, res) => {\n    await x();\n  },\n);\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 3,
+          "start": 3,
+          "end": 8,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-test-file-skipped",
+      "file": "a.test.ts",
+      "source": "app.get('/', async () => { await x(); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-wrapped-async",
+      "file": "a.js",
+      "source": "app.get('/', wrap(async (req, res) => { await x(); }));\n",
+      "ts": []
+    },
+    {
+      "name": "route-this-app",
+      "file": "a.js",
+      "source": "this.app.get('/', async () => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 19,
+          "end": 24,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "route-use-not-a-route",
+      "file": "a.js",
+      "source": "app.use(async (req, res, next) => { await x(); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-parenthesized",
+      "file": "a.js",
+      "source": "app.get('/', (async () => { await x(); }));\n",
+      "ts": []
+    },
+    {
+      "name": "route-in-string",
+      "file": "a.js",
+      "source": "const s = \"app.get('/', async () => {})\";\n",
+      "ts": []
+    },
+    {
+      "name": "route-try-in-nested-function",
+      "file": "a.js",
+      "source": "app.get('/', async () => { const f = () => { try { g(); } catch {} }; await f(); });\n",
+      "ts": []
+    },
+    {
+      "name": "route-ts",
+      "file": "a.ts",
+      "source": "app.post('/', async (req: Request, res: Response) => { await x(); });\n",
+      "ts": [
+        {
+          "rule": "async-route-errors",
+          "line": 1,
+          "start": 15,
+          "end": 20,
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "only-it",
+      "file": "a.js",
+      "source": "it.only('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-describe",
+      "file": "a.js",
+      "source": "describe.only('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-test",
+      "file": "a.ts",
+      "source": "test.only('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-context-suite",
+      "file": "a.js",
+      "source": "context.only('x', () => {});\nsuite.only('y', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 14,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-focused-tests",
+          "line": 2,
+          "start": 1,
+          "end": 12,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-fit-fdescribe",
+      "file": "a.js",
+      "source": "fit('x', () => {});\nfdescribe('y', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 5,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-focused-tests",
+          "line": 2,
+          "start": 1,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-spaced",
+      "file": "a.js",
+      "source": "it.only ('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 10,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-in-string-and-comment",
+      "file": "a.js",
+      "source": "// it.only('x')\nconst s = \"it.only('x')\";\n",
+      "ts": []
+    },
+    {
+      "name": "only-member-of-object",
+      "file": "a.js",
+      "source": "foo.it.only('x', () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "only-skip-is-fine",
+      "file": "a.js",
+      "source": "it.skip('x', () => {});\nit('y', () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "only-fit-not-called",
+      "file": "a.js",
+      "source": "const fit = 1;\nconst g = fit + 1;\n",
+      "ts": []
+    },
+    {
+      "name": "only-in-test-file",
+      "file": "a.test.ts",
+      "source": "it.only('x', () => { expect(1); });\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-in-non-test-file",
+      "file": "a.ts",
+      "source": "it.only('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-two-on-one-line",
+      "file": "a.js",
+      "source": "it.only('a', () => {}); it.only('b', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "only-each",
+      "file": "a.js",
+      "source": "describe.only.each([1])('x', () => {});\n",
+      "why": "a focused table is focused",
+      "rust": [
+        [
+          "no-focused-tests",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "only-playwright-describe",
+      "file": "a.js",
+      "source": "test.describe.only('x', () => {});\n",
+      "why": "a focused Playwright group is focused",
+      "rust": [
+        [
+          "no-focused-tests",
+          1,
+          1
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "empty-arrow",
+      "file": "a.test.ts",
+      "source": "it('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-async",
+      "file": "a.test.ts",
+      "source": "test('x', async () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 6,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-function",
+      "file": "a.test.ts",
+      "source": "it('x', function () {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-only",
+      "file": "a.test.ts",
+      "source": "it.only('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-comment-only",
+      "file": "a.test.ts",
+      "source": "it('x', () => { /* todo */ });\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-line-comment",
+      "file": "a.test.ts",
+      "source": "it('x', () => {\n  // todo\n});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-expression-body",
+      "file": "a.test.ts",
+      "source": "it('x', () => expect(1));\n",
+      "ts": []
+    },
+    {
+      "name": "empty-no-callback",
+      "file": "a.test.ts",
+      "source": "it('x');\n",
+      "ts": []
+    },
+    {
+      "name": "empty-done-param",
+      "file": "a.test.ts",
+      "source": "it('x', done => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-with-timeout",
+      "file": "a.test.ts",
+      "source": "it('x', () => {}, 1000);\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-name-not-string",
+      "file": "a.test.ts",
+      "source": "it(name, () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "empty-template-name",
+      "file": "a.test.ts",
+      "source": "it(`x ${y}`, () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-each-not-matched",
+      "file": "a.test.ts",
+      "source": "it.each([1])('x', () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "empty-wrapped-callback",
+      "file": "a.test.ts",
+      "source": "it('x', wrap(() => {}));\n",
+      "ts": []
+    },
+    {
+      "name": "empty-nested",
+      "file": "a.test.ts",
+      "source": "describe('x', () => {\n  it('y', () => {});\n});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 2,
+          "start": 3,
+          "end": 6,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-non-test-file",
+      "file": "a.ts",
+      "source": "it('x', () => {});\n",
+      "ts": []
+    },
+    {
+      "name": "empty-spec-file",
+      "file": "a.spec.js",
+      "source": "it('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-test-dir",
+      "file": "__tests__/a.js",
+      "source": "it('x', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-use-strict",
+      "file": "a.test.ts",
+      "source": "it('x', () => { 'use strict'; });\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "empty-concurrent",
+      "file": "a.test.ts",
+      "source": "it.concurrent('x', async () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-two-lines",
+      "file": "a.test.ts",
+      "source": "it('a', () => {});\nit('b', () => {});\n",
+      "ts": [
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-empty-tests",
+          "line": 2,
+          "start": 1,
+          "end": 4,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "empty-in-string",
+      "file": "a.test.ts",
+      "source": "const s = \"it('x', () => {})\";\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-plain",
+      "file": "a.test.ts",
+      "source": "it('x', () => { doThing(); });\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-expect",
+      "file": "a.test.ts",
+      "source": "it('x', () => { expect(1).toBe(1); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-assert",
+      "file": "a.test.ts",
+      "source": "it('x', () => { assert.ok(1); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-should",
+      "file": "a.test.ts",
+      "source": "it('x', () => { x.should.equal(1); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-verify",
+      "file": "a.test.ts",
+      "source": "it('x', () => { verify(x); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-fail",
+      "file": "a.test.ts",
+      "source": "it('x', () => { fail('no'); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-done-call",
+      "file": "a.test.ts",
+      "source": "it('x', (done) => { f(done); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-rejects",
+      "file": "a.test.ts",
+      "source": "it('x', async () => { await p.rejects; });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-throw",
+      "file": "a.test.ts",
+      "source": "it('x', () => { f(() => g()).toThrow(); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-snapshot",
+      "file": "a.test.ts",
+      "source": "it('x', () => { f().toMatchSnapshot(); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-helper-named-expect",
+      "file": "a.test.ts",
+      "source": "it('x', () => { expectEvent(x); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-comment-mentions",
+      "file": "a.test.ts",
+      "source": "it('x', () => {\n  // expect nothing\n  f();\n});\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-string-mentions",
+      "file": "a.test.ts",
+      "source": "it('x', () => { f('expect'); });\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-done-param-unused",
+      "file": "a.test.ts",
+      "source": "it('x', (done) => { f(); });\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-uppercase",
+      "file": "a.test.ts",
+      "source": "it('x', () => { EXPECT(x); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-nested-callback",
+      "file": "a.test.ts",
+      "source": "it('x', () => { run(() => { expect(1); }); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-non-test-file",
+      "file": "a.ts",
+      "source": "it('x', () => { doThing(); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-use-strict",
+      "file": "a.test.ts",
+      "source": "it('x', () => { 'use strict'; });\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-multiline",
+      "file": "a.test.ts",
+      "source": "it('x', async () => {\n  await a();\n  await b();\n});\n",
+      "ts": [
+        {
+          "rule": "no-assertionless-tests",
+          "line": 1,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "noassert-expression-body",
+      "file": "a.test.ts",
+      "source": "it('x', () => run());\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-object-key",
+      "file": "a.test.ts",
+      "source": "it('x', () => { f({ expected: 1 }); });\n",
+      "ts": []
+    },
+    {
+      "name": "noassert-await-expect",
+      "file": "a.test.ts",
+      "source": "it('x', async () => { await expect(p).resolves.toBe(1); });\n",
+      "ts": []
+    },
+    {
+      "name": "crlf-lines",
+      "file": "a.test.ts",
+      "source": "it.only('a', () => {});\r\nit('b', () => { f(); });\r\n",
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-empty-tests",
+          "line": 1,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        },
+        {
+          "rule": "no-assertionless-tests",
+          "line": 2,
+          "start": 1,
+          "end": 4,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "unicode-before",
+      "file": "a.js",
+      "source": "const s = \"😀\"; items.forEach(async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 1,
+          "start": 22,
+          "end": 31,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "recoverable-error-elsewhere",
+      "file": "a.js",
+      "source": "const q;\nitems.forEach(async x => {});\n",
+      "ts": [
+        {
+          "rule": "no-async-foreach",
+          "line": 2,
+          "start": 6,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "fatal-error-file-is-not-analyzed",
+      "file": "a.js",
+      "source": "const q = ;\nit.only('x', () => {});\n",
+      "why": "nothing is concluded about a file the parser could not read",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "no-focused-tests",
+          "line": 2,
+          "start": 1,
+          "end": 9,
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}

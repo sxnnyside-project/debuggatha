@@ -1,0 +1,310 @@
+{
+ "name": "dart-sei",
+ "commit": "c941d586fa2d798b53b2ea21f4b5a3c428646997",
+ "findings": [
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 10,
+    "end": 10
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 15,
+    "end": 15
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 33,
+    "end": 33
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 36,
+    "end": 36
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 39,
+    "end": 39
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 4,
+    "end": 4
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 7,
+    "end": 7
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "example/example.dart",
+   "lines": {
+    "start": 9,
+    "end": 9
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "tool/generate_icons.dart",
+   "lines": {
+    "start": 317,
+    "end": 317
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "avoid-print",
+   "pack": "debuggatha/dart",
+   "file": "tool/generate_icons.dart",
+   "lines": {
+    "start": 44,
+    "end": 44
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

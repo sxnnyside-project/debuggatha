@@ -1,4 +1,4 @@
-import type { FindingLifecycleStatus } from "./lifecycle.js";
+import type { FindingLifecycleStatus } from './lifecycle.js';
 
 /**
  * What triggered a transition. Two kinds only, deliberately: an automated
@@ -10,8 +10,8 @@ import type { FindingLifecycleStatus } from "./lifecycle.js";
  * an imported adapter identifier.
  */
 export type TransitionOrigin =
-  | { kind: "review"; sessionId: string }
-  | { kind: "manual"; actor: string };
+  | { kind: 'review'; sessionId: string }
+  | { kind: 'manual'; actor: string };
 
 /**
  * One immutable record of a state change. History is append-only — see

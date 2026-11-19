@@ -1,13 +1,13 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   createFinding,
   type Evidence,
   type Finding,
   ruleIdFromEvidence,
   type Severity,
-} from "@debuggatha/core";
-import type { SemanticProvider } from "./types.js";
+} from '@debuggatha/core';
+import type { SemanticProvider } from './types.js';
 
 /**
  * Everything a model reads is data from a repository, and repositories can be written by
@@ -34,16 +34,16 @@ export const isSecretFile = (file: string) => SECRET_FILE.test(file);
 
 /** Nothing that looks like a credential is sent to a model, even a local one. */
 export function scrub(text: string): string {
-  return text.replace(LONG_TOKEN, "$1[REDACTED]$1");
+  return text.replace(LONG_TOKEN, '$1[REDACTED]$1');
 }
 
 export function renderView(view: CodeView, withheld: ReadonlySet<number>, marked?: number): string {
   return view.lines
     .map(({ n, text }) => {
-      const body = withheld.has(n) ? "[line withheld: may hold a secret]" : scrub(text);
-      return `${n === marked ? ">" : " "} ${String(n).padStart(4)} | ${body}`;
+      const body = withheld.has(n) ? '[line withheld: may hold a secret]' : scrub(text);
+      return `${n === marked ? '>' : ' '} ${String(n).padStart(4)} | ${body}`;
     })
-    .join("\n");
+    .join('\n');
 }
 
 /** Reads `radius` lines either side of a line; `undefined` when the file is gone. */
@@ -55,27 +55,27 @@ export function windowAround(
 ): CodeView | undefined {
   let all: string[];
   try {
-    all = readFileSync(join(rootDir, file), "utf8").split("\n");
+    all = readFileSync(join(rootDir, file), 'utf8').split('\n');
   } catch {
     return undefined;
   }
   const from = Math.max(1, line - radius);
   const to = Math.min(all.length, line + radius);
   const lines: CodeLine[] = [];
-  for (let n = from; n <= to; n++) lines.push({ n, text: all[n - 1] ?? "" });
+  for (let n = from; n <= to; n++) lines.push({ n, text: all[n - 1] ?? '' });
   return { file, lines };
 }
 
 /** A model's answer as an object: JSON, possibly fenced or surrounded by prose. */
 export function parseObject(text: string): Record<string, unknown> | undefined {
   const attempts = [text.trim()];
-  const start = text.indexOf("{");
-  const end = text.lastIndexOf("}");
+  const start = text.indexOf('{');
+  const end = text.lastIndexOf('}');
   if (start >= 0 && end > start) attempts.push(text.slice(start, end + 1));
   for (const attempt of attempts) {
     try {
       const value: unknown = JSON.parse(attempt);
-      if (value && typeof value === "object" && !Array.isArray(value)) {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
         return value as Record<string, unknown>;
       }
     } catch {
@@ -86,7 +86,7 @@ export function parseObject(text: string): Record<string, unknown> | undefined {
 }
 
 const clip = (value: unknown, limit: number): string =>
-  typeof value === "string" ? value.replace(/\s+/g, " ").trim().slice(0, limit) : "";
+  typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, limit) : '';
 
 /* ------------------------------------------------------------------ verification */
 
@@ -97,7 +97,7 @@ Most findings are real. Answer "false_positive" only when a line in the code sho
 Answer with JSON only: {"verdict":"real"|"false_positive"|"unsure","proof":"<the line that proves it, copied exactly; empty unless false_positive>","reason":"one short sentence"}.
 Say "unsure" when the code shown is not enough to decide.`;
 
-export type Verdict = "confirmed" | "doubtful" | "unsure";
+export type Verdict = 'confirmed' | 'doubtful' | 'unsure';
 
 export interface Verification {
   verdict: Verdict;
@@ -132,12 +132,12 @@ export function parseVerdict(
   if (!object) return undefined;
   const raw = clip(object.verdict, 40)
     .toLowerCase()
-    .replace(/[\s-]+/g, "_");
+    .replace(/[\s-]+/g, '_');
   const reason = clip(object.reason, 300);
-  if (["real", "true_positive", "confirmed", "yes"].includes(raw))
-    return { verdict: "confirmed", reason };
-  if (["unsure", "unknown", "unclear"].includes(raw)) return { verdict: "unsure", reason };
-  if (["false_positive", "fp", "not_real", "no"].includes(raw)) {
+  if (['real', 'true_positive', 'confirmed', 'yes'].includes(raw))
+    return { verdict: 'confirmed', reason };
+  if (['unsure', 'unknown', 'unclear'].includes(raw)) return { verdict: 'unsure', reason };
+  if (['false_positive', 'fp', 'not_real', 'no'].includes(raw)) {
     const proof = squash(clip(object.proof, 200));
     const grounded =
       view !== undefined &&
@@ -145,9 +145,9 @@ export function parseVerdict(
       // The flagged line always "contains" itself; the proof has to be some other line.
       view.lines.some((line) => line.n !== flaggedLine && squash(line.text).includes(proof));
     return grounded
-      ? { verdict: "doubtful", reason }
+      ? { verdict: 'doubtful', reason }
       : {
-          verdict: "unsure",
+          verdict: 'unsure',
           reason: `Called a false positive without pointing at code that shows it: ${reason}`,
         };
   }
@@ -179,8 +179,8 @@ export function withVerdict(
   provider: SemanticProvider,
 ): Finding {
   const evidence: Evidence = {
-    kind: "semantic-review",
-    role: "verification",
+    kind: 'semantic-review',
+    role: 'verification',
     provider: provider.name,
     model: provider.model,
     verdict: verification.verdict,
@@ -209,14 +209,14 @@ export function detectionPrompt(view: CodeView, withheld: ReadonlySet<number>) {
   };
 }
 
-const CATEGORIES = new Set(["security", "reliability", "performance", "maintainability"]);
+const CATEGORIES = new Set(['security', 'reliability', 'performance', 'maintainability']);
 
-const squash = (text: string) => text.replace(/\s+/g, "");
+const squash = (text: string) => text.replace(/\s+/g, '');
 const slug = (title: string) =>
   title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
     .slice(0, 40);
 
 export interface Detection {
@@ -268,27 +268,27 @@ export function detectionsFrom(
 
     const category = CATEGORIES.has(String(issue.category))
       ? String(issue.category)
-      : "reliability";
+      : 'reliability';
     // A model's claim about a line is never worse than medium, and never more than a suspicion.
-    const severity: Severity = issue.severity === "low" ? "low" : "medium";
+    const severity: Severity = issue.severity === 'low' ? 'low' : 'medium';
     accepted.push(
       createFinding({
         title,
-        explanation: `${why} Raised by a language model (${provider.name}${provider.model ? `, ${provider.model}` : ""}) reading this code; no analyzer or rule reported it, so treat it as a suspicion to check.`,
+        explanation: `${why} Raised by a language model (${provider.name}${provider.model ? `, ${provider.model}` : ''}) reading this code; no analyzer or rule reported it, so treat it as a suspicion to check.`,
         severity,
-        confidence: "low",
+        confidence: 'low',
         category,
         locations: [{ file: view.file, lines: { start: line, end: line } }],
         evidence: [
           {
-            kind: "code",
+            kind: 'code',
             file: view.file,
             lines: { start: line, end: line },
             excerpt: scrub(actual).trim().slice(0, 200),
           },
           {
-            kind: "semantic-review",
-            role: "detection",
+            kind: 'semantic-review',
+            role: 'detection',
             provider: provider.name,
             model: provider.model,
             verdict: undefined,
@@ -300,7 +300,7 @@ export function detectionsFrom(
         recommendations: [
           {
             id: `semantic-${topic}-${view.file}-${line}`,
-            action: "investigate",
+            action: 'investigate',
             summary: `Check whether this is a defect: ${title}`,
             rationale: why,
             targetFile: view.file,

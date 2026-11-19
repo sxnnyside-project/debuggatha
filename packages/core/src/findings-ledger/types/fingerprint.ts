@@ -3,8 +3,8 @@ import {
   type Evidence,
   type Finding,
   ruleIdFromEvidence,
-} from "../../review-engine/index.js";
-import { sha256Hex } from "../internal/hash.js";
+} from '../../review-engine/index.js';
+import { sha256Hex } from '../internal/hash.js';
 
 /**
  * What Finding Matching keys off of (epic §2, §6) — deliberately never
@@ -30,7 +30,7 @@ function extractRuleId(evidence: Evidence[]): string | undefined {
 
 function extractContentAnchor(evidence: Evidence[]): string | undefined {
   for (const item of evidence) {
-    if (item.kind === "code" && item.excerpt !== undefined) {
+    if (item.kind === 'code' && item.excerpt !== undefined) {
       return sha256Hex(item.excerpt).slice(0, 16);
     }
   }
@@ -39,7 +39,7 @@ function extractContentAnchor(evidence: Evidence[]): string | undefined {
 
 export function computeFindingFingerprint(finding: Finding): FindingFingerprint {
   return {
-    file: finding.locations[0]?.file ?? "",
+    file: finding.locations[0]?.file ?? '',
     ruleId: extractRuleId(finding.evidence),
     category: finding.category,
     contentAnchor: extractContentAnchor(finding.evidence),

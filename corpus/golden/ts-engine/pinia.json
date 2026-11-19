@@ -1,0 +1,2358 @@
+{
+ "name": "pinia",
+ "commit": "05ece25e563d15dd1187fd30b4e5a833e9aefd78",
+ "findings": [
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/nuxt/src/runtime/plugin.ts",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 49,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/nuxt/test/auto-hmr-plugin.spec.ts",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 32,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/nuxt/test/nuxt.spec.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/online-playground/src/download/download.ts",
+   "lines": {
+    "start": 37,
+    "end": 37
+   },
+   "columns": {
+    "start": 31,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/getters.spec.ts",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 16,
+    "end": 38
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/getters.spec.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 16,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 196,
+    "end": 196
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 338,
+    "end": 338
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 368,
+    "end": 368
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 391,
+    "end": 391
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 428,
+    "end": 428
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 46,
+    "end": 46
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 460,
+    "end": 460
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 486,
+    "end": 486
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 506,
+    "end": 506
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 525,
+    "end": 525
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 544,
+    "end": 544
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 590,
+    "end": 590
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 619,
+    "end": 619
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 642,
+    "end": 642
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 663,
+    "end": 663
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 682,
+    "end": 682
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 704,
+    "end": 704
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 736,
+    "end": 736
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 761,
+    "end": 761
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/hmr.spec.ts",
+   "lines": {
+    "start": 795,
+    "end": 795
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 112,
+    "end": 112
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 139,
+    "end": 139
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 194,
+    "end": 194
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 207,
+    "end": 207
+   },
+   "columns": {
+    "start": 47,
+    "end": 52
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 207,
+    "end": 207
+   },
+   "columns": {
+    "start": 19,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 221,
+    "end": 221
+   },
+   "columns": {
+    "start": 20,
+    "end": 30
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 229,
+    "end": 229
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 247,
+    "end": 247
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "packages/pinia/__tests__/mapHelpers.spec.ts",
+   "lines": {
+    "start": 96,
+    "end": 96
+   },
+   "columns": {
+    "start": 5,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/onAction.spec.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/onAction.spec.ts",
+   "lines": {
+    "start": 35,
+    "end": 35
+   },
+   "columns": {
+    "start": 24,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/ssr.spec.ts",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/ssr.spec.ts",
+   "lines": {
+    "start": 221,
+    "end": 221
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/ssr.spec.ts",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/ssr.spec.ts",
+   "lines": {
+    "start": 74,
+    "end": 74
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/state.spec.ts",
+   "lines": {
+    "start": 436,
+    "end": 436
+   },
+   "columns": {
+    "start": 11,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/state.spec.ts",
+   "lines": {
+    "start": 450,
+    "end": 450
+   },
+   "columns": {
+    "start": 20,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/store.patch.spec.ts",
+   "lines": {
+    "start": 144,
+    "end": 144
+   },
+   "columns": {
+    "start": 19,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/store.spec.ts",
+   "lines": {
+    "start": 221,
+    "end": 221
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/store.spec.ts",
+   "lines": {
+    "start": 222,
+    "end": 222
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/storePlugins.spec.ts",
+   "lines": {
+    "start": 248,
+    "end": 248
+   },
+   "columns": {
+    "start": 25,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/__tests__/storePlugins.spec.ts",
+   "lines": {
+    "start": 249,
+    "end": 249
+   },
+   "columns": {
+    "start": 31,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "eqeqeq",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/storePlugins.spec.ts",
+   "lines": {
+    "start": 66,
+    "end": 66
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/__tests__/subscriptions.spec.ts",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 10,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/createPinia.ts",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 3,
+    "end": 5
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 43,
+    "end": 49
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 89,
+    "end": 89
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 90,
+    "end": 90
+   },
+   "columns": {
+    "start": 31,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 97,
+    "end": 97
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 98,
+    "end": 98
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/actions.ts",
+   "lines": {
+    "start": 99,
+    "end": 99
+   },
+   "columns": {
+    "start": 15,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 124,
+    "end": 124
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 126,
+    "end": 126
+   },
+   "columns": {
+    "start": 40,
+    "end": 42
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 131,
+    "end": 131
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 41,
+    "end": 41
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/formatting.ts",
+   "lines": {
+    "start": 9,
+    "end": 9
+   },
+   "columns": {
+    "start": 8,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 158,
+    "end": 158
+   },
+   "columns": {
+    "start": 20,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 351,
+    "end": 351
+   },
+   "columns": {
+    "start": 20,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 368,
+    "end": 368
+   },
+   "columns": {
+    "start": 22,
+    "end": 31
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 388,
+    "end": 388
+   },
+   "columns": {
+    "start": 22,
+    "end": 31
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 480,
+    "end": 480
+   },
+   "columns": {
+    "start": 20,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 53,
+    "end": 53
+   },
+   "columns": {
+    "start": 38,
+    "end": 47
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 558,
+    "end": 558
+   },
+   "columns": {
+    "start": 30,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 595,
+    "end": 595
+   },
+   "columns": {
+    "start": 47,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 615,
+    "end": 615
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/plugin.ts",
+   "lines": {
+    "start": 619,
+    "end": 619
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/devtools/utils.ts",
+   "lines": {
+    "start": 15,
+    "end": 15
+   },
+   "columns": {
+    "start": 24,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/devtools/utils.ts",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 26,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/hmr.ts",
+   "lines": {
+    "start": 113,
+    "end": 113
+   },
+   "columns": {
+    "start": 60,
+    "end": 62
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/hmr.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/hmr.ts",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/hmr.ts",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/mapHelpers.ts",
+   "lines": {
+    "start": 153,
+    "end": 153
+   },
+   "columns": {
+    "start": 48,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/mapHelpers.ts",
+   "lines": {
+    "start": 259,
+    "end": 259
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/mapHelpers.ts",
+   "lines": {
+    "start": 404,
+    "end": 404
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/mapHelpers.ts",
+   "lines": {
+    "start": 416,
+    "end": 416
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 140,
+    "end": 140
+   },
+   "columns": {
+    "start": 34,
+    "end": 39
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 149,
+    "end": 149
+   },
+   "columns": {
+    "start": 22,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 28,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 196,
+    "end": 196
+   },
+   "columns": {
+    "start": 44,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 203,
+    "end": 203
+   },
+   "columns": {
+    "start": 28,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 215,
+    "end": 215
+   },
+   "columns": {
+    "start": 16,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 234,
+    "end": 234
+   },
+   "columns": {
+    "start": 11,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 379,
+    "end": 379
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 383,
+    "end": 383
+   },
+   "columns": {
+    "start": 50,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 483,
+    "end": 483
+   },
+   "columns": {
+    "start": 7,
+    "end": 9
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 513,
+    "end": 513
+   },
+   "columns": {
+    "start": 75,
+    "end": 77
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 514,
+    "end": 514
+   },
+   "columns": {
+    "start": 3,
+    "end": 5
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 772,
+    "end": 772
+   },
+   "columns": {
+    "start": 5,
+    "end": 7
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 786,
+    "end": 786
+   },
+   "columns": {
+    "start": 35,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 819,
+    "end": 819
+   },
+   "columns": {
+    "start": 57,
+    "end": 59
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 908,
+    "end": 908
+   },
+   "columns": {
+    "start": 5,
+    "end": 10
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 909,
+    "end": 909
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 910,
+    "end": 910
+   },
+   "columns": {
+    "start": 16,
+    "end": 21
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 947,
+    "end": 947
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 954,
+    "end": 954
+   },
+   "columns": {
+    "start": 40,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 964,
+    "end": 964
+   },
+   "columns": {
+    "start": 48,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 967,
+    "end": 967
+   },
+   "columns": {
+    "start": 21,
+    "end": 33
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 970,
+    "end": 970
+   },
+   "columns": {
+    "start": 57,
+    "end": 63
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 989,
+    "end": 989
+   },
+   "columns": {
+    "start": 52,
+    "end": 54
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/store.ts",
+   "lines": {
+    "start": 995,
+    "end": 995
+   },
+   "columns": {
+    "start": 18,
+    "end": 24
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 4,
+    "end": 9
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 335,
+    "end": 335
+   },
+   "columns": {
+    "start": 48,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 415,
+    "end": 415
+   },
+   "columns": {
+    "start": 31,
+    "end": 36
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 441,
+    "end": 441
+   },
+   "columns": {
+    "start": 42,
+    "end": 47
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 446,
+    "end": 446
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 454,
+    "end": 454
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 556,
+    "end": 556
+   },
+   "columns": {
+    "start": 69,
+    "end": 74
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 564,
+    "end": 564
+   },
+   "columns": {
+    "start": 55,
+    "end": 60
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/src/types.ts",
+   "lines": {
+    "start": 572,
+    "end": 572
+   },
+   "columns": {
+    "start": 59,
+    "end": 64
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/actions.test-d.ts",
+   "lines": {
+    "start": 11,
+    "end": 11
+   },
+   "columns": {
+    "start": 25,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/customizations.test-d.ts",
+   "lines": {
+    "start": 111,
+    "end": 111
+   },
+   "columns": {
+    "start": 26,
+    "end": 31
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/customizations.test-d.ts",
+   "lines": {
+    "start": 132,
+    "end": 132
+   },
+   "columns": {
+    "start": 36,
+    "end": 41
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/onAction.test-d.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 13,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/onAction.test-d.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 20,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "packages/pinia/test-dts/store.test-d.ts",
+   "lines": {
+    "start": 314,
+    "end": 314
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/store.test-d.ts",
+   "lines": {
+    "start": 317,
+    "end": 317
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/pinia/test-dts/store.test-d.ts",
+   "lines": {
+    "start": 318,
+    "end": 318
+   },
+   "columns": {
+    "start": 11,
+    "end": 16
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/playground/src/composables/useCachedRequest.ts",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 33,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/playground/src/router.ts",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 50,
+    "end": 57
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/mocked-store.spec.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 58,
+    "end": 63
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/mocked-store.spec.ts",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 21,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/restoreGetters.ts",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 54,
+    "end": 59
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/testing.ts",
+   "lines": {
+    "start": 220,
+    "end": 220
+   },
+   "columns": {
+    "start": 4,
+    "end": 9
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/testing.ts",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 29,
+    "end": 34
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "packages/testing/src/testing.ts",
+   "lines": {
+    "start": 95,
+    "end": 95
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/testing/src/testing.ts",
+   "lines": {
+    "start": 98,
+    "end": 98
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 170,
+    "end": 170
+   },
+   "columns": {
+    "start": 16,
+    "end": 21
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 308,
+    "end": 308
+   },
+   "columns": {
+    "start": 27,
+    "end": 29
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 321,
+    "end": 321
+   },
+   "columns": {
+    "start": 28,
+    "end": 30
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 324,
+    "end": 324
+   },
+   "columns": {
+    "start": 38,
+    "end": 40
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 357,
+    "end": 357
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 360,
+    "end": 360
+   },
+   "columns": {
+    "start": 41,
+    "end": 43
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 450,
+    "end": 450
+   },
+   "columns": {
+    "start": 59,
+    "end": 61
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "scripts/release.ts",
+   "lines": {
+    "start": 655,
+    "end": 655
+   },
+   "columns": {
+    "start": 17,
+    "end": 22
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}

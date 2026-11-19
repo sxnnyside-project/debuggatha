@@ -1,0 +1,91 @@
+[go]
+language = "go"
+manifest = "go.mod"
+name = "go-mod"
+resolve = "module-path"
+extensions = ["go"]
+module_roots = ["internal", "pkg", "cmd", ""]
+dependencies = "go-mod"
+internal_dirs = ["internal"]
+
+[python]
+language = "python"
+manifest = "pyproject.toml"
+name = "toml:project.name"
+resolve = "dotted-path"
+roots = ["", "src"]
+extensions = ["py"]
+module_roots = ["src", ""]
+dependencies = "toml-list:project.dependencies"
+
+[dart]
+language = "dart"
+manifest = "pubspec.yaml"
+name = "yaml:name"
+resolve = "package-uri"
+roots = ["lib"]
+extensions = ["dart"]
+module_roots = ["lib/src", "lib"]
+dependencies = "yaml:dependencies"
+
+[php]
+language = "php"
+manifest = "composer.json"
+name = "json:name"
+resolve = "psr-4"
+extensions = ["php"]
+module_roots = ["src", "app"]
+dependencies = "json:require"
+
+[elixir]
+language = "elixir"
+manifest = "mix.exs"
+name = "mix-app"
+resolve = "snake-path"
+roots = ["lib"]
+extensions = ["ex", "exs"]
+module_roots = ["lib"]
+dependencies = "mix-deps"
+
+[java]
+language = "java"
+manifest = "pom.xml"
+name = "xml:artifactId"
+resolve = "dotted-path"
+extensions = ["java", "kt"]
+
+dependencies = "xml:dependency/artifactId"
+
+[kotlin]
+language = "kotlin"
+manifest = "build.gradle.kts"
+name = "dir-name"
+dependencies = "gradle-projects"
+resolve = "dotted-path"
+extensions = ["java", "kt"]
+
+[csharp]
+language = "csharp"
+manifest = "*.csproj"
+name = "xml:RootNamespace"
+resolve = "namespace-prefix"
+extensions = ["cs"]
+
+dependencies = "msbuild-project-reference"
+
+[ruby]
+language = "ruby"
+manifest = "Gemfile"
+resolve = "require-path"
+roots = ["lib", ""]
+extensions = ["rb"]
+module_roots = ["lib", "app"]
+
+[swift]
+language = "swift"
+manifest = "Package.swift"
+name = "swift-package"
+resolve = "namespace-prefix"
+extensions = ["swift"]
+module_roots = ["Sources"]
+dependencies = "swift-packages"

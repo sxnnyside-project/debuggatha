@@ -1,0 +1,53 @@
+# Native engine (ADR-0006). The TypeScript packages remain the shipped engine until the cutover gate.
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.3.0"
+edition = "2024"
+# oxc (pinned exactly when added in phase 3) needs 1.97; the toolchain pin is newer.
+rust-version = "1.97"
+license = "MIT"
+authors = ["Sxnnyside Project"]
+repository = "https://github.com/sxnnyside-project/debuggatha"
+homepage = "https://github.com/sxnnyside-project/debuggatha"
+readme = "README.md"
+keywords = ["code-review", "static-analysis", "cli"]
+categories = ["development-tools", "command-line-utilities"]
+
+[workspace.dependencies]
+debuggatha-core = { path = "crates/debuggatha-core", version = "0.3.0" }
+debuggatha-engine = { path = "crates/debuggatha-engine", version = "0.3.0" }
+clap_complete = "4"
+clap = { version = "4", default-features = false, features = ["std", "derive", "help", "usage", "error-context"] }
+schemars = { version = "1", features = ["indexmap2"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }
+sha2 = "0.10"
+uuid = { version = "1", default-features = false, features = ["v4"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unreachable_pub = "warn"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "warn"
+expect_used = "warn"
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+let_underscore_must_use = "warn"
+
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1

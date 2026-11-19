@@ -1,0 +1,49 @@
+# 0006. Debuggatha's core is a native Rust engine; the CLI is the single engine; adapters are clients
+
+## Status
+
+Accepted (2026-11-10), after the phase 0.3 spikes. The migration follows [ROADMAP.md](../ROADMAP.md); until its cutover gate, the TypeScript engine remains the shipped engine (decision 8).
+
+## Context
+
+Debuggatha is meant to be a senior reviewer that understands a repository's context. Three facts about today's engine work against that:
+
+1. **Detection is line-based regex over masked text** (`packages/engine/src/skills/engine/detectors.ts`). It has no notion of scope, call structure or data flow, so rules that need them (`no-floating-promises`, `require-await`, taint for `exec`/`res.json`, helper resolution in tests, environment drift across languages) are either undetected or approximated at low confidence. The same limit sits in the analysis engine: imports are read with a regex (`dependency-graph.ts`) and dead code is a textual identifier search (`dead-code.ts`).
+2. **The engine exists three times.** `@sxnnyside/debuggatha-cli` and `@sxnnyside/debuggatha-mcp` each bundle a copy (~1.3 MB each), and the VS Code worker bundles a third. They can diverge.
+3. **The product is tied to a JavaScript runtime.** Reviewing a Go, Flutter or Rust repository requires Node (or an ~85 MB `bun build --compile` binary), although 8 of the 30 packs target other languages (ASP.NET, Dart, Flutter, Go, Kotlin, Laravel, PHP, Rust) and 7 more are language-agnostic concerns (accessibility, architecture, DX, OWASP, performance, release, testing).
+
+A spike (tree-sitter compiled to WebAssembly, queried from TypeScript) showed that a syntax-tree approach works: environment reads in Python and Go were found across lines and ignored inside strings and comments, parsing plus queries took ~30 ms, and the result compiled into standalone binaries for four targets with no size impact. It also showed the cost of that route: the `web-tree-sitter` runtime and the precompiled grammars must be version-paired exactly (a mismatched pair failed at load time), and the grammar package is not maintained by the tree-sitter project.
+
+A sibling project (Animoria) already runs the target architecture: a Rust engine as single source of truth, a daemon speaking NDJSON over stdio with a version handshake, contracts generated from Rust, and thin TypeScript/Kotlin adapters.
+
+## Decision
+
+1. **One engine, in Rust.** A Cargo workspace builds the `debuggatha` binary. It contains the review domain (findings ledger, repository memory, knowledge system, repository intelligence, review engine), the engine (skills, analysis, analyzers, semantic layer, baseline, scan scope) and the CLI. `core` stays dependency-free in the sense of CLAUDE.md: it knows nothing about adapters.
+2. **Contracts are language-neutral and generated from the Rust types.** JSON Schema (`schemars`) is the published contract; TypeScript types for adapters are generated (`ts-rs`) into a contracts package. Persisted files (`ledger.json`, `memory.json`, `baseline.json`) keep their current formats and schema versions.
+3. **Review Packs are data.** Rules, knowledge and policies are defined by a JSON Schema. **JSON is the canonical, published form** (what the engine loads, and what policy ids hash, ADR-0005); **TOML is an accepted authoring form** (comments, readable multi-line prose) compiled to the same canonical JSON by `debuggatha packs build`, so a pack authored in either gives the same policy id. Syntactic detection is expressed as tree-sitter queries (`.scm`) next to the pack; detectors that need logic (taint, helper resolution) are Rust code addressed by rule id. TOON is not used: it targets token savings in model prompts, and packs are read by the engine.
+4. **Parsing: oxc for the JavaScript/TypeScript family, tree-sitter for everything else, both native.** Phase 0.3 measured both. `oxc` (parser plus scope and symbol resolution) parsed 99.93% of 4,186 real JS/TS files and resolved the shadowing, helper-resolution and environment-alias fixtures that name-based lookup gets wrong; the tree-sitter TypeScript grammar parsed 98.0% and has no symbol resolution. Tree-sitter grammar crates are pinned in `Cargo.lock`, and every language has a load test and a positive/negative query corpus in CI. Single-file components (Vue, Svelte, Astro) are handled by extracting their script blocks with the HTML grammar and passing them to oxc. Both backends sit behind an internal interface and produce the same findings and evidence. Semantic analysis (taint, helper resolution, environment drift) is written per language family on top of the tree. Anything that needs type information stays out of the engine: it is reported as "not covered" or delegated to an external analyzer. A file with parse errors is analyzed on its intact subtrees and reported as parsed with errors; nothing is concluded about the broken region. `oxc` is pre-1.0: versions are pinned exactly and upgraded deliberately.
+5. **External analyzers keep their trust classes.** `tsc` is added as a `runs-project-code` analyzer (it uses the project's own `typescript`), enabled only by the person running the review. Typed lint rules continue to arrive through ESLint with typescript-eslint.
+6. **The CLI is the engine; adapters are clients.** The CLI exposes a daemon mode over NDJSON (Protocol v1: `hello` handshake with version range, request ids, and requests in both directions so the engine can ask the client for a model completion via MCP sampling).
+   - **MCP:** a `debuggatha mcp` subcommand built on the official Rust SDK (`rmcp`), which the spike showed serving tools over stdio and Streamable HTTP. Sampling works on protocol versions up to 2025-11-25 but is deprecated, and 2026-07-28 forbids server-to-client requests; the semantic pass over MCP must therefore also support the SDK's multi-round-trip mechanism (the tool returns an input-required result and the client retries with its answers). The thin TypeScript client over the daemon remains the fallback.
+   - **VS Code:** stays TypeScript (Node-only by platform). It finds the CLI through a machine-scope setting and PATH, validates it with the handshake, and never accepts the path from workspace settings.
+7. **Distribution is one binary through several channels.** npm keeps `@sxnnyside/debuggatha-cli` and `@sxnnyside/debuggatha-mcp` as launchers over per-platform packages (`optionalDependencies`, no install scripts, provenance); the same binary goes to GitHub Releases and Homebrew, and the crates are published to crates.io under the `debuggatha-` prefix.
+8. **Continuity and parity.** The existing TypeScript engine and the `@debuggatha/*` workspace packages stay the published engine, and are **kept in step as the reference implementation** while each module is migrated: ported modules are validated for parity by differential tests that run both implementations over the same corpus. Parity means identical findings on the golden corpus, except for divergences that are listed in a reviewed file with a reason (for example, a Rust detector that removes a false positive the regex version had). Capabilities that exist only on the syntax tree (no TypeScript twin) are validated against fixtures and the real-repository corpus instead. The ledger fingerprint (`sha256(excerpt)[..16]`, excerpt cut at 200 UTF-16 code units) must be reproduced byte for byte, otherwise existing ledgers reopen every finding. Crates are named `debuggatha-core`, `debuggatha-engine` and `debuggatha-cli`.
+
+Unchanged: the deterministic core does not depend on a model; the semantic layer is off by default and sends code only to `localhost` or the client's own model; secrets are redacted before reports, ledger or model; a config file can only make a review stricter or quieter; no personality selector.
+
+## Consequences
+
+- The largest piece of work on the table: ~16,000 lines of TypeScript logic and ~11,000 of tests are ported or replaced. The tests and fixtures become the conformance suite.
+- The TypeScript engine is maintained as a parity reference until cutover (fixes and parity adjustments only). Detectors that need the syntax tree are written once, in Rust, and are not duplicated in TypeScript.
+- Reviewing non-JavaScript repositories no longer needs Node.
+- JetBrains becomes feasible as another client.
+- Release engineering grows: native builds for darwin (arm64 only: Intel macOS is deprecated and not shipped), linux (x64, arm64) and windows (x64), per-platform npm packages, crates.io order. A cross-compilation spike built all but Windows MSVC from one laptop with Zig; the shipping path is still a CI matrix on native runners.
+- Two parsing backends and a pre-1.0 dependency (`oxc`) to keep current. The estimated binary is 36 to 40 MB, against 85 MB for the Bun executables today.
+- `cargo install` compiles C grammars, so it needs a C toolchain; prebuilt binaries remain the main channel.
+
+## Alternatives considered
+
+- **Keep the TypeScript engine, add tree-sitter as WebAssembly plus the TypeScript compiler for JS/TS semantics.** Rejected: it ships a minimal syntax layer first and defers the real decision; the wasm runtime and grammars have a fragile version pairing; the work (queries aside) is discarded by any later port; the product stays tied to a JS runtime.
+- **A Rust sidecar used only for parsing, orchestration left in TypeScript.** Rejected: it pays the full cost of native distribution without removing the duplicated engines or the Node requirement.
+- **Native JavaScript parsers (oxc, swc) bound from Node.** Rejected for the Node engine: per-platform `.node` binaries break the existing `bun --compile` targets and the extension bundle. (A Rust-side `oxc` remains a candidate for JS/TS scope analysis; see the roadmap spikes.)
+- **Port the TypeScript type checker's capabilities.** Rejected: type information is out of scope for the engine; see decision 4.

@@ -11,9 +11,9 @@ import {
   type SemanticRun,
   type SuppressedFinding,
   type SyncReport,
-} from "@debuggatha/engine";
-import type { DomainDeps } from "../domain-deps.js";
-import type { ToolRuntimeContext } from "./shared.js";
+} from '@debuggatha/engine';
+import type { DomainDeps } from '../domain-deps.js';
+import type { ToolRuntimeContext } from './shared.js';
 
 /**
  * Thin adapter over `@debuggatha/core`'s `executeReview` — the shared
@@ -26,9 +26,9 @@ import type { ToolRuntimeContext } from "./shared.js";
  */
 
 export type RunReviewScope =
-  | { kind: "diff"; base: string | undefined; diff: string }
-  | { kind: "files"; paths: string[] }
-  | { kind: "workspace" };
+  | { kind: 'diff'; base: string | undefined; diff: string }
+  | { kind: 'files'; paths: string[] }
+  | { kind: 'workspace' };
 
 export interface RunReviewInput {
   rootDir: string;
@@ -78,10 +78,10 @@ export function pipelineDeps(deps: DomainDeps) {
 
 /** What the server allows, narrowed by a call that asked for none. */
 export function analyzersFor(
-  ctx: Pick<ToolRuntimeContext, "config">,
+  ctx: Pick<ToolRuntimeContext, 'config'>,
   wanted: boolean | undefined,
 ): AnalyzerOptions {
-  if (wanted === false) return { mode: "off" };
+  if (wanted === false) return { mode: 'off' };
   return {
     ...ctx.config.analyzers,
     enableHint: (id) => `the server has to be started with DEBUGGATHA_ANALYZERS=${id}`,
@@ -91,16 +91,16 @@ export function analyzersFor(
 /** The model the operator configured for the semantic pass, or a message saying how to get one. */
 async function semanticProvider(ctx: ToolRuntimeContext): Promise<SemanticProvider> {
   const { provider, model, url } = ctx.config.semantic;
-  if (provider === "off") {
+  if (provider === 'off') {
     throw new Error(
       "The semantic pass is not enabled on this server. Start it with DEBUGGATHA_SEMANTIC=sampling (the client's own model), ollama, or lmstudio.",
     );
   }
-  if (provider === "sampling") {
+  if (provider === 'sampling') {
     const host = ctx.sampling();
     if (!host) {
       throw new Error(
-        "DEBUGGATHA_SEMANTIC=sampling, but the connected client does not support sampling. Use a client that does, or configure ollama or lmstudio.",
+        'DEBUGGATHA_SEMANTIC=sampling, but the connected client does not support sampling. Use a client that does, or configure ollama or lmstudio.',
       );
     }
     return host;
@@ -119,10 +119,10 @@ export async function runReview(
     rootDir: input.rootDir,
     scope: input.scope,
     // Review depth has no effect on the engine yet, so it is not offered to callers.
-    depth: "full" as const,
+    depth: 'full' as const,
     packIds: input.packIds,
     policyId: input.policyId,
-    sourceName: "debuggatha-mcp",
+    sourceName: 'debuggatha-mcp',
     persist: input.persist,
     includeBaselined: input.includeBaselined,
     analyzers: analyzersFor(ctx, input.analyzers),

@@ -20,8 +20,8 @@ export interface StackSignal {
   evidence: Evidence[];
 }
 
-export type WorkspaceType = "single-package" | "monorepo";
-export type PlatformTarget = "web" | "desktop" | "mobile";
+export type WorkspaceType = 'single-package' | 'monorepo';
+export type PlatformTarget = 'web' | 'desktop' | 'mobile';
 
 export interface StackProfile {
   languages: StackSignal[];
@@ -46,9 +46,9 @@ export interface StackProfile {
  * backwards compatibility — nothing about it changed), generated from
  * these same underlying signals, not the other way around.
  */
-export type CapabilityKind = "language" | "framework" | "platform" | "tooling" | "characteristic";
-export type CapabilityConfidence = "high" | "medium" | "low";
-export type CapabilityOrigin = "manifest" | "lockfile" | "config" | "convention";
+export type CapabilityKind = 'language' | 'framework' | 'platform' | 'tooling' | 'characteristic';
+export type CapabilityConfidence = 'high' | 'medium' | 'low';
+export type CapabilityOrigin = 'manifest' | 'lockfile' | 'config' | 'convention';
 
 export interface Capability {
   /** Normalized (lowercase, alphanumeric-only) — e.g. "typescript", "react", "aspnetcore". */
@@ -66,14 +66,14 @@ export interface DependencyProfile {
 }
 
 export type DocumentationKind =
-  | "readme"
-  | "claude-memory"
-  | "contributing"
-  | "architecture"
-  | "adr"
-  | "prd"
-  | "roadmap"
-  | "other";
+  | 'readme'
+  | 'claude-memory'
+  | 'contributing'
+  | 'architecture'
+  | 'adr'
+  | 'prd'
+  | 'roadmap'
+  | 'other';
 
 export interface DocumentationSource {
   file: string;
@@ -98,7 +98,7 @@ export interface CriteriaProfile {
   sources: string[];
 }
 
-export type UnderstandingConfidence = "high" | "medium" | "low";
+export type UnderstandingConfidence = 'high' | 'medium' | 'low';
 
 export interface OpenQuestion {
   question: string;

@@ -11,9 +11,9 @@
  * on/off switch, not a path. See README "Technical decisions".
  */
 
-import { ADAPTERS, type AnalyzerOptions, type LocalProviderName } from "@debuggatha/engine";
+import { ADAPTERS, type AnalyzerOptions, type LocalProviderName } from '@debuggatha/engine';
 
-export const LOG_LEVELS = ["debug", "info", "warn", "error"] as const;
+export const LOG_LEVELS = ['debug', 'info', 'warn', 'error'] as const;
 export type LogLevel = (typeof LOG_LEVELS)[number];
 
 export interface ServerConfig {
@@ -34,7 +34,7 @@ export interface ServerConfig {
   semantic: SemanticConfig;
 }
 
-export type SemanticProviderName = "off" | "sampling" | LocalProviderName;
+export type SemanticProviderName = 'off' | 'sampling' | LocalProviderName;
 export interface SemanticConfig {
   provider: SemanticProviderName;
   model?: string;
@@ -46,16 +46,16 @@ export interface SemanticConfig {
 const DEFAULT_CONFIG: ServerConfig = {
   defaultRepositoryRoot: undefined,
   cache: { enabled: true },
-  logLevel: "info",
-  analyzers: { mode: "auto", enable: [] },
-  semantic: { provider: "off", verify: false },
+  logLevel: 'info',
+  analyzers: { mode: 'auto', enable: [] },
+  semantic: { provider: 'off', verify: false },
 };
 
 const SEMANTIC_PROVIDERS: readonly SemanticProviderName[] = [
-  "off",
-  "sampling",
-  "ollama",
-  "lmstudio",
+  'off',
+  'sampling',
+  'ollama',
+  'lmstudio',
 ];
 
 /**
@@ -63,17 +63,17 @@ const SEMANTIC_PROVIDERS: readonly SemanticProviderName[] = [
  * `ollama`, or `lmstudio` (a local runtime; `DEBUGGATHA_SEMANTIC_MODEL` and `_URL` tune it).
  */
 function parseSemantic(env: Record<string, string | undefined>): SemanticConfig {
-  const raw = env.DEBUGGATHA_SEMANTIC?.trim().toLowerCase() || "off";
+  const raw = env.DEBUGGATHA_SEMANTIC?.trim().toLowerCase() || 'off';
   if (!SEMANTIC_PROVIDERS.includes(raw as SemanticProviderName)) {
     throw new Error(
-      `DEBUGGATHA_SEMANTIC must be one of ${SEMANTIC_PROVIDERS.join(", ")}; got "${raw}".`,
+      `DEBUGGATHA_SEMANTIC must be one of ${SEMANTIC_PROVIDERS.join(', ')}; got "${raw}".`,
     );
   }
   return {
     provider: raw as SemanticProviderName,
     ...(env.DEBUGGATHA_SEMANTIC_MODEL ? { model: env.DEBUGGATHA_SEMANTIC_MODEL } : {}),
     ...(env.DEBUGGATHA_SEMANTIC_URL ? { url: env.DEBUGGATHA_SEMANTIC_URL } : {}),
-    verify: env.DEBUGGATHA_SEMANTIC_VERIFY?.toLowerCase() === "true",
+    verify: env.DEBUGGATHA_SEMANTIC_VERIFY?.toLowerCase() === 'true',
   };
 }
 
@@ -85,20 +85,20 @@ function parseAnalyzers(raw: string | undefined, timeout: string | undefined): A
   const seconds = Number(timeout);
   const timeoutSeconds = timeout && Number.isFinite(seconds) && seconds > 0 ? seconds : undefined;
   const value = raw?.trim().toLowerCase();
-  if (!value || value === "auto") {
-    return { mode: "auto", enable: [], ...(timeoutSeconds ? { timeoutSeconds } : {}) };
+  if (!value || value === 'auto') {
+    return { mode: 'auto', enable: [], ...(timeoutSeconds ? { timeoutSeconds } : {}) };
   }
-  if (value === "off") return { mode: "off" };
+  if (value === 'off') return { mode: 'off' };
 
   const known = ADAPTERS.map((adapter) => adapter.id);
-  const enable = value.split(",").map((id) => id.trim());
+  const enable = value.split(',').map((id) => id.trim());
   const unknown = enable.filter((id) => !known.includes(id));
   if (unknown.length > 0) {
     throw new Error(
-      `DEBUGGATHA_ANALYZERS names unknown analyzers: ${unknown.join(", ")}. Known: ${known.join(", ")}, or "auto" / "off".`,
+      `DEBUGGATHA_ANALYZERS names unknown analyzers: ${unknown.join(', ')}. Known: ${known.join(', ')}, or "auto" / "off".`,
     );
   }
-  return { mode: "auto", enable, ...(timeoutSeconds ? { timeoutSeconds } : {}) };
+  return { mode: 'auto', enable, ...(timeoutSeconds ? { timeoutSeconds } : {}) };
 }
 
 function isLogLevel(value: string): value is LogLevel {
@@ -113,7 +113,7 @@ export function loadConfig(env: Record<string, string | undefined> = {}): Server
     defaultRepositoryRoot: env.DEBUGGATHA_REPOSITORY_ROOT || undefined,
     cache: {
       enabled:
-        cacheEnabledRaw === undefined ? DEFAULT_CONFIG.cache.enabled : cacheEnabledRaw !== "false",
+        cacheEnabledRaw === undefined ? DEFAULT_CONFIG.cache.enabled : cacheEnabledRaw !== 'false',
     },
     logLevel: logLevelRaw && isLogLevel(logLevelRaw) ? logLevelRaw : DEFAULT_CONFIG.logLevel,
     analyzers: parseAnalyzers(env.DEBUGGATHA_ANALYZERS, env.DEBUGGATHA_ANALYZER_TIMEOUT),
@@ -129,7 +129,7 @@ export function resolveRepositoryRoot(
   const root = explicitRoot || config.defaultRepositoryRoot;
   if (!root) {
     throw new Error(
-      "No repository root provided — pass `rootDir` in the tool call, set DEBUGGATHA_REPOSITORY_ROOT, or connect from a client that shares a workspace root.",
+      'No repository root provided — pass `rootDir` in the tool call, set DEBUGGATHA_REPOSITORY_ROOT, or connect from a client that shares a workspace root.',
     );
   }
   return root;

@@ -3,9 +3,9 @@ import {
   buildRepositoryContext,
   createReviewRequest,
   resolveRequestedPackIds,
-} from "@debuggatha/engine";
-import type { Command } from "commander";
-import type { CliLogger } from "../utils/logger.js";
+} from '@debuggatha/engine';
+import type { Command } from 'commander';
+import type { CliLogger } from '../utils/logger.js';
 
 /**
  * Assembles and displays the real `ReviewPolicy` for the current
@@ -17,19 +17,19 @@ import type { CliLogger } from "../utils/logger.js";
  */
 export function registerPoliciesCommand(program: Command) {
   program
-    .command("policies")
-    .description("Show the Review Policy Debuggatha would assemble for this repository right now")
+    .command('policies')
+    .description('Show the Review Policy Debuggatha would assemble for this repository right now')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
-      logger.info("Assembling the current Review Policy...");
+      logger.info('Assembling the current Review Policy...');
 
       try {
         const context = buildRepositoryContext(cwd);
         const requestedPackIds = resolveRequestedPackIds([]);
         const request = createReviewRequest({
-          scope: { kind: "workspace" },
-          depth: "full",
+          scope: { kind: 'workspace' },
+          depth: 'full',
           requestedPackIds,
         });
         const policy = assemblePolicy(context, request);
@@ -53,7 +53,7 @@ export function registerPoliciesCommand(program: Command) {
           );
         }
       } catch (err: unknown) {
-        logger.error("Failed to assemble Review Policy.", err);
+        logger.error('Failed to assemble Review Policy.', err);
         process.exit(1);
       }
     });

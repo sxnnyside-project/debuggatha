@@ -3,7 +3,7 @@ import type {
   AnalyzerRun,
   ReviewPipelineScope,
   SemanticRun,
-} from "@debuggatha/engine";
+} from '@debuggatha/engine';
 
 /** A review as data, so it can cross into the process that runs it. */
 export interface ReviewJob {
@@ -12,7 +12,7 @@ export interface ReviewJob {
   packIds: string[];
   analyzers: AnalyzerOptions;
   /** Also have a model on this machine read the changed code. Only ever set by an explicit command. */
-  semantic?: { provider: "ollama" | "lmstudio"; model?: string; url?: string };
+  semantic?: { provider: 'ollama' | 'lmstudio'; model?: string; url?: string };
 }
 
 /** What a review reports back. The findings themselves are in the ledger the review wrote. */
@@ -25,8 +25,8 @@ export interface ReviewJobResult {
 }
 
 export type WorkerMessage =
-  | { type: "done"; result: ReviewJobResult }
-  | { type: "error"; message: string };
+  | { type: 'done'; result: ReviewJobResult }
+  | { type: 'error'; message: string };
 
 export interface ReviewRunner {
   /** Rejects with `ReviewCancelled` when `signal` aborts, after the work has been stopped. */
@@ -35,7 +35,7 @@ export interface ReviewRunner {
 
 export class ReviewCancelled extends Error {
   constructor() {
-    super("The review was cancelled.");
-    this.name = "ReviewCancelled";
+    super('The review was cancelled.');
+    this.name = 'ReviewCancelled';
   }
 }

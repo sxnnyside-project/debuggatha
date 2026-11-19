@@ -1,4 +1,4 @@
-import type { ChangeImpact, DependencyGraph, ModuleBoundary, PublicApiSurface } from "../types.js";
+import type { ChangeImpact, DependencyGraph, ModuleBoundary, PublicApiSurface } from '../types.js';
 
 function moduleForFile(boundaries: ModuleBoundary[], file: string): string | undefined {
   return boundaries.find((b) => b.files.includes(file))?.id;
@@ -50,15 +50,15 @@ export function estimateChangeImpact(
     .flatMap((api) => api.exported)
     .filter((symbol) => changedFiles.includes(symbol.file));
 
-  let confidence: ChangeImpact["confidence"] = "high";
+  let confidence: ChangeImpact['confidence'] = 'high';
   let rationale =
-    "Every changed file resolved to a known module boundary with a fully-scanned dependency graph.";
+    'Every changed file resolved to a known module boundary with a fully-scanned dependency graph.';
   if (affectedModules.length === 0) {
-    confidence = "low";
+    confidence = 'low';
     rationale =
-      "None of the changed files resolved to a known module boundary — impact could not be estimated from the Dependency Graph.";
+      'None of the changed files resolved to a known module boundary — impact could not be estimated from the Dependency Graph.';
   } else if (affectedPublicApi.length > 0) {
-    confidence = "medium";
+    confidence = 'medium';
     rationale = `${affectedPublicApi.length} changed symbol(s) are part of a module's public API surface — downstream impact beyond this repository (external consumers) cannot be measured statically.`;
   }
 

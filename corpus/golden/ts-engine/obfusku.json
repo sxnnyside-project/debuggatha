@@ -1,0 +1,2534 @@
+{
+ "name": "obfusku",
+ "commit": "aca67f046de79dd3c146556bc7a6c1c1951fa2d1",
+ "findings": [
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/bundle.rs",
+   "lines": {
+    "start": 224,
+    "end": 224
+   },
+   "columns": {
+    "start": 77,
+    "end": 86
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/bytes_native.rs",
+   "lines": {
+    "start": 158,
+    "end": 158
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/bytes_native.rs",
+   "lines": {
+    "start": 161,
+    "end": 161
+   },
+   "columns": {
+    "start": 48,
+    "end": 57
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/bytes_native.rs",
+   "lines": {
+    "start": 162,
+    "end": 162
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 480,
+    "end": 480
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 484,
+    "end": 484
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 497,
+    "end": 497
+   },
+   "columns": {
+    "start": 30,
+    "end": 37
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 500,
+    "end": 500
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 516,
+    "end": 516
+   },
+   "columns": {
+    "start": 83,
+    "end": 92
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 526,
+    "end": 526
+   },
+   "columns": {
+    "start": 60,
+    "end": 69
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 530,
+    "end": 530
+   },
+   "columns": {
+    "start": 58,
+    "end": 67
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 534,
+    "end": 534
+   },
+   "columns": {
+    "start": 83,
+    "end": 92
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 537,
+    "end": 537
+   },
+   "columns": {
+    "start": 56,
+    "end": 65
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 539,
+    "end": 539
+   },
+   "columns": {
+    "start": 64,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 550,
+    "end": 550
+   },
+   "columns": {
+    "start": 52,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 557,
+    "end": 557
+   },
+   "columns": {
+    "start": 48,
+    "end": 57
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 558,
+    "end": 558
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 565,
+    "end": 565
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 566,
+    "end": 566
+   },
+   "columns": {
+    "start": 66,
+    "end": 75
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 567,
+    "end": 567
+   },
+   "columns": {
+    "start": 62,
+    "end": 71
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 569,
+    "end": 569
+   },
+   "columns": {
+    "start": 64,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 571,
+    "end": 571
+   },
+   "columns": {
+    "start": 69,
+    "end": 78
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 573,
+    "end": 573
+   },
+   "columns": {
+    "start": 64,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 581,
+    "end": 581
+   },
+   "columns": {
+    "start": 32,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 582,
+    "end": 582
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/collection_native.rs",
+   "lines": {
+    "start": 583,
+    "end": 583
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 214,
+    "end": 214
+   },
+   "columns": {
+    "start": 31,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 382,
+    "end": 382
+   },
+   "columns": {
+    "start": 29,
+    "end": 37
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 401,
+    "end": 401
+   },
+   "columns": {
+    "start": 38,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 410,
+    "end": 410
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 416,
+    "end": 416
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 421,
+    "end": 421
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 422,
+    "end": 422
+   },
+   "columns": {
+    "start": 43,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 423,
+    "end": 423
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 430,
+    "end": 430
+   },
+   "columns": {
+    "start": 33,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 442,
+    "end": 442
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/deps.rs",
+   "lines": {
+    "start": 452,
+    "end": 452
+   },
+   "columns": {
+    "start": 63,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/main.rs",
+   "lines": {
+    "start": 720,
+    "end": 720
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/main.rs",
+   "lines": {
+    "start": 722,
+    "end": 722
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/main.rs",
+   "lines": {
+    "start": 724,
+    "end": 724
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/manifest.rs",
+   "lines": {
+    "start": 597,
+    "end": 597
+   },
+   "columns": {
+    "start": 38,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/manifest.rs",
+   "lines": {
+    "start": 598,
+    "end": 598
+   },
+   "columns": {
+    "start": 59,
+    "end": 68
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/manifest.rs",
+   "lines": {
+    "start": 618,
+    "end": 618
+   },
+   "columns": {
+    "start": 72,
+    "end": 81
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/manifest.rs",
+   "lines": {
+    "start": 638,
+    "end": 638
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/manifest.rs",
+   "lines": {
+    "start": 641,
+    "end": 641
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 528,
+    "end": 528
+   },
+   "columns": {
+    "start": 38,
+    "end": 46
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 538,
+    "end": 538
+   },
+   "columns": {
+    "start": 37,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 548,
+    "end": 548
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 558,
+    "end": 558
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 571,
+    "end": 571
+   },
+   "columns": {
+    "start": 37,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 585,
+    "end": 585
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 604,
+    "end": 604
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 612,
+    "end": 612
+   },
+   "columns": {
+    "start": 29,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 619,
+    "end": 619
+   },
+   "columns": {
+    "start": 29,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 635,
+    "end": 635
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 637,
+    "end": 637
+   },
+   "columns": {
+    "start": 75,
+    "end": 83
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 639,
+    "end": 639
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 645,
+    "end": 645
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 658,
+    "end": 658
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 666,
+    "end": 666
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 674,
+    "end": 674
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 682,
+    "end": 682
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 689,
+    "end": 689
+   },
+   "columns": {
+    "start": 50,
+    "end": 59
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 692,
+    "end": 692
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 694,
+    "end": 694
+   },
+   "columns": {
+    "start": 77,
+    "end": 85
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 696,
+    "end": 696
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 707,
+    "end": 707
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 715,
+    "end": 715
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 738,
+    "end": 738
+   },
+   "columns": {
+    "start": 40,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 739,
+    "end": 739
+   },
+   "columns": {
+    "start": 80,
+    "end": 89
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 745,
+    "end": 745
+   },
+   "columns": {
+    "start": 84,
+    "end": 93
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 752,
+    "end": 752
+   },
+   "columns": {
+    "start": 13,
+    "end": 20
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 755,
+    "end": 755
+   },
+   "columns": {
+    "start": 80,
+    "end": 89
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/natives.rs",
+   "lines": {
+    "start": 765,
+    "end": 765
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/numeric_native.rs",
+   "lines": {
+    "start": 291,
+    "end": 291
+   },
+   "columns": {
+    "start": 31,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/numeric_native.rs",
+   "lines": {
+    "start": 293,
+    "end": 293
+   },
+   "columns": {
+    "start": 18,
+    "end": 25
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/numeric_native.rs",
+   "lines": {
+    "start": 332,
+    "end": 332
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/numeric_native.rs",
+   "lines": {
+    "start": 343,
+    "end": 343
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/project.rs",
+   "lines": {
+    "start": 81,
+    "end": 81
+   },
+   "columns": {
+    "start": 60,
+    "end": 68
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 332,
+    "end": 332
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 336,
+    "end": 336
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 352,
+    "end": 352
+   },
+   "columns": {
+    "start": 35,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 357,
+    "end": 357
+   },
+   "columns": {
+    "start": 51,
+    "end": 60
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 364,
+    "end": 364
+   },
+   "columns": {
+    "start": 64,
+    "end": 73
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 371,
+    "end": 371
+   },
+   "columns": {
+    "start": 72,
+    "end": 81
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 377,
+    "end": 377
+   },
+   "columns": {
+    "start": 73,
+    "end": 82
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 385,
+    "end": 385
+   },
+   "columns": {
+    "start": 44,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 391,
+    "end": 391
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 401,
+    "end": 401
+   },
+   "columns": {
+    "start": 44,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 428,
+    "end": 428
+   },
+   "columns": {
+    "start": 17,
+    "end": 24
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 432,
+    "end": 432
+   },
+   "columns": {
+    "start": 54,
+    "end": 61
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 437,
+    "end": 437
+   },
+   "columns": {
+    "start": 26,
+    "end": 33
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 460,
+    "end": 460
+   },
+   "columns": {
+    "start": 9,
+    "end": 18
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-cli/src/text_native.rs",
+   "lines": {
+    "start": 471,
+    "end": 471
+   },
+   "columns": {
+    "start": 49,
+    "end": 58
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-diagnostics/src/lib.rs",
+   "lines": {
+    "start": 195,
+    "end": 195
+   },
+   "columns": {
+    "start": 38,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-diagnostics/src/lib.rs",
+   "lines": {
+    "start": 238,
+    "end": 238
+   },
+   "columns": {
+    "start": 35,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-diagnostics/src/lib.rs",
+   "lines": {
+    "start": 239,
+    "end": 239
+   },
+   "columns": {
+    "start": 33,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-diagnostics/src/lib.rs",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 39,
+    "end": 48
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/env.rs",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 43,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/eval.rs",
+   "lines": {
+    "start": 289,
+    "end": 289
+   },
+   "columns": {
+    "start": 45,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/eval.rs",
+   "lines": {
+    "start": 411,
+    "end": 411
+   },
+   "columns": {
+    "start": 45,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pmap.rs",
+   "lines": {
+    "start": 45,
+    "end": 45
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pmap.rs",
+   "lines": {
+    "start": 55,
+    "end": 55
+   },
+   "columns": {
+    "start": 37,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pmap.rs",
+   "lines": {
+    "start": 71,
+    "end": 71
+   },
+   "columns": {
+    "start": 22,
+    "end": 30
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pmap.rs",
+   "lines": {
+    "start": 81,
+    "end": 81
+   },
+   "columns": {
+    "start": 36,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 255,
+    "end": 255
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 268,
+    "end": 268
+   },
+   "columns": {
+    "start": 36,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 270,
+    "end": 270
+   },
+   "columns": {
+    "start": 42,
+    "end": 51
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 271,
+    "end": 271
+   },
+   "columns": {
+    "start": 45,
+    "end": 54
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 272,
+    "end": 272
+   },
+   "columns": {
+    "start": 33,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 273,
+    "end": 273
+   },
+   "columns": {
+    "start": 33,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 274,
+    "end": 274
+   },
+   "columns": {
+    "start": 36,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 286,
+    "end": 286
+   },
+   "columns": {
+    "start": 32,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 303,
+    "end": 303
+   },
+   "columns": {
+    "start": 36,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 304,
+    "end": 304
+   },
+   "columns": {
+    "start": 35,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 310,
+    "end": 310
+   },
+   "columns": {
+    "start": 40,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 321,
+    "end": 321
+   },
+   "columns": {
+    "start": 32,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-runtime/src/pvec.rs",
+   "lines": {
+    "start": 330,
+    "end": 330
+   },
+   "columns": {
+    "start": 33,
+    "end": 42
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/desugar.rs",
+   "lines": {
+    "start": 628,
+    "end": 628
+   },
+   "columns": {
+    "start": 34,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/desugar.rs",
+   "lines": {
+    "start": 629,
+    "end": 629
+   },
+   "columns": {
+    "start": 36,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/desugar.rs",
+   "lines": {
+    "start": 855,
+    "end": 855
+   },
+   "columns": {
+    "start": 45,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/lexer.rs",
+   "lines": {
+    "start": 507,
+    "end": 507
+   },
+   "columns": {
+    "start": 53,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1064,
+    "end": 1064
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1078,
+    "end": 1078
+   },
+   "columns": {
+    "start": 31,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1091,
+    "end": 1091
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1107,
+    "end": 1107
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1108,
+    "end": 1108
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1133,
+    "end": 1133
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1147,
+    "end": 1147
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1148,
+    "end": 1148
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1157,
+    "end": 1157
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1191,
+    "end": 1191
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1210,
+    "end": 1210
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1216,
+    "end": 1216
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1239,
+    "end": 1239
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1248,
+    "end": 1248
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1279,
+    "end": 1279
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1302,
+    "end": 1302
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1311,
+    "end": 1311
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 1362,
+    "end": 1362
+   },
+   "columns": {
+    "start": 31,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 271,
+    "end": 271
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 330,
+    "end": 330
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 335,
+    "end": 335
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 344,
+    "end": 344
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 373,
+    "end": 373
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 383,
+    "end": 383
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 413,
+    "end": 413
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 452,
+    "end": 452
+   },
+   "columns": {
+    "start": 23,
+    "end": 31
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 531,
+    "end": 531
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 585,
+    "end": 585
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 854,
+    "end": 854
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 891,
+    "end": 891
+   },
+   "columns": {
+    "start": 31,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 924,
+    "end": 924
+   },
+   "columns": {
+    "start": 33,
+    "end": 41
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 933,
+    "end": 933
+   },
+   "columns": {
+    "start": 39,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-syntax/src/parser.rs",
+   "lines": {
+    "start": 950,
+    "end": 950
+   },
+   "columns": {
+    "start": 31,
+    "end": 39
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-typecheck/src/infer.rs",
+   "lines": {
+    "start": 1060,
+    "end": 1060
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-typecheck/src/infer.rs",
+   "lines": {
+    "start": 1324,
+    "end": 1324
+   },
+   "columns": {
+    "start": 32,
+    "end": 39
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/obfusku-typecheck/src/infer.rs",
+   "lines": {
+    "start": 850,
+    "end": 850
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

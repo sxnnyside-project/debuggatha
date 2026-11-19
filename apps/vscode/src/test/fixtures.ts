@@ -1,8 +1,8 @@
-import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { executeReview } from "@debuggatha/engine";
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { executeReview } from '@debuggatha/engine';
 
 /** Source that the detected packs flag: `any`, `==`, `eval`, and a hardcoded secret. */
 export const BAD_SOURCE =
@@ -11,14 +11,14 @@ export const BAD_SOURCE =
 const created: string[] = [];
 
 export function makeRepo(source = BAD_SOURCE): { root: string; badFile: string } {
-  const root = mkdtempSync(join(tmpdir(), "debuggatha-vscode-"));
+  const root = mkdtempSync(join(tmpdir(), 'debuggatha-vscode-'));
   created.push(root);
-  mkdirSync(join(root, "src"));
+  mkdirSync(join(root, 'src'));
   writeFileSync(
-    join(root, "package.json"),
-    JSON.stringify({ name: "fixture", devDependencies: { typescript: "^5.0.0" } }),
+    join(root, 'package.json'),
+    JSON.stringify({ name: 'fixture', devDependencies: { typescript: '^5.0.0' } }),
   );
-  const badFile = join(root, "src", "bad.ts");
+  const badFile = join(root, 'src', 'bad.ts');
   writeFileSync(badFile, source);
   return { root, badFile };
 }
@@ -27,19 +27,19 @@ export function makeRepo(source = BAD_SOURCE): { root: string; badFile: string }
 export function seedLedger(root: string) {
   return executeReview({
     rootDir: root,
-    scope: { kind: "workspace" },
-    depth: "full",
+    scope: { kind: 'workspace' },
+    depth: 'full',
     packIds: [],
     policyId: undefined,
-    sourceName: "vscode-test",
+    sourceName: 'vscode-test',
   });
 }
 
 export function git(cwd: string, ...args: string[]): void {
   execFileSync(
-    "git",
-    ["-c", "user.name=t", "-c", "user.email=t@t", "-c", "commit.gpgsign=false", ...args],
-    { cwd, stdio: "ignore" },
+    'git',
+    ['-c', 'user.name=t', '-c', 'user.email=t@t', '-c', 'commit.gpgsign=false', ...args],
+    { cwd, stdio: 'ignore' },
   );
 }
 

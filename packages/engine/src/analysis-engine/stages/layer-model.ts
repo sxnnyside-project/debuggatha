@@ -1,4 +1,4 @@
-import { LAYER_ORDER, type LayerModel, type LayerName, type ModuleBoundary } from "../types.js";
+import { LAYER_ORDER, type LayerModel, type LayerName, type ModuleBoundary } from '../types.js';
 
 /**
  * Vocabulary a module's own id/name is checked against, case-insensitive,
@@ -8,11 +8,11 @@ import { LAYER_ORDER, type LayerModel, type LayerName, type ModuleBoundary } fro
  * style").
  */
 const LAYER_VOCABULARY: Record<(typeof LAYER_ORDER)[number], string[]> = {
-  domain: ["domain", "domains", "core", "entities", "model", "models"],
-  application: ["application", "app", "use-cases", "usecases", "services"],
-  adapter: ["adapter", "adapters", "gateways", "repositories"],
-  infrastructure: ["infrastructure", "infra", "persistence", "data"],
-  presentation: ["presentation", "ui", "web", "views", "components", "pages"],
+  domain: ['domain', 'domains', 'core', 'entities', 'model', 'models'],
+  application: ['application', 'app', 'use-cases', 'usecases', 'services'],
+  adapter: ['adapter', 'adapters', 'gateways', 'repositories'],
+  infrastructure: ['infrastructure', 'infra', 'persistence', 'data'],
+  presentation: ['presentation', 'ui', 'web', 'views', 'components', 'pages'],
 };
 
 function matchLayer(text: string): LayerName {
@@ -26,7 +26,7 @@ function matchLayer(text: string): LayerName {
       return layer;
     }
   }
-  return "unknown";
+  return 'unknown';
 }
 
 /** Layer Model: assigns each Module Boundary a conventional layer name, purely from its id/name — never from its dependencies (that would be circular with Layer Violations, which consumes this). */

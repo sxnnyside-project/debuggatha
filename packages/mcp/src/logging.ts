@@ -1,4 +1,4 @@
-import type { LogLevel } from "./config.js";
+import type { LogLevel } from './config.js';
 
 /**
  * Structured logging (epic "Logging") — focused on tool execution,
@@ -50,9 +50,9 @@ export function createLogger(options: CreateLoggerOptions): Logger {
 
   return {
     log,
-    debug: (event, data) => log("debug", event, data),
-    info: (event, data) => log("info", event, data),
-    warn: (event, data) => log("warn", event, data),
-    error: (event, data) => log("error", event, data),
+    debug: (event, data) => log('debug', event, data),
+    info: (event, data) => log('info', event, data),
+    warn: (event, data) => log('warn', event, data),
+    error: (event, data) => log('error', event, data),
   };
 }

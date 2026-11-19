@@ -1,0 +1,181 @@
+id = "debuggatha/php"
+version = "1.0.0"
+kind = "stack"
+displayName = "PHP"
+dependsOn = []
+
+[[rules]]
+id = "strict-types"
+packId = "debuggatha/php"
+statement = "Always declare `declare(strict_types=1);` as the first statement in every PHP file."
+category = "architecture"
+defaultSeverity = "high"
+knowledgeRefs = ["know-php-strict-types"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "no-eval"
+packId = "debuggatha/php"
+statement = "Never use `eval()`. It is highly dangerous and allows arbitrary code execution."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-php-eval"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "prepared-statements"
+packId = "debuggatha/php"
+statement = "Always use prepared statements (e.g., via PDO or mysqli) when querying databases. Never concatenate strings into SQL queries."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-php-sql-injection"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "use-password-hash"
+packId = "debuggatha/php"
+statement = "Use `password_hash()` and `password_verify()` for handling passwords. Never use `md5()`, `sha1()`, or custom hashing schemes."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-php-passwords"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "no-global-variables"
+packId = "debuggatha/php"
+statement = "Avoid using the `global` keyword or reading from `$GLOBALS`. Inject dependencies explicitly."
+category = "architecture"
+defaultSeverity = "high"
+knowledgeRefs = ["know-php-globals"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "type-hints"
+packId = "debuggatha/php"
+statement = "Provide explicit type hints for all function arguments, return types, and class properties."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-php-type-hints"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[knowledge]]
+id = "know-php-strict-types"
+title = "Strict Type Enforcement"
+body = "By default, PHP coerces types (e.g., passing a string `\"1\"` to an int parameter). `declare(strict_types=1);` forces a `TypeError` on mismatch, catching silent truncation or conversion bugs early."
+externalRefs = ["https://www.php.net/manual/en/language.types.declarations.php#language.types.declarations.strict"]
+limitations = ["`strict_types` is file-scoped, not project-wide — a file that omits the declaration is still valid PHP and calls into strict-typed files still get coerced at the call boundary unless the callee itself also declares it, so flagging every file without the declaration as equally risky ignores that the practical exposure depends on what that file actually accepts as input."]
+
+[[knowledge]]
+id = "know-php-eval"
+title = "Eval is Evil"
+body = "`eval()` executes an arbitrary string as PHP code. If any part of that string is influenced by user input, it results in complete Remote Code Execution (RCE) on the server."
+externalRefs = ["https://www.php.net/manual/en/function.eval.php"]
+limitations = ["A hardcoded, developer-authored string passed to `eval()` (e.g. a code-golf trick or a template-compilation step with no user input in the string) is not RCE-vulnerable — the danger is specifically user-influenced input reaching `eval()`, not the mere presence of the call."]
+
+[[knowledge]]
+id = "know-php-sql-injection"
+title = "SQL Injection Prevention"
+body = "Concatenating strings into SQL queries allows attackers to break out of the string boundary and execute arbitrary SQL commands. PDO prepared statements send the query and the data separately, neutralizing the threat."
+externalRefs = ["https://www.php.net/manual/en/pdo.prepared-statements.php"]
+limitations = ["String concatenation used to build a query from fixed, developer-controlled identifiers (e.g. selecting a table name from an internal allowlist enum, not user input) is not injectable — a naive text scan for `.` or string interpolation next to `SELECT`/`INSERT` will false-positive on concatenation that never touches untrusted data."]
+
+[[knowledge]]
+id = "know-php-passwords"
+title = "Cryptographic Password Hashing"
+body = "`password_hash()` utilizes strong, natively supported hashing algorithms (like bcrypt or Argon2) with built-in salting and stretching, making it resilient against rainbow tables and brute force attacks."
+externalRefs = ["https://www.php.net/manual/en/function.password-hash.php"]
+limitations = ["`md5()`/`sha1()` calls used for non-password purposes (ETags, cache keys, checksums, deduplication hashes) are not a violation of this rule — the concern is specifically about hashing credentials, and a scan matching any `md5(`/`sha1(` call regardless of context will false-positive on those legitimate uses."]
+
+[[knowledge]]
+id = "know-php-globals"
+title = "Global State Entanglement"
+body = "Using `global` creates invisible dependencies across the application. It breaks encapsulation, makes unit testing extremely difficult, and leads to unpredictable mutations."
+externalRefs = ["https://phptherightway.com/#dependency_injection"]
+limitations = ["Reading well-known PHP superglobals (`$_SERVER`, `$_ENV`, `$_GET`) is a different concern from the `global` keyword or `$GLOBALS` array this rule targets — flagging any superglobal access under this rule conflates request/environment data access with actual cross-scope variable injection."]
+
+[[knowledge]]
+id = "know-php-type-hints"
+title = "Explicit Typings"
+body = "Using property, argument, and return type declarations creates a self-documenting API contract that the PHP runtime enforces, drastically reducing `null` checks and unexpected object shapes."
+externalRefs = ["https://www.php.net/manual/en/language.types.declarations.php"]
+limitations = ["Variadic parameters (`...$args`), `mixed`-by-design container/serialization functions, and magic methods like `__call`/`__get` often cannot carry a meaningful specific type hint without defeating their purpose — flagging every untyped parameter uniformly misses that some are untyped by legitimate design, not oversight."]
+
+[[rules]]
+id = "no-error-suppression"
+packId = "debuggatha/php"
+statement = "Do not use the `@` error-control operator; check the result."
+category = "architecture"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-no-error-suppression"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "no-extract"
+packId = "debuggatha/php"
+statement = "Do not call `extract()` on request data."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-extract"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "no-removed-mysql-api"
+packId = "debuggatha/php"
+statement = "Do not use the `mysql_*` functions; use PDO or mysqli."
+category = "architecture"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-removed-mysql-api"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[knowledge]]
+id = "know-no-error-suppression"
+title = "Error suppression"
+body = "`@` hides the failure and its message, and costs speed."
+externalRefs = ["https://www.php.net/manual/en/language.operators.errorcontrol.php"]
+limitations = ["A call whose failure is expected and checked on the next line is reported."]
+
+[[knowledge]]
+id = "know-no-extract"
+title = "Variable extraction"
+body = "`extract($_POST)` lets a request create or overwrite any local variable."
+externalRefs = ["https://www.php.net/manual/en/function.extract.php", "https://cwe.mitre.org/data/definitions/621.html"]
+limitations = ["`extract` over an array the code built is reported too."]
+
+[[knowledge]]
+id = "know-no-removed-mysql-api"
+title = "Removed MySQL API"
+body = "The extension was removed in PHP 7 and had no prepared statements."
+externalRefs = ["https://www.php.net/manual/en/migration70.removed-exts-sapis.php"]
+limitations = ["A polyfill that defines the functions is reported."]
+
+[[rules]]
+id = "no-shell-interpolation"
+packId = "debuggatha/php"
+statement = "Do not build a shell command from interpolated or concatenated text; pass the arguments separately."
+category = "security"
+defaultSeverity = "critical"
+knowledgeRefs = ["know-no-shell-interpolation"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[rules]]
+id = "no-unsafe-deserialization"
+packId = "debuggatha/php"
+statement = "Do not deserialize data that can come from outside with a format that rebuilds arbitrary objects."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-no-unsafe-deserialization"]
+appliesTo = { kind = "requires-language", language = "php" }
+
+[[knowledge]]
+id = "know-no-shell-interpolation"
+title = "Shell command built from text"
+body = "A command line assembled by interpolation or concatenation is read by a shell, so a value with a quote or a separator becomes a second command. Pass the program and its arguments as separate values."
+externalRefs = ["https://cwe.mitre.org/data/definitions/78.html"]
+limitations = ["Only a command built in the same file and reached by name is seen; a command assembled in another function or module is not, and a variable that only ever holds constants is reported."]
+
+[[knowledge]]
+id = "know-no-unsafe-deserialization"
+title = "Deserializing untrusted bytes"
+body = "Formats that rebuild arbitrary objects can run code while loading. Read data-only formats such as JSON, or restrict the classes that may be rebuilt."
+externalRefs = ["https://cwe.mitre.org/data/definitions/502.html", "https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html"]
+limitations = ["The rule cannot tell whether the bytes come from a trusted place, so data the program wrote itself is reported too.", "A call with a second argument (for example a class allowlist) is left alone; whether that argument is enough is not checked."]

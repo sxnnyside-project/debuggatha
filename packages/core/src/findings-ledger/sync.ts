@@ -1,12 +1,12 @@
-import type { RepositoryContext } from "../repository-intelligence/index.js";
-import type { ReviewResult } from "../review-engine/index.js";
-import { deepFreeze } from "./internal/deep-freeze.js";
-import { defaultFindingMatcher, type FindingMatcher } from "./matching.js";
-import { associationFor } from "./types/association.js";
-import { createLedgerEntry, refreshLedgerEntry, transitionFinding } from "./types/entry.js";
-import { computeFindingFingerprint } from "./types/fingerprint.js";
-import type { Ledger } from "./types/ledger.js";
-import { isActiveFindingStatus } from "./types/lifecycle.js";
+import type { RepositoryContext } from '../repository-intelligence/index.js';
+import type { ReviewResult } from '../review-engine/index.js';
+import { deepFreeze } from './internal/deep-freeze.js';
+import { defaultFindingMatcher, type FindingMatcher } from './matching.js';
+import { associationFor } from './types/association.js';
+import { createLedgerEntry, refreshLedgerEntry, transitionFinding } from './types/entry.js';
+import { computeFindingFingerprint } from './types/fingerprint.js';
+import type { Ledger } from './types/ledger.js';
+import { isActiveFindingStatus } from './types/lifecycle.js';
 
 /**
  * What files this review actually looked at. NOT inferred from
@@ -16,7 +16,7 @@ import { isActiveFindingStatus } from "./types/lifecycle.js";
  * `"workspace"` means "the whole repository was in scope" — every active
  * entry becomes an auto-resolve candidate if not re-detected.
  */
-export type SyncScope = { kind: "workspace" } | { kind: "files"; files: string[] };
+export type SyncScope = { kind: 'workspace' } | { kind: 'files'; files: string[] };
 
 export interface SyncReport {
   newEntryIds: string[];
@@ -27,7 +27,7 @@ export interface SyncReport {
 }
 
 function inScope(file: string, scope: SyncScope): boolean {
-  return scope.kind === "workspace" || scope.files.includes(file);
+  return scope.kind === 'workspace' || scope.files.includes(file);
 }
 
 /**
@@ -67,12 +67,12 @@ export function synchronizeReviewResult(
     const outcome = matcher(finding, candidateEntries);
     const fingerprint = computeFindingFingerprint(finding);
 
-    if (outcome.kind === "new") {
+    if (outcome.kind === 'new') {
       const entry = createLedgerEntry({
         fingerprint,
         finding,
         review: association,
-        origin: { kind: "review", sessionId: result.sessionId },
+        origin: { kind: 'review', sessionId: result.sessionId },
       });
       entriesById.set(entry.id, entry);
       touchedThisRun.add(entry.id);
@@ -85,9 +85,9 @@ export function synchronizeReviewResult(
 
     touchedThisRun.add(existing.id);
 
-    if (existing.status === "resolved" || existing.status === "dismissed") {
-      const reopened = transitionFinding(existing, "reopened", {
-        kind: "review",
+    if (existing.status === 'resolved' || existing.status === 'dismissed') {
+      const reopened = transitionFinding(existing, 'reopened', {
+        kind: 'review',
         sessionId: result.sessionId,
       });
       const refreshed = refreshLedgerEntry(reopened, finding, fingerprint, association);
@@ -105,8 +105,8 @@ export function synchronizeReviewResult(
     if (touchedThisRun.has(entry.id)) continue;
     if (!inScope(entry.fingerprint.file, scope)) continue;
 
-    const resolved = transitionFinding(entry, "resolved", {
-      kind: "review",
+    const resolved = transitionFinding(entry, 'resolved', {
+      kind: 'review',
       sessionId: result.sessionId,
     });
     entriesById.set(resolved.id, resolved);

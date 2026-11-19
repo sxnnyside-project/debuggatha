@@ -1,6 +1,6 @@
-import type { Severity } from "@debuggatha/core";
-import { toRepositoryPath } from "./paths.js";
-import type { AnalyzerFinding, ParseContext } from "./types.js";
+import type { Severity } from '@debuggatha/core';
+import { toRepositoryPath } from './paths.js';
+import type { AnalyzerFinding, ParseContext } from './types.js';
 
 interface SarifRegion {
   startLine?: number;
@@ -41,8 +41,8 @@ export interface SarifOptions {
  * JSON), so the document is whatever starts at the first line beginning with `{`.
  */
 export function jsonFrom(text: string): unknown {
-  const start = /^\{/m.exec(text)?.index ?? text.indexOf("{");
-  if (start < 0) throw new Error("no JSON document in the output");
+  const start = /^\{/m.exec(text)?.index ?? text.indexOf('{');
+  if (start < 0) throw new Error('no JSON document in the output');
   return JSON.parse(text.slice(start));
 }
 
@@ -50,7 +50,7 @@ export function jsonFrom(text: string): unknown {
 export function sarifVersion(text: string): string | undefined {
   try {
     const run = (jsonFrom(text) as { runs?: SarifRun[] }).runs?.[0]?.tool?.driver;
-    return run?.semanticVersion?.replace(/^v/, "") ?? run?.version;
+    return run?.semanticVersion?.replace(/^v/, '') ?? run?.version;
   } catch {
     return undefined;
   }
@@ -59,22 +59,22 @@ export function sarifVersion(text: string): string | undefined {
 /** SARIF `level` mapped onto the severity rubric; a style tool's `error` is a rule it enforces, not a defect. */
 export function severityFromLevel(level: string | undefined): Severity {
   switch (level) {
-    case "error":
-      return "medium";
-    case "note":
-    case "none":
-      return "informational";
+    case 'error':
+      return 'medium';
+    case 'note':
+    case 'none':
+      return 'informational';
     default:
-      return "low";
+      return 'low';
   }
 }
 
 /** CVSS-style scores (`security-severity`) onto the rubric. */
 function severityFromScore(score: number): Severity {
-  if (score >= 9) return "critical";
-  if (score >= 7) return "high";
-  if (score >= 4) return "medium";
-  return "low";
+  if (score >= 9) return 'critical';
+  if (score >= 7) return 'high';
+  if (score >= 4) return 'medium';
+  return 'low';
 }
 
 /** Reads any SARIF 2.1.0 document; the per-tool parsers only decide category and severity. */
@@ -97,10 +97,10 @@ export function parseSarif(
       const file = toRepositoryPath(context.rootDir, uri);
       if (!file) continue;
 
-      const ruleId = result.ruleId ?? "unknown";
+      const ruleId = result.ruleId ?? 'unknown';
       const rule = rules.get(ruleId);
       const message = result.message?.text ?? ruleId;
-      const score = Number(rule?.properties?.["security-severity"]);
+      const score = Number(rule?.properties?.['security-severity']);
       const severity = Number.isFinite(score)
         ? severityFromScore(score)
         : (options.severity ?? severityFromLevel)(result.level, ruleId);

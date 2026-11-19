@@ -1,14 +1,14 @@
-import { loadLedger } from "@debuggatha/engine";
-import * as vscode from "vscode";
-import { getSettings } from "./config/settings.js";
-import { updateDiagnostics } from "./diagnostics/diagnostics.js";
-import { FindingIndex } from "./findings/index.js";
-import type { Logger } from "./logging.js";
-import type { FindingDocProvider } from "./providers/findingDocProvider.js";
-import type { FindingsProvider } from "./providers/findingsProvider.js";
-import type { IntelligenceProvider } from "./providers/intelligenceProvider.js";
-import type { ReviewCoordinator } from "./review/coordinator.js";
-import type { StatusBar } from "./status/statusBar.js";
+import { loadLedger } from '@debuggatha/engine';
+import * as vscode from 'vscode';
+import { getSettings } from './config/settings.js';
+import { updateDiagnostics } from './diagnostics/diagnostics.js';
+import { FindingIndex } from './findings/index.js';
+import type { Logger } from './logging.js';
+import type { FindingDocProvider } from './providers/findingDocProvider.js';
+import type { FindingsProvider } from './providers/findingsProvider.js';
+import type { IntelligenceProvider } from './providers/intelligenceProvider.js';
+import type { ReviewCoordinator } from './review/coordinator.js';
+import type { StatusBar } from './status/statusBar.js';
 
 /** What the commands and providers share: one of each, created when the extension activates. */
 export class Services {
@@ -42,7 +42,7 @@ export class Services {
       updateDiagnostics(this.index);
       this.status.showFindings(countShown(this.index));
     } catch (error) {
-      this.logger.error("Could not read the ledger", {
+      this.logger.error('Could not read the ledger', {
         reason: error instanceof Error ? error.message : String(error),
       });
     }

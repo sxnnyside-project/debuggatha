@@ -1,5 +1,5 @@
-import { isIgnoredPath } from "../../scan-scope/index.js";
-import type { SourceUnit } from "./run.js";
+import { isIgnoredPath } from '../../scan-scope/index.js';
+import type { SourceUnit } from './run.js';
 
 /**
  * Turns a unified diff into one `SourceUnit` per changed file, containing
@@ -20,7 +20,7 @@ export function parseUnifiedDiff(diff: string): SourceUnit[] {
     if (currentFile && addedLines.length > 0) {
       units.push({
         file: currentFile,
-        content: addedLines.join("\n"),
+        content: addedLines.join('\n'),
         lineNumbers: addedLineNumbers,
       });
     }
@@ -28,7 +28,7 @@ export function parseUnifiedDiff(diff: string): SourceUnit[] {
     addedLineNumbers = [];
   };
 
-  const lines = diff.split("\n");
+  const lines = diff.split('\n');
   for (const line of lines) {
     const fileHeader = /^\+\+\+ (?:b\/)?(.+)$/.exec(line);
     if (fileHeader) {
@@ -36,7 +36,7 @@ export function parseUnifiedDiff(diff: string): SourceUnit[] {
       const path = fileHeader[1];
       // A path the project does not own (dependencies, build output, generated) is never reviewed.
       currentFile =
-        path === undefined || path === "/dev/null" || isIgnoredPath(undefined, path)
+        path === undefined || path === '/dev/null' || isIgnoredPath(undefined, path)
           ? undefined
           : path;
       continue;
@@ -44,19 +44,19 @@ export function parseUnifiedDiff(diff: string): SourceUnit[] {
 
     const hunkHeader = /^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/.exec(line);
     if (hunkHeader) {
-      newLine = Number.parseInt(hunkHeader[1] ?? "1", 10);
+      newLine = Number.parseInt(hunkHeader[1] ?? '1', 10);
       continue;
     }
 
     if (!currentFile) continue;
 
-    if (line.startsWith("+") && !line.startsWith("+++")) {
+    if (line.startsWith('+') && !line.startsWith('+++')) {
       addedLines.push(line.slice(1));
       addedLineNumbers.push(newLine);
       newLine += 1;
-    } else if (line.startsWith("-") && !line.startsWith("---")) {
+    } else if (line.startsWith('-') && !line.startsWith('---')) {
       // removed line — doesn't advance newLine, not scanned
-    } else if (!line.startsWith("\\")) {
+    } else if (!line.startsWith('\\')) {
       newLine += 1;
     }
   }

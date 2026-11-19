@@ -1,0 +1,22 @@
+{
+ "name": "bloc",
+ "commit": "b9be1e252ee24ffbe9f2fb629edc7624b2cfbf05",
+ "findings": [
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "packages/hydrated_bloc/lib/src/hydrated_bloc.dart",
+   "lines": {
+    "start": 382,
+    "end": 382
+   },
+   "columns": {
+    "start": 30,
+    "end": 49
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  }
+ ]
+}

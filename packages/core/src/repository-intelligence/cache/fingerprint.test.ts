@@ -1,10 +1,10 @@
-import { afterEach, describe, expect, it } from "bun:test";
-import { readdirSync, unlinkSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import { withTempRepo } from "../../testing/index.js";
-import { buildFingerprint, hasFingerprintChanged } from "./fingerprint.js";
+import { afterEach, describe, expect, it } from 'bun:test';
+import { readdirSync, unlinkSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { withTempRepo } from '../../testing/index.js';
+import { buildFingerprint, hasFingerprintChanged } from './fingerprint.js';
 
-describe("fingerprint", () => {
+describe('fingerprint', () => {
   let cleanup: (() => void) | undefined;
 
   afterEach(() => {
@@ -12,11 +12,11 @@ describe("fingerprint", () => {
     cleanup = undefined;
   });
 
-  it("reports no change for an untouched repository", () => {
-    const repo = withTempRepo({ "Cargo.toml": '[package]\nname = "demo"\n' });
+  it('reports no change for an untouched repository', () => {
+    const repo = withTempRepo({ 'Cargo.toml': '[package]\nname = "demo"\n' });
     cleanup = repo.cleanup;
 
-    const filePath = join(repo.root, "Cargo.toml");
+    const filePath = join(repo.root, 'Cargo.toml');
     const fingerprint = buildFingerprint(
       [{ dir: repo.root, entries: readdirSync(repo.root).sort() }],
       [filePath],
@@ -26,10 +26,10 @@ describe("fingerprint", () => {
   });
 
   it("detects a tracked file's content changing", () => {
-    const repo = withTempRepo({ "Cargo.toml": '[package]\nname = "demo"\n' });
+    const repo = withTempRepo({ 'Cargo.toml': '[package]\nname = "demo"\n' });
     cleanup = repo.cleanup;
 
-    const filePath = join(repo.root, "Cargo.toml");
+    const filePath = join(repo.root, 'Cargo.toml');
     const fingerprint = buildFingerprint([], [filePath]);
 
     writeFileSync(filePath, '[package]\nname = "renamed"\n\n[dependencies]\ntauri = "2.0"\n');
@@ -37,8 +37,8 @@ describe("fingerprint", () => {
     expect(hasFingerprintChanged(fingerprint)).toBe(true);
   });
 
-  it("detects a new file appearing in a tracked directory, not just tracked-file mutations", () => {
-    const repo = withTempRepo({ "README.md": "# Demo\n" });
+  it('detects a new file appearing in a tracked directory, not just tracked-file mutations', () => {
+    const repo = withTempRepo({ 'README.md': '# Demo\n' });
     cleanup = repo.cleanup;
 
     const fingerprint = buildFingerprint(
@@ -46,16 +46,16 @@ describe("fingerprint", () => {
       [],
     );
 
-    writeFileSync(join(repo.root, "Cargo.toml"), '[package]\nname = "demo"\n');
+    writeFileSync(join(repo.root, 'Cargo.toml'), '[package]\nname = "demo"\n');
 
     expect(hasFingerprintChanged(fingerprint)).toBe(true);
   });
 
-  it("detects a tracked file being deleted", () => {
-    const repo = withTempRepo({ "Cargo.toml": '[package]\nname = "demo"\n' });
+  it('detects a tracked file being deleted', () => {
+    const repo = withTempRepo({ 'Cargo.toml': '[package]\nname = "demo"\n' });
     cleanup = repo.cleanup;
 
-    const filePath = join(repo.root, "Cargo.toml");
+    const filePath = join(repo.root, 'Cargo.toml');
     const fingerprint = buildFingerprint([], [filePath]);
 
     unlinkSync(filePath);

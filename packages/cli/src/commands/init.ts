@@ -1,22 +1,22 @@
-import { execFileSync } from "node:child_process";
-import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { type Command, Option } from "commander";
-import pkg from "../../package.json" with { type: "json" };
-import { CONFIG_FILE } from "../config.js";
-import { SEVERITY_ORDER } from "../report.js";
-import type { CliLogger } from "../utils/logger.js";
+import { execFileSync } from 'node:child_process';
+import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { type Command, Option } from 'commander';
+import pkg from '../../package.json' with { type: 'json' };
+import { CONFIG_FILE } from '../config.js';
+import { SEVERITY_ORDER } from '../report.js';
+import type { CliLogger } from '../utils/logger.js';
 
-const HOOK_MARKER = "# debuggatha-hook";
+const HOOK_MARKER = '# debuggatha-hook';
 
 interface InitOptions {
-  ci?: "github" | "gitlab" | "none";
+  ci?: 'github' | 'gitlab' | 'none';
   hooks?: boolean;
   failOn: string;
   force?: boolean;
 }
 
-type Outcome = "created" | "updated" | "kept";
+type Outcome = 'created' | 'updated' | 'kept';
 interface Step {
   file: string;
   outcome: Outcome;
@@ -109,19 +109,19 @@ debuggatha:
 }
 
 /** The provider the repository lives on, judged from its remote; GitHub when it cannot tell. */
-export function detectCiProvider(cwd: string): "github" | "gitlab" {
-  if (existsSync(join(cwd, ".gitlab-ci.yml")) && !existsSync(join(cwd, ".github"))) return "gitlab";
+export function detectCiProvider(cwd: string): 'github' | 'gitlab' {
+  if (existsSync(join(cwd, '.gitlab-ci.yml')) && !existsSync(join(cwd, '.github'))) return 'gitlab';
   try {
-    const remote = execFileSync("git", ["remote", "get-url", "origin"], {
+    const remote = execFileSync('git', ['remote', 'get-url', 'origin'], {
       cwd,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
     });
-    if (/gitlab/i.test(remote)) return "gitlab";
+    if (/gitlab/i.test(remote)) return 'gitlab';
   } catch {
     // no remote
   }
-  return "github";
+  return 'github';
 }
 
 export function preCommitHook(failOn: string): string {
@@ -144,43 +144,43 @@ exit 0
 function workspaceKinds(cwd: string): string[] {
   const kinds: string[] = [];
   try {
-    const manifest = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
+    const manifest = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8')) as {
       workspaces?: unknown;
     };
-    if (manifest.workspaces) kinds.push("package.json workspaces");
+    if (manifest.workspaces) kinds.push('package.json workspaces');
   } catch {
     // no package.json
   }
-  if (existsSync(join(cwd, "pnpm-workspace.yaml"))) kinds.push("pnpm workspace");
-  if (existsSync(join(cwd, "go.work"))) kinds.push("Go workspace");
+  if (existsSync(join(cwd, 'pnpm-workspace.yaml'))) kinds.push('pnpm workspace');
+  if (existsSync(join(cwd, 'go.work'))) kinds.push('Go workspace');
   try {
-    if (/^\[workspace\]/m.test(readFileSync(join(cwd, "Cargo.toml"), "utf8"))) {
-      kinds.push("Cargo workspace");
+    if (/^\[workspace\]/m.test(readFileSync(join(cwd, 'Cargo.toml'), 'utf8'))) {
+      kinds.push('Cargo workspace');
     }
   } catch {
     // no Cargo.toml
   }
-  if (existsSync(join(cwd, "settings.gradle")) || existsSync(join(cwd, "settings.gradle.kts"))) {
-    kinds.push("Gradle multi-project build");
+  if (existsSync(join(cwd, 'settings.gradle')) || existsSync(join(cwd, 'settings.gradle.kts'))) {
+    kinds.push('Gradle multi-project build');
   }
   return kinds;
 }
 
 function write(path: string, content: string, force: boolean): Outcome {
   const existed = existsSync(path);
-  if (existed && !force) return "kept";
+  if (existed && !force) return 'kept';
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
-  return existed ? "updated" : "created";
+  return existed ? 'updated' : 'created';
 }
 
 /** `core.hooksPath` means another tool (husky, lefthook) owns the hooks; writing into `.git/hooks` would do nothing. */
 function hooksDirectory(cwd: string): { dir: string } | { reason: string } {
   try {
-    const custom = execFileSync("git", ["config", "--get", "core.hooksPath"], {
+    const custom = execFileSync('git', ['config', '--get', 'core.hooksPath'], {
       cwd,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
     }).trim();
     if (custom) {
       return {
@@ -191,36 +191,36 @@ function hooksDirectory(cwd: string): { dir: string } | { reason: string } {
     // no core.hooksPath set
   }
   try {
-    const gitDir = execFileSync("git", ["rev-parse", "--git-path", "hooks"], {
+    const gitDir = execFileSync('git', ['rev-parse', '--git-path', 'hooks'], {
       cwd,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
     }).trim();
     return { dir: join(cwd, gitDir) };
   } catch {
-    return { reason: "this is not a git repository, so there is nowhere to install a hook." };
+    return { reason: 'this is not a git repository, so there is nowhere to install a hook.' };
   }
 }
 
 export function registerInitCommand(program: Command) {
   program
-    .command("init")
+    .command('init')
     .description(
-      "Set a repository up: a config file, a CI workflow that reviews only what a pull request changes, and optionally a pre-commit hook",
+      'Set a repository up: a config file, a CI workflow that reviews only what a pull request changes, and optionally a pre-commit hook',
     )
     .addOption(
       new Option(
-        "--ci <provider>",
+        '--ci <provider>',
         "Write a CI workflow for this provider (default: the one the repository's remote points at)",
-      ).choices(["github", "gitlab", "none"]),
+      ).choices(['github', 'gitlab', 'none']),
     )
     .addOption(
-      new Option("--fail-on <severity>", "Lowest severity that fails CI and the hook")
-        .choices(SEVERITY_ORDER.filter((severity) => severity !== "informational"))
-        .default("high"),
+      new Option('--fail-on <severity>', 'Lowest severity that fails CI and the hook')
+        .choices(SEVERITY_ORDER.filter((severity) => severity !== 'informational'))
+        .default('high'),
     )
-    .option("--hooks", "Install a git pre-commit hook that reviews what you are about to commit")
-    .option("--force", "Overwrite files init wrote before")
+    .option('--hooks', 'Install a git pre-commit hook that reviews what you are about to commit')
+    .option('--force', 'Overwrite files init wrote before')
     .action((options: InitOptions, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
@@ -231,16 +231,16 @@ export function registerInitCommand(program: Command) {
           file: CONFIG_FILE,
           outcome: write(
             join(cwd, CONFIG_FILE),
-            `${JSON.stringify({ review: { failOn: options.failOn }, analyzers: { mode: "auto" } }, null, 2)}\n`,
+            `${JSON.stringify({ review: { failOn: options.failOn }, analyzers: { mode: 'auto' } }, null, 2)}\n`,
             Boolean(options.force),
           ),
         });
 
         const ci = options.ci ?? detectCiProvider(cwd);
-        if (ci === "gitlab") {
-          const hasPipeline = existsSync(join(cwd, ".gitlab-ci.yml"));
+        if (ci === 'gitlab') {
+          const hasPipeline = existsSync(join(cwd, '.gitlab-ci.yml'));
           // An existing pipeline is the team's; the job goes in its own file, for them to include.
-          const file = hasPipeline ? join(".gitlab", "debuggatha.gitlab-ci.yml") : ".gitlab-ci.yml";
+          const file = hasPipeline ? join('.gitlab', 'debuggatha.gitlab-ci.yml') : '.gitlab-ci.yml';
           steps.push({
             file,
             outcome: write(
@@ -255,8 +255,8 @@ export function registerInitCommand(program: Command) {
               : {}),
           });
         }
-        if (ci === "github") {
-          const file = join(".github", "workflows", "debuggatha.yml");
+        if (ci === 'github') {
+          const file = join('.github', 'workflows', 'debuggatha.yml');
           steps.push({
             file,
             outcome: write(
@@ -269,47 +269,47 @@ export function registerInitCommand(program: Command) {
 
         if (options.hooks) {
           const hooks = hooksDirectory(cwd);
-          if ("reason" in hooks) {
-            steps.push({ file: "pre-commit hook", outcome: "kept", note: hooks.reason });
+          if ('reason' in hooks) {
+            steps.push({ file: 'pre-commit hook', outcome: 'kept', note: hooks.reason });
           } else {
-            const path = join(hooks.dir, "pre-commit");
-            const ours = existsSync(path) && readFileSync(path, "utf8").includes(HOOK_MARKER);
+            const path = join(hooks.dir, 'pre-commit');
+            const ours = existsSync(path) && readFileSync(path, 'utf8').includes(HOOK_MARKER);
             if (existsSync(path) && !ours && !options.force) {
               steps.push({
                 file: path,
-                outcome: "kept",
-                note: "a pre-commit hook that Debuggatha did not write is already there; --force replaces it",
+                outcome: 'kept',
+                note: 'a pre-commit hook that Debuggatha did not write is already there; --force replaces it',
               });
             } else {
               write(path, preCommitHook(options.failOn), true);
               chmodSync(path, 0o755);
-              steps.push({ file: path, outcome: ours ? "updated" : "created" });
+              steps.push({ file: path, outcome: ours ? 'updated' : 'created' });
             }
           }
         }
 
         const monorepo = workspaceKinds(cwd);
         if (logger.isJson) {
-          logger.json({ status: "success", steps, monorepo });
+          logger.json({ status: 'success', steps, monorepo });
           return;
         }
         for (const step of steps) {
           const verb =
-            step.outcome === "kept" ? "Kept" : step.outcome === "updated" ? "Updated" : "Created";
-          const line = `${verb} ${step.file}${step.note ? `: ${step.note}` : "."}`;
-          if (step.outcome === "kept") logger.info(line);
+            step.outcome === 'kept' ? 'Kept' : step.outcome === 'updated' ? 'Updated' : 'Created';
+          const line = `${verb} ${step.file}${step.note ? `: ${step.note}` : '.'}`;
+          if (step.outcome === 'kept') logger.info(line);
           else logger.success(line);
         }
         if (monorepo.length > 0) {
           logger.info(
-            `This looks like a monorepo (${monorepo.join(", ")}). CI reviews only the files a pull request changes, so it scales with the change rather than the repository.`,
+            `This looks like a monorepo (${monorepo.join(', ')}). CI reviews only the files a pull request changes, so it scales with the change rather than the repository.`,
           );
         }
         logger.info(
-          "Next: commit these files. To accept the findings the repository has today, run `debuggatha baseline create` and commit .debuggatha/baseline.json. Keep .debuggatha/ledger.json out of version control if you do not want your local history shared.",
+          'Next: commit these files. To accept the findings the repository has today, run `debuggatha baseline create` and commit .debuggatha/baseline.json. Keep .debuggatha/ledger.json out of version control if you do not want your local history shared.',
         );
       } catch (err) {
-        logger.error("Failed to initialize Debuggatha.", err);
+        logger.error('Failed to initialize Debuggatha.', err);
         process.exit(1);
       }
     });

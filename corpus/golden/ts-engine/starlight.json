@@ -1,0 +1,1254 @@
+{
+ "name": "starlight",
+ "commit": "22ee803927db52ef2c38847d93471c3752dab6a1",
+ "findings": [
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "docs/__a11y__/test-utils.ts",
+   "lines": {
+    "start": 84,
+    "end": 84
+   },
+   "columns": {
+    "start": 36,
+    "end": 38
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "docs/src/components/theme-designer/color-lib.ts",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 96,
+    "end": 98
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/file-icons-generator/utils/seti.ts",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 49,
+    "end": 51
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/markdoc/__tests__/markdoc.test-d.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 40,
+    "end": 45
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/absolute-favicon/absolute-favicon.test.ts",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 23,
+    "end": 25
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/omit-canonical.test.ts",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/route-data.test.ts",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/route-data.test.ts",
+   "lines": {
+    "start": 66,
+    "end": 66
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/route-data.test.ts",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/route-data.test.ts",
+   "lines": {
+    "start": 84,
+    "end": 84
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/__tests__/basics/routing.test.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 29,
+    "end": 66
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 118,
+    "end": 118
+   },
+   "columns": {
+    "start": 51,
+    "end": 57
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 125,
+    "end": 125
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 146,
+    "end": 146
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 151,
+    "end": 151
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 152,
+    "end": 152
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 159,
+    "end": 159
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 170,
+    "end": 170
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/schema.test-d.ts",
+   "lines": {
+    "start": 182,
+    "end": 182
+   },
+   "columns": {
+    "start": 22,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 538,
+    "end": 538
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 574,
+    "end": 574
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 601,
+    "end": 601
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 603,
+    "end": 603
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 605,
+    "end": 605
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 607,
+    "end": 607
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/basics/starlight-page-route-data.test.ts",
+   "lines": {
+    "start": 609,
+    "end": 609
+   },
+   "columns": {
+    "start": 35,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/edit-url/edit-url.test.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/edit-url/edit-url.test.ts",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/edit-url/edit-url.test.ts",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/head/head.test.ts",
+   "lines": {
+    "start": 210,
+    "end": 210
+   },
+   "columns": {
+    "start": 18,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/head/head.test.ts",
+   "lines": {
+    "start": 48,
+    "end": 48
+   },
+   "columns": {
+    "start": 55,
+    "end": 57
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/i18n-root-locale/routing-prototype-names.test.ts",
+   "lines": {
+    "start": 18,
+    "end": 18
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/i18n-root-locale/routing.test.ts",
+   "lines": {
+    "start": 72,
+    "end": 72
+   },
+   "columns": {
+    "start": 66,
+    "end": 68
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/i18n/head.test.ts",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/i18n/head.test.ts",
+   "lines": {
+    "start": 19,
+    "end": 19
+   },
+   "columns": {
+    "start": 67,
+    "end": 69
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/i18n/head.test.ts",
+   "lines": {
+    "start": 32,
+    "end": 32
+   },
+   "columns": {
+    "start": 24,
+    "end": 26
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/markdown-processor/tabs-processor.test.ts",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 46,
+    "end": 48
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/toc-custom-config/toc-custom-config.test.ts",
+   "lines": {
+    "start": 28,
+    "end": 28
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/toc-custom-config/toc-custom-config.test.ts",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/__tests__/toc-custom-config/toc-custom-config.test.ts",
+   "lines": {
+    "start": 47,
+    "end": 47
+   },
+   "columns": {
+    "start": 25,
+    "end": 27
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/components-internals/TableOfContents/starlight-toc.ts",
+   "lines": {
+    "start": 66,
+    "end": 66
+   },
+   "columns": {
+    "start": 53,
+    "end": 60
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/components-internals/TableOfContents/starlight-toc.ts",
+   "lines": {
+    "start": 93,
+    "end": 93
+   },
+   "columns": {
+    "start": 36,
+    "end": 38
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-var",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/global.ts",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 2,
+    "end": 7
+   },
+   "severity": "low",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/integrations/rehype-heading-links.ts",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 51,
+    "end": 58
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/integrations/remark-rehype.ts",
+   "lines": {
+    "start": 39,
+    "end": 39
+   },
+   "columns": {
+    "start": 66,
+    "end": 68
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/integrations/satteri.ts",
+   "lines": {
+    "start": 215,
+    "end": 215
+   },
+   "columns": {
+    "start": 53,
+    "end": 60
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/integrations/satteri.ts",
+   "lines": {
+    "start": 35,
+    "end": 35
+   },
+   "columns": {
+    "start": 65,
+    "end": 67
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/integrations/satteri.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 66,
+    "end": 68
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/integrations/shared/absolutePathToLang.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 72,
+    "end": 79
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/integrations/sitemap.ts",
+   "lines": {
+    "start": 10,
+    "end": 10
+   },
+   "columns": {
+    "start": 74,
+    "end": 76
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/user-components/steps-processor.ts",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 12,
+    "end": 54
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/base.ts",
+   "lines": {
+    "start": 14,
+    "end": 14
+   },
+   "columns": {
+    "start": 16,
+    "end": 24
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/base.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 16,
+    "end": 24
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/error-map.ts",
+   "lines": {
+    "start": 146,
+    "end": 146
+   },
+   "columns": {
+    "start": 18,
+    "end": 41
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/error-map.ts",
+   "lines": {
+    "start": 147,
+    "end": 147
+   },
+   "columns": {
+    "start": 18,
+    "end": 36
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/utils/error-map.ts",
+   "lines": {
+    "start": 82,
+    "end": 82
+   },
+   "columns": {
+    "start": 51,
+    "end": 53
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/head.ts",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 14,
+    "end": 21
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/localizedUrl.ts",
+   "lines": {
+    "start": 37,
+    "end": 37
+   },
+   "columns": {
+    "start": 40,
+    "end": 47
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/localizedUrl.ts",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": {
+    "start": 19,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/localizedUrl.ts",
+   "lines": {
+    "start": 44,
+    "end": 44
+   },
+   "columns": {
+    "start": 19,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/navigation.ts",
+   "lines": {
+    "start": 106,
+    "end": 106
+   },
+   "columns": {
+    "start": 51,
+    "end": 58
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/navigation.ts",
+   "lines": {
+    "start": 115,
+    "end": 115
+   },
+   "columns": {
+    "start": 40,
+    "end": 53
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/navigation.ts",
+   "lines": {
+    "start": 129,
+    "end": 129
+   },
+   "columns": {
+    "start": 22,
+    "end": 29
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/navigation.ts",
+   "lines": {
+    "start": 147,
+    "end": 147
+   },
+   "columns": {
+    "start": 41,
+    "end": 51
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/navigation.ts",
+   "lines": {
+    "start": 264,
+    "end": 264
+   },
+   "columns": {
+    "start": 67,
+    "end": 75
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/path.ts",
+   "lines": {
+    "start": 3,
+    "end": 3
+   },
+   "columns": {
+    "start": 30,
+    "end": 37
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/path.ts",
+   "lines": {
+    "start": 49,
+    "end": 49
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/utils/plugins.ts",
+   "lines": {
+    "start": 509,
+    "end": 509
+   },
+   "columns": {
+    "start": 28,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/utils/plugins.ts",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 48,
+    "end": 50
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/routing/index.ts",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 66,
+    "end": 76
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/utils/routing/index.ts",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 26,
+    "end": 28
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/slugs.ts",
+   "lines": {
+    "start": 58,
+    "end": 58
+   },
+   "columns": {
+    "start": 17,
+    "end": 24
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/slugs.ts",
+   "lines": {
+    "start": 77,
+    "end": 77
+   },
+   "columns": {
+    "start": 42,
+    "end": 56
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/slugs.ts",
+   "lines": {
+    "start": 79,
+    "end": 79
+   },
+   "columns": {
+    "start": 16,
+    "end": 26
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/slugs.ts",
+   "lines": {
+    "start": 95,
+    "end": 95
+   },
+   "columns": {
+    "start": 27,
+    "end": 45
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "prefer-template-literals",
+   "pack": "debuggatha/javascript",
+   "file": "packages/starlight/src/utils/slugs.ts",
+   "lines": {
+    "start": 97,
+    "end": 97
+   },
+   "columns": {
+    "start": 10,
+    "end": 20
+   },
+   "severity": "low",
+   "confidence": "low",
+   "category": "style"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "packages/starlight/src/utils/user-config.ts",
+   "lines": {
+    "start": 206,
+    "end": 206
+   },
+   "columns": {
+    "start": 31,
+    "end": 33
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  }
+ ]
+}

@@ -1,0 +1,742 @@
+{
+ "name": "promediatum",
+ "commit": "ff269640ba9f42f2b2699f4749486bcd535e60d2",
+ "findings": [
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "app/Http/Controllers/Auth/AuthenticatedSessionController.php",
+   "lines": {
+    "start": 97,
+    "end": 97
+   },
+   "columns": {
+    "start": 27,
+    "end": 44
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "app/Http/Controllers/Auth/RecoveryCodeController.php",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 27,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "app/Http/Controllers/ProfileController.php",
+   "lines": {
+    "start": 72,
+    "end": 72
+   },
+   "columns": {
+    "start": 35,
+    "end": 69
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "lang/es/auth.php",
+   "lines": {
+    "start": 5,
+    "end": 5
+   },
+   "columns": {
+    "start": 19,
+    "end": 63
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "lang/es/auth.php",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 33,
+    "end": 83
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "lang/es/validation.php",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 27,
+    "end": 57
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "lang/es/validation.php",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 23,
+    "end": 35
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "lang/es/validation.php",
+   "lines": {
+    "start": 24,
+    "end": 24
+   },
+   "columns": {
+    "start": 36,
+    "end": 64
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/en.ts",
+   "lines": {
+    "start": 782,
+    "end": 782
+   },
+   "columns": {
+    "start": 24,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/en.ts",
+   "lines": {
+    "start": 783,
+    "end": 783
+   },
+   "columns": {
+    "start": 29,
+    "end": 70
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/en.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 29,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 245,
+    "end": 245
+   },
+   "columns": {
+    "start": 41,
+    "end": 76
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 313,
+    "end": 313
+   },
+   "columns": {
+    "start": 26,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 316,
+    "end": 316
+   },
+   "columns": {
+    "start": 33,
+    "end": 53
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 371,
+    "end": 371
+   },
+   "columns": {
+    "start": 31,
+    "end": 43
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 39,
+    "end": 39
+   },
+   "columns": {
+    "start": 31,
+    "end": 60
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 40,
+    "end": 40
+   },
+   "columns": {
+    "start": 31,
+    "end": 62
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 55,
+    "end": 55
+   },
+   "columns": {
+    "start": 23,
+    "end": 35
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 56,
+    "end": 56
+   },
+   "columns": {
+    "start": 36,
+    "end": 58
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 62,
+    "end": 62
+   },
+   "columns": {
+    "start": 27,
+    "end": 45
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 63,
+    "end": 63
+   },
+   "columns": {
+    "start": 40,
+    "end": 68
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 64,
+    "end": 64
+   },
+   "columns": {
+    "start": 31,
+    "end": 50
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 799,
+    "end": 799
+   },
+   "columns": {
+    "start": 24,
+    "end": 47
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 8,
+    "end": 8
+   },
+   "columns": {
+    "start": 29,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 800,
+    "end": 800
+   },
+   "columns": {
+    "start": 29,
+    "end": 76
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "resources/js/i18n/locales/es.ts",
+   "lines": {
+    "start": 9,
+    "end": 9
+   },
+   "columns": {
+    "start": 28,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "use-v-html-carefully",
+   "pack": "debuggatha/vue",
+   "file": "resources/js/Pages/Profile/Index.vue",
+   "lines": {
+    "start": 879,
+    "end": 879
+   },
+   "columns": {
+    "start": 85,
+    "end": 92
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useTheme.test.ts",
+   "lines": {
+    "start": 7,
+    "end": 7
+   },
+   "columns": {
+    "start": 32,
+    "end": 37
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 20,
+    "end": 20
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 40,
+    "end": 40
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 41,
+    "end": 41
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "strict-null-checks",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/composables/useToast.test.ts",
+   "lines": {
+    "start": 42,
+    "end": 42
+   },
+   "columns": {
+    "start": 30,
+    "end": 32
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 1,
+    "end": 1
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 100,
+    "end": 100
+   },
+   "columns": {
+    "start": 50,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 104,
+    "end": 104
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 21,
+    "end": 21
+   },
+   "columns": {
+    "start": 50,
+    "end": 55
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 25,
+    "end": 25
+   },
+   "columns": {
+    "start": 53,
+    "end": 58
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 30,
+    "end": 30
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 11,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 59,
+    "end": 59
+   },
+   "columns": {
+    "start": 12,
+    "end": 18
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 67,
+    "end": 67
+   },
+   "columns": {
+    "start": 15,
+    "end": 20
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 68,
+    "end": 68
+   },
+   "columns": {
+    "start": 42,
+    "end": 47
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/Frontend/setup.ts",
+   "lines": {
+    "start": 96,
+    "end": 96
+   },
+   "columns": {
+    "start": 43,
+    "end": 48
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}

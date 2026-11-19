@@ -1,6 +1,6 @@
-import type { RepositoryContext } from "../../repository-intelligence/index.js";
-import type { ReviewRequest } from "../../review-engine/index.js";
-import type { ReviewPolicy } from "./policy.js";
+import type { RepositoryContext } from '../../repository-intelligence/index.js';
+import type { ReviewRequest } from '../../review-engine/index.js';
+import type { ReviewPolicy } from './policy.js';
 
 /**
  * The one shape every Skill receives, regardless of tier or `ReviewSource`

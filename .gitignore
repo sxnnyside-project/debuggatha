@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 **/node_modules/
+.pnpm-store/
 
 # Monorepo tooling
 .turbo/
@@ -59,3 +60,9 @@ temp/
 
 # Animoria cache & staged cleanup
 .animoria/
+
+# Rust workspace (native engine, ADR-0006)
+target/
+
+# Debuggatha's own state when it reviews this repository (ledger, memory, baseline)
+.debuggatha/

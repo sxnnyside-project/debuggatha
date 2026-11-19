@@ -1,12 +1,12 @@
-import type { Finding } from "../review-engine/index.js";
-import { acceptedDeviationMatches, exceptionMatches, suppressionMatches } from "./matching.js";
-import { isActiveMemoryStatus } from "./types/lifecycle.js";
-import type { MemoryStore } from "./types/store.js";
+import type { Finding } from '../review-engine/index.js';
+import { acceptedDeviationMatches, exceptionMatches, suppressionMatches } from './matching.js';
+import { isActiveMemoryStatus } from './types/lifecycle.js';
+import type { MemoryStore } from './types/store.js';
 
 export interface SuppressedFinding {
   finding: Finding;
   memoryItemId: string;
-  reason: "suppression" | "accepted-deviation" | "exception";
+  reason: 'suppression' | 'accepted-deviation' | 'exception';
 }
 
 export interface FilterFindingsResult {
@@ -29,16 +29,16 @@ export function filterSuppressedFindings(
   store: MemoryStore,
 ): FilterFindingsResult {
   const activeSuppressions = store.items.filter(
-    (item): item is Extract<typeof item, { category: "suppression" }> =>
-      item.category === "suppression" && isActiveMemoryStatus(item.status),
+    (item): item is Extract<typeof item, { category: 'suppression' }> =>
+      item.category === 'suppression' && isActiveMemoryStatus(item.status),
   );
   const activeDeviations = store.items.filter(
-    (item): item is Extract<typeof item, { category: "accepted-deviation" }> =>
-      item.category === "accepted-deviation" && isActiveMemoryStatus(item.status),
+    (item): item is Extract<typeof item, { category: 'accepted-deviation' }> =>
+      item.category === 'accepted-deviation' && isActiveMemoryStatus(item.status),
   );
   const activeExceptions = store.items.filter(
-    (item): item is Extract<typeof item, { category: "exception" }> =>
-      item.category === "exception" && isActiveMemoryStatus(item.status),
+    (item): item is Extract<typeof item, { category: 'exception' }> =>
+      item.category === 'exception' && isActiveMemoryStatus(item.status),
   );
 
   const kept: Finding[] = [];
@@ -47,17 +47,17 @@ export function filterSuppressedFindings(
   for (const finding of findings) {
     const suppression = activeSuppressions.find((item) => suppressionMatches(item, finding));
     if (suppression) {
-      suppressed.push({ finding, memoryItemId: suppression.id, reason: "suppression" });
+      suppressed.push({ finding, memoryItemId: suppression.id, reason: 'suppression' });
       continue;
     }
     const deviation = activeDeviations.find((item) => acceptedDeviationMatches(item, finding));
     if (deviation) {
-      suppressed.push({ finding, memoryItemId: deviation.id, reason: "accepted-deviation" });
+      suppressed.push({ finding, memoryItemId: deviation.id, reason: 'accepted-deviation' });
       continue;
     }
     const exception = activeExceptions.find((item) => exceptionMatches(item, finding));
     if (exception) {
-      suppressed.push({ finding, memoryItemId: exception.id, reason: "exception" });
+      suppressed.push({ finding, memoryItemId: exception.id, reason: 'exception' });
       continue;
     }
     kept.push(finding);

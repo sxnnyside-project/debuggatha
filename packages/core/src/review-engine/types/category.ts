@@ -5,14 +5,14 @@
  * well-known ones for autocomplete and consistency.
  */
 export const CATEGORIES = {
-  Architecture: "architecture",
-  Security: "security",
-  Performance: "performance",
-  Reliability: "reliability",
-  Accessibility: "accessibility",
-  Maintainability: "maintainability",
-  DeveloperExperience: "developer-experience",
-  Documentation: "documentation",
+  Architecture: 'architecture',
+  Security: 'security',
+  Performance: 'performance',
+  Reliability: 'reliability',
+  Accessibility: 'accessibility',
+  Maintainability: 'maintainability',
+  DeveloperExperience: 'developer-experience',
+  Documentation: 'documentation',
 } as const;
 
 export type KnownCategory = (typeof CATEGORIES)[keyof typeof CATEGORIES];

@@ -1,9 +1,9 @@
-import type { Finding } from "../../review-engine/index.js";
-import { randomId } from "../internal/ids.js";
-import type { ReviewAssociation } from "./association.js";
-import type { FindingFingerprint } from "./fingerprint.js";
-import type { HistoryEvent, TransitionOrigin } from "./history.js";
-import { canTransitionFinding, type FindingLifecycleStatus } from "./lifecycle.js";
+import type { Finding } from '../../review-engine/index.js';
+import { randomId } from '../internal/ids.js';
+import type { ReviewAssociation } from './association.js';
+import type { FindingFingerprint } from './fingerprint.js';
+import type { HistoryEvent, TransitionOrigin } from './history.js';
+import { canTransitionFinding, type FindingLifecycleStatus } from './lifecycle.js';
 
 /**
  * One tracked issue across its entire lifetime. `id` is the *stable*
@@ -33,7 +33,7 @@ export function createLedgerEntry(input: CreateLedgerEntryInput): LedgerEntry {
   const createdEvent: HistoryEvent = {
     timestamp: new Date().toISOString(),
     previousState: undefined,
-    newState: "open",
+    newState: 'open',
     origin: input.origin,
     comment: undefined,
   };
@@ -41,7 +41,7 @@ export function createLedgerEntry(input: CreateLedgerEntryInput): LedgerEntry {
   return {
     id: randomId(),
     fingerprint: input.fingerprint,
-    status: "open",
+    status: 'open',
     history: [createdEvent],
     latestFinding: input.finding,
     review: input.review,

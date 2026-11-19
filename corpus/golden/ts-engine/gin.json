@@ -1,0 +1,374 @@
+{
+ "name": "gin",
+ "commit": "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646",
+ "findings": [
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "context.go",
+   "lines": {
+    "start": 263,
+    "end": 263
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "context.go",
+   "lines": {
+    "start": 309,
+    "end": 309
+   },
+   "columns": {
+    "start": 2,
+    "end": 8
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "mode.go",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "render/html.go",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 2,
+    "end": 8
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "render/redirect.go",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "routergroup.go",
+   "lines": {
+    "start": 131,
+    "end": 131
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "routergroup.go",
+   "lines": {
+    "start": 218,
+    "end": 218
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "routergroup.go",
+   "lines": {
+    "start": 241,
+    "end": 241
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 230,
+    "end": 230
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 262,
+    "end": 262
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 298,
+    "end": 298
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 304,
+    "end": 304
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 345,
+    "end": 345
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 353,
+    "end": 353
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 363,
+    "end": 363
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 589,
+    "end": 589
+   },
+   "columns": {
+    "start": 6,
+    "end": 12
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "tree.go",
+   "lines": {
+    "start": 941,
+    "end": 941
+   },
+   "columns": {
+    "start": 4,
+    "end": 10
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "utils.go",
+   "lines": {
+    "start": 108,
+    "end": 108
+   },
+   "columns": {
+    "start": 2,
+    "end": 8
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "utils.go",
+   "lines": {
+    "start": 127,
+    "end": 127
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "utils.go",
+   "lines": {
+    "start": 160,
+    "end": 160
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "utils.go",
+   "lines": {
+    "start": 33,
+    "end": 33
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-panic",
+   "pack": "debuggatha/go",
+   "file": "utils.go",
+   "lines": {
+    "start": 88,
+    "end": 88
+   },
+   "columns": {
+    "start": 3,
+    "end": 9
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

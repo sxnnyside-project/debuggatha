@@ -1,0 +1,2366 @@
+{
+  "excerpts": [
+    {
+      "line": "var a = 1;",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": "   var a = 1;   ",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": "\tvar a = 1;\t",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": " var a = 1; ",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": "﻿var a = 1;",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": "var a = 1;\r",
+      "excerpt": "var a = 1;"
+    },
+    {
+      "line": "var a = \"é ✓ 日本語\";",
+      "excerpt": "var a = \"é ✓ 日本語\";"
+    },
+    {
+      "line": "var a = \"😀\";",
+      "excerpt": "var a = \"😀\";"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\""
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx😀\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx😀\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx😀😀\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "line": "var a = \"日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日\";",
+      "excerpt": "var a = \"日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日"
+    },
+    {
+      "line": "var a = \"éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé\";",
+      "excerpt": "var a = \"ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée"
+    },
+    {
+      "line": "var a = \"AKIAABCDEFGHIJKLMNOP\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"ghp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"github_pat_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"xoxb-1234567890-abcdef\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"sk_live_cccccccccccccccc\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"AIzaddddddddddddddddddddddddddddddddddd\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"-----BEGIN RSA PRIVATE KEY-----\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"-----BEGIN PRIVATE KEY-----\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"eyJeeeeeeeeee.eyJffffffffff.gggggggggg\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"SG.hhhhhhhhhhhhhhhhhhhhhh.iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii\";",
+      "excerpt": "var a = \"[redacted]\";"
+    },
+    {
+      "line": "var a = \"AKIAABCDEFGHIJKLMNOP and ghp_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa and AKIAABCDEFGHIJKLMNOP\";",
+      "excerpt": "var a = \"[redacted] and [redacted] and [redacted]\";"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsk_live_cccccccccccccccc\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxsk_live_ccccccccccccc"
+    },
+    {
+      "line": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxAKIAABCDEFGHIJKLMNOP\";",
+      "excerpt": "var a = \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxAKIAAB"
+    },
+    {
+      "line": "var a = \"AKIAABCDEFGHIJKLMNOPyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\";",
+      "excerpt": "var a = \"AKIAABCDEFGHIJKLMNOPyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+    },
+    {
+      "line": "var a = \"AKIAZZZZZZZZZZZZZZZ\";",
+      "excerpt": "var a = \"AKIAZZZZZZZZZZZZZZZ\";"
+    },
+    {
+      "line": "var a = \"xAKIAABCDEFGHIJKLMNOP\";",
+      "excerpt": "var a = \"xAKIAABCDEFGHIJKLMNOP\";"
+    },
+    {
+      "line": "var a = \"eyJeeeeeeeeee.eyJffffffffff.gggggggggg.eyJeeeeeeeeee.eyJffffffffff.gggggggggg\";",
+      "excerpt": "var a = \"[redacted].[redacted]\";"
+    },
+    {
+      "line": "var a = \"[redacted] AKIAABCDEFGHIJKLMNOP\";",
+      "excerpt": "var a = \"[redacted] [redacted]\";"
+    }
+  ],
+  "policy": {
+    "id": "pol1",
+    "packRefs": [
+      {
+        "id": "p",
+        "version": "1.0.0"
+      }
+    ],
+    "conflicts": [],
+    "rules": [
+      {
+        "id": "toy-pack",
+        "statement": "First sentence. Second sentence.",
+        "category": "security",
+        "defaultSeverity": "high",
+        "origin": {
+          "kind": "pack",
+          "packId": "p",
+          "packVersion": "1.0.0",
+          "id": "x"
+        }
+      },
+      {
+        "id": "toy-criteria",
+        "statement": "Line one\nline two",
+        "category": "maintainability",
+        "defaultSeverity": "low",
+        "origin": {
+          "kind": "criteria"
+        }
+      },
+      {
+        "id": "toy-nocat",
+        "statement": ".leading dot statement",
+        "origin": {
+          "kind": "pack",
+          "packId": "p",
+          "packVersion": "1.0.0",
+          "id": "y"
+        }
+      },
+      {
+        "id": "eqeqeq",
+        "statement": "Use ===. Always.",
+        "category": "correctness",
+        "defaultSeverity": "medium",
+        "origin": {
+          "kind": "pack",
+          "packId": "p",
+          "packVersion": "1.0.0",
+          "id": "z"
+        }
+      },
+      {
+        "id": "no-var",
+        "statement": "  Use let  ",
+        "category": "maintainability",
+        "defaultSeverity": "low",
+        "origin": {
+          "kind": "pack",
+          "packId": "p",
+          "packVersion": "1.0.0",
+          "id": "w"
+        }
+      },
+      {
+        "id": "has-no-detector",
+        "statement": "Never runs",
+        "category": "x",
+        "defaultSeverity": "high",
+        "origin": {
+          "kind": "pack",
+          "packId": "p",
+          "packVersion": "1.0.0",
+          "id": "v"
+        }
+      }
+    ]
+  },
+  "units": [
+    {
+      "file": "src/a.ts",
+      "content": "a TOY b\nplain\n  TOY SEV EDIT here\n// debuggatha-ignore toy-pack -- accepted\nx TOY\n"
+    },
+    {
+      "file": "src/b.py",
+      "content": "# nothing\nx = 'TOY é ✓ 日本語'\n# debuggatha-ignore-next-line toy-criteria, eqeqeq\ny = 'TOY next'\nz = 'TOY after'\n"
+    },
+    {
+      "file": "src/c.ts",
+      "content": "/* debuggatha-ignore-file no-var -- vendored */\nconst a = 'TOY 1';\nconst b = 'TOY 2';\n"
+    }
+  ],
+  "findings": [
+    {
+      "id": "n1",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "excerpt": "a TOY b"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/a.ts-1",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 1,
+            "end": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "critical",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "TOY SEV EDIT here"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/a.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "edit": {
+            "line": 3,
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "OK",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "x TOY"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/a.ts-5",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "x = 'TOY é ✓ 日本語'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/b.py-2",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "excerpt": "y = 'TOY next'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/b.py-4",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 4,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "z = 'TOY after'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/b.py-5",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "const a = 'TOY 1';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/c.ts-2",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "title": "First sentence",
+      "explanation": "Rule \"toy-pack\": First sentence. Second sentence.",
+      "severity": "high",
+      "confidence": "high",
+      "category": "security",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "const b = 'TOY 2';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-pack"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-pack-src/c.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-pack\": First sentence. Second sentence.",
+          "rationale": "First sentence. Second sentence.",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "excerpt": "a TOY b"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/a.ts"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/a.ts-1",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 1,
+            "end": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "critical",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "TOY SEV EDIT here"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/a.ts"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/a.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "edit": {
+            "line": 3,
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "OK",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n11",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "x TOY"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/a.ts"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/a.ts-5",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "x = 'TOY é ✓ 日本語'"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/b.py"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/b.py-2",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n13",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "z = 'TOY after'"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/b.py"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/b.py-5",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n14",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "const a = 'TOY 1';"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/c.ts"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/c.ts-2",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n15",
+      "title": "Line one",
+      "explanation": "Rule \"toy-criteria\": Line one\nline two",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "const b = 'TOY 2';"
+        },
+        {
+          "kind": "criteria",
+          "ruleId": "toy-criteria",
+          "source": "src/c.ts"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "recommendations": [
+        {
+          "id": "toy-criteria-src/c.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-criteria\": Line one\nline two",
+          "rationale": "Line one\nline two",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "n16",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "excerpt": "a TOY b"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/a.ts-1",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 1,
+            "end": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "n17",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "critical",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "TOY SEV EDIT here"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/a.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "edit": {
+            "line": 3,
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "OK",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n18",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "x TOY"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/a.ts-5",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n19",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "x = 'TOY é ✓ 日本語'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/b.py-2",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n20",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "excerpt": "y = 'TOY next'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/b.py-4",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 4,
+            "end": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "n21",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "z = 'TOY after'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/b.py-5",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "n22",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "const a = 'TOY 1';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/c.ts-2",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "n23",
+      "title": ".leading dot statement",
+      "explanation": "Rule \"toy-nocat\": .leading dot statement",
+      "severity": "medium",
+      "confidence": "low",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "const b = 'TOY 2';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "toy-nocat"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "toy-nocat-src/c.ts-3",
+          "action": "refactor",
+          "summary": "Address \"toy-nocat\": .leading dot statement",
+          "rationale": ".leading dot statement",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "n24",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "excerpt": "a TOY b"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/a.ts-1",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 1,
+            "end": 1
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n25",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "critical",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "TOY SEV EDIT here"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/a.ts-3",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          },
+          "edit": {
+            "line": 3,
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "OK",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n26",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "x TOY"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/a.ts-5",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n27",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "x = 'TOY é ✓ 日本語'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/b.py-2",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n28",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "z = 'TOY after'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/b.py-5",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n29",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "const a = 'TOY 1';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/c.ts-2",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n30",
+      "title": "Use ===",
+      "explanation": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+      "severity": "medium",
+      "confidence": "high",
+      "category": "correctness",
+      "locations": [
+        {
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 12,
+            "end": 15
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/c.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "const b = 'TOY 2';"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "eqeqeq"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "eqeqeq-src/c.ts-3",
+          "action": "replace",
+          "summary": "Compare with `===` or `!==`.",
+          "rationale": "`==` converts types before comparing (`0 == ''` is true), which hides bugs. Comparing to `null` with `== null` is the one accepted idiom and is not reported.",
+          "targetFile": "src/c.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "example": {
+            "before": "if (count == 0) {}",
+            "after": "if (count === 0) {}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n31",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 1,
+            "end": 1
+          },
+          "excerpt": "a TOY b"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/a.ts-1",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 1,
+            "end": 1
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n32",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "critical",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 3,
+            "end": 3
+          },
+          "excerpt": "TOY SEV EDIT here"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/a.ts-3",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 3,
+            "end": 3
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          },
+          "edit": {
+            "line": 3,
+            "startColumn": 3,
+            "endColumn": 6,
+            "replacement": "OK",
+            "safety": "safe"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n33",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 3,
+            "end": 6
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/a.ts",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "x TOY"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/a.ts-5",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/a.ts",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n34",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 2,
+            "end": 2
+          },
+          "excerpt": "x = 'TOY é ✓ 日本語'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/b.py-2",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 2,
+            "end": 2
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n35",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 4,
+            "end": 4
+          },
+          "excerpt": "y = 'TOY next'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/b.py-4",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 4,
+            "end": 4
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          }
+        }
+      ]
+    },
+    {
+      "id": "n36",
+      "title": "Use let",
+      "explanation": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+      "severity": "low",
+      "confidence": "medium",
+      "category": "maintainability",
+      "locations": [
+        {
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "columns": {
+            "start": 6,
+            "end": 9
+          }
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "code",
+          "file": "src/b.py",
+          "lines": {
+            "start": 5,
+            "end": 5
+          },
+          "excerpt": "z = 'TOY after'"
+        },
+        {
+          "kind": "review-pack-rule",
+          "packId": "p",
+          "ruleId": "no-var"
+        }
+      ],
+      "appliedPolicy": {
+        "id": "pol1"
+      },
+      "originatingPack": {
+        "id": "p",
+        "version": "1.0.0"
+      },
+      "recommendations": [
+        {
+          "id": "no-var-src/b.py-5",
+          "action": "replace",
+          "summary": "Use `const`, or `let` if the value is reassigned.",
+          "rationale": "`var` is function-scoped and hoisted, so a variable can be read before it is assigned or leak out of its block.",
+          "targetFile": "src/b.py",
+          "targetLines": {
+            "start": 5,
+            "end": 5
+          },
+          "example": {
+            "before": "var total = 0;",
+            "after": "let total = 0;"
+          }
+        }
+      ]
+    }
+  ],
+  "suppressed": [
+    {
+      "file": "src/b.py",
+      "line": 4,
+      "ruleId": "toy-criteria"
+    },
+    {
+      "file": "src/b.py",
+      "line": 4,
+      "ruleId": "eqeqeq"
+    },
+    {
+      "file": "src/c.ts",
+      "line": 2,
+      "ruleId": "no-var",
+      "reason": "vendored"
+    },
+    {
+      "file": "src/c.ts",
+      "line": 3,
+      "ruleId": "no-var",
+      "reason": "vendored"
+    }
+  ]
+}

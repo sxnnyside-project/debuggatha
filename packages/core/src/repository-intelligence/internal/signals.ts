@@ -1,4 +1,4 @@
-import type { Evidence, StackSignal } from "../types.js";
+import type { Evidence, StackSignal } from '../types.js';
 
 /** Accumulates evidence per detected value so repeated signals merge into one StackSignal. */
 export class SignalCollector {

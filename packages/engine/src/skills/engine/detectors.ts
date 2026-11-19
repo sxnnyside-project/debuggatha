@@ -1,6 +1,6 @@
-import type { Confidence, LineRange, Severity } from "@debuggatha/core";
-import { isTestPath } from "../../scan-scope/index.js";
-import type { StringLiteral } from "./lex.js";
+import type { Confidence, LineRange, Severity } from '@debuggatha/core';
+import { isTestPath } from '../../scan-scope/index.js';
+import type { StringLiteral } from './lex.js';
 
 /**
  * One hit a detector finds in a chunk of source text. Line numbers are
@@ -31,7 +31,7 @@ export interface HitEdit {
   /** 1-based, just past the last replaced character. */
   endColumn: number;
   replacement: string;
-  safety: "safe" | "review";
+  safety: 'safe' | 'review';
 }
 
 export interface DetectorInput {
@@ -107,7 +107,7 @@ function looksLikeWords(value: string): boolean {
 
 const redactKnownTokens = (line: string) =>
   KNOWN_TOKENS.reduce(
-    (text, pattern) => text.replace(new RegExp(pattern.source, "g"), "[redacted]"),
+    (text, pattern) => text.replace(new RegExp(pattern.source, 'g'), '[redacted]'),
     line,
   );
 
@@ -117,8 +117,15 @@ function excerptOf(rawLine: string): string {
 
 const ASSIGNED_NAME = /([A-Za-z_][\w.-]*)["']?\s*(?:=>|[:=])\s*$/;
 
+function isSyntheticFixture(token: string, line: string): boolean {
+  return (
+    /1234567890|ABCDEFG|dummy|fake|mock|fixture|synthetic|PRIVATE KEY|a1B2/i.test(token) ||
+    /fixture|dummy|mock|fake|synthetic|placeholder|detect\(|expect\(/i.test(line)
+  );
+}
+
 function detectHardcodedSecrets(input: DetectorInput): DetectorHit[] {
-  const rawLines = input.content.split("\n");
+  const rawLines = input.content.split('\n');
   const hits: DetectorHit[] = [];
   const flagged = new Set<number>();
 
@@ -130,13 +137,14 @@ function detectHardcodedSecrets(input: DetectorInput): DetectorHit[] {
     for (const pattern of KNOWN_TOKENS) {
       const match = pattern.exec(line);
       if (!match || /EXAMPLE|SAMPLE|XXXX/i.test(match[0])) continue;
+      if (inTests && isSyntheticFixture(match[0], line)) continue;
       hits.push({
         index,
         lines: lineRangeAt(input, index),
         columns: { start: match.index + 1, end: match.index + 1 + match[0].length },
         excerpt: excerptOf(line),
-        confidence: inTests ? "medium" : "high",
-        severity: inTests ? "medium" : "critical",
+        confidence: inTests ? 'medium' : 'high',
+        severity: inTests ? 'medium' : 'critical',
       });
       flagged.add(index);
       return;
@@ -148,7 +156,7 @@ function detectHardcodedSecrets(input: DetectorInput): DetectorHit[] {
 
   const lineStarts = [0];
   for (let i = 0; i < input.content.length; i += 1) {
-    if (input.content[i] === "\n") lineStarts.push(i + 1);
+    if (input.content[i] === '\n') lineStarts.push(i + 1);
   }
   let cursor = 0;
   for (const literal of input.strings) {
@@ -156,14 +164,14 @@ function detectHardcodedSecrets(input: DetectorInput): DetectorHit[] {
       cursor += 1;
     if (flagged.has(cursor)) continue;
     const column = literal.start - (lineStarts[cursor] ?? 0);
-    const before = (rawLines[cursor] ?? "").slice(0, column);
+    const before = (rawLines[cursor] ?? '').slice(0, column);
     const name = ASSIGNED_NAME.exec(before)?.[1];
     if (!name || !SECRET_NAME.test(name)) continue;
 
     const value = literal.value;
     if (value.length < 6 || PLACEHOLDER.test(value) || looksLikeWords(value)) continue;
     if (/^(?:https?:)?\/\//i.test(value) || /^[./~]/.test(value)) continue;
-    if (value.toLowerCase() === name.toLowerCase().replace(/[_.-]/g, "")) continue;
+    if (value.toLowerCase() === name.toLowerCase().replace(/[_.-]/g, '')) continue;
     const strong = value.length >= 16 && entropy(value) >= 3;
     if (!PASSWORD_NAME.test(name) && !strong) continue;
 
@@ -171,9 +179,9 @@ function detectHardcodedSecrets(input: DetectorInput): DetectorHit[] {
       index: cursor,
       lines: lineRangeAt(input, cursor),
       columns: { start: column + 1, end: column + 1 + (literal.end - literal.start) },
-      excerpt: excerptOf((rawLines[cursor] ?? "").replace(value, "[redacted]")),
-      confidence: strong ? "medium" : "low",
-      severity: "high",
+      excerpt: excerptOf((rawLines[cursor] ?? '').replace(value, '[redacted]')),
+      confidence: strong ? 'medium' : 'low',
+      severity: 'high',
     });
     flagged.add(cursor);
   }
@@ -194,7 +202,7 @@ interface ScanOptions {
     from: number;
     to: number;
     replacement: string;
-    safety: "safe" | "review";
+    safety: 'safe' | 'review';
   };
 }
 
@@ -205,11 +213,11 @@ function scanCode(input: DetectorInput, pattern: RegExp, options: ScanOptions): 
 
   const global = new RegExp(
     pattern.source,
-    pattern.flags.includes("g") ? pattern.flags : `${pattern.flags}g`,
+    pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`,
   );
-  const raw = input.content.split("\n");
+  const raw = input.content.split('\n');
   const hits: DetectorHit[] = [];
-  input.masked.split("\n").forEach((line, index) => {
+  input.masked.split('\n').forEach((line, index) => {
     for (const match of line.matchAll(global)) {
       if (options.accept && !options.accept(match, line)) continue;
       const start = match.index ?? 0;
@@ -218,7 +226,7 @@ function scanCode(input: DetectorInput, pattern: RegExp, options: ScanOptions): 
         index,
         lines: lineRangeAt(input, index),
         columns: { start: start + 1, end: start + 1 + match[0].length },
-        excerpt: excerptOf(raw[index] ?? ""),
+        excerpt: excerptOf(raw[index] ?? ''),
         confidence: options.confidence,
         ...(change
           ? {
@@ -245,6 +253,196 @@ function isNullComparison(match: RegExpMatchArray, line: string): boolean {
   return /\bnull\s*$/.test(before) || /^\s*null\b/.test(after);
 }
 
+// --- Call-shaped detectors ---------------------------------------------------
+
+/** Offset of the bracket that closes the one at `open`; strings and comments are blank in masked code, so only real brackets count. */
+function matchingClose(masked: string, open: number): number {
+  let depth = 0;
+  for (let i = open; i < masked.length; i += 1) {
+    const char = masked[i] ?? '';
+    if ('([{'.includes(char)) depth += 1;
+    else if (')]}'.includes(char)) {
+      depth -= 1;
+      if (depth === 0) return i;
+    }
+  }
+  return masked.length;
+}
+
+/** First offset in [from, to) at bracket depth 0 where `at` is true. */
+function topLevelOffset(
+  masked: string,
+  from: number,
+  to: number,
+  at: (offset: number) => boolean,
+): number | undefined {
+  let depth = 0;
+  for (let i = from; i < to; i += 1) {
+    const char = masked[i] ?? '';
+    if ('([{'.includes(char)) depth += 1;
+    else if (')]}'.includes(char)) depth -= 1;
+    else if (depth === 0 && at(i)) return i;
+  }
+  return undefined;
+}
+
+/** Every call whose callee matches `callee` (a pattern ending at the opening paren), with the offsets of its arguments. */
+function findCalls(masked: string, callee: RegExp) {
+  const calls: { start: number; length: number; argsStart: number; argsEnd: number }[] = [];
+  for (const match of masked.matchAll(new RegExp(callee.source, 'g'))) {
+    const start = match.index ?? 0;
+    const argsStart = start + match[0].length;
+    calls.push({
+      start,
+      length: match[0].length,
+      argsStart,
+      argsEnd: matchingClose(masked, argsStart - 1),
+    });
+  }
+  return calls;
+}
+
+function hitAtOffset(
+  input: DetectorInput,
+  offset: number,
+  length: number,
+  confidence: Confidence,
+): DetectorHit {
+  const before = input.masked.slice(0, offset);
+  const index = before.split('\n').length - 1;
+  const column = offset - (before.lastIndexOf('\n') + 1) + 1;
+  return {
+    index,
+    lines: lineRangeAt(input, index),
+    columns: { start: column, end: column + length },
+    excerpt: excerptOf(input.content.split('\n')[index] ?? ''),
+    confidence,
+  };
+}
+
+const isTestFile = (file: string) => isJsLike(file) && isTestPath(file);
+const TEST_CALL = /(?<![\w$.])(?:it|test)(?:\.(?:only|concurrent|fails))?\s*\(/;
+
+/** The block body of each `it('name', () => {...})` / `function () {...}` test; expression-bodied callbacks have no block to inspect. */
+function testBodies(input: DetectorInput) {
+  const { masked } = input;
+  const bodies: { start: number; length: number; body: string }[] = [];
+  for (const call of findCalls(masked, TEST_CALL)) {
+    if (!/^\s*["'`]/.test(masked.slice(call.argsStart, call.argsEnd))) continue;
+    const callback = topLevelOffset(
+      masked,
+      call.argsStart,
+      call.argsEnd,
+      (i) => masked.startsWith('=>', i) || /^function\b/.test(masked.slice(i, i + 9)),
+    );
+    if (callback === undefined) continue;
+    let open: number;
+    if (masked.startsWith('=>', callback)) {
+      open = callback + 2;
+    } else {
+      const paren = masked.indexOf('(', callback);
+      if (paren < 0 || paren >= call.argsEnd) continue;
+      open = matchingClose(masked, paren) + 1;
+    }
+    while (/\s/.test(masked[open] ?? '')) open += 1;
+    if (masked[open] !== '{' || open >= call.argsEnd) continue;
+    bodies.push({
+      start: call.start,
+      length: call.length,
+      body: masked.slice(open + 1, matchingClose(masked, open)),
+    });
+  }
+  return bodies;
+}
+
+const ASSERTION = /expect|assert|should|verify|fail|\bdone\b|\.rejects|toThrow|snapshot/i;
+
+/** A depth-0 `async` handler in a route registration that has no `try`/`.catch` around its body. */
+function detectAsyncRouteWithoutCatch(input: DetectorInput): DetectorHit[] {
+  if (!isJsLike(input.file) || isTestPath(input.file)) return [];
+  const { masked } = input;
+  const hits: DetectorHit[] = [];
+  const callee =
+    /\b(?:app|router|[A-Za-z_$][\w$]*(?:Router|App))\.(?:get|post|put|patch|delete|all)\s*\(/;
+  for (const call of findCalls(masked, callee)) {
+    const at = topLevelOffset(
+      masked,
+      call.argsStart,
+      call.argsEnd,
+      (i) =>
+        masked.startsWith('async', i) &&
+        !/[\w$]/.test(masked[i - 1] ?? '') &&
+        !/[\w$]/.test(masked[i + 5] ?? ''),
+    );
+    if (at === undefined || /\btry\b|\.catch\s*\(/.test(masked.slice(at, call.argsEnd))) continue;
+    hits.push(hitAtOffset(input, at, 5, 'medium'));
+  }
+  return hits;
+}
+
+/** `.forEach(async ...)`, also across lines. */
+function detectAsyncForEach(input: DetectorInput): DetectorHit[] {
+  if (!isJsLike(input.file)) return [];
+  const { masked } = input;
+  return findCalls(masked, /\.forEach\s*\(/)
+    .filter((call) => /^\s*async\b/.test(masked.slice(call.argsStart, call.argsEnd)))
+    .map((call) => hitAtOffset(input, call.start, call.length, 'high'));
+}
+
+/** `exec`/`execSync` whose command is a template with `${}` or a concatenation: a shell will read whatever the values hold. */
+function detectShellInterpolation(input: DetectorInput): DetectorHit[] {
+  if (!isJsLike(input.file) || isTestPath(input.file)) return [];
+  const { masked, content } = input;
+  const callee = /(?<![\w$.])(?:(?:child_process|childProcess|cp)\.)?(?:exec|execSync)\s*\(/;
+  const hits: DetectorHit[] = [];
+  for (const call of findCalls(masked, callee)) {
+    const end =
+      topLevelOffset(masked, call.argsStart, call.argsEnd, (i) => masked[i] === ',') ??
+      call.argsEnd;
+    const raw = content.slice(call.argsStart, end).trim();
+    const built = masked.slice(call.argsStart, end);
+    const interpolated = raw.startsWith('`') && raw.includes('${');
+    const concatenated = /^["'`]/.test(raw) && built.includes('+');
+    if (interpolated || concatenated)
+      hits.push(hitAtOffset(input, call.start, call.length, 'medium'));
+  }
+  return hits;
+}
+
+/** `cors()` with no options, or `origin: '*'`. */
+function detectOpenCors(input: DetectorInput): DetectorHit[] {
+  if (!isJsLike(input.file) || isTestPath(input.file)) return [];
+  const { masked, content } = input;
+  const hits = findCalls(masked, /(?<![\w$.])cors\s*\(/)
+    .filter((call) => masked.slice(call.argsStart, call.argsEnd).trim() === '')
+    .map((call) => hitAtOffset(input, call.start, call.length, 'high'));
+  for (const match of masked.matchAll(/\borigin\s*:\s*(["'`])\s*\1/g)) {
+    const start = match.index ?? 0;
+    if (/(["'`])\*\1/.test(content.slice(start, start + match[0].length))) {
+      hits.push(hitAtOffset(input, start, match[0].length, 'high'));
+    }
+  }
+  return hits.sort((a, b) => a.index - b.index);
+}
+
+/** `res.json(...)`/`res.send(...)` whose arguments read `err.stack` (high) or `err.message` (medium). */
+function detectErrorLeak(input: DetectorInput): DetectorHit[] {
+  if (!isJsLike(input.file) || isTestPath(input.file)) return [];
+  const { masked } = input;
+  const callee = /\b(?:res|response)\s*(?:\.\s*status\s*\([^)]*\)\s*)?\.\s*(?:json|send)\s*\(/;
+  const hits: DetectorHit[] = [];
+  for (const call of findCalls(masked, callee)) {
+    const leak = /\b(?:err|error|e|ex)\.(stack|message)\b/.exec(
+      masked.slice(call.argsStart, call.argsEnd),
+    );
+    if (leak)
+      hits.push(
+        hitAtOffset(input, call.start, call.length, leak[1] === 'stack' ? 'high' : 'medium'),
+      );
+  }
+  return hits;
+}
+
 /**
  * Curated, hand-written per rule id — deliberately not "generic" or
  * "AI-generated on the fly": a Rule is declarative data (knowledge-system
@@ -264,97 +462,126 @@ function isNullComparison(match: RegExpMatchArray, line: string): boolean {
  * matches, and every hit carries the columns it spans.
  */
 export const RULE_DETECTORS: Record<string, RuleDetector> = {
-  "no-explicit-any": (input) =>
+  'no-explicit-any': (input) =>
     scanCode(input, /:\s*any\b|<any>|as\s+any\b/, {
       guard: isTsLike,
-      confidence: "high",
+      confidence: 'high',
       // `unknown` is the right direction, but callers may rely on `any`, so the result needs checking.
       edit: (match) => ({
-        from: match[0].lastIndexOf("any"),
-        to: match[0].lastIndexOf("any") + 3,
-        replacement: "unknown",
-        safety: "review",
+        from: match[0].lastIndexOf('any'),
+        to: match[0].lastIndexOf('any') + 3,
+        replacement: 'unknown',
+        safety: 'review',
       }),
     }),
-  "strict-null-checks": (input) =>
-    scanCode(input, /[A-Za-z0-9_\])]!(?!=)/, { guard: isTsLike, confidence: "medium" }),
-  "no-var": (input) =>
+  'strict-null-checks': (input) =>
+    scanCode(input, /[A-Za-z0-9_\])]!(?!=)/, { guard: isTsLike, confidence: 'medium' }),
+  'no-var': (input) =>
     scanCode(input, /\bvar\s+[A-Za-z_$]/, {
       guard: isJsLike,
-      confidence: "high",
+      confidence: 'high',
       // `let` never changes behavior a `var` in normal code relied on, and `const` is a follow-up.
-      edit: () => ({ from: 0, to: 3, replacement: "let", safety: "safe" }),
+      edit: () => ({ from: 0, to: 3, replacement: 'let', safety: 'safe' }),
     }),
   eqeqeq: (input) =>
     scanCode(input, /(?<![=!<>])(?:==|!=)(?!=)/, {
       guard: isJsLike,
-      confidence: "high",
+      confidence: 'high',
       accept: (match, line) => !isNullComparison(match, line),
       edit: (match) => ({
         from: 0,
         to: 2,
-        replacement: match[0] === "==" ? "===" : "!==",
-        safety: "review",
+        replacement: match[0] === '==' ? '===' : '!==',
+        safety: 'review',
       }),
     }),
-  "no-eval": (input) =>
+  'no-eval': (input) =>
     scanCode(input, /(?<![.\w$])eval\s*\(|(?<![.\w$])(?:setTimeout|setInterval)\s*\(\s*["'`]/, {
-      guard: (file) => isJsLike(file) || file.endsWith(".php"),
-      confidence: "high",
+      guard: (file) => isJsLike(file) || file.endsWith('.php'),
+      confidence: 'high',
     }),
-  "prefer-template-literals": (input) =>
+  'prefer-template-literals': (input) =>
     scanCode(input, /["'`][^"'`]*["'`]\s*\+\s*[A-Za-z_$]|[A-Za-z_$][\w.]*\s*\+\s*["'`]/, {
       guard: isJsLike,
-      confidence: "low",
+      confidence: 'low',
     }),
-  "no-extend-native": (input) =>
+  'no-extend-native': (input) =>
     scanCode(
       input,
       /\b(?:Object|Array|String|Number|Boolean|Function)\.prototype\.[A-Za-z_$]\w*\s*=/,
-      { guard: isJsLike, confidence: "high" },
+      { guard: isJsLike, confidence: 'high' },
     ),
-  "no-implied-eval": (input) =>
-    scanCode(input, /(?<![.\w$])new\s+Function\s*\(/, { guard: isJsLike, confidence: "high" }),
-  "prefer-object-spread": (input) =>
-    scanCode(input, /Object\.assign\s*\(\s*\{\s*\}/, { guard: isJsLike, confidence: "medium" }),
-  "avoid-print": (input) =>
-    scanCode(input, /(?<![.\w$])print\s*\(/, {
-      guard: (file) => file.endsWith(".dart"),
-      confidence: "high",
-      edit: () => ({ from: 0, to: 5, replacement: "debugPrint", safety: "safe" }),
+  'no-implied-eval': (input) =>
+    scanCode(input, /(?<![.\w$])new\s+Function\s*\(/, {
+      guard: isJsLike,
+      confidence: 'high',
+      skipTests: true,
     }),
-  "no-hardcoded-secrets": detectHardcodedSecrets,
+  'prefer-object-spread': (input) =>
+    scanCode(input, /Object\.assign\s*\(\s*\{\s*\}/, { guard: isJsLike, confidence: 'medium' }),
+  'avoid-print': (input) =>
+    scanCode(input, /(?<![.\w$])print\s*\(/, {
+      guard: (file) => file.endsWith('.dart'),
+      confidence: 'high',
+      edit: () => ({ from: 0, to: 5, replacement: 'debugPrint', safety: 'safe' }),
+    }),
+  'no-hardcoded-secrets': detectHardcodedSecrets,
+
+  // Test-suite quality: these run on test files, where the problem lives.
+  'no-focused-tests': (input) =>
+    scanCode(input, /(?<![\w$.])(?:(?:it|test|describe|context|suite)\.only|fit|fdescribe)\s*\(/, {
+      guard: isJsLike,
+      confidence: 'high',
+    }),
+  'no-empty-tests': (input) =>
+    isTestFile(input.file)
+      ? testBodies(input)
+          .filter(({ body }) => body.trim() === '')
+          .map(({ start, length }) => hitAtOffset(input, start, length, 'high'))
+      : [],
+  // Low confidence: a helper such as `checkInvariants()` may assert on the test's behalf.
+  'no-assertionless-tests': (input) =>
+    isTestFile(input.file)
+      ? testBodies(input)
+          .filter(({ body }) => body.trim() !== '' && !ASSERTION.test(body))
+          .map(({ start, length }) => hitAtOffset(input, start, length, 'low'))
+      : [],
+  'async-route-errors': detectAsyncRouteWithoutCatch,
+  'no-async-foreach': detectAsyncForEach,
+  'no-shell-interpolation': detectShellInterpolation,
+  'no-open-cors': detectOpenCors,
+  'no-error-leak': detectErrorLeak,
 
   // A handful of high-confidence, low-false-positive rules from the
   // highest-traffic packs (React, Vue, Rust, Go); not every pack rule has a detector.
-  "no-dangerously-set-inner-html": (input) =>
+  'no-dangerously-set-inner-html': (input) =>
     scanCode(input, /dangerouslySetInnerHTML/, {
       guard: (file) => /\.(tsx|jsx)$/.test(file),
-      confidence: "high",
+      confidence: 'high',
     }),
-  "use-v-html-carefully": (input) =>
-    scanCode(input, /v-html\s*=/, { guard: (file) => file.endsWith(".vue"), confidence: "high" }),
-  "no-unwrap-expect": (input) =>
+  'use-v-html-carefully': (input) =>
+    scanCode(input, /v-html\s*=/, { guard: (file) => file.endsWith('.vue'), confidence: 'high' }),
+  'no-unwrap-expect': (input) =>
     scanCode(input, /\.unwrap\s*\(\s*\)|\.expect\s*\(/, {
-      guard: (file) => file.endsWith(".rs"),
-      confidence: "high",
+      guard: (file) => file.endsWith('.rs'),
+      confidence: 'high',
       skipTests: true,
     }),
-  "no-unsafe-blocks": (input) =>
+  'no-unsafe-blocks': (input) =>
     scanCode(input, /\bunsafe\s*\{|\bunsafe\s+fn\b/, {
-      guard: (file) => file.endsWith(".rs"),
-      confidence: "high",
+      guard: (file) => file.endsWith('.rs'),
+      confidence: 'high',
     }),
   // Shared by both `debuggatha/rust` and `debuggatha/go` — same rule id,
   // different syntax per language (`panic!(...)` vs `panic(...)`),
   // distinguished by file extension rather than needing two registry
   // entries the `Record<string, RuleDetector>` shape can't hold anyway.
-  "no-panic": (input) => {
-    if (input.file.endsWith(".rs")) {
-      return scanCode(input, /\bpanic!\s*\(/, { confidence: "high", skipTests: true });
+  'no-panic': (input) => {
+    if (input.file.endsWith('.rs')) {
+      return scanCode(input, /\bpanic!\s*\(/, { confidence: 'high', skipTests: true });
     }
-    if (input.file.endsWith(".go")) {
-      return scanCode(input, /(?<![.\w])panic\s*\(/, { confidence: "high", skipTests: true });
+    if (input.file.endsWith('.go')) {
+      return scanCode(input, /(?<![.\w])panic\s*\(/, { confidence: 'high', skipTests: true });
     }
     return [];
   },

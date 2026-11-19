@@ -1,4 +1,4 @@
-import type { MemoryLifecycleStatus } from "./lifecycle.js";
+import type { MemoryLifecycleStatus } from './lifecycle.js';
 
 /**
  * What triggered a transition — mirrors
@@ -9,8 +9,8 @@ import type { MemoryLifecycleStatus } from "./lifecycle.js";
  * `"confirmed"`, keeping "user-confirmed" confidence honest.
  */
 export type MemoryOrigin =
-  | { kind: "detection"; sessionId: string }
-  | { kind: "user"; actor: string };
+  | { kind: 'detection'; sessionId: string }
+  | { kind: 'user'; actor: string };
 
 /** One immutable record of a state change — append-only, same discipline as the Findings Ledger's `HistoryEvent`. */
 export interface MemoryHistoryEvent {

@@ -1,0 +1,134 @@
+{
+ "name": "okhttp",
+ "commit": "d16191b6792e3bc72781e5bf45193951b52adc4e",
+ "findings": [
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp-tls/src/main/kotlin/okhttp3/tls/HeldCertificate.kt",
+   "lines": {
+    "start": 164,
+    "end": 164
+   },
+   "columns": {
+    "start": 15,
+    "end": 42
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp-tls/src/main/kotlin/okhttp3/tls/HeldCertificate.kt",
+   "lines": {
+    "start": 178,
+    "end": 178
+   },
+   "columns": {
+    "start": 15,
+    "end": 46
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp-tls/src/main/kotlin/okhttp3/tls/HeldCertificate.kt",
+   "lines": {
+    "start": 529,
+    "end": 529
+   },
+   "columns": {
+    "start": 8,
+    "end": 35
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/Credentials.kt",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 31,
+    "end": 52
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp/src/commonJvmAndroid/kotlin/okhttp3/MediaType.kt",
+   "lines": {
+    "start": 93,
+    "end": 93
+   },
+   "columns": {
+    "start": 31,
+    "end": 64
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "okhttp/src/jvmTest/kotlin/okhttp3/internal/RecordingAuthenticator.kt",
+   "lines": {
+    "start": 41,
+    "end": 41
+   },
+   "columns": {
+    "start": 37,
+    "end": 63
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "samples/guide/src/main/java/okhttp3/recipes/RequestBodyCompression.java",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 48,
+    "end": 87
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "samples/slack/src/main/java/okhttp3/slack/SlackClient.java",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 27,
+    "end": 61
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  }
+ ]
+}

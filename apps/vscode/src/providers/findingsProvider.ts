@@ -1,5 +1,5 @@
-import { isActiveFindingStatus, type LedgerEntry } from "@debuggatha/engine";
-import * as vscode from "vscode";
+import { isActiveFindingStatus, type LedgerEntry } from '@debuggatha/engine';
+import * as vscode from 'vscode';
 
 export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<FindingTreeItem | undefined | void> =
@@ -36,20 +36,20 @@ export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem
     if (!element) {
       // Group by file
       const files = new Set(
-        visible.map((e) => e.latestFinding.locations?.[0]?.file || "Workspace"),
+        visible.map((e) => e.latestFinding.locations?.[0]?.file || 'Workspace'),
       );
       const items = Array.from(files).map((file) => {
         return new FindingTreeItem(
           file,
           vscode.TreeItemCollapsibleState.Expanded,
           undefined,
-          file === "Workspace" ? "project" : "file",
+          file === 'Workspace' ? 'project' : 'file',
         );
       });
       return Promise.resolve(items);
-    } else if (element.contextValue === "file" || element.contextValue === "project") {
+    } else if (element.contextValue === 'file' || element.contextValue === 'project') {
       const fileEntries = visible.filter(
-        (e) => (e.latestFinding.locations?.[0]?.file || "Workspace") === element.label,
+        (e) => (e.latestFinding.locations?.[0]?.file || 'Workspace') === element.label,
       );
       const items = fileEntries.map((e) => {
         return new FindingTreeItem(
@@ -71,7 +71,7 @@ export class FindingTreeItem extends vscode.TreeItem {
     labelStr: string,
     collapsibleStateVal: vscode.TreeItemCollapsibleState,
     public readonly entry?: LedgerEntry,
-    contextValueStr: string = "finding-open",
+    contextValueStr: string = 'finding-open',
   ) {
     super(labelStr, collapsibleStateVal);
     this.contextValue = contextValueStr;
@@ -85,25 +85,25 @@ export class FindingTreeItem extends vscode.TreeItem {
       this.iconPath = new vscode.ThemeIcon(this.getIconForSeverity(finding.severity));
 
       this.command = {
-        command: "debuggatha.openFinding",
-        title: "Open Finding",
+        command: 'debuggatha.openFinding',
+        title: 'Open Finding',
         arguments: [finding],
       };
     } else {
-      this.iconPath = new vscode.ThemeIcon(this.contextValue === "file" ? "file" : "project");
+      this.iconPath = new vscode.ThemeIcon(this.contextValue === 'file' ? 'file' : 'project');
     }
   }
 
   private getIconForSeverity(severity: string): string {
     switch (severity) {
-      case "critical":
-        return "error";
-      case "high":
-        return "warning";
-      case "medium":
-        return "info";
+      case 'critical':
+        return 'error';
+      case 'high':
+        return 'warning';
+      case 'medium':
+        return 'info';
       default:
-        return "note";
+        return 'note';
     }
   }
 }

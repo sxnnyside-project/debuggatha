@@ -1,4 +1,4 @@
-import type { PackDependency, ReviewPack } from "./types/pack.js";
+import type { PackDependency, ReviewPack } from './types/pack.js';
 
 /**
  * Structural well-formedness only — not semantic correctness of a rule's
@@ -18,7 +18,7 @@ export function validateReviewPack(pack: ReviewPack): void {
   const issues: string[] = [];
 
   if (!pack.id.trim()) {
-    issues.push("pack.id must be a non-empty string");
+    issues.push('pack.id must be a non-empty string');
   }
   if (!/^\d+\.\d+\.\d+/.test(pack.version.trim())) {
     issues.push(
@@ -70,23 +70,23 @@ export function validateReviewPack(pack: ReviewPack): void {
   }
 
   if (issues.length > 0) {
-    throw new Error(`Review pack "${pack.id}" failed validation:\n- ${issues.join("\n- ")}`);
+    throw new Error(`Review pack "${pack.id}" failed validation:\n- ${issues.join('\n- ')}`);
   }
 }
 
 function describeMalformedDependency(dependency: PackDependency): string[] {
-  const hasPackId = "packId" in dependency && Boolean(dependency.packId);
-  const hasSkillId = "skillId" in dependency && Boolean(dependency.skillId);
+  const hasPackId = 'packId' in dependency && Boolean(dependency.packId);
+  const hasSkillId = 'skillId' in dependency && Boolean(dependency.skillId);
 
   if (hasPackId && hasSkillId) {
     return [
-      "dependsOn entry declares both packId and skillId — a dependency must be exactly one shape",
+      'dependsOn entry declares both packId and skillId — a dependency must be exactly one shape',
     ];
   }
   if (!hasPackId && !hasSkillId) {
-    return ["dependsOn entry declares neither a packId nor a skillId"];
+    return ['dependsOn entry declares neither a packId nor a skillId'];
   }
-  if (hasPackId && "packId" in dependency && !dependency.versionRange?.trim()) {
+  if (hasPackId && 'packId' in dependency && !dependency.versionRange?.trim()) {
     return [`dependsOn entry for pack "${dependency.packId}" is missing a non-empty versionRange`];
   }
   return [];

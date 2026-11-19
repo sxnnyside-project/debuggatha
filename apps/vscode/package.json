@@ -26,6 +26,7 @@
     "Linters",
     "Testing"
   ],
+  "qna": "marketplace",
   "keywords": [
     "code review",
     "static analysis",
@@ -54,6 +55,7 @@
     "dev": "node esbuild.config.mjs --watch",
     "lint": "biome lint .",
     "format": "biome format --write .",
+    "format:check": "biome format .",
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",

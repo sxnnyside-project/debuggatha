@@ -1,0 +1,694 @@
+{
+ "name": "framework",
+ "commit": "753f33ea6d105909732d42f4334682989288ef5c",
+ "findings": [
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Broadcasting/Broadcasters/RedisBroadcaster.php",
+   "lines": {
+    "start": 146,
+    "end": 146
+   },
+   "columns": {
+    "start": 47,
+    "end": 52
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Broadcasting/Broadcasters/RedisBroadcaster.php",
+   "lines": {
+    "start": 151,
+    "end": 151
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/PhpRedisLock.php",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 37,
+    "end": 42
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/PhpRedisLock.php",
+   "lines": {
+    "start": 45,
+    "end": 45
+   },
+   "columns": {
+    "start": 37,
+    "end": 42
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/RedisLock.php",
+   "lines": {
+    "start": 53,
+    "end": 53
+   },
+   "columns": {
+    "start": 37,
+    "end": 42
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/RedisLock.php",
+   "lines": {
+    "start": 65,
+    "end": 65
+   },
+   "columns": {
+    "start": 37,
+    "end": 42
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/RedisStore.php",
+   "lines": {
+    "start": 192,
+    "end": 192
+   },
+   "columns": {
+    "start": 36,
+    "end": 41
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Cache/RedisTaggedCache.php",
+   "lines": {
+    "start": 205,
+    "end": 205
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "src/Illuminate/Database/Console/DbCommand.php",
+   "lines": {
+    "start": 191,
+    "end": 191
+   },
+   "columns": {
+    "start": 27,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "low",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Foundation/Console/ConfigCacheCommand.php",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 120,
+    "end": 120
+   },
+   "columns": {
+    "start": 40,
+    "end": 45
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 418,
+    "end": 418
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 458,
+    "end": 458
+   },
+   "columns": {
+    "start": 33,
+    "end": 38
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 498,
+    "end": 498
+   },
+   "columns": {
+    "start": 33,
+    "end": 38
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 577,
+    "end": 577
+   },
+   "columns": {
+    "start": 40,
+    "end": 45
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 591,
+    "end": 591
+   },
+   "columns": {
+    "start": 44,
+    "end": 49
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 634,
+    "end": 634
+   },
+   "columns": {
+    "start": 33,
+    "end": 38
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Queue/RedisQueue.php",
+   "lines": {
+    "start": 650,
+    "end": 650
+   },
+   "columns": {
+    "start": 40,
+    "end": 45
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Redis/Connections/PhpRedisConnection.php",
+   "lines": {
+    "start": 545,
+    "end": 545
+   },
+   "columns": {
+    "start": 21,
+    "end": 26
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Redis/Limiters/ConcurrencyLimiter.php",
+   "lines": {
+    "start": 119,
+    "end": 119
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Redis/Limiters/ConcurrencyLimiter.php",
+   "lines": {
+    "start": 156,
+    "end": 156
+   },
+   "columns": {
+    "start": 23,
+    "end": 28
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Redis/Limiters/DurationLimiter.php",
+   "lines": {
+    "start": 105,
+    "end": 105
+   },
+   "columns": {
+    "start": 34,
+    "end": 39
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "src/Illuminate/Redis/Limiters/DurationLimiter.php",
+   "lines": {
+    "start": 123,
+    "end": 123
+   },
+   "columns": {
+    "start": 61,
+    "end": 66
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Integration/Foundation/CloudBootstrapperTest.php",
+   "lines": {
+    "start": 369,
+    "end": 369
+   },
+   "columns": {
+    "start": 40,
+    "end": 45
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Integration/Queue/RedisQueueTest.php",
+   "lines": {
+    "start": 924,
+    "end": 924
+   },
+   "columns": {
+    "start": 22,
+    "end": 27
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Redis/RedisConnectionTest.php",
+   "lines": {
+    "start": 496,
+    "end": 496
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Redis/RedisConnectionTest.php",
+   "lines": {
+    "start": 498,
+    "end": 498
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Support/OnceTest.php",
+   "lines": {
+    "start": 276,
+    "end": 276
+   },
+   "columns": {
+    "start": 26,
+    "end": 31
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Support/OnceTest.php",
+   "lines": {
+    "start": 281,
+    "end": 281
+   },
+   "columns": {
+    "start": 27,
+    "end": 32
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Support/OnceTest.php",
+   "lines": {
+    "start": 286,
+    "end": 286
+   },
+   "columns": {
+    "start": 18,
+    "end": 23
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Support/OnceTest.php",
+   "lines": {
+    "start": 287,
+    "end": 287
+   },
+   "columns": {
+    "start": 19,
+    "end": 24
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/Support/SupportCarbonTest.php",
+   "lines": {
+    "start": 100,
+    "end": 100
+   },
+   "columns": {
+    "start": 25,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeBoolTest.php",
+   "lines": {
+    "start": 36,
+    "end": 36
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeBoolTest.php",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeBoolTest.php",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeBoolTest.php",
+   "lines": {
+    "start": 57,
+    "end": 57
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeComponentsTest.php",
+   "lines": {
+    "start": 71,
+    "end": 71
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeComponentTagCompilerTest.php",
+   "lines": {
+    "start": 920,
+    "end": 920
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeComponentTagCompilerTest.php",
+   "lines": {
+    "start": 972,
+    "end": 972
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeEchoHandlerTest.php",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeEchoHandlerTest.php",
+   "lines": {
+    "start": 66,
+    "end": 66
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladeEchoHandlerTest.php",
+   "lines": {
+    "start": 87,
+    "end": 87
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-eval",
+   "pack": "debuggatha/php",
+   "file": "tests/View/Blade/BladePropsTest.php",
+   "lines": {
+    "start": 51,
+    "end": 51
+   },
+   "columns": {
+    "start": 9,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  }
+ ]
+}

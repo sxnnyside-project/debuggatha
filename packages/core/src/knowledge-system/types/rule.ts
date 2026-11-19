@@ -1,4 +1,4 @@
-import type { Category, Severity } from "../../review-engine/index.js";
+import type { Category, Severity } from '../../review-engine/index.js';
 
 /**
  * When a Rule is even relevant. Resolved against `RepositoryContext.stack`
@@ -10,10 +10,10 @@ import type { Category, Severity } from "../../review-engine/index.js";
  * Skill's job at execution time (see package README "Technical decisions").
  */
 export type RuleScope =
-  | { kind: "always" }
-  | { kind: "requires-framework"; framework: string }
-  | { kind: "requires-language"; language: string }
-  | { kind: "glob"; pattern: string };
+  | { kind: 'always' }
+  | { kind: 'requires-framework'; framework: string }
+  | { kind: 'requires-language'; language: string }
+  | { kind: 'glob'; pattern: string };
 
 export interface KnowledgeEntry {
   id: string;

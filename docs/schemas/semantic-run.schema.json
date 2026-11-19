@@ -1,0 +1,72 @@
+{
+  "$ref": "#/definitions/SemanticRun",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "SemanticRun": {
+      "additionalProperties": false,
+      "description": "What the semantic pass did in one review, reported whether or not it found anything.",
+      "properties": {
+        "confirmed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "detected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "doubtful": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "description": "Calls that failed or answered with something unusable.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "model": {
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "rejected": {
+          "description": "Claims the model made that did not match the code, and were dropped.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "unsure": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "provider",
+        "verified",
+        "confirmed",
+        "doubtful",
+        "unsure",
+        "detected",
+        "rejected",
+        "failed",
+        "notes",
+        "durationMs"
+      ],
+      "type": "object"
+    }
+  },
+  "title": "SemanticRun"
+}

@@ -3,7 +3,7 @@ import {
   LAYER_ORDER,
   type LayerModel,
   type LayerViolation,
-} from "../types.js";
+} from '../types.js';
 
 /**
  * Layer Violations: compares the Dependency Graph against the
@@ -22,9 +22,9 @@ export function detectLayerViolations(
   const byPair = new Map<string, LayerViolation>();
 
   for (const edge of graph.edges) {
-    const fromLayer = layerModel.assignments[edge.from] ?? "unknown";
-    const toLayer = layerModel.assignments[edge.to] ?? "unknown";
-    if (fromLayer === "unknown" || toLayer === "unknown") continue;
+    const fromLayer = layerModel.assignments[edge.from] ?? 'unknown';
+    const toLayer = layerModel.assignments[edge.to] ?? 'unknown';
+    if (fromLayer === 'unknown' || toLayer === 'unknown') continue;
     if (fromLayer === toLayer) continue;
 
     const fromIndex = LAYER_ORDER.indexOf(fromLayer as (typeof LAYER_ORDER)[number]);
@@ -41,7 +41,7 @@ export function detectLayerViolations(
         to: edge.to,
         fromLayer,
         toLayer,
-        explanation: `"${edge.from}" (layer "${fromLayer}") depends on "${edge.to}" (layer "${toLayer}"), but "${toLayer}" is conventionally outer relative to "${fromLayer}" — this is an upward dependency against the assumed layer order (${LAYER_ORDER.join(" -> ")}).`,
+        explanation: `"${edge.from}" (layer "${fromLayer}") depends on "${edge.to}" (layer "${toLayer}"), but "${toLayer}" is conventionally outer relative to "${fromLayer}" — this is an upward dependency against the assumed layer order (${LAYER_ORDER.join(' -> ')}).`,
         evidence: [],
       };
       byPair.set(key, violation);

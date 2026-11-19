@@ -1,7 +1,7 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { isGeneratedContent, listScanFiles } from "../../scan-scope/index.js";
-import type { SourceUnit } from "./run.js";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { isGeneratedContent, listScanFiles } from '../../scan-scope/index.js';
+import type { SourceUnit } from './run.js';
 
 const SOURCE_EXTENSIONS = /\.(ts|tsx|js|jsx|mjs|cjs|dart|rs|go|py|kt|kts|php|cs|java|vue|svelte)$/;
 
@@ -13,7 +13,7 @@ export function readSourceUnits(paths: string[]): SourceUnit[] {
   const units: SourceUnit[] = [];
   for (const path of paths) {
     try {
-      const content = readFileSync(path, "utf8");
+      const content = readFileSync(path, 'utf8');
       if (isGeneratedContent(content)) continue;
       units.push({ file: path, content, lineNumbers: undefined });
     } catch {
@@ -32,7 +32,7 @@ export function walkSourceUnits(rootDir: string): SourceUnit[] {
   const units: SourceUnit[] = [];
   for (const file of listScanFiles(rootDir, SOURCE_EXTENSIONS)) {
     try {
-      const content = readFileSync(join(rootDir, file), "utf8");
+      const content = readFileSync(join(rootDir, file), 'utf8');
       if (isGeneratedContent(content)) continue;
       units.push({ file, content, lineNumbers: undefined });
     } catch {

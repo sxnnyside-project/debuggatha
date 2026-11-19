@@ -1,4 +1,4 @@
-import type { LogLevel } from "./config/settings.js";
+import type { LogLevel } from './config/settings.js';
 
 const RANK: Record<LogLevel, number> = { off: 0, error: 1, info: 2, debug: 3 };
 
@@ -10,10 +10,10 @@ export interface LogSink {
 const FIELD_LIMIT = 300;
 
 function show(value: unknown): string {
-  if (typeof value === "string") {
+  if (typeof value === 'string') {
     return JSON.stringify(value.length > FIELD_LIMIT ? `${value.slice(0, FIELD_LIMIT)}…` : value);
   }
-  if (typeof value === "number" || typeof value === "boolean" || value === undefined) {
+  if (typeof value === 'number' || typeof value === 'boolean' || value === undefined) {
     return String(value);
   }
   return show(JSON.stringify(value));
@@ -32,7 +32,7 @@ export class Logger {
   ) {}
 
   private write(
-    level: Exclude<LogLevel, "off">,
+    level: Exclude<LogLevel, 'off'>,
     message: string,
     fields?: Record<string, unknown>,
   ) {
@@ -40,20 +40,20 @@ export class Logger {
     const detail = fields
       ? ` ${Object.entries(fields)
           .map(([key, value]) => `${key}=${show(value)}`)
-          .join(" ")}`
-      : "";
+          .join(' ')}`
+      : '';
     this.sink.appendLine(
       `${this.now().toISOString()} ${level.toUpperCase().padEnd(5)} ${message}${detail}`,
     );
   }
 
   error(message: string, fields?: Record<string, unknown>) {
-    this.write("error", message, fields);
+    this.write('error', message, fields);
   }
   info(message: string, fields?: Record<string, unknown>) {
-    this.write("info", message, fields);
+    this.write('info', message, fields);
   }
   debug(message: string, fields?: Record<string, unknown>) {
-    this.write("debug", message, fields);
+    this.write('debug', message, fields);
   }
 }

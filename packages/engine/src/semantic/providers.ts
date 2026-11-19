@@ -1,9 +1,9 @@
-import type { Provider } from "../runtime-engine/provider.js";
-import { createLMStudioProvider } from "../runtime-engine/providers/lmstudio.js";
-import { createOllamaProvider } from "../runtime-engine/providers/ollama.js";
-import type { CompletionRequest, SemanticProvider } from "./types.js";
+import type { Provider } from '../runtime-engine/provider.js';
+import { createLMStudioProvider } from '../runtime-engine/providers/lmstudio.js';
+import { createOllamaProvider } from '../runtime-engine/providers/ollama.js';
+import type { CompletionRequest, SemanticProvider } from './types.js';
 
-const LOOPBACK = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
+const LOOPBACK = new Set(['localhost', '127.0.0.1', '[::1]', '::1']);
 const DEFAULT_TIMEOUT_MS = 120_000;
 
 /**
@@ -37,7 +37,7 @@ export function fromRuntimeProvider(
     model,
     async complete({ system, user, maxTokens }: CompletionRequest) {
       const signal = AbortSignal.timeout(timeoutMs);
-      let text = "";
+      let text = '';
       for await (const event of runtime.execute({
         model,
         prompt: user,
@@ -47,8 +47,8 @@ export function fromRuntimeProvider(
         maxTokens,
         signal,
       })) {
-        if (event.kind === "token") text += event.text;
-        else if (event.kind === "error") throw new Error(event.message);
+        if (event.kind === 'token') text += event.text;
+        else if (event.kind === 'error') throw new Error(event.message);
       }
       // A provider treats an abort as the end of the stream, so the timeout has to be noticed here.
       if (signal.aborted)
@@ -65,12 +65,12 @@ export interface LocalProviderOptions {
   timeoutMs?: number;
 }
 
-export type LocalProviderName = "ollama" | "lmstudio";
-export const LOCAL_PROVIDERS: readonly LocalProviderName[] = ["ollama", "lmstudio"];
+export type LocalProviderName = 'ollama' | 'lmstudio';
+export const LOCAL_PROVIDERS: readonly LocalProviderName[] = ['ollama', 'lmstudio'];
 
 const DEFAULT_URL: Record<LocalProviderName, string> = {
-  ollama: "http://localhost:11434",
-  lmstudio: "http://localhost:1234",
+  ollama: 'http://localhost:11434',
+  lmstudio: 'http://localhost:1234',
 };
 
 /** Connects to a runtime on this machine and picks its model: the one asked for, or the first it has. */
@@ -80,7 +80,7 @@ export async function createLocalProvider(
 ): Promise<SemanticProvider> {
   const baseUrl = assertLoopback(options.baseUrl ?? DEFAULT_URL[name]).origin;
   const runtime =
-    name === "ollama" ? createOllamaProvider({ baseUrl }) : createLMStudioProvider({ baseUrl });
+    name === 'ollama' ? createOllamaProvider({ baseUrl }) : createLMStudioProvider({ baseUrl });
 
   const health = await runtime.healthCheck();
   if (!health.available) throw new Error(`${runtime.displayName} is not answering at ${baseUrl}.`);
@@ -90,9 +90,9 @@ export async function createLocalProvider(
     model = (await runtime.discoverModels())[0]?.id;
     if (!model) {
       throw new Error(
-        name === "ollama"
-          ? "Ollama has no models; pull one (`ollama pull qwen2.5-coder:7b`)."
-          : "LM Studio has no model loaded.",
+        name === 'ollama'
+          ? 'Ollama has no models; pull one (`ollama pull qwen2.5-coder:7b`).'
+          : 'LM Studio has no model loaded.',
       );
     }
   }
@@ -100,6 +100,6 @@ export async function createLocalProvider(
 }
 
 export const ollamaProvider = (options?: LocalProviderOptions) =>
-  createLocalProvider("ollama", options);
+  createLocalProvider('ollama', options);
 export const lmStudioProvider = (options?: LocalProviderOptions) =>
-  createLocalProvider("lmstudio", options);
+  createLocalProvider('lmstudio', options);

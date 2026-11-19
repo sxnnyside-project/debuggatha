@@ -1,7 +1,7 @@
-import type { Finding, ReviewPolicy } from "@debuggatha/core";
-import { buildAnalysisFindings } from "../engine/analysis-findings.js";
-import { walkSourceUnits } from "../engine/read-files.js";
-import { type RunOptions, runReviewSkillsEngine } from "../engine/run.js";
+import type { Finding, ReviewPolicy } from '@debuggatha/core';
+import { buildAnalysisFindings } from '../engine/analysis-findings.js';
+import { walkSourceUnits } from '../engine/read-files.js';
+import { type RunOptions, runReviewSkillsEngine } from '../engine/run.js';
 
 /**
  * Review Skill: Architecture Review.

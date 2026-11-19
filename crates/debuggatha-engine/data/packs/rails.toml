@@ -1,0 +1,21 @@
+id = "debuggatha/rails"
+version = "1.0.0"
+kind = "stack"
+displayName = "Rails"
+dependsOn = []
+
+[[rules]]
+id = "rails-skip-authentication"
+packId = "debuggatha/rails"
+statement = "Do not skip authentication or the CSRF check with `skip_before_action` on a controller that serves browsers."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-rails-skip-authentication"]
+appliesTo = { kind = "requires-framework", framework = "rails" }
+
+[[knowledge]]
+id = "know-rails-skip-authentication"
+title = "Filter skipped"
+body = "`skip_before_action :authenticate_user!` or `:verify_authenticity_token` leaves the actions it covers open or open to cross-site forgery."
+externalRefs = ["https://guides.rubyonrails.org/security.html", "https://cwe.mitre.org/data/definitions/306.html"]
+limitations = ["A public landing action, or an API controller that authenticates differently, is reported too."]

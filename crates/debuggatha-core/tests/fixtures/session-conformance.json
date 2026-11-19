@@ -1,0 +1,1180 @@
+{
+  "context": {
+    "rootDir": ".",
+    "generatedAt": "T",
+    "hasGit": false,
+    "stack": {
+      "languages": [
+        {
+          "value": "JavaScript/TypeScript",
+          "evidence": [
+            {
+              "file": "package.json",
+              "detail": "package.json present at repository root"
+            }
+          ]
+        }
+      ],
+      "frameworks": [
+        {
+          "value": "React",
+          "evidence": [
+            {
+              "file": "package.json",
+              "detail": "dependency \"react\" declared"
+            }
+          ]
+        }
+      ],
+      "buildSystems": [],
+      "packageManagers": [],
+      "runtimes": [],
+      "platformTargets": [
+        "web"
+      ],
+      "workspaceType": "single-package",
+      "workspaceEvidence": [],
+      "manifests": [
+        "package.json"
+      ]
+    },
+    "capabilities": [
+      {
+        "id": "react",
+        "kind": "framework",
+        "confidence": "high",
+        "evidence": [
+          {
+            "file": "package.json",
+            "detail": "dependency \"react\" declared"
+          }
+        ],
+        "origin": "manifest"
+      },
+      {
+        "id": "javascript",
+        "kind": "language",
+        "confidence": "high",
+        "evidence": [
+          {
+            "file": "package.json",
+            "detail": "package.json present at repository root"
+          }
+        ],
+        "origin": "manifest"
+      },
+      {
+        "id": "web",
+        "kind": "platform",
+        "confidence": "high",
+        "evidence": [
+          {
+            "file": "package.json",
+            "detail": "platform target \"web\" inferred from detected frameworks"
+          }
+        ],
+        "origin": "convention"
+      }
+    ],
+    "dependencies": {
+      "lockfiles": [],
+      "declaredVersions": {
+        "react": "18"
+      },
+      "runtimeConstraints": {}
+    },
+    "documentation": {
+      "sources": [
+        {
+          "file": "README.md",
+          "kind": "readme",
+          "title": "Demo",
+          "wordCount": 4
+        }
+      ],
+      "summary": "1 documentation source found: 1 readme."
+    },
+    "criteria": {
+      "rules": [],
+      "sources": []
+    },
+    "understanding": {
+      "confidence": "medium",
+      "openQuestions": [
+        {
+          "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+          "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+        },
+        {
+          "question": "Does this project have engineering conventions Debuggatha should follow?",
+          "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+        }
+      ]
+    }
+  },
+  "requests": [
+    {
+      "name": "diff-with-base",
+      "input": {
+        "scope": {
+          "kind": "diff",
+          "base": "main"
+        },
+        "depth": "full"
+      },
+      "request": {
+        "id": "r1",
+        "scope": {
+          "kind": "diff",
+          "base": "main"
+        },
+        "depth": "full",
+        "requestedAt": "2026-07-10T00:00:00.000Z",
+        "requestedPackIds": []
+      }
+    },
+    {
+      "name": "diff-no-base",
+      "input": {
+        "scope": {
+          "kind": "diff"
+        },
+        "depth": "quick"
+      },
+      "request": {
+        "id": "r1",
+        "scope": {
+          "kind": "diff"
+        },
+        "depth": "quick",
+        "requestedAt": "2026-07-10T00:00:00.000Z",
+        "requestedPackIds": []
+      }
+    },
+    {
+      "name": "files",
+      "input": {
+        "scope": {
+          "kind": "files",
+          "paths": [
+            "a.ts",
+            "b.ts"
+          ]
+        },
+        "depth": "quick"
+      },
+      "request": {
+        "id": "r1",
+        "scope": {
+          "kind": "files",
+          "paths": [
+            "a.ts",
+            "b.ts"
+          ]
+        },
+        "depth": "quick",
+        "requestedAt": "2026-07-10T00:00:00.000Z",
+        "requestedPackIds": []
+      }
+    },
+    {
+      "name": "workspace-with-packs",
+      "input": {
+        "scope": {
+          "kind": "workspace"
+        },
+        "depth": "architectural",
+        "requestedPackIds": [
+          "react",
+          "owasp"
+        ],
+        "requestedPolicyId": "abc123"
+      },
+      "request": {
+        "id": "r1",
+        "scope": {
+          "kind": "workspace"
+        },
+        "depth": "architectural",
+        "requestedAt": "2026-07-10T00:00:00.000Z",
+        "requestedPackIds": [
+          "react",
+          "owasp"
+        ],
+        "requestedPolicyId": "abc123"
+      }
+    },
+    {
+      "name": "files-empty",
+      "input": {
+        "scope": {
+          "kind": "files",
+          "paths": []
+        },
+        "depth": "quick"
+      },
+      "error": "A file review request must name at least one file."
+    }
+  ],
+  "session": {
+    "id": "s1",
+    "createdAt": "2026-07-10T00:00:00.000Z",
+    "request": {
+      "id": "r1",
+      "scope": {
+        "kind": "workspace"
+      },
+      "depth": "architectural",
+      "requestedAt": "2026-07-10T00:00:00.000Z",
+      "requestedPackIds": [
+        "react",
+        "owasp"
+      ],
+      "requestedPolicyId": "abc123"
+    },
+    "repositoryContext": {
+      "rootDir": ".",
+      "generatedAt": "T",
+      "hasGit": false,
+      "stack": {
+        "languages": [
+          {
+            "value": "JavaScript/TypeScript",
+            "evidence": [
+              {
+                "file": "package.json",
+                "detail": "package.json present at repository root"
+              }
+            ]
+          }
+        ],
+        "frameworks": [
+          {
+            "value": "React",
+            "evidence": [
+              {
+                "file": "package.json",
+                "detail": "dependency \"react\" declared"
+              }
+            ]
+          }
+        ],
+        "buildSystems": [],
+        "packageManagers": [],
+        "runtimes": [],
+        "platformTargets": [
+          "web"
+        ],
+        "workspaceType": "single-package",
+        "workspaceEvidence": [],
+        "manifests": [
+          "package.json"
+        ]
+      },
+      "capabilities": [
+        {
+          "id": "react",
+          "kind": "framework",
+          "confidence": "high",
+          "evidence": [
+            {
+              "file": "package.json",
+              "detail": "dependency \"react\" declared"
+            }
+          ],
+          "origin": "manifest"
+        },
+        {
+          "id": "javascript",
+          "kind": "language",
+          "confidence": "high",
+          "evidence": [
+            {
+              "file": "package.json",
+              "detail": "package.json present at repository root"
+            }
+          ],
+          "origin": "manifest"
+        },
+        {
+          "id": "web",
+          "kind": "platform",
+          "confidence": "high",
+          "evidence": [
+            {
+              "file": "package.json",
+              "detail": "platform target \"web\" inferred from detected frameworks"
+            }
+          ],
+          "origin": "convention"
+        }
+      ],
+      "dependencies": {
+        "lockfiles": [],
+        "declaredVersions": {
+          "react": "18"
+        },
+        "runtimeConstraints": {}
+      },
+      "documentation": {
+        "sources": [
+          {
+            "file": "README.md",
+            "kind": "readme",
+            "title": "Demo",
+            "wordCount": 4
+          }
+        ],
+        "summary": "1 documentation source found: 1 readme."
+      },
+      "criteria": {
+        "rules": [],
+        "sources": []
+      },
+      "understanding": {
+        "confidence": "medium",
+        "openQuestions": [
+          {
+            "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+            "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+          },
+          {
+            "question": "Does this project have engineering conventions Debuggatha should follow?",
+            "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+          }
+        ]
+      }
+    },
+    "selectedPolicy": {
+      "id": "abc123"
+    },
+    "selectedPacks": [
+      {
+        "id": "react",
+        "version": "1.0.0"
+      }
+    ],
+    "status": "requested",
+    "execution": {}
+  },
+  "sessions": [
+    {
+      "name": "happy-path",
+      "steps": [
+        {
+          "to": "prepared"
+        },
+        {
+          "to": "running",
+          "patch": {
+            "source": {
+              "kind": "deterministic-analyzer",
+              "name": "debuggatha-core"
+            },
+            "startedAt": "2026-07-10T00:00:00.000Z"
+          }
+        },
+        {
+          "to": "completed",
+          "patch": {
+            "completedAt": "2026-07-10T00:00:01.000Z",
+            "durationMs": 1000
+          }
+        }
+      ],
+      "trail": [
+        "prepared",
+        "running",
+        "completed"
+      ],
+      "final": {
+        "id": "s1",
+        "createdAt": "2026-07-10T00:00:00.000Z",
+        "request": {
+          "id": "r1",
+          "scope": {
+            "kind": "workspace"
+          },
+          "depth": "architectural",
+          "requestedAt": "2026-07-10T00:00:00.000Z",
+          "requestedPackIds": [
+            "react",
+            "owasp"
+          ],
+          "requestedPolicyId": "abc123"
+        },
+        "repositoryContext": {
+          "rootDir": ".",
+          "generatedAt": "T",
+          "hasGit": false,
+          "stack": {
+            "languages": [
+              {
+                "value": "JavaScript/TypeScript",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "package.json present at repository root"
+                  }
+                ]
+              }
+            ],
+            "frameworks": [
+              {
+                "value": "React",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "dependency \"react\" declared"
+                  }
+                ]
+              }
+            ],
+            "buildSystems": [],
+            "packageManagers": [],
+            "runtimes": [],
+            "platformTargets": [
+              "web"
+            ],
+            "workspaceType": "single-package",
+            "workspaceEvidence": [],
+            "manifests": [
+              "package.json"
+            ]
+          },
+          "capabilities": [
+            {
+              "id": "react",
+              "kind": "framework",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "dependency \"react\" declared"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "javascript",
+              "kind": "language",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "package.json present at repository root"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "web",
+              "kind": "platform",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "platform target \"web\" inferred from detected frameworks"
+                }
+              ],
+              "origin": "convention"
+            }
+          ],
+          "dependencies": {
+            "lockfiles": [],
+            "declaredVersions": {
+              "react": "18"
+            },
+            "runtimeConstraints": {}
+          },
+          "documentation": {
+            "sources": [
+              {
+                "file": "README.md",
+                "kind": "readme",
+                "title": "Demo",
+                "wordCount": 4
+              }
+            ],
+            "summary": "1 documentation source found: 1 readme."
+          },
+          "criteria": {
+            "rules": [],
+            "sources": []
+          },
+          "understanding": {
+            "confidence": "medium",
+            "openQuestions": [
+              {
+                "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+                "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+              },
+              {
+                "question": "Does this project have engineering conventions Debuggatha should follow?",
+                "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+              }
+            ]
+          }
+        },
+        "selectedPolicy": {
+          "id": "abc123"
+        },
+        "selectedPacks": [
+          {
+            "id": "react",
+            "version": "1.0.0"
+          }
+        ],
+        "status": "completed",
+        "execution": {
+          "source": {
+            "kind": "deterministic-analyzer",
+            "name": "debuggatha-core"
+          },
+          "startedAt": "2026-07-10T00:00:00.000Z",
+          "completedAt": "2026-07-10T00:00:01.000Z",
+          "durationMs": 1000
+        }
+      }
+    },
+    {
+      "name": "fails-with-error",
+      "steps": [
+        {
+          "to": "prepared"
+        },
+        {
+          "to": "failed",
+          "patch": {
+            "error": "boom — é ✓"
+          }
+        }
+      ],
+      "trail": [
+        "prepared",
+        "failed"
+      ],
+      "final": {
+        "id": "s1",
+        "createdAt": "2026-07-10T00:00:00.000Z",
+        "request": {
+          "id": "r1",
+          "scope": {
+            "kind": "workspace"
+          },
+          "depth": "architectural",
+          "requestedAt": "2026-07-10T00:00:00.000Z",
+          "requestedPackIds": [
+            "react",
+            "owasp"
+          ],
+          "requestedPolicyId": "abc123"
+        },
+        "repositoryContext": {
+          "rootDir": ".",
+          "generatedAt": "T",
+          "hasGit": false,
+          "stack": {
+            "languages": [
+              {
+                "value": "JavaScript/TypeScript",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "package.json present at repository root"
+                  }
+                ]
+              }
+            ],
+            "frameworks": [
+              {
+                "value": "React",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "dependency \"react\" declared"
+                  }
+                ]
+              }
+            ],
+            "buildSystems": [],
+            "packageManagers": [],
+            "runtimes": [],
+            "platformTargets": [
+              "web"
+            ],
+            "workspaceType": "single-package",
+            "workspaceEvidence": [],
+            "manifests": [
+              "package.json"
+            ]
+          },
+          "capabilities": [
+            {
+              "id": "react",
+              "kind": "framework",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "dependency \"react\" declared"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "javascript",
+              "kind": "language",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "package.json present at repository root"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "web",
+              "kind": "platform",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "platform target \"web\" inferred from detected frameworks"
+                }
+              ],
+              "origin": "convention"
+            }
+          ],
+          "dependencies": {
+            "lockfiles": [],
+            "declaredVersions": {
+              "react": "18"
+            },
+            "runtimeConstraints": {}
+          },
+          "documentation": {
+            "sources": [
+              {
+                "file": "README.md",
+                "kind": "readme",
+                "title": "Demo",
+                "wordCount": 4
+              }
+            ],
+            "summary": "1 documentation source found: 1 readme."
+          },
+          "criteria": {
+            "rules": [],
+            "sources": []
+          },
+          "understanding": {
+            "confidence": "medium",
+            "openQuestions": [
+              {
+                "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+                "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+              },
+              {
+                "question": "Does this project have engineering conventions Debuggatha should follow?",
+                "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+              }
+            ]
+          }
+        },
+        "selectedPolicy": {
+          "id": "abc123"
+        },
+        "selectedPacks": [
+          {
+            "id": "react",
+            "version": "1.0.0"
+          }
+        ],
+        "status": "failed",
+        "execution": {
+          "error": "boom — é ✓"
+        }
+      }
+    },
+    {
+      "name": "cancel-early",
+      "steps": [
+        {
+          "to": "cancelled"
+        }
+      ],
+      "trail": [
+        "cancelled"
+      ],
+      "final": {
+        "id": "s1",
+        "createdAt": "2026-07-10T00:00:00.000Z",
+        "request": {
+          "id": "r1",
+          "scope": {
+            "kind": "workspace"
+          },
+          "depth": "architectural",
+          "requestedAt": "2026-07-10T00:00:00.000Z",
+          "requestedPackIds": [
+            "react",
+            "owasp"
+          ],
+          "requestedPolicyId": "abc123"
+        },
+        "repositoryContext": {
+          "rootDir": ".",
+          "generatedAt": "T",
+          "hasGit": false,
+          "stack": {
+            "languages": [
+              {
+                "value": "JavaScript/TypeScript",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "package.json present at repository root"
+                  }
+                ]
+              }
+            ],
+            "frameworks": [
+              {
+                "value": "React",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "dependency \"react\" declared"
+                  }
+                ]
+              }
+            ],
+            "buildSystems": [],
+            "packageManagers": [],
+            "runtimes": [],
+            "platformTargets": [
+              "web"
+            ],
+            "workspaceType": "single-package",
+            "workspaceEvidence": [],
+            "manifests": [
+              "package.json"
+            ]
+          },
+          "capabilities": [
+            {
+              "id": "react",
+              "kind": "framework",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "dependency \"react\" declared"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "javascript",
+              "kind": "language",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "package.json present at repository root"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "web",
+              "kind": "platform",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "platform target \"web\" inferred from detected frameworks"
+                }
+              ],
+              "origin": "convention"
+            }
+          ],
+          "dependencies": {
+            "lockfiles": [],
+            "declaredVersions": {
+              "react": "18"
+            },
+            "runtimeConstraints": {}
+          },
+          "documentation": {
+            "sources": [
+              {
+                "file": "README.md",
+                "kind": "readme",
+                "title": "Demo",
+                "wordCount": 4
+              }
+            ],
+            "summary": "1 documentation source found: 1 readme."
+          },
+          "criteria": {
+            "rules": [],
+            "sources": []
+          },
+          "understanding": {
+            "confidence": "medium",
+            "openQuestions": [
+              {
+                "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+                "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+              },
+              {
+                "question": "Does this project have engineering conventions Debuggatha should follow?",
+                "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+              }
+            ]
+          }
+        },
+        "selectedPolicy": {
+          "id": "abc123"
+        },
+        "selectedPacks": [
+          {
+            "id": "react",
+            "version": "1.0.0"
+          }
+        ],
+        "status": "cancelled",
+        "execution": {}
+      }
+    },
+    {
+      "name": "skip-state",
+      "steps": [
+        {
+          "to": "running"
+        }
+      ],
+      "trail": [],
+      "error": "Illegal review lifecycle transition: \"requested\" -> \"running\".",
+      "final": {
+        "id": "s1",
+        "createdAt": "2026-07-10T00:00:00.000Z",
+        "request": {
+          "id": "r1",
+          "scope": {
+            "kind": "workspace"
+          },
+          "depth": "architectural",
+          "requestedAt": "2026-07-10T00:00:00.000Z",
+          "requestedPackIds": [
+            "react",
+            "owasp"
+          ],
+          "requestedPolicyId": "abc123"
+        },
+        "repositoryContext": {
+          "rootDir": ".",
+          "generatedAt": "T",
+          "hasGit": false,
+          "stack": {
+            "languages": [
+              {
+                "value": "JavaScript/TypeScript",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "package.json present at repository root"
+                  }
+                ]
+              }
+            ],
+            "frameworks": [
+              {
+                "value": "React",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "dependency \"react\" declared"
+                  }
+                ]
+              }
+            ],
+            "buildSystems": [],
+            "packageManagers": [],
+            "runtimes": [],
+            "platformTargets": [
+              "web"
+            ],
+            "workspaceType": "single-package",
+            "workspaceEvidence": [],
+            "manifests": [
+              "package.json"
+            ]
+          },
+          "capabilities": [
+            {
+              "id": "react",
+              "kind": "framework",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "dependency \"react\" declared"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "javascript",
+              "kind": "language",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "package.json present at repository root"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "web",
+              "kind": "platform",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "platform target \"web\" inferred from detected frameworks"
+                }
+              ],
+              "origin": "convention"
+            }
+          ],
+          "dependencies": {
+            "lockfiles": [],
+            "declaredVersions": {
+              "react": "18"
+            },
+            "runtimeConstraints": {}
+          },
+          "documentation": {
+            "sources": [
+              {
+                "file": "README.md",
+                "kind": "readme",
+                "title": "Demo",
+                "wordCount": 4
+              }
+            ],
+            "summary": "1 documentation source found: 1 readme."
+          },
+          "criteria": {
+            "rules": [],
+            "sources": []
+          },
+          "understanding": {
+            "confidence": "medium",
+            "openQuestions": [
+              {
+                "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+                "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+              },
+              {
+                "question": "Does this project have engineering conventions Debuggatha should follow?",
+                "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+              }
+            ]
+          }
+        },
+        "selectedPolicy": {
+          "id": "abc123"
+        },
+        "selectedPacks": [
+          {
+            "id": "react",
+            "version": "1.0.0"
+          }
+        ],
+        "status": "requested",
+        "execution": {}
+      }
+    },
+    {
+      "name": "out-of-terminal",
+      "steps": [
+        {
+          "to": "cancelled"
+        },
+        {
+          "to": "requested"
+        }
+      ],
+      "trail": [
+        "cancelled"
+      ],
+      "error": "Illegal review lifecycle transition: \"cancelled\" -> \"requested\".",
+      "final": {
+        "id": "s1",
+        "createdAt": "2026-07-10T00:00:00.000Z",
+        "request": {
+          "id": "r1",
+          "scope": {
+            "kind": "workspace"
+          },
+          "depth": "architectural",
+          "requestedAt": "2026-07-10T00:00:00.000Z",
+          "requestedPackIds": [
+            "react",
+            "owasp"
+          ],
+          "requestedPolicyId": "abc123"
+        },
+        "repositoryContext": {
+          "rootDir": ".",
+          "generatedAt": "T",
+          "hasGit": false,
+          "stack": {
+            "languages": [
+              {
+                "value": "JavaScript/TypeScript",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "package.json present at repository root"
+                  }
+                ]
+              }
+            ],
+            "frameworks": [
+              {
+                "value": "React",
+                "evidence": [
+                  {
+                    "file": "package.json",
+                    "detail": "dependency \"react\" declared"
+                  }
+                ]
+              }
+            ],
+            "buildSystems": [],
+            "packageManagers": [],
+            "runtimes": [],
+            "platformTargets": [
+              "web"
+            ],
+            "workspaceType": "single-package",
+            "workspaceEvidence": [],
+            "manifests": [
+              "package.json"
+            ]
+          },
+          "capabilities": [
+            {
+              "id": "react",
+              "kind": "framework",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "dependency \"react\" declared"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "javascript",
+              "kind": "language",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "package.json present at repository root"
+                }
+              ],
+              "origin": "manifest"
+            },
+            {
+              "id": "web",
+              "kind": "platform",
+              "confidence": "high",
+              "evidence": [
+                {
+                  "file": "package.json",
+                  "detail": "platform target \"web\" inferred from detected frameworks"
+                }
+              ],
+              "origin": "convention"
+            }
+          ],
+          "dependencies": {
+            "lockfiles": [],
+            "declaredVersions": {
+              "react": "18"
+            },
+            "runtimeConstraints": {}
+          },
+          "documentation": {
+            "sources": [
+              {
+                "file": "README.md",
+                "kind": "readme",
+                "title": "Demo",
+                "wordCount": 4
+              }
+            ],
+            "summary": "1 documentation source found: 1 readme."
+          },
+          "criteria": {
+            "rules": [],
+            "sources": []
+          },
+          "understanding": {
+            "confidence": "medium",
+            "openQuestions": [
+              {
+                "question": "Which JavaScript/TypeScript runtime does this project target (Node.js, Bun, Deno)?",
+                "reason": "package.json is present but no runtime-specific marker (packageManager field, lockfile, engines.node, bunfig.toml, deno.json) was found."
+              },
+              {
+                "question": "Does this project have engineering conventions Debuggatha should follow?",
+                "reason": "No lint/format configuration and no rule-shaped documentation section (ARCHITECTURE.md, CONTRIBUTING.md, CLAUDE.md, *_CRITERIA.md) was found."
+              }
+            ]
+          }
+        },
+        "selectedPolicy": {
+          "id": "abc123"
+        },
+        "selectedPacks": [
+          {
+            "id": "react",
+            "version": "1.0.0"
+          }
+        ],
+        "status": "cancelled",
+        "execution": {}
+      }
+    }
+  ],
+  "allowed": {
+    "requested": [
+      "prepared",
+      "cancelled"
+    ],
+    "prepared": [
+      "running",
+      "failed",
+      "cancelled"
+    ],
+    "running": [
+      "completed",
+      "failed",
+      "cancelled"
+    ],
+    "completed": [],
+    "failed": [],
+    "cancelled": []
+  }
+}

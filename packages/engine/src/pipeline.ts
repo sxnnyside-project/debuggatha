@@ -1,19 +1,19 @@
-import { realpathSync } from "node:fs";
-import { isAbsolute, join, relative, sep } from "node:path";
+import { realpathSync } from 'node:fs';
+import { isAbsolute, join, relative, sep } from 'node:path';
 import {
   ANALYZER_IDS,
   type AnalyzerOptions,
   type AnalyzerRun,
   mergeAnalyzerFindings,
   runAnalyzers,
-} from "./analyzers/index.js";
+} from './analyzers/index.js';
 import {
   applyBaseline,
   type Baseline,
   createBaselineFrom,
   loadBaseline,
   saveBaseline,
-} from "./baseline.js";
+} from './baseline.js';
 import type {
   BuildRepositoryContextOptions,
   Finding,
@@ -23,10 +23,10 @@ import type {
   ReviewResult,
   Severity,
   SyncReport,
-} from "./index.js";
-import * as core from "./index.js";
-import { parseUnifiedDiff } from "./skills/engine/diff-parser.js";
-import type { InlineSuppression } from "./skills/engine/suppress.js";
+} from './index.js';
+import * as core from './index.js';
+import { parseUnifiedDiff } from './skills/engine/diff-parser.js';
+import type { InlineSuppression } from './skills/engine/suppress.js';
 
 /**
  * The one orchestration pipeline every review-shaped entry point runs —
@@ -41,9 +41,9 @@ import type { InlineSuppression } from "./skills/engine/suppress.js";
  * re-deriving it.
  */
 export type ReviewPipelineScope =
-  | { kind: "diff"; base: string | undefined; diff: string }
-  | { kind: "files"; paths: string[] }
-  | { kind: "workspace" };
+  | { kind: 'diff'; base: string | undefined; diff: string }
+  | { kind: 'files'; paths: string[] }
+  | { kind: 'workspace' };
 
 export interface ReviewPipelineInput {
   rootDir: string;
@@ -168,7 +168,7 @@ export const defaultPipelineDeps: ReviewPipelineDeps = {
  * twice. Files outside the root stay absolute.
  */
 export function toRepoRelative(rootDir: string, file: string): string {
-  if (!isAbsolute(file)) return file.split(sep).join("/");
+  if (!isAbsolute(file)) return file.split(sep).join('/');
   const real = (path: string) => {
     try {
       return realpathSync.native(path);
@@ -177,8 +177,8 @@ export function toRepoRelative(rootDir: string, file: string): string {
     }
   };
   const relativePath = relative(real(rootDir), real(file));
-  if (relativePath === "" || relativePath.startsWith("..") || isAbsolute(relativePath)) return file;
-  return relativePath.split(sep).join("/");
+  if (relativePath === '' || relativePath.startsWith('..') || isAbsolute(relativePath)) return file;
+  return relativePath.split(sep).join('/');
 }
 
 function relativizeFinding(finding: Finding, rootDir: string): Finding {
@@ -203,8 +203,8 @@ function relativizeFinding(finding: Finding, rootDir: string): Finding {
           : toRepoRelative(rootDir, recommendation.targetFile),
     })),
     evidence: finding.evidence.map((evidence) => {
-      if ("file" in evidence) return { ...evidence, file: toRepoRelative(rootDir, evidence.file) };
-      if (evidence.kind === "criteria") {
+      if ('file' in evidence) return { ...evidence, file: toRepoRelative(rootDir, evidence.file) };
+      if (evidence.kind === 'criteria') {
         return { ...evidence, source: toRepoRelative(rootDir, evidence.source) };
       }
       return evidence;
@@ -220,11 +220,11 @@ function runSkillForScope(
   options: { onSuppressed: (suppression: InlineSuppression) => void },
 ): Finding[] {
   switch (scope.kind) {
-    case "diff":
+    case 'diff':
       return deps.reviewDiff(scope.diff, policy, options);
-    case "workspace":
+    case 'workspace':
       return deps.reviewArchitecture(rootDir, policy, options);
-    case "files":
+    case 'files':
       // A relative path is relative to the repository, not to wherever the process happens to run.
       return deps.reviewFiles(
         scope.paths.map((path) => (isAbsolute(path) ? path : join(rootDir, path))),
@@ -245,13 +245,13 @@ function deriveSyncScope(
   scope: ReviewPipelineScope,
   findings: Finding[],
   rootDir: string,
-): { kind: "workspace" } | { kind: "files"; files: string[] } {
-  if (scope.kind === "workspace") return { kind: "workspace" };
-  if (scope.kind === "files") {
-    return { kind: "files", files: scope.paths.map((path) => toRepoRelative(rootDir, path)) };
+): { kind: 'workspace' } | { kind: 'files'; files: string[] } {
+  if (scope.kind === 'workspace') return { kind: 'workspace' };
+  if (scope.kind === 'files') {
+    return { kind: 'files', files: scope.paths.map((path) => toRepoRelative(rootDir, path)) };
   }
   return {
-    kind: "files",
+    kind: 'files',
     files: [...new Set(findings.flatMap((finding) => finding.locations.map((l) => l.file)))],
   };
 }
@@ -259,11 +259,11 @@ function deriveSyncScope(
 /** The files a review looks at, for analyzers that can be limited to them; `undefined` is the whole repository. */
 function scopeFiles(scope: ReviewPipelineScope, rootDir: string): string[] | undefined {
   switch (scope.kind) {
-    case "workspace":
+    case 'workspace':
       return undefined;
-    case "files":
+    case 'files':
       return scope.paths.map((path) => toRepoRelative(rootDir, path));
-    case "diff":
+    case 'diff':
       return [...new Set(parseUnifiedDiff(scope.diff).map((unit) => unit.file))];
   }
 }
@@ -282,8 +282,8 @@ function keepUnanalyzedEntries(
   const before = new Map(previous.entries.map((entry) => [entry.id, entry]));
   const restore = new Set(
     report.autoResolvedEntryIds.filter((id) => {
-      const tool = before.get(id)?.fingerprint.ruleId?.split(":")[0];
-      if (tool === "semantic") return true; // A model never closes a finding by not repeating it.
+      const tool = before.get(id)?.fingerprint.ruleId?.split(':')[0];
+      if (tool === 'semantic') return true; // A model never closes a finding by not repeating it.
       return tool !== undefined && ANALYZER_IDS.has(tool) && !ranAnalyzers.has(tool);
     }),
   );
@@ -332,11 +332,11 @@ export function analyzeReview(
   const repositoryContext = deps.buildRepositoryContext(input.rootDir, repositoryContextOptions);
 
   const requestScope =
-    input.scope.kind === "diff"
-      ? { kind: "diff" as const, base: input.scope.base }
-      : input.scope.kind === "files"
-        ? { kind: "files" as const, paths: input.scope.paths }
-        : { kind: "workspace" as const };
+    input.scope.kind === 'diff'
+      ? { kind: 'diff' as const, base: input.scope.base }
+      : input.scope.kind === 'files'
+        ? { kind: 'files' as const, paths: input.scope.paths }
+        : { kind: 'workspace' as const };
 
   const request = deps.createReviewRequest({
     scope: requestScope,
@@ -353,9 +353,9 @@ export function analyzeReview(
     selectedPolicy: { id: policy.id },
     selectedPacks: policy.packRefs,
   });
-  session = deps.transitionSession(session, "prepared");
-  session = deps.transitionSession(session, "running", {
-    source: { kind: "deterministic-analyzer", name: input.sourceName },
+  session = deps.transitionSession(session, 'prepared');
+  session = deps.transitionSession(session, 'running', {
+    source: { kind: 'deterministic-analyzer', name: input.sourceName },
     startedAt: new Date().toISOString(),
   });
 
@@ -370,7 +370,7 @@ export function analyzeReview(
         }),
     }).map((finding) => relativizeFinding(finding, repositoryContext.rootDir));
   } catch (error) {
-    deps.transitionSession(session, "failed", {
+    deps.transitionSession(session, 'failed', {
       completedAt: new Date().toISOString(),
       error: error instanceof Error ? error.message : String(error),
     });
@@ -378,7 +378,7 @@ export function analyzeReview(
   }
 
   let analyzerRuns: AnalyzerRun[] = [];
-  if (input.analyzers && input.analyzers.mode !== "off") {
+  if (input.analyzers && input.analyzers.mode !== 'off') {
     const outcome = runAnalyzers({
       rootDir: repositoryContext.rootDir,
       files: scopeFiles(input.scope, repositoryContext.rootDir),
@@ -421,7 +421,7 @@ export function concludeReview(
     memoryStore,
   );
 
-  session = deps.transitionSession(session, "completed", { completedAt: new Date().toISOString() });
+  session = deps.transitionSession(session, 'completed', { completedAt: new Date().toISOString() });
   const trackedResult = deps.createReviewResult({ session, findings: keptFindings });
 
   // Adoption mode: what the baseline accepted is still tracked in the ledger
@@ -444,7 +444,7 @@ export function concludeReview(
     ledger,
     synced.ledger,
     synced.report,
-    new Set(analyzerRuns.filter((run) => run.status === "ran").map((run) => run.id)),
+    new Set(analyzerRuns.filter((run) => run.status === 'ran').map((run) => run.id)),
   );
   if (input.persist !== false) deps.saveLedger(updatedLedger);
 
@@ -452,7 +452,7 @@ export function concludeReview(
   const ledgerIds: Record<string, string> = {};
   for (const finding of keptFindings) {
     const match = core.defaultFindingMatcher(finding, [...updatedLedger.entries]);
-    if (match.kind === "matched") ledgerIds[finding.id] = match.entryId;
+    if (match.kind === 'matched') ledgerIds[finding.id] = match.entryId;
   }
   const reportedEntryIds = new Set(fresh.map((finding) => ledgerIds[finding.id]));
   const entriesById = new Map(updatedLedger.entries.map((entry) => [entry.id, entry]));
@@ -499,7 +499,7 @@ export function concludeReview(
  * they add later would look new.
  */
 export function createBaseline(
-  input: Pick<ReviewPipelineInput, "rootDir" | "sourceName" | "analyzers"> & {
+  input: Pick<ReviewPipelineInput, 'rootDir' | 'sourceName' | 'analyzers'> & {
     cache?: RepositoryContextCache;
     /** Extra packs, the same a review of this repository asks for. */
     packIds?: string[];
@@ -509,8 +509,8 @@ export function createBaseline(
   const { result, analyzers } = executeReview(
     {
       rootDir: input.rootDir,
-      scope: { kind: "workspace" },
-      depth: "full",
+      scope: { kind: 'workspace' },
+      depth: 'full',
       packIds: input.packIds ?? [],
       policyId: undefined,
       sourceName: input.sourceName,

@@ -26,8 +26,8 @@
  *   low     a weak signal that needs a person to judge (a short value assigned to `password`)
  */
 
-export const SEVERITIES = ["critical", "high", "medium", "low", "informational"] as const;
+export const SEVERITIES = ['critical', 'high', 'medium', 'low', 'informational'] as const;
 export type Severity = (typeof SEVERITIES)[number];
 
-export const CONFIDENCE_LEVELS = ["high", "medium", "low"] as const;
+export const CONFIDENCE_LEVELS = ['high', 'medium', 'low'] as const;
 export type Confidence = (typeof CONFIDENCE_LEVELS)[number];

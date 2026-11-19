@@ -5,19 +5,19 @@
  * file should encode lifecycle logic.
  */
 export const REVIEW_LIFECYCLE_STATUSES = [
-  "requested",
-  "prepared",
-  "running",
-  "completed",
-  "failed",
-  "cancelled",
+  'requested',
+  'prepared',
+  'running',
+  'completed',
+  'failed',
+  'cancelled',
 ] as const;
 export type ReviewLifecycleStatus = (typeof REVIEW_LIFECYCLE_STATUSES)[number];
 
 const LEGAL_TRANSITIONS: Record<ReviewLifecycleStatus, readonly ReviewLifecycleStatus[]> = {
-  requested: ["prepared", "cancelled"],
-  prepared: ["running", "failed", "cancelled"],
-  running: ["completed", "failed", "cancelled"],
+  requested: ['prepared', 'cancelled'],
+  prepared: ['running', 'failed', 'cancelled'],
+  running: ['completed', 'failed', 'cancelled'],
   completed: [],
   failed: [],
   cancelled: [],

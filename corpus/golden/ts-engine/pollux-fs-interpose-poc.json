@@ -1,0 +1,230 @@
+{
+ "name": "pollux-fs-interpose-poc",
+ "commit": "8f4dcdc381125ff8aead2b8ccc6c5b5ca6d732c5",
+ "findings": [
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/audit.rs",
+   "lines": {
+    "start": 43,
+    "end": 43
+   },
+   "columns": {
+    "start": 14,
+    "end": 22
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/audit.rs",
+   "lines": {
+    "start": 60,
+    "end": 60
+   },
+   "columns": {
+    "start": 5,
+    "end": 13
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/poc_fixture.rs",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 47,
+    "end": 55
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/poc_fixture.rs",
+   "lines": {
+    "start": 31,
+    "end": 31
+   },
+   "columns": {
+    "start": 18,
+    "end": 26
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/poc_fixture.rs",
+   "lines": {
+    "start": 38,
+    "end": 38
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/bin/poc_fixture.rs",
+   "lines": {
+    "start": 40,
+    "end": 40
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/decision.rs",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 5,
+    "end": 14
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/decision.rs",
+   "lines": {
+    "start": 29,
+    "end": 29
+   },
+   "columns": {
+    "start": 22,
+    "end": 30
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/decision.rs",
+   "lines": {
+    "start": 90,
+    "end": 90
+   },
+   "columns": {
+    "start": 5,
+    "end": 13
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "src/guard.rs",
+   "lines": {
+    "start": 130,
+    "end": 130
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/interpose.rs",
+   "lines": {
+    "start": 106,
+    "end": 106
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/interpose.rs",
+   "lines": {
+    "start": 113,
+    "end": 113
+   },
+   "columns": {
+    "start": 13,
+    "end": 21
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/interpose.rs",
+   "lines": {
+    "start": 75,
+    "end": 75
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  },
+  {
+   "rule": "no-unsafe-blocks",
+   "pack": "debuggatha/rust",
+   "file": "src/interpose.rs",
+   "lines": {
+    "start": 94,
+    "end": 94
+   },
+   "columns": {
+    "start": 9,
+    "end": 17
+   },
+   "severity": "critical",
+   "confidence": "high",
+   "category": "security"
+  }
+ ]
+}

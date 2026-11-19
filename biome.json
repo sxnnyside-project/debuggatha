@@ -7,23 +7,38 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!**/dist", "!**/legacy", "!**/.turbo", "!**/analyzers/fixtures"]
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/legacy",
+      "!**/.turbo",
+      "!**/analyzers/fixtures",
+      "!corpus/golden",
+      "!docs/schemas/repository-context.schema.json",
+      "!docs/schemas/review-request.schema.json",
+      "!docs/schemas/review-session.schema.json",
+      "!docs/schemas/finding.schema.json",
+      "!docs/schemas/ledger.schema.json",
+      "!corpus/baseline-ts-engine.json",
+      "!crates/*/tests/fixtures"
+    ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 100
+    "lineWidth": 100,
+    "lineEnding": "lf"
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "double",
+      "quoteStyle": "single",
       "semicolons": "always",
       "trailingCommas": "all"
     }

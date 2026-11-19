@@ -1,8 +1,8 @@
-import { execFileSync } from "node:child_process";
-import { statSync } from "node:fs";
-import { join } from "node:path";
-import { isIgnoredPath } from "../scan-scope/index.js";
-import { SAFE_REF } from "./providers/git.js";
+import { execFileSync } from 'node:child_process';
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
+import { isIgnoredPath } from '../scan-scope/index.js';
+import { SAFE_REF } from './providers/git.js';
 
 export interface ChangedFiles {
   /** Files that exist now and were added, modified, or are new and untracked, relative to the repository directory. */
@@ -14,10 +14,10 @@ export interface ChangedFiles {
 }
 
 function git(cwd: string, args: string[]): string {
-  return execFileSync("git", args, {
+  return execFileSync('git', args, {
     cwd,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
     maxBuffer: 256 * 1024 * 1024,
   });
 }
@@ -33,47 +33,47 @@ export function listChangedFiles(rootDir: string, base?: string): ChangedFiles {
   if (base !== undefined && !SAFE_REF.test(base)) throw new Error(`Unsafe git ref "${base}".`);
 
   try {
-    git(rootDir, ["rev-parse", "--is-inside-work-tree"]);
+    git(rootDir, ['rev-parse', '--is-inside-work-tree']);
   } catch {
     throw new Error(
-      "This is not a git repository, so there is no record of what changed. Review specific files with review_files, or the whole repository with review_workspace.",
+      'This is not a git repository, so there is no record of what changed. Review specific files with review_files, or the whole repository with review_workspace.',
     );
   }
 
   let hasHead = true;
   try {
-    git(rootDir, ["rev-parse", "--verify", "--quiet", "HEAD"]);
+    git(rootDir, ['rev-parse', '--verify', '--quiet', 'HEAD']);
   } catch {
     hasHead = false;
   }
-  const ref = base ?? (hasHead ? "HEAD" : null);
+  const ref = base ?? (hasHead ? 'HEAD' : null);
 
   const changed = new Set<string>();
   const deleted = new Set<string>();
 
   if (ref) {
     const parts = git(rootDir, [
-      "diff",
-      "--name-status",
-      "-z",
-      "--no-renames",
-      "--relative",
+      'diff',
+      '--name-status',
+      '-z',
+      '--no-renames',
+      '--relative',
       ref,
-    ]).split("\0");
+    ]).split('\0');
     for (let i = 0; i + 1 < parts.length; i += 2) {
-      const status = parts[i] ?? "";
-      const path = parts[i + 1] ?? "";
+      const status = parts[i] ?? '';
+      const path = parts[i + 1] ?? '';
       if (!path) continue;
-      (status.startsWith("D") ? deleted : changed).add(path);
+      (status.startsWith('D') ? deleted : changed).add(path);
     }
   } else {
     // No commits yet: everything staged is new.
-    for (const path of git(rootDir, ["ls-files", "-z", "--cached"]).split("\0")) {
+    for (const path of git(rootDir, ['ls-files', '-z', '--cached']).split('\0')) {
       if (path) changed.add(path);
     }
   }
-  for (const path of git(rootDir, ["ls-files", "-z", "--others", "--exclude-standard"]).split(
-    "\0",
+  for (const path of git(rootDir, ['ls-files', '-z', '--others', '--exclude-standard']).split(
+    '\0',
   )) {
     if (path) changed.add(path);
   }

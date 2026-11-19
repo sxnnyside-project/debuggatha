@@ -1,0 +1,37 @@
+{
+  "$ref": "#/definitions/AnalyzerOptions",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AnalyzerOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "description": "Analyzers to leave out, by id (a repository's own choice; it can only narrow what runs).",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "enable": {
+          "description": "Analyzers to run even though they load project code or use the network: the person's explicit choice.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mode": {
+          "description": "`off` runs none. `auto` (the default when options are given) runs the safe ones that are installed and apply.",
+          "enum": ["auto", "off"],
+          "type": "string"
+        },
+        "timeoutSeconds": {
+          "description": "Seconds one analyzer may run before it is stopped.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "type": "object"
+    }
+  },
+  "title": "AnalyzerOptions"
+}

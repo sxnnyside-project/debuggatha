@@ -1,0 +1,29 @@
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.icns binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.riv binary
+*.lottie binary
+
+# Lockfiles
+bun.lock linguist-generated -diff
+package-lock.json linguist-generated -diff
+pnpm-lock.yaml linguist-generated -diff
+

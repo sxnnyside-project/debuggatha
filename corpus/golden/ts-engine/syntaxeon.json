@@ -1,0 +1,294 @@
+{
+ "name": "syntaxeon",
+ "commit": "dc05be788ed61c614c585f5e0db90bed3c14c580",
+ "findings": [
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-analysis/src/pipeline.rs",
+   "lines": {
+    "start": 149,
+    "end": 149
+   },
+   "columns": {
+    "start": 48,
+    "end": 56
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-analysis/src/pipeline.rs",
+   "lines": {
+    "start": 150,
+    "end": 150
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-analysis/src/pipeline.rs",
+   "lines": {
+    "start": 162,
+    "end": 162
+   },
+   "columns": {
+    "start": 64,
+    "end": 72
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-analysis/src/rhythm.rs",
+   "lines": {
+    "start": 109,
+    "end": 109
+   },
+   "columns": {
+    "start": 29,
+    "end": 38
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-analysis/src/rhythm.rs",
+   "lines": {
+    "start": 115,
+    "end": 115
+   },
+   "columns": {
+    "start": 71,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 204,
+    "end": 204
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 211,
+    "end": 211
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 215,
+    "end": 215
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 243,
+    "end": 243
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 304,
+    "end": 304
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 319,
+    "end": 319
+   },
+   "columns": {
+    "start": 28,
+    "end": 36
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 360,
+    "end": 360
+   },
+   "columns": {
+    "start": 21,
+    "end": 29
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 430,
+    "end": 430
+   },
+   "columns": {
+    "start": 32,
+    "end": 40
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 462,
+    "end": 462
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-check/src/lib.rs",
+   "lines": {
+    "start": 491,
+    "end": 491
+   },
+   "columns": {
+    "start": 17,
+    "end": 25
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-lsp/src/position.rs",
+   "lines": {
+    "start": 83,
+    "end": 83
+   },
+   "columns": {
+    "start": 46,
+    "end": 55
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-lsp/src/position.rs",
+   "lines": {
+    "start": 84,
+    "end": 84
+   },
+   "columns": {
+    "start": 66,
+    "end": 75
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-unwrap-expect",
+   "pack": "debuggatha/rust",
+   "file": "crates/syntaxeon-lsp/src/position.rs",
+   "lines": {
+    "start": 86,
+    "end": 86
+   },
+   "columns": {
+    "start": 66,
+    "end": 75
+   },
+   "severity": "high",
+   "confidence": "high",
+   "category": "architecture"
+  }
+ ]
+}

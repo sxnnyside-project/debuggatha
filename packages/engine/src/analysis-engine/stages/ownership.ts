@@ -1,6 +1,6 @@
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-import type { ModuleBoundary, OwnershipSignal } from "../types.js";
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { ModuleBoundary, OwnershipSignal } from '../types.js';
 
 interface CodeownersRule {
   pattern: string;
@@ -8,7 +8,7 @@ interface CodeownersRule {
 }
 
 function findCodeownersPath(rootDir: string): string | undefined {
-  const candidates = ["CODEOWNERS", ".github/CODEOWNERS", "docs/CODEOWNERS"];
+  const candidates = ['CODEOWNERS', '.github/CODEOWNERS', 'docs/CODEOWNERS'];
   for (const candidate of candidates) {
     const full = join(rootDir, candidate);
     if (existsSync(full)) return full;
@@ -18,9 +18,9 @@ function findCodeownersPath(rootDir: string): string | undefined {
 
 function parseCodeowners(content: string): CodeownersRule[] {
   const rules: CodeownersRule[] = [];
-  for (const rawLine of content.split("\n")) {
+  for (const rawLine of content.split('\n')) {
     const line = rawLine.trim();
-    if (!line || line.startsWith("#")) continue;
+    if (!line || line.startsWith('#')) continue;
     const [pattern, ...owners] = line.split(/\s+/);
     if (!pattern || owners.length === 0) continue;
     rules.push({ pattern, owners });
@@ -30,16 +30,16 @@ function parseCodeowners(content: string): CodeownersRule[] {
 
 /** Real (if simplified) CODEOWNERS glob matching: `*` is any path segment content, `**` any depth, patterns anchored at repo root unless prefixed with `/`. Last matching rule wins — real CODEOWNERS semantics. */
 function patternMatches(pattern: string, path: string): boolean {
-  const normalized = pattern.startsWith("/") ? pattern.slice(1) : pattern;
-  const withoutTrailingSlash = normalized.endsWith("/") ? normalized.slice(0, -1) : normalized;
+  const normalized = pattern.startsWith('/') ? pattern.slice(1) : pattern;
+  const withoutTrailingSlash = normalized.endsWith('/') ? normalized.slice(0, -1) : normalized;
   const regexSource = withoutTrailingSlash
-    .split("/")
+    .split('/')
     .map((segment) =>
-      segment === "**"
-        ? ".*"
-        : segment.replace(/[.+^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^/]*"),
+      segment === '**'
+        ? '.*'
+        : segment.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[^/]*'),
     )
-    .join("/");
+    .join('/');
   const regex = new RegExp(`^${regexSource}(?:/.*)?$`);
   return regex.test(path);
 }
@@ -54,7 +54,7 @@ function patternMatches(pattern: string, path: string): boolean {
  */
 export function detectOwnership(rootDir: string, boundaries: ModuleBoundary[]): OwnershipSignal[] {
   const codeownersPath = findCodeownersPath(rootDir);
-  const rules = codeownersPath ? parseCodeowners(readFileSync(codeownersPath, "utf8")) : [];
+  const rules = codeownersPath ? parseCodeowners(readFileSync(codeownersPath, 'utf8')) : [];
 
   return boundaries.map((boundary) => {
     let owners: string[] = [];
@@ -64,7 +64,7 @@ export function detectOwnership(rootDir: string, boundaries: ModuleBoundary[]): 
     return {
       moduleId: boundary.id,
       owners,
-      source: owners.length > 0 ? "codeowners" : "unknown",
+      source: owners.length > 0 ? 'codeowners' : 'unknown',
     };
   });
 }

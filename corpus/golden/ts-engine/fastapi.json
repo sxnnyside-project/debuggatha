@@ -1,0 +1,262 @@
+{
+ "name": "fastapi",
+ "commit": "af628068e772b05bb56bf050cc99f2817b9020f9",
+ "findings": [
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial004_non_an.py",
+   "lines": {
+    "start": 12,
+    "end": 12
+   },
+   "columns": {
+    "start": 14,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial004_non_an.py",
+   "lines": {
+    "start": 22,
+    "end": 22
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial004.py",
+   "lines": {
+    "start": 13,
+    "end": 13
+   },
+   "columns": {
+    "start": 14,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial004.py",
+   "lines": {
+    "start": 23,
+    "end": 23
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005_non_an.py",
+   "lines": {
+    "start": 16,
+    "end": 16
+   },
+   "columns": {
+    "start": 14,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005_non_an.py",
+   "lines": {
+    "start": 26,
+    "end": 26
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005_non_an.py",
+   "lines": {
+    "start": 33,
+    "end": 33
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005.py",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 14,
+    "end": 80
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005.py",
+   "lines": {
+    "start": 27,
+    "end": 27
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "docs_src/security/tutorial005.py",
+   "lines": {
+    "start": 34,
+    "end": 34
+   },
+   "columns": {
+    "start": 28,
+    "end": 127
+   },
+   "severity": "high",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial004.py",
+   "lines": {
+    "start": 120,
+    "end": 120
+   },
+   "columns": {
+    "start": 38,
+    "end": 138
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial004.py",
+   "lines": {
+    "start": 134,
+    "end": 134
+   },
+   "columns": {
+    "start": 38,
+    "end": 137
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial004.py",
+   "lines": {
+    "start": 148,
+    "end": 148
+   },
+   "columns": {
+    "start": 38,
+    "end": 149
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial005.py",
+   "lines": {
+    "start": 141,
+    "end": 141
+   },
+   "columns": {
+    "start": 38,
+    "end": 138
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial005.py",
+   "lines": {
+    "start": 155,
+    "end": 155
+   },
+   "columns": {
+    "start": 38,
+    "end": 137
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  },
+  {
+   "rule": "no-hardcoded-secrets",
+   "pack": "debuggatha/release",
+   "file": "tests/test_tutorial/test_security/test_tutorial005.py",
+   "lines": {
+    "start": 181,
+    "end": 181
+   },
+   "columns": {
+    "start": 38,
+    "end": 149
+   },
+   "severity": "medium",
+   "confidence": "medium",
+   "category": "security"
+  }
+ ]
+}

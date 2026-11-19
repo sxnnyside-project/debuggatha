@@ -1,0 +1,2500 @@
+{
+  "cases": [
+    {
+      "name": "line",
+      "file": "a.ts",
+      "source": "risky(); // debuggatha-ignore no-eval -- sandboxed loader",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- sandboxed loader"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "sandboxed loader"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "next-line",
+      "file": "a.ts",
+      "source": "// debuggatha-ignore-next-line eqeqeq\nif (a == b) {}\nif (c == d) {}",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore-next-line eqeqeq"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "next-line",
+          "line": 1,
+          "ruleIds": [
+            "eqeqeq"
+          ]
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          0
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ],
+        [
+          5,
+          "no-eval",
+          -1
+        ],
+        [
+          5,
+          "no-var",
+          -1
+        ],
+        [
+          5,
+          "eqeqeq",
+          -1
+        ],
+        [
+          5,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          5,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "file",
+      "file": "a.ts",
+      "source": "// debuggatha-ignore-file no-explicit-any -- generated\nlet a: any;",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore-file no-explicit-any -- generated"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "file",
+          "line": 1,
+          "ruleIds": [
+            "no-explicit-any"
+          ],
+          "reason": "generated"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          0
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          0
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          0
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          0
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "unnamed-rule",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ]
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "all-rules-bare",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          0
+        ],
+        [
+          1,
+          "no-explicit-any",
+          0
+        ],
+        [
+          1,
+          "anything",
+          0
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "all-rules-star",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore * -- why",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore * -- why"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "reason": "why"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          0
+        ],
+        [
+          1,
+          "no-explicit-any",
+          0
+        ],
+        [
+          1,
+          "anything",
+          0
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "several-ids",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval, no-var eqeqeq -- legacy",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval, no-var eqeqeq -- legacy"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval",
+            "no-var",
+            "eqeqeq"
+          ],
+          "reason": "legacy"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          0
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "star-among-ids",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval * -- r",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval * -- r"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "reason": "r"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          0
+        ],
+        [
+          1,
+          "no-explicit-any",
+          0
+        ],
+        [
+          1,
+          "anything",
+          0
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "colon-ids",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore: no-eval:no-var -- r",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore: no-eval:no-var -- r"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval",
+            "no-var"
+          ],
+          "reason": "r"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "hash-comment",
+      "file": "a.py",
+      "source": "x = eval(y)  # debuggatha-ignore no-eval -- why",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- why"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "why"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "block-comment",
+      "file": "a.ts",
+      "source": "x(); /* debuggatha-ignore no-eval -- why */",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- why "
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "why"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "block-multiline",
+      "file": "a.ts",
+      "source": "/*\n * debuggatha-ignore-next-line no-eval -- why\n */\neval(x);",
+      "comments": [
+        {
+          "line": 1,
+          "text": ""
+        },
+        {
+          "line": 2,
+          "text": " * debuggatha-ignore-next-line no-eval -- why"
+        },
+        {
+          "line": 3,
+          "text": " "
+        }
+      ],
+      "directives": [
+        {
+          "scope": "next-line",
+          "line": 2,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "why"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          0
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ],
+        [
+          5,
+          "no-eval",
+          -1
+        ],
+        [
+          5,
+          "no-var",
+          -1
+        ],
+        [
+          5,
+          "eqeqeq",
+          -1
+        ],
+        [
+          5,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          5,
+          "anything",
+          -1
+        ],
+        [
+          6,
+          "no-eval",
+          -1
+        ],
+        [
+          6,
+          "no-var",
+          -1
+        ],
+        [
+          6,
+          "eqeqeq",
+          -1
+        ],
+        [
+          6,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          6,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "in-string",
+      "file": "a.ts",
+      "source": "const s = \"debuggatha-ignore no-eval\";",
+      "comments": [],
+      "directives": [],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "em-dash",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval — emdash reason",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval — emdash reason"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "emdash reason"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "empty-reason",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval -- ",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- "
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ]
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "reason-with-dashes",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval -- a -- b",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- a -- b"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "a -- b"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "unicode-reason",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval -- razón 日本語 🚀",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- razón 日本語 🚀"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "razón 日本語 🚀"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "nextline-typo",
+      "file": "a.ts",
+      "source": "// debuggatha-ignore-nextline no-eval\nx();",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore-nextline no-eval"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "-nextline",
+            "no-eval"
+          ]
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "two-directives",
+      "file": "a.ts",
+      "source": "// debuggatha-ignore-file no-var\nx(); // debuggatha-ignore no-eval -- r\ny();",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore-file no-var"
+        },
+        {
+          "line": 2,
+          "text": " debuggatha-ignore no-eval -- r"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "file",
+          "line": 1,
+          "ruleIds": [
+            "no-var"
+          ]
+        },
+        {
+          "scope": "line",
+          "line": 2,
+          "ruleIds": [
+            "no-eval"
+          ],
+          "reason": "r"
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          0
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          1
+        ],
+        [
+          2,
+          "no-var",
+          0
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          0
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          0
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ],
+        [
+          5,
+          "no-eval",
+          -1
+        ],
+        [
+          5,
+          "no-var",
+          0
+        ],
+        [
+          5,
+          "eqeqeq",
+          -1
+        ],
+        [
+          5,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          5,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "prefix-word",
+      "file": "a.ts",
+      "source": "// notdebuggatha-ignore no-eval",
+      "comments": [
+        {
+          "line": 1,
+          "text": " notdebuggatha-ignore no-eval"
+        }
+      ],
+      "directives": [
+        {
+          "scope": "line",
+          "line": 1,
+          "ruleIds": [
+            "no-eval"
+          ]
+        }
+      ],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          0
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "crlf-line",
+      "file": "a.ts",
+      "source": "x(); // debuggatha-ignore no-eval -- why\r\ny();\r\n",
+      "note": "ts-bug-crlf",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore no-eval -- why\r"
+        }
+      ],
+      "directives": [],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ],
+        [
+          5,
+          "no-eval",
+          -1
+        ],
+        [
+          5,
+          "no-var",
+          -1
+        ],
+        [
+          5,
+          "eqeqeq",
+          -1
+        ],
+        [
+          5,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          5,
+          "anything",
+          -1
+        ]
+      ]
+    },
+    {
+      "name": "crlf-block",
+      "file": "a.ts",
+      "source": "/* debuggatha-ignore a\r\n b */ z",
+      "note": "ts-bug-crlf",
+      "comments": [
+        {
+          "line": 1,
+          "text": " debuggatha-ignore a\r"
+        },
+        {
+          "line": 2,
+          "text": " b "
+        }
+      ],
+      "directives": [],
+      "probes": [
+        [
+          1,
+          "no-eval",
+          -1
+        ],
+        [
+          1,
+          "no-var",
+          -1
+        ],
+        [
+          1,
+          "eqeqeq",
+          -1
+        ],
+        [
+          1,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          1,
+          "anything",
+          -1
+        ],
+        [
+          2,
+          "no-eval",
+          -1
+        ],
+        [
+          2,
+          "no-var",
+          -1
+        ],
+        [
+          2,
+          "eqeqeq",
+          -1
+        ],
+        [
+          2,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          2,
+          "anything",
+          -1
+        ],
+        [
+          3,
+          "no-eval",
+          -1
+        ],
+        [
+          3,
+          "no-var",
+          -1
+        ],
+        [
+          3,
+          "eqeqeq",
+          -1
+        ],
+        [
+          3,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          3,
+          "anything",
+          -1
+        ],
+        [
+          4,
+          "no-eval",
+          -1
+        ],
+        [
+          4,
+          "no-var",
+          -1
+        ],
+        [
+          4,
+          "eqeqeq",
+          -1
+        ],
+        [
+          4,
+          "no-explicit-any",
+          -1
+        ],
+        [
+          4,
+          "anything",
+          -1
+        ]
+      ]
+    }
+  ],
+  "comments": [
+    [
+      "a.ts",
+      "// debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.py",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.rb",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.sh",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.yml",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.toml",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.env",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.html",
+      "<!-- debuggatha-ignore-next-line no-eval -- because -->"
+    ],
+    [
+      "a.vue",
+      "<!-- debuggatha-ignore-next-line no-eval -- because -->"
+    ],
+    [
+      "a.svelte",
+      "<!-- debuggatha-ignore-next-line no-eval -- because -->"
+    ],
+    [
+      "a.md",
+      "<!-- debuggatha-ignore-next-line no-eval -- because -->"
+    ],
+    [
+      "A.PY",
+      "# debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "a.rs",
+      "// debuggatha-ignore-next-line no-eval -- because"
+    ],
+    [
+      "noext",
+      "// debuggatha-ignore-next-line no-eval -- because"
+    ]
+  ]
+}

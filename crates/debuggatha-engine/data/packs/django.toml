@@ -1,0 +1,85 @@
+id = "debuggatha/django"
+version = "1.0.0"
+kind = "stack"
+displayName = "Django"
+dependsOn = []
+
+[[rules]]
+id = "django-csrf-exempt"
+packId = "debuggatha/django"
+statement = "Do not mark a view `@csrf_exempt`; send the CSRF token from the client."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-django-csrf-exempt"]
+appliesTo = { kind = "requires-framework", framework = "django" }
+
+[[rules]]
+id = "django-debug-enabled"
+packId = "debuggatha/django"
+statement = "Do not leave `DEBUG = True` in settings that reach production; read it from the environment."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-django-debug-enabled"]
+appliesTo = { kind = "requires-framework", framework = "django" }
+
+[[rules]]
+id = "django-secret-key-in-code"
+packId = "debuggatha/django"
+statement = "Do not write `SECRET_KEY` in the settings file; read it from the environment or a secret store."
+category = "security"
+defaultSeverity = "high"
+knowledgeRefs = ["know-django-secret-key-in-code"]
+appliesTo = { kind = "requires-framework", framework = "django" }
+
+[[rules]]
+id = "django-allowed-hosts-wildcard"
+packId = "debuggatha/django"
+statement = "Do not set `ALLOWED_HOSTS = [\"*\"]`; list the host names."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-django-allowed-hosts-wildcard"]
+appliesTo = { kind = "requires-framework", framework = "django" }
+
+[[rules]]
+id = "django-cookie-not-secure"
+packId = "debuggatha/django"
+statement = "Do not turn off `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE` or `SECURE_SSL_REDIRECT` in production."
+category = "security"
+defaultSeverity = "medium"
+knowledgeRefs = ["know-django-cookie-not-secure"]
+appliesTo = { kind = "requires-framework", framework = "django" }
+
+[[knowledge]]
+id = "know-django-csrf-exempt"
+title = "CSRF exemption"
+body = "`csrf_exempt` turns off the token check for the view, so another site can submit forms to it with the visitor's cookies."
+externalRefs = ["https://docs.djangoproject.com/en/stable/howto/csrf/", "https://cwe.mitre.org/data/definitions/352.html"]
+limitations = ["An endpoint that authenticates every request with a token header is reported too."]
+
+[[knowledge]]
+id = "know-django-debug-enabled"
+title = "Debug mode on"
+body = "With `DEBUG` on, error pages show settings, SQL and source code."
+externalRefs = ["https://docs.djangoproject.com/en/stable/howto/deployment/checklist/#debug", "https://cwe.mitre.org/data/definitions/489.html"]
+limitations = ["A development settings module is reported too."]
+
+[[knowledge]]
+id = "know-django-secret-key-in-code"
+title = "Secret key in code"
+body = "Anyone with the repository can forge sessions and signed values."
+externalRefs = ["https://docs.djangoproject.com/en/stable/howto/deployment/checklist/#secret-key", "https://cwe.mitre.org/data/definitions/798.html"]
+limitations = ["A throwaway key in a test settings module is reported too."]
+
+[[knowledge]]
+id = "know-django-allowed-hosts-wildcard"
+title = "Any host accepted"
+body = "The host header then comes from the attacker, which poisons password-reset links and caches."
+externalRefs = ["https://docs.djangoproject.com/en/stable/ref/settings/#allowed-hosts", "https://cwe.mitre.org/data/definitions/644.html"]
+limitations = ["A development settings module is reported too."]
+
+[[knowledge]]
+id = "know-django-cookie-not-secure"
+title = "Cookies over plain HTTP"
+body = "The session and CSRF cookies then travel over HTTP and can be read on the network."
+externalRefs = ["https://docs.djangoproject.com/en/stable/ref/settings/#session-cookie-secure", "https://cwe.mitre.org/data/definitions/614.html"]
+limitations = ["A development settings module served over HTTP is reported too."]

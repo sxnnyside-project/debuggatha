@@ -1,6 +1,6 @@
-import { computeFindingFingerprint } from "../findings-ledger/index.js";
-import type { Finding } from "../review-engine/index.js";
-import type { AcceptedDeviationItem, ExceptionItem, SuppressionItem } from "./types/item.js";
+import { computeFindingFingerprint } from '../findings-ledger/index.js';
+import type { Finding } from '../review-engine/index.js';
+import type { AcceptedDeviationItem, ExceptionItem, SuppressionItem } from './types/item.js';
 
 /**
  * Matching reuses `core/findings-ledger`'s own

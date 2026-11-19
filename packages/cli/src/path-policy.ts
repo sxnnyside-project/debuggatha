@@ -1,41 +1,41 @@
-import { relative } from "node:path";
-import type { Finding } from "@debuggatha/engine";
-import type { LoadedConfig } from "./config.js";
+import { relative } from 'node:path';
+import type { Finding } from '@debuggatha/engine';
+import type { LoadedConfig } from './config.js';
 
 /**
  * A glob as a monorepo config writes it: `**` crosses directories, `*` and `?` stay inside one,
  * and a pattern with no slash matches that name at any depth (`*.generated.ts`).
  */
 export function globToRegExp(glob: string): RegExp {
-  const anywhere = !glob.includes("/");
-  let source = "";
+  const anywhere = !glob.includes('/');
+  let source = '';
   for (let i = 0; i < glob.length; i++) {
     const char = glob[i] as string;
-    if (char === "*") {
-      if (glob[i + 1] === "*") {
+    if (char === '*') {
+      if (glob[i + 1] === '*') {
         i += 1;
         // `**/` matches zero or more directories.
-        if (glob[i + 1] === "/") {
+        if (glob[i + 1] === '/') {
           i += 1;
-          source += "(?:.*/)?";
+          source += '(?:.*/)?';
         } else {
-          source += ".*";
+          source += '.*';
         }
       } else {
-        source += "[^/]*";
+        source += '[^/]*';
       }
-    } else if (char === "?") {
-      source += "[^/]";
+    } else if (char === '?') {
+      source += '[^/]';
     } else {
-      source += char.replace(/[.+^${}()|[\]\\]/g, "\\$&");
+      source += char.replace(/[.+^${}()|[\]\\]/g, '\\$&');
     }
   }
   // A directory pattern (`packages/legacy`) covers what is inside it.
-  return new RegExp(`^${anywhere ? "(?:.*/)?" : ""}${source}(?:/.*)?$`);
+  return new RegExp(`^${anywhere ? '(?:.*/)?' : ''}${source}(?:/.*)?$`);
 }
 
 export function matchesAny(globs: readonly string[], file: string): boolean {
-  return globs.some((glob) => globToRegExp(glob.replace(/^\.\//, "")).test(file));
+  return globs.some((glob) => globToRegExp(glob.replace(/^\.\//, '')).test(file));
 }
 
 export interface PathPolicy {
@@ -57,7 +57,7 @@ export function pathPolicy(
   loaded: LoadedConfig,
   cwd: string,
 ): PathPolicy {
-  const prefix = relative(loaded.root, cwd).split("\\").join("/");
+  const prefix = relative(loaded.root, cwd).split('\\').join('/');
   const fromConfigRoot = (file: string) => (prefix ? `${prefix}/${file}` : file);
   const { ignore, overrides } = loaded.config;
 

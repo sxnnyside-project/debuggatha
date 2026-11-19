@@ -6,22 +6,22 @@ import {
   saveLedger,
   summarizeLedger,
   updateFindingStatus,
-} from "@debuggatha/engine";
-import type { Command } from "commander";
-import type { CliLogger } from "../utils/logger.js";
+} from '@debuggatha/engine';
+import type { Command } from 'commander';
+import type { CliLogger } from '../utils/logger.js';
 
 export function registerFindingsCommand(program: Command) {
-  const findings = program.command("findings").description("Manage and query the Findings Ledger");
+  const findings = program.command('findings').description('Manage and query the Findings Ledger');
 
   findings
-    .command("list")
-    .description("List open findings")
+    .command('list')
+    .description('List open findings')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
       try {
         const ledger = loadLedger(cwd);
-        const entries = listEntries(ledger, { status: ["open"] });
+        const entries = listEntries(ledger, { status: ['open'] });
         if (logger.isJson) {
           logger.json(entries);
         } else {
@@ -33,14 +33,14 @@ export function registerFindingsCommand(program: Command) {
           }
         }
       } catch (err) {
-        logger.error("Failed to list findings.", err);
+        logger.error('Failed to list findings.', err);
         process.exit(1);
       }
     });
 
   findings
-    .command("show <id>")
-    .description("Show details of a specific finding")
+    .command('show <id>')
+    .description('Show details of a specific finding')
     .action(async (id, _options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
@@ -59,15 +59,15 @@ export function registerFindingsCommand(program: Command) {
           logger.log(`Severity: ${entry.latestFinding.severity}`);
           logger.log(`Category: ${entry.latestFinding.category}`);
           logger.log(`Summary: ${entry.latestFinding.title}`);
-          const loc = entry.latestFinding.locations && entry.latestFinding.locations[0];
-          if (loc && loc.file) {
+          const loc = entry.latestFinding.locations?.[0];
+          if (loc?.file) {
             logger.log(`Location: ${loc.file}`);
           }
           if (entry.history.length > 0) {
-            logger.log("History:");
+            logger.log('History:');
             for (const event of entry.history) {
               logger.log(
-                `  - [${event.timestamp}] ${event.origin.kind}: ${event.newState} (${event.comment || "No comment"})`,
+                `  - [${event.timestamp}] ${event.origin.kind}: ${event.newState} (${event.comment || 'No comment'})`,
               );
             }
           }
@@ -78,8 +78,12 @@ export function registerFindingsCommand(program: Command) {
       }
     });
 
-  const transitionCommand = async (id: string, status: FindingLifecycleStatus, command: any) => {
-    const logger = command.logger as CliLogger;
+  const transitionCommand = async (
+    id: string,
+    status: FindingLifecycleStatus,
+    command: Command,
+  ) => {
+    const logger = (command as Command & { logger: CliLogger }).logger;
     const cwd = program.opts().cwd as string;
     try {
       const ledger = loadLedger(cwd);
@@ -92,13 +96,13 @@ export function registerFindingsCommand(program: Command) {
         ledger,
         id,
         status,
-        { kind: "manual", actor: "cli" },
+        { kind: 'manual', actor: 'cli' },
         `CLI transition to ${status}`,
       );
       saveLedger(updatedLedger);
       const updated = getEntry(updatedLedger, id);
       if (logger.isJson) {
-        logger.json({ status: "success", entry: updated });
+        logger.json({ status: 'success', entry: updated });
       } else {
         logger.success(`Finding ${id} transitioned to ${status}.`);
       }
@@ -109,23 +113,23 @@ export function registerFindingsCommand(program: Command) {
   };
 
   findings
-    .command("resolve <id>")
-    .description("Resolve a finding")
-    .action(async (id, _options, command) => transitionCommand(id, "resolved", command));
+    .command('resolve <id>')
+    .description('Resolve a finding')
+    .action(async (id, _options, command) => transitionCommand(id, 'resolved', command));
 
   findings
-    .command("dismiss <id>")
-    .description("Dismiss a finding")
-    .action(async (id, _options, command) => transitionCommand(id, "dismissed", command));
+    .command('dismiss <id>')
+    .description('Dismiss a finding')
+    .action(async (id, _options, command) => transitionCommand(id, 'dismissed', command));
 
   findings
-    .command("reopen <id>")
-    .description("Reopen a finding")
-    .action(async (id, _options, command) => transitionCommand(id, "open", command));
+    .command('reopen <id>')
+    .description('Reopen a finding')
+    .action(async (id, _options, command) => transitionCommand(id, 'open', command));
 
   findings
-    .command("summary")
-    .description("Print findings ledger summary")
+    .command('summary')
+    .description('Print findings ledger summary')
     .action(async (_options, command) => {
       const logger = command.logger as CliLogger;
       const cwd = program.opts().cwd as string;
@@ -135,7 +139,7 @@ export function registerFindingsCommand(program: Command) {
         if (logger.isJson) {
           logger.json(summary);
         } else {
-          logger.info("Ledger Summary:");
+          logger.info('Ledger Summary:');
           logger.log(`By Status:`);
           for (const [status, count] of Object.entries(summary.countsByStatus)) {
             logger.log(`  ${status}: ${count}`);
@@ -146,7 +150,7 @@ export function registerFindingsCommand(program: Command) {
           }
         }
       } catch (err) {
-        logger.error("Failed to generate ledger summary.", err);
+        logger.error('Failed to generate ledger summary.', err);
         process.exit(1);
       }
     });

@@ -1,4 +1,4 @@
-import type { LineRange } from "./location.js";
+import type { LineRange } from './location.js';
 
 /**
  * Machine-readable evidence — a discriminated union, not free text. This
@@ -7,15 +7,15 @@ import type { LineRange } from "./location.js";
  * (see CLAUDE.md "never opine without evidence").
  */
 export type Evidence =
-  | { kind: "documentation"; file: string; excerpt: string }
-  | { kind: "criteria"; ruleId: string; source: string }
-  | { kind: "review-pack-rule"; packId: string; ruleId: string }
-  | { kind: "framework-convention"; framework: string; detail: string }
-  | { kind: "language-convention"; language: string; detail: string }
-  | { kind: "code"; file: string; lines: LineRange | undefined; excerpt: string | undefined }
+  | { kind: 'documentation'; file: string; excerpt: string }
+  | { kind: 'criteria'; ruleId: string; source: string }
+  | { kind: 'review-pack-rule'; packId: string; ruleId: string }
+  | { kind: 'framework-convention'; framework: string; detail: string }
+  | { kind: 'language-convention'; language: string; detail: string }
+  | { kind: 'code'; file: string; lines: LineRange | undefined; excerpt: string | undefined }
   | {
       /** A finding an external analyzer reported; Debuggatha ran the tool and read its output, it did not judge the code itself. */
-      kind: "external-analyzer";
+      kind: 'external-analyzer';
       tool: string;
       ruleId: string;
       version: string | undefined;
@@ -29,12 +29,12 @@ export type Evidence =
        * detector made; as `detection` it raised the finding itself, and `topic` names it.
        * A model's opinion is evidence to weigh, never a reason to close a finding.
        */
-      kind: "semantic-review";
-      role: "verification" | "detection";
+      kind: 'semantic-review';
+      role: 'verification' | 'detection';
       provider: string;
       model: string | undefined;
       /** Verification only: `confirmed` (looks real), `doubtful` (looks like a false positive), or `unsure`. */
-      verdict: "confirmed" | "doubtful" | "unsure" | undefined;
+      verdict: 'confirmed' | 'doubtful' | 'unsure' | undefined;
       reason: string;
       topic: string | undefined;
     };
@@ -45,9 +45,9 @@ export type Evidence =
  */
 export function ruleIdFromEvidence(evidence: readonly Evidence[]): string | undefined {
   for (const item of evidence) {
-    if (item.kind === "review-pack-rule" || item.kind === "criteria") return item.ruleId;
-    if (item.kind === "external-analyzer") return `${item.tool}:${item.ruleId}`;
-    if (item.kind === "semantic-review" && item.role === "detection" && item.topic) {
+    if (item.kind === 'review-pack-rule' || item.kind === 'criteria') return item.ruleId;
+    if (item.kind === 'external-analyzer') return `${item.tool}:${item.ruleId}`;
+    if (item.kind === 'semantic-review' && item.role === 'detection' && item.topic) {
       return `semantic:${item.topic}`;
     }
   }

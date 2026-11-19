@@ -1,4 +1,4 @@
-import type { LedgerEntry } from "./entry.js";
+import type { LedgerEntry } from './entry.js';
 
 /** Bumped whenever the persisted shape changes in a way old data can't be read as-is. See `persistence/serialize.ts`. */
 export const CURRENT_SCHEMA_VERSION = 1;

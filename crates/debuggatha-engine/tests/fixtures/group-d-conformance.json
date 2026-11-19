@@ -1,0 +1,322 @@
+{
+  "rules": [
+    "use-v-html-carefully"
+  ],
+  "cases": [
+    {
+      "name": "basic",
+      "file": "a.vue",
+      "source": "<template>\n  <div v-html=\"html\"></div>\n</template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 8,
+          "end": 15,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "single-quotes",
+      "file": "a.vue",
+      "source": "<template><p v-html='h'></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 14,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unquoted",
+      "file": "a.vue",
+      "source": "<template><p v-html=h></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 14,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "spaces-around-equals",
+      "file": "a.vue",
+      "source": "<template><p v-html  =  \"h\"></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 14,
+          "end": 23,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "other-attributes-first",
+      "file": "a.vue",
+      "source": "<template><p class=\"a\" id=\"b\" v-html=\"h\"></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 31,
+          "end": 38,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "two-elements",
+      "file": "a.vue",
+      "source": "<template>\n<p v-html=\"a\"></p>\n<p v-html=\"b\"></p>\n</template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 4,
+          "end": 11,
+          "confidence": "high"
+        },
+        {
+          "rule": "use-v-html-carefully",
+          "line": 3,
+          "start": 4,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "two-on-one-line-one-hit",
+      "file": "a.vue",
+      "source": "<template><p v-html=\"a\"></p><p v-html=\"b\"></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 14,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "self-closing",
+      "file": "a.vue",
+      "source": "<template><Comp v-html=\"x\" /></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 17,
+          "end": 24,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "nested",
+      "file": "a.vue",
+      "source": "<template><div><ul><li v-html=\"x\"></li></ul></div></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 24,
+          "end": 31,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "unicode-before",
+      "file": "a.vue",
+      "source": "<template><p title=\"😀\" v-html=\"x\"></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 25,
+          "end": 32,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "crlf",
+      "file": "a.vue",
+      "source": "<template>\r\n  <p v-html=\"x\"></p>\r\n</template>\r\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 6,
+          "end": 13,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "no-value",
+      "file": "a.vue",
+      "source": "<template><p v-html></p></template>\n",
+      "ts": []
+    },
+    {
+      "name": "v-text-is-fine",
+      "file": "a.vue",
+      "source": "<template><p v-text=\"x\"></p></template>\n",
+      "ts": []
+    },
+    {
+      "name": "with-script",
+      "file": "a.vue",
+      "source": "<script setup>\nconst h = \"<b>x</b>\";\n</script>\n<template><p v-html=\"h\"></p></template>\n",
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 4,
+          "start": 14,
+          "end": 21,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "html-file-not-scanned",
+      "file": "a.html",
+      "source": "<p v-html=\"x\"></p>\n",
+      "ts": []
+    },
+    {
+      "name": "svelte-not-scanned",
+      "file": "a.svelte",
+      "source": "<p v-html=\"x\"></p>\n",
+      "ts": []
+    },
+    {
+      "name": "ts-file-not-scanned",
+      "file": "a.ts",
+      "source": "const s = `v-html=\"x\"`;\n",
+      "ts": []
+    },
+    {
+      "name": "in-script-string",
+      "file": "a.vue",
+      "source": "<script>\nconst s = 'v-html=\"x\"';\n</script>\n",
+      "why": "the old lexer did not mask strings in a component, so text in a script was read as an attribute",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 12,
+          "end": 19,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "in-script-comment",
+      "file": "a.vue",
+      "source": "<script>\n// v-html=\"x\"\n</script>\n",
+      "why": "the old lexer did not mask comments in a component, so text in a script was read as an attribute",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 4,
+          "end": 11,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "colon-prefix",
+      "file": "a.vue",
+      "source": "<template><p :v-html=\"x\"></p></template>\n",
+      "why": ":v-html is a binding to a prop of that name, not the directive",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 15,
+          "end": 22,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "data-prefix",
+      "file": "a.vue",
+      "source": "<template><p data-v-html=\"x\"></p></template>\n",
+      "why": "data-v-html is another attribute",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 1,
+          "start": 19,
+          "end": 26,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "html-comment",
+      "file": "a.vue",
+      "source": "<template>\n  <!-- <p v-html=\"x\"></p> -->\n</template>\n",
+      "why": "text inside an HTML comment is not code",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 11,
+          "end": 18,
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "equals-on-next-line",
+      "file": "a.vue",
+      "source": "<template><p v-html\n  =\"x\"></p></template>\n",
+      "why": "the old pattern read one line at a time",
+      "rust": [
+        [
+          "use-v-html-carefully",
+          1,
+          14
+        ]
+      ],
+      "ts": []
+    },
+    {
+      "name": "in-style-block",
+      "file": "a.vue",
+      "source": "<style>\n.a::after { content: \"v-html=1\"; }\n</style>\n",
+      "why": "a style block holds no template",
+      "rust": [],
+      "ts": [
+        {
+          "rule": "use-v-html-carefully",
+          "line": 2,
+          "start": 23,
+          "end": 30,
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}

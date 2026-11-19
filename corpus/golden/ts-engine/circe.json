@@ -1,0 +1,192 @@
+{
+ "name": "circe",
+ "commit": "e77e771e899e27e0bc02cd08c719ec2f7abef11d",
+ "findings": [
+  {
+   "rule": null,
+   "pack": null,
+   "file": "src/application",
+   "lines": null,
+   "columns": null,
+   "severity": "low",
+   "confidence": "high",
+   "category": "architecture"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/cli/prepare-app.ts",
+   "lines": {
+    "start": 72,
+    "end": 72
+   },
+   "columns": {
+    "start": 41,
+    "end": 46
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/cli/prepare-app.ts",
+   "lines": {
+    "start": 86,
+    "end": 86
+   },
+   "columns": {
+    "start": 30,
+    "end": 35
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "src/discord/components/types.ts",
+   "lines": {
+    "start": 110,
+    "end": 110
+   },
+   "columns": {
+    "start": 43,
+    "end": 48
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "tests/application/app.test.ts",
+   "lines": {
+    "start": 667,
+    "end": 667
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-assertionless-tests",
+   "pack": "debuggatha/testing",
+   "file": "tests/application/app.test.ts",
+   "lines": {
+    "start": 690,
+    "end": 690
+   },
+   "columns": {
+    "start": 3,
+    "end": 8
+   },
+   "severity": "medium",
+   "confidence": "low",
+   "category": "reliability"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/commands/groups/loader.test.ts",
+   "lines": {
+    "start": 132,
+    "end": 132
+   },
+   "columns": {
+    "start": 11,
+    "end": 17
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/commands/groups/loader.test.ts",
+   "lines": {
+    "start": 81,
+    "end": 81
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/components/pagination/paginator.test.ts",
+   "lines": {
+    "start": 183,
+    "end": 183
+   },
+   "columns": {
+    "start": 7,
+    "end": 13
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/components/pagination/paginator.test.ts",
+   "lines": {
+    "start": 50,
+    "end": 50
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/components/pagination/paginator.test.ts",
+   "lines": {
+    "start": 76,
+    "end": 76
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  },
+  {
+   "rule": "no-explicit-any",
+   "pack": "debuggatha/typescript",
+   "file": "tests/discord/guards/cooldown.test.ts",
+   "lines": {
+    "start": 17,
+    "end": 17
+   },
+   "columns": {
+    "start": 5,
+    "end": 11
+   },
+   "severity": "medium",
+   "confidence": "high",
+   "category": "correctness"
+  }
+ ]
+}
