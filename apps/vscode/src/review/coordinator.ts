@@ -1,3 +1,9 @@
+/**
+ * Runs one review at a time and lets the person cancel it.
+ *
+ * @packageDocumentation
+ */
+
 import type { ReviewJobResult } from '../contracts/index.js';
 import type { ReviewJob } from '../daemon/api.js';
 import type { Progress } from '../daemon/client.js';
@@ -5,6 +11,7 @@ import { DaemonUnavailable } from '../daemon/connection.js';
 
 /** Whatever runs a review: the daemon. Rejects when `signal` aborts, after the work has stopped. */
 export interface ReviewRunner {
+  /** The review that ran. */
   review(
     job: ReviewJob,
     signal: AbortSignal,
@@ -15,6 +22,7 @@ export interface ReviewRunner {
 /** Who asked: a person (a command) or the editor (a save). */
 export type Origin = 'manual' | 'save';
 
+/** How a review ended: with a result, failed, or cancelled. */
 export type Outcome =
   | { status: 'done'; result: ReviewJobResult }
   | { status: 'cancelled' }
@@ -37,14 +45,19 @@ export class ReviewCoordinator {
     private readonly onChange: (running: Origin | undefined) => void = () => {},
   ) {}
 
+  /** What started the review that is running, or `undefined` when none is. */
   get running(): Origin | undefined {
     return this.current?.origin;
   }
 
+  /**
+   * Cancels the review that is running; the daemon stops its work and the analyzers it started.
+   */
   cancel(): void {
     this.current?.controller.abort();
   }
 
+  /** Runs `job`. A person's review replaces the one running; a save never interrupts a person's review and is skipped. */
   async run(
     origin: Origin,
     job: ReviewJob,

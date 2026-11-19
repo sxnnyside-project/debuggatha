@@ -1,10 +1,20 @@
+//! Matching a reported finding to a ledger entry.
+
 use super::entry::LedgerEntry;
 use super::fingerprint::compute_finding_fingerprint;
 use crate::review_engine::Finding;
 
+/// What matching a reported finding against the ledger found.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MatchOutcome {
-    Matched { entry_id: String, changed: bool },
+    /// It is the same finding as an existing entry.
+    Matched {
+        /// The entry it matched.
+        entry_id: String,
+        /// Whether the flagged code changed since the entry was last seen.
+        changed: bool,
+    },
+    /// No entry is the same finding.
     New,
 }
 

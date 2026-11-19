@@ -1,25 +1,36 @@
+/**
+ * The Repository Intelligence tree view: what Debuggatha detected about the repository.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { RepositoryContext, ReviewPolicy } from '../contracts/index.js';
 
+/** Provides the repository intelligence tree. */
 export class IntelligenceProvider implements vscode.TreeDataProvider<IntelligenceTreeItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<IntelligenceTreeItem | undefined> =
     new vscode.EventEmitter<IntelligenceTreeItem | undefined>();
+  /** Fires when the tree changed. */
   readonly onDidChangeTreeData: vscode.Event<IntelligenceTreeItem | undefined> =
     this._onDidChangeTreeData.event;
 
   private context?: RepositoryContext;
   private policy?: ReviewPolicy;
 
+  /** Reloads what was detected and rebuilds the tree. */
   refresh(context: RepositoryContext, policy: ReviewPolicy): void {
     this.context = context;
     this.policy = policy;
     this._onDidChangeTreeData.fire(undefined);
   }
 
+  /** The tree item to show for `element`. */
   getTreeItem(element: IntelligenceTreeItem): vscode.TreeItem {
     return element;
   }
 
+  /** The children of `element`, or the sections when it is `undefined`. */
   getChildren(element?: IntelligenceTreeItem): Thenable<IntelligenceTreeItem[]> {
     if (!this.context || !this.policy) {
       return Promise.resolve([]);
@@ -93,6 +104,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
   }
 }
 
+/** One fact in the tree. */
 export class IntelligenceTreeItem extends vscode.TreeItem {
   constructor(
     labelStr: string,

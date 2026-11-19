@@ -1,6 +1,6 @@
 //! Differential tests against the TypeScript repository memory (ADR-0006, decision 8).
 //!
-//! `tests/fixtures/memory-conformance.json` is written by `scripts/parity/gen-memory-fixtures.ts`.
+//! `tests/fixtures/memory-conformance.json` is written by `scripts/parity/gen-memory-fixtures.ts` at tag `ts-engine-final`.
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::panic)] // a failed expect is a failed test
 
 mod common;

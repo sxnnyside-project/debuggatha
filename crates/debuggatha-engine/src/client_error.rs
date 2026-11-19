@@ -19,6 +19,7 @@ use crate::syntax::QueryError;
 const FILESYSTEM: &str = "A filesystem error occurred while accessing the repository.";
 const UNEXPECTED: &str = "An unexpected error occurred.";
 
+/// An error split into what a client may read and what only the log may.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ClassifiedError {
     /// Safe to send to a client.
@@ -27,6 +28,7 @@ pub struct ClassifiedError {
     pub log_detail: String,
 }
 
+/// Classify `error`: the client gets a message from an error type known to write none of the machine's paths, and everything else gets a generic one.
 #[must_use]
 pub fn classify_error(error: &(dyn Error + 'static)) -> ClassifiedError {
     ClassifiedError {

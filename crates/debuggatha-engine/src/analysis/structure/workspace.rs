@@ -43,6 +43,7 @@ pub fn is_rust_file(path: &str) -> bool {
     path.rsplit_once('.').is_some_and(|(_, e)| e == "rs")
 }
 
+/// The files of a repository as the analysis sees them, read once so every stage is a function of it.
 #[derive(Debug, Clone, Default)]
 pub struct Workspace {
     /// Files a review owns: they belong to a boundary and are read.

@@ -1,3 +1,5 @@
+//! The memory store and the operations that change it.
+
 use std::fmt;
 
 use schemars::JsonSchema;
@@ -7,18 +9,26 @@ use super::item::{MemoryItem, MemoryOrigin, MemoryTransitionError, transition_me
 use super::lifecycle::MemoryStatus;
 use crate::env::Env;
 
+/// Version of the memory file format; a file with another version is refused.
 pub const CURRENT_SCHEMA_VERSION: u32 = 1;
 
+/// The persistent record of engineering decisions in `.debuggatha/memory.json`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct MemoryStore {
+    /// Version of the file format.
     pub schema_version: u32,
+    /// The repository the memory belongs to.
     pub repository_root: String,
+    /// Every item.
     pub items: Vec<MemoryItem>,
+    /// When it was created, ISO 8601.
     pub created_at: String,
+    /// When it last changed, ISO 8601.
     pub updated_at: String,
 }
 
+/// A memory store with no items, stamped with the current time.
 #[must_use]
 pub fn create_empty_memory_store(repository_root: &str, env: &dyn Env) -> MemoryStore {
     let now = env.now();
@@ -31,9 +41,12 @@ pub fn create_empty_memory_store(repository_root: &str, env: &dyn Env) -> Memory
     }
 }
 
+/// Why a memory operation failed.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MemoryError {
+    /// No item has that id.
     NotFound(String),
+    /// The lifecycle does not allow the move.
     Transition(MemoryTransitionError),
 }
 
@@ -93,6 +106,7 @@ fn user(actor: &str) -> MemoryOrigin {
     }
 }
 
+/// The store with `item` added.
 #[must_use]
 pub fn add_memory_item(store: &MemoryStore, item: MemoryItem, env: &dyn Env) -> MemoryStore {
     let mut items = store.items.clone();

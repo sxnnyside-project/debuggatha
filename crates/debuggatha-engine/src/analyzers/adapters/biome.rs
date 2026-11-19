@@ -87,6 +87,7 @@ fn biome_command(context: &RunContext<'_>) -> Invocation {
     }
 }
 
+/// Biome, the JavaScript and TypeScript linter.
 pub static BIOME: Adapter = Adapter {
     id: "biome",
     name: "Biome",

@@ -14,11 +14,15 @@ use super::structure::boundaries::ModuleBoundary;
 use super::structure::graph::DependencyGraph;
 use super::surface::public_api::{PublicApiSurface, PublicApiSymbol};
 
+/// How far the estimate of a change's impact can be trusted.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ImpactConfidence {
+    /// Every changed file belongs to a module the graph knows.
     High,
+    /// Some changed files could not be placed, or the graph is incomplete.
     Medium,
+    /// None of the changed files belongs to a known module.
     Low,
 }
 
@@ -32,9 +36,12 @@ impl ImpactConfidence {
     }
 }
 
+/// What a change reaches, and how much of that is known.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ChangeImpact {
+    /// The files that changed, relative to the repository root.
     pub changed_files: Vec<String>,
+    /// The modules those files belong to.
     pub affected_modules: Vec<String>,
     /// Modules not changed that depend, transitively, on a changed one.
     pub downstream_modules: Vec<String>,
@@ -48,7 +55,9 @@ pub struct ChangeImpact {
     pub exports_on_changed_lines: Vec<PublicApiSymbol>,
     /// Files the diff removes: they are not in the graph, so what imported them is not followed.
     pub deleted_files: Vec<String>,
+    /// How far the estimate can be trusted.
     pub confidence: ImpactConfidence,
+    /// Why that confidence, in words.
     pub rationale: String,
 }
 
@@ -130,6 +139,7 @@ fn assess(
     }
 }
 
+/// Estimate what `changed` reaches: its modules, the modules that depend on them through the graph, and the public names it touches.
 #[must_use]
 pub fn estimate_change_impact(
     changed: &[String],

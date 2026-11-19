@@ -3,15 +3,21 @@
 use std::collections::BTreeSet;
 use std::path::Path;
 
+/// One line of code shown to a model.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CodeLine {
+    /// The line number, 1-based.
     pub n: u32,
+    /// The line's text.
     pub text: String,
 }
 
+/// The code a model is allowed to read of one file.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CodeView {
+    /// The file.
     pub file: String,
+    /// The lines.
     pub lines: Vec<CodeLine>,
 }
 
@@ -61,6 +67,7 @@ pub fn scrub(text: &str) -> String {
     out
 }
 
+/// The view as text for a prompt, one numbered line each: lines in `withheld` are hidden and `marked` is flagged.
 #[must_use]
 pub fn render_view(view: &CodeView, withheld: &BTreeSet<u32>, marked: Option<u32>) -> String {
     view.lines

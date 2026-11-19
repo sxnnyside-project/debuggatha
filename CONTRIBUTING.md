@@ -53,6 +53,18 @@ Before submitting:
 
 ---
 
+## Style
+
+Rust and TypeScript each have a style guide: [docs/styleguide/RUST.md](docs/styleguide/RUST.md) and [docs/styleguide/TYPESCRIPT.md](docs/styleguide/TYPESCRIPT.md). `just docs` builds the Rust API documentation with every warning denied.
+
+---
+
+## Contract Schemas
+
+The JSON Schemas under `docs/schemas` that the Rust types generate are checked by `just test`. After you change one of those types on purpose, regenerate them with `DEBUGGATHA_UPDATE_SCHEMAS=1 cargo test -p debuggatha-core`, then run `just vscode-contracts` for the extension's types.
+
+---
+
 ## Commit Style
 
 This project uses [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Every commit message must follow the format:

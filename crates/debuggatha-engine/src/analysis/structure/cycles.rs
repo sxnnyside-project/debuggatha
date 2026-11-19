@@ -8,20 +8,26 @@ use serde::Serialize;
 
 use super::graph::DependencyGraph;
 
+/// How much a cycle matters.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Impact {
+    /// Four modules or more are tied together.
     High,
+    /// Three modules are tied together.
     Medium,
+    /// Two modules depend on each other.
     Low,
 }
 
+/// A group of modules that depend on each other.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct DependencyCycle {
     /// The modules in the cycle, sorted.
     pub modules: Vec<String>,
     /// The shortest path that leaves the first module and comes back to it.
     pub shortest_cycle: Vec<String>,
+    /// How much it matters.
     pub impact: Impact,
 }
 

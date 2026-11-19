@@ -93,7 +93,7 @@ fn locked<T>(mutex: &Mutex<T>) -> std::sync::MutexGuard<'_, T> {
 
 impl Pending {
     /// Be told the response to daemon request `id`.
-    pub(crate) fn expect(&self, id: &str) -> Receiver<Value> {
+    pub(crate) fn await_response(&self, id: &str) -> Receiver<Value> {
         let (sender, receiver) = channel();
         locked(&self.waiting).insert(id.to_owned(), sender);
         receiver

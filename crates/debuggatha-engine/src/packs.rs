@@ -59,6 +59,7 @@ const SOURCES: [&str; 43] = [
 pub fn builtin_packs() -> Vec<ReviewPack> {
     SOURCES
         .iter()
+        // debuggatha-ignore-next-line no-unwrap-expect -- embedded table, proven by the tests
         .map(|text| toml::from_str(text).expect("data/packs is valid"))
         .collect()
 }

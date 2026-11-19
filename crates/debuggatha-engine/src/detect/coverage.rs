@@ -18,89 +18,136 @@ use crate::syntax::{Backend, Language, ParseStatus};
 pub const CRITERIA_PACK_ID: &str = "criteria";
 const CRITERIA_PACK_VERSION: &str = "repository";
 
+/// How completely a language or file was parsed.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum CoverageStatus {
+    /// Parsed without errors.
     Parsed,
+    /// Parsed; some regions have syntax errors and nothing is concluded about them.
     ParsedWithErrors,
+    /// Parsed by a grammar that covers part of the language.
     ParsedLimited,
+    /// No parser: nothing was checked.
     NotParsed,
 }
 
+/// Which parser read the code.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum ParserKind {
+    /// The oxc parser, for the JavaScript and TypeScript family.
     Oxc,
+    /// A tree-sitter grammar.
     TreeSitter,
+    /// None.
     None,
 }
 
+/// What the parser said about one file; present only when the review asks for file detail.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FileCoverage {
+    /// Path relative to the repository root.
     pub path: String,
+    /// How completely it was parsed.
     pub status: CoverageStatus,
+    /// Why it was not fully parsed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
 }
 
+/// What the parser said about the files of one language.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LanguageCoverage {
+    /// The language's id.
     pub language: String,
+    /// How many files were reviewed.
     pub files: usize,
+    /// How many of them have syntax errors.
     pub files_with_errors: usize,
+    /// How completely the language was parsed.
     pub status: CoverageStatus,
+    /// Which parser read it.
     pub parser: ParserKind,
+    /// Why it was not fully parsed.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reason: Option<String>,
+    /// One entry per file; present only when the review asks for file detail.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_details: Option<Vec<FileCoverage>>,
 }
 
+/// Why a rule of an active pack was not evaluated.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum GapReason {
+    /// The engine has no detector for it.
     NoDetector,
+    /// The rule needs types the engine does not have.
     NeedsTypeInformation,
     /// The rule reads the repository's configuration and documentation files and the caller did
     /// not hand them over.
     NeedsRepositoryFiles,
+    /// The language of the code has no parser.
     LanguageNotParsed,
+    /// An analyzer the rule needs is not installed.
     AnalyzerNotInstalled,
+    /// An analyzer the rule needs is installed but not enabled; only the person can enable it.
     AnalyzerNotEnabled,
+    /// The analyzer ran and failed.
     AnalyzerFailed,
+    /// The analyzer ran out of time.
     Timeout,
+    /// The person's own configuration turned it off.
     DisabledByConfig,
 }
 
+/// A rule that was not evaluated, and why.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RuleGap {
+    /// The pack the rule belongs to.
     pub pack_id: String,
+    /// The rule's id.
     pub rule_id: String,
+    /// Why it was not evaluated.
     pub reason: GapReason,
+    /// More about the reason.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub detail: Option<String>,
 }
 
+/// The rules of one pack that were evaluated.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CheckedRules {
+    /// The pack's id.
     pub pack_id: String,
+    /// The pack's version.
     pub pack_version: String,
+    /// The rules evaluated.
     pub rule_ids: Vec<String>,
 }
 
+/// Why files were left out of a review.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum SkipReason {
+    /// The repository's ignore rules exclude them.
     Ignored,
+    /// Binary files.
     Binary,
+    /// Generated or minified files.
     Generated,
+    /// A symlink that leaves the repository.
     SymlinkOutsideRoot,
+    /// Above the size limit.
     TooLarge,
+    /// Could not be read.
     Unreadable,
+    /// Not valid UTF-8.
     NotUtf8,
 }
 
@@ -112,31 +159,42 @@ impl SkipReason {
     }
 }
 
+/// How many files were left out for one reason.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SkippedFiles {
+    /// The reason.
     pub reason: SkipReason,
+    /// How many files.
     pub files: usize,
     /// At most five.
     pub examples: Vec<String>,
 }
 
+/// What a review could not check: a language with no parser or a rule with no detector is never reported as clean.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Coverage {
+    /// True only when every language was fully parsed, no rule has a gap and no file was skipped for a reason that hides code.
     pub complete: bool,
+    /// What the parsers said, per language.
     pub languages: Vec<LanguageCoverage>,
+    /// The rules that were evaluated, per pack.
     pub checked_rules: Vec<CheckedRules>,
+    /// The rules that were not, and why.
     pub rule_gaps: Vec<RuleGap>,
+    /// The files left out, per reason.
     pub skipped_files: Vec<SkippedFiles>,
 }
 
 /// What the parser says about one reviewed file, kept by the runner so coverage needs no reparse.
 #[derive(Debug, Clone)]
 pub struct ReviewedFile {
+    /// The file, relative to the repository root.
     pub file: String,
     /// `None`: the engine has no parser for the file.
     pub language: Option<Language>,
+    /// How completely it was parsed.
     pub status: Option<ParseStatus>,
 }
 

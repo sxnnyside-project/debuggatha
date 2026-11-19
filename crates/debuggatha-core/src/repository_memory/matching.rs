@@ -1,3 +1,5 @@
+//! Whether a memory item covers a finding.
+
 use super::item::{MemoryDetail, MemoryItem};
 use crate::findings_ledger::compute_finding_fingerprint;
 use crate::review_engine::Finding;
@@ -24,6 +26,7 @@ pub fn suppression_matches(item: &MemoryItem, finding: &Finding) -> bool {
     }
 }
 
+/// Whether `item` is an accepted deviation that covers `finding`: the same rule, in the file or anywhere when the item names none.
 #[must_use]
 pub fn accepted_deviation_matches(item: &MemoryItem, finding: &Finding) -> bool {
     let MemoryDetail::AcceptedDeviation {
@@ -40,6 +43,7 @@ pub fn accepted_deviation_matches(item: &MemoryItem, finding: &Finding) -> bool 
     scope_file.as_ref().is_none_or(|file| fp.file == *file)
 }
 
+/// Whether `item` is an exception that covers `finding`: the same rule when it names one, in the file or anywhere when it names none.
 #[must_use]
 pub fn exception_matches(item: &MemoryItem, finding: &Finding) -> bool {
     let MemoryDetail::Exception {

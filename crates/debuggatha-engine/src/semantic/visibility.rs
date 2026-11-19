@@ -8,6 +8,7 @@ use serde::Deserialize;
 
 use crate::syntax::Language;
 
+/// Who can see a declaration.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Visibility {
     /// Anything that imports the module.
@@ -41,6 +42,7 @@ fn rules() -> &'static BTreeMap<String, Rule> {
     static RULES: OnceLock<BTreeMap<String, Rule>> = OnceLock::new();
     RULES.get_or_init(|| {
         toml::from_str(include_str!("../../data/visibility.toml"))
+            // debuggatha-ignore-next-line no-unwrap-expect -- embedded table, proven by the tests
             .expect("data/visibility.toml is valid")
     })
 }

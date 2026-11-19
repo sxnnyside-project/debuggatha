@@ -24,29 +24,44 @@ use crate::analysis::structure::boundaries::ModuleBoundary;
 use crate::analysis::structure::resolve::{Resolution, Resolver, Unresolved};
 use crate::analysis::structure::workspace::{Workspace, join};
 
+/// What kind of dead code a finding is.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum DeadCodeKind {
+    /// Declared and read by nobody, not even its own file.
     Unreferenced,
+    /// Exported, and nothing in the repository imports it.
     ExportedButUnused,
+    /// Exported from a file that is not an entrypoint, and nothing reads it.
     ProbablyDead,
 }
 
+/// How sure a finding is.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Confidence {
+    /// A use outside what the analysis sees (a computed path, a consumer outside the repository) cannot be ruled out.
     Low,
+    /// No use was found, with a caveat the analysis states.
     Medium,
+    /// Nothing in the file reads it and it is not exported.
     High,
 }
 
+/// A symbol nothing reads.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct DeadCodeFinding {
+    /// The file.
     pub file: String,
+    /// The symbol's name.
     pub symbol: String,
+    /// The line.
     pub line: u32,
+    /// What kind it is.
     pub kind: DeadCodeKind,
+    /// How sure it is.
     pub confidence: Confidence,
+    /// Why it is reported.
     pub rationale: String,
 }
 
@@ -261,6 +276,7 @@ fn unused_exposed(
     }
 }
 
+/// Find the JavaScript and TypeScript symbols nothing reads, by what files declare, export and import by name.
 #[must_use]
 pub fn detect_dead_code(
     ws: &Workspace,

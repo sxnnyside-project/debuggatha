@@ -1,3 +1,9 @@
+/**
+ * The requests the extension makes to the daemon, typed. Protocol v1 is in `docs/PROTOCOL.md`.
+ *
+ * @packageDocumentation
+ */
+
 import type {
   LedgerEntry,
   LifecycleStatus,
@@ -15,8 +21,11 @@ export type ReviewScope =
   | { kind: 'files'; paths: string[]; owned?: boolean }
   | { kind: 'diff'; diff?: string; base?: string };
 
+/** What a review asks for. */
 export interface ReviewJob {
+  /** What to review. */
   scope: ReviewScope;
+  /** Review Packs to apply on top of the detected ones. */
   packIds: string[];
   /** `off` runs the built-in detectors only. Which analyzers may run is the person's, at start. */
   analyzers: { mode: 'off' | 'auto' };
@@ -30,6 +39,7 @@ const PAGE = 500;
 export class Daemon {
   constructor(private readonly connection: DaemonConnection) {}
 
+  /** Runs a review; `signal` cancels it and `onProgress` hears its stages. */
   async review(
     job: ReviewJob,
     signal: AbortSignal,
@@ -61,6 +71,7 @@ export class Daemon {
     return entries;
   }
 
+  /** Moves a ledger entry to `status`. */
   async setStatus(id: string, status: LifecycleStatus): Promise<LedgerEntry> {
     const { entry } = await this.connection.request<{ entry: LedgerEntry }>('findings/update', {
       id,
@@ -77,6 +88,7 @@ export class Daemon {
     return ifYouAcceptIt.inlineComment;
   }
 
+  /** The repository's context: stack, dependencies, documentation and criteria. */
   async context(): Promise<RepositoryContext> {
     const { context } = await this.connection.request<{ context: RepositoryContext }>(
       'repository/context',
@@ -84,6 +96,7 @@ export class Daemon {
     return context;
   }
 
+  /** The policy a review of `packIds` would apply. */
   async policy(packIds: string[]): Promise<ReviewPolicy> {
     const { policy } = await this.connection.request<{ policy: ReviewPolicy }>(
       'repository/policy',

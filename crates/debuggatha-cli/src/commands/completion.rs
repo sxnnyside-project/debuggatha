@@ -1,3 +1,5 @@
+//! `debuggatha completion`: shell completion scripts.
+
 use std::io;
 
 use clap::{CommandFactory, ValueEnum};

@@ -1,3 +1,5 @@
+//! The five-state lifecycle of a finding and the moves it allows.
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -7,14 +9,20 @@ use serde::{Deserialize, Serialize};
 )]
 #[serde(rename_all = "lowercase")]
 pub enum LifecycleStatus {
+    /// Reported and not yet looked at.
     Open,
+    /// Seen by a person; still to fix.
     Acknowledged,
+    /// No longer detected within the reviewed scope.
     Resolved,
+    /// Set aside on purpose.
     Dismissed,
+    /// Came back after it was resolved.
     Reopened,
 }
 
 impl LifecycleStatus {
+    /// Every status, in lifecycle order.
     pub const ALL: [LifecycleStatus; 5] = [
         Self::Open,
         Self::Acknowledged,
@@ -23,6 +31,7 @@ impl LifecycleStatus {
         Self::Reopened,
     ];
 
+    /// The name used in reports and files.
     #[must_use]
     pub fn as_str(self) -> &'static str {
         match self {

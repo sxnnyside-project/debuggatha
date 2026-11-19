@@ -9,7 +9,7 @@ use debuggatha_engine::syntax::Language;
 
 #[test]
 fn the_parity_list_is_what_the_typescript_engine_reads() {
-    // `SOURCE_EXTENSIONS` in `packages/engine/src/skills/engine/read-files.ts`.
+    // `SOURCE_EXTENSIONS` in `packages/engine/src/skills/engine/read-files.ts` at tag `ts-engine-final`.
     assert_eq!(
         PARITY_EXTENSIONS,
         [

@@ -240,7 +240,9 @@ fn psr4(text: &str) -> Vec<(String, String)> {
 /// What a manifest says it depends on: a name, or a path to another manifest's directory or file.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Dependency {
+    /// A package, by the name it is published under.
     Name(String),
+    /// A package, by the path to its directory or manifest.
     Path(String),
 }
 

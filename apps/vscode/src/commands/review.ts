@@ -1,3 +1,9 @@
+/**
+ * The review commands: the whole workspace, the current file, a selection and the pending changes.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { getSettings } from '../config/settings.js';
 import type { ReviewJob } from '../daemon/api.js';
@@ -7,7 +13,9 @@ import type { Origin } from '../review/coordinator.js';
 import { planReview, type ReviewRequest, selectionDiff } from '../review/plan.js';
 import type { Services } from '../services.js';
 
+/** What a review command was asked to do, and who asked. */
 export interface ReviewOptions {
+  /** What started the review: a command the person ran, or a save. */
   origin: Origin;
   /** Also have the model on this machine read the changed code. Only an explicit command sets it. */
   semantic?: boolean;
@@ -201,6 +209,7 @@ export function requestForDiff(): ReviewRequest {
   return { kind: 'diff' };
 }
 
+/** The request for the file in the active editor, or `undefined` when no editor is open. */
 export function requestForActiveFile(rootDir: string): ReviewRequest | undefined {
   const editor = vscode.window.activeTextEditor;
   return editor

@@ -1,3 +1,5 @@
+//! What the review that produced an entry used.
+
 use serde_json::{Value, json};
 
 use super::entry::{ReviewAssociation, SnapshotRef};
@@ -27,6 +29,7 @@ pub fn snapshot_ref_for(
     }
 }
 
+/// What the review that produced `result` used, for the entries it creates or refreshes.
 #[must_use]
 pub fn association_for(result: &ReviewResult, snapshot: SnapshotRef) -> ReviewAssociation {
     ReviewAssociation {

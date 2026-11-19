@@ -19,10 +19,52 @@ use serde_json::Value;
 pub fn generated_schema<T: JsonSchema>() -> Value {
     let generator = SchemaSettings::draft07().into_generator();
     let mut value =
+        // debuggatha-ignore-next-line no-unwrap-expect -- a schema is plain data; serialization cannot fail
         serde_json::to_value(generator.into_root_schema_for::<T>()).expect("serializes");
     close_objects(&mut value);
     drop_nulls_and_formats(&mut value);
+    plain_enums_and_refs(&mut value);
     value
+}
+
+/// Doc comments on variants and fields make the generator wrap what it described: a string enum
+/// becomes a `oneOf` of constants, and a reference becomes an `allOf` of one. The published
+/// shape is a plain `enum` and a plain `$ref`, so the wrappers are taken off and what was said
+/// about the whole stays.
+fn plain_enums_and_refs(value: &mut Value) {
+    match value {
+        Value::Object(map) => {
+            map.values_mut().for_each(plain_enums_and_refs);
+            let constants: Option<Vec<Value>> = map
+                .get("oneOf")
+                .and_then(Value::as_array)
+                .filter(|alts| !alts.is_empty())
+                .and_then(|alts| {
+                    alts.iter()
+                        .map(|alt| {
+                            (alt.get("type") == Some(&Value::from("string")))
+                                .then(|| alt.get("const").cloned())
+                                .flatten()
+                        })
+                        .collect()
+                });
+            if let Some(constants) = constants {
+                map.remove("oneOf");
+                map.insert("type".into(), "string".into());
+                map.insert("enum".into(), Value::Array(constants));
+            }
+            if let Some(Value::Array(only)) = map.get("allOf")
+                && let [Value::Object(inner)] = only.as_slice()
+                && !map.contains_key("$ref")
+            {
+                let inner = inner.clone();
+                map.remove("allOf");
+                map.extend(inner);
+            }
+        }
+        Value::Array(items) => items.iter_mut().for_each(plain_enums_and_refs),
+        _ => {}
+    }
 }
 
 /// An absent optional field is how the stored files say "none" (`null` is refused by the strict
@@ -99,7 +141,6 @@ mod tests {
     use crate::findings_ledger::Ledger;
     use crate::repository_intelligence::RepositoryContext;
     use crate::review_engine::{Confidence, Finding, ReviewRequest, ReviewSession, Severity};
-    use schemars::schema_for;
     use serde_json::{Value, json};
 
     fn published(name: &str) -> Value {
@@ -109,19 +150,19 @@ mod tests {
     }
 
     fn values(schema: &Value) -> Value {
-        // schemars 1 emits `enum` for unit variants; the published file uses `enum` too.
+        // The published files list string enums as `enum`, which `generated_schema` restores.
         schema["enum"].clone()
     }
 
     #[test]
     fn severity_matches_published_schema() {
-        let generated = serde_json::to_value(schema_for!(Severity)).expect("serializes");
+        let generated = generated_schema::<Severity>();
         assert_eq!(values(&generated), values(&published("Severity")));
     }
 
     #[test]
     fn confidence_matches_published_schema() {
-        let generated = serde_json::to_value(schema_for!(Confidence)).expect("serializes");
+        let generated = generated_schema::<Confidence>();
         assert_eq!(values(&generated), values(&published("Confidence")));
     }
 

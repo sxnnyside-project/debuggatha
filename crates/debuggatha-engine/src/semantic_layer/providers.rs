@@ -10,13 +10,17 @@ use super::types::{CompletionRequest, SemanticProvider};
 
 const DEFAULT_TIMEOUT: Duration = Duration::from_secs(120);
 
+/// A model server on this machine.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum LocalRuntime {
+    /// Ollama.
     Ollama,
+    /// LM Studio.
     LmStudio,
 }
 
 impl LocalRuntime {
+    /// The name used in reports and flags.
     #[must_use]
     pub const fn id(self) -> &'static str {
         match self {
@@ -70,6 +74,7 @@ pub fn assert_loopback(url: &str) -> Result<String, String> {
     }
 }
 
+/// A model served from this machine; it refuses any address that is not loopback.
 pub struct LocalProvider {
     runtime: LocalRuntime,
     base: String,

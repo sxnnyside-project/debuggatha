@@ -1,5 +1,5 @@
 //! The detector runner and the finding excerpt against the TypeScript engine
-//! (`scripts/parity/gen-detect-fixtures.ts`), plus what is new in the Rust runner: a detector reads the
+//! (`scripts/parity/gen-detect-fixtures.ts` at tag `ts-engine-final`), plus what is new in the Rust runner: a detector reads the
 //! whole file and a diff review keeps the hits on its added lines.
 // A failed expect is a failed test; emptiness is the property several tests assert.
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::assert_is_empty)]

@@ -47,6 +47,7 @@ use crate::semantic_layer::{
 };
 use crate::syntax::{InlineSuppression, Language};
 
+/// What a review covers.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Scope {
     /// Every file of the project that a parser or a detector reads.
@@ -54,17 +55,25 @@ pub enum Scope {
     /// These files, relative to the repository or absolute inside it.
     Files(Vec<String>),
     /// What changed against `base` (`HEAD` when `None`), added lines only.
-    Diff { base: Option<String> },
+    Diff {
+        /// The revision to compare against.
+        base: Option<String>,
+    },
     /// A unified diff handed over by the caller; the files it names are read from the tree.
     DiffText(String),
 }
 
+/// Everything one review needs.
 pub struct ReviewInput<'a> {
+    /// The repository root.
     pub root: &'a Path,
+    /// What to review.
     pub scope: Scope,
+    /// How much to do.
     pub depth: ReviewDepth,
     /// Packs asked for by name; every other registered pack follows them.
     pub pack_ids: Vec<String>,
+    /// A policy id a previous review reported; the review fails if it would now differ.
     pub policy_id: Option<String>,
     /// Who ran the review, recorded in the session ("debuggatha-cli").
     pub source_name: &'a str,
@@ -84,19 +93,30 @@ pub struct ReviewInput<'a> {
 /// The person's choice to let a model look: which one, and what it may do. Code goes only where
 /// the provider sends it; the local providers accept `localhost` alone.
 pub struct SemanticInput<'a> {
+    /// The model to ask.
     pub provider: &'a dyn SemanticProvider,
+    /// What it may do.
     pub options: SemanticOptions,
 }
 
+/// Why a review failed.
 #[derive(Debug)]
 pub enum PipelineError {
+    /// The repository could not be scanned.
     Scan(ScanError),
+    /// A files scope with no files.
     Request(EmptyFileScope),
+    /// The policy could not be resolved.
     Policy(PolicyError),
+    /// The session lifecycle refused a move.
     Session(IllegalTransition),
+    /// The diff could not be read.
     Diff(DiffReviewError),
+    /// A finding could not be built (no location or no evidence).
     Finding(FindingError),
+    /// A stored file could not be read or written.
     Store(StoreError),
+    /// The ledger refused an operation.
     Ledger(LedgerError),
     /// The caller asked to stop; nothing was written.
     Cancelled,
@@ -137,11 +157,17 @@ impl std::error::Error for PipelineError {
 /// A finding described enough to talk about without fetching it.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct FindingRef {
+    /// The ledger id of the finding.
     pub ledger_id: String,
+    /// Its title.
     pub title: String,
+    /// The file it is in.
     pub file: String,
+    /// The line, when it has one.
     pub line: Option<u32>,
+    /// The rule that raised it.
     pub rule_id: Option<String>,
+    /// How serious it is.
     pub severity: debuggatha_core::review_engine::Severity,
 }
 
@@ -149,24 +175,33 @@ pub struct FindingRef {
 /// leave out what the baseline set aside.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ReviewChanges {
+    /// Findings this review added to the ledger.
     pub introduced: Vec<FindingRef>,
+    /// Findings that are gone because the code was corrected or the file removed.
     pub fixed: Vec<FindingRef>,
+    /// Findings that came back after they were resolved.
     pub reopened: Vec<FindingRef>,
 }
 
+/// Everything a review produced.
 #[derive(Debug)]
 pub struct ReviewOutput {
     /// What the review reports: everything found minus what memory, an inline comment or the
     /// baseline set aside.
     pub result: ReviewResult,
+    /// The policy that was applied.
     pub policy: ReviewPolicy,
+    /// What the review could not check.
     pub coverage: Coverage,
+    /// What the review changed in the ledger.
     pub sync: SyncReport,
+    /// Introduced, fixed and reopened findings.
     pub changes: ReviewChanges,
     /// Findings an inline `debuggatha-ignore` comment hid.
     pub suppressed_inline: Vec<InlineSuppression>,
     /// Findings an active memory item covers: reported, never silently dropped.
     pub suppressed_by_memory: Vec<SuppressedFinding>,
+    /// How many findings the baseline set aside.
     pub baselined: usize,
     /// Every analyzer considered: which ran, which did not and why. Empty when none were asked for.
     pub analyzers: Vec<AnalyzerRun>,

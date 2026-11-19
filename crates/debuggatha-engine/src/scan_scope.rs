@@ -51,6 +51,7 @@ const BUILD_MARKERS: &[&str] = &[
 
 #[allow(clippy::expect_used)] // constant patterns, proven by the tests
 fn regex(pattern: &str, flags: &str) -> Regex {
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     Regex::with_flags(pattern, flags).expect("a valid pattern")
 }
 

@@ -14,7 +14,7 @@ Polyglot workspace, Rust first ([ARCHITECTURE.md](ARCHITECTURE.md) has the detai
 - `npm/` holds the two launchers (`@sxnnyside/debuggatha-cli` and `-mcp`), plain JavaScript that runs the binary and nothing else.
 - `apps/vscode` is the only TypeScript left: **Node + pnpm** (esbuild, vitest, `vsce`), a client of the binary. Read [apps/vscode/CLAUDE.md](apps/vscode/CLAUDE.md) before touching it.
 
-Contracts are in [docs/schemas/](docs/schemas/README.md), the protocol in [docs/PROTOCOL.md](docs/PROTOCOL.md), the plan and its record in [docs/ROADMAP.md](docs/ROADMAP.md), the decision in ADR-0006.
+Contracts are in [docs/schemas/](docs/schemas/README.md), the protocol in [docs/PROTOCOL.md](docs/PROTOCOL.md), the quality bar of a detector in [docs/DETECTOR_QUALITY.md](docs/DETECTOR_QUALITY.md), the decision in ADR-0006.
 
 ## Commands
 
@@ -37,6 +37,7 @@ Contracts are in [docs/schemas/](docs/schemas/README.md), the protocol in [docs/
 | VS Code extension | `apps/vscode/src/`: kebab-case modules |
 | Tests | In the file, or `crates/*/tests/<concern>/`; extension: `<name>.test.ts`, `<name>.itest.ts` |
 | Scripts | `scripts/`: kebab-case (`.sh`, `.mjs` for npm tooling) |
+| Style guides | `docs/styleguide/RUST.md`, `docs/styleguide/TYPESCRIPT.md`: how code is written and documented |
 | Docs, ADRs, schemas | `docs/`, `docs/adr/`, `docs/schemas/`; the glossary is `docs/glossary.md` |
 
 (See `docs/glossary.md` for domain terms.)

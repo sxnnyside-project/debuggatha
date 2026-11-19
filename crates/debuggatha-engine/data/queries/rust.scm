@@ -19,22 +19,22 @@
 ; 4  unsafe { .. } inside a macro
 (token_tree "unsafe" @kw . (token_tree) @body)
 
-; 5  a function marked #[test] (or #[tokio::test] ..), possibly after other attributes
+; 5  a function marked #[test] (or #[tokio::test] ..), possibly after other attributes or comments
 ((attribute_item
    (attribute [(identifier) @attr (scoped_identifier name: (identifier) @attr)])
    (#eq? @attr "test"))
  .
- (attribute_item)*
+ [(attribute_item) (line_comment) (block_comment)]*
  .
  (function_item) @item)
 
-; 6  an item under #[cfg(test)]
+; 6  an item under #[cfg(test)], with attributes or comments between the attribute and the item
 ((attribute_item
    (attribute (identifier) @attr arguments: (token_tree (identifier) @arg))
    (#eq? @attr "cfg")
    (#eq? @arg "test"))
  .
- (attribute_item)*
+ [(attribute_item) (line_comment) (block_comment)]*
  .
  [(mod_item) (function_item)] @item)
 

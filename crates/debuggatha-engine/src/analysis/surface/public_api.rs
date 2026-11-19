@@ -18,33 +18,45 @@ use crate::analysis::structure::boundaries::{Manifest, ModuleBoundary};
 use crate::analysis::structure::resolve::{Resolution, Resolver};
 use crate::analysis::structure::workspace::{Workspace, join};
 
+/// Whether a name is meant for consumers.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Stability {
+    /// Meant for consumers.
     Stable,
     /// The name starts with an underscore: by convention not for consumers.
     Unstable,
 }
 
+/// One name a module exposes.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct PublicApiSymbol {
+    /// The name.
     pub name: String,
     /// The file and line of the statement that exports it from the surface.
     pub file: String,
+    /// The line.
     pub line: u32,
+    /// Whether it is meant for consumers.
     pub stability: Stability,
+    /// How it is exported.
     pub form: ExportForm,
     /// Where it is declared: `(file, name)`, after following re-exports.
     pub definition: Option<(String, String)>,
 }
 
+/// What a module exposes through its entrypoints.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct PublicApiSurface {
+    /// The module's id.
     pub module_id: String,
+    /// The entrypoint files.
     pub entrypoints: Vec<String>,
     /// What each subpath of the package names (`.` and `./v3`), as a source file.
     pub subpaths: Vec<(String, String)>,
+    /// Names exported from the entrypoints.
     pub exported: Vec<PublicApiSymbol>,
+    /// Names exported by a file that is not an entrypoint and that no entrypoint re-exports: probably not meant to be public.
     pub unexpectedly_exposed: Vec<PublicApiSymbol>,
     /// `javascript` (JavaScript and TypeScript) or `rust`.
     pub language: &'static str,

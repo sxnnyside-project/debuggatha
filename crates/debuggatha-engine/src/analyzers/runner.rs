@@ -226,16 +226,26 @@ fn repo_facts(root: &Path) -> RepoFacts {
     }
 }
 
+/// One analyzer as `debuggatha analyzers` lists it.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct InventoryEntry {
+    /// The adapter's id.
     pub id: &'static str,
+    /// Name shown to people.
     pub name: &'static str,
+    /// The tool's license (SPDX).
     pub license: &'static str,
+    /// The tool's home page.
     pub homepage: &'static str,
+    /// What the tool analyzes.
     pub covers: &'static str,
+    /// What running it does to the machine.
     pub trust: Trust,
+    /// Whether the repository uses what the tool analyzes.
     pub applies: bool,
+    /// Whether the executable was found.
     pub installed: bool,
+    /// The installed version, when it reports one.
     pub version: Option<String>,
     /// Whether a review would run it with the options given.
     pub will_run: bool,
@@ -275,26 +285,37 @@ pub fn inventory(
         .collect()
 }
 
+/// What one analyzer found.
 #[derive(Debug)]
 pub struct AnalyzerFindings {
+    /// The adapter that ran.
     pub adapter: &'static Adapter,
+    /// The version it reported.
     pub version: Option<String>,
+    /// Its findings, in a common shape.
     pub findings: Vec<AnalyzerFinding>,
 }
 
+/// What running the analyzers produced.
 #[derive(Debug, Default)]
 pub struct AnalyzerRunResult {
+    /// What became of each one, found anything or not.
     pub runs: Vec<AnalyzerRun>,
+    /// The findings of those that ran.
     pub results: Vec<AnalyzerFindings>,
 }
 
+/// What a run of the analyzers needs.
 pub struct RunInput<'a> {
+    /// The repository root, where the tools run.
     pub root: &'a Path,
     /// Repository-relative files under review, or `None` for the whole repository.
     pub files: Option<&'a [String]>,
+    /// What the person allowed.
     pub options: &'a AnalyzerOptions,
     /// Where executables are looked for after the repository's own: normally [`path_dirs`].
     pub search: &'a [PathBuf],
+    /// The adapters to consider.
     pub adapters: &'a [&'static Adapter],
     /// Stops the run between tools and kills the one that is running.
     pub control: Option<&'a Control>,
@@ -316,6 +337,7 @@ fn first_line(root: &Path, captured: &Captured) -> String {
     line.chars().take(200).collect()
 }
 
+/// Run the analyzers the options allow, each as a separate process with a time limit, and report what became of every one.
 #[must_use]
 pub fn run_analyzers(input: &RunInput<'_>) -> AnalyzerRunResult {
     let mut out = AnalyzerRunResult::default();

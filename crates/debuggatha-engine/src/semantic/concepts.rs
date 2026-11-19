@@ -9,11 +9,14 @@ use serde::Deserialize;
 
 use crate::syntax::Language;
 
+/// What a concept means in one language: the calls that express it, or that it does not apply.
 #[derive(Debug, Default, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Meaning {
+    /// The calls, as the language writes them.
     #[serde(default)]
     pub calls: Vec<String>,
+    /// Whether the concept does not apply to the language, as opposed to not being written yet.
     #[serde(default)]
     pub not_applicable: bool,
     /// File names where the concept is how the program works (a build script panics to fail).
@@ -56,23 +59,30 @@ struct Definition {
     languages: BTreeMap<String, Meaning>,
 }
 
+/// The concept table in `data/concepts.toml`: which calls mean each concept in each language.
 #[derive(Debug, Deserialize)]
 #[serde(transparent)]
 pub struct Concepts(BTreeMap<String, Definition>);
 
+/// Whether a concept is bound in a language.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Status {
+    /// The language has an entry for it.
     Bound,
+    /// It does not apply to the language.
     NotApplicable,
+    /// The table has no entry yet; reported as a gap, never as clean.
     NotImplemented,
 }
 
 impl Concepts {
+    /// What `concept` means in `language`, when the table says.
     #[must_use]
     pub fn meaning(&self, concept: &str, language: Language) -> Option<&Meaning> {
         self.0.get(concept)?.languages.get(key(language))
     }
 
+    /// Whether `concept` is bound, not applicable or not implemented in `language`.
     #[must_use]
     pub fn status(&self, concept: &str, language: Language) -> Status {
         match self.meaning(concept, language) {
@@ -205,6 +215,7 @@ pub fn concepts() -> &'static Concepts {
     static TABLE: OnceLock<Concepts> = OnceLock::new();
     TABLE.get_or_init(|| {
         let mut table: Concepts = toml::from_str(include_str!("../../data/concepts.toml"))
+            // debuggatha-ignore-next-line no-unwrap-expect -- embedded table, proven by the tests
             .expect("data/concepts.toml is valid");
         for definition in table.0.values_mut() {
             for meaning in definition.languages.values_mut() {

@@ -46,6 +46,7 @@ pub fn compare_versions(a: &str, b: &str) -> Ordering {
     }
 }
 
+/// Whether `version` satisfies `range`: `*` (or empty), `^x.y.z`, `~x.y.z` or an exact `x.y.z`.
 #[must_use]
 pub fn satisfies_range(version: &str, range: &str) -> bool {
     let range = js_trim(range);

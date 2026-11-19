@@ -1,3 +1,5 @@
+//! A short statement of the repository in one line.
+
 use std::collections::BTreeMap;
 
 use super::types::{Capability, CapabilityKind};

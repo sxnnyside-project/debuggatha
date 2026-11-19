@@ -18,8 +18,12 @@ function compare(a: readonly number[], b: readonly number[]): number {
   return 0;
 }
 
+/**
+ * Whether the binary can be used with this extension, and what to tell the person when it cannot.
+ */
 export type Compatibility = { ok: true } | { ok: false; message: string };
 
+/** Checks `version`, as the binary reports it, against the range this extension was built for. */
 export function checkCliVersion(version: string): Compatibility {
   const found = parse(version);
   const [min, below] = [SUPPORTED_CLI.min.join('.'), SUPPORTED_CLI.below.join('.')];

@@ -484,6 +484,7 @@ pub fn languages_of(rule: &str) -> Vec<Language> {
         .collect()
 }
 
+/// Register the concept rules with `registry`.
 pub fn register(registry: &mut Registry) {
     registry.register_group(RULES, detect);
 }

@@ -27,7 +27,7 @@ Review tools accept `includeBaselined`, `analyzers: false`, `limit` and `semanti
 repository the server started in, one given with `--allow-root`, or one the client shares as a root;
 without it the repository is `DEBUGGATHA_REPOSITORY_ROOT`, then the first root the client shares.
 
-Resources: `debuggatha://repository/context`, `…/summary`, `…/ledger`, `…/ledger/history`. Prompts:
+Resources: `debuggatha://repository/context`, `debuggatha://repository/summary`, `debuggatha://ledger`, `debuggatha://ledger/history`. Prompts:
 `review-flow`, `fix-findings`, `triage-findings`.
 
 ## Transports
@@ -69,18 +69,13 @@ Set by whoever starts the server, never by a tool call.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `DEBUGGATHA_REPOSITORY_ROOT` | none | Repository reviewed when a tool call omits `rootDir` |
-| `DEBUGGATHA_LOG_LEVEL` | `info` | `debug`, `info`, `warn`, or `error`; logs go to stderr |
-| `DEBUGGATHA_CACHE_ENABLED` | `true` | Cache the resolved repository context between calls |
 | `DEBUGGATHA_ANALYZERS` | `auto` | `off`, `auto` (tools that only read source), or a list of analyzer ids; the only way to enable one that runs project code or uses the network |
-| `DEBUGGATHA_ANALYZER_TIMEOUT` | `60` | Seconds an analyzer may run |
-| `DEBUGGATHA_SEMANTIC` | `off` | `sampling` (the connected client's own model), `ollama`, or `lmstudio` |
-| `DEBUGGATHA_SEMANTIC_MODEL`, `_URL`, `_VERIFY` | none | Tune the local runtime; `_VERIFY=true` turns on verification |
+| `DEBUGGATHA_SEMANTIC` | `off` | `host` (the connected client's own model; `sampling` is accepted too), `ollama`, or `lmstudio` |
+| `DEBUGGATHA_SEMANTIC_MODEL`, `DEBUGGATHA_SEMANTIC_URL` | none | Model name and address of the local runtime; `localhost` only |
 
 A tool call can ask for the semantic pass but cannot choose where code goes, and an agent can turn
 analyzers off for a call but cannot enable one.
 
 ## Boundaries
 
-Zero business logic: every handler delegates to `@debuggatha/engine` through an injected
-`DomainDeps`, and errors are sanitized so raw paths and stack traces never reach the client. The
-package ships as one self-contained bundle that depends only on the MCP SDK and `zod`.
+This package is a launcher; the server is the `debuggatha mcp` binary. Every handler delegates to the engine, and errors are sanitized so raw paths and stack traces never reach the client.

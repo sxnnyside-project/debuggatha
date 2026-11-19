@@ -21,6 +21,7 @@ pub use ruff::RUFF;
 
 use super::types::Adapter;
 
+/// Every adapter, in the order analyzers are considered.
 pub static ADAPTERS: &[&Adapter] = &[
     &GITLEAKS,
     &BIOME,

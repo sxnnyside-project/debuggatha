@@ -2,10 +2,21 @@
 
 <!-- Measured false-positive rates of the ported detectors; for anyone changing or trusting a rule. -->
 
-The ROADMAP quality bar asks for a measured false-positive rate per detector, on the real
+The quality bar below asks for a measured false-positive rate per detector, on the real
 corpus, with the limits stated. Parity (`docs/PARITY.md`) proves the Rust detectors agree with the
 TypeScript ones; it does not prove either is right. This is the first measurement of the ported
 rules.
+
+---
+
+## Quality bar for a detector
+
+A detector, query or analysis stage is done when it has:
+
+1. A **positive corpus** (code that must be reported) and a **negative corpus** (look-alikes, strings, comments, generated code, test code, other frameworks that must not be reported), kept as fixtures.
+2. A **measured false-positive rate** on the real-repository corpus (phase 0), recorded in the module README with the corpus commit ids. Medium-and-above confidence needs a target set per rule before merging; low confidence is allowed only when the limit is stated in the rule's `limitations`.
+3. An honest **confidence**: `high` only when the syntax tree plus resolved facts make the claim certain; unresolved facts (an imported helper that cannot be followed, a value of unknown origin) produce "not verified", not a finding.
+4. Its limits written in the pack knowledge entry and the module README.
 
 ---
 

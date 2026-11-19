@@ -1,3 +1,9 @@
+/**
+ * The commands that move a finding through its lifecycle: resolve, dismiss and reopen.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { FindingsProvider, FindingTreeItem } from '../providers/findingsProvider.js';
 import type { Services } from '../services.js';
@@ -31,6 +37,7 @@ export function registerLifecycleCommands(
   );
 }
 
+/** Moves the finding `id` to `status` through the daemon and refreshes what the editor shows. */
 export async function changeFindingStatus(
   services: Services,
   id: string,

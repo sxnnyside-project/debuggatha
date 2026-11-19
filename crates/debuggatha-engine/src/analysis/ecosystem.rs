@@ -18,14 +18,17 @@ use super::structure::resolve::Resolution;
 use super::structure::workspace::Workspace;
 use crate::syntax::Language;
 
+/// How an ecosystem names its modules and resolves imports, read from `data/ecosystems.toml`.
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Descriptor {
+    /// The language the ecosystem is for.
     pub language: String,
     /// A file name, or `*.ext` for a manifest named after its project.
     pub manifest: String,
     /// How the module's name is read from the manifest.
     pub name: Option<String>,
+    /// The resolver that turns an import of this language into a file or module.
     pub resolve: String,
     /// Source roots, relative to the repository root and to each manifest's directory.
     #[serde(default)]
@@ -46,9 +49,13 @@ pub struct Descriptor {
 /// A manifest found in the repository.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ManifestFile {
+    /// The ecosystem's id.
     pub ecosystem: String,
+    /// The manifest's path, relative to the repository root.
     pub path: String,
+    /// The manifest's directory.
     pub dir: String,
+    /// The module's declared name, when the manifest has one.
     pub name: Option<String>,
     /// PSR-4 namespace prefixes and their directories, for Composer.
     pub namespaces: Vec<(String, String)>,
@@ -63,17 +70,20 @@ pub fn descriptors() -> &'static [(String, Descriptor)] {
     TABLE.get_or_init(|| {
         let table: std::collections::BTreeMap<String, Descriptor> =
             toml::from_str(include_str!("../../data/ecosystems.toml"))
+                // debuggatha-ignore-next-line no-unwrap-expect -- embedded table, proven by the tests
                 .expect("data/ecosystems.toml is valid");
         table.into_iter().collect()
     })
 }
 
+/// The manifests of a workspace, read once.
 pub struct Ecosystems<'w> {
     ws: &'w Workspace,
     manifests: Vec<ManifestFile>,
 }
 
 impl<'w> Ecosystems<'w> {
+    /// Read every manifest the descriptors name from `ws`.
     #[must_use]
     pub fn new(ws: &'w Workspace) -> Self {
         let mut manifests = Vec::new();
@@ -87,6 +97,7 @@ impl<'w> Ecosystems<'w> {
         Self { ws, manifests }
     }
 
+    /// The manifests found.
     #[must_use]
     pub fn manifests(&self) -> &[ManifestFile] {
         &self.manifests

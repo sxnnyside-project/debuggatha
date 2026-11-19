@@ -6,7 +6,7 @@ This document defines the canonical engineering standard for all Debuggatha Revi
 
 ---
 
-**Review Packs NEVER execute code.** They are schema-driven catalogs (similar to a Terraform provider schema or an ESLint plugin manifest). The execution logic lives entirely within `engine/skills`.
+**Review Packs NEVER execute code.** They are schema-driven catalogs (similar to a Terraform provider schema or an ESLint plugin manifest). The execution logic lives entirely in the detectors of `debuggatha-engine`. Packs are TOML files in `crates/debuggatha-engine/data/packs`.
 
 ---
 
@@ -25,7 +25,7 @@ Review Packs form a DAG. There are no optional dependencies.
 
 - **`dependsOn`**: Array of strict dependencies.
   - `packId` & `versionRange`: Depends on another pack (e.g., the React pack depends on the TypeScript pack).
-  - `skillId`: Depends on a specific Skill being registered (e.g., an Architecture pack depending on `debuggatha/architecture-analyzer`).
+  - `skillId`: Depends on a specific Skill being registered (e.g., a pack depending on the Architecture analysis skill).
 
 ## 3. Rule Schema
 Rules are atomic, declarative constraints.
@@ -33,8 +33,8 @@ Rules are atomic, declarative constraints.
 - **`id`**: Unique identifier scoped to the pack (e.g., `rule-strict-null`).
 - **`packId`**: Reference back to the parent pack's `id`.
 - **`statement`**: A concise, direct, imperative instruction. (e.g., "Always use `tsx` extensions for files containing JSX"). Do NOT include the rationale here.
-- **`category`**: Must map strictly to the domain: `security`, `performance`, `architecture`, `style`.
-- **`defaultSeverity`**: Base severity level: `critical`, `high`, `medium`, `low`.
+- **`category`**: The area the rule belongs to. Packs use `security`, `architecture`, `performance`, `style`, `correctness`, `reliability` and `maintainability`; the type is open because packs are data.
+- **`defaultSeverity`**: Base severity level: `critical`, `high`, `medium`, `low`, `informational`.
 - **`appliesTo`**: Defines when the rule survives policy assembly.
   - `{ kind: "always" }`: Globally applicable (e.g., OWASP).
   - `{ kind: "requires-language", language: string }`: Bound to a language (e.g., `typescript`).
@@ -61,7 +61,7 @@ When the Review Engine produces a `Finding` based on a Rule, the finding must pr
 - **No Placeholders**: A rule without actionable criteria is invalid and must not be committed.
 - **No Empty Packs**: A Review Pack must contain at least one Rule and one Knowledge Entry.
 - **False Positives/Negatives**: Packs MUST document known heuristic limitations in their Knowledge Entries — via the required `limitations` field (§4), not prose buried in `body`.
-- **Testing**: Every pack must pass `core/knowledge-system`'s `validateReviewPack` before registration.
+- **Testing**: Every pack must pass `validate_review_pack` (`debuggatha_core::knowledge_system`) before registration; `crates/debuggatha-engine/tests/packs.rs` checks every pack on the list.
 
 ---
 

@@ -1,3 +1,5 @@
+//! Ledger entries and the ledger file.
+
 use std::fmt;
 
 use schemars::JsonSchema;
@@ -8,8 +10,10 @@ use super::lifecycle::{LifecycleStatus, can_transition_finding};
 use crate::env::Env;
 use crate::review_engine::{Finding, PackReference, PolicyReference};
 
+/// Version of the ledger file format; a file with another version is refused.
 pub const CURRENT_SCHEMA_VERSION: u32 = 1;
 
+/// What caused a ledger entry to change state.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(
     tag = "kind",
@@ -17,68 +21,109 @@ pub const CURRENT_SCHEMA_VERSION: u32 = 1;
     rename_all_fields = "camelCase"
 )]
 pub enum TransitionOrigin {
-    Review { session_id: String },
-    Manual { actor: String },
+    /// A review.
+    Review {
+        /// The review session.
+        session_id: String,
+    },
+    /// A person.
+    Manual {
+        /// Who, as the person gave it.
+        actor: String,
+    },
 }
 
+/// One change of a finding's state, kept as an append-only history.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct HistoryEvent {
+    /// When it happened, ISO 8601.
     pub timestamp: String,
+    /// The state before; `None` for the creation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub previous_state: Option<LifecycleStatus>,
+    /// The state after.
     pub new_state: LifecycleStatus,
+    /// What caused it.
     pub origin: TransitionOrigin,
+    /// The reason given, when there is one.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
 }
 
+/// The repository snapshot a review ran against.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct SnapshotRef {
+    /// When the snapshot was built, ISO 8601.
     pub generated_at: String,
+    /// Fingerprint of the snapshot.
     pub fingerprint: String,
 }
 
+/// Which review touched an entry, with what.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct ReviewAssociation {
+    /// The review that first reported it.
     pub created_by_session_id: String,
+    /// The review that last saw it.
     pub last_updated_by_session_id: String,
+    /// The snapshot of the latest review.
     pub repository_snapshot: SnapshotRef,
+    /// The policy the latest review applied.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub applied_policy: Option<PolicyReference>,
+    /// The packs it applied.
     pub applied_packs: Vec<PackReference>,
 }
 
+/// One finding the ledger tracks: its identity, state, history and latest form.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct LedgerEntry {
+    /// Stable identifier.
     pub id: String,
+    /// What makes it the same finding across reviews: file, rule and content, never the line alone.
     pub fingerprint: FindingFingerprint,
+    /// Where it is in the lifecycle.
     pub status: LifecycleStatus,
+    /// Every state change, oldest first.
     pub history: Vec<HistoryEvent>,
+    /// The finding as the latest review reported it.
     pub latest_finding: Finding,
+    /// What the reviews that saw it used.
     pub review: ReviewAssociation,
 }
 
+/// The persistent record of findings in `.debuggatha/ledger.json`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Ledger {
+    /// Version of the file format.
     #[schemars(range(min = 1))]
     pub schema_version: u32,
+    /// The repository the ledger belongs to.
     pub repository_root: String,
+    /// Every finding it tracks.
     pub entries: Vec<LedgerEntry>,
+    /// When it was created, ISO 8601.
     pub created_at: String,
+    /// When it last changed, ISO 8601.
     pub updated_at: String,
 }
 
+/// Why a ledger operation failed.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum LedgerError {
+    /// The lifecycle does not allow the move.
     IllegalTransition {
+        /// The state it is in.
         from: LifecycleStatus,
+        /// The state asked for.
         to: LifecycleStatus,
     },
+    /// No entry has that id.
     EntryNotFound(String),
 }
 
@@ -98,6 +143,7 @@ impl fmt::Display for LedgerError {
 
 impl std::error::Error for LedgerError {}
 
+/// A ledger with no entries, stamped with the current time.
 #[must_use]
 pub fn create_empty_ledger(repository_root: &str, env: &dyn Env) -> Ledger {
     let now = env.now();
@@ -110,6 +156,7 @@ pub fn create_empty_ledger(repository_root: &str, env: &dyn Env) -> Ledger {
     }
 }
 
+/// A new entry for a finding the first time a review reports it: status `open`, history of one event.
 #[must_use]
 pub fn create_ledger_entry(
     fingerprint: FindingFingerprint,
@@ -161,6 +208,7 @@ pub fn transition_finding(
     Ok(next)
 }
 
+/// The entry after a review sees the same finding again: the latest finding, fingerprint and session are replaced, the history is kept.
 #[must_use]
 pub fn refresh_ledger_entry(
     entry: &LedgerEntry,

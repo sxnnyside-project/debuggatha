@@ -1,3 +1,9 @@
+/**
+ * Decides what a review covers from the command that was run and the settings.
+ *
+ * @packageDocumentation
+ */
+
 import type { ExtensionSettings } from '../config/settings.js';
 import type { ReviewJob, ReviewScope } from '../daemon/api.js';
 
@@ -10,8 +16,11 @@ export type ReviewRequest =
   | { kind: 'file'; path: string; owned?: boolean }
   | { kind: 'selection'; diff: string; path: string };
 
+/** What a review will do. */
 export interface ReviewPlan {
+  /** What to review. */
   scope: ReviewScope;
+  /** Whether external analyzers run. */
   analyzers: ReviewJob['analyzers'];
   /** True when depth widened the review beyond what was asked (architectural). */
   widened: boolean;

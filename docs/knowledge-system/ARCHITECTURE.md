@@ -2,7 +2,7 @@
 
 <!-- How the knowledge system (packs, policies, rule resolution) is built; for contributors to it. -->
 
-The Knowledge System (`core/knowledge-system`) defines what a Skill, a Review Pack, a Rule, and a Review Policy are, how a registry answers "what exists and what does it need," and how a review's policy is assembled from packs and the repository's own criteria. It builds on [Repository Intelligence](../../packages/core/README.md#corerepository-intelligence), which produces `RepositoryContext` (what a repository *is*), and the [Review Engine domain](../../packages/core/README.md#corereview-engine), which defines `ReviewRequest`, `Finding`, and `Evidence` (what a review *produces*). Decisions are recorded in [ADR-0001 to ADR-0005](../adr).
+The Knowledge System (`debuggatha_core::knowledge_system`) defines what a Skill, a Review Pack, a Rule, and a Review Policy are, how a registry answers "what exists and what does it need," and how a review's policy is assembled from packs and the repository's own criteria. It builds on Repository Intelligence (`repository_intelligence`), which produces `RepositoryContext` (what a repository *is*), and the Review Engine domain (`review_engine`), which defines `ReviewRequest`, `Finding`, and `Evidence` (what a review *produces*). Decisions are recorded in [ADR-0001 to ADR-0005](../adr).
 
 ---
 
@@ -21,17 +21,11 @@ The Knowledge System (`core/knowledge-system`) defines what a Skill, a Review Pa
 ```text
 RepositoryContext ───────►┌────────────────────────┐◄─── ReviewRequest
   (criteria, capabilities) │    Rule Resolution      │     (requestedPackIds / requestedPolicyId)
-                           │ resolvePolicy(...)      │
+                           │ resolve_policy(...)     │
 CapabilityRegistry ───────►└───────────┬────────────┘
   (packs, skills)                      │ ReviewPolicy (frozen: rules, packRefs, conflicts)
                                        ▼
-                           ┌────────────────────────┐
-                           │   Context Assembly      │
-                           │ assembleContext(...)    │
-                           └───────────┬────────────┘
-                                       │ SkillContext
-                                       ▼
-                                Skill (engine/skills)
+                           Detectors (engine::detect), through pipeline::execute_review
                                        │
                                        ▼
                                   Finding[] citing a Rule or a CriteriaRule
@@ -56,15 +50,15 @@ Every step is pure and produces an immutable value: nothing mutates a `Repositor
 
 **Rule Resolution** is a pure function `(RepositoryContext, requested pack ids, CapabilityRegistry) → ReviewPolicy`. It keeps each pack's rules whose `appliesTo` matches the repository's capabilities (a flat, additive set of ids such as `typescript`, `react`, `bun`), merges them with the repository's criteria, detects conflicts, and returns a frozen policy. It throws if a requested pack's dependency cannot be resolved.
 
-**Context Assembly** is a pure function `(RepositoryContext, ReviewRequest, ReviewPolicy | undefined) → SkillContext`. `SkillContext` is the one shape every Skill receives. Core Skills receive it with no policy (they run before any pack is selected); Review and Analysis Skills receive a resolved one.
-
 **Review Packs** (`crates/debuggatha-engine/data/packs`) are content, not logic: `ReviewPack` values conforming to the schema this module defines, with no algorithms.
 
-**Policies** (`engine/policies`) wires a registry populated from the packs to `resolvePolicy` and exposes `assemblePolicy` as the call site the rest of the system uses.
+**Policies** are assembled by `pipeline::assemble_policy` in the engine, which fills a registry from the packs and calls `resolve_policy`; it is the call site the rest of the system uses.
 
-**Skills** (`engine/skills`) execute. A Review Skill is a function `(SkillContext) → Finding[]`; an Analysis Skill returns structural facts, not findings.
+**Detectors** (`engine::detect`) execute. A detector reads the semantic model and returns hits that become findings; an Analysis stage (`engine::analysis`) returns structural facts, not findings.
 
 ## 5. Rules and Knowledge
+
+The shapes, written as TypeScript for brevity (the Rust types are in `knowledge_system::pack`, and packs are TOML):
 
 ```ts
 interface Rule {
@@ -101,8 +95,7 @@ Rules are declarative data, not executable code. A Rule cannot decide "this file
 2. **Registered**: the pack is added to a `CapabilityRegistry`.
 3. **Requested**: `ReviewRequest.requestedPackIds` (or `requestedPolicyId`, to re-run a policy) names what a session wants.
 4. **Resolved**: Rule Resolution turns the request and the `RepositoryContext` into a frozen `ReviewPolicy`, checking dependencies and recording conflicts.
-5. **Assembled**: Context Assembly combines the policy, the context, and the request into a `SkillContext`.
-6. **Applied**: a Skill runs and produces findings, each citing the `Rule` (`review-pack-rule` evidence) or `CriteriaRule` (`criteria` evidence) that justified it, stamped with `appliedPolicy` and `originatingPack`.
+5. **Applied**: a detector runs and produces findings, each citing the `Rule` (`review-pack-rule` evidence) or `CriteriaRule` (`criteria` evidence) that justified it, stamped with `appliedPolicy` and `originatingPack`.
 
 ## 7. Composition and conflicts
 
@@ -147,7 +140,7 @@ No change is needed in `review_engine`, the pipeline, the MCP server or the CLI:
 
 ## 13. Boundaries
 
-`core/knowledge-system` depends on `core/repository-intelligence` and `core/review-engine`, never the reverse. the packs (content), `engine/policies` (wiring), and `engine/skills` (execution) depend on it. It consumes the review domain's types as they are and adds none to them.
+`knowledge_system` depends on `repository_intelligence` and `review_engine`, never the reverse. The packs (content), `pipeline::assemble_policy` (wiring) and the detectors (execution) depend on it. It consumes the review domain's types as they are and adds none to them.
 
 ---
 

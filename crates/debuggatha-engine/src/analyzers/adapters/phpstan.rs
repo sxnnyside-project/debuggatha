@@ -102,6 +102,7 @@ fn phpstan_applies(facts: &RepoFacts) -> bool {
         ])
 }
 
+/// `PHPStan`, the PHP static analyzer, with the project's own configuration.
 pub static PHPSTAN: Adapter = Adapter {
     id: "phpstan",
     name: "PHPStan",

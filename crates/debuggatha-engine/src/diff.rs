@@ -7,29 +7,40 @@ pub mod review;
 
 use std::collections::BTreeSet;
 
+/// What a change did to a file.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ChangeKind {
+    /// A new file.
     Added,
+    /// A file with edits.
     Modified,
+    /// A file removed.
     Deleted,
+    /// A file renamed.
     Renamed,
 }
 
+/// A line a change added.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AddedLine {
     /// Line number in the new file, 1-based.
     pub line: u32,
+    /// The line's text.
     pub text: String,
 }
 
+/// What a change did to one file.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct FileDiff {
     /// Path after the change; for a deleted file, the path it had.
     pub path: String,
+    /// The path before a rename.
     pub old_path: Option<String>,
+    /// What the change did.
     pub kind: ChangeKind,
     /// Binary content has no lines to read.
     pub binary: bool,
+    /// The lines it added.
     pub added: Vec<AddedLine>,
     /// New-file line each removal sits before: a removal changes the statement now at that line.
     pub removed_before: Vec<u32>,

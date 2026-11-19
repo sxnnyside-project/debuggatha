@@ -1,3 +1,5 @@
+//! Criteria Resolution: the repository's own rules, from documentation, configuration and manifests.
+
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 
@@ -13,6 +15,7 @@ use crate::js::{
 /// The patterns in this file are literals checked by the tests, so a failure cannot happen.
 #[allow(clippy::expect_used)]
 fn regex(pattern: &str, flags: &str) -> Regex {
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     Regex::with_flags(pattern, flags).expect("a valid pattern")
 }
 

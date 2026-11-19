@@ -1,3 +1,5 @@
+//! `debuggatha policies`: the policy a review would apply.
+
 use debuggatha_engine::core::env::SystemEnv;
 use debuggatha_engine::pipeline::assemble_policy;
 

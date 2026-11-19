@@ -21,6 +21,7 @@ fn ktlint_command(context: &RunContext<'_>) -> Invocation {
     }
 }
 
+/// ktlint, the Kotlin style checker.
 pub static KTLINT: Adapter = Adapter {
     id: "ktlint",
     name: "ktlint",
@@ -97,6 +98,7 @@ fn detekt_applies(facts: &RepoFacts) -> bool {
         })
 }
 
+/// detekt, the Kotlin static analyzer.
 pub static DETEKT: Adapter = Adapter {
     id: "detekt",
     name: "detekt",

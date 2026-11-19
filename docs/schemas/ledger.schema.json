@@ -1,25 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Ledger",
+  "description": "The persistent record of findings in `.debuggatha/ledger.json`.",
   "type": "object",
   "properties": {
     "schemaVersion": {
+      "description": "Version of the file format.",
       "type": "integer",
       "minimum": 1
     },
     "repositoryRoot": {
+      "description": "The repository the ledger belongs to.",
       "type": "string"
     },
     "entries": {
+      "description": "Every finding it tracks.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LedgerEntry"
       }
     },
     "createdAt": {
+      "description": "When it was created, ISO 8601.",
       "type": "string"
     },
     "updatedAt": {
+      "description": "When it last changed, ISO 8601.",
       "type": "string"
     }
   },
@@ -32,27 +38,34 @@
   ],
   "definitions": {
     "LedgerEntry": {
+      "description": "One finding the ledger tracks: its identity, state, history and latest form.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Stable identifier.",
           "type": "string"
         },
         "fingerprint": {
+          "description": "What makes it the same finding across reviews: file, rule and content, never the line alone.",
           "$ref": "#/definitions/FindingFingerprint"
         },
         "status": {
+          "description": "Where it is in the lifecycle.",
           "$ref": "#/definitions/LifecycleStatus"
         },
         "history": {
+          "description": "Every state change, oldest first.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HistoryEvent"
           }
         },
         "latestFinding": {
+          "description": "The finding as the latest review reported it.",
           "$ref": "#/definitions/Finding"
         },
         "review": {
+          "description": "What the reviews that saw it used.",
           "$ref": "#/definitions/ReviewAssociation"
         }
       },
@@ -71,15 +84,19 @@
       "type": "object",
       "properties": {
         "file": {
+          "description": "The file, relative to the repository root.",
           "type": "string"
         },
         "ruleId": {
+          "description": "The rule that raised the finding, when it has one.",
           "type": "string"
         },
         "category": {
+          "description": "The category, used when there is no rule id.",
           "type": "string"
         },
         "contentAnchor": {
+          "description": "A hash of the flagged code, so the same finding survives a move to another line.",
           "type": "string"
         }
       },
@@ -101,21 +118,27 @@
       ]
     },
     "HistoryEvent": {
+      "description": "One change of a finding's state, kept as an append-only history.",
       "type": "object",
       "properties": {
         "timestamp": {
+          "description": "When it happened, ISO 8601.",
           "type": "string"
         },
         "previousState": {
+          "description": "The state before; `None` for the creation.",
           "$ref": "#/definitions/LifecycleStatus"
         },
         "newState": {
+          "description": "The state after.",
           "$ref": "#/definitions/LifecycleStatus"
         },
         "origin": {
+          "description": "What caused it.",
           "$ref": "#/definitions/TransitionOrigin"
         },
         "comment": {
+          "description": "The reason given, when there is one.",
           "type": "string"
         }
       },
@@ -127,8 +150,10 @@
       "additionalProperties": false
     },
     "TransitionOrigin": {
+      "description": "What caused a ledger entry to change state.",
       "oneOf": [
         {
+          "description": "A review.",
           "type": "object",
           "properties": {
             "kind": {
@@ -136,6 +161,7 @@
               "const": "review"
             },
             "sessionId": {
+              "description": "The review session.",
               "type": "string"
             }
           },
@@ -146,6 +172,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A person.",
           "type": "object",
           "properties": {
             "kind": {
@@ -153,6 +180,7 @@
               "const": "manual"
             },
             "actor": {
+              "description": "Who, as the person gave it.",
               "type": "string"
             }
           },
@@ -165,27 +193,35 @@
       ]
     },
     "Finding": {
+      "description": "A problem found in the code, always with at least one location and one piece of evidence: no source, no finding.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Stable identifier of the finding within its review.",
           "type": "string"
         },
         "title": {
+          "description": "A short statement of the problem.",
           "type": "string"
         },
         "explanation": {
+          "description": "Why it is a problem, in the reviewer's words.",
           "type": "string"
         },
         "severity": {
+          "description": "How serious it is if real.",
           "$ref": "#/definitions/Severity"
         },
         "confidence": {
+          "description": "How sure the detector is.",
           "$ref": "#/definitions/Confidence"
         },
         "category": {
+          "description": "The area it belongs to (security, reliability, architecture...).",
           "type": "string"
         },
         "locations": {
+          "description": "Where it is; never empty.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FindingLocation"
@@ -193,6 +229,7 @@
           "minItems": 1
         },
         "evidence": {
+          "description": "What backs it up; never empty.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evidence"
@@ -200,12 +237,15 @@
           "minItems": 1
         },
         "appliedPolicy": {
+          "description": "The policy the review applied, when the finding came from one.",
           "$ref": "#/definitions/PolicyReference"
         },
         "originatingPack": {
+          "description": "The pack whose rule produced it.",
           "$ref": "#/definitions/PackReference"
         },
         "recommendations": {
+          "description": "What to do about it.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Recommendation"
@@ -226,6 +266,7 @@
       "additionalProperties": false
     },
     "Severity": {
+      "description": "How serious a finding is if it is real, independent of its [`Confidence`]. Declared from most to least serious, so the derived order is the order of seriousness.",
       "type": "string",
       "enum": [
         "critical",
@@ -236,6 +277,7 @@
       ]
     },
     "Confidence": {
+      "description": "How sure a detector is that a finding is a real problem, independent of its [`Severity`].",
       "type": "string",
       "enum": [
         "high",
@@ -244,15 +286,19 @@
       ]
     },
     "FindingLocation": {
+      "description": "Where a finding is: a file and, when known, the lines and columns.",
       "type": "object",
       "properties": {
         "file": {
+          "description": "Path relative to the repository root, with `/` separators.",
           "type": "string"
         },
         "lines": {
+          "description": "The lines the finding is about; `None` when it concerns the whole file.",
           "$ref": "#/definitions/LineRange"
         },
         "columns": {
+          "description": "The columns on the first line, when the finding names an exact span.",
           "$ref": "#/definitions/LineRange"
         }
       },
@@ -262,13 +308,16 @@
       "additionalProperties": false
     },
     "LineRange": {
+      "description": "A span of lines or columns, 1-based and inclusive at both ends.",
       "type": "object",
       "properties": {
         "start": {
+          "description": "First line (or column) of the span.",
           "type": "integer",
           "minimum": 1
         },
         "end": {
+          "description": "Last line (or column) of the span, equal to `start` for a single one.",
           "type": "integer",
           "minimum": 1
         }
@@ -283,6 +332,7 @@
       "description": "Machine-readable evidence: a discriminated union, never free text.",
       "oneOf": [
         {
+          "description": "A passage of the repository's own documentation.",
           "type": "object",
           "properties": {
             "kind": {
@@ -290,9 +340,11 @@
               "const": "documentation"
             },
             "file": {
+              "description": "The documentation file.",
               "type": "string"
             },
             "excerpt": {
+              "description": "The passage quoted.",
               "type": "string"
             }
           },
@@ -304,6 +356,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A criterion the repository states or implies.",
           "type": "object",
           "properties": {
             "kind": {
@@ -311,9 +364,11 @@
               "const": "criteria"
             },
             "ruleId": {
+              "description": "Identifier of the criterion.",
               "type": "string"
             },
             "source": {
+              "description": "Where the repository states it (a config file or a document).",
               "type": "string"
             }
           },
@@ -325,6 +380,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A rule of a Review Pack.",
           "type": "object",
           "properties": {
             "kind": {
@@ -332,9 +388,11 @@
               "const": "review-pack-rule"
             },
             "packId": {
+              "description": "The pack the rule belongs to.",
               "type": "string"
             },
             "ruleId": {
+              "description": "The rule's identifier within the pack.",
               "type": "string"
             }
           },
@@ -346,6 +404,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A convention of a framework.",
           "type": "object",
           "properties": {
             "kind": {
@@ -353,9 +412,11 @@
               "const": "framework-convention"
             },
             "framework": {
+              "description": "The framework's name.",
               "type": "string"
             },
             "detail": {
+              "description": "The convention, in a sentence.",
               "type": "string"
             }
           },
@@ -367,6 +428,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A convention of a language.",
           "type": "object",
           "properties": {
             "kind": {
@@ -374,9 +436,11 @@
               "const": "language-convention"
             },
             "language": {
+              "description": "The language's name.",
               "type": "string"
             },
             "detail": {
+              "description": "The convention, in a sentence.",
               "type": "string"
             }
           },
@@ -388,6 +452,7 @@
           "additionalProperties": false
         },
         {
+          "description": "The analyzed code itself.",
           "type": "object",
           "properties": {
             "kind": {
@@ -395,12 +460,15 @@
               "const": "code"
             },
             "file": {
+              "description": "The file the code is in.",
               "type": "string"
             },
             "lines": {
+              "description": "The lines quoted.",
               "$ref": "#/definitions/LineRange"
             },
             "excerpt": {
+              "description": "The code, redacted of anything that looks like a secret.",
               "type": "string"
             }
           },
@@ -411,6 +479,7 @@
           "additionalProperties": false
         },
         {
+          "description": "The output of an external analyzer, which runs as a separate process.",
           "type": "object",
           "properties": {
             "kind": {
@@ -418,18 +487,23 @@
               "const": "external-analyzer"
             },
             "tool": {
+              "description": "The tool's name.",
               "type": "string"
             },
             "ruleId": {
+              "description": "The tool's own rule identifier.",
               "type": "string"
             },
             "version": {
+              "description": "The tool's version, when it reports one.",
               "type": "string"
             },
             "license": {
+              "description": "The tool's license, from the analyzer catalog.",
               "type": "string"
             },
             "url": {
+              "description": "A page that explains the rule.",
               "type": "string"
             }
           },
@@ -442,6 +516,7 @@
           "additionalProperties": false
         },
         {
+          "description": "What the optional semantic layer concluded.",
           "type": "object",
           "properties": {
             "kind": {
@@ -449,21 +524,27 @@
               "const": "semantic-review"
             },
             "role": {
+              "description": "What the model was asked to do.",
               "$ref": "#/definitions/SemanticRole"
             },
             "provider": {
+              "description": "The provider that served the request (a local runtime or the client's own model).",
               "type": "string"
             },
             "model": {
+              "description": "The model's name, when known.",
               "type": "string"
             },
             "verdict": {
+              "description": "The verdict, for a verification.",
               "$ref": "#/definitions/SemanticVerdict"
             },
             "reason": {
+              "description": "The reason the model gave, kept only when it quotes the line it is about.",
               "type": "string"
             },
             "topic": {
+              "description": "The subject of a detection, when it has one.",
               "type": "string"
             }
           },
@@ -478,6 +559,7 @@
       ]
     },
     "SemanticRole": {
+      "description": "What the semantic layer was asked to do with a finding.",
       "type": "string",
       "enum": [
         "verification",
@@ -485,6 +567,7 @@
       ]
     },
     "SemanticVerdict": {
+      "description": "A model's judgment of a finding a detector raised; it never closes, hides or lowers the finding.",
       "type": "string",
       "enum": [
         "confirmed",
@@ -493,9 +576,11 @@
       ]
     },
     "PolicyReference": {
+      "description": "A review policy, by its deterministic id (ADR-0005).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The policy's id.",
           "type": "string"
         }
       },
@@ -505,12 +590,15 @@
       "additionalProperties": false
     },
     "PackReference": {
+      "description": "A pack, by id and exact version, so a finding stays citable after the pack updates (ADR-0002).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The pack's namespaced id, such as `debuggatha/rust`.",
           "type": "string"
         },
         "version": {
+          "description": "The pack's semantic version.",
           "type": "string"
         }
       },
@@ -521,30 +609,39 @@
       "additionalProperties": false
     },
     "Recommendation": {
+      "description": "What to do about a finding: a summary, why, and optionally an example or an exact edit.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Identifier, unique within its finding.",
           "type": "string"
         },
         "action": {
+          "description": "The kind of change asked for.",
           "$ref": "#/definitions/RecommendationAction"
         },
         "summary": {
+          "description": "One sentence saying what to do.",
           "type": "string"
         },
         "rationale": {
+          "description": "Why this is the right change.",
           "type": "string"
         },
         "targetFile": {
+          "description": "The file the change belongs in, when not the one the finding is in.",
           "type": "string"
         },
         "targetLines": {
+          "description": "The lines the change touches.",
           "$ref": "#/definitions/LineRange"
         },
         "example": {
+          "description": "The code before and after, when the fix is not mechanical.",
           "$ref": "#/definitions/RecommendationExample"
         },
         "edit": {
+          "description": "An exact replacement, when the fix is mechanical.",
           "$ref": "#/definitions/RecommendationEdit"
         }
       },
@@ -556,6 +653,7 @@
       "additionalProperties": false
     },
     "RecommendationAction": {
+      "description": "What a recommendation asks the reader to do.",
       "type": "string",
       "enum": [
         "replace",
@@ -568,12 +666,15 @@
       ]
     },
     "RecommendationExample": {
+      "description": "The same code before and after a fix, shown to the reader.",
       "type": "object",
       "properties": {
         "before": {
+          "description": "The code as it is.",
           "type": "string"
         },
         "after": {
+          "description": "The code as it should be.",
           "type": "string"
         }
       },
@@ -584,24 +685,30 @@
       "additionalProperties": false
     },
     "RecommendationEdit": {
+      "description": "An exact text replacement on one line, for fixes that are mechanical.",
       "type": "object",
       "properties": {
         "line": {
+          "description": "The line the edit applies to.",
           "type": "integer",
           "minimum": 1
         },
         "startColumn": {
+          "description": "First column replaced.",
           "type": "integer",
           "minimum": 1
         },
         "endColumn": {
+          "description": "Column after the last one replaced.",
           "type": "integer",
           "minimum": 1
         },
         "replacement": {
+          "description": "The text that takes the place of the span.",
           "type": "string"
         },
         "safety": {
+          "description": "Whether the edit is safe to apply without reading it.",
           "$ref": "#/definitions/EditSafety"
         }
       },
@@ -615,6 +722,7 @@
       "additionalProperties": false
     },
     "EditSafety": {
+      "description": "How far an edit can be trusted to be applied as it is.",
       "type": "string",
       "enum": [
         "safe",
@@ -622,21 +730,27 @@
       ]
     },
     "ReviewAssociation": {
+      "description": "Which review touched an entry, with what.",
       "type": "object",
       "properties": {
         "createdBySessionId": {
+          "description": "The review that first reported it.",
           "type": "string"
         },
         "lastUpdatedBySessionId": {
+          "description": "The review that last saw it.",
           "type": "string"
         },
         "repositorySnapshot": {
+          "description": "The snapshot of the latest review.",
           "$ref": "#/definitions/SnapshotRef"
         },
         "appliedPolicy": {
+          "description": "The policy the latest review applied.",
           "$ref": "#/definitions/PolicyReference"
         },
         "appliedPacks": {
+          "description": "The packs it applied.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PackReference"
@@ -652,12 +766,15 @@
       "additionalProperties": false
     },
     "SnapshotRef": {
+      "description": "The repository snapshot a review ran against.",
       "type": "object",
       "properties": {
         "generatedAt": {
+          "description": "When the snapshot was built, ISO 8601.",
           "type": "string"
         },
         "fingerprint": {
+          "description": "Fingerprint of the snapshot.",
           "type": "string"
         }
       },

@@ -1,3 +1,5 @@
+//! Documentation Context: which documents the repository has and what they say.
+
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 

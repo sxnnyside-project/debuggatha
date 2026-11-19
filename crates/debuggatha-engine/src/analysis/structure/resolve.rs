@@ -29,6 +29,7 @@ pub enum Unresolved {
 }
 
 impl Unresolved {
+    /// The name used in reports.
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -40,6 +41,7 @@ impl Unresolved {
     }
 }
 
+/// What an import specifier names.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Resolution {
     /// A file of the repository.
@@ -48,6 +50,7 @@ pub enum Resolution {
     Package(String),
     /// Not in the repository: a dependency, a built-in.
     External,
+    /// Nothing the analysis could find, and why.
     Unresolved(Unresolved),
 }
 
@@ -81,6 +84,7 @@ struct TsConfig {
     paths: Vec<(String, Vec<String>)>,
 }
 
+/// Turns import specifiers into what they name, for one workspace.
 pub struct Resolver<'w> {
     ws: &'w Workspace,
     /// Workspace packages by the name other code imports them with, longest name first.
@@ -89,6 +93,7 @@ pub struct Resolver<'w> {
 }
 
 impl<'w> Resolver<'w> {
+    /// A resolver for `ws` and its boundaries.
     #[must_use]
     pub fn new(ws: &'w Workspace, boundaries: &[ModuleBoundary]) -> Self {
         let npm: Vec<(String, String)> = boundaries

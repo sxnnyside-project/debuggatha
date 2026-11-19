@@ -1,3 +1,5 @@
+//! `debuggatha doctor`: diagnose the setup.
+
 use std::process::{Command, Stdio};
 
 use debuggatha_engine::analyzers::{ADAPTERS, AnalyzerOptions, inventory, path_dirs};

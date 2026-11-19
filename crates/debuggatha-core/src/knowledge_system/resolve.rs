@@ -17,6 +17,7 @@ use crate::findings_ledger::sha256_hex;
 use crate::repository_intelligence::RepositoryContext;
 use crate::review_engine::{Category, PackReference, Severity};
 
+/// Where a rule of a policy came from.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(
     tag = "kind",
@@ -24,39 +25,58 @@ use crate::review_engine::{Category, PackReference, Severity};
     rename_all_fields = "camelCase"
 )]
 pub enum PolicyRuleOrigin {
+    /// A rule of a pack.
     Pack {
+        /// The pack.
         pack_id: String,
+        /// Its exact version.
         pack_version: String,
     },
+    /// A criterion the repository declares for itself.
     Criteria,
 }
 
+/// One rule of an assembled policy, with where it came from.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct PolicyRule {
+    /// The rule's id.
     pub id: String,
+    /// The rule as a sentence a finding can quote.
     pub statement: String,
+    /// The area it belongs to; `None` for a criterion that names none.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub category: Option<Category>,
+    /// The default severity; `None` for a criterion that sets none.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub default_severity: Option<Severity>,
+    /// Where it came from.
     pub origin: PolicyRuleOrigin,
 }
 
+/// Two rules that contradict each other, and which one won. Conflicts are recorded, never dropped (ADR-0003).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct ConflictRecord {
+    /// The rule that stays in the policy.
     pub winning_rule_id: String,
+    /// The rule that was left out.
     pub losing_rule_id: String,
+    /// Why the first one wins, by the fixed precedence.
     pub reason: String,
 }
 
+/// The rules a review applies, assembled from packs and the repository's own criteria; always inspectable and citable.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct ReviewPolicy {
+    /// Deterministic hash of the inputs (ADR-0005).
     pub id: String,
+    /// The rules, in the order they apply.
     pub rules: Vec<PolicyRule>,
+    /// The packs they came from.
     pub pack_refs: Vec<PackReference>,
+    /// The conflicts found while assembling.
     pub conflicts: Vec<ConflictRecord>,
 }
 
@@ -64,8 +84,11 @@ pub struct ReviewPolicy {
 /// capabilities, and the criteria profile (whose `rules` are `{ id, description }`).
 #[derive(Debug, Clone)]
 pub struct ResolutionContext {
+    /// When the repository context was built, ISO 8601.
     pub generated_at: String,
+    /// The capabilities the repository has.
     pub capability_ids: Vec<String>,
+    /// The criteria profile, whose `rules` are `{ id, description }`.
     pub criteria: Value,
 }
 
@@ -82,16 +105,27 @@ impl ResolutionContext {
     }
 }
 
+/// What a caller asks resolution for.
 #[derive(Debug, Clone, Default)]
 pub struct PolicyRequest {
+    /// Packs to add on top of the detected ones.
     pub requested_pack_ids: Vec<String>,
+    /// A policy id a previous review reported; resolution fails if it would now differ.
     pub requested_policy_id: Option<String>,
 }
 
+/// Why resolution failed.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PolicyError {
+    /// A pack or skill needs something that is not registered.
     UnresolvedDependencies(Vec<PackDependency>),
-    PolicyIdMismatch { requested: String, computed: String },
+    /// The policy id asked for is not the one computed.
+    PolicyIdMismatch {
+        /// The id asked for.
+        requested: String,
+        /// The id computed from the current inputs.
+        computed: String,
+    },
 }
 
 impl fmt::Display for PolicyError {

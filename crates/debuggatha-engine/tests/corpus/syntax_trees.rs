@@ -1,5 +1,5 @@
 //! Parse every JavaScript and TypeScript file of the real-repository corpus and report how the
-//! parser did (opt-in: needs the clones, `node scripts/parity/fetch-corpus.mjs`).
+//! parser did (opt-in: needs the clones, `scripts/fetch-corpus.sh`).
 //! Run: `DEBUGGATHA_CORPUS_DIR=<dir> cargo test -p debuggatha-engine --test corpus -- syntax_trees:: --ignored --nocapture`
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::print_stdout)] // a diagnostic test
 

@@ -37,6 +37,7 @@ fn osv_parse(stdout: &str, root: &Path) -> Result<Vec<AnalyzerFinding>, String> 
     )
 }
 
+/// OSV-Scanner, which sends package names and versions to a service to find known vulnerabilities.
 pub static OSV_SCANNER: Adapter = Adapter {
     id: "osv-scanner",
     name: "OSV-Scanner",

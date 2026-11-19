@@ -1,5 +1,5 @@
 //! The syntax rules of the JavaScript/TypeScript family against the TypeScript regex
-//! detectors (`scripts/parity/gen-group-a-fixtures.ts`). Cases marked "same" must give exactly what the
+//! detectors (`scripts/parity/gen-group-a-fixtures.ts` at tag `ts-engine-final`). Cases marked "same" must give exactly what the
 //! regex gave: rule, line, columns, confidence and edit. Cases that carry `rust` are the ones where
 //! the tree is right and the regex wrong; each states why and what Rust must report instead.
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test

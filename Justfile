@@ -36,8 +36,12 @@ format:
 format-check:
     cargo fmt --all --check
 
-# Native gate: format, clippy with warnings denied, tests, dependency policy (needs cargo-deny).
-rust-check: format-check lint test
+# The API documentation, with every warning denied: a missing doc, a broken link, a bad code block.
+docs:
+    RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps --document-private-items --locked
+
+# Native gate: format, clippy with warnings denied, tests, API docs, dependency policy (needs cargo-deny).
+rust-check: format-check lint test docs
     cargo deny check
 
 # Full quality gate. CI runs exactly this: the native gate, the extension's, and the npm packages'.

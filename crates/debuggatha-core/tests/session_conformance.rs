@@ -1,5 +1,5 @@
 //! The Rust review request, lifecycle and session against the TypeScript reference
-//! (`scripts/parity/gen-session-fixtures.ts`).
+//! (`scripts/parity/gen-session-fixtures.ts` at tag `ts-engine-final`).
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test
 
 mod common;

@@ -1,3 +1,5 @@
+//! `debuggatha review`: review changes, files or the whole repository.
+
 use std::collections::{BTreeMap, BTreeSet};
 use std::io::Read;
 use std::path::Path;

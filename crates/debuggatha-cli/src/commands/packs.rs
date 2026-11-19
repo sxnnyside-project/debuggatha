@@ -1,3 +1,5 @@
+//! `debuggatha packs`: the Review Packs the engine ships.
+
 use debuggatha_engine::packs::builtin_packs;
 use serde_json::json;
 

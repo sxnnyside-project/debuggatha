@@ -125,7 +125,9 @@ pub(super) fn parse(source: &str, language: Language) -> FileSyntax {
 pub struct ScriptRegion {
     /// Byte range of the code, in the file.
     pub start: usize,
+    /// Byte offset after the code.
     pub end: usize,
+    /// The language the script is in.
     pub language: Language,
 }
 

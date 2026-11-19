@@ -1,3 +1,5 @@
+//! `debuggatha analyzers`: the external analyzers a review can run.
+
 use clap::Args as ClapArgs;
 use clap::builder::PossibleValuesParser;
 use debuggatha_engine::analyzers::{ADAPTERS, AnalyzerOptions, Mode, inventory, path_dirs};

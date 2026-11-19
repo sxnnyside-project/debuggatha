@@ -29,7 +29,7 @@ fn review_properties(extra: Vec<(&'static str, Value)>) -> Vec<(&'static str, Va
         ("policyId", text("Assert the review policy id a previous review reported; fails if it changed.")),
         ("persist", flag("Record findings in .debuggatha/ledger.json. Defaults to true; false is read-only.")),
         ("includeBaselined", flag("Also report findings the repository's baseline accepted. Defaults to false: with a baseline, only new findings are reported.")),
-        ("semantic", flag("Also have the client's model read the changed code for defects analyzers do not see. Needs a client that can be asked for its own model (sampling, or input-required on MCP 2026-07-28); without one the call fails with a message saying so and nothing is recorded. It costs one or more model calls of the client and is slower. What it raises is a labeled suspicion with low confidence, each quoting the line it is about; it never closes or hides a finding.")),
+        ("semantic", flag("Also have the client's model read the changed code (sampling, or input-required on MCP 2026-07-28). Without a client that can be asked, the call fails and records nothing. Costs model calls and time. Raises labeled suspicions at low confidence, each quoting its line; never closes or hides a finding.")),
         ("limit", json!({ "type": "integer", "minimum": 1, "description": "At most this many findings in findingsPage, highest severity first (default 100). findingsPage.truncated says whether more exist; list_findings pages through all of them." })),
         ("analyzers", flag("Set false to run only the built-in detectors. Which external analyzers run otherwise is decided when the server starts; a call cannot enable more.")),
     ]);

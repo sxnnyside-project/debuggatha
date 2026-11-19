@@ -1,3 +1,5 @@
+//! Turns the paths a tool prints into repository-relative ones.
+
 use std::path::{Path, PathBuf};
 
 /// A path or `file://` URI as a tool printed it, made repository-relative with `/` separators. A

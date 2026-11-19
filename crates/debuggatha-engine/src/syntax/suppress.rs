@@ -17,10 +17,14 @@ use regress::Regex;
 
 use super::{Span, SyntaxFacts};
 
+/// What a directive covers.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DirectiveScope {
+    /// The line it is on.
     Line,
+    /// The line after it.
     NextLine,
+    /// The whole file.
     File,
 }
 
@@ -29,42 +33,56 @@ pub enum DirectiveScope {
 pub struct CommentLine {
     /// 1-based line in the reviewed text.
     pub line: u32,
+    /// The comment's text.
     pub text: String,
 }
 
+/// One `debuggatha-ignore` comment.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Directive {
+    /// What it covers.
     pub scope: DirectiveScope,
+    /// The line it is on.
     pub line: u32,
     /// `None` covers every rule.
     pub rule_ids: Option<Vec<String>>,
+    /// Why the finding is accepted.
     pub reason: Option<String>,
 }
 
 /// What an inline directive hid, reported next to the findings so nothing is silently dropped.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct InlineSuppression {
+    /// The file.
     pub file: String,
+    /// The line, when the directive names one.
     pub line: Option<u32>,
+    /// The rule.
     pub rule_id: String,
+    /// The reason given.
     pub reason: Option<String>,
 }
 
 #[allow(clippy::expect_used)] // constant patterns, proven by the tests
 static DIRECTIVE: LazyLock<Regex> = LazyLock::new(|| {
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     Regex::new(r"debuggatha-ignore(-next-line|-file)?\b(.*)$").expect("a valid pattern")
 });
 #[allow(clippy::expect_used)] // constant pattern, proven by the tests
 static REASON_SEPARATOR: LazyLock<Regex> =
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     LazyLock::new(|| Regex::new(r"\s--\s|\s—\s").expect("a valid pattern"));
 #[allow(clippy::expect_used)] // constant pattern, proven by the tests
 static RULE_SEPARATOR: LazyLock<Regex> =
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     LazyLock::new(|| Regex::new(r"[\s,:]+").expect("a valid pattern"));
 #[allow(clippy::expect_used)] // constant pattern, proven by the tests
 static RULE_ID: LazyLock<Regex> =
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     LazyLock::new(|| Regex::new(r"^[\w*-]+$").expect("a valid pattern"));
 #[allow(clippy::expect_used)] // constant pattern, proven by the tests
 static BLOCK_CLOSE: LazyLock<Regex> =
+    // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
     LazyLock::new(|| Regex::new(r"\*/\s*$").expect("a valid pattern"));
 
 /// JavaScript's `String.prototype.split(regex)` for a pattern that cannot match the empty string.
@@ -79,6 +97,7 @@ fn split<'a>(re: &Regex, text: &'a str) -> Vec<&'a str> {
     parts
 }
 
+/// Read the directives out of comment lines.
 #[must_use]
 pub fn parse_directives(comments: &[CommentLine]) -> Vec<Directive> {
     let mut directives = Vec::new();

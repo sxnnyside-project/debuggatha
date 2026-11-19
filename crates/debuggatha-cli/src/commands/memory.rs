@@ -1,3 +1,5 @@
+//! `debuggatha memory`: the repository's engineering decisions.
+
 use clap::Subcommand;
 use debuggatha_engine::core::env::SystemEnv;
 use debuggatha_engine::core::repository_memory::{

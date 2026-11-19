@@ -1,3 +1,5 @@
+//! The lifecycle of a review session and the moves it allows.
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -6,15 +8,22 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "lowercase")]
 pub enum ReviewLifecycleStatus {
+    /// Asked for; nothing has started.
     Requested,
+    /// The repository was understood and the policy assembled.
     Prepared,
+    /// Detectors and analyzers are running.
     Running,
+    /// Finished with a result.
     Completed,
+    /// Stopped with an error.
     Failed,
+    /// Stopped because it was cancelled.
     Cancelled,
 }
 
 impl ReviewLifecycleStatus {
+    /// Every status, in lifecycle order.
     pub const ALL: [Self; 6] = [
         Self::Requested,
         Self::Prepared,
@@ -24,6 +33,7 @@ impl ReviewLifecycleStatus {
         Self::Cancelled,
     ];
 
+    /// The name used in reports and files.
     #[must_use]
     pub fn as_str(self) -> &'static str {
         match self {
@@ -46,11 +56,13 @@ impl ReviewLifecycleStatus {
     }
 }
 
+/// Whether a session may move from one status to another.
 #[must_use]
 pub fn can_transition(from: ReviewLifecycleStatus, to: ReviewLifecycleStatus) -> bool {
     from.legal_targets().contains(&to)
 }
 
+/// Whether no further move is possible.
 #[must_use]
 pub fn is_terminal(status: ReviewLifecycleStatus) -> bool {
     status.legal_targets().is_empty()

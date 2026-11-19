@@ -64,6 +64,7 @@ fn mentioned_in(parsed: &[Parsed]) -> BTreeMap<&str, Vec<usize>> {
     by_name
 }
 
+/// Find unread declarations in the languages the semantic model reads, by name and conservatively.
 #[must_use]
 pub fn detect_declared_dead_code(ws: &Workspace) -> Vec<DeadCodeFinding> {
     let parsed = parse_all(ws);
@@ -133,6 +134,7 @@ pub fn detect_declared_dead_code(ws: &Workspace) -> Vec<DeadCodeFinding> {
     out
 }
 
+/// Build the public API of each module for the languages the semantic model reads.
 #[must_use]
 pub fn build_declared_public_api(
     ws: &Workspace,

@@ -559,6 +559,7 @@ pub(in crate::detect) fn blank_comments(source: &str, comments: &[Span]) -> Stri
         .collect()
 }
 
+/// Run the JavaScript and TypeScript syntax rules over one file.
 #[must_use]
 pub fn detect(input: &DetectorInput<'_>) -> Vec<(&'static str, Hit)> {
     let Some(syntax) = input.syntax else {

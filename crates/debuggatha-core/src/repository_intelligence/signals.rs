@@ -1,3 +1,5 @@
+//! The signals Stack Detection reads from manifests.
+
 use indexmap::IndexMap;
 
 use super::types::{Evidence, StackSignal};

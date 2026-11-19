@@ -10,8 +10,8 @@ expects a Node toolchain.
 | ------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | Runtime / package manager | Node (`.node-version`), pnpm (pinned in `packageManager`)                                                     |
 | Bundle                    | esbuild via `esbuild.config.mjs` -> `dist/index.js` (CJS, `vscode` external; the extension host requires CJS) |
-| Correctness               | TypeScript strict (shared `tsconfig.base.json`), `types` set explicitly                                       |
-| Format / lint             | Biome (shared root `biome.json`)                                                                              |
+| Correctness               | TypeScript strict (`tsconfig.json` of this package), `types` set explicitly                                   |
+| Format / lint             | Biome (`biome.json` of this package)                                                                          |
 | Unit tests                | Vitest, driving the real `debuggatha` binary (`vi.mock("vscode")` is why it stays Vitest, not `bun test`)     |
 | Contracts                 | `scripts/contracts.mjs` writes `src/contracts/*.ts` from `docs/schemas` (`json-schema-to-typescript`)         |
 | Packaging                 | `vsce package --no-dependencies`; Open VSX with `ovsx publish` (both are dev dependencies)                    |

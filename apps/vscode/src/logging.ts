@@ -1,8 +1,16 @@
+/**
+ * The output channel and its level: a line never carries code.
+ *
+ * @packageDocumentation
+ */
+
 import type { LogLevel } from './config/settings.js';
 
 const RANK: Record<LogLevel, number> = { off: 0, error: 1, info: 2, debug: 3 };
 
+/** Where log lines go. */
 export interface LogSink {
+  /** Writes one line. */
   appendLine(line: string): void;
 }
 
@@ -47,12 +55,15 @@ export class Logger {
     );
   }
 
+  /** Records a failure. */
   error(message: string, fields?: Record<string, unknown>) {
     this.write('error', message, fields);
   }
+  /** Records what happened. */
   info(message: string, fields?: Record<string, unknown>) {
     this.write('info', message, fields);
   }
+  /** Records detail for diagnosing a problem. */
   debug(message: string, fields?: Record<string, unknown>) {
     this.write('debug', message, fields);
   }

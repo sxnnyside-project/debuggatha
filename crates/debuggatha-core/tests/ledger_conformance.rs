@@ -1,6 +1,6 @@
 //! Differential tests against the TypeScript ledger (ADR-0006, decision 8).
 //!
-//! `tests/fixtures/ledger-conformance.json` is written by `scripts/parity/gen-ledger-fixtures.ts`, which
+//! `tests/fixtures/ledger-conformance.json` is written by `scripts/parity/gen-ledger-fixtures.ts` at tag `ts-engine-final`, which
 //! runs the TypeScript implementation. Ids are renumbered `n1`, `n2`, ... in creation order and
 //! timestamps are not compared, so the Rust side injects a counting environment.
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::panic)] // a failed expect is a failed test

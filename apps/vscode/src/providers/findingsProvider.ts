@@ -1,20 +1,30 @@
+/**
+ * The Findings tree view: the open findings grouped by file.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { isActiveFindingStatus, type LedgerEntry } from '../contracts/index.js';
 
+/** Provides the findings tree. */
 export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem> {
   private _onDidChangeTreeData: vscode.EventEmitter<FindingTreeItem | undefined> =
     new vscode.EventEmitter<FindingTreeItem | undefined>();
+  /** Fires when the tree changed. */
   readonly onDidChangeTreeData: vscode.Event<FindingTreeItem | undefined> =
     this._onDidChangeTreeData.event;
 
   private entries: LedgerEntry[] = [];
   private showResolved: boolean = false;
 
+  /** Rebuilds the tree. */
   refresh(entries: LedgerEntry[]): void {
     this.entries = entries;
     this._onDidChangeTreeData.fire(undefined);
   }
 
+  /** Shows or hides the resolved and dismissed findings. */
   toggleResolved(): void {
     this.showResolved = !this.showResolved;
     this._onDidChangeTreeData.fire(undefined);
@@ -26,10 +36,12 @@ export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem
       : this.entries.filter((e) => isActiveFindingStatus(e.status));
   }
 
+  /** The tree item to show for `element`. */
   getTreeItem(element: FindingTreeItem): vscode.TreeItem {
     return element;
   }
 
+  /** The children of `element`, or the files when it is `undefined`. */
   getChildren(element?: FindingTreeItem): Thenable<FindingTreeItem[]> {
     const visible = this.getVisibleEntries();
 
@@ -66,6 +78,7 @@ export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem
   }
 }
 
+/** One finding in the tree. */
 export class FindingTreeItem extends vscode.TreeItem {
   constructor(
     labelStr: string,

@@ -1,3 +1,9 @@
+/**
+ * Reviews a file quietly when it is saved, after a short pause.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { getSettings } from '../config/settings.js';
 import { toRepoRelative } from '../paths.js';

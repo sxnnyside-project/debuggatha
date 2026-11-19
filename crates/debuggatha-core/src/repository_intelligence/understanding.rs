@@ -1,3 +1,5 @@
+//! Repository Understanding: what is known and the questions a concrete gap raises.
+
 use super::types::{
     Confidence, CriteriaProfile, DocumentationProfile, OpenQuestion, StackProfile,
     UnderstandingProfile,

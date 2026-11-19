@@ -5,9 +5,12 @@ use std::fmt;
 use std::path::Path;
 use std::process::{Command, Stdio};
 
+/// Why a git call was refused or failed.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum GitError {
+    /// A ref that could be read as an option.
     UnsafeRef,
+    /// The directory is not a git repository.
     NotARepository,
     /// Git ran and failed (unknown ref, corrupt repository); its message is not passed on, since
     /// it names paths.

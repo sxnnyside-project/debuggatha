@@ -1,3 +1,5 @@
+//! `debuggatha baseline`: record what the repository has today so later reviews report only what is new.
+
 use std::collections::BTreeMap;
 
 use clap::Subcommand;

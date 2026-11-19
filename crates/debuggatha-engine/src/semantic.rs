@@ -29,12 +29,16 @@ pub use visibility::{Visibility, is_wired, reads, visibility};
 
 use crate::syntax::Span;
 
+/// A call the code makes, with its arguments and where it sits.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Call {
+    /// The whole call, as a byte range.
     pub span: Span,
     /// The callee as written, with `::`, `->`, `?.` and `\` read as `.`, and a `!` after a macro.
     pub callee: String,
+    /// The callee, as a byte range.
     pub callee_span: Span,
+    /// The arguments including the parentheses.
     pub args: Option<Span>,
     /// Each argument, in order.
     pub arg_list: Vec<Span>,
@@ -47,14 +51,18 @@ pub struct Call {
     pub refs: Vec<usize>,
     /// Loops around the call inside its own function.
     pub loop_depth: u32,
+    /// Whether the call is inside test code.
     pub in_test: bool,
 }
 
 /// A name introduced by a parameter, a declaration, an assignment or a loop header.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Binding {
+    /// The name.
     pub name: String,
+    /// Where it is introduced.
     pub span: Span,
+    /// Index into `Model::functions` of the function around it.
     pub function: Option<usize>,
     /// The loop body this name iterates, when a loop header introduces it.
     pub loop_body: Option<Span>,
@@ -65,9 +73,13 @@ pub struct Binding {
 /// A function, type or method a file defines.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Declaration {
+    /// The name.
     pub name: String,
+    /// Where it is declared.
     pub span: Span,
+    /// The line.
     pub line: u32,
+    /// Who can see it.
     pub visibility: Visibility,
     /// A member of a class or module, not a declaration of the file itself.
     pub member: bool,
@@ -75,41 +87,56 @@ pub struct Declaration {
     pub decorated: bool,
 }
 
+/// A name written in the code that is not a call or a declaration.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Mention {
+    /// The name.
     pub name: String,
+    /// Where it is.
     pub span: Span,
 }
 
 /// What an import statement names, as written (quotes removed), and the line it is on.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Import {
+    /// What the statement names, as written.
     pub specifier: String,
+    /// The line.
     pub line: u32,
 }
 
 /// A variable or member chain as written (`request.args`, `$_GET`).
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Path {
+    /// Where it is.
     pub span: Span,
+    /// The text as written.
     pub text: String,
 }
 
+/// What detectors read of a file instead of a parser's tree, with the same meaning in every language.
 #[derive(Debug, Default)]
 pub struct Model {
+    /// Every call.
     pub calls: Vec<Call>,
+    /// The functions of the file.
     pub functions: Vec<Span>,
+    /// The loops of the file.
     pub loops: Vec<Span>,
     /// The loops that run a fixed small number of times (over a list written out, up to ten
     /// turns): a query in one is not one query per row.
     pub small_loops: Vec<Span>,
+    /// Every name introduced in the file.
     pub bindings: Vec<Binding>,
     /// Names read, each with the binding it resolves to.
     pub reads: Vec<(Span, usize)>,
+    /// Variable and member chains.
     pub paths: Vec<Path>,
     /// Spans whose value is made safe by what they are (a cast to a number).
     pub cleaned: Vec<Span>,
+    /// Import statements.
     pub imports: Vec<Import>,
+    /// What the file defines.
     pub declarations: Vec<Declaration>,
     /// Calls whose target is computed at run time: a name search cannot follow them.
     pub dynamic_calls: Vec<Span>,

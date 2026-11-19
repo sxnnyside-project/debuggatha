@@ -1,4 +1,4 @@
-//! Inline suppression against the TypeScript reference (`scripts/parity/gen-suppress-fixtures.ts`).
+//! Inline suppression against the TypeScript reference (`scripts/parity/gen-suppress-fixtures.ts` at tag `ts-engine-final`).
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test
 
 use std::path::Path;

@@ -16,24 +16,34 @@ use debuggatha_core::stored::{
 use serde::{Deserialize, Serialize};
 
 const WHAT: &str = "baseline";
+/// Version of the baseline file format; a file with another version is refused.
 pub const SCHEMA_VERSION: u32 = 1;
 
+/// One kind of finding the baseline accepted.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BaselineEntry {
+    /// The finding's identity: file, rule and code.
     pub key: String,
+    /// The file.
     pub file: String,
+    /// The rule.
     pub rule_id: String,
+    /// The finding's title.
     pub title: String,
     /// How many identical findings (same file, rule and code) were accepted.
     pub count: u32,
 }
 
+/// What a repository has today, so later reviews report only what is new.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Baseline {
+    /// Version of the file format.
     pub schema_version: u32,
+    /// When it was created, ISO 8601.
     pub created_at: String,
+    /// What it accepted.
     pub entries: Vec<BaselineEntry>,
 }
 
@@ -50,6 +60,7 @@ pub fn baseline_key(finding: &Finding) -> String {
     )
 }
 
+/// Where the baseline of the repository at `root` is stored.
 #[must_use]
 pub fn baseline_path(root: &Path) -> PathBuf {
     root.join(".debuggatha").join("baseline.json")
@@ -65,6 +76,7 @@ pub fn load_baseline(root: &Path) -> Result<Option<Baseline>, StoreError> {
         .transpose()
 }
 
+/// A baseline that accepts every one of `findings`.
 #[must_use]
 pub fn create_baseline_from(findings: &[Finding], env: &dyn Env) -> Baseline {
     let mut entries: BTreeMap<String, BaselineEntry> = BTreeMap::new();
@@ -111,9 +123,12 @@ pub fn clear_baseline(root: &Path) -> Result<bool, StoreError> {
     remove_if_exists(&baseline_path(root), WHAT)
 }
 
+/// Findings split by whether the baseline accepted them.
 #[derive(Debug)]
 pub struct Applied<'a> {
+    /// Findings the baseline does not cover: new.
     pub fresh: Vec<&'a Finding>,
+    /// Findings it accepted.
     pub baselined: Vec<&'a Finding>,
 }
 

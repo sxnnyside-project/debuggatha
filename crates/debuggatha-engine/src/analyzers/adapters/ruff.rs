@@ -64,6 +64,7 @@ fn ruff_command(context: &RunContext<'_>) -> Invocation {
     }
 }
 
+/// Ruff, the Python linter.
 pub static RUFF: Adapter = Adapter {
     id: "ruff",
     name: "Ruff",

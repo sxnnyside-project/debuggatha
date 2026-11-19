@@ -206,6 +206,7 @@ pub(crate) fn serve(repositories: Repositories<'_>, host: &str, port: u16) -> Re
     let bound = listener
         .local_addr()
         .map_err(|_| "The HTTP server has no address.".to_owned())?;
+    // debuggatha-ignore-next-line no-debug-output -- stderr is the diagnostics channel; stdout carries the protocol
     eprintln!("debuggatha: MCP listening on http://{bound}/mcp");
     let server = Server::new(repositories, None);
     let active = AtomicUsize::new(0);

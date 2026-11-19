@@ -1,3 +1,5 @@
+//! Stack Detection: languages, frameworks, build systems and runtimes from manifests.
+
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 
@@ -8,11 +10,15 @@ use super::signals::SignalCollector;
 use super::types::{Evidence, PlatformTarget, ScanError, ScanResult, StackProfile, WorkspaceType};
 use crate::js::{js_get, js_to_string, js_truthy, merge_objects, utf16_cmp};
 
+/// The stack scan and the manifests it read, kept so later scans do not read them again.
 pub struct StackScan {
+    /// The stack profile and what the scan read.
     pub scan: ScanResult<StackProfile>,
     /// The parsed `package.json`, when the root has one. Shared with the later scanners.
     pub package_json: Option<Value>,
+    /// The text of `Cargo.toml`, when there is one.
     pub cargo_toml: Option<String>,
+    /// The text of `pubspec.yaml`, when there is one.
     pub pubspec_yaml: Option<String>,
 }
 

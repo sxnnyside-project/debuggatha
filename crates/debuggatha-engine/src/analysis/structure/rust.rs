@@ -19,7 +19,9 @@ use crate::syntax::treesitter::grammar;
 /// A path a file writes, with where it was written.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RustRef {
+    /// The path, split at `::`.
     pub segments: Vec<String>,
+    /// The line.
     pub line: u32,
     /// The inline modules the reference sits in, outermost first.
     pub inline: Vec<String>,
@@ -30,15 +32,20 @@ pub struct RustRef {
 /// A `mod` declaration.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ModDecl {
+    /// The module's name.
     pub name: String,
+    /// The `#[path]` attribute, when the declaration has one.
     pub path_attr: Option<String>,
     /// `Some` for `mod x { .. }`.
     pub body: Option<Vec<ModDecl>>,
 }
 
+/// What one Rust file declares and refers to.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct RustFile {
+    /// The `mod` declarations.
     pub mods: Vec<ModDecl>,
+    /// The paths it writes.
     pub refs: Vec<RustRef>,
 }
 

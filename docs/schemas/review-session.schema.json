@@ -5,31 +5,39 @@
   "type": "object",
   "properties": {
     "id": {
+      "description": "Stable identifier of the session.",
       "type": "string"
     },
     "createdAt": {
+      "description": "When it was created, ISO 8601.",
       "type": "string",
       "format": "date-time"
     },
     "request": {
+      "description": "What was asked.",
       "$ref": "#/definitions/ReviewRequest"
     },
     "repositoryContext": {
+      "description": "The repository as it was when the session started.",
       "$ref": "#/definitions/RepositoryContext"
     },
     "selectedPolicy": {
+      "description": "The policy chosen for the review.",
       "$ref": "#/definitions/PolicyReference"
     },
     "selectedPacks": {
+      "description": "The packs chosen for the review.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/PackReference"
       }
     },
     "status": {
+      "description": "Where the session is in its lifecycle.",
       "$ref": "#/definitions/ReviewLifecycleStatus"
     },
     "execution": {
+      "description": "Timing and outcome so far.",
       "$ref": "#/definitions/ExecutionMetadata"
     }
   },
@@ -44,28 +52,35 @@
   ],
   "definitions": {
     "ReviewRequest": {
+      "description": "What a review is asked to cover.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Stable identifier of the request.",
           "type": "string"
         },
         "scope": {
+          "description": "What to review.",
           "$ref": "#/definitions/ReviewScope"
         },
         "depth": {
+          "description": "How much to do.",
           "$ref": "#/definitions/ReviewDepth"
         },
         "requestedAt": {
+          "description": "When it was requested, ISO 8601.",
           "type": "string",
           "format": "date-time"
         },
         "requestedPackIds": {
+          "description": "Packs to add on top of the detected ones.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "requestedPolicyId": {
+          "description": "A policy id a previous review reported.",
           "type": "string"
         }
       },
@@ -90,6 +105,7 @@
               "const": "diff"
             },
             "base": {
+              "description": "The base to diff against.",
               "type": "string"
             }
           },
@@ -99,6 +115,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A list of files.",
           "type": "object",
           "properties": {
             "kind": {
@@ -121,6 +138,7 @@
           "additionalProperties": false
         },
         {
+          "description": "The whole repository.",
           "type": "object",
           "properties": {
             "kind": {
@@ -136,6 +154,7 @@
       ]
     },
     "ReviewDepth": {
+      "description": "How much a review does.",
       "type": "string",
       "enum": [
         "quick",
@@ -148,34 +167,43 @@
       "type": "object",
       "properties": {
         "rootDir": {
+          "description": "Absolute path of the repository root.",
           "type": "string"
         },
         "generatedAt": {
+          "description": "When the context was built, as an ISO 8601 timestamp.",
           "type": "string",
           "format": "date-time"
         },
         "hasGit": {
+          "description": "Whether the root is a git repository.",
           "type": "boolean"
         },
         "stack": {
+          "description": "The stack: languages, frameworks, tools.",
           "$ref": "#/definitions/StackProfile"
         },
         "capabilities": {
+          "description": "The capabilities rules match against.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Capability"
           }
         },
         "dependencies": {
+          "description": "What the repository depends on.",
           "$ref": "#/definitions/DependencyProfile"
         },
         "documentation": {
+          "description": "What its documentation says.",
           "$ref": "#/definitions/DocumentationProfile"
         },
         "criteria": {
+          "description": "Its own criteria.",
           "$ref": "#/definitions/CriteriaProfile"
         },
         "understanding": {
+          "description": "What Debuggatha understands and what it does not.",
           "$ref": "#/definitions/UnderstandingProfile"
         }
       },
@@ -193,54 +221,64 @@
       "additionalProperties": false
     },
     "StackProfile": {
+      "description": "What Stack Detection read from the manifests: the languages, frameworks and tools in use.",
       "type": "object",
       "properties": {
         "languages": {
+          "description": "Languages in use.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackSignal"
           }
         },
         "frameworks": {
+          "description": "Frameworks in use.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackSignal"
           }
         },
         "buildSystems": {
+          "description": "Build systems (Cargo, Gradle, Vite...).",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackSignal"
           }
         },
         "packageManagers": {
+          "description": "Package managers (npm, pnpm, Composer...).",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackSignal"
           }
         },
         "runtimes": {
+          "description": "Runtimes the code targets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StackSignal"
           }
         },
         "platformTargets": {
+          "description": "The kinds of product the repository builds.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlatformTarget"
           }
         },
         "workspaceType": {
+          "description": "Single package or monorepo.",
           "$ref": "#/definitions/WorkspaceType"
         },
         "workspaceEvidence": {
+          "description": "Why the workspace type was chosen.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evidence"
           }
         },
         "manifests": {
+          "description": "The manifests that were read, relative to the root.",
           "type": "array",
           "items": {
             "type": "string"
@@ -261,12 +299,15 @@
       "additionalProperties": false
     },
     "StackSignal": {
+      "description": "A detected value (a language, a framework...) and the evidence for it.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "The value, such as `rust` or `react`.",
           "type": "string"
         },
         "evidence": {
+          "description": "Where it was seen; never empty.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evidence"
@@ -284,9 +325,11 @@
       "type": "object",
       "properties": {
         "file": {
+          "description": "The file the fact comes from, relative to the repository root.",
           "type": "string"
         },
         "detail": {
+          "description": "What the file says, in a sentence.",
           "type": "string"
         }
       },
@@ -297,6 +340,7 @@
       "additionalProperties": false
     },
     "PlatformTarget": {
+      "description": "What kind of product the repository builds.",
       "type": "string",
       "enum": [
         "desktop",
@@ -305,6 +349,7 @@
       ]
     },
     "WorkspaceType": {
+      "description": "How the repository is laid out.",
       "type": "string",
       "enum": [
         "single-package",
@@ -316,21 +361,26 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "Normalized identifier packs match on, such as `typescript`.",
           "type": "string"
         },
         "kind": {
+          "description": "Which group it belongs to.",
           "$ref": "#/definitions/CapabilityKind"
         },
         "confidence": {
+          "description": "How sure the detection is.",
           "$ref": "#/definitions/Confidence"
         },
         "evidence": {
+          "description": "What it was detected from; never empty.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evidence"
           }
         },
         "origin": {
+          "description": "The kind of source it came from.",
           "$ref": "#/definitions/CapabilityOrigin"
         }
       },
@@ -344,6 +394,7 @@
       "additionalProperties": false
     },
     "CapabilityKind": {
+      "description": "The group a [`Capability`] belongs to.",
       "type": "string",
       "enum": [
         "language",
@@ -354,6 +405,7 @@
       ]
     },
     "Confidence": {
+      "description": "How sure a detection is.",
       "type": "string",
       "enum": [
         "high",
@@ -362,6 +414,7 @@
       ]
     },
     "CapabilityOrigin": {
+      "description": "Where the evidence for a capability came from.",
       "type": "string",
       "enum": [
         "manifest",
@@ -371,21 +424,25 @@
       ]
     },
     "DependencyProfile": {
+      "description": "What the repository depends on.",
       "type": "object",
       "properties": {
         "lockfiles": {
+          "description": "Lockfiles found.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Evidence"
           }
         },
         "declaredVersions": {
+          "description": "Dependency versions as declared, by name.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "runtimeConstraints": {
+          "description": "Constraints on the runtime (an engines or rust-version field), by name.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -400,15 +457,18 @@
       "additionalProperties": false
     },
     "DocumentationProfile": {
+      "description": "What the repository's documentation says about its intent.",
       "type": "object",
       "properties": {
         "sources": {
+          "description": "The files that were read.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentationSource"
           }
         },
         "summary": {
+          "description": "A short summary of the intent they state.",
           "type": "string"
         }
       },
@@ -419,18 +479,23 @@
       "additionalProperties": false
     },
     "DocumentationSource": {
+      "description": "One documentation file that was read.",
       "type": "object",
       "properties": {
         "file": {
+          "description": "Path relative to the repository root.",
           "type": "string"
         },
         "kind": {
+          "description": "What kind of document it is.",
           "$ref": "#/definitions/DocumentationKind"
         },
         "title": {
+          "description": "Its first heading, when it has one.",
           "type": "string"
         },
         "wordCount": {
+          "description": "Length in words.",
           "type": "integer",
           "minimum": 0
         }
@@ -443,6 +508,7 @@
       "additionalProperties": false
     },
     "DocumentationKind": {
+      "description": "The kind of a documentation file.",
       "type": "string",
       "enum": [
         "readme",
@@ -456,15 +522,18 @@
       ]
     },
     "CriteriaProfile": {
+      "description": "The repository's own criteria, resolved from documentation, configuration and manifests.",
       "type": "object",
       "properties": {
         "rules": {
+          "description": "The criteria found.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CriteriaRule"
           }
         },
         "sources": {
+          "description": "The files they came from.",
           "type": "array",
           "items": {
             "type": "string"
@@ -478,15 +547,19 @@
       "additionalProperties": false
     },
     "CriteriaRule": {
+      "description": "A criterion the repository declares for its own code.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "Stable identifier.",
           "type": "string"
         },
         "description": {
+          "description": "The criterion in a sentence.",
           "type": "string"
         },
         "source": {
+          "description": "The file or document that states it.",
           "$ref": "#/definitions/Evidence"
         }
       },
@@ -498,12 +571,15 @@
       "additionalProperties": false
     },
     "UnderstandingProfile": {
+      "description": "How well Debuggatha understands the repository, and what it still does not.",
       "type": "object",
       "properties": {
         "confidence": {
+          "description": "Overall confidence in the understanding.",
           "$ref": "#/definitions/Confidence"
         },
         "openQuestions": {
+          "description": "The gaps that remain.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OpenQuestion"
@@ -517,12 +593,15 @@
       "additionalProperties": false
     },
     "OpenQuestion": {
+      "description": "A question Debuggatha raises because a concrete gap exists; it never invents an answer.",
       "type": "object",
       "properties": {
         "question": {
+          "description": "What is unknown.",
           "type": "string"
         },
         "reason": {
+          "description": "Why it matters to a review.",
           "type": "string"
         }
       },
@@ -533,9 +612,11 @@
       "additionalProperties": false
     },
     "PolicyReference": {
+      "description": "A review policy, by its deterministic id (ADR-0005).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The policy's id.",
           "type": "string"
         }
       },
@@ -545,12 +626,15 @@
       "additionalProperties": false
     },
     "PackReference": {
+      "description": "A pack, by id and exact version, so a finding stays citable after the pack updates (ADR-0002).",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The pack's namespaced id, such as `debuggatha/rust`.",
           "type": "string"
         },
         "version": {
+          "description": "The pack's semantic version.",
           "type": "string"
         }
       },
@@ -573,34 +657,43 @@
       ]
     },
     "ExecutionMetadata": {
+      "description": "Timing and outcome of a review.",
       "type": "object",
       "properties": {
         "source": {
+          "description": "What ran it.",
           "$ref": "#/definitions/ReviewSource"
         },
         "startedAt": {
+          "description": "When it started, ISO 8601.",
           "type": "string"
         },
         "completedAt": {
+          "description": "When it ended, ISO 8601.",
           "type": "string"
         },
         "durationMs": {
+          "description": "How long it took, in milliseconds.",
           "type": "integer",
           "minimum": 0
         },
         "error": {
+          "description": "The failure, when the review failed.",
           "type": "string"
         }
       },
       "additionalProperties": false
     },
     "ReviewSource": {
+      "description": "What ran a review.",
       "type": "object",
       "properties": {
         "kind": {
+          "description": "The kind of source.",
           "$ref": "#/definitions/SourceKind"
         },
         "name": {
+          "description": "Its name.",
           "type": "string"
         }
       },
@@ -611,6 +704,7 @@
       "additionalProperties": false
     },
     "SourceKind": {
+      "description": "What produced a piece of evidence.",
       "type": "string",
       "enum": [
         "ai-provider",

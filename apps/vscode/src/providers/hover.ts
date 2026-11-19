@@ -1,3 +1,9 @@
+/**
+ * The hover on a finding's underline.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { FindingIndex } from '../findings/index.js';
 import { hoverMarkdown } from '../findings/present.js';
@@ -6,6 +12,7 @@ import { hoverMarkdown } from '../findings/present.js';
 export class FindingHoverProvider implements vscode.HoverProvider {
   constructor(private readonly index: FindingIndex) {}
 
+  /** The hover for the findings at `position`, or `undefined` when there are none. */
   provideHover(document: vscode.TextDocument, position: vscode.Position): vscode.Hover | undefined {
     const here = this.index
       .onLine(document.uri.fsPath, position.line)

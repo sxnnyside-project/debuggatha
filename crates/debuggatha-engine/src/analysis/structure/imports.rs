@@ -17,6 +17,7 @@ use oxc_span::GetSpan;
 use crate::syntax::oxc::source_type;
 use crate::syntax::{Language, script_regions};
 
+/// How a file refers to another module.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ImportKind {
     /// `import x from`, `import 'x'`, `import x = require()` in a module.
@@ -31,12 +32,14 @@ pub enum ImportKind {
     TypeQuery,
 }
 
+/// One reference to a module made by a source file.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ImportRef {
     /// `None` when the specifier is computed.
     pub specifier: Option<String>,
     /// 1-based line of the statement or call.
     pub line: u32,
+    /// How the file refers to it.
     pub kind: ImportKind,
     /// `import type`, `export type`: erased at build, still a dependency of the source.
     pub type_only: bool,

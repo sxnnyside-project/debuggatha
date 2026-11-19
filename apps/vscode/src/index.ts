@@ -1,3 +1,9 @@
+/**
+ * Activation of the extension: wires the daemon, the views, the commands and the editor providers.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { registerLifecycleCommands } from './commands/lifecycle.js';
 import {
@@ -26,6 +32,7 @@ import { StatusBar } from './status/statusBar.js';
 let services: Services | undefined;
 let connection: DaemonConnection | undefined;
 
+/** Called by VS Code when the extension starts. */
 export function activate(context: vscode.ExtensionContext) {
   const output = vscode.window.createOutputChannel('Debuggatha');
   context.subscriptions.push(output);
@@ -166,6 +173,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
+/** Called by VS Code when the extension stops: a review still running is cancelled. */
 export async function deactivate() {
   // A review still running is stopped, along with any analyzer it started.
   services?.coordinator.cancel();

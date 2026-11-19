@@ -1,3 +1,5 @@
+//! `debuggatha findings`: list and change the findings the ledger tracks.
+
 use clap::Subcommand;
 use debuggatha_engine::core::env::SystemEnv;
 use debuggatha_engine::core::findings_ledger::{

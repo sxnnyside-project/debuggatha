@@ -1,11 +1,16 @@
+//! The registry of packs and skills a review resolves against.
+
 use std::collections::{HashMap, HashSet};
 
 use super::pack::{PackDependency, PackKind, ReviewPack, SkillDescriptor, SkillTier};
 use super::semver::{compare_versions, satisfies_range};
 
+/// The packs a request resolved to, and the dependencies that could not be met.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ResolvedDependencies {
+    /// Every pack needed, dependencies first.
     pub resolved: Vec<ReviewPack>,
+    /// Dependencies no registered pack or skill satisfies.
     pub missing: Vec<PackDependency>,
 }
 
@@ -20,6 +25,7 @@ pub struct CapabilityRegistry {
 }
 
 impl CapabilityRegistry {
+    /// A registry with these packs and skills.
     #[must_use]
     pub fn new(packs: Vec<ReviewPack>, skills: Vec<SkillDescriptor>) -> Self {
         let mut registry = Self::default();
@@ -50,11 +56,13 @@ impl CapabilityRegistry {
         }
     }
 
+    /// Register a skill, replacing one with the same id.
     pub fn register_skill(&mut self, skill: SkillDescriptor) {
         self.skill_ids.insert(skill.id.clone());
         self.all_skills.push(skill);
     }
 
+    /// The skills, of one tier or all of them.
     #[must_use]
     pub fn list_skills(&self, tier: Option<SkillTier>) -> Vec<&SkillDescriptor> {
         self.all_skills
@@ -63,6 +71,7 @@ impl CapabilityRegistry {
             .collect()
     }
 
+    /// The packs, of one kind or all of them.
     #[must_use]
     pub fn list_packs(&self, kind: Option<PackKind>) -> Vec<&ReviewPack> {
         self.all_packs

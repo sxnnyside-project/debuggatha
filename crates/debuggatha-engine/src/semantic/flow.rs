@@ -11,10 +11,13 @@ use crate::syntax::{Language, Span};
 /// analysis does not know which assignment reaches the use.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Certainty {
+    /// The flow goes through a name assigned more than once.
     Uncertain,
+    /// The flow does not.
     Certain,
 }
 
+/// Whether untrusted input reaches a span, within one file.
 pub struct Flow<'m> {
     model: &'m Model,
     sources: Vec<Span>,
@@ -28,6 +31,7 @@ fn within(outer: Span, inner: Span) -> bool {
 }
 
 impl<'m> Flow<'m> {
+    /// The flow of untrusted input through `model`, to a fixed point.
     #[must_use]
     pub fn new(model: &'m Model, table: &Concepts, language: Language) -> Self {
         let is = |concept: &str, text: &str| table.is(concept, language, text);

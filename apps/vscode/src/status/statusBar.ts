@@ -1,3 +1,9 @@
+/**
+ * The status bar item: the open findings, a review running, or an error.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 
 type State =
@@ -21,6 +27,7 @@ export class StatusBar {
     this.item.show();
   }
 
+  /** Shows that a review is running. */
   reviewing(origin: 'manual' | 'save'): void {
     this.set({ kind: 'reviewing', origin });
   }
@@ -36,6 +43,7 @@ export class StatusBar {
     this.set({ kind: 'findings', count: this.lastCount });
   }
 
+  /** Shows that a review failed, with `message`. */
   failed(message: string): void {
     this.set({ kind: 'error', message });
   }

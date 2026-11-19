@@ -3,7 +3,7 @@
 //! the Rust ledger, and every fingerprint and every step must equal what the TypeScript ledger did
 //! (`corpus/golden/ts-ledger`). Nothing to fetch: both are committed.
 //!
-//! The five steps are the ones `scripts/parity/gen-ledger-golden.ts` runs: a first review; a second with
+//! The five steps are the ones `scripts/parity/gen-ledger-golden.ts` at tag `ts-engine-final` runs: a first review; a second with
 //! every fifth finding gone and every seventh one's excerpt edited; a person dismisses the first
 //! open entry; everything comes back; and nothing is left in the first file.
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::panic)] // a failed expect is a failed test

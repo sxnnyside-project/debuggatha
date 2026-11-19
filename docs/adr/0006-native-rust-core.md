@@ -1,6 +1,6 @@
 # 0006. Debuggatha's core is a native Rust engine; the CLI is the single engine; adapters are clients
 
-Status: Accepted (2026-11-10), after the phase 0.3 spikes. The migration follows [ROADMAP.md](../ROADMAP.md); until its cutover gate, the TypeScript engine remains the shipped engine (decision 8).
+Status: Accepted (2026-11-10), after the phase 0.3 spikes. The migration is done: the TypeScript engine is frozen in the git history (tag `ts-engine-final`) and [PARITY.md](../PARITY.md) lists every intended difference from it.
 
 ## Context
 

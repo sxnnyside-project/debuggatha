@@ -9,14 +9,21 @@ use serde::Serialize;
 use super::workspace::{ANALYZED_EXTENSIONS, Workspace, join};
 use crate::analysis::ecosystem::Ecosystems;
 
+/// What kind of unit a module boundary is.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ModuleKind {
+    /// A package declared by a manifest.
     Package,
+    /// A workspace root.
     Workspace,
+    /// A feature folder.
     Feature,
+    /// A domain folder.
     Domain,
+    /// An adapter folder.
     Adapter,
+    /// A layer folder.
     Layer,
 }
 
@@ -48,16 +55,20 @@ pub enum Manifest {
     Bundler,
     /// `Package.swift`.
     SwiftPm,
+    /// No manifest backs it.
     None,
 }
 
+/// A unit of the repository the rest of the analysis talks about.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ModuleBoundary {
     /// The directory, relative to the root: the id the graph uses.
     pub id: String,
+    /// What kind of unit it is.
     pub kind: ModuleKind,
     /// The declared package name, if a manifest backs the boundary.
     pub name: Option<String>,
+    /// The manifest that declares it.
     pub manifest: Manifest,
     /// The analyzed files it owns, sorted.
     pub files: Vec<String>,
@@ -129,6 +140,7 @@ pub(in crate::analysis) fn manifest_of(ecosystem: &str) -> Manifest {
 /// The result: boundaries plus what the inference could not do.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct Boundaries {
+    /// The boundaries found.
     pub list: Vec<ModuleBoundary>,
     /// Constructs the inference does not read, stated so a report can say so.
     pub limits: Vec<String>,

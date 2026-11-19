@@ -2,6 +2,7 @@
 
 use std::time::{SystemTime, UNIX_EPOCH};
 
+/// The clock and the id source of the domain, so tests can fix both.
 pub trait Env {
     /// An ISO 8601 UTC timestamp with millisecond precision, like JavaScript's `toISOString()`.
     fn now(&self) -> String;
@@ -9,6 +10,7 @@ pub trait Env {
     fn new_id(&self) -> String;
 }
 
+/// The real clock and UUID v4 identifiers.
 pub struct SystemEnv;
 
 impl Env for SystemEnv {

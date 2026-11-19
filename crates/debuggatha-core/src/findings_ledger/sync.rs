@@ -1,3 +1,5 @@
+//! Synchronizes a review's findings into the ledger, within the scope the review covered.
+
 use std::collections::{HashMap, HashSet};
 
 use serde::Serialize;
@@ -12,9 +14,12 @@ use super::matching::{MatchOutcome, default_finding_matcher};
 use crate::env::Env;
 use crate::review_engine::ReviewResult;
 
+/// What a review covered; entries outside it are left alone.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum SyncScope {
+    /// The whole repository.
     Workspace,
+    /// These files only.
     Files(Vec<String>),
 }
 
@@ -27,13 +32,19 @@ impl SyncScope {
     }
 }
 
+/// What synchronizing a review into the ledger changed.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SyncReport {
+    /// Entries created for findings seen for the first time.
     pub new_entry_ids: Vec<String>,
+    /// Entries whose finding is the same as before.
     pub unchanged_entry_ids: Vec<String>,
+    /// Entries whose finding is the same but whose flagged code changed.
     pub changed_entry_ids: Vec<String>,
+    /// Entries resolved because the finding is no longer detected within the scope.
     pub auto_resolved_entry_ids: Vec<String>,
+    /// Resolved entries whose finding came back.
     pub reopened_entry_ids: Vec<String>,
 }
 

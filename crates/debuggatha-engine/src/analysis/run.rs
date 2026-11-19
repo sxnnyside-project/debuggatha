@@ -28,21 +28,34 @@ use crate::syntax::{Backend, Language};
 /// Files of a language no stage reads, and what is missing for them.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct NotCovered {
+    /// The language.
     pub language: &'static str,
+    /// How many files of it were found.
     pub files: usize,
+    /// What is missing to read them.
     pub what: &'static str,
 }
 
+/// Every stage of the analysis over a workspace.
 #[derive(Debug)]
 pub struct Analysis {
+    /// The modules.
     pub boundaries: Boundaries,
+    /// How they depend on each other.
     pub graph: DependencyGraph,
+    /// The layer each module sits in.
     pub layers: LayerModel,
+    /// Dependencies that go against the layers.
     pub layer_violations: Vec<LayerViolation>,
+    /// Cyclic dependencies.
     pub cycles: Vec<DependencyCycle>,
+    /// Who owns each module.
     pub ownership: Vec<OwnershipSignal>,
+    /// What each module exposes.
     pub public_api: Vec<PublicApiSurface>,
+    /// Code nothing reads.
     pub dead_code: Vec<DeadCodeFinding>,
+    /// What the analysis could not read.
     pub not_covered: Vec<NotCovered>,
 }
 

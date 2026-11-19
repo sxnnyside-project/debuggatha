@@ -1,6 +1,6 @@
 # 0001. `core/knowledge-system` owns the Pack and Policy domain logic
 
-Status: Accepted
+Status: Accepted. Since ADR-0006 the packages named here are the modules `knowledge_system`, `review_engine` and `repository_intelligence` of `debuggatha-core`; the decision stands.
 
 ## Context
 

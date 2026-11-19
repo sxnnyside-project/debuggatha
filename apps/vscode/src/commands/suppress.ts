@@ -1,3 +1,9 @@
+/**
+ * The command that accepts a finding in the code itself, with a reason.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { canSuppressInline, suppressionEdit } from '../findings/present.js';
 import type { Services } from '../services.js';

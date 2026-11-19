@@ -1,3 +1,5 @@
+//! How a review is printed: text, json, sarif, github, markdown and gitlab.
+
 pub(crate) mod formats;
 
 use debuggatha_engine::analyzers::{AnalyzerRun, Status};

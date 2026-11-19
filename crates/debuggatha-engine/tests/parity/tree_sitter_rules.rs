@@ -1,5 +1,5 @@
 //! The rules of the tree-sitter languages against the TypeScript regex
-//! detectors (`scripts/parity/gen-group-c-fixtures.ts`). Cases marked "same" must give exactly what the
+//! detectors (`scripts/parity/gen-group-c-fixtures.ts` at tag `ts-engine-final`). Cases marked "same" must give exactly what the
 //! regex gave: rule, line, columns, confidence and edit. Cases that carry `rust` are the ones where
 //! the tree is right and the regex wrong; each states why and what Rust must report instead.
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test
@@ -117,4 +117,14 @@ fn where_the_regex_was_wrong_the_tree_reports_what_the_case_states() {
         );
     }
     assert!(bad.is_empty(), "{}", bad.join("\n"));
+}
+
+#[test]
+fn a_comment_between_the_test_attribute_and_its_module_does_not_make_it_production_code() {
+    let source = "#[cfg(test)]\n// a failed expect is a failed test\n#[allow(clippy::expect_used)]\nmod tests {\n    fn f() { value.unwrap(); }\n}\nfn g() { value.unwrap(); }\n";
+    let lines: Vec<u32> = run("src/lib.rs", source)
+        .iter()
+        .map(|(_, hit)| hit.line)
+        .collect();
+    assert_eq!(lines, [7]);
 }

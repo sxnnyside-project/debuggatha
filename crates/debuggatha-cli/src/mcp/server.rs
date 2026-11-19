@@ -288,7 +288,7 @@ impl<'a> Server<'a> {
                 let mut input = (t.input)();
                 input["properties"]["rootDir"] = json!({
                     "type": "string",
-                    "description": "Absolute path of the repository, when it is not the one this server was started in. It must be one the person allowed (--allow-root) or one the client shares as a root.",
+                    "description": "Absolute path of another repository the person allowed (--allow-root) or the client shares as a root. Omit it for the server's own.",
                 });
                 json!({
                     "name": t.name, "title": t.title, "description": t.description,
@@ -373,7 +373,7 @@ impl<'a> Server<'a> {
         call: &str,
     ) -> Value {
         let request_id = format!("m-{}", self.next.fetch_add(1, Ordering::Relaxed) + 1);
-        let waiting = self.pending.expect(&request_id);
+        let waiting = self.pending.await_response(&request_id);
         let emit = self.emitter(at);
         let state = params["requestState"].as_str();
         if let Some(key) = state {

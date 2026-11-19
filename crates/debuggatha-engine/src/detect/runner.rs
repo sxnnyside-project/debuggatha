@@ -52,6 +52,7 @@ pub struct Registry {
 }
 
 impl Registry {
+    /// A registry with no detectors.
     #[must_use]
     pub fn new() -> Self {
         Self::default()
@@ -135,8 +136,11 @@ pub enum NotAnalyzed {
 /// and the files syntax detectors could not read (so a review never calls them clean).
 #[derive(Debug)]
 pub struct Run {
+    /// What the detectors found, after inline suppression.
     pub findings: Vec<Finding>,
+    /// What inline directives hid.
     pub suppressed: Vec<InlineSuppression>,
+    /// Files a syntax rule could not read, by path.
     pub not_analyzed: BTreeMap<String, NotAnalyzed>,
     /// What the parser made of each unit, in input order (see [`Run::coverage`]).
     pub files: Vec<ReviewedFile>,

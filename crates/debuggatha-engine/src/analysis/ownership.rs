@@ -9,21 +9,28 @@ use serde::Serialize;
 use super::structure::boundaries::ModuleBoundary;
 use super::structure::workspace::{CODEOWNERS_PLACES, Workspace};
 
+/// Where the owners of a module come from.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum OwnershipSource {
+    /// A `CODEOWNERS` file.
     Codeowners,
+    /// Nowhere: no rule covers the module's files.
     Unknown,
 }
 
+/// Who owns a module, from `CODEOWNERS` only.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct OwnershipSignal {
+    /// The module's id.
     pub module_id: String,
     /// The owners of the module's files, in the order the rules name them.
     pub owners: Vec<String>,
+    /// Where the owners come from.
     pub source: OwnershipSource,
     /// Files of the module with at least one owner, and all its files.
     pub owned_files: usize,
+    /// How many files the module has.
     pub total_files: usize,
     /// Every file of the module has the same owners.
     pub uniform: bool,

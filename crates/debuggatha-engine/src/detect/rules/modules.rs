@@ -40,7 +40,9 @@ const EXTENSIONS: &[&str] = &["ts", "tsx", "mts", "cts", "js", "jsx", "mjs", "cj
 /// What an import or export names.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ExportName<'n> {
+    /// A name the module exports.
     Named(&'n str),
+    /// The module's default export.
     Default,
 }
 

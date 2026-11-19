@@ -1,3 +1,5 @@
+//! Builds the immutable `RepositoryContext` snapshot.
+
 use std::path::Path;
 
 use super::cache::{

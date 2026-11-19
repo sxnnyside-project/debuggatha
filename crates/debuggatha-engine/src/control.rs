@@ -10,10 +10,12 @@ use std::sync::atomic::{AtomicBool, Ordering};
 pub struct Cancel(Arc<AtomicBool>);
 
 impl Cancel {
+    /// Ask the work to stop.
     pub fn cancel(&self) {
         self.0.store(true, Ordering::SeqCst);
     }
 
+    /// Whether a stop was asked.
     #[must_use]
     pub fn is_cancelled(&self) -> bool {
         self.0.load(Ordering::SeqCst)
@@ -23,14 +25,20 @@ impl Cancel {
 /// The steps of a review, in order (`PROTOCOL.md`, section 8).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Stage {
+    /// Understanding the repository and assembling the policy.
     Orient,
+    /// Running the detectors.
     Detect,
+    /// Running the external analyzers.
     Analyzers,
+    /// The optional model pass.
     Semantic,
+    /// Recording findings in the ledger.
     Sync,
 }
 
 impl Stage {
+    /// The name used in progress messages.
     #[must_use]
     pub const fn name(self) -> &'static str {
         match self {
@@ -59,6 +67,7 @@ impl Control {
         Self::default()
     }
 
+    /// A control that `cancel` can stop.
     #[must_use]
     pub fn new(cancel: Cancel) -> Self {
         Self {
@@ -77,16 +86,19 @@ impl Control {
         self
     }
 
+    /// Whether a stop was asked.
     #[must_use]
     pub fn cancelled(&self) -> bool {
         self.cancel.is_cancelled()
     }
 
+    /// The token that asks the work to stop.
     #[must_use]
     pub fn token(&self) -> &Cancel {
         &self.cancel
     }
 
+    /// Tell the listener how far `stage` has got; does nothing without one.
     pub fn report(&self, stage: Stage, done: usize, total: usize, message: &str) {
         if let Some(listener) = &self.listener {
             let count = |n: usize| u32::try_from(n).unwrap_or(u32::MAX);

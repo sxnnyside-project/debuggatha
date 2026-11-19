@@ -1,19 +1,30 @@
+/**
+ * Virtual documents that show one finding in full.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { Finding } from '../contracts/index.js';
 
+/** Shows a finding in a read-only document. */
 export class FindingDocProvider implements vscode.TextDocumentContentProvider {
+  /** The URI scheme of those documents. */
   static scheme = 'debuggatha-finding';
 
   private _onDidChange = new vscode.EventEmitter<vscode.Uri>();
+  /** Fires when the content of a document changed. */
   readonly onDidChange = this._onDidChange.event;
 
   private findingsMap = new Map<string, Finding>();
 
+  /** Remembers the finding that `uri` shows. */
   public registerFinding(finding: Finding): vscode.Uri {
     this.findingsMap.set(finding.id, finding);
     return vscode.Uri.parse(`${FindingDocProvider.scheme}:${finding.id}.md`);
   }
 
+  /** The Markdown of the finding the document shows. */
   provideTextDocumentContent(uri: vscode.Uri): string {
     const id = uri.path.replace('.md', '');
     const finding = this.findingsMap.get(id);

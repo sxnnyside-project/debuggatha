@@ -31,7 +31,12 @@ pub enum Origin {
     /// Declared or bound in this file; the local name when there is one.
     Local(Option<String>),
     /// `export { imported as name } from 'source'` (`imported` is `*` for `export * as name`).
-    From { source: String, imported: String },
+    From {
+        /// The module it is re-exported from.
+        source: String,
+        /// The name there; `*` for `export * as name`.
+        imported: String,
+    },
 }
 
 /// How a name is exported.
@@ -46,17 +51,24 @@ pub enum ExportForm {
     ReExport,
     /// `export * as ns from 'm'`.
     Namespace,
+    /// `export default`.
     Default,
     /// Carried by `export * from 'm'` (only in a public surface).
     Star,
 }
 
+/// One exported name.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ExportEntry {
+    /// How it is exported.
     pub form: ExportForm,
+    /// The name.
     pub name: String,
+    /// The line.
     pub line: u32,
+    /// Where it comes from.
     pub origin: Origin,
+    /// Whether only the type is exported.
     pub type_only: bool,
     /// Something in the file other than the export itself reads the declaration.
     pub used_here: bool,
@@ -65,43 +77,58 @@ pub struct ExportEntry {
 /// `export * from 'source'`: every name the source exports, but its default.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct StarExport {
+    /// The module it re-exports.
     pub source: String,
+    /// The line.
     pub line: u32,
 }
 
 /// How a file uses `import * as ns`.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct NamespaceUse {
+    /// The members the file reads.
     pub members: BTreeSet<String>,
     /// The namespace is passed around, spread, destructured or exported: every name may be used.
     pub escapes: bool,
 }
 
+/// What a file imports from one module.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct ImportFact {
+    /// The module.
     pub source: String,
+    /// The line.
     pub line: u32,
     /// Names taken from the source (`default` for the default import).
     pub names: Vec<String>,
+    /// How the file uses the namespace when it imports `* as ns`.
     pub namespace: Option<NamespaceUse>,
 }
 
 /// A top-level declaration that nothing in its file reads and that is not exported.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Unreferenced {
+    /// The declaration's name.
     pub name: String,
+    /// The line.
     pub line: u32,
+    /// What it is (function, class, variable...).
     pub kind: &'static str,
 }
 
+/// What one JavaScript or TypeScript file exports, imports and leaves unread.
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct FileFacts {
     /// Has an `import` or `export`: a script's top-level names are global, so another file may
     /// read them.
     pub is_module: bool,
+    /// Exported names.
     pub exports: Vec<ExportEntry>,
+    /// `export *` statements.
     pub stars: Vec<StarExport>,
+    /// Imports.
     pub imports: Vec<ImportFact>,
+    /// Top-level declarations nothing reads.
     pub unreferenced: Vec<Unreferenced>,
 }
 
@@ -603,7 +630,9 @@ pub fn read_all(ws: &crate::analysis::structure::workspace::Workspace) -> Facts 
 
 /// Follows `export { x } from` and `export *` from file to file, to where a name is declared.
 pub struct ExportGraph<'a> {
+    /// The facts of every file.
     pub facts: &'a Facts,
+    /// The resolver that turns specifiers into files.
     pub resolver: &'a crate::analysis::structure::resolve::Resolver<'a>,
 }
 

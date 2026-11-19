@@ -117,6 +117,7 @@ fn clippy_command(context: &RunContext<'_>) -> Invocation {
     }
 }
 
+/// Clippy, the Rust linter; it compiles the project, so it runs project code.
 pub static CLIPPY: Adapter = Adapter {
     id: "clippy",
     name: "Clippy",

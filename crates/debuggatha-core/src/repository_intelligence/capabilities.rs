@@ -1,3 +1,5 @@
+//! Derives the additive capability set rules match against.
+
 use indexmap::IndexMap;
 use serde_json::Value;
 

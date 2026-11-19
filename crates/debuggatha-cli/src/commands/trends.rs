@@ -1,3 +1,5 @@
+//! `debuggatha trends`: how the repository's findings change over time.
+
 use std::collections::BTreeMap;
 
 use clap::Args as ClapArgs;

@@ -1,3 +1,5 @@
+//! The lifecycle of a memory item and the moves it allows.
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -5,16 +7,24 @@ use serde::{Deserialize, Serialize};
     Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
 )]
 #[serde(rename_all = "lowercase")]
+/// Where a memory item is in its lifecycle; only `active` items filter findings.
 pub enum MemoryStatus {
+    /// Raised by a detector.
     Detected,
+    /// Proposed to a person.
     Suggested,
+    /// A person confirmed it.
     Confirmed,
+    /// In force: the only status that filters findings.
     Active,
+    /// No longer applies; kept for the record.
     Deprecated,
+    /// Closed and kept out of the way.
     Archived,
 }
 
 impl MemoryStatus {
+    /// Every status, in lifecycle order.
     pub const ALL: [MemoryStatus; 6] = [
         Self::Detected,
         Self::Suggested,
@@ -24,6 +34,7 @@ impl MemoryStatus {
         Self::Archived,
     ];
 
+    /// The name used in reports and files.
     #[must_use]
     pub fn as_str(self) -> &'static str {
         match self {

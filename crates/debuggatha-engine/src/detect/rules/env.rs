@@ -174,8 +174,11 @@ fn is_ambient(name: &str) -> bool {
 /// One read of an environment variable in code.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct EnvRead {
+    /// The variable's name.
     pub name: String,
+    /// Where the read starts in the file, as a byte offset.
     pub start: usize,
+    /// Where the read ends, as a byte offset.
     pub end: usize,
     /// The code handles the variable being absent: a default value, or a test for presence. The
     /// program starts without it, so leaving it undocumented costs less.

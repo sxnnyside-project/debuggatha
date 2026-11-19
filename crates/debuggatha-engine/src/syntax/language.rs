@@ -5,39 +5,63 @@ use std::path::Path;
 /// A language the engine can parse.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum Language {
+    /// JavaScript.
     JavaScript,
+    /// JSX.
     Jsx,
+    /// TypeScript.
     TypeScript,
+    /// TSX.
     Tsx,
+    /// Rust.
     Rust,
+    /// Python.
     Python,
+    /// Go.
     Go,
+    /// PHP.
     Php,
+    /// Java.
     Java,
+    /// C#.
     CSharp,
+    /// Ruby.
     Ruby,
+    /// Kotlin.
     Kotlin,
+    /// Swift.
     Swift,
+    /// Dart.
     Dart,
+    /// Elixir.
     Elixir,
+    /// C and C++.
     Cpp,
+    /// `GDScript`.
     GdScript,
+    /// HTML.
     Html,
+    /// Vue single-file components.
     Vue,
+    /// Svelte components.
     Svelte,
+    /// Astro components.
     Astro,
 }
 
 /// Who parses a language: oxc for the JavaScript/TypeScript family, tree-sitter for the rest.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Backend {
+    /// oxc.
     Oxc,
+    /// tree-sitter.
     TreeSitter,
     /// A single-file component: its script blocks go to oxc (`sfc.rs`).
     Sfc,
 }
 
 impl Language {
+    /// Every language, in a fixed order.
     pub const ALL: [Self; 21] = [
         Self::JavaScript,
         Self::Jsx,
@@ -90,6 +114,7 @@ impl Language {
         }
     }
 
+    /// Who parses the language.
     #[must_use]
     pub const fn backend(self) -> Backend {
         match self {

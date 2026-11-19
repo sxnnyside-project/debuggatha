@@ -1,28 +1,35 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ReviewRequest",
+  "description": "What a review is asked to cover.",
   "type": "object",
   "properties": {
     "id": {
+      "description": "Stable identifier of the request.",
       "type": "string"
     },
     "scope": {
+      "description": "What to review.",
       "$ref": "#/definitions/ReviewScope"
     },
     "depth": {
+      "description": "How much to do.",
       "$ref": "#/definitions/ReviewDepth"
     },
     "requestedAt": {
+      "description": "When it was requested, ISO 8601.",
       "type": "string",
       "format": "date-time"
     },
     "requestedPackIds": {
+      "description": "Packs to add on top of the detected ones.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "requestedPolicyId": {
+      "description": "A policy id a previous review reported.",
       "type": "string"
     }
   },
@@ -46,6 +53,7 @@
               "const": "diff"
             },
             "base": {
+              "description": "The base to diff against.",
               "type": "string"
             }
           },
@@ -55,6 +63,7 @@
           "additionalProperties": false
         },
         {
+          "description": "A list of files.",
           "type": "object",
           "properties": {
             "kind": {
@@ -77,6 +86,7 @@
           "additionalProperties": false
         },
         {
+          "description": "The whole repository.",
           "type": "object",
           "properties": {
             "kind": {
@@ -92,6 +102,7 @@
       ]
     },
     "ReviewDepth": {
+      "description": "How much a review does.",
       "type": "string",
       "enum": [
         "quick",

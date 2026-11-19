@@ -16,40 +16,61 @@ use crate::analysis::ecosystem::{Dependency, Ecosystems};
 use crate::semantic::model_of;
 use crate::syntax::{Language, parse};
 
+/// How one module comes to depend on another.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum EdgeKind {
+    /// Its manifest names the other.
     Declared,
+    /// Its files import the other.
     Import,
 }
 
+/// Where a dependency is seen.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Evidence {
+    /// The file.
     pub file: String,
+    /// What it says.
     pub detail: String,
+    /// The line, when there is one.
     pub line: Option<u32>,
 }
 
+/// One module depending on another.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct DependencyEdge {
+    /// The depending module's id.
     pub from: String,
+    /// The module depended on.
     pub to: String,
+    /// How the dependency is seen.
     pub kind: EdgeKind,
+    /// Where it is seen.
     pub evidence: Vec<Evidence>,
 }
 
+/// An import the analysis could not follow.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct UnresolvedImport {
+    /// The file with the import.
     pub file: String,
+    /// The line.
     pub line: u32,
+    /// What the import names; `None` when it is computed.
     pub specifier: Option<String>,
+    /// Why it could not be followed.
     pub reason: &'static str,
 }
 
+/// The dependency graph between modules.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 pub struct DependencyGraph {
+    /// The modules' ids.
     pub nodes: Vec<String>,
+    /// The dependencies.
     pub edges: Vec<DependencyEdge>,
+    /// The imports that resolved to nothing.
     pub unresolved: Vec<UnresolvedImport>,
     /// Files whose imports could not be read (a fatal parse error): nothing is concluded about them.
     pub unread_files: Vec<String>,

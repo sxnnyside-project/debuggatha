@@ -1,3 +1,9 @@
+/**
+ * Paths as the daemon names files.
+ *
+ * @packageDocumentation
+ */
+
 import { isAbsolute, relative, sep } from 'node:path';
 
 /**

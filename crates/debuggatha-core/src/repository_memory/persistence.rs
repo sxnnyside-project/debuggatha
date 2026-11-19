@@ -22,6 +22,7 @@ pub fn deserialize_memory_store(json: &str) -> Result<MemoryStore, StoreError> {
     deserialize_store(json, WHAT, CURRENT_SCHEMA_VERSION)
 }
 
+/// Where the memory of the repository at `repository_root` is stored.
 #[must_use]
 pub fn memory_file_path(repository_root: &Path) -> PathBuf {
     repository_root.join(".debuggatha").join("memory.json")

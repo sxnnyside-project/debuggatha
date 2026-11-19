@@ -1,6 +1,6 @@
 //! Differential tests against the TypeScript repository intelligence (ADR-0006, decision 8).
 //!
-//! `tests/fixtures/intelligence-conformance.json` is written by `scripts/parity/gen-intelligence-fixtures.ts`:
+//! `tests/fixtures/intelligence-conformance.json` is written by `scripts/parity/gen-intelligence-fixtures.ts` at tag `ts-engine-final`:
 //! small repositories built on disk, scanned by the TypeScript code. Each case is rebuilt here in a
 //! temporary directory and must give the same context (root path and build time are normalized).
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::panic)] // a failed expect is a failed test

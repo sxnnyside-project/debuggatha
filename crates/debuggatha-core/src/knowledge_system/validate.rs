@@ -1,12 +1,16 @@
+//! Checks a pack against the Review Pack specification.
+
 use std::collections::HashSet;
 use std::fmt;
 
 use super::pack::{PackDependency, ReviewPack};
 use crate::js::js_trim;
 
+/// A pack that does not meet the Review Pack specification.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PackValidationError {
     pack_id: String,
+    /// What is wrong, one entry per problem.
     pub issues: Vec<String>,
 }
 

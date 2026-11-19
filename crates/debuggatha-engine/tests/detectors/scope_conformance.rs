@@ -1,4 +1,4 @@
-//! The scan scope predicates against the TypeScript (`scripts/parity/gen-scope-fixtures.ts`).
+//! The scan scope predicates against the TypeScript (`scripts/parity/gen-scope-fixtures.ts` at tag `ts-engine-final`).
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test
 
 use debuggatha_engine::scan_scope::{is_generated_content, is_ignored_path, is_test_path};

@@ -1,4 +1,4 @@
-//! The Rust syntax layer against the TypeScript line lexer (`scripts/parity/gen-syntax-fixtures.ts`).
+//! The Rust syntax layer against the TypeScript line lexer (`scripts/parity/gen-syntax-fixtures.ts` at tag `ts-engine-final`).
 //! Cases marked "same" must produce the identical masked text; cases marked "differs" are the ones
 //! where the lexer is wrong and the parse is right, and the expected Rust text is stated here.
 #![allow(clippy::expect_used, clippy::unwrap_used)] // a failed expect is a failed test

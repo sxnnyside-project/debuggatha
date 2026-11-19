@@ -1,12 +1,20 @@
+/**
+ * Findings as VS Code diagnostics: the underlines and the Problems panel.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { Severity } from '../contracts/index.js';
 import type { FindingIndex, IndexedFinding } from '../findings/index.js';
 import { provenanceOf, ruleOf } from '../findings/present.js';
 
+/** The name VS Code shows beside each diagnostic. */
 export const DIAGNOSTIC_SOURCE = 'Debuggatha';
 
 let diagnosticCollection: vscode.DiagnosticCollection;
 
+/** Creates the diagnostic collection and ties it to the extension's lifetime. */
 export function initializeDiagnostics(context: vscode.ExtensionContext) {
   diagnosticCollection = vscode.languages.createDiagnosticCollection('debuggatha');
   context.subscriptions.push(diagnosticCollection);
@@ -31,6 +39,7 @@ function codeOf(indexed: IndexedFinding): string | { value: string; target: vsco
   return value;
 }
 
+/** The diagnostic of a finding: its range, severity, rule code and message. */
 export function toDiagnostic(indexed: IndexedFinding): vscode.Diagnostic {
   const { span } = indexed;
   const range = new vscode.Range(span.line, span.startChar, span.line, span.endChar ?? 1_000_000);
@@ -49,6 +58,7 @@ export function updateDiagnostics(index: FindingIndex) {
   }
 }
 
+/** Removes every diagnostic. */
 export function clearDiagnostics() {
   if (diagnosticCollection) {
     diagnosticCollection.clear();

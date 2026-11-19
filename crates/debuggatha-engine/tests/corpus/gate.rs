@@ -1,6 +1,6 @@
 //! Detector gate: every detector group together, through the default registry and the golden
 //! policy of each repository, against the 7,736 findings the TypeScript engine reported on the
-//! corpus (`corpus/golden/ts-findings`). Opt-in: needs the clones (`node scripts/parity/fetch-corpus.mjs`).
+//! corpus (`corpus/golden/ts-findings`). Opt-in: needs the clones (`scripts/fetch-corpus.sh`).
 //! Run: `DEBUGGATHA_CORPUS_DIR=<dir> cargo test -p debuggatha-engine --test corpus --release -- gate:: --ignored --nocapture`
 //!
 //! A finding is compared whole (title, explanation, severity, confidence, category, locations,
@@ -142,7 +142,7 @@ fn every_detector_together_against_the_golden_findings() {
         // a broken corpus, not a divergence: stop here.
         assert!(
             repo.join(".git").is_dir() && repo.read_dir().unwrap().count() > 1,
-            "{name} is missing or empty: node scripts/parity/fetch-corpus.mjs <dir>"
+            "{name} is missing or empty: scripts/fetch-corpus.sh <dir>"
         );
         repos += 1;
         let (policy, golden_findings) = golden(&name);

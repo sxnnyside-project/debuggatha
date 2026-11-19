@@ -1,3 +1,5 @@
+//! Reads the SARIF output many analyzers print.
+
 use std::path::Path;
 
 use debuggatha_core::review_engine::Severity;
@@ -6,11 +8,14 @@ use serde_json::Value;
 use super::paths::to_repository_path;
 use super::types::AnalyzerFinding;
 
+/// How to read a tool's SARIF output into findings.
 pub struct SarifOptions {
+    /// Maps the tool's rule id to a finding category.
     pub category: fn(&str) -> &'static str,
     /// Severity from SARIF's `level` when the tool gives none of its own; `None` maps the level
     /// with [`severity_from_level`].
     pub severity: Option<fn(Option<&str>) -> Severity>,
+    /// The tool's findings may include secrets, so their excerpts are never copied.
     pub sensitive: bool,
 }
 

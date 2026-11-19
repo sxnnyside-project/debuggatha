@@ -1,3 +1,5 @@
+//! What a detector is given: one file, its parse and what the other files say.
+
 use std::collections::BTreeSet;
 use std::path::Path;
 
@@ -10,7 +12,9 @@ use crate::syntax::{FileSyntax, SyntaxFacts, mask_source, parse};
 /// handed detectors the added lines alone and parsed fragments; see `docs/PARITY.md`.)
 #[derive(Debug, Clone)]
 pub struct SourceUnit {
+    /// Path relative to the repository root.
     pub file: String,
+    /// The file's text.
     pub content: String,
     /// 1-based lines of the file a diff added. `None` reviews the whole file.
     pub changed_lines: Option<BTreeSet<u32>>,
@@ -23,12 +27,15 @@ pub struct SourceUnit {
 pub struct RepoFile {
     /// Path relative to the repository root, with `/` separators.
     pub path: String,
+    /// The file's text.
     pub content: String,
 }
 
 /// What a detector sees of one file.
 pub struct DetectorInput<'a> {
+    /// Path relative to the repository root.
     pub file: &'a str,
+    /// The file's text.
     pub content: &'a str,
     /// `content` with comments and string contents blanked, same layout: what is left is code.
     /// Equal to `content` for a language with no parser.
@@ -46,6 +53,7 @@ pub struct DetectorInput<'a> {
 }
 
 impl<'a> DetectorInput<'a> {
+    /// The input for one file; the other facts are added with `with_modules` and `with_env_docs`.
     #[must_use]
     pub fn new(file: &'a str, content: &'a str, syntax: Option<&'a FileSyntax>) -> Self {
         let masked = match syntax.and_then(|s| s.facts.as_ref()) {
@@ -62,18 +70,21 @@ impl<'a> DetectorInput<'a> {
         }
     }
 
+    /// Add what the other files of the review export.
     #[must_use]
     pub const fn with_modules(mut self, modules: Option<&'a ModuleIndex>) -> Self {
         self.modules = modules;
         self
     }
 
+    /// Add what the repository's documentation says about environment variables.
     #[must_use]
     pub const fn with_env_docs(mut self, env_docs: Option<&'a EnvDocs>) -> Self {
         self.env_docs = env_docs;
         self
     }
 
+    /// The syntax facts of the file, when it was parsed.
     #[must_use]
     pub fn facts(&self) -> Option<&SyntaxFacts> {
         self.syntax.and_then(|s| s.facts.as_ref())

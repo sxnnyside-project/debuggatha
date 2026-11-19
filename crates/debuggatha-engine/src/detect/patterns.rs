@@ -65,6 +65,7 @@ const NOT_WHEN_HEADER_HAS: &[(&str, &[&str])] = &[("no-async-void", &["EventArgs
 
 const ONLY_IN: &[(&str, &[&str])] = &[("no-using-namespace-in-header", &["h", "hpp", "hh", "hxx"])];
 
+/// Register the pattern rules with `registry`.
 pub fn register(registry: &mut Registry) {
     registry.register_group(RULES, detect);
 }
@@ -118,6 +119,7 @@ pub fn languages_of(rule: &str) -> Vec<Language> {
         .collect()
 }
 
+/// Run the pattern rules over one file.
 #[must_use]
 pub fn detect(input: &DetectorInput<'_>) -> Vec<(&'static str, Hit)> {
     let Some(syntax) = input.syntax else {

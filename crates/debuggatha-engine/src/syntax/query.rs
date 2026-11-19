@@ -15,24 +15,34 @@ use super::language::Language;
 use super::treesitter::grammar;
 use super::{FileSyntax, Span};
 
+/// A tree-sitter query compiled for one language.
 #[derive(Debug)]
 pub struct Query {
     language: Language,
     inner: tree_sitter::Query,
 }
 
+/// Why a query could not be built or run.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum QueryError {
     /// The language is parsed by oxc, whose detectors are code and not queries.
     NotTreeSitter(Language),
     /// The query does not compile for the grammar: where and why.
     Invalid {
+        /// The line of the error, 0-based.
         row: usize,
+        /// The column.
         column: usize,
+        /// What tree-sitter said.
         message: String,
     },
     /// `run` was given a file of another language than the query's.
-    WrongLanguage { query: Language, file: Language },
+    WrongLanguage {
+        /// The language the query is for.
+        query: Language,
+        /// The language of the file.
+        file: Language,
+    },
     /// The file has no tree (it failed to parse).
     NoTree,
 }
@@ -63,16 +73,21 @@ impl fmt::Display for QueryError {
 
 impl std::error::Error for QueryError {}
 
+/// One capture of a match.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Capture {
+    /// The capture's name, without the `@`.
     pub name: String,
+    /// What it captured.
     pub span: Span,
 }
 
+/// One match of a query.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct QueryMatch {
     /// Index of the pattern in the query source, in order.
     pub pattern: usize,
+    /// The captures, in the order they appear.
     pub captures: Vec<Capture>,
 }
 

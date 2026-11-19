@@ -5,7 +5,7 @@
 //! The clones are not in the repository. To run the gate:
 //!
 //! ```text
-//! node scripts/parity/fetch-corpus.mjs /tmp/debuggatha-corpus
+//! scripts/fetch-corpus.sh /tmp/debuggatha-corpus
 //! DEBUGGATHA_CORPUS_DIR=/tmp/debuggatha-corpus cargo test -p debuggatha-core --test corpus_gate
 //! ```
 //!

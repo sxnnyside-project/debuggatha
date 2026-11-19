@@ -25,17 +25,27 @@ const MAX_CONSECUTIVE_FAILURES: u32 = 3;
 pub enum Scope<'a> {
     /// A whole-repository review has no changed code, so only candidates are verified.
     Workspace,
+    /// The files of a diff, with the lines they added.
     Diff(&'a [FileDiff]),
+    /// These files.
     Files(&'a [String]),
 }
 
+/// What a semantic review is asked.
 pub struct Refine<'a> {
+    /// The repository root.
     pub root: &'a Path,
+    /// The code a model may read.
     pub scope: Scope<'a>,
+    /// The findings to verify.
     pub findings: Vec<Finding>,
+    /// The id of the policy the review applied.
     pub policy_id: &'a str,
+    /// What the person allowed.
     pub options: &'a SemanticOptions,
+    /// The model to ask.
     pub provider: &'a dyn SemanticProvider,
+    /// The clock and id source.
     pub env: &'a dyn Env,
 }
 

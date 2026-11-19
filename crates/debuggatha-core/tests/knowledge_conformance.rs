@@ -1,6 +1,6 @@
 //! Differential tests against the TypeScript knowledge system (ADR-0006, decision 8).
 //!
-//! `tests/fixtures/knowledge-conformance.json` is written by `scripts/parity/gen-knowledge-fixtures.ts`:
+//! `tests/fixtures/knowledge-conformance.json` is written by `scripts/parity/gen-knowledge-fixtures.ts` at tag `ts-engine-final`:
 //! the 30 real Review Packs, three real repository contexts, and synthetic packs that exercise
 //! conflicts, version ranges, skills and awkward rule ids.
 #![allow(clippy::expect_used, clippy::unwrap_used, clippy::panic)] // a failed expect is a failed test

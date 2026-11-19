@@ -1,3 +1,9 @@
+/**
+ * Quick fixes for the findings at the cursor: apply a suggested edit or accept the finding in the code.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { DIAGNOSTIC_SOURCE } from '../diagnostics/diagnostics.js';
 import type { FindingIndex } from '../findings/index.js';
@@ -9,10 +15,12 @@ import { canSuppressInline, fixOf, quickFixEdit, ruleOf } from '../findings/pres
  * is safe to apply to the file as it is now.
  */
 export class FindingCodeActionProvider implements vscode.CodeActionProvider {
+  /** The kinds of action this provider offers. */
   static readonly kinds = [vscode.CodeActionKind.QuickFix];
 
   constructor(private readonly index: FindingIndex) {}
 
+  /** The quick fixes for the findings that overlap `range`. */
   provideCodeActions(
     document: vscode.TextDocument,
     _range: vscode.Range,

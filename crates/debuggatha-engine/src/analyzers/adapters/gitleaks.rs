@@ -87,6 +87,7 @@ fn gitleaks_parse(stdout: &str, root: &Path) -> Result<Vec<AnalyzerFinding>, Str
     )
 }
 
+/// gitleaks, which looks for secrets in the working tree.
 pub static GITLEAKS: Adapter = Adapter {
     id: "gitleaks",
     name: "Gitleaks",

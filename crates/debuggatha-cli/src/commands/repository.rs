@@ -1,3 +1,5 @@
+//! `debuggatha repository`: what Debuggatha understands about the repository.
+
 use debuggatha_engine::core::env::SystemEnv;
 use debuggatha_engine::core::repository_intelligence::build_repository_context;
 

@@ -22,6 +22,7 @@ fn collator() -> &'static CollatorBorrowed<'static> {
     })
 }
 
+/// Compare like `Intl.Collator`'s default `localeCompare`, so ids sort the same as in the TypeScript engine.
 #[must_use]
 pub fn locale_compare(a: &str, b: &str) -> Ordering {
     collator().compare(a, b)

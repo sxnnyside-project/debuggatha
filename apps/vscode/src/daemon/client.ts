@@ -1,6 +1,13 @@
+/**
+ * The client of the daemon: NDJSON over the standard streams of a `debuggatha serve` process.
+ *
+ * @packageDocumentation
+ */
+
 import { type ChildProcess, spawn } from 'node:child_process';
 import { createInterface } from 'node:readline';
 
+/** The protocol version this client speaks. */
 export const PROTOCOL = 1;
 
 /** What the daemon answered when a request failed: a stable `code`, and a message with no paths. */
@@ -15,16 +22,25 @@ export class DaemonError extends Error {
   }
 }
 
+/** How far a review has got. */
 export interface Progress {
+  /** The stage the review is in. */
   stage: string;
+  /** Work done in the stage. */
   done?: number;
+  /** Work the stage has. */
   total?: number;
+  /** What the stage is doing. */
   message?: string;
 }
 
+/** How to start the daemon. */
 export interface Spawn {
+  /** The program to run. */
   command: string;
+  /** Its arguments. */
   args: readonly string[];
+  /** The directory it runs in: the repository. */
   cwd: string;
 }
 
@@ -98,10 +114,14 @@ export class DaemonClient {
     }
   }
 
+  /** Whether the daemon is still running. */
   get alive(): boolean {
     return this.closed === undefined;
   }
 
+  /**
+   * Sends a request and resolves with the daemon's result; `signal` cancels it and `onProgress` hears the stages of a review.
+   */
   request<T>(
     method: string,
     params: unknown = {},

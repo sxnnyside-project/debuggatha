@@ -2,32 +2,22 @@
 
 <!-- Baseline performance measurements and how to take them; for maintainers. -->
 
-The TypeScript commands below were run from the engine that was removed from the tree (tag `ts-engine-final`); the figures are kept as the baseline the native engine is measured against.
-
-Baseline performance measurements for Debuggatha CLI.
+Performance of the `debuggatha` binary and its measurement protocol, for maintainers. The figures compare it with the TypeScript engine (tag `ts-engine-final`), which no longer builds from the tree.
 
 ---
 
-## Measurement Protocol
+## Measurement protocol
 
-Run with:
 ```bash
 just bench
 ```
 
-Or measure end-to-end wall time using `hyperfine`:
+Or measure end-to-end wall time with `hyperfine` on a release build (`just build`):
+
 ```bash
-hyperfine --warmup 3 'bun packages/cli/src/bin.ts --version'
-hyperfine --warmup 1 'bun packages/cli/src/bin.ts review --files packages/core/src/index.ts --quiet'
+hyperfine --warmup 3 'target/release/debuggatha --version'
+hyperfine --warmup 1 'target/release/debuggatha review --all --fail-on none --quiet --no-persist --no-analyzers'
 ```
-
-## Baselines
-
-| Date | Environment | Command | Median Runtime | Notes |
-|---|---|---|---|---|
-| 2026-11-10 | macOS (arm64, Apple Silicon) | `debuggatha --version` | ~25ms | Startup overhead |
-| 2026-11-10 | macOS (arm64, Apple Silicon) | `debuggatha review --files packages/core/src/index.ts --quiet` | ~180ms | Deterministic core review |
-
 
 ## Rust engine against the TypeScript engine
 

@@ -1,3 +1,5 @@
+//! Blanks comments and string contents so a rule reads only code.
+
 use super::SyntaxFacts;
 
 /// The source with comment text and string contents replaced by spaces, one space per UTF-16 unit

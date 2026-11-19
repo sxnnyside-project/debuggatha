@@ -1,3 +1,9 @@
+/**
+ * The objects the extension shares between its commands and providers.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import { getSettings } from './config/settings.js';
 import type { Daemon } from './daemon/api.js';
@@ -13,6 +19,7 @@ import type { StatusBar } from './status/statusBar.js';
 
 /** What the commands and providers share: one of each, created when the extension activates. */
 export class Services {
+  /** The findings of the ledger, by file and by id. */
   readonly index = new FindingIndex();
 
   constructor(

@@ -6,12 +6,14 @@ use std::sync::OnceLock;
 
 use super::{Language, Query};
 
+/// The queries of one adapter, one per language, each compiled the first time it is needed.
 pub struct QuerySet<const N: usize> {
     sources: [(Language, &'static str); N],
     compiled: [OnceLock<Result<Query, String>>; N],
 }
 
 impl<const N: usize> QuerySet<N> {
+    /// A set from the query sources of each language.
     #[must_use]
     pub const fn new(sources: [(Language, &'static str); N]) -> Self {
         Self {

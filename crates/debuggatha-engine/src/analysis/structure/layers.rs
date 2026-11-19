@@ -14,14 +14,21 @@ use serde::Serialize;
 use super::boundaries::ModuleBoundary;
 use super::graph::{DependencyGraph, Evidence};
 
+/// A conventional layer of an architecture.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum LayerName {
+    /// The business rules.
     Domain,
+    /// The use cases.
     Application,
+    /// An adapter to the outside.
     Adapter,
+    /// Databases, files, networks.
     Infrastructure,
+    /// What the user sees.
     Presentation,
+    /// Does not fit a layer.
     Unknown,
 }
 
@@ -35,6 +42,7 @@ pub const LAYER_ORDER: [LayerName; 5] = [
 ];
 
 impl LayerName {
+    /// The name used in reports.
     #[must_use]
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -79,8 +87,10 @@ fn match_layer(text: &str) -> LayerName {
     }
 }
 
+/// The layer of each module.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize)]
 pub struct LayerModel {
+    /// Module id to layer.
     pub assignments: BTreeMap<String, LayerName>,
 }
 
@@ -100,14 +110,20 @@ pub fn build_layer_model(boundaries: &[ModuleBoundary]) -> LayerModel {
     }
 }
 
+/// A dependency that goes against the layering.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct LayerViolation {
+    /// The depending module.
     pub from: String,
+    /// The module depended on.
     pub to: String,
+    /// The layer of the first.
     pub from_layer: LayerName,
+    /// The layer of the second.
     pub to_layer: LayerName,
     /// Both sides of the violation, in words.
     pub explanation: String,
+    /// Where the dependency is seen.
     pub evidence: Vec<Evidence>,
 }
 

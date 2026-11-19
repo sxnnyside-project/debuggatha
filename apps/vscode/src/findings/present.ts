@@ -1,3 +1,9 @@
+/**
+ * How a finding is shown: its span, where it comes from, its hover, its quick fix and the inline comment that accepts it.
+ *
+ * @packageDocumentation
+ */
+
 import { isAbsolute, join } from 'node:path';
 import type { Evidence, Finding, LedgerEntry } from '../contracts/index.js';
 
@@ -6,9 +12,11 @@ import type { Evidence, Finding, LedgerEntry } from '../contracts/index.js';
  * tested without an editor; the providers only turn these values into VS Code objects.
  */
 
+/** Where a finding is in a file. */
 export interface Span {
   /** 0-based, as the editor counts. */
   line: number;
+  /** First column of the span. */
   startChar: number;
   /** `undefined`: to the end of the line, whatever its length. */
   endChar: number | undefined;
@@ -31,10 +39,12 @@ export function spanOf(finding: Finding): Span {
   return { line, startChar: 0, endChar: undefined };
 }
 
+/** The absolute path of `file`, which the ledger keeps relative to the root. */
 export function absolutePath(rootDir: string, file: string): string {
   return isAbsolute(file) ? file : join(rootDir, file);
 }
 
+/** Where a finding comes from: a built-in rule or an external analyzer. */
 export type Provenance =
   | { kind: 'built-in'; pack: string | undefined }
   | {
@@ -46,6 +56,7 @@ export type Provenance =
     }
   | { kind: 'model'; provider: string; model: string | undefined };
 
+/** Where `finding` comes from, read from its evidence. */
 export function provenanceOf(finding: Finding): Provenance {
   for (const evidence of finding.evidence) {
     if (evidence.kind === 'external-analyzer') {
@@ -76,6 +87,7 @@ function ruleIdFromEvidence(evidence: readonly Evidence[]): string | undefined {
   return undefined;
 }
 
+/** The rule that raised `finding`, or its category when it has no rule id. */
 export const ruleOf = (finding: Finding): string =>
   ruleIdFromEvidence(finding.evidence) ?? finding.category;
 
@@ -96,11 +108,17 @@ const excerptOf = (finding: Finding): string | undefined => {
   return code?.kind === 'code' ? code.excerpt : undefined;
 };
 
+/** An exact edit that fixes a finding. */
 export interface QuickFixEdit {
+  /** The line, 1-based. */
   line: number;
+  /** First column replaced. */
   startChar: number;
+  /** Column after the last one replaced. */
   endChar: number;
+  /** The text that takes the place of the span. */
   replacement: string;
+  /** Whether the edit is safe to apply without reading it. */
   safety: 'safe' | 'review';
 }
 
@@ -155,6 +173,7 @@ export function suppressionEdit(
 
 const escapeHtml = (text: string) => text.replace(/[<>]/g, (c) => (c === '<' ? '&lt;' : '&gt;'));
 
+/** A Markdown link that runs the command `command` with `args` when clicked. */
 export const commandLink = (title: string, command: string, ...args: unknown[]) =>
   `[${title}](command:${command}?${encodeURIComponent(JSON.stringify(args))})`;
 

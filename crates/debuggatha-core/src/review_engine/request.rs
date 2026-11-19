@@ -1,3 +1,5 @@
+//! What a review is asked to cover.
+
 use std::fmt;
 
 use schemars::JsonSchema;
@@ -5,11 +7,15 @@ use serde::{Deserialize, Serialize};
 
 use crate::env::Env;
 
+/// How much a review does.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "lowercase")]
 pub enum ReviewDepth {
+    /// The built-in detectors only.
     Quick,
+    /// The detectors and the installed analyzers.
     Full,
+    /// Everything, and the whole repository's architecture.
     Architectural,
 }
 
@@ -20,40 +26,58 @@ pub enum ReviewDepth {
 pub enum ReviewScope {
     /// No `base` means "since the last commit".
     Diff {
+        /// The base to diff against.
         #[serde(default, skip_serializing_if = "Option::is_none")]
         base: Option<String>,
     },
+    /// A list of files.
     Files {
         /// At least one; `create_review_request` refuses an empty list.
         #[schemars(length(min = 1))]
         paths: Vec<String>,
     },
+    /// The whole repository.
     Workspace,
 }
 
+/// What a review is asked to cover.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct ReviewRequest {
+    /// Stable identifier of the request.
     pub id: String,
+    /// What to review.
     pub scope: ReviewScope,
+    /// How much to do.
     pub depth: ReviewDepth,
+    /// When it was requested, ISO 8601.
     #[schemars(extend("format" = "date-time"))]
     pub requested_at: String,
+    /// Packs to add on top of the detected ones.
     pub requested_pack_ids: Vec<String>,
+    /// A policy id a previous review reported.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_policy_id: Option<String>,
 }
 
+/// What is needed to create a request; the id and time are generated when absent.
 pub struct CreateReviewRequestInput {
+    /// The id to use, or `None` to generate one.
     pub id: Option<String>,
+    /// What to review.
     pub scope: ReviewScope,
+    /// How much to do.
     pub depth: ReviewDepth,
+    /// The time to use, or `None` for now.
     pub requested_at: Option<String>,
+    /// Packs to add.
     pub requested_pack_ids: Vec<String>,
+    /// A policy id to assert.
     pub requested_policy_id: Option<String>,
 }
 
 impl CreateReviewRequestInput {
+    /// A request for `scope` and `depth` with nothing else asked.
     #[must_use]
     pub fn new(scope: ReviewScope, depth: ReviewDepth) -> Self {
         Self {
@@ -67,6 +91,7 @@ impl CreateReviewRequestInput {
     }
 }
 
+/// A files scope with no paths; at least one is required.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct EmptyFileScope;
 

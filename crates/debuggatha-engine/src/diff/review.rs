@@ -15,9 +15,12 @@ use crate::diff::{ChangeKind, FileDiff, parse_unified_diff};
 use crate::git::{self, GitError};
 use crate::scan_scope::{MAX_REPO_FILE_BYTES, is_generated_content, is_ignored_path};
 
+/// Why a diff review failed.
 #[derive(Debug)]
 pub enum DiffReviewError {
+    /// Git failed.
     Git(GitError),
+    /// A finding could not be built.
     Finding(FindingError),
 }
 
@@ -32,15 +35,18 @@ impl std::fmt::Display for DiffReviewError {
 
 impl std::error::Error for DiffReviewError {}
 
+/// The result of reviewing a change.
 #[derive(Debug)]
 pub struct DiffReview {
     /// The changes that were reviewed, as parsed.
     pub diff: Vec<FileDiff>,
+    /// What the detectors produced on the files the change touched.
     pub run: Run,
     /// Changed files that were not reviewed, by reason (`Coverage::skipped_files`).
     pub skipped: Vec<SkippedFiles>,
     /// Files the change removes: nothing to review, and what the ledger held for them is resolved.
     pub deleted: Vec<String>,
+    /// The revision the change was taken against.
     pub base: Option<String>,
 }
 

@@ -8,6 +8,7 @@ use serde_json::{Number, Value};
 
 use crate::findings_ledger::sha256_hex;
 
+/// Stringify `value` the way the ledger hashes it: keys sorted, no whitespace, numbers as JavaScript prints them, so the same data gives the same text and hash everywhere.
 #[must_use]
 pub fn canonical_stringify(value: &Value) -> String {
     let mut out = String::new();

@@ -1,3 +1,5 @@
+//! A review session: the request, the repository, the policy and the lifecycle status.
+
 use std::fmt;
 
 use schemars::JsonSchema;
@@ -15,27 +17,43 @@ use crate::repository_intelligence::RepositoryContext;
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct ReviewSession {
+    /// Stable identifier of the session.
     pub id: String,
+    /// When it was created, ISO 8601.
     #[schemars(extend("format" = "date-time"))]
     pub created_at: String,
+    /// What was asked.
     pub request: ReviewRequest,
+    /// The repository as it was when the session started.
     pub repository_context: RepositoryContext,
+    /// The policy chosen for the review.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub selected_policy: Option<PolicyReference>,
+    /// The packs chosen for the review.
     pub selected_packs: Vec<PackReference>,
+    /// Where the session is in its lifecycle.
     pub status: ReviewLifecycleStatus,
+    /// Timing and outcome so far.
     pub execution: ExecutionMetadata,
 }
 
+/// What is needed to create a session; the id and time are generated when absent.
 pub struct CreateReviewSessionInput {
+    /// The id to use, or `None` to generate one.
     pub id: Option<String>,
+    /// The creation time to use, or `None` for now.
     pub created_at: Option<String>,
+    /// What was asked.
     pub request: ReviewRequest,
+    /// The repository snapshot.
     pub repository_context: RepositoryContext,
+    /// The policy chosen.
     pub selected_policy: Option<PolicyReference>,
+    /// The packs chosen.
     pub selected_packs: Vec<PackReference>,
 }
 
+/// A session in the `requested` status, with an id and a time from `env` when the input gives none.
 #[must_use]
 pub fn create_review_session(input: CreateReviewSessionInput, env: &dyn Env) -> ReviewSession {
     ReviewSession {
@@ -53,16 +71,24 @@ pub fn create_review_session(input: CreateReviewSessionInput, env: &dyn Env) -> 
 /// Fields a transition may set. A field left `None` keeps its value; the engine never clears one.
 #[derive(Debug, Clone, Default)]
 pub struct ExecutionPatch {
+    /// What ran the review.
     pub source: Option<ReviewSource>,
+    /// When it started, ISO 8601.
     pub started_at: Option<String>,
+    /// When it ended, ISO 8601.
     pub completed_at: Option<String>,
+    /// How long it took, in milliseconds.
     pub duration_ms: Option<u64>,
+    /// The failure, when the review failed.
     pub error: Option<String>,
 }
 
+/// A move the lifecycle does not allow.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct IllegalTransition {
+    /// The status the session was in.
     pub from: ReviewLifecycleStatus,
+    /// The status asked for.
     pub to: ReviewLifecycleStatus,
 }
 

@@ -381,5 +381,9 @@ suite('Debuggatha in a real VS Code', () => {
 
   test('the log can be opened', async () => {
     await vscode.commands.executeCommand('debuggatha.showLog');
+    assert.ok(
+      (await vscode.commands.getCommands(true)).includes('debuggatha.showLog'),
+      'the show log command stays registered',
+    );
   });
 });

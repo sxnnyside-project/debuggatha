@@ -1,3 +1,5 @@
+//! What a finding tells the person who has to act on it, from `data/guidance.json`.
+
 use std::collections::BTreeMap;
 use std::sync::LazyLock;
 
@@ -9,10 +11,15 @@ use serde::Deserialize;
 /// pack's own statement.
 #[derive(Debug, Clone, Deserialize)]
 pub struct Guidance {
+    /// Why the pattern is a problem.
     pub why: String,
+    /// What kind of change fixes it.
     pub action: RecommendationAction,
+    /// The fix, in a sentence.
     pub fix: String,
+    /// The code before the fix.
     pub before: String,
+    /// The code after the fix.
     pub after: String,
 }
 
@@ -20,9 +27,11 @@ pub struct Guidance {
 #[allow(clippy::expect_used)]
 static GUIDANCE: LazyLock<BTreeMap<String, Guidance>> = LazyLock::new(|| {
     serde_json::from_str(include_str!("../../data/guidance.json"))
+        // debuggatha-ignore-next-line no-unwrap-expect -- embedded table, proven by the tests
         .expect("data/guidance.json is valid")
 });
 
+/// The guidance of `rule_id`, when the rule has an entry.
 #[must_use]
 pub fn guidance_for(rule_id: &str) -> Option<&'static Guidance> {
     GUIDANCE.get(rule_id)

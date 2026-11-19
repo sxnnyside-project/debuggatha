@@ -114,6 +114,7 @@ fn eslint_applies(facts: &RepoFacts) -> bool {
     })
 }
 
+/// `ESLint` with the project's own configuration, which can load project code.
 pub static ESLINT: Adapter = Adapter {
     id: "eslint",
     name: "ESLint",

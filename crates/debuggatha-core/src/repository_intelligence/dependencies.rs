@@ -1,3 +1,5 @@
+//! Dependency Context: lockfiles, declared versions and runtime constraints.
+
 use indexmap::IndexMap;
 use regress::Regex;
 use serde_json::Value;
@@ -46,6 +48,7 @@ fn extract_toml_string_value(text: &str, key: &str) -> Option<String> {
     found.group(1).map(|range| text[range].to_owned())
 }
 
+/// Read lockfiles, declared versions and runtime constraints of the repository.
 #[must_use]
 pub fn scan_dependencies(
     root_entries: &[String],

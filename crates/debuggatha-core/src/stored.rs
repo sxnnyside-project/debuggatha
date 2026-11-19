@@ -12,6 +12,7 @@ use serde::Serialize;
 use serde::de::DeserializeOwned;
 use serde_json::Value;
 
+/// A stored file that could not be read, parsed or written, worded so it names the file kind and never a path.
 #[derive(Debug)]
 pub struct StoreError {
     what: &'static str,

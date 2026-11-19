@@ -6,7 +6,7 @@ import { CLI, makeRepo, removeRepos } from '../test/fixtures.js';
 import { Daemon } from './api.js';
 import { DaemonClient, DaemonError } from './client.js';
 import { checkCliVersion } from './compat.js';
-import { DaemonConnection, DaemonUnavailable, spawnSpec } from './connection.js';
+import { DaemonConnection, DaemonUnavailable, spawnSpec, usualLocations } from './connection.js';
 
 afterAll(removeRepos);
 
@@ -197,6 +197,31 @@ describe('DaemonConnection', () => {
     expect((error as Error).message).not.toContain('/nonexistent');
     // A failed start is not remembered.
     await expect(connection.get()).rejects.toBeInstanceOf(DaemonUnavailable);
+  });
+
+  it('looks in the usual places when the PATH has no binary, and only then', async () => {
+    const { root } = makeRepo();
+    const commands: string[] = [];
+    const start = (async (spec: { command: string }) => {
+      commands.push(spec.command);
+      if (spec.command === 'debuggatha') {
+        throw Object.assign(new Error('spawn debuggatha ENOENT'), { code: 'ENOENT' });
+      }
+      return { server: { version: '0.3.0' }, alive: true, dispose: async () => {} };
+    }) as unknown as typeof DaemonClient.start;
+    const connection = new DaemonConnection({
+      ...options(root, () => settings({ cliPath: '' })),
+      start,
+      locations: ['/nonexistent/debuggatha', process.execPath],
+    });
+    await connection.get();
+    expect(commands).toEqual(['debuggatha', process.execPath]);
+  });
+
+  it('names where it looked for the binary: the cargo folder first, the .exe on Windows', () => {
+    expect(usualLocations('/home/ana', 'linux')[0]).toBe('/home/ana/.cargo/bin/debuggatha');
+    expect(usualLocations('C:\\Users\\ana', 'win32')).toHaveLength(1);
+    expect(usualLocations('/home/ana', 'win32')[0]).toMatch(/debuggatha\.exe$/);
   });
 
   it('refuses a binary of another version, and says which side to update', async () => {

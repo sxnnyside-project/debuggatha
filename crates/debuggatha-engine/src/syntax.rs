@@ -29,25 +29,32 @@ pub use suppress::{
 /// A byte range in the source (UTF-8 offsets, `end` exclusive).
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Span {
+    /// First byte.
     pub start: u32,
+    /// Byte after the last one.
     pub end: u32,
 }
 
 impl Span {
+    /// A span from `start` to `end`.
     #[must_use]
     pub const fn new(start: u32, end: u32) -> Self {
         Self { start, end }
     }
 
+    /// Whether the two spans share a byte.
     #[must_use]
     pub const fn overlaps(self, other: Self) -> bool {
         self.start < other.end && other.start < self.end
     }
 }
 
+/// How well a file was parsed.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ParseStatus {
+    /// No syntax errors.
     Parsed,
+    /// Syntax errors in some regions; nothing is concluded about them.
     ParsedWithErrors,
     /// A fatal error: no tree, no facts.
     Failed,
@@ -56,20 +63,28 @@ pub enum ParseStatus {
 /// What is not code. Template literals contribute only their text parts, never `${...}`.
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct SyntaxFacts {
+    /// The comments.
     pub comments: Vec<Span>,
     /// Whole string literals, delimiters included.
     pub strings: Vec<Span>,
+    /// Regular expression literals.
     pub regexes: Vec<Span>,
     /// What `mask_source` hides: comments, string contents and regex patterns.
     pub hidden: Vec<Span>,
 }
 
+/// What the syntax layer knows of one file.
 #[derive(Debug, Clone)]
 pub struct FileSyntax {
+    /// The language.
     pub language: Language,
+    /// How well it parsed.
     pub status: ParseStatus,
+    /// How many syntax errors.
     pub errors: usize,
+    /// Where they are.
     pub error_spans: Vec<Span>,
+    /// What is code and what is not, when the parse produced a tree.
     pub facts: Option<SyntaxFacts>,
     /// The tree-sitter tree, kept for queries. The oxc backend keeps none: its detectors are Rust
     /// code over its AST and run during the parse (next slices).

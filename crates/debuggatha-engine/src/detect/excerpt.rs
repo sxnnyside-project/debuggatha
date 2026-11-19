@@ -24,6 +24,7 @@ const KNOWN_TOKEN_PATTERNS: &[&str] = &[
 pub(crate) static KNOWN_TOKENS: LazyLock<Vec<Regex>> = LazyLock::new(|| {
     KNOWN_TOKEN_PATTERNS
         .iter()
+        // debuggatha-ignore-next-line no-unwrap-expect -- constant pattern, proven by the tests
         .map(|p| Regex::new(p).expect("a valid pattern"))
         .collect()
 });
@@ -67,6 +68,7 @@ fn first_200_units(text: &str) -> String {
     out
 }
 
+/// The excerpt a finding carries: the line trimmed, known credential formats redacted, cut at 200 UTF-16 units.
 #[must_use]
 pub fn excerpt_of(raw_line: &str) -> String {
     first_200_units(&redact_known_tokens(js_trim(raw_line)))

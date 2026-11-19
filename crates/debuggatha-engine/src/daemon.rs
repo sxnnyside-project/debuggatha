@@ -59,9 +59,11 @@ pub type Emitter = Arc<dyn Fn(Value) + Send + Sync>;
 
 /// What the person who started the daemon allows. A client cannot enlarge it.
 pub struct Config {
+    /// The repository the daemon works on, fixed at start.
     pub root: PathBuf,
     /// Analyzers enabled by name although they run project code or use the network.
     pub enabled_analyzers: Vec<String>,
+    /// Where analyzer executables are looked for after the repository's own.
     pub analyzer_search: Vec<PathBuf>,
     /// A model on this machine, when the person started the daemon with one.
     pub semantic: Option<LocalProvider>,
@@ -69,6 +71,7 @@ pub struct Config {
     pub client_model: bool,
 }
 
+/// The engine behind Protocol v1: it answers requests for one repository root.
 pub struct Daemon {
     config: Config,
     initialized: AtomicBool,
@@ -94,8 +97,11 @@ pub struct Daemon {
 /// A request that passed the envelope checks.
 #[derive(Debug)]
 pub struct Request {
+    /// The request's id, echoed in the response.
     pub id: String,
+    /// The method name, such as `review/run`.
     pub method: String,
+    /// The method's parameters.
     pub params: Value,
 }
 
@@ -285,6 +291,7 @@ fn ok(id: &str, result: &Value) -> Value {
 }
 
 impl Daemon {
+    /// A daemon for `config`, waiting for the handshake.
     #[must_use]
     pub fn new(config: Config) -> Self {
         Self {
@@ -342,6 +349,7 @@ impl Daemon {
     fn error(&self, id: &str, failure: &Fail) -> Value {
         let error_id = format!("e-{:04x}", self.errors.fetch_add(1, Ordering::Relaxed) + 1);
         if let Some(detail) = &failure.detail {
+            // debuggatha-ignore-next-line no-debug-output -- stderr is the diagnostics channel; stdout carries the protocol
             eprintln!("debuggatha: {error_id}: {detail}");
         }
         let mut error = json!({

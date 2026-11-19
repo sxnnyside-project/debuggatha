@@ -16,8 +16,7 @@ reviews, and the findings land in the same ledger the CLI and the editor read.
 | Installed from this checkout | `debuggatha mcp` (after `just install-cli`) |
 | Installed from a registry | `debuggatha-mcp` (after `bun add --global @sxnnyside/debuggatha-mcp` or `npm install --global @sxnnyside/debuggatha-mcp`) |
 
-The examples below use `debuggatha-mcp`; substitute `npx` with `["-y", "@sxnnyside/debuggatha-mcp"]` or `bunx` with `["@sxnnyside/debuggatha-mcp"]` if you did not install it. A host that starts from a GUI may not see your
-`["-y", "@sxnnyside/debuggatha-mcp"]` if you did not install it. A host that starts from a GUI may not see your
+The examples below use `debuggatha-mcp`. If you did not install it, run `npx` with the arguments `["-y", "@sxnnyside/debuggatha-mcp"]` or `bunx` with `["@sxnnyside/debuggatha-mcp"]` instead. A host that starts from a GUI may not see your
 shell `PATH`; use the absolute path (`which debuggatha-mcp`) if it cannot find the command.
 
 Every host needs the same three things: a name (`debuggatha`), a command with its arguments, and
@@ -49,7 +48,7 @@ for Qwen Code; `~/.gemini/settings.json` or `.gemini/settings.json` for Gemini C
     "debuggatha": {
       "command": "debuggatha-mcp",
       "args": [],
-      "env": { "DEBUGGATHA_LOG_LEVEL": "info" }
+      "env": { "DEBUGGATHA_ANALYZERS": "auto" }
     }
   }
 }
@@ -118,9 +117,8 @@ change them.
 | --- | --- |
 | `DEBUGGATHA_REPOSITORY_ROOT` | Repository to review when a tool call gives no `rootDir`. Hosts that share workspace roots need not set it. |
 | `DEBUGGATHA_ANALYZERS` | `off`, `auto` (default: only tools that read source), or a list of analyzer ids. The only way to enable `eslint`, `phpstan`, `clippy` (they run project code) or `osv-scanner` (uses the network). |
-| `DEBUGGATHA_SEMANTIC` | `off` (default), `sampling` (the host's own model), `ollama`, or `lmstudio`. |
+| `DEBUGGATHA_SEMANTIC` | `off` (default), `host` (the host's own model; `sampling` is accepted too), `ollama`, or `lmstudio`. |
 | `DEBUGGATHA_SEMANTIC_MODEL`, `_URL` | Model name and address for `ollama` or `lmstudio`; `localhost` only. |
-| `DEBUGGATHA_LOG_LEVEL` | `debug`, `info`, `warn`, `error`; logs go to stderr. |
 
 The optional model pass never changes what the deterministic review found. `sampling` works only in
 hosts that support MCP sampling; elsewhere use `ollama` or `lmstudio`, or leave it off.

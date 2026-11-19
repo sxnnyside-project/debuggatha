@@ -1,3 +1,9 @@
+/**
+ * The extension's settings, read from VS Code's configuration with a fallback for every value.
+ *
+ * @packageDocumentation
+ */
+
 import * as vscode from 'vscode';
 import type { Severity } from '../contracts/index.js';
 
@@ -9,11 +15,16 @@ import type { Severity } from '../contracts/index.js';
  *                  violations, dead code), whatever the command was
  */
 export type ReviewDepth = 'quick' | 'full' | 'architectural';
+/** How much the output channel records. */
 export type LogLevel = 'off' | 'error' | 'info' | 'debug';
+/** The model runtime the person configured for the optional semantic pass. */
 export type SemanticProviderName = 'off' | 'ollama' | 'lmstudio';
 
+/** Every review depth, from the least to the most. */
 export const REVIEW_DEPTHS: readonly ReviewDepth[] = ['quick', 'full', 'architectural'];
+/** Every log level, from the least to the most. */
 export const LOG_LEVELS: readonly LogLevel[] = ['off', 'error', 'info', 'debug'];
+/** Every severity, from the least to the most serious. */
 export const SEVERITY_LEVELS: readonly Severity[] = [
   'informational',
   'low',
@@ -22,17 +33,23 @@ export const SEVERITY_LEVELS: readonly Severity[] = [
   'critical',
 ];
 
+/** What the extension reads from the `debuggatha.*` settings. */
 export interface ExtensionSettings {
   /** The `debuggatha` binary: empty means the one on the PATH. Machine scope. */
   cliPath: string | undefined;
+  /** Review Packs applied on top of the ones detected for the stack. */
   extraReviewPacks: string[];
+  /** How much a review does. */
   reviewDepth: ReviewDepth;
+  /** What the output channel records. */
   logLevel: LogLevel;
+  /** Whether saving a file reviews it. */
   reviewOnSave: boolean;
   /** Lowest severity shown as a squiggle and in Problems; the findings view lists everything. */
   minimumSeverity: Severity;
   /** Analyzers that run project code or use the network, which only the user's own settings can enable. */
   enabledAnalyzers: string[];
+  /** The model on this machine for the semantic pass; `off` sends nothing anywhere. */
   semantic: { provider: SemanticProviderName; model: string | undefined; url: string | undefined };
 }
 
@@ -42,6 +59,7 @@ function pick<T extends string>(value: unknown, allowed: readonly T[], fallback:
     : fallback;
 }
 
+/** The current settings, each value checked against what it may be. */
 export function getSettings(): ExtensionSettings {
   const config = vscode.workspace.getConfiguration('debuggatha');
   const text = (key: string) => {
@@ -64,6 +82,7 @@ export function getSettings(): ExtensionSettings {
   };
 }
 
+/** Calls `callback` with the new settings when one under `debuggatha` changes. */
 export function onSettingsChanged(
   callback: (settings: ExtensionSettings) => void,
 ): vscode.Disposable {

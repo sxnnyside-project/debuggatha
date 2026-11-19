@@ -1,11 +1,20 @@
+/**
+ * The findings of the ledger, indexed by file and by id for the editor.
+ *
+ * @packageDocumentation
+ */
+
 import { SEVERITY_LEVELS } from '../config/settings.js';
 import { isActiveFindingStatus, type LedgerEntry, type Severity } from '../contracts/index.js';
 import { absolutePath, type Span, spanOf } from './present.js';
 
+/** A ledger entry placed in a file of the workspace. */
 export interface IndexedFinding {
+  /** The ledger entry. */
   entry: LedgerEntry;
   /** Absolute path, as the editor names files. */
   file: string;
+  /** Where in the file the finding is. */
   span: Span;
 }
 
@@ -34,10 +43,12 @@ export class FindingIndex {
     }
   }
 
+  /** The files that have findings. */
   files(): IterableIterator<string> {
     return this.byFile.keys();
   }
 
+  /** The findings in `file`. */
   inFile(file: string): readonly IndexedFinding[] {
     return this.byFile.get(file) ?? [];
   }
@@ -47,6 +58,7 @@ export class FindingIndex {
     return this.inFile(file).filter((finding) => finding.span.line === line);
   }
 
+  /** The ledger entry with `id`, if the index has it. */
   entry(id: string): LedgerEntry | undefined {
     return this.byId.get(id);
   }

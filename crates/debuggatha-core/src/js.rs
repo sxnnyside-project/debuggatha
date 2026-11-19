@@ -14,6 +14,7 @@ pub fn is_js_whitespace(c: char) -> bool {
     c == '\u{feff}' || (c.is_whitespace() && c != '\u{85}')
 }
 
+/// `String.prototype.trim`: removes white space and line terminators from both ends.
 #[must_use]
 pub fn js_trim(text: &str) -> &str {
     text.trim_matches(is_js_whitespace)
