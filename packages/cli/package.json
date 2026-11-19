@@ -47,9 +47,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "commander": "^15.0.0",
+    "commander": "^15.1.0",
     "picocolors": "^1.1.1",
-    "zod": "^4.4.3"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@debuggatha/engine": "workspace:*",
