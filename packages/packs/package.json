@@ -26,6 +26,6 @@
     "@debuggatha/core": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0"
+    "@types/node": "^26.6.6"
   }
 }
