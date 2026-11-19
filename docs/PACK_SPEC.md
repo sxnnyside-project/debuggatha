@@ -1,6 +1,10 @@
 # Canonical Review Pack Specification (PACK_SPEC.md)
 
+<!-- The specification every Review Pack follows; for pack authors. -->
+
 This document defines the canonical engineering standard for all Debuggatha Review Packs. A Review Pack is a declarative knowledge artifact. It contains Rules and Knowledge Entries that are strictly consumed by the Review Engine. 
+
+---
 
 **Review Packs NEVER execute code.** They are schema-driven catalogs (similar to a Terraform provider schema or an ESLint plugin manifest). The execution logic lives entirely within `engine/skills`.
 
@@ -58,3 +62,7 @@ When the Review Engine produces a `Finding` based on a Rule, the finding must pr
 - **No Empty Packs**: A Review Pack must contain at least one Rule and one Knowledge Entry.
 - **False Positives/Negatives**: Packs MUST document known heuristic limitations in their Knowledge Entries — via the required `limitations` field (§4), not prose buried in `body`.
 - **Testing**: Every pack must pass `core/knowledge-system`'s `validateReviewPack` before registration.
+
+---
+
+*Last updated: 2026-11-19*

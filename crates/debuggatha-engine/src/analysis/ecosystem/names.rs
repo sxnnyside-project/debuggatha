@@ -4,7 +4,7 @@ use std::sync::OnceLock;
 
 use super::xml;
 use super::{Descriptor, ManifestFile};
-use crate::analysis::workspace::dirname;
+use crate::analysis::structure::workspace::dirname;
 use crate::syntax::{Language, Query, parse};
 
 pub(super) fn read(id: &str, descriptor: &Descriptor, path: &str, text: &str) -> ManifestFile {

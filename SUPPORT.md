@@ -5,11 +5,17 @@
 **GitHub Issues**
 For bugs or unexpected behavior, open an [issue](https://github.com/sxnnyside-project/debuggatha/issues). Use the bug report template and include enough context to reproduce the problem.
 
+**Discord**
+For questions, general discussion, or anything that isn't a bug — join the Sxnnyside Project community at [discord.gg/h3hhNY8VTE](https://discord.gg/h3hhNY8VTE).
+
+**Email**
+For anything that doesn't fit the channels above — `support.sxnnyside@sxnnysideproject.com`.
+
 ---
 
 ## Before Asking
 
-- Check the [README](README.md) — installation, usage, and architecture are documented there.
+- Check the [README](README.md) — installation and usage are documented there.
 - Search existing [issues](https://github.com/sxnnyside-project/debuggatha/issues) before opening a new one.
 
 ---
@@ -21,4 +27,4 @@ For security vulnerabilities, see [SECURITY.md](SECURITY.md).
 
 ---
 
-*Debuggatha is A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com).*
+*Debuggatha — A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com) ecosystem.*

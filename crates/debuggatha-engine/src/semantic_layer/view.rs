@@ -81,7 +81,7 @@ pub fn render_view(view: &CodeView, withheld: &BTreeSet<u32>, marked: Option<u32
 /// `radius` lines either side of a line; `None` when the file cannot be read inside the root.
 #[must_use]
 pub fn window_around(root: &Path, file: &str, line: u32, radius: u32) -> Option<CodeView> {
-    let text = crate::diff_review::read_text(root, file).ok()?;
+    let text = crate::diff::review::read_text(root, file).ok()?;
     let all: Vec<&str> = text.split('\n').collect();
     let from = line.saturating_sub(radius).max(1);
     let to = line

@@ -20,7 +20,7 @@ assignees: ""
 
 - OS:
 - Debuggatha version:
-- Runtime: <!-- e.g. Node 20, Bun 1.x -->
+- Runtime: <!-- e.g. Rust 1.85, Node 22 -->
 
 ## Additional context
 

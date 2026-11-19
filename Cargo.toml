@@ -1,4 +1,4 @@
-# Native engine (ADR-0006). The TypeScript packages remain the shipped engine until the cutover gate.
+# The native engine (ADR-0006): the three crates, and the product.
 [workspace]
 resolver = "3"
 members = ["crates/*"]
@@ -20,7 +20,7 @@ categories = ["development-tools", "command-line-utilities"]
 debuggatha-core = { path = "crates/debuggatha-core", version = "0.3.0" }
 debuggatha-engine = { path = "crates/debuggatha-engine", version = "0.3.0" }
 clap_complete = "4"
-clap = { version = "4", default-features = false, features = ["std", "derive", "help", "usage", "error-context"] }
+clap = { version = "4", default-features = false, features = ["std", "derive", "help", "usage", "error-context", "env"] }
 schemars = { version = "1", features = ["indexmap2"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }

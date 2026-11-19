@@ -1,5 +1,5 @@
-import type { Finding } from '@debuggatha/engine';
 import { describe, expect, it } from 'vitest';
+import type { Finding } from '../contracts/index.js';
 import { FindingDocProvider } from './findingDocProvider.js';
 
 const finding = {
@@ -47,7 +47,9 @@ describe('FindingDocProvider', () => {
   it('omits sections a finding does not have', () => {
     const provider = new FindingDocProvider();
     const bare = { ...finding, appliedPolicy: undefined, locations: [], recommendations: [] };
-    const md = provider.provideTextDocumentContent(provider.registerFinding(bare as Finding));
+    const md = provider.provideTextDocumentContent(
+      provider.registerFinding(bare as unknown as Finding),
+    );
     expect(md).not.toContain('Policy Reference');
     expect(md).not.toContain('Location');
     expect(md).not.toContain('Recommendation');

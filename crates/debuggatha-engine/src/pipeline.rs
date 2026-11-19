@@ -37,7 +37,7 @@ use crate::control::{Control, Stage};
 use crate::detect::coverage::{Coverage, SkipReason, SkippedFiles};
 use crate::detect::{Registry, RepoFile, SourceUnit, default_registry, run_review_controlled};
 use crate::diff::FileDiff;
-use crate::diff_review::{
+use crate::diff::review::{
     DiffReviewError, group, read_text, review_diff_controlled, review_diff_text_controlled,
 };
 use crate::packs::builtin_packs;

@@ -1,7 +1,6 @@
-import { loadLedger } from '@debuggatha/engine';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import type { FindingTreeItem } from '../providers/findingsProvider.js';
-import { makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
+import { loadLedger, makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
 import { editorDiagnostics, harness } from '../test/harness.js';
 import { mock, resetMock } from '../test/vscode-mock.js';
 import { registerLifecycleCommands } from './lifecycle.js';
@@ -11,11 +10,11 @@ afterAll(removeRepos);
 const statusOf = (root: string, id: string) =>
   loadLedger(root).entries.find((entry) => entry.id === id)?.status;
 
-function setup() {
+async function setup() {
   const { root } = makeRepo();
   seedLedger(root);
   const { services } = harness(root);
-  services.refreshFromLedger();
+  await services.refreshFromLedger();
   registerLifecycleCommands({ subscriptions: [] } as never, services, services.findings);
 
   const entries = loadLedger(root).entries;
@@ -33,8 +32,8 @@ function setup() {
 describe('finding lifecycle commands', () => {
   beforeEach(resetMock);
 
-  it('registers a command for each transition, from the tree and from the editor', () => {
-    setup();
+  it('registers a command for each transition, from the tree and from the editor', async () => {
+    await setup();
     expect([...mock.commands.keys()].sort()).toEqual([
       'debuggatha.dismissFinding',
       'debuggatha.dismissFindingById',
@@ -46,7 +45,7 @@ describe('finding lifecycle commands', () => {
   });
 
   it('resolves an open finding: ledger on disk, tree, editor diagnostics, and status bar all follow', async () => {
-    const { root, id, fromTree, total } = setup();
+    const { root, id, fromTree, total } = await setup();
     await fromTree('debuggatha.resolveFinding');
 
     expect(statusOf(root, id)).toBe('resolved');
@@ -56,17 +55,19 @@ describe('finding lifecycle commands', () => {
   });
 
   it('does the same from the editor (a hover or the lightbulb), by id', async () => {
-    const { root, id, byId, total } = setup();
+    const { root, id, byId, total } = await setup();
     await byId('debuggatha.dismissFindingById');
     expect(statusOf(root, id)).toBe('dismissed');
     expect(editorDiagnostics().flat()).toHaveLength(total - 1);
 
     await byId('debuggatha.resolveFindingById', 'no-such-id');
-    expect(mock.errors).toEqual(['Finding not found in ledger.']);
+    expect(mock.errors).toEqual([
+      'Failed to update finding status: No finding has that id. Use an id from a review result or from the findings list.',
+    ]);
   });
 
   it('reopens a resolved finding as reopened, the only state the lifecycle allows', async () => {
-    const { root, id, fromTree, total } = setup();
+    const { root, id, fromTree, total } = await setup();
     await fromTree('debuggatha.resolveFinding');
     await fromTree('debuggatha.reopenFinding');
 
@@ -76,7 +77,7 @@ describe('finding lifecycle commands', () => {
   });
 
   it('reopens a dismissed finding too, and keeps it actionable', async () => {
-    const { root, id, fromTree } = setup();
+    const { root, id, fromTree } = await setup();
     await fromTree('debuggatha.dismissFinding');
     expect(statusOf(root, id)).toBe('dismissed');
     await fromTree('debuggatha.reopenFinding');
@@ -86,7 +87,7 @@ describe('finding lifecycle commands', () => {
   });
 
   it('refuses an illegal transition and leaves the ledger as it was', async () => {
-    const { root, id, fromTree } = setup();
+    const { root, id, fromTree } = await setup();
     await fromTree('debuggatha.dismissFinding');
     await fromTree('debuggatha.resolveFinding');
 
@@ -96,21 +97,23 @@ describe('finding lifecycle commands', () => {
   });
 
   it('does nothing when the status would not change', async () => {
-    const { fromTree } = setup();
+    const { fromTree } = await setup();
     await fromTree('debuggatha.resolveFinding');
     await fromTree('debuggatha.resolveFinding');
     expect(mock.errors).toEqual([]);
   });
 
   it('reports a finding that is not in the ledger', async () => {
-    const { root, fromTree } = setup();
+    const { root, fromTree } = await setup();
     await fromTree('debuggatha.resolveFinding', 'no-such-id');
-    expect(mock.errors).toEqual(['Finding not found in ledger.']);
+    expect(mock.errors).toEqual([
+      'Failed to update finding status: No finding has that id. Use an id from a review result or from the findings list.',
+    ]);
     expect(loadLedger(root).entries.every((entry) => entry.status === 'open')).toBe(true);
   });
 
   it('ignores a tree node that is not a finding', async () => {
-    setup();
+    await setup();
     const handler = mock.commands.get('debuggatha.resolveFinding') as (
       item: FindingTreeItem,
     ) => Promise<void>;
@@ -119,20 +122,20 @@ describe('finding lifecycle commands', () => {
   });
 
   it('does nothing without an open workspace', async () => {
-    const { fromTree } = setup();
+    const { fromTree } = await setup();
     mock.workspaceFolders = undefined;
     await fromTree('debuggatha.resolveFinding');
     expect(mock.errors).toEqual([]);
   });
 
   it('logs each change without the code it is about', async () => {
-    const { fromTree } = setup();
+    const { fromTree } = await setup();
     await fromTree('debuggatha.resolveFinding');
     expect(mock.outputLines.some((line) => line.includes('Finding status changed'))).toBe(true);
   });
 
-  it('toggles the resolved-findings filter on the tree', () => {
-    const { services } = setup();
+  it('toggles the resolved-findings filter on the tree', async () => {
+    const { services } = await setup();
     let fired = 0;
     services.findings.onDidChangeTreeData(() => {
       fired += 1;

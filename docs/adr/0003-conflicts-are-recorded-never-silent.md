@@ -1,8 +1,6 @@
 # 0003. Rule conflicts are recorded with explicit precedence, never silently merged
 
-## Status
-
-Accepted
+Status: Accepted
 
 ## Context
 

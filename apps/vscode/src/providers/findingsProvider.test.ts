@@ -1,5 +1,5 @@
-import type { LedgerEntry } from '@debuggatha/engine';
 import { beforeEach, describe, expect, it } from 'vitest';
+import type { LedgerEntry } from '../contracts/index.js';
 import { resetMock } from '../test/vscode-mock.js';
 import { FindingsProvider, type FindingTreeItem } from './findingsProvider.js';
 

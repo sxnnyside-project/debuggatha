@@ -1,26 +1,23 @@
-import {
-  assemblePolicy,
-  buildRepositoryContext,
-  createReviewRequest,
-  resolveRequestedPackIds,
-} from '@debuggatha/engine';
 import { afterAll, describe, expect, it } from 'vitest';
-import { makeRepo, removeRepos } from '../test/fixtures.js';
+import type { RepositoryContext, ReviewPolicy } from '../contracts/index.js';
+import { removeRepos } from '../test/fixtures.js';
 import { IntelligenceProvider } from './intelligenceProvider.js';
 
 afterAll(removeRepos);
 
+/** What the daemon's `repository/context` and `repository/policy` answer for a small repository. */
 function loaded() {
-  const { root } = makeRepo();
-  const context = buildRepositoryContext(root);
-  const policy = assemblePolicy(
-    context,
-    createReviewRequest({
-      scope: { kind: 'workspace' },
-      depth: 'full',
-      requestedPackIds: resolveRequestedPackIds([]),
-    }),
-  );
+  const context = {
+    rootDir: '/w',
+    stack: {
+      languages: [{ value: 'typescript' }],
+      frameworks: [{ value: 'react' }],
+      buildSystems: [{ value: 'bun' }],
+    },
+    documentation: { sources: [{ kind: 'readme', file: 'README.md' }] },
+    criteria: { rules: [{ id: 'strict-types', description: 'Types are strict.' }] },
+  } as unknown as RepositoryContext;
+  const policy: ReviewPolicy = { id: 'p-1', packRefs: [{ id: 'typescript', version: '1.0.0' }] };
   const provider = new IntelligenceProvider();
   provider.refresh(context, policy);
   return { provider, context, policy };

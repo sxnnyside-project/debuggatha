@@ -47,9 +47,24 @@ echo '[]'
   return { pidFile };
 }
 
+/**
+ * The binary the extension runs as its engine. `debuggatha.cliPath` is machine scope, so it goes in
+ * the user's settings, where a workspace could not put it.
+ */
+function useBinary(userData: string): void {
+  const cli = process.env.DEBUGGATHA_CLI;
+  if (!cli) throw new Error('Set DEBUGGATHA_CLI to the debuggatha binary (just test-vscode does).');
+  mkdirSync(join(userData, 'User'), { recursive: true });
+  writeFileSync(
+    join(userData, 'User', 'settings.json'),
+    JSON.stringify({ 'debuggatha.cliPath': cli }),
+  );
+}
+
 async function main() {
   const workspace = makeWorkspace();
   const userData = mkdtempSync(join(tmpdir(), 'debuggatha-itest-user-'));
+  useBinary(userData);
   const extensionsDir = mkdtempSync(join(tmpdir(), 'debuggatha-itest-ext-'));
   const { pidFile } = fakeRuff(workspace);
 

@@ -3,6 +3,8 @@
 //! never taken for a header. Context and removed lines are counted, never returned as code to
 //! review.
 
+pub mod review;
+
 use std::collections::BTreeSet;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -43,7 +43,12 @@ export async function suppressInline(
   const document = await vscode.workspace.openTextDocument(vscode.Uri.file(file));
   const line = Math.max(0, (finding.locations[0]?.lines?.start ?? 1) - 1);
   if (line >= document.lineCount) return false;
-  const { text: comment, line: at } = suppressionEdit(finding, document.lineAt(line).text, text);
+  const { text: comment, line: at } = suppressionEdit(
+    finding,
+    document.lineAt(line).text,
+    text,
+    await services.daemon.inlineComment(id),
+  );
 
   const edit = new vscode.WorkspaceEdit();
   edit.insert(document.uri, new vscode.Position(at, 0), comment);

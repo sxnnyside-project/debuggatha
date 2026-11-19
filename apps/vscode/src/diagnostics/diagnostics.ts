@@ -1,5 +1,5 @@
-import type { Severity } from '@debuggatha/engine';
 import * as vscode from 'vscode';
+import type { Severity } from '../contracts/index.js';
 import type { FindingIndex, IndexedFinding } from '../findings/index.js';
 import { provenanceOf, ruleOf } from '../findings/present.js';
 

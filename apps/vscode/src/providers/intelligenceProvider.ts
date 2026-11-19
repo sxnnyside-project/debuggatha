@@ -1,10 +1,10 @@
-import type { RepositoryContext, ReviewPolicy } from '@debuggatha/engine';
 import * as vscode from 'vscode';
+import type { RepositoryContext, ReviewPolicy } from '../contracts/index.js';
 
 export class IntelligenceProvider implements vscode.TreeDataProvider<IntelligenceTreeItem> {
-  private _onDidChangeTreeData: vscode.EventEmitter<IntelligenceTreeItem | undefined | void> =
-    new vscode.EventEmitter<IntelligenceTreeItem | undefined | void>();
-  readonly onDidChangeTreeData: vscode.Event<IntelligenceTreeItem | undefined | void> =
+  private _onDidChangeTreeData: vscode.EventEmitter<IntelligenceTreeItem | undefined> =
+    new vscode.EventEmitter<IntelligenceTreeItem | undefined>();
+  readonly onDidChangeTreeData: vscode.Event<IntelligenceTreeItem | undefined> =
     this._onDidChangeTreeData.event;
 
   private context?: RepositoryContext;
@@ -13,7 +13,7 @@ export class IntelligenceProvider implements vscode.TreeDataProvider<Intelligenc
   refresh(context: RepositoryContext, policy: ReviewPolicy): void {
     this.context = context;
     this.policy = policy;
-    this._onDidChangeTreeData.fire();
+    this._onDidChangeTreeData.fire(undefined);
   }
 
   getTreeItem(element: IntelligenceTreeItem): vscode.TreeItem {

@@ -81,7 +81,7 @@ fn detection_views(root: &Path, scope: &Scope<'_>, max_lines: usize) -> Vec<Code
             .iter()
             .filter_map(|path| {
                 // A file that is gone has nothing to read.
-                let text = crate::diff_review::read_text(root, path).ok()?;
+                let text = crate::diff::review::read_text(root, path).ok()?;
                 Some(CodeView {
                     file: path.clone(),
                     lines: text

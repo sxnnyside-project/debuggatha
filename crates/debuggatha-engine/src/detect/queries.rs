@@ -6,15 +6,14 @@
 //! `bin/` script prints as its output.
 
 use std::path::Path;
-use std::sync::OnceLock;
 
-use super::calls::one_per_line;
 use super::hit::Hit;
 use super::input::DetectorInput;
-use super::js::{Lines, make_hit};
+use super::rules::calls::one_per_line;
+use super::rules::js::{Lines, make_hit};
 use super::runner::Registry;
 use crate::scan_scope::is_test_path;
-use crate::syntax::{FileSyntax, Language, Query, QueryMatch, Span};
+use crate::syntax::{FileSyntax, Language, QueryMatch, QuerySet, Span};
 use debuggatha_core::review_engine::{Confidence, EditSafety};
 
 /// The rules this group answers for.
@@ -30,36 +29,12 @@ const SOURCES: [(Language, &str); 2] = [
     (Language::Dart, include_str!("../../data/queries/dart.scm")),
 ];
 
-/// Compiled on first use: a repository holds a few languages, and every query costs milliseconds.
-fn compiled(index: usize) -> &'static Result<Query, String> {
-    static QUERIES: [OnceLock<Result<Query, String>>; SOURCES.len()] =
-        [const { OnceLock::new() }; SOURCES.len()];
-    QUERIES[index].get_or_init(|| {
-        let (language, source) = SOURCES[index];
-        Query::new(language, source).map_err(|e| e.to_string())
-    })
-}
+static QUERIES: QuerySet<{ SOURCES.len() }> = QuerySet::new(SOURCES);
 
 /// Why a query does not compile, if any (a test asserts there is none).
 #[must_use]
 pub fn compile_errors() -> Vec<String> {
-    SOURCES
-        .iter()
-        .enumerate()
-        .filter_map(|(i, (l, _))| {
-            compiled(i)
-                .as_ref()
-                .err()
-                .map(|e| format!("{}: {e}", l.id()))
-        })
-        .collect()
-}
-
-fn query_for(language: Language) -> Option<&'static Query> {
-    SOURCES
-        .iter()
-        .position(|(l, _)| *l == language)
-        .and_then(|i| compiled(i).as_ref().ok())
+    QUERIES.errors()
 }
 
 fn capture(m: &QueryMatch, name: &str) -> Option<Span> {
@@ -234,7 +209,7 @@ pub fn detect(input: &DetectorInput<'_>) -> Vec<(&'static str, Hit)> {
         return Vec::new();
     };
     let language = syntax.language;
-    let Some(query) = query_for(language) else {
+    let Some(query) = QUERIES.query_for(language) else {
         return Vec::new();
     };
     let Ok(matches) = query.run(syntax as &FileSyntax, input.content) else {

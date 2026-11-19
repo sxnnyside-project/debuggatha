@@ -1,8 +1,30 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { randomUUID } from 'node:crypto';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { executeReview } from '@debuggatha/engine';
+import { join, resolve } from 'node:path';
+import type { Finding, LedgerEntry } from '../contracts/index.js';
+
+export type { Finding, LedgerEntry };
+
+/** The binary the tests drive: `cargo build -p debuggatha-cli` makes it (the global setup does). */
+export const CLI =
+  process.env.DEBUGGATHA_CLI ??
+  resolve(import.meta.dirname, '..', '..', '..', '..', 'target', 'debug', 'debuggatha');
+
+/** A finding as a test needs one: the fields a detector would always give, the rest defaulted. */
+export function createFinding(input: Record<string, unknown>): Finding {
+  return { id: randomUUID(), recommendations: [], ...input } as unknown as Finding;
+}
+
+/** What the daemon wrote to `.debuggatha/ledger.json`: the persisted, versioned file. */
+export function loadLedger(root: string): { entries: LedgerEntry[] } {
+  try {
+    return JSON.parse(readFileSync(join(root, '.debuggatha', 'ledger.json'), 'utf8'));
+  } catch {
+    return { entries: [] };
+  }
+}
 
 /** Source that the detected packs flag: `any`, `==`, `eval`, and a hardcoded secret. */
 export const BAD_SOURCE =
@@ -23,15 +45,10 @@ export function makeRepo(source = BAD_SOURCE): { root: string; badFile: string }
   return { root, badFile };
 }
 
-/** Runs a real workspace review so the repository has a ledger with genuine entries. */
-export function seedLedger(root: string) {
-  return executeReview({
-    rootDir: root,
-    scope: { kind: 'workspace' },
-    depth: 'full',
-    packIds: [],
-    policyId: undefined,
-    sourceName: 'vscode-test',
+/** Runs a real workspace review with the binary, so the repository has a ledger with genuine entries. */
+export function seedLedger(root: string): void {
+  execFileSync(CLI, ['--root', root, 'review', '--all', '--fail-on', 'none', '--quiet'], {
+    stdio: 'ignore',
   });
 }
 

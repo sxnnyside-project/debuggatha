@@ -1,4 +1,3 @@
-import { getEntry, loadLedger, saveLedger, updateFindingStatus } from '@debuggatha/engine';
 import * as vscode from 'vscode';
 import type { FindingsProvider, FindingTreeItem } from '../providers/findingsProvider.js';
 import type { Services } from '../services.js';
@@ -37,23 +36,16 @@ export async function changeFindingStatus(
   id: string,
   status: Target,
 ): Promise<void> {
-  const rootDir = services.rootDir;
-  if (!rootDir) return;
+  if (!services.rootDir) return;
 
   try {
-    const ledger = loadLedger(rootDir);
-    const entry = getEntry(ledger, id);
-    if (!entry) {
-      vscode.window.showErrorMessage('Finding not found in ledger.');
-      return;
-    }
-    if (entry.status === status) return;
-
-    // The ledger is immutable: the update returns a new ledger to persist.
-    saveLedger(updateFindingStatus(ledger, id, status, { kind: 'manual', actor: 'vscode' }));
+    const entry = services.index.entry(id);
+    if (entry?.status === status) return;
+    // The daemon enforces the lifecycle: an illegal move comes back as an error.
+    await services.daemon.setStatus(id, status);
     services.logger.info('Finding status changed', { id, status });
     // Resolved and dismissed findings leave the editor's problem list.
-    services.refreshFromLedger();
+    await services.refreshFromLedger();
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     services.logger.error("Could not change a finding's status", { id, reason: message });

@@ -3,8 +3,8 @@
 use std::path::Path;
 
 use super::{Descriptor, ManifestFile};
-use crate::analysis::resolve::{Resolution, Unresolved};
-use crate::analysis::workspace::{Workspace, dirname, join};
+use crate::analysis::structure::resolve::{Resolution, Unresolved};
+use crate::analysis::structure::workspace::{Workspace, dirname, join};
 
 pub(super) fn resolve(
     ws: &Workspace,

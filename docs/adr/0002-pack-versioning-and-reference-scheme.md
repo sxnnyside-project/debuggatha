@@ -1,8 +1,6 @@
 # 0002. Review Packs are semver-versioned; `ReviewPackReference` carries a real `version` field
 
-## Status
-
-Accepted
+Status: Accepted
 
 ## Context
 

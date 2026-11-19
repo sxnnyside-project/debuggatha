@@ -1,8 +1,6 @@
 # 0001. `core/knowledge-system` owns the Pack and Policy domain logic
 
-## Status
-
-Accepted
+Status: Accepted
 
 ## Context
 

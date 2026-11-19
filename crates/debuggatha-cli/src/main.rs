@@ -1,30 +1,19 @@
 //! The `debuggatha` binary.
 
-mod analyzers;
-mod baseline;
-mod completion;
+mod commands;
 mod config;
-mod doctor;
-mod findings;
-mod formats;
-mod init;
 mod mcp;
-mod mcp_http;
-mod mcp_input;
-mod mcp_server;
-mod memory;
-mod packs;
-mod policies;
 mod report;
-mod repository;
-mod review;
 mod serve;
-mod trends;
 
 use std::path::PathBuf;
 use std::process::ExitCode;
 
 use clap::{Parser, Subcommand};
+use commands::{
+    analyzers, baseline, completion, doctor, findings, init, memory, packs, policies, repository,
+    review, trends,
+};
 
 /// Exit codes of every command: `0` clean, `2` findings at or above the threshold, `1` error.
 const FINDINGS: u8 = 2;
@@ -34,8 +23,17 @@ const ERROR: u8 = 1;
 #[command(name = "debuggatha", version = debuggatha_engine::VERSION, about = "A senior code reviewer that cites a real source for every finding.")]
 pub(crate) struct Cli {
     /// The repository the command works on.
-    #[arg(long, global = true)]
+    #[arg(
+        long,
+        short = 'C',
+        visible_alias = "cwd",
+        env = "DEBUGGATHA_REPOSITORY_ROOT",
+        global = true
+    )]
     root: Option<PathBuf>,
+    /// Print JSON: the same as `--format json`.
+    #[arg(long, global = true, conflicts_with = "format")]
+    json: bool,
     /// How to print: `review` knows all of them, the other commands only text and json.
     #[arg(long, global = true, value_enum)]
     format: Option<report::ReportFormat>,
@@ -133,7 +131,11 @@ fn main() -> ExitCode {
     let context = Context {
         root_given: cli.root.is_some(),
         root: cli.root.unwrap_or_else(|| PathBuf::from(".")),
-        report: cli.format,
+        report: if cli.json {
+            Some(report::ReportFormat::Json)
+        } else {
+            cli.format
+        },
     };
     let outcome = match cli.command {
         Command::Review(args) => review::run(&context, &args),

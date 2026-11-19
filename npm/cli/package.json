@@ -1,0 +1,46 @@
+{
+  "name": "@sxnnyside/debuggatha-cli",
+  "version": "0.3.0",
+  "description": "A senior code reviewer that cites a real source for every finding. Launches the native debuggatha binary.",
+  "license": "MIT",
+  "author": "Sxnnyside Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxnnyside-project/debuggatha.git",
+    "directory": "npm/cli"
+  },
+  "homepage": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "bugs": {
+    "url": "https://github.com/sxnnyside-project/debuggatha/issues"
+  },
+  "keywords": [
+    "code-review",
+    "cli",
+    "debuggatha"
+  ],
+  "type": "module",
+  "bin": {
+    "debuggatha": "./bin.js"
+  },
+  "exports": {
+    "./launch": "./launch.js"
+  },
+  "files": [
+    "bin.js",
+    "launch.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "optionalDependencies": {
+    "@sxnnyside/debuggatha-darwin-arm64": "0.3.0",
+    "@sxnnyside/debuggatha-linux-x64": "0.3.0",
+    "@sxnnyside/debuggatha-linux-arm64": "0.3.0",
+    "@sxnnyside/debuggatha-win32-x64": "0.3.0"
+  }
+}

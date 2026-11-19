@@ -1,6 +1,12 @@
 # Benchmarks
 
+<!-- Baseline performance measurements and how to take them; for maintainers. -->
+
+The TypeScript commands below were run from the engine that was removed from the tree (tag `ts-engine-final`); the figures are kept as the baseline the native engine is measured against.
+
 Baseline performance measurements for Debuggatha CLI.
+
+---
 
 ## Measurement Protocol
 
@@ -37,3 +43,7 @@ hyperfine --warmup 1 'bun packages/cli/src/bin.ts review --files packages/core/s
 - Before the fixes below the same run took 3.3 s (whole repository) and 148 ms (one file). Profiling found three causes, all fixed: the queries of every language were compiled on the first use of any (now each language compiles when a file of it appears); the call-to-concept lookup compared every call against every wildcard entry (now exact entries are a map and patterns are rejected by their prefix and suffix first); and the environment, pattern and query detectors compiled all their languages eagerly.
 - With analyzers on, whatever is installed runs in both engines (Biome here adds about 0.4 s to each); that is the tool's time.
 - Not measured: Linux and Windows; a repository of a single language; the semantic pass; a cold disk cache; a repository larger than this one. The remaining time is spread over parsing, masking and query matching with no single hot spot.
+
+---
+
+*Last updated: 2026-11-19*

@@ -9,7 +9,7 @@ use debuggatha_core::env::Env;
 use debuggatha_core::knowledge_system::ReviewPolicy;
 use debuggatha_engine::detect::coverage::SkipReason;
 use debuggatha_engine::detect::default_registry;
-use debuggatha_engine::diff_review::{DiffReviewError, review_diff};
+use debuggatha_engine::diff::review::{DiffReviewError, review_diff};
 use debuggatha_engine::git::GitError;
 use serde_json::json;
 
@@ -78,7 +78,7 @@ impl Drop for Repo {
     }
 }
 
-fn lines_of(review: &debuggatha_engine::diff_review::DiffReview) -> Vec<(String, u32)> {
+fn lines_of(review: &debuggatha_engine::diff::review::DiffReview) -> Vec<(String, u32)> {
     review
         .run
         .findings
@@ -90,7 +90,7 @@ fn lines_of(review: &debuggatha_engine::diff_review::DiffReview) -> Vec<(String,
         .collect()
 }
 
-fn review(root: &Path, base: Option<&str>) -> debuggatha_engine::diff_review::DiffReview {
+fn review(root: &Path, base: Option<&str>) -> debuggatha_engine::diff::review::DiffReview {
     review_diff(root, base, &policy(), &default_registry(), &FixedEnv).expect("review")
 }
 

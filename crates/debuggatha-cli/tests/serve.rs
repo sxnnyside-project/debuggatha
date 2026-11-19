@@ -324,6 +324,48 @@ fn requests_run_side_by_side_and_answer_by_id() {
 }
 
 #[test]
+fn the_policy_a_review_would_assemble_is_a_read_method() {
+    let repo = Repo::new("policy");
+    let mut daemon = Daemon::start(&repo, &[]);
+    daemon.hello();
+    let policy = daemon.request("repository/policy", json!({ "packIds": [] }));
+    assert_eq!(policy["ok"], true, "{policy}");
+    assert!(policy["result"]["policy"]["id"].is_string());
+    assert_ne!(
+        policy["result"]["policy"]["packRefs"]
+            .as_array()
+            .unwrap()
+            .len(),
+        0
+    );
+    daemon.finish();
+}
+
+#[test]
+fn a_files_review_for_a_client_that_saves_leaves_out_what_the_project_does_not_own() {
+    let repo = Repo::new("owned");
+    std::fs::create_dir_all(repo.0.join("node_modules/dep")).unwrap();
+    std::fs::write(
+        repo.0.join("node_modules/dep/index.js"),
+        "const x = eval(input);\n",
+    )
+    .unwrap();
+    let mut daemon = Daemon::start(&repo, &[]);
+    daemon.hello();
+    let review = |daemon: &mut Daemon, owned: bool| {
+        daemon.request(
+            "review/run",
+            json!({ "scope": { "kind": "files", "paths": ["node_modules/dep/index.js"], "owned": owned },
+                    "persist": false }),
+        )
+    };
+    assert_eq!(review(&mut daemon, false)["result"]["findings"], 1);
+    let owned = review(&mut daemon, true);
+    assert_eq!(owned["error"]["code"], "nothing_to_review", "{owned}");
+    daemon.finish();
+}
+
+#[test]
 fn shutdown_answers_and_ends_the_session() {
     let repo = Repo::new("shutdown");
     let mut daemon = Daemon::start(&repo, &[]);

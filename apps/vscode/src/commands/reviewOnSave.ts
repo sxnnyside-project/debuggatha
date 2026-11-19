@@ -1,6 +1,6 @@
-import { isIgnoredPath, toRepoRelative } from '@debuggatha/engine';
 import * as vscode from 'vscode';
 import { getSettings } from '../config/settings.js';
+import { toRepoRelative } from '../paths.js';
 import type { Services } from '../services.js';
 import { runReview } from './review.js';
 
@@ -21,16 +21,15 @@ export function registerReviewOnSave(context: vscode.ExtensionContext, services:
       if (document.uri.scheme !== 'file') return;
 
       const relative = toRepoRelative(rootDir, document.uri.fsPath);
-      // Outside the workspace (still absolute), or code the project does not own.
+      // Outside the workspace (still absolute). Code the project does not own is the daemon's call.
       if (relative.startsWith('/') || /^[a-zA-Z]:/.test(relative)) return;
-      if (isIgnoredPath(rootDir, relative)) return;
 
       if (timer) clearTimeout(timer);
       timer = setTimeout(() => {
         timer = undefined;
         void runReview(
           services,
-          { kind: 'file', path: document.uri.fsPath },
+          { kind: 'file', path: relative, owned: true },
           { origin: 'save', widen: false },
         );
       }, SAVE_DEBOUNCE_MS);

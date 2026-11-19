@@ -1,40 +1,34 @@
-import { addedLinesByFile } from '@debuggatha/engine';
 import { describe, expect, it } from 'vitest';
 import { planReview, selectionDiff } from './plan.js';
 
 const settings = (over: Partial<Parameters<typeof planReview>[1]> = {}) => ({
   reviewDepth: 'full' as const,
-  enabledAnalyzers: [],
   ...over,
 });
 
 describe('planReview', () => {
-  it('full runs the analyzers that are safe by themselves, and only the ones the person listed beyond them', () => {
-    const plan = planReview(
-      { kind: 'workspace' },
-      settings({ enabledAnalyzers: ['eslint'] }),
-      true,
-    );
-    expect(plan.analyzers).toEqual({ mode: 'auto', enable: ['eslint'] });
+  it("full runs the analyzers that are safe by themselves; the ones that run code are the person's, at start", () => {
+    const plan = planReview({ kind: 'workspace' }, settings(), true);
+    expect(plan.analyzers).toEqual({ mode: 'auto' });
     expect(plan.scope).toEqual({ kind: 'workspace' });
     expect(plan.notes).toEqual([]);
   });
 
   it('quick runs the built-in detectors only', () => {
     const plan = planReview(
-      { kind: 'file', path: '/w/a.ts' },
+      { kind: 'file', path: 'a.ts' },
       settings({ reviewDepth: 'quick' }),
       true,
     );
     expect(plan.analyzers).toEqual({ mode: 'off' });
-    expect(plan.scope).toEqual({ kind: 'files', paths: ['/w/a.ts'] });
+    expect(plan.scope).toEqual({ kind: 'files', paths: ['a.ts'] });
   });
 
   it('architectural widens a file or a diff to the whole repository, and says so', () => {
     for (const request of [
-      { kind: 'file', path: '/w/a.ts' },
+      { kind: 'file', path: 'a.ts' },
       { kind: 'diff', diff: 'x' },
-      { kind: 'selection', diff: 'x', path: '/w/a.ts' },
+      { kind: 'selection', diff: 'x', path: 'a.ts' },
     ] as const) {
       const plan = planReview(request, settings({ reviewDepth: 'architectural' }), true);
       expect(plan.scope).toEqual({ kind: 'workspace' });
@@ -56,27 +50,25 @@ describe('planReview', () => {
 
   it('an untrusted workspace never runs an analyzer, whatever the depth or the settings', () => {
     for (const reviewDepth of ['quick', 'full', 'architectural'] as const) {
-      const plan = planReview(
-        { kind: 'workspace' },
-        settings({ reviewDepth, enabledAnalyzers: ['eslint', 'phpstan'] }),
-        false,
-      );
+      const plan = planReview({ kind: 'workspace' }, settings({ reviewDepth }), false);
       expect(plan.analyzers).toEqual({ mode: 'off' });
       expect(plan.notes.join(' ')).toContain('not trusted');
     }
   });
 
+  it('a diff review without a diff leaves the working tree to the daemon', () => {
+    expect(planReview({ kind: 'diff' }, settings(), true).scope).toEqual({ kind: 'diff' });
+  });
+
   it('a diff or a selection reviews as a diff', () => {
     expect(planReview({ kind: 'diff', diff: 'D' }, settings(), true).scope).toEqual({
       kind: 'diff',
-      base: undefined,
       diff: 'D',
     });
     expect(
-      planReview({ kind: 'selection', diff: 'S', path: '/w/a.ts' }, settings(), true).scope,
+      planReview({ kind: 'selection', diff: 'S', path: 'a.ts' }, settings(), true).scope,
     ).toEqual({
       kind: 'diff',
-      base: undefined,
       diff: 'S',
     });
   });
@@ -88,7 +80,5 @@ describe('selectionDiff', () => {
     expect(diff).toBe(
       '--- a/src/a.ts\n+++ b/src/a.ts\n@@ -0,0 +41,2 @@\n+var x = 1;\n+  eval(x);\n',
     );
-    // The engine reads it as those two lines, numbered where they are in the file.
-    expect(addedLinesByFile(diff)).toEqual(new Map([['src/a.ts', new Set([41, 42])]]));
   });
 });

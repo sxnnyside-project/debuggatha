@@ -1,3 +1,5 @@
+pub(crate) mod formats;
+
 use debuggatha_engine::analyzers::{AnalyzerRun, Status};
 use debuggatha_engine::core::review_engine::{
     Evidence, Finding, ReviewSummary, SemanticRole, SemanticVerdict,
@@ -5,7 +7,7 @@ use debuggatha_engine::core::review_engine::{
 use debuggatha_engine::pipeline::ReviewOutput;
 use serde_json::json;
 
-use crate::formats::{self, analyzer_of, rule_id_of, severity_name};
+use self::formats::{analyzer_of, rule_id_of, severity_name};
 
 /// What every command but `review` can print.
 #[derive(Clone, Copy, PartialEq, Eq)]

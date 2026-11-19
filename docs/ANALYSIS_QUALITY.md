@@ -1,9 +1,13 @@
 # Analysis engine quality on the corpus (phase 4)
 
+<!-- How the analysis stages were compared on the corpus; for reviewers of the analysis engine. -->
+
 The analysis stages **discover**, they do not judge (`CLAUDE.md`). Their quality is whether the model
 they build is right, so this file records what each stage was compared with, not a false-positive
-rate. Every difference with the TypeScript engine is in `docs/PARITY.md`; `tests/corpus_graph.rs`
+rate. Every difference with the TypeScript engine is in `docs/PARITY.md`; `tests/corpus/graph.rs`
 fails on any difference nobody explained.
+
+---
 
 ## Module boundaries, import resolution, dependency graph
 
@@ -14,7 +18,7 @@ manifests), so it is tested with a few lines of text. Scope decided with the per
 
 **Proof.**
 
-- 46 hand-written cases in `tests/boundaries_and_graph.rs` and `tests/rust_module_tree.rs` (every import form, text that only looks
+- 46 hand-written cases in `tests/analysis/boundaries_and_graph.rs` and `tests/analysis/rust_module_tree.rs` (every import form, text that only looks
   like an import, computed specifiers, the lines of imports in components, TypeScript's extension and `index`
   order, `paths`/`baseUrl`/`extends` with comments in the JSON, a mapping that misses, workspace package names,
   Cargo members and globs, a root crate, `mod` files, `#[path]`, inline modules, `super`/`self`/`crate`, group
@@ -23,7 +27,7 @@ manifests), so it is tested with a few lines of text. Scope decided with the per
   nothing (a `quasis.len()` test that is always 1, a length sort that no input can tell apart, a recursion depth
   already covered by the cycle guard) and were removed, and 8 became cases.
 - **Against the TypeScript engine** (`scripts/parity/dump-analysis.ts` dumps its boundaries and graph;
-  `tests/corpus_graph.rs` compares): 137 edges identical; 5 the TypeScript found and this does not (all read,
+  `tests/corpus/graph.rs` compares): 137 edges identical; 5 the TypeScript found and this does not (all read,
   all in `PARITY.md`); every edge only this one finds comes from Rust, a component, an `.mts` file or an alias.
 - **Against `cargo metadata --no-deps`** (an independent oracle for declared edges): `ripgrep` 17/17, `obfusku`
   20/20, `syntaxeon` 27/27, `clap` 9/9. The first run missed the edges of a root crate that is also a package
@@ -56,7 +60,7 @@ presentation: an inner layer using an outer one) is a violation; a cycle is a st
 the graph (Tarjan, iterative: 30,000 modules in one loop do not overflow the stack), with the shortest way
 round and an impact by size (2 low, 3 medium, 4 or more high).
 
-**Proof.** 14 hand cases (`tests/layers_and_cycles.rs`): 35 names for the layer model, every direction of the
+**Proof.** 14 hand cases (`tests/analysis/layers_and_cycles.rs`): 35 names for the layer model, every direction of the
 layer order, unknown ends, merged evidence and the explanation text, cycles of 2, 3 and 4 modules, overlapping
 and disjoint loops, a node leading into or out of a cycle, an edge into a finished component, the order of the
 result. 19 mutations: 4 survived the first round (a same-layer edge, the sort of the modules, the on-stack test
@@ -111,8 +115,8 @@ and its scopes), `analysis/public_api.rs` (JavaScript and TypeScript), `analysis
   declared in the changed files, and lists files no module owns. Confidence falls to `medium` for an unmapped file,
   a file the graph could not read, computed imports, or a public name, and to `low` when no file belongs to a module.
 
-**Proof.** 63 hand cases (`tests/module_api.rs`). Two mutation rounds, 64 mutations, each fails a case (the script tells a failing case from a compile error). Against the
-TypeScript engine on the 61 repositories (`tests/corpus_module_api.rs`), every difference needs a rule that
+**Proof.** 63 hand cases (`tests/analysis/module_api.rs`). Two mutation rounds, 64 mutations, each fails a case (the script tells a failing case from a compile error). Against the
+TypeScript engine on the 61 repositories (`tests/corpus/module_api.rs`), every difference needs a rule that
 explains it and the test fails otherwise:
 
 | Stage | Same | Different, explained | Unexplained |
@@ -198,7 +202,10 @@ and Swift, C++ and GDScript have no declarations.
 
 On the 61-repository corpus it takes 38 s for 364 modules and does not fail. Surfaces by language (modules, of them read): C# 18/18, Dart 51/51, Elixir 1/1, Go 9/9, Java 24/24, JavaScript 155/85, Kotlin 10/10, PHP 43/43, Python 13/13, Ruby 6/6, Rust 34/34. The 70 JavaScript modules not read hold no JavaScript file: a nested package whose files belong to its parent, or a directory of tests. Dead code is found in C#, Dart, Go, Java, JavaScript, Kotlin, PHP, Python, Ruby and TypeScript; 127 C++ and 69 GDScript files are not read.
 
-Three defects came out of running it on every language: a Swift package was not analyzed at all (the extension was not in the list the stages read, and Swift had no declarations in its adapter), an import of a package at the repository root made an edge to a module that did not exist and stopped the cycle search, and a surface said it was read when the language had no visibility rule. The three are fixed and have tests (`tests/polyglot_analysis.rs`, `tests/ecosystems.rs`, `tests/declared_api.rs`).
+Three defects came out of running it on every language: a Swift package was not analyzed at all (the extension was not in the list the stages read, and Swift had no declarations in its adapter), an import of a package at the repository root made an edge to a module that did not exist and stopped the cycle search, and a surface said it was read when the language had no visibility rule. The three are fixed and have tests (`tests/analysis/polyglot.rs`, `tests/analysis/ecosystems.rs`, `tests/analysis/declared_api.rs`).
 
 The comparison with the TypeScript engine (`just corpus-analysis`) explains each difference by a rule: a module, an edge, a name or a cycle that belongs to an ecosystem the TypeScript engine does not read.
 
+---
+
+*Last updated: 2026-11-19*

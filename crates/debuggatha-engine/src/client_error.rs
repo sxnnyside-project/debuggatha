@@ -11,7 +11,7 @@ use debuggatha_core::repository_memory::MemoryError;
 use debuggatha_core::review_engine::{EmptyFileScope, FindingError, IllegalTransition};
 use debuggatha_core::stored::StoreError;
 
-use crate::diff_review::DiffReviewError;
+use crate::diff::review::DiffReviewError;
 use crate::git::GitError;
 use crate::pipeline::PipelineError;
 use crate::syntax::QueryError;

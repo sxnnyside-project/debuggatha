@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
-import type { Finding } from '@debuggatha/engine';
 import * as vscode from 'vscode';
 import { registerLifecycleCommands } from './commands/lifecycle.js';
 import {
@@ -12,6 +9,9 @@ import {
 import { registerReviewOnSave } from './commands/reviewOnSave.js';
 import { suppressInline } from './commands/suppress.js';
 import { getSettings, onSettingsChanged } from './config/settings.js';
+import type { Finding } from './contracts/index.js';
+import { Daemon } from './daemon/api.js';
+import { DaemonConnection } from './daemon/connection.js';
 import { clearDiagnostics, initializeDiagnostics } from './diagnostics/diagnostics.js';
 import { Logger } from './logging.js';
 import { FindingCodeActionProvider } from './providers/codeActions.js';
@@ -20,26 +20,41 @@ import { FindingsProvider } from './providers/findingsProvider.js';
 import { FindingHoverProvider } from './providers/hover.js';
 import { IntelligenceProvider } from './providers/intelligenceProvider.js';
 import { ReviewCoordinator } from './review/coordinator.js';
-import { createInProcessRunner, createProcessRunner } from './runner/process-runner.js';
 import { Services } from './services.js';
 import { StatusBar } from './status/statusBar.js';
 
 let services: Services | undefined;
+let connection: DaemonConnection | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
   const output = vscode.window.createOutputChannel('Debuggatha');
   context.subscriptions.push(output);
   const logger = new Logger(output, () => getSettings().logLevel);
 
-  // Reviews run in their own process so a slow analyzer cannot freeze the editor and a review
-  // can be cancelled. Without the worker file (a bare checkout) they run in this process.
-  const workerPath = join(context.extensionPath ?? '', 'dist', 'review-worker.js');
-  const runner = existsSync(workerPath) ? createProcessRunner(workerPath) : createInProcessRunner();
-  if (!existsSync(workerPath)) logger.info('No review worker found; reviews run in this process');
+  // The engine is the `debuggatha` binary, run as a daemon: reviews happen in its process, so a slow
+  // analyzer cannot freeze the editor and a review can be cancelled.
+  connection = new DaemonConnection({
+    rootDir: () => vscode.workspace.workspaceFolders?.[0]?.uri.fsPath,
+    settings: () => {
+      const settings = getSettings();
+      const { provider, model, url } = settings.semantic;
+      return {
+        cliPath: settings.cliPath,
+        enabledAnalyzers: settings.enabledAnalyzers,
+        semantic: { provider, ...(model ? { model } : {}), ...(url ? { url } : {}) },
+        trusted: vscode.workspace.isTrusted,
+      };
+    },
+    client: {
+      name: 'debuggatha-vscode',
+      version: String(context.extension?.packageJSON?.version ?? '0.0.0'),
+    },
+  });
+  const daemon = new Daemon(connection);
 
   const status = new StatusBar(context);
   // "Cancel Review" is offered in the palette only while a review is running.
-  const coordinator = new ReviewCoordinator(runner, (running) => {
+  const coordinator = new ReviewCoordinator(daemon, (running) => {
     void vscode.commands.executeCommand(
       'setContext',
       'debuggatha.reviewing',
@@ -58,6 +73,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const shared = new Services(
     logger,
+    daemon,
     coordinator,
     findingsProvider,
     intelligenceProvider,
@@ -68,7 +84,7 @@ export function activate(context: vscode.ExtensionContext) {
   initializeDiagnostics(context);
 
   // Restore what the previous session found, so a reload does not look like a clean repository.
-  shared.refreshFromLedger();
+  void shared.refreshFromLedger();
 
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(
@@ -98,10 +114,11 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage('No workspace folder open.');
         return;
       }
-      await runReview(shared, await requestForDiff(rootDir), { origin: 'manual' });
+      await runReview(shared, requestForDiff(), { origin: 'manual' });
     }),
     vscode.commands.registerCommand('debuggatha.reviewActiveFile', async () => {
-      const request = requestForActiveFile();
+      const rootDir = shared.rootDir;
+      const request = rootDir ? requestForActiveFile(rootDir) : undefined;
       if (!request) {
         vscode.window.showErrorMessage('No active file to review.');
         return;
@@ -118,7 +135,8 @@ export function activate(context: vscode.ExtensionContext) {
       await runReview(shared, request, { origin: 'manual' });
     }),
     vscode.commands.registerCommand('debuggatha.reviewActiveFileWithModel', async () => {
-      const request = requestForActiveFile();
+      const rootDir = shared.rootDir;
+      const request = rootDir ? requestForActiveFile(rootDir) : undefined;
       if (!request) {
         vscode.window.showErrorMessage('No active file to review.');
         return;
@@ -143,14 +161,16 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     onSettingsChanged(() => {
       // The minimum severity decides which findings the editor shows.
-      shared.refreshFromLedger();
+      void shared.refreshFromLedger();
     }),
   );
 }
 
-export function deactivate() {
+export async function deactivate() {
   // A review still running is stopped, along with any analyzer it started.
   services?.coordinator.cancel();
   services = undefined;
   clearDiagnostics();
+  await connection?.dispose();
+  connection = undefined;
 }

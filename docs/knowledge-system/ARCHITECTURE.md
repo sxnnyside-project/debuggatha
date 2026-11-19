@@ -1,6 +1,10 @@
 # Knowledge System — Architecture
 
+<!-- How the knowledge system (packs, policies, rule resolution) is built; for contributors to it. -->
+
 The Knowledge System (`core/knowledge-system`) defines what a Skill, a Review Pack, a Rule, and a Review Policy are, how a registry answers "what exists and what does it need," and how a review's policy is assembled from packs and the repository's own criteria. It builds on [Repository Intelligence](../../packages/core/README.md#corerepository-intelligence), which produces `RepositoryContext` (what a repository *is*), and the [Review Engine domain](../../packages/core/README.md#corereview-engine), which defines `ReviewRequest`, `Finding`, and `Evidence` (what a review *produces*). Decisions are recorded in [ADR-0001 to ADR-0005](../adr).
+
+---
 
 ## 1. Design influences
 
@@ -54,7 +58,7 @@ Every step is pure and produces an immutable value: nothing mutates a `Repositor
 
 **Context Assembly** is a pure function `(RepositoryContext, ReviewRequest, ReviewPolicy | undefined) → SkillContext`. `SkillContext` is the one shape every Skill receives. Core Skills receive it with no policy (they run before any pack is selected); Review and Analysis Skills receive a resolved one.
 
-**Review Packs** (`@debuggatha/packs`) are content, not logic: `ReviewPack` values conforming to the schema this module defines, with no algorithms.
+**Review Packs** (`crates/debuggatha-engine/data/packs`) are content, not logic: `ReviewPack` values conforming to the schema this module defines, with no algorithms.
 
 **Policies** (`engine/policies`) wires a registry populated from the packs to `resolvePolicy` and exposes `assemblePolicy` as the call site the rest of the system uses.
 
@@ -93,7 +97,7 @@ Rules are declarative data, not executable code. A Rule cannot decide "this file
 
 ## 6. Lifecycle: defined to applied
 
-1. **Defined**: a `ReviewPack` is authored in `@debuggatha/packs` and checked by `validateReviewPack` (every `knowledgeRefs` entry resolves, every `dependsOn` is well-formed, ids are unique, limitations are present).
+1. **Defined**: a `ReviewPack` is authored as TOML in `data/packs` and checked by `validate_review_pack` (every `knowledgeRefs` entry resolves, every `dependsOn` is well-formed, ids are unique, limitations are present).
 2. **Registered**: the pack is added to a `CapabilityRegistry`.
 3. **Requested**: `ReviewRequest.requestedPackIds` (or `requestedPolicyId`, to re-run a policy) names what a session wants.
 4. **Resolved**: Rule Resolution turns the request and the `RepositoryContext` into a frozen `ReviewPolicy`, checking dependencies and recording conflicts.
@@ -120,11 +124,10 @@ A finding's `appliedPolicy` and `originatingPack` keep pointing at the exact pac
 
 ## 10. Adding a Review Pack
 
-1. Author a `ReviewPack` in `packages/packs/src/packs/<name>.ts` following §5 and the spec.
-2. Run `validateReviewPack` in the pack's tests.
-3. Add it to the exported array in `packages/packs/src/index.ts`.
+1. Author the pack as TOML in `crates/debuggatha-engine/data/packs/<name>.toml` following §5 and the spec.
+2. Add its `include_str!` line to the list in `crates/debuggatha-engine/src/packs.rs`; `tests/packs.rs` validates every pack on the list.
 
-No change is needed in `review-engine`, `policies`, `skills`, `mcp`, or `cli`: a well-formed pack is immediately requestable, because those packages depend on the schema, not on any pack's content.
+No change is needed in `review_engine`, the pipeline, the MCP server or the CLI: a well-formed pack is immediately requestable, because those packages depend on the schema, not on any pack's content.
 
 ## 11. Deliberately not built
 
@@ -144,4 +147,8 @@ No change is needed in `review-engine`, `policies`, `skills`, `mcp`, or `cli`: a
 
 ## 13. Boundaries
 
-`core/knowledge-system` depends on `core/repository-intelligence` and `core/review-engine`, never the reverse. `@debuggatha/packs` (content), `engine/policies` (wiring), and `engine/skills` (execution) depend on it. It consumes the review domain's types as they are and adds none to them.
+`core/knowledge-system` depends on `core/repository-intelligence` and `core/review-engine`, never the reverse. the packs (content), `engine/policies` (wiring), and `engine/skills` (execution) depend on it. It consumes the review domain's types as they are and adds none to them.
+
+---
+
+*Last updated: 2026-11-19*

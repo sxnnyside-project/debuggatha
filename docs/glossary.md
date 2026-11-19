@@ -1,6 +1,10 @@
 # Domain Glossary
 
+<!-- The vocabulary used across code, docs and findings; for everyone writing about Debuggatha. -->
+
 Canonical vocabulary used across Debuggatha code, documentation, interfaces, and findings.
+
+---
 
 | Term | Replaces | Meaning |
 |---|---|---|
@@ -12,3 +16,6 @@ Canonical vocabulary used across Debuggatha code, documentation, interfaces, and
 | **Findings Ledger** | Database / Issue list | Persistent state machine tracking findings across their full lifecycle (open, acknowledged, resolved, dismissed, reopened). |
 | **Repository Memory** | Settings | Persistent structured record of engineering decisions, accepted deviations, suppressions, and active conventions. |
 
+---
+
+*Last updated: 2026-11-19*

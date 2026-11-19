@@ -14,24 +14,28 @@ use crate::Context;
 
 #[derive(Clone, Copy, ValueEnum)]
 enum Runtime {
+    /// No model, which is also what leaving the option out means.
+    Off,
     Ollama,
     Lmstudio,
-    /// The model of the client that talks to the daemon, if it offers one.
+    /// The model of the client that talks to the daemon, if it offers one (`sampling` too).
+    #[value(alias = "sampling")]
     Host,
 }
 
 #[derive(ClapArgs)]
 pub(crate) struct Args {
     /// Analyzers clients may run although they load project code or use the network. Only the
-    /// person starting the daemon can allow them; a request never can.
-    #[arg(long, num_args = 1.., value_parser = clap::builder::PossibleValuesParser::new(ADAPTERS.iter().map(|a| a.id)))]
+    /// person starting the daemon can allow them; a request never can. `auto` (the default) adds
+    /// none: the tools that only read source always run unless a request turns them off.
+    #[arg(long, env = "DEBUGGATHA_ANALYZERS", value_delimiter = ',', num_args = 1.., value_parser = clap::builder::PossibleValuesParser::new(ADAPTERS.iter().map(|a| a.id).chain(["auto"])))]
     analyzer: Vec<String>,
     /// A model clients may ask to read the changed code: one on this machine, or their own.
-    #[arg(long, value_enum)]
+    #[arg(long, env = "DEBUGGATHA_SEMANTIC", value_enum)]
     semantic: Option<Runtime>,
-    #[arg(long, requires = "semantic")]
+    #[arg(long, env = "DEBUGGATHA_SEMANTIC_MODEL", requires = "semantic")]
     semantic_model: Option<String>,
-    #[arg(long, requires = "semantic")]
+    #[arg(long, env = "DEBUGGATHA_SEMANTIC_URL", requires = "semantic")]
     semantic_url: Option<String>,
 }
 
@@ -75,7 +79,7 @@ pub(crate) fn config_at(root: std::path::PathBuf, args: &Args) -> Result<Config,
     let local = match args.semantic {
         Some(Runtime::Ollama) => Some(LocalRuntime::Ollama),
         Some(Runtime::Lmstudio) => Some(LocalRuntime::LmStudio),
-        Some(Runtime::Host) | None => None,
+        Some(Runtime::Host | Runtime::Off) | None => None,
     };
     let semantic = local
         .map(|runtime| {
@@ -89,7 +93,12 @@ pub(crate) fn config_at(root: std::path::PathBuf, args: &Args) -> Result<Config,
         .transpose()?;
     Ok(Config {
         root,
-        enabled_analyzers: args.analyzer.clone(),
+        enabled_analyzers: args
+            .analyzer
+            .iter()
+            .filter(|id| *id != "auto")
+            .cloned()
+            .collect(),
         analyzer_search: path_dirs(),
         semantic,
         client_model,

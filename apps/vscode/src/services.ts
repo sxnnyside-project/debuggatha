@@ -1,6 +1,7 @@
-import { loadLedger } from '@debuggatha/engine';
 import * as vscode from 'vscode';
 import { getSettings } from './config/settings.js';
+import type { Daemon } from './daemon/api.js';
+import { DaemonUnavailable } from './daemon/connection.js';
 import { updateDiagnostics } from './diagnostics/diagnostics.js';
 import { FindingIndex } from './findings/index.js';
 import type { Logger } from './logging.js';
@@ -16,6 +17,7 @@ export class Services {
 
   constructor(
     readonly logger: Logger,
+    readonly daemon: Daemon,
     readonly coordinator: ReviewCoordinator,
     readonly findings: FindingsProvider,
     readonly intelligence: IntelligenceProvider,
@@ -29,22 +31,39 @@ export class Services {
   }
 
   /**
-   * Reads the ledger and brings the tree, the squiggles, and the status bar in line with it. The
-   * ledger is the source of truth: a review, a lifecycle change, and a reload all end here.
+   * Reads the ledger from the daemon and brings the tree, the squiggles, and the status bar in
+   * line with it. The ledger is the source of truth: a review, a lifecycle change, and a reload
+   * all end here.
    */
-  refreshFromLedger(): void {
+  async refreshFromLedger(): Promise<void> {
     const rootDir = this.rootDir;
     if (!rootDir) return;
     try {
-      const { entries } = loadLedger(rootDir);
-      this.findings.refresh([...entries]);
+      const entries = await this.daemon.ledger();
+      this.findings.refresh(entries);
       this.index.rebuild(entries, rootDir, getSettings().minimumSeverity);
       updateDiagnostics(this.index);
       this.status.showFindings(countShown(this.index));
     } catch (error) {
-      this.logger.error('Could not read the ledger', {
-        reason: error instanceof Error ? error.message : String(error),
-      });
+      const reason = error instanceof Error ? error.message : String(error);
+      this.logger.error('Could not read the ledger', { reason });
+      if (error instanceof DaemonUnavailable) await this.warnOnce(error);
+    }
+  }
+
+  private warned = false;
+
+  /** The binary is missing or does not fit: said once, with the setting that fixes it. */
+  private async warnOnce(error: DaemonUnavailable): Promise<void> {
+    this.status.failed(error.message);
+    if (this.warned) return;
+    this.warned = true;
+    const choice = await vscode.window.showErrorMessage(
+      `Debuggatha: ${error.message}`,
+      ...(error.setting ? ['Open Settings'] : []),
+    );
+    if (choice === 'Open Settings') {
+      void vscode.commands.executeCommand('workbench.action.openSettings', 'debuggatha.cliPath');
     }
   }
 }

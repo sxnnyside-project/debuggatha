@@ -1,6 +1,10 @@
 # Roadmap: from a regex reviewer to a native, syntax-aware one
 
+<!-- The plan, gates and record of the move to the native engine; for maintainers. -->
+
 This plan implements [ADR-0006](adr/0006-native-rust-core.md). It has no dates: each phase ends at a **gate**, and the next phase does not start until the gate is met. Sizes are relative (S, M, L, XL), not time.
+
+---
 
 Ground rules for every phase:
 
@@ -169,7 +173,7 @@ Status: **gate met.** The ledger (lifecycle, matching, persistence), repository 
   - Error leakage, open CORS, rate-limit absence on model-calling endpoints, non-idempotent webhook handlers, destructive migrations (each with its own negative corpus).
 - Anything that needs type information is documented as not covered.
 
-Status: **built.** The syntax layer: oxc for the JavaScript and TypeScript family, tree-sitter for thirteen other languages, the HTML grammar plus oxc for the scripts of Vue, Svelte and Astro; a parse status per file (`Parsed`, `ParsedWithErrors` with the error spans, `Failed`), comment, string and regex facts, `mask_source`, a query runner and inline suppression (`debuggatha-ignore`). Parse rate on the corpus (12,859 files, opt-in `tests/syntax_corpus.rs`, none failed): C# 99.5%, Elixir 99.5%, Go 99.3%, Java 99.6%, Python 99.7%, PHP 99.0%, Ruby 98.9%, Kotlin 98.8%, Rust 98.6%, GDScript 98.6%, HTML 98.5%, Dart 98.1%, Swift 95.9%, C++ 78.0% (no preprocessor; `Language::limited()`), JavaScript and TypeScript 98.6% to 100%. The detectors of the TypeScript engine are ported in five groups, compared detector by detector and then together against the golden findings; the new detectors (`require-await`, `no-loop-func`, `no-floating-promises`, `leak-mock-restore`, `n-plus-one-queries`, `a03-injection`, `validate-input`, `document-env-vars`) are measured on the corpus. Measurements and false-positive readings are in `docs/DETECTOR_QUALITY.md`; every divergence from the TypeScript engine is in `docs/PARITY.md`. A review states what it could not check (`coverage`); what needs type information is not covered.
+Status: **built.** The syntax layer: oxc for the JavaScript and TypeScript family, tree-sitter for thirteen other languages, the HTML grammar plus oxc for the scripts of Vue, Svelte and Astro; a parse status per file (`Parsed`, `ParsedWithErrors` with the error spans, `Failed`), comment, string and regex facts, `mask_source`, a query runner and inline suppression (`debuggatha-ignore`). Parse rate on the corpus (12,859 files, opt-in `tests/corpus/syntax_trees.rs`, none failed): C# 99.5%, Elixir 99.5%, Go 99.3%, Java 99.6%, Python 99.7%, PHP 99.0%, Ruby 98.9%, Kotlin 98.8%, Rust 98.6%, GDScript 98.6%, HTML 98.5%, Dart 98.1%, Swift 95.9%, C++ 78.0% (no preprocessor; `Language::limited()`), JavaScript and TypeScript 98.6% to 100%. The detectors of the TypeScript engine are ported in five groups, compared detector by detector and then together against the golden findings; the new detectors (`require-await`, `no-loop-func`, `no-floating-promises`, `leak-mock-restore`, `n-plus-one-queries`, `a03-injection`, `validate-input`, `document-env-vars`) are measured on the corpus. Measurements and false-positive readings are in `docs/DETECTOR_QUALITY.md`; every divergence from the TypeScript engine is in `docs/PARITY.md`. A review states what it could not check (`coverage`); what needs type information is not covered.
 
 Gate: quality bar met for every shipped detector; false-positive rates recorded; the 20-risk checklist (see below) mapped to detector, "delegated analyzer" or "not covered".
 
@@ -201,6 +205,8 @@ Status: the CLI is complete. The review pipeline is in the engine (`pipeline::ex
 - VS Code: runner replaced by a daemon client; `cliPath` is machine scope; handshake validates the version range; clear messages when the CLI is missing or incompatible; untrusted workspaces run built-in detectors only; integration tests on the minimum and stable VS Code versions still pass. The extension bundle drops the engine.
 - Contracts package generated from Rust; adapters import it, never the engine.
 
+Status: the VS Code extension is a client of the binary (2026-11-19). `apps/vscode/src/daemon` starts `debuggatha serve` (path from the machine-scope `debuggatha.cliPath`, else the PATH), does the handshake, checks the CLI version (`compat.ts`), speaks NDJSON, maps cancellation to the `cancel` event and progress to the notification, and restarts the daemon when a setting that decides how it starts changes (analyzers, model, trust, binary). The ledger, lifecycle changes, inline-accept comment, repository context and policy all come from daemon methods (`repository/policy` and `owned` on a files scope were added for it). The bundle is 31 KB with no engine and no worker; the types of what the daemon sends are generated from `docs/schemas` (`just vscode-contracts`). The unit tests drive the real binary, and the 19 integration tests pass in a real VS Code 1.90.2 and in the stable one, on macOS arm64 only. The extension does not bundle the CLI (that is phase 7); a missing or mismatched CLI is reported once, with the setting that fixes it. The MCP package of npm is now a launcher (`npm/mcp`, 0.3.0, no engine, no dependencies): `DEBUGGATHA_CLI`, then `@sxnnyside/debuggatha-<os>-<cpu>`, then `PATH`; the TypeScript server stays in `packages/mcp` as a private parity reference. The thirteen tools now declare `outputSchema` (top-level shapes), honest `idempotentHint`/`destructiveHint` (`suppress_finding` and `create_baseline` are destructive), preconditions and error recovery in their descriptions, and reviews take `limit`; this answers the third-party reports on 0.2.0 (missing output schemas and annotations, brief descriptions, no pagination). The per-platform packages do not exist yet, so until phase 7 the launcher needs the binary from `DEBUGGATHA_CLI` or `PATH`. Not done: no Linux or Windows run of the extension; no `log` event or `coverageDetail` use in the editor; the editor shows `coverage.complete` only as a sentence in the completion message.
+
 Gate: adapter test suites pass against the real binary on all CI platforms.
 
 ## Phase 7: distribution (M)
@@ -209,6 +215,8 @@ Gate: adapter test suites pass against the real binary on all CI platforms.
 - GitHub Releases and Homebrew with checksums; crates.io publish order and metadata per the Rust packaging checklist; the README only promises channels the release workflow performs.
 - The release workflow validates tag/version agreement across npm, Cargo and the extension.
 
+Status (2026-11-19): built, not yet run by a tag. `v*.*.*` tags run `release.yml`: version check on every manifest (`scripts/verify-version.sh`: the three crates, both launchers and their platform dependencies, `server.json`, the extension), the CI workflow as the gate, native builds for macOS arm64, Linux x64 and arm64 and Windows x64, then one publish job: `SHA256SUMS`, release notes from the Conventional Commits (`git-cliff`), npm (platform packages first, with provenance and a skip for a version already published), crates.io in dependency order, the Marketplace and Open VSX, and one GitHub release. `just smoke` installs the packed launchers and this platform's package into an empty project and runs `debuggatha --version` and an MCP handshake under Node and Bun (passes here, macOS arm64). `cargo publish --workspace --dry-run` passes. Homebrew builds from the tag in the tap, which bumps itself; nothing here notifies it. Not done: no tag has run the workflow, so npm provenance, the trusted-publisher setup on npmjs.com (the first release of each new package needs a token), the crates.io token and the extension tokens are untested; macOS Intel is not a target; a clean-machine `debuggatha doctor` per channel has not been run.
+
 Gate: a clean machine installs through each channel and `debuggatha doctor` passes.
 
 ## Phase 8: cutover and hardening (M)
@@ -216,6 +224,8 @@ Gate: a clean machine installs through each channel and `debuggatha doctor` pass
 - Switch the published packages to the Rust engine in a new version of the same npm names; keep the previous TypeScript engine tagged for reference; fixes only.
 - Dogfood: Debuggatha reviews itself and the real-repository corpus in CI; results published in the repository.
 - Module READMEs, glossary, PACK_SPEC (data format, queries) and INTEGRATIONS updated; CLAUDE.md reflects the final layout.
+
+Status (2026-11-19): the cutover itself is done in the tree. The TypeScript engine, its Bun and Turborepo tooling, its fixture generators and the license script are removed; `ts-engine-final` is the tag of the last commit that had them. The goldens and fixtures stay as the frozen contract (`docs/PARITY.md`). Gaps found by comparing the command lines, the variables and the tools with the TypeScript ones were closed (`-C/--cwd`, `--json`, the `DEBUGGATHA_*` variables, `semantic-eval`, the analyzer license test); the ones left are listed in `docs/PARITY.md`. Not done: dogfooding in CI, and the false-positive rates are not published.
 
 Gate: conformance green, benchmarks recorded, false-positive rates published, `just check` green on all platforms.
 
@@ -262,4 +272,8 @@ Gate: conformance green, benchmarks recorded, false-positive rates published, `j
 2. **Packs:** JSON canonical, TOML as authoring form, same schema and same policy id (ADR-0006, decision 3).
 3. **Languages:** the tiers above, set from the real use across the four organizations. Ruby, C++ and Elixir are included in the plan (Elixir is tier 1).
 4. **Corpus:** a manifest of repositories at pinned commits, fetched on demand. Public manifest: public repositories only, including the organizations' own CLIs and libraries (for example the `core-red-project` CLIs) and public projects per tier. Private repositories (including all current Elixir code) may be used only through a **local, git-ignored manifest** run on the owner's machine, never in public CI, and with findings kept local (counts and rule ids, no excerpts). A public Elixir project is needed for the shared corpus. Nothing is cloned until a manifest is approved.
-5. **TypeScript packages:** the `@debuggatha/*` packages are kept in step with the migration as the parity reference (ADR-0006, decision 8). At cutover the TypeScript engine is tagged and archived; the contracts package stays, generated from Rust.
+5. **TypeScript packages:** the `@debuggatha/*` packages were kept in step with the migration as the parity reference (ADR-0006, decision 8). At cutover the TypeScript engine is tagged and archived; the contracts package stays, generated from Rust.
+
+---
+
+*Last updated: 2026-11-19*

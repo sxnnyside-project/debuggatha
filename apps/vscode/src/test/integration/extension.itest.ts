@@ -130,6 +130,7 @@ suite('Debuggatha in a real VS Code', () => {
 
   test('contributes exactly the settings something reads, with the values the code expects', () => {
     const cfg = config();
+    assert.strictEqual(cfg.inspect('cliPath')?.defaultValue, '');
     assert.deepStrictEqual(cfg.get('extraReviewPacks'), []);
     assert.strictEqual(cfg.get('reviewDepth'), 'full');
     assert.strictEqual(cfg.get('logLevel'), 'info');
@@ -146,6 +147,7 @@ suite('Debuggatha in a real VS Code', () => {
     const extension = vscode.extensions.getExtension(EXTENSION_ID);
     const properties = extension?.packageJSON.contributes.configuration.properties;
     for (const key of [
+      'debuggatha.cliPath',
       'debuggatha.enabledAnalyzers',
       'debuggatha.semantic.provider',
       'debuggatha.semantic.model',

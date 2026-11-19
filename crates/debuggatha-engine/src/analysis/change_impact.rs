@@ -10,9 +10,9 @@ use serde::Serialize;
 
 use crate::diff::{ChangeKind, FileDiff};
 
-use super::boundaries::ModuleBoundary;
-use super::graph::DependencyGraph;
-use super::public_api::{PublicApiSurface, PublicApiSymbol};
+use super::structure::boundaries::ModuleBoundary;
+use super::structure::graph::DependencyGraph;
+use super::surface::public_api::{PublicApiSurface, PublicApiSymbol};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]

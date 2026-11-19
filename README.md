@@ -1,8 +1,10 @@
 # Debuggatha
 
-![Version](https://img.shields.io/badge/version-0.2.0-blue)
+![Debuggatha banner](docs/assets/debuggatha-banner.png)
+
+![Version](https://img.shields.io/badge/version-0.3.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-[![CI](https://github.com/sxnnyside-project/debuggatha/workflows/CI/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions)
+[![CI](https://github.com/sxnnyside-project/debuggatha/actions/workflows/ci.yml/badge.svg)](https://github.com/sxnnyside-project/debuggatha/actions/workflows/ci.yml)
 
 <p align="center">
   <strong>Contextual ✦ Deterministic ✦ Extensible</strong><br>
@@ -32,7 +34,7 @@ Findings persist in a versioned ledger with a real lifecycle (open, acknowledged
 
 > *"A senior code reviewer, not a chat wrapper."*
 
-This is a Sxnnyside Project.
+Part of the Sxnnyside Project ecosystem.
 
 ## Features
 
@@ -51,7 +53,7 @@ This is a Sxnnyside Project.
 
 - [Rust](https://rustup.rs) (the toolchain is pinned in `rust-toolchain.toml`) and [cargo-deny](https://github.com/EmbarkStudios/cargo-deny): the engine, CLI, daemon, and MCP server
 - [just](https://github.com/casey/just): command surface for the whole repository
-- [Bun](https://bun.sh) (see `.bun-version`), [Node.js](https://nodejs.org) (see `apps/vscode/.node-version`) and [pnpm](https://pnpm.io): only for the VS Code extension and the TypeScript parity reference (`just parity-install`)
+- [Node.js](https://nodejs.org) (see `apps/vscode/.node-version`) and [pnpm](https://pnpm.io): only for the VS Code extension (`just vscode-install`)
 
 ### From Source
 
@@ -62,16 +64,16 @@ cd debuggatha
 just install       # fetch the crates
 just build         # target/release/debuggatha
 just install-cli   # put `debuggatha` on your PATH
-just check         # the full gate: native, then the TypeScript parity reference
+just check         # the full gate: native, the extension, the npm packages
 ```
 
-`just --list` shows every recipe. The unprefixed ones drive the Rust workspace; `parity-*` drive the TypeScript reference.
+`just --list` shows every recipe. The unprefixed ones drive the Rust workspace, and `vscode-*` the extension.
 
 ### From a Registry
 
 - **VS Code / Cursor**: install the [Debuggatha extension](https://marketplace.visualstudio.com/items?itemName=SxnnysideProject.debuggatha) from the Marketplace, or from [Open VSX](https://open-vsx.org/extension/SxnnysideProject/debuggatha). See [apps/vscode/README.md](apps/vscode/README.md).
-- **MCP host** (Claude Code, Claude Desktop, Cursor): `claude mcp add debuggatha -- bunx @sxnnyside/debuggatha-mcp` (`npx -y` works too). See [packages/mcp/README.md](packages/mcp/README.md).
-- **Terminal / CI**: `bunx @sxnnyside/debuggatha-cli review` (or `npx`), or a standalone executable from the releases page. See [packages/cli/README.md](packages/cli/README.md).
+- **MCP host** (Claude Code, Claude Desktop, Cursor): `claude mcp add debuggatha -- npx -y @sxnnyside/debuggatha-mcp` (`bunx` works too). The package launches the native binary (`DEBUGGATHA_CLI`, the package of your platform, or `PATH`). See [npm/mcp/README.md](npm/mcp/README.md).
+- **Terminal / CI**: `npx @sxnnyside/debuggatha-cli review` (or `bunx`), `cargo install debuggatha-cli`, or the archive of your platform from the releases page (with `SHA256SUMS`). See [npm/cli/README.md](npm/cli/README.md).
 
 ## Usage
 
@@ -87,16 +89,7 @@ To connect a coding agent (Claude Code, Qwen Code, Cursor, and others), see [doc
 
 ## Architecture
 
-```
-debuggatha/
-├── crates/       # The Rust engine: core (domain), engine (reviews, daemon), cli (the `debuggatha` binary, daemon, MCP)
-├── apps/         # The VS Code extension (Node + pnpm), a client of the binary
-├── packages/     # The TypeScript engine, kept as the parity reference until the cutover
-├── scripts/      # Gates, and scripts/parity for the fixture generators
-└── docs/         # Architecture, Protocol v1, parity, roadmap, ADRs, integrations, and the Review Pack spec
-```
-
-For a detailed breakdown, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+For a detailed breakdown, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Contributing
 

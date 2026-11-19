@@ -1,18 +1,22 @@
 # Using Debuggatha with your coding tool
 
+<!-- How to connect a coding agent to Debuggatha; for people wiring it into their tools. -->
+
 Debuggatha runs as an MCP server (`debuggatha-mcp`), a CLI (`debuggatha`), and a VS Code extension.
 Any coding agent that speaks MCP can call it after it writes code: the agent writes, Debuggatha
 reviews, and the findings land in the same ledger the CLI and the editor read.
+
+---
 
 ## 1. Pick how the host launches the server
 
 | Install | Command the host runs |
 | --- | --- |
-| No install (published package) | `bunx @sxnnyside/debuggatha-mcp` or `npx -y @sxnnyside/debuggatha-mcp` |
+| No install (published package) | `npx -y @sxnnyside/debuggatha-mcp` or `bunx @sxnnyside/debuggatha-mcp` |
 | Installed from this checkout | `debuggatha mcp` (after `just install-cli`) |
 | Installed from a registry | `debuggatha-mcp` (after `bun add --global @sxnnyside/debuggatha-mcp` or `npm install --global @sxnnyside/debuggatha-mcp`) |
 
-The examples below use `debuggatha-mcp`; substitute `bunx` with `["@sxnnyside/debuggatha-mcp"]` or `npx` with
+The examples below use `debuggatha-mcp`; substitute `npx` with `["-y", "@sxnnyside/debuggatha-mcp"]` or `bunx` with `["@sxnnyside/debuggatha-mcp"]` if you did not install it. A host that starts from a GUI may not see your
 `["-y", "@sxnnyside/debuggatha-mcp"]` if you did not install it. A host that starts from a GUI may not see your
 shell `PATH`; use the absolute path (`which debuggatha-mcp`) if it cannot find the command.
 
@@ -150,7 +154,7 @@ debuggatha init                         # config and a GitHub Actions or GitLab 
 debuggatha doctor                       # diagnose the setup
 ```
 
-See [packages/cli/README.md](../packages/cli/README.md) for every command and flag.
+`debuggatha --help` lists every command and flag; [npm/cli/README.md](../npm/cli/README.md) covers the npm package.
 
 ## 6. Installing from a checkout
 
@@ -158,14 +162,14 @@ See [packages/cli/README.md](../packages/cli/README.md) for every command and fl
 just install          # fetch the crates
 just install-cli      # puts debuggatha on your PATH (needs ~/.cargo/bin on PATH); MCP hosts run `debuggatha mcp`
 just uninstall-cli    # undoes install-cli
-just parity-install   # JavaScript toolchains, for the extension
-just dev              # rebuilds the packages and watches the extension
+just vscode-install   # the extension's Node toolchain
+just dev              # watches the extension
 ```
 
 To try the extension from source, open this repository in your editor (VS Code, Antigravity,
 Cursor, or any VS Code fork) and press **F5** (**Run Extension**). The editor you are in opens its
 own Extension Development Host with Debuggatha loaded; `just dev` in a terminal keeps it rebuilding.
-To install a build instead, run `just package` and use **Extensions: Install from VSIX...** in your
+To install a build instead, run `just vscode-package` and use **Extensions: Install from VSIX...** in your
 editor, or install from Open VSX.
 
 ## 7. Troubleshooting
@@ -177,3 +181,7 @@ editor, or install from Open VSX.
   review would run.
 - **Findings do not match the editor**: they share `.debuggatha/ledger.json` in the repository root;
   check that both point at the same repository.
+
+---
+
+*Last updated: 2026-11-19*

@@ -5,7 +5,7 @@
 If you find a security vulnerability in **Debuggatha**, report it privately before disclosing it publicly.
 
 **Preferred channel:**
-Email — `legal.sxnnyside@sxnnysideproject.com`
+Email — `security.sxnnyside@sxnnysideproject.com`
 
 **Alternative:**
 [GitHub Private Security Advisory](https://github.com/sxnnyside-project/debuggatha/security/advisories/new)
@@ -49,4 +49,4 @@ For ecosystem-wide security concerns, use the email above.
 
 ---
 
-*Debuggatha is A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com).*
+*Debuggatha — A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com) ecosystem.*

@@ -1,10 +1,5 @@
 import { isAbsolute, join } from 'node:path';
-import {
-  type Finding,
-  inlineSuppressionComment,
-  type LedgerEntry,
-  ruleIdFromEvidence,
-} from '@debuggatha/engine';
+import type { Evidence, Finding, LedgerEntry } from '../contracts/index.js';
 
 /*
  * What a finding looks like in the editor, as data. Nothing here imports `vscode`, so it is
@@ -70,6 +65,17 @@ export function provenanceOf(finding: Finding): Provenance {
   return { kind: 'built-in', pack: pack?.kind === 'review-pack-rule' ? pack.packId : undefined };
 }
 
+function ruleIdFromEvidence(evidence: readonly Evidence[]): string | undefined {
+  for (const item of evidence) {
+    if (item.kind === 'review-pack-rule' || item.kind === 'criteria') return item.ruleId;
+    if (item.kind === 'external-analyzer') return `${item.tool}:${item.ruleId}`;
+    if (item.kind === 'semantic-review' && item.role === 'detection' && item.topic) {
+      return `semantic:${item.topic}`;
+    }
+  }
+  return undefined;
+}
+
 export const ruleOf = (finding: Finding): string =>
   ruleIdFromEvidence(finding.evidence) ?? finding.category;
 
@@ -127,13 +133,23 @@ export function canSuppressInline(finding: Finding): boolean {
   );
 }
 
-/** The comment line that accepts `finding` on the line below it, indented like the code it covers. */
-export function suppressionEdit(finding: Finding, lineText: string, reason: string) {
-  const file = finding.locations[0]?.file ?? '';
+/** What the daemon's comment has where the reason goes. */
+export const REASON_PLACEHOLDER = '<why this is acceptable>';
+
+/**
+ * The comment line that accepts `finding` on the line below it, indented like the code it covers.
+ * `template` is the comment the daemon gives for the finding's file, with the reason left to fill.
+ */
+export function suppressionEdit(
+  finding: Finding,
+  lineText: string,
+  reason: string,
+  template: string,
+) {
   const indent = /^\s*/.exec(lineText)?.[0] ?? '';
   return {
     line: Math.max(0, (finding.locations[0]?.lines?.start ?? 1) - 1),
-    text: `${indent}${inlineSuppressionComment(file, ruleOf(finding), reason.trim())}\n`,
+    text: `${indent}${template.replace(REASON_PLACEHOLDER, reason.trim())}\n`,
   };
 }
 

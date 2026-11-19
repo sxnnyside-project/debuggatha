@@ -3,15 +3,14 @@
 //! concept or to its own detector.
 
 use std::path::Path;
-use std::sync::OnceLock;
 
-use super::calls::one_per_line;
 use super::hit::Hit;
 use super::input::DetectorInput;
-use super::js::{Lines, make_hit};
+use super::rules::calls::one_per_line;
+use super::rules::js::{Lines, make_hit};
 use super::runner::Registry;
 use crate::scan_scope::is_test_path;
-use crate::syntax::{Language, Query};
+use crate::syntax::{Language, QuerySet};
 use debuggatha_core::review_engine::Confidence;
 
 /// The rules this group answers for.
@@ -100,39 +99,22 @@ const SOURCES: [(Language, &str); 12] = [
     (Language::Ruby, include_str!("../../data/patterns/ruby.scm")),
 ];
 
-/// Compiled on first use: a repository holds a few languages, and every query costs milliseconds.
-fn compiled(index: usize) -> &'static Result<Query, String> {
-    static QUERIES: [OnceLock<Result<Query, String>>; SOURCES.len()] =
-        [const { OnceLock::new() }; SOURCES.len()];
-    QUERIES[index].get_or_init(|| {
-        let (language, source) = SOURCES[index];
-        Query::new(language, source).map_err(|e| e.to_string())
-    })
-}
+static QUERIES: QuerySet<{ SOURCES.len() }> = QuerySet::new(SOURCES);
 
 /// Why a query does not compile, if any (a test asserts there is none).
 #[must_use]
 pub fn compile_errors() -> Vec<String> {
-    SOURCES
-        .iter()
-        .enumerate()
-        .filter_map(|(i, (l, _))| {
-            compiled(i)
-                .as_ref()
-                .err()
-                .map(|e| format!("{}: {e}", l.id()))
-        })
-        .collect()
+    QUERIES.errors()
 }
 
 /// The languages whose patterns report the rule.
 #[must_use]
 pub fn languages_of(rule: &str) -> Vec<Language> {
     let marker = format!("@hit.{rule}");
-    SOURCES
-        .iter()
+    QUERIES
+        .sources()
         .filter(|(_, source)| source.contains(&marker))
-        .map(|(language, _)| *language)
+        .map(|(language, _)| language)
         .collect()
 }
 
@@ -141,11 +123,7 @@ pub fn detect(input: &DetectorInput<'_>) -> Vec<(&'static str, Hit)> {
     let Some(syntax) = input.syntax else {
         return Vec::new();
     };
-    let Some(query) = SOURCES
-        .iter()
-        .position(|(l, _)| *l == syntax.language)
-        .and_then(|i| compiled(i).as_ref().ok())
-    else {
+    let Some(query) = QUERIES.query_for(syntax.language) else {
         return Vec::new();
     };
     let Ok(matches) = query.run(syntax, input.content) else {

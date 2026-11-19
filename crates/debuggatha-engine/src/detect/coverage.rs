@@ -287,7 +287,7 @@ impl Run {
             let (pack_id, pack_version) = pack_of(&rule.origin);
             if registry.has(&rule.id)
                 && !self.repo_files_given
-                && super::env::NEEDS_REPO_FILES.contains(&rule.id.as_str())
+                && super::rules::env::NEEDS_REPO_FILES.contains(&rule.id.as_str())
             {
                 // It could not run: not checked, and the review says why.
                 rule_gaps.push(RuleGap {
@@ -303,7 +303,7 @@ impl Run {
                 if !ids.contains(&rule.id) {
                     ids.push(rule.id.clone());
                 }
-                let unbound = super::concepts::unbound_languages(&rule.id, &reviewed);
+                let unbound = super::rules::concepts::unbound_languages(&rule.id, &reviewed);
                 if !unbound.is_empty() {
                     rule_gaps.push(RuleGap {
                         pack_id: pack_of(&rule.origin).0,

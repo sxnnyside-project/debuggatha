@@ -3,11 +3,9 @@
 //! `@args`, `@function`, `@loop` (the body that repeats), `@test`. Nesting is worked out here from
 //! the spans, so no language needs code of its own.
 
-use std::sync::OnceLock;
-
 use super::build::{Found, RawDecl, assemble, normalize};
 use super::{Call, Model};
-use crate::syntax::{FileSyntax, Language, Query, QueryMatch, Span};
+use crate::syntax::{FileSyntax, Language, QueryMatch, QuerySet, Span};
 
 const SOURCES: [(Language, &str); 13] = [
     (Language::Rust, include_str!("../../data/semantic/rust.scm")),
@@ -43,31 +41,12 @@ const SOURCES: [(Language, &str); 13] = [
     ),
 ];
 
-type Compiled = Result<Query, String>;
-
-/// Compiled on first use: a repository holds a few languages, and every query costs milliseconds.
-fn compiled(index: usize) -> &'static Compiled {
-    static QUERIES: [OnceLock<Compiled>; SOURCES.len()] =
-        [const { OnceLock::new() }; SOURCES.len()];
-    QUERIES[index].get_or_init(|| {
-        let (language, source) = SOURCES[index];
-        Query::new(language, source).map_err(|e| e.to_string())
-    })
-}
+static QUERIES: QuerySet<{ SOURCES.len() }> = QuerySet::new(SOURCES);
 
 /// Why an adapter query does not compile, if any (a test asserts there is none).
 #[must_use]
 pub fn compile_errors() -> Vec<String> {
-    SOURCES
-        .iter()
-        .enumerate()
-        .filter_map(|(i, (l, _))| {
-            compiled(i)
-                .as_ref()
-                .err()
-                .map(|e| format!("{}: {e}", l.id()))
-        })
-        .collect()
+    QUERIES.errors()
 }
 
 fn capture(m: &QueryMatch, name: &str) -> Option<Span> {
@@ -180,8 +159,7 @@ fn collect(matches: &[QueryMatch], syntax: &FileSyntax, source: &str) -> Found {
 }
 
 pub(super) fn model_of(syntax: &FileSyntax, source: &str) -> Option<Model> {
-    let index = SOURCES.iter().position(|(l, _)| *l == syntax.language)?;
-    let query = compiled(index).as_ref().ok()?;
+    let query = QUERIES.query_for(syntax.language)?;
     let matches = query.run(syntax, source).ok()?;
     let found = collect(&matches, syntax, source);
     let comments = syntax

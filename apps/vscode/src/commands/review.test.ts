@@ -1,9 +1,8 @@
 import { chmodSync, existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { delimiter, join } from 'node:path';
-import { loadLedger } from '@debuggatha/engine';
 import { afterAll, afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { git, makeRepo, removeRepos } from '../test/fixtures.js';
+import { git, loadLedger, makeRepo, removeRepos } from '../test/fixtures.js';
 import { editorDiagnostics, harness, statusItem } from '../test/harness.js';
 import { documentFor, mock, resetMock, Uri } from '../test/vscode-mock.js';
 import { requestForActiveFile, requestForDiff, requestForSelection, runReview } from './review.js';
@@ -48,8 +47,8 @@ describe('reviewing', () => {
     const { root, badFile } = makeRepo();
     const { services } = harness(root);
     mock.activeTextEditor = { document: { uri: Uri.file(badFile) } };
-    const request = requestForActiveFile();
-    expect(request).toEqual({ kind: 'file', path: badFile });
+    const request = requestForActiveFile(root);
+    expect(request).toEqual({ kind: 'file', path: 'src/bad.ts' });
 
     await runReview(services, request as never, { origin: 'manual' });
 
@@ -59,7 +58,7 @@ describe('reviewing', () => {
 
   it('has no request for a file when none is open', () => {
     harness();
-    expect(requestForActiveFile()).toBeUndefined();
+    expect(requestForActiveFile('/w')).toBeUndefined();
   });
 
   it('does not track the same finding twice after a file review and a workspace review', async () => {
@@ -79,7 +78,7 @@ describe('reviewing', () => {
     writeFileSync(badFile, 'var old: any = 1;\neval("new");\n');
     const { services } = harness(root);
 
-    await runReview(services, await requestForDiff(root), { origin: 'manual' });
+    await runReview(services, requestForDiff(), { origin: 'manual' });
 
     expect(rulesInLedger(root)).toContain('no-eval');
     expect(rulesInLedger(root)).not.toContain('no-explicit-any');
@@ -98,7 +97,7 @@ describe('reviewing', () => {
       },
     } as never;
     const request = requestForSelection(root);
-    expect(request).toMatchObject({ kind: 'selection', path: badFile });
+    expect(request).toMatchObject({ kind: 'selection', path: 'src/bad.ts' });
 
     await runReview(services, request as never, { origin: 'manual' });
 
@@ -201,7 +200,7 @@ describe('reviewing', () => {
     const total = loadLedger(root).entries.length;
 
     mock.settings['debuggatha.minimumSeverity'] = 'high';
-    services.refreshFromLedger();
+    await services.refreshFromLedger();
 
     const shown = editorDiagnostics().flat().length;
     expect(shown).toBeGreaterThan(0);

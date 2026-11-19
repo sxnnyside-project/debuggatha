@@ -1,0 +1,41 @@
+{
+  "name": "@sxnnyside/debuggatha-mcp",
+  "version": "0.3.0",
+  "description": "MCP server exposing Debuggatha code review, findings ledger, and repository intelligence to any MCP host. Launches the native debuggatha binary.",
+  "license": "MIT",
+  "author": "Sxnnyside Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxnnyside-project/debuggatha.git",
+    "directory": "npm/mcp"
+  },
+  "homepage": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "bugs": {
+    "url": "https://github.com/sxnnyside-project/debuggatha/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "code-review",
+    "debuggatha"
+  ],
+  "type": "module",
+  "mcpName": "io.github.sxnnyside-project/debuggatha",
+  "bin": {
+    "debuggatha-mcp": "./bin.js"
+  },
+  "files": [
+    "bin.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@sxnnyside/debuggatha-cli": "0.3.0"
+  }
+}

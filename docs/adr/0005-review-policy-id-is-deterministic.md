@@ -1,8 +1,6 @@
 # 0005. `ReviewPolicy.id` is a deterministic hash of its resolution inputs
 
-## Status
-
-Accepted
+Status: Accepted
 
 ## Context
 

@@ -1,12 +1,16 @@
 # Detector quality on the corpus
 
+<!-- Measured false-positive rates of the ported detectors; for anyone changing or trusting a rule. -->
+
 The ROADMAP quality bar asks for a measured false-positive rate per detector, on the real
 corpus, with the limits stated. Parity (`docs/PARITY.md`) proves the Rust detectors agree with the
 TypeScript ones; it does not prove either is right. This is the first measurement of the ported
 rules.
 
+---
+
 **Method.** `DEBUGGATHA_SAMPLES=<file> DEBUGGATHA_CORPUS_DIR=<dir> cargo test -p debuggatha-engine
---test corpus_gate --release` writes up to 50 findings per rule, evenly spaced over all of the
+--test corpus --release` writes up to 50 findings per rule, evenly spaced over all of the
 engine's findings in scan order (deterministic), with three lines of context. The corpus is the 61
 repositories pinned in `corpus/manifest.json` (commits as of 2026-11-10). One reviewer (an AI
 agent, not a person) read each sampled excerpt, and the surrounding code where the excerpt was not
@@ -103,7 +107,7 @@ Same caveat as before: written looking at this corpus, so not an independent mea
 ## `require-await` and `no-loop-func`
 
 These two have no TypeScript twin, so there is nothing to be identical to: the proof is
-`crates/debuggatha-engine/tests/functions.rs` (hand-written positives and look-alikes, 85 cases),
+`crates/debuggatha-engine/tests/detectors/functions.rs` (hand-written positives and look-alikes, 85 cases),
 31 mutations that each fail a case, a seeded-recall test and a full reading of the corpus hits. The
 corpus gate counts them apart (`newRules` in `corpus/golden/divergences-all-detectors.json`).
 
@@ -163,7 +167,7 @@ exemptions is recall: a callback that really did not need `async` is not reporte
   a finding on a file that is not a reviewed unit, and every source file of the repository to conclude
   "never read" (a diff review has not). Not built; reopen it if a real stale example shows up.
 
-**Recall, seeded.** `tests/corpus_recall.rs` appends 12 known violations (8 forms of `require-await`,
+**Recall, seeded.** `tests/corpus/recall.rs` appends 12 known violations (8 forms of `require-await`,
 4 of `no-loop-func`) to each of the 1,706 clean non-test JS/TS files of the corpus: 100% found, on
 the appended line. A first run missed 5 and showed that two of my seeds redeclared a name the file
 already had, which is invalid code, not a miss; the seeds now use unique names. This says nothing
@@ -203,7 +207,7 @@ The rule is a typed one in its usual form ("is this expression a `Promise`?"), a
 no types. So the detector reports a discarded statement only when the tree shows the value is a
 promise, and `Coverage` says so: the rule is among the checked rules **and** has a rule gap of
 reason `needs-type-information` (so a review that holds the rule is never `complete`). The proof is
-`crates/debuggatha-engine/tests/promises.rs` (109 table cases, one more that runs the same files with
+`crates/debuggatha-engine/tests/detectors/promises.rs` (109 table cases, one more that runs the same files with
 and without the index), 50 mutations that each fail a case, a seeded-recall test, a comparison
 with the TypeScript type checker, and a reading of the corpus hits.
 
@@ -247,7 +251,7 @@ the packages. So the low label is honest, and 52 of 81 is the confirmed floor, n
 One form that did not need types was found by this comparison and is now covered:
 `const delay = (t) => new Promise(..)` and `function sleep(t) { return new Promise(..) }`.
 
-**Recall, seeded.** `tests/corpus_recall.rs` appends 10 forms to each of the 1,706 clean non-test
+**Recall, seeded.** `tests/corpus/recall.rs` appends 10 forms to each of the 1,706 clean non-test
 files: all found (1,706 of 1,706), except where the seed is not valid or not the global: the
 `: Promise<void>` form is seeded only in `.ts`/`.tsx` (1,252), `fetch` only in files with no
 `fetch` of their own (1,681). A first run missed 164 of the on-the-spot `async` call, which was an
@@ -281,7 +285,7 @@ Read from the test file and, where the review holds it, the test runner's config
 (`modules::TestConfig`, found by `restoreMocks`, `clearMocks`, `resetMocks`, `mockReset`,
 `unstubGlobals`, `unstubEnvs` in `vitest.config`, `vite.config`, `jest.config` or the `jest` key of
 `package.json`, applied to the files under that folder). The proof is
-`crates/debuggatha-engine/tests/leaks.rs` (95 cases), about 75 mutations that each fail a case, a
+`crates/debuggatha-engine/tests/detectors/leaks.rs` (95 cases), about 75 mutations that each fail a case, a
 seeded-recall test, a full reading of the corpus hits and an independent listing of every
 creation site with the TypeScript parser. Every hit is *medium*: whether the override matters
 depends on test order and isolation.
@@ -324,7 +328,7 @@ evidence anywhere in the file and not at the top level (20): all are explained b
 above or by the configuration (`animoria-vscode` sets `restoreMocks: true`, the only configuration
 of the kind in the corpus). No missed leak was found. That reading is mine, and a sample.
 
-**Recall, seeded.** `tests/corpus_recall.rs` appends 8 forms (inside `it` or `beforeEach`) to each
+**Recall, seeded.** `tests/corpus/recall.rs` appends 8 forms (inside `it` or `beforeEach`) to each
 of the 1,706 clean files, read under a test file name: 1,706 of 1,706 for each.
 
 **Limits.**
@@ -344,7 +348,7 @@ The weakest of the phase 3 rules, by design. The syntax tree cannot say that `re
 to a database; that is a property of a type. The detector reads *shape and names*, so **every hit
 is low confidence and is reported at `medium` severity** (the rule says `high`), the same decision
 as for an unverified thenable in `no-floating-promises`. The proof is
-`crates/debuggatha-engine/tests/n_plus_one.rs` (43 cases), about 25 mutations that each fail a
+`crates/debuggatha-engine/tests/detectors/n_plus_one.rs` (43 cases), about 25 mutations that each fail a
 case, a seeded-recall test, a reading of the corpus hits and a listing of every `await` in a loop.
 
 **What it reports.** A call that *looks like a query* inside a loop over a collection, with
@@ -372,7 +376,7 @@ layer, so it cannot measure the rule. The TypeScript parser listed 162 `await`s 
 non-test files; every one was read by callee name. Besides those two, none is a database call
 (they are `fetch`, file and stream reads, `reader.read`, hooks, parsing, Docker `container.stop`).
 
-**Recall, seeded.** `tests/corpus_recall.rs` appends 6 forms to each of the 1,706 clean files:
+**Recall, seeded.** `tests/corpus/recall.rs` appends 6 forms to each of the 1,706 clean files:
 1,706 of 1,706 for each.
 
 **Limits.**
@@ -392,7 +396,7 @@ non-test files; every one was read by callee name. Besides those two, none is a 
 ## `a03-injection` and `validate-input`
 
 One small taint analysis (`detect::taint`) answers for both rules. The proof is
-`crates/debuggatha-engine/tests/taint.rs` (14 groups, about 230 cases), about 100 mutations that each
+`crates/debuggatha-engine/tests/detectors/taint.rs` (14 groups, about 230 cases), about 100 mutations that each
 fail a case, a seeded-recall test, a reading of every corpus hit and a comparison with the
 TypeScript compiler's own listing.
 
@@ -464,7 +468,7 @@ already clean). One survivor is equivalent: a validator *in the same argument as
 Environment drift: a variable the code reads and no file of the repository mentions. The rule is new
 (pack `debuggatha/dx`, now 1.1.0; the pack is `always`, so **every** policy id changes and the TypeScript
 fixtures and the 61 context goldens were regenerated). It is **language-agnostic by construction**: two
-halves that do not know each other, plus a new input. The proof is `crates/debuggatha-engine/tests/env.rs`
+halves that do not know each other, plus a new input. The proof is `crates/debuggatha-engine/tests/detectors/env.rs`
 (25 groups), about 110 mutations that each fail a case, a seeded-recall test and two independent listings.
 
 **Input.** `run_review_with_files(policy, units, Some(repo_files), ..)`; `RepoFile { path, content }`.
@@ -554,7 +558,7 @@ Measured on the 61-repository corpus, non-JavaScript files only, `no-eval`, `no-
   `exec` built only from fixed text and `escapeshellarg` parts (3).
 - **Recall is not measured on real code.** The corpus holds no vulnerable query in these languages:
   the Flask tutorial and the Rust `conn.execute` calls bind their parameters. The cases that
-  specify the rules are in `tests/concepts.rs`, nine to ten languages each.
+  specify the rules are in `tests/detectors/concepts.rs`, nine to ten languages each.
 - Not checked: Swift, C++ and GDScript have calls but no names, so `n-plus-one-queries` and
   `a03-injection` do not run there; tables were written from the languages' common libraries and
   miss any wrapper or ORM they do not list.
@@ -607,3 +611,7 @@ with their TypeScript parity (the concept table still binds both for every other
 
 - `no-eval` and `no-shell-interpolation` over the model, against their 107 and 149 cases: 9 and 2 differ. `setTimeout` and `setInterval` with a string, and a shadowed `setTimeout`, are not calls the concept can name (the argument is text, and the callee must be the global); `new Function` is in the concept and not in the JavaScript rule; the JavaScript rule reports in test files and the concept skips them; the old rule reports `exec("a" + "b")` and not `exec(name + "x")`, the opposite of what flow says. They stay as JavaScript detectors.
 - What stays on oxc is a rule about a feature of the language (`require-await`, `no-floating-promises`, `no-loop-func`, `leak-mock-restore`, `eqeqeq`), as `no-unwrap-expect` is for Rust. A rule about a concept every language has goes through the model.
+
+---
+
+*Last updated: 2026-11-19*

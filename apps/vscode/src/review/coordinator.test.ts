@@ -1,17 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import {
-  ReviewCancelled,
-  type ReviewJob,
-  type ReviewJobResult,
-  type ReviewRunner,
-} from '../runner/protocol.js';
-import { ReviewCoordinator } from './coordinator.js';
+import type { ReviewJobResult } from '../contracts/index.js';
+import type { ReviewJob } from '../daemon/api.js';
+import { DaemonError } from '../daemon/client.js';
+import { ReviewCoordinator, type ReviewRunner } from './coordinator.js';
 
 const job: ReviewJob = {
-  rootDir: '/w',
   scope: { kind: 'workspace' },
   packIds: [],
   analyzers: { mode: 'off' },
+  semantic: false,
 };
 const result = (findings: number): ReviewJobResult => ({
   findings,
@@ -29,11 +26,13 @@ function controlled() {
     signal: AbortSignal;
   }[] = [];
   const runner: ReviewRunner = {
-    run: (_job, signal) =>
+    review: (_job, signal) =>
       new Promise((resolve, reject) => {
         const entry = { resolve, reject, signal };
         started.push(entry);
-        signal.addEventListener('abort', () => reject(new ReviewCancelled()), { once: true });
+        signal.addEventListener('abort', () => reject(new DaemonError('cancelled', 'Cancelled.')), {
+          once: true,
+        });
       }),
   };
   return { runner, started };

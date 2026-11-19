@@ -1,7 +1,14 @@
-import { createFinding, type Finding, type LedgerEntry, loadLedger } from '@debuggatha/engine';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { FindingIndex } from '../findings/index.js';
-import { makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
+import {
+  createFinding,
+  type Finding,
+  type LedgerEntry,
+  loadLedger,
+  makeRepo,
+  removeRepos,
+  seedLedger,
+} from '../test/fixtures.js';
 import { DiagnosticSeverity, mock, resetMock } from '../test/vscode-mock.js';
 import { clearDiagnostics, initializeDiagnostics, updateDiagnostics } from './diagnostics.js';
 

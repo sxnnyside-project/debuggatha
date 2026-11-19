@@ -1,6 +1,10 @@
 # Contract schemas
 
+<!-- The JSON Schemas of the data Debuggatha stores and exchanges; for adapter authors. -->
+
 JSON Schema (draft-07) for the data Debuggatha stores and exchanges. They are the target the Rust engine must reproduce (ADR-0006) and the shapes [PROTOCOL.md](../PROTOCOL.md) refers to.
+
+---
 
 | File | Describes | Where it appears today |
 |---|---|---|
@@ -15,7 +19,7 @@ JSON Schema (draft-07) for the data Debuggatha stores and exchanges. They are th
 | `review-changes.schema.json` | Introduced, fixed and reopened findings of a run | Engine output |
 | `analyzer-options.schema.json`, `analyzer-run.schema.json` | Which analyzers may run, and what happened | Engine input and output |
 | `semantic-run.schema.json` | What the semantic pass did | Engine output |
-| `review-job.schema.json`, `review-job-result.schema.json` | The VS Code worker job, the closest existing form of a protocol request | `apps/vscode/src/runner/protocol.ts` |
+| `review-job.schema.json`, `review-job-result.schema.json` | The former VS Code worker job, the closest existing form of a protocol request; `apps/vscode/src/contracts` is generated from `ledger`, `repository-context` and `review-job-result` | `apps/vscode/src/daemon/api.ts` |
 
 ## How they were made
 
@@ -55,3 +59,7 @@ Checked again with Ajv after the changes: the same real data passes and the same
 ## Strict stored files, tolerant wire
 
 The schemas reject unknown fields, which is right for files on disk (they carry `schemaVersion` and a migration path). Protocol messages use the same shapes but receivers ignore unknown fields (PROTOCOL.md, section 2), so adding an optional field does not break an older client.
+
+---
+
+*Last updated: 2026-11-19*

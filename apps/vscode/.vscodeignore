@@ -1,5 +1,4 @@
 .vscode/**
-.turbo/**
 src/**
 tsconfig.json
 esbuild.config.mjs

@@ -1,0 +1,336 @@
+{
+ "verification": [
+  {
+   "id": "null-assert-find-real",
+   "stack": "ts",
+   "file": "src/users.ts",
+   "rule": "strict-null-checks",
+   "flagged": "find(",
+   "truth": "real",
+   "code": "interface User { id: string; name: string }\n\nexport function nameOf(users: User[], id: string): string {\n  const user = users.find((u) => u.id === id)!;\n  return user.name;\n}\n"
+  },
+  {
+   "id": "null-assert-header-real",
+   "stack": "ts",
+   "file": "src/auth.ts",
+   "rule": "strict-null-checks",
+   "flagged": "authorization!",
+   "truth": "real",
+   "code": "import type { IncomingMessage } from \"node:http\";\n\nexport function bearerToken(req: IncomingMessage): string {\n  const token = req.headers.authorization!.split(\" \")[1];\n  return token ?? \"\";\n}\n"
+  },
+  {
+   "id": "null-assert-checked-index-fp",
+   "stack": "ts",
+   "file": "src/first.ts",
+   "rule": "strict-null-checks",
+   "flagged": "items[0]!",
+   "truth": "false_positive",
+   "code": "export function firstTrimmed(items: string[]): string {\n  if (items.length === 0) {\n    throw new Error(\"expected at least one item\");\n  }\n  return items[0]!.trim();\n}\n"
+  },
+  {
+   "id": "null-assert-checked-el-fp",
+   "stack": "ts",
+   "file": "src/main.ts",
+   "rule": "strict-null-checks",
+   "flagged": "el!",
+   "truth": "false_positive",
+   "code": "import { mount } from \"./app\";\n\nconst el = document.getElementById(\"root\");\nif (!el) {\n  throw new Error(\"#root is missing from index.html\");\n}\nmount(el!);\n"
+  },
+  {
+   "id": "any-parse-real",
+   "stack": "ts",
+   "file": "src/parse.ts",
+   "rule": "no-explicit-any",
+   "flagged": "input: any",
+   "truth": "real",
+   "code": "export function firstName(input: any): string {\n  return input.user.name.first;\n}\n"
+  },
+  {
+   "id": "any-json-config-real",
+   "stack": "ts",
+   "file": "src/config.ts",
+   "rule": "no-explicit-any",
+   "flagged": "config: any",
+   "truth": "real",
+   "code": "import { readFileSync } from \"node:fs\";\nimport { listen } from \"./server\";\n\nconst config: any = JSON.parse(readFileSync(\"config.json\", \"utf8\"));\nlisten(config.port, config.host);\n"
+  },
+  {
+   "id": "any-never-guard-fp",
+   "stack": "ts",
+   "file": "src/exhaustive.ts",
+   "rule": "no-explicit-any",
+   "flagged": "as any",
+   "truth": "false_positive",
+   "code": "type Shape = { kind: \"circle\"; r: number } | { kind: \"square\"; side: number };\n\nexport function area(shape: Shape): number {\n  switch (shape.kind) {\n    case \"circle\":\n      return Math.PI * shape.r ** 2;\n    case \"square\":\n      return shape.side ** 2;\n    default: {\n      // Exhaustiveness check: this branch cannot run, the cast only reads the tag for the message.\n      const unreachable: never = shape;\n      const kind = (unreachable as any).kind;\n      throw new Error(\"unhandled shape: \" + kind);\n    }\n  }\n}\n"
+  },
+  {
+   "id": "any-listener-signature-fp",
+   "stack": "ts",
+   "file": "src/emitter.ts",
+   "rule": "no-explicit-any",
+   "flagged": "args: any[]",
+   "truth": "false_positive",
+   "code": "// Listeners take whatever the emitting site passes; `unknown[]` would make every handler a type error.\ntype Listener = (...args: any[]) => void;\n\nexport class Emitter {\n  private listeners = new Map<string, Listener[]>();\n\n  on(event: string, listener: Listener): void {\n    this.listeners.set(event, [...(this.listeners.get(event) ?? []), listener]);\n  }\n\n  emit(event: string, ...args: unknown[]): void {\n    for (const listener of this.listeners.get(event) ?? []) listener(...args);\n  }\n}\n"
+  },
+  {
+   "id": "eqeq-string-number-real",
+   "stack": "ts",
+   "file": "src/paging.ts",
+   "rule": "eqeqeq",
+   "flagged": "== 0",
+   "truth": "real",
+   "code": "export function pageOf(query: Record<string, string>, firstPage: () => string[]) {\n  // query values are always strings\n  if (query.page == 0) {\n    return firstPage();\n  }\n  return [];\n}\n"
+  },
+  {
+   "id": "eqeq-id-coercion-real",
+   "stack": "ts",
+   "file": "src/owner.ts",
+   "rule": "eqeqeq",
+   "flagged": "!= user.id",
+   "truth": "real",
+   "code": "interface User { id: number }\n\nexport function canEdit(paramId: string, user: User): boolean {\n  // paramId comes from the URL, user.id is a number\n  return paramId != user.id ? false : true;\n}\n"
+  },
+  {
+   "id": "eqeq-typeof-fp",
+   "stack": "ts",
+   "file": "src/kind.ts",
+   "rule": "eqeqeq",
+   "flagged": "typeof value ==",
+   "truth": "false_positive",
+   "code": "export function isText(value: unknown): boolean {\n  return typeof value == \"string\";\n}\n"
+  },
+  {
+   "id": "eqeq-lengths-fp",
+   "stack": "ts",
+   "file": "src/same.ts",
+   "rule": "eqeqeq",
+   "flagged": "a.length ==",
+   "truth": "false_positive",
+   "code": "export function sameSize(a: string[], b: string[]): boolean {\n  return a.length == b.length;\n}\n"
+  },
+  {
+   "id": "eval-user-input-real",
+   "stack": "ts",
+   "file": "src/calc.ts",
+   "rule": "no-eval",
+   "flagged": "eval(",
+   "truth": "real",
+   "code": "import type { Request, Response } from \"express\";\n\nexport function calculate(req: Request, res: Response) {\n  const result = eval(req.body.expression);\n  res.json({ result });\n}\n"
+  },
+  {
+   "id": "html-unsanitized-real",
+   "stack": "ts",
+   "file": "src/Comment.tsx",
+   "rule": "no-dangerously-set-inner-html",
+   "flagged": "dangerouslySetInnerHTML",
+   "truth": "real",
+   "code": "export function Comment({ comment }: { comment: { body: string } }) {\n  // comment.body is written by any signed-in user\n  return <div dangerouslySetInnerHTML={{ __html: comment.body }} />;\n}\n"
+  },
+  {
+   "id": "html-sanitized-fp",
+   "stack": "ts",
+   "file": "src/Post.tsx",
+   "rule": "no-dangerously-set-inner-html",
+   "flagged": "dangerouslySetInnerHTML",
+   "truth": "false_positive",
+   "code": "import DOMPurify from \"dompurify\";\n\nexport function Post({ html }: { html: string }) {\n  return <article dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />;\n}\n"
+  },
+  {
+   "id": "html-jsonld-fp",
+   "stack": "ts",
+   "file": "src/Seo.tsx",
+   "rule": "no-dangerously-set-inner-html",
+   "flagged": "dangerouslySetInnerHTML",
+   "truth": "false_positive",
+   "code": "const schema = { \"@context\": \"https://schema.org\", \"@type\": \"Organization\", name: \"Acme\" };\n\nexport function Seo() {\n  return (\n    <script type=\"application/ld+json\" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />\n  );\n}\n"
+  },
+  {
+   "id": "unwrap-read-real",
+   "stack": "rust",
+   "file": "src/load.rs",
+   "rule": "no-unwrap-expect",
+   "flagged": "read_to_string",
+   "truth": "real",
+   "code": "use std::fs;\n\n/// `path` is chosen by the user on the command line.\npub fn load(path: &str) -> String {\n    fs::read_to_string(path).unwrap()\n}\n"
+  },
+  {
+   "id": "unwrap-const-regex-fp",
+   "stack": "rust",
+   "file": "src/slug.rs",
+   "rule": "no-unwrap-expect",
+   "flagged": "Regex::new",
+   "truth": "false_positive",
+   "code": "use regex::Regex;\nuse std::sync::OnceLock;\n\npub fn is_slug(text: &str) -> bool {\n    static SLUG: OnceLock<Regex> = OnceLock::new();\n    let re = SLUG.get_or_init(|| Regex::new(r\"^[a-z0-9-]+$\").unwrap());\n    re.is_match(text)\n}\n"
+  },
+  {
+   "id": "expect-checked-fp",
+   "stack": "rust",
+   "file": "src/head.rs",
+   "rule": "no-unwrap-expect",
+   "flagged": "expect(",
+   "truth": "false_positive",
+   "code": "pub fn head(names: &[String]) -> Option<&str> {\n    if names.is_empty() {\n        return None;\n    }\n    let first = names.first().expect(\"non-empty checked above\");\n    Some(first.as_str())\n}\n"
+  },
+  {
+   "id": "unsafe-unchecked-index-real",
+   "stack": "rust",
+   "file": "src/read.rs",
+   "rule": "no-unsafe-blocks",
+   "flagged": "unsafe",
+   "truth": "real",
+   "code": "/// `offset` comes straight from the request body.\npub fn byte_at(buf: &[u8], offset: usize) -> u8 {\n    unsafe { *buf.as_ptr().add(offset) }\n}\n"
+  },
+  {
+   "id": "unsafe-validated-utf8-fp",
+   "stack": "rust",
+   "file": "src/text.rs",
+   "rule": "no-unsafe-blocks",
+   "flagged": "unsafe",
+   "truth": "false_positive",
+   "code": "pub fn as_str(buf: &[u8]) -> Option<&str> {\n    if std::str::from_utf8(buf).is_err() {\n        return None;\n    }\n    // SAFETY: the bytes were just validated as UTF-8 above.\n    Some(unsafe { std::str::from_utf8_unchecked(buf) })\n}\n"
+  },
+  {
+   "id": "panic-user-command-real",
+   "stack": "rust",
+   "file": "src/command.rs",
+   "rule": "no-panic",
+   "flagged": "panic!",
+   "truth": "real",
+   "code": "pub enum Command { Start, Stop }\n\n/// `word` is text typed by a remote client.\npub fn parse(word: &str) -> Command {\n    match word {\n        \"start\" => Command::Start,\n        \"stop\" => Command::Stop,\n        other => panic!(\"unsupported command: {}\", other),\n    }\n}\n"
+  },
+  {
+   "id": "panic-startup-config-fp",
+   "stack": "rust",
+   "file": "src/main.rs",
+   "rule": "no-panic",
+   "flagged": "panic!",
+   "truth": "false_positive",
+   "code": "fn main() {\n    // Fail fast at startup: the service cannot do anything useful without a database.\n    let url = match std::env::var(\"DATABASE_URL\") {\n        Ok(url) => url,\n        Err(_) => panic!(\"DATABASE_URL must be set\"),\n    };\n    run(&url);\n}\n\nfn run(_url: &str) {}\n"
+  },
+  {
+   "id": "panic-handler-real",
+   "stack": "go",
+   "file": "handler.go",
+   "rule": "no-panic",
+   "flagged": "panic(err)",
+   "truth": "real",
+   "code": "package main\n\nimport (\n\t\"database/sql\"\n\t\"net/http\"\n)\n\nfunc handle(db *sql.DB) http.HandlerFunc {\n\treturn func(w http.ResponseWriter, r *http.Request) {\n\t\trow := db.QueryRow(\"SELECT name FROM users WHERE id = $1\", r.URL.Query().Get(\"id\"))\n\t\tvar name string\n\t\tif err := row.Scan(&name); err != nil {\n\t\t\tpanic(err)\n\t\t}\n\t\tw.Write([]byte(name))\n\t}\n}\n"
+  },
+  {
+   "id": "panic-must-helper-fp",
+   "stack": "go",
+   "file": "must.go",
+   "rule": "no-panic",
+   "flagged": "panic(",
+   "truth": "false_positive",
+   "code": "package main\n\nimport \"regexp\"\n\n// MustCompile is used only for package-level patterns that are constants in the source.\nfunc mustCompile(pattern string) *regexp.Regexp {\n\tre, err := regexp.Compile(pattern)\n\tif err != nil {\n\t\tpanic(\"bad built-in pattern \" + pattern + \": \" + err.Error())\n\t}\n\treturn re\n}\n\nvar slug = mustCompile(\"^[a-z0-9-]+$\")\n"
+  }
+ ],
+ "detection": [
+  {
+   "id": "off-by-one",
+   "stack": "ts",
+   "file": "src/total.ts",
+   "planted": [
+    {
+     "at": "i <= items.length",
+     "category": "reliability"
+    }
+   ],
+   "code": "export function total(items: { price: number }[]): number {\n  let sum = 0;\n  for (let i = 0; i <= items.length; i++) {\n    sum += items[i].price;\n  }\n  return sum;\n}\n"
+  },
+  {
+   "id": "sql-concat",
+   "stack": "ts",
+   "file": "src/orders.ts",
+   "planted": [
+    {
+     "at": "DELETE FROM orders",
+     "category": "security"
+    }
+   ],
+   "code": "interface Db { query(sql: string, params?: unknown[]): Promise<unknown> }\n\nexport async function removeOrder(db: Db, req: { params: { id: string } }) {\n  await db.query(\"DELETE FROM orders WHERE id = \" + req.params.id);\n}\n"
+  },
+  {
+   "id": "missing-authorization",
+   "stack": "ts",
+   "file": "src/documents.ts",
+   "planted": [
+    {
+     "at": "documents.delete(",
+     "category": "security"
+    }
+   ],
+   "code": "interface Doc { id: string; ownerId: string }\ninterface Store { get(id: string): Doc | undefined; delete(id: string): void }\n\nexport function deleteDocument(documents: Store, currentUserId: string, id: string) {\n  const doc = documents.get(id);\n  if (!doc) return { status: 404 };\n  documents.delete(id);\n  return { status: 204, deletedBy: currentUserId };\n}\n"
+  },
+  {
+   "id": "missing-await",
+   "stack": "ts",
+   "file": "src/checkout.ts",
+   "planted": [
+    {
+     "at": "orders.save(order);",
+     "category": "reliability"
+    }
+   ],
+   "code": "interface Orders { save(order: object): Promise<void> }\n\nexport async function checkout(orders: Orders, order: object) {\n  orders.save(order);\n  return { ok: true };\n}\n"
+  },
+  {
+   "id": "division-by-zero",
+   "stack": "ts",
+   "file": "src/stats.ts",
+   "planted": [
+    {
+     "at": "total / scores.length",
+     "category": "reliability"
+    }
+   ],
+   "code": "export function average(scores: number[]): number {\n  const total = scores.reduce((sum, score) => sum + score, 0);\n  return total / scores.length;\n}\n"
+  },
+  {
+   "id": "jwt-decode-only",
+   "stack": "ts",
+   "file": "src/session.ts",
+   "planted": [
+    {
+     "at": "jwt.decode(",
+     "category": "security"
+    }
+   ],
+   "code": "import jwt from \"jsonwebtoken\";\n\nexport function currentUser(token: string): string | undefined {\n  const payload = jwt.decode(token) as { sub?: string } | null;\n  return payload?.sub;\n}\n"
+  },
+  {
+   "id": "path-traversal",
+   "stack": "python",
+   "file": "download.py",
+   "planted": [
+    {
+     "at": "open(os.path.join",
+     "category": "security"
+    }
+   ],
+   "code": "import os\nfrom flask import Flask, request\n\napp = Flask(__name__)\nBASE = \"/srv/files\"\n\n\n@app.route(\"/download\")\ndef download():\n    name = request.args[\"file\"]\n    with open(os.path.join(BASE, name), \"rb\") as handle:\n        return handle.read()\n"
+  },
+  {
+   "id": "clean-slugify",
+   "stack": "ts",
+   "file": "src/slugify.ts",
+   "planted": [],
+   "code": "export function slugify(text: string): string {\n  return text\n    .toLowerCase()\n    .normalize(\"NFKD\")\n    .replace(/[^a-z0-9]+/g, \"-\")\n    .replace(/^-+|-+$/g, \"\");\n}\n"
+  },
+  {
+   "id": "clean-average",
+   "stack": "ts",
+   "file": "src/safe-stats.ts",
+   "planted": [],
+   "code": "export function average(scores: number[]): number | undefined {\n  if (scores.length === 0) return undefined;\n  const total = scores.reduce((sum, score) => sum + score, 0);\n  return total / scores.length;\n}\n"
+  },
+  {
+   "id": "clean-download",
+   "stack": "python",
+   "file": "safe_download.py",
+   "planted": [],
+   "code": "import os\nfrom flask import Flask, abort, request\n\napp = Flask(__name__)\nBASE = os.path.realpath(\"/srv/files\")\n\n\n@app.route(\"/download\")\ndef download():\n    path = os.path.realpath(os.path.join(BASE, request.args[\"file\"]))\n    if os.path.commonpath([BASE, path]) != BASE or not os.path.isfile(path):\n        abort(404)\n    with open(path, \"rb\") as handle:\n        return handle.read()\n"
+  }
+ ]
+}

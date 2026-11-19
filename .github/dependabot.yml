@@ -11,22 +11,6 @@ updates:
       actions:
         patterns: ["*"]
 
-  - package-ecosystem: bun
-    directory: /
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 2
-    commit-message:
-      prefix: "chore(deps)"
-    groups:
-      minor-and-patch:
-        update-types: ["minor", "patch"]
-      major:
-        update-types: ["major"]
-      security:
-        applies-to: security-updates
-        patterns: ["*"]
-
   - package-ecosystem: npm
     directory: /apps/vscode
     schedule:

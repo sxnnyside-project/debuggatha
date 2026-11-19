@@ -7,19 +7,21 @@
 use std::collections::BTreeMap;
 use std::path::Path;
 
-use super::boundaries::{Boundaries, infer_boundaries};
 use super::change_impact::{ChangeImpact, estimate_change_impact, estimate_change_impact_of_diff};
-use super::cycles::{DependencyCycle, detect_cycles};
-use super::dead_code::{DeadCodeFinding, detect_dead_code};
-use super::declared::{build_declared_public_api, detect_declared_dead_code};
 use super::ecosystem::Ecosystems;
-use super::exports::{ExportGraph, read_all};
-use super::graph::{DependencyGraph, build_graph};
-use super::layers::{LayerModel, LayerViolation, build_layer_model, detect_layer_violations};
 use super::ownership::{OwnershipSignal, detect_ownership};
-use super::public_api::{PublicApiSurface, build_public_api};
-use super::resolve::Resolver;
-use super::workspace::Workspace;
+use super::structure::boundaries::{Boundaries, infer_boundaries};
+use super::structure::cycles::{DependencyCycle, detect_cycles};
+use super::structure::graph::{DependencyGraph, build_graph};
+use super::structure::layers::{
+    LayerModel, LayerViolation, build_layer_model, detect_layer_violations,
+};
+use super::structure::resolve::Resolver;
+use super::structure::workspace::Workspace;
+use super::surface::dead_code::{DeadCodeFinding, detect_dead_code};
+use super::surface::declared::{build_declared_public_api, detect_declared_dead_code};
+use super::surface::exports::{ExportGraph, read_all};
+use super::surface::public_api::{PublicApiSurface, build_public_api};
 use crate::diff::FileDiff;
 use crate::syntax::{Backend, Language};
 

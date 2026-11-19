@@ -1,10 +1,10 @@
-import { isActiveFindingStatus, type LedgerEntry } from '@debuggatha/engine';
 import * as vscode from 'vscode';
+import { isActiveFindingStatus, type LedgerEntry } from '../contracts/index.js';
 
 export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem> {
-  private _onDidChangeTreeData: vscode.EventEmitter<FindingTreeItem | undefined | void> =
-    new vscode.EventEmitter<FindingTreeItem | undefined | void>();
-  readonly onDidChangeTreeData: vscode.Event<FindingTreeItem | undefined | void> =
+  private _onDidChangeTreeData: vscode.EventEmitter<FindingTreeItem | undefined> =
+    new vscode.EventEmitter<FindingTreeItem | undefined>();
+  readonly onDidChangeTreeData: vscode.Event<FindingTreeItem | undefined> =
     this._onDidChangeTreeData.event;
 
   private entries: LedgerEntry[] = [];
@@ -12,12 +12,12 @@ export class FindingsProvider implements vscode.TreeDataProvider<FindingTreeItem
 
   refresh(entries: LedgerEntry[]): void {
     this.entries = entries;
-    this._onDidChangeTreeData.fire();
+    this._onDidChangeTreeData.fire(undefined);
   }
 
   toggleResolved(): void {
     this.showResolved = !this.showResolved;
-    this._onDidChangeTreeData.fire();
+    this._onDidChangeTreeData.fire(undefined);
   }
 
   private getVisibleEntries(): LedgerEntry[] {

@@ -47,7 +47,7 @@ For larger features, an issue discussion first avoids wasted effort on both side
 Before submitting:
 
 - [ ] The project builds without errors
-- [ ] Changes are described in [CHANGELOG.md](CHANGELOG.md) under `[Unreleased]`
+- [ ] Commit messages follow Conventional Commits (the release notes are generated from them)
 - [ ] The PR description explains what changed and why
 - [ ] New behavior is covered by tests where applicable
 
@@ -96,4 +96,4 @@ If something in the codebase is unclear, open an issue with the `question` label
 
 ---
 
-*Debuggatha is A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com).*
+*Debuggatha — A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com) ecosystem.*

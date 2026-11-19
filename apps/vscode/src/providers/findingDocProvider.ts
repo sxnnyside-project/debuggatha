@@ -1,5 +1,5 @@
-import type { Finding } from '@debuggatha/engine';
 import * as vscode from 'vscode';
+import type { Finding } from '../contracts/index.js';
 
 export class FindingDocProvider implements vscode.TextDocumentContentProvider {
   static scheme = 'debuggatha-finding';

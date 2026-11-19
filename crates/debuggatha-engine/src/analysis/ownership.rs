@@ -6,8 +6,8 @@
 
 use serde::Serialize;
 
-use super::boundaries::ModuleBoundary;
-use super::workspace::{CODEOWNERS_PLACES, Workspace};
+use super::structure::boundaries::ModuleBoundary;
+use super::structure::workspace::{CODEOWNERS_PLACES, Workspace};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "lowercase")]

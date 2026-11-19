@@ -1,8 +1,6 @@
 # 0004. The Capability Registry is an injectable interface with an in-memory default
 
-## Status
-
-Accepted
+Status: Accepted
 
 ## Context
 

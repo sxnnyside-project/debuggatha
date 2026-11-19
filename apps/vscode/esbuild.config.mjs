@@ -22,16 +22,6 @@ const extension = {
   external: ['vscode'],
 };
 
-// The process a review runs in, so a slow analyzer cannot freeze the editor and a review can be
-// cancelled. It carries the engine and needs nothing from VS Code.
-/** @type {import("esbuild").BuildOptions} */
-const worker = {
-  ...shared,
-  entryPoints: ['src/runner/worker.ts'],
-  outfile: 'dist/review-worker.js',
-  minify: !watch,
-};
-
 // Integration tests run inside a real VS Code: `run.js` launches it, `suite.js` and
 // `extension.itest.js` execute in the extension host.
 /** @type {import("esbuild").BuildOptions} */
@@ -47,9 +37,9 @@ const integration = {
 };
 
 if (watch) {
-  for (const options of [extension, worker]) await (await context(options)).watch();
+  await (await context(extension)).watch();
 } else if (tests) {
   await build(integration);
 } else {
-  await Promise.all([build(extension), build(worker)]);
+  await build(extension);
 }

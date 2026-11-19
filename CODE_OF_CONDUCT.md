@@ -47,4 +47,4 @@ This Code of Conduct applies to all project spaces: issues, pull requests, commi
 
 ---
 
-*Debuggatha is A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com).*
+*Debuggatha — A Sxnnyside Project. Part of the [Sxnnyside Project](https://sxnnysideproject.com) ecosystem.*

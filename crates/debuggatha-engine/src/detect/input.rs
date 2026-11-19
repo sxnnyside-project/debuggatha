@@ -1,8 +1,8 @@
 use std::collections::BTreeSet;
 use std::path::Path;
 
-use super::env_docs::EnvDocs;
-use super::modules::ModuleIndex;
+use super::rules::env_docs::EnvDocs;
+use super::rules::modules::ModuleIndex;
 use crate::syntax::{FileSyntax, SyntaxFacts, mask_source, parse};
 
 /// One file handed to the engine. A detector always reads the **whole** file: for a diff review

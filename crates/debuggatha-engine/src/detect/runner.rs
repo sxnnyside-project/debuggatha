@@ -17,11 +17,11 @@ use debuggatha_core::review_engine::{
 };
 
 use super::coverage::{GapReason, ReviewedFile};
-use super::env_docs::EnvDocs;
 use super::guidance::guidance_for;
 use super::hit::Hit;
 use super::input::{DetectorInput, RepoFile, SourceUnit, parse_unit};
-use super::modules::ModuleIndex;
+use super::rules::env_docs::EnvDocs;
+use super::rules::modules::ModuleIndex;
 use crate::control::{Control, Stage};
 use crate::syntax::{
     InlineSuppression, ParseStatus, comment_lines, find_directive, parse_directives,
@@ -247,7 +247,7 @@ pub fn run_review_controlled(
     let env_docs = if policy
         .rules
         .iter()
-        .any(|r| super::env::NEEDS_REPO_FILES.contains(&r.id.as_str()))
+        .any(|r| super::rules::env::NEEDS_REPO_FILES.contains(&r.id.as_str()))
     {
         repo_files.map(EnvDocs::build)
     } else {

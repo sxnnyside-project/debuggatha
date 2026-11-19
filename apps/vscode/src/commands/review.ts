@@ -1,16 +1,10 @@
-import {
-  assemblePolicy,
-  buildRepositoryContext,
-  createReviewRequest,
-  LocalGitProvider,
-  resolveRequestedPackIds,
-  toRepoRelative,
-} from '@debuggatha/engine';
 import * as vscode from 'vscode';
 import { getSettings } from '../config/settings.js';
+import type { ReviewJob } from '../daemon/api.js';
+import type { Progress } from '../daemon/client.js';
+import { toRepoRelative } from '../paths.js';
 import type { Origin } from '../review/coordinator.js';
 import { planReview, type ReviewRequest, selectionDiff } from '../review/plan.js';
-import type { ReviewJob } from '../runner/protocol.js';
 import type { Services } from '../services.js';
 
 export interface ReviewOptions {
@@ -40,7 +34,6 @@ export async function runReview(
   const trusted = vscode.workspace.isTrusted;
   const plan = planReview(request, settings, trusted, { widen: options.widen !== false });
 
-  let semantic: ReviewJob['semantic'];
   if (options.semantic) {
     if (settings.semantic.provider === 'off') {
       const choice = await vscode.window.showInformationMessage(
@@ -52,19 +45,13 @@ export async function runReview(
       }
       return;
     }
-    semantic = {
-      provider: settings.semantic.provider,
-      ...(settings.semantic.model ? { model: settings.semantic.model } : {}),
-      ...(settings.semantic.url ? { url: settings.semantic.url } : {}),
-    };
   }
 
   const job: ReviewJob = {
-    rootDir,
     scope: plan.scope,
     packIds: settings.extraReviewPacks,
     analyzers: plan.analyzers,
-    ...(semantic ? { semantic } : {}),
+    semantic: options.semantic === true,
   };
 
   services.logger.info('Review started', {
@@ -74,7 +61,7 @@ export async function runReview(
     depth: settings.reviewDepth,
     trusted,
     analyzers: plan.analyzers.mode,
-    model: semantic?.provider ?? 'none',
+    model: options.semantic ? settings.semantic.provider : 'none',
   });
   services.status.reviewing(options.origin);
 
@@ -90,8 +77,10 @@ export async function runReview(
             token.onCancellationRequested(() => services.coordinator.cancel());
             progress.report({ message: `Reviewing (${settings.reviewDepth})...` });
             // The repository's context is what the Intelligence view shows; it is cheap next to the review.
-            refreshIntelligence(services, rootDir, plan.scope.kind, settings.extraReviewPacks);
-            return services.coordinator.run(options.origin, job);
+            void refreshIntelligence(services, settings.extraReviewPacks);
+            return services.coordinator.run(options.origin, job, (step) =>
+              progress.report({ message: describe(step, settings.reviewDepth) }),
+            );
           },
         )
       : await vscode.window.withProgress(
@@ -102,7 +91,7 @@ export async function runReview(
   switch (outcome.status) {
     case 'done': {
       const { result } = outcome;
-      services.refreshFromLedger();
+      await services.refreshFromLedger();
       services.logger.info('Review finished', {
         findings: result.findings,
         introduced: result.changes.introduced,
@@ -134,6 +123,9 @@ export async function runReview(
             ? `(${result.changes.introduced} new, ${result.changes.fixed} fixed)`
             : '',
           result.semantic ? `, ${result.semantic.detected} raised by the model` : '',
+          result.coverage && !result.coverage.complete
+            ? '. Some code or rules could not be checked: this is not a clean bill'
+            : '',
           failed.length > 0
             ? `. ${failed.map((run) => run.name).join(', ')} failed; see the log`
             : '',
@@ -151,12 +143,27 @@ export async function runReview(
         void vscode.window.showInformationMessage('Review cancelled.');
       return;
     case 'skipped':
-      services.logger.debug('Save review skipped: a review is already running');
+      services.logger.debug(
+        "Review skipped: another is running, or the file is not the project's own",
+      );
       return;
     case 'failed': {
       services.logger.error('Review failed', { reason: outcome.error });
       services.status.failed(outcome.error);
       if (options.origin !== 'manual') return;
+      if (outcome.unavailable) {
+        const choice = await vscode.window.showErrorMessage(
+          `Debuggatha: ${outcome.error}`,
+          ...(outcome.setting ? ['Open Settings'] : []),
+        );
+        if (choice === 'Open Settings') {
+          void vscode.commands.executeCommand(
+            'workbench.action.openSettings',
+            'debuggatha.cliPath',
+          );
+        }
+        return;
+      }
       const action = await vscode.window.showErrorMessage(
         `Debuggatha review failed: ${outcome.error}`,
         'Show Log',
@@ -168,23 +175,17 @@ export async function runReview(
   }
 }
 
-function refreshIntelligence(
-  services: Services,
-  rootDir: string,
-  scopeKind: 'workspace' | 'files' | 'diff',
-  packs: string[],
-): void {
+function describe(step: Progress, depth: string): string {
+  const where = step.total ? ` (${step.done ?? 0}/${step.total})` : '';
+  return `Reviewing (${depth}): ${step.stage}${where}`;
+}
+
+async function refreshIntelligence(services: Services, packs: string[]): Promise<void> {
   try {
-    const context = buildRepositoryContext(rootDir);
-    const policy = assemblePolicy(
-      context,
-      createReviewRequest({
-        scope:
-          scopeKind === 'workspace' ? { kind: 'workspace' } : { kind: 'diff', base: undefined },
-        depth: 'full',
-        requestedPackIds: resolveRequestedPackIds(packs),
-      }),
-    );
+    const [context, policy] = await Promise.all([
+      services.daemon.context(),
+      services.daemon.policy(packs),
+    ]);
     services.intelligence.refresh(context, policy);
   } catch (error) {
     services.logger.debug('Could not refresh Repository Intelligence', {
@@ -195,13 +196,16 @@ function refreshIntelligence(
 
 /* ------------------------------------------------------------- what the commands ask for */
 
-export async function requestForDiff(rootDir: string): Promise<ReviewRequest> {
-  return { kind: 'diff', diff: (await new LocalGitProvider(rootDir).getDiff()) ?? '' };
+/** The pending changes of the working tree; the daemon reads them. */
+export function requestForDiff(): ReviewRequest {
+  return { kind: 'diff' };
 }
 
-export function requestForActiveFile(): ReviewRequest | undefined {
+export function requestForActiveFile(rootDir: string): ReviewRequest | undefined {
   const editor = vscode.window.activeTextEditor;
-  return editor ? { kind: 'file', path: editor.document.uri.fsPath } : undefined;
+  return editor
+    ? { kind: 'file', path: toRepoRelative(rootDir, editor.document.uri.fsPath) }
+    : undefined;
 }
 
 /** The selected lines, whole, as a change: only they are reviewed, at their real line numbers. */
@@ -217,7 +221,7 @@ export function requestForSelection(rootDir: string): ReviewRequest | undefined 
     lines.push(document.lineAt(line).text);
   return {
     kind: 'selection',
-    path: document.uri.fsPath,
+    path: toRepoRelative(rootDir, document.uri.fsPath),
     diff: selectionDiff(toRepoRelative(rootDir, document.uri.fsPath), first + 1, lines),
   };
 }

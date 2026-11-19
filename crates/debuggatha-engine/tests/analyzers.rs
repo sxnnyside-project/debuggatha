@@ -632,3 +632,29 @@ fn where_a_linter_reports_the_same_rule_on_the_same_line_its_finding_replaces_ou
         "the no-eval ESLint reported on the same line is not said twice"
     );
 }
+
+/// Analyzers are run, never bundled or depended on: each declares its own license and where it
+/// lives, the license lets a person use it freely, and none is a tool whose rules cannot be used.
+#[test]
+fn every_analyzer_declares_a_permissive_license_and_none_is_a_forbidden_one() {
+    const PERMISSIVE: [&str; 6] = [
+        "MIT",
+        "Apache-2.0",
+        "MIT OR Apache-2.0",
+        "BSD-3-Clause",
+        "ISC",
+        "MPL-2.0",
+    ];
+    // Their rule sets are not licensed for redistribution or commercial use.
+    const FORBIDDEN: [&str; 2] = ["semgrep", "codeql"];
+    for adapter in ADAPTERS {
+        assert!(
+            PERMISSIVE.contains(&adapter.license),
+            "{} declares {}",
+            adapter.id,
+            adapter.license
+        );
+        assert!(adapter.homepage.starts_with("https://"), "{}", adapter.id);
+        assert!(!FORBIDDEN.contains(&adapter.id), "{}", adapter.id);
+    }
+}

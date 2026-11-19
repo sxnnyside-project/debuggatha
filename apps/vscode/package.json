@@ -2,7 +2,7 @@
   "name": "debuggatha",
   "displayName": "Debuggatha",
   "description": "The engineering reviewer that remembers — every finding traced to a real rule, tracked from open to resolved, judged against the repo you actually wrote.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "SxnnysideProject",
   "repository": {
     "type": "git",
@@ -61,7 +61,9 @@
     "test": "vitest run --passWithNoTests",
     "test:integration": "node esbuild.config.mjs && node esbuild.config.mjs --tests && node dist-test/run.js",
     "package": "vsce package --no-dependencies",
-    "clean": "rm -rf dist dist-test .vscode-test *.vsix"
+    "clean": "rm -rf dist dist-test .vscode-test *.vsix",
+    "contracts": "node scripts/contracts.mjs",
+    "contracts:check": "node scripts/contracts.mjs --check"
   },
   "contributes": {
     "commands": [
@@ -253,6 +255,12 @@
     "configuration": {
       "title": "Debuggatha",
       "properties": {
+        "debuggatha.cliPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "markdownDescription": "The `debuggatha` binary the extension runs as its engine. Empty: the one on your `PATH`. This can only be set in your own user settings, not by a workspace, so a repository cannot make the extension run a program it ships."
+        },
         "debuggatha.extraReviewPacks": {
           "type": "array",
           "items": {
@@ -371,17 +379,19 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.0",
-    "@debuggatha/engine": "link:../../packages/engine",
+    "@biomejs/biome": "^2.6.8",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.0.0",
-    "@types/vscode": "^1.90.0",
+    "@types/vscode": "1.90.0",
     "@vscode/test-electron": "^3.1.0",
-    "@vscode/vsce": "^3.0.0",
-    "esbuild": "^0.25.0",
-    "mocha": "^10.8.2",
-    "typescript": "^5.6.0",
-    "vitest": "^2.0.0"
+    "@vscode/vsce": "^4.1.1",
+    "esbuild": "^0.28.2",
+    "json-schema-to-typescript": "^16.0.0",
+    "mocha": "^11.8.0",
+    "ovsx": "^1.4.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
   },
   "packageManager": "pnpm@11.5.2"
 }

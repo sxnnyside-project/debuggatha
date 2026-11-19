@@ -1,8 +1,7 @@
 # Command surface for the whole repository.
-# The native engine (Cargo workspace under crates/) is the product: the recipes without a prefix
-# drive it. What is left of the TypeScript engine is the parity reference (ADR-0006) and sits under
-# `parity-*` until the cutover; the VS Code extension (apps/vscode, Node + pnpm) is still the
-# consumer and keeps its own recipes.
+# The native engine (Cargo workspace under crates/) is the product, and the recipes without a
+# prefix drive it. The npm launchers (npm/) and the VS Code extension (apps/vscode, Node + pnpm)
+# are clients of the binary, and `vscode-*` recipes drive the extension.
 
 vscode := "apps/vscode"
 host_os := if os() == "macos" { "darwin" } else if os() == "windows" { "windows" } else { "linux" }
@@ -14,9 +13,10 @@ default:
 
 # --- Native engine -------------------------------------------------------------------------
 
-# Fetch the crates the lockfile names (the toolchain is pinned by rust-toolchain.toml).
+# Fetch the crates the lockfile names (the toolchain is pinned by rust-toolchain.toml) and use the repository's git hooks.
 install:
     cargo fetch --locked
+    git config core.hooksPath .githooks
 
 # The release binary: target/release/debuggatha.
 build:
@@ -40,8 +40,8 @@ format-check:
 rust-check: format-check lint test
     cargo deny check
 
-# Full quality gate. CI runs exactly this: the native gate and the parity reference's.
-check: rust-check parity-check
+# Full quality gate. CI runs exactly this: the native gate, the extension's, and the npm packages'.
+check: rust-check vscode-check npm-check
 
 # The release binary for this machine in dist/binaries (the other platforms are built by the release workflow on native runners).
 binaries: build
@@ -56,7 +56,7 @@ install-cli:
 uninstall-cli:
     -cargo uninstall debuggatha-cli
 
-# Startup and one file review with the release binary (docs/benchmarks.md compares it with the TypeScript engine).
+# Startup and one file review with the release binary (docs/benchmarks.md has the TypeScript baseline).
 bench: build
     target/release/debuggatha --version
     target/release/debuggatha review --files crates/debuggatha-core/src/lib.rs --fail-on none --quiet --no-persist
@@ -65,120 +65,103 @@ bench: build
 rust-publish-dry-run *args:
     cargo publish --workspace --dry-run --locked {{args}}
 
-# --- Parity reference: the TypeScript engine ---------------------------------------------------
+# --- VS Code extension (a client of the binary) ---------------------------------------------
 
-# Bootstrap the JavaScript toolchains from their lockfiles.
-parity-install:
-    bun install --frozen-lockfile
+# Bootstrap the extension's Node toolchain from its lockfile.
+vscode-install:
     pnpm --dir {{vscode}} install --frozen-lockfile
 
-parity-build-packages:
-    bun run build
+# Write src/contracts from docs/schemas (the types of what the daemon sends).
+vscode-contracts:
+    pnpm --dir {{vscode}} run contracts
 
-parity-build: parity-build-packages
+vscode-build:
     pnpm --dir {{vscode}} run build
 
-parity-test: parity-build-packages
-    bun run test
-    pnpm --dir {{vscode}} run test
-
-parity-typecheck: parity-build-packages
-    bun run typecheck
-    pnpm --dir {{vscode}} run typecheck
-
-parity-lint:
-    bun run lint
-    pnpm --dir {{vscode}} run lint
-
-# Apply formatting and import organization to the JavaScript side.
-parity-format:
-    bunx biome check --write --linter-enabled=false .
-
-parity-format-check:
-    bunx biome check --linter-enabled=false .
-
-# Licenses of what ships, and proof that no analyzer is bundled or depended on.
-parity-licenses: parity-build-packages
-    node scripts/license-gate.mjs
-
-# The TypeScript gate: what keeps the reference green while the fixtures are regenerated from it.
-parity-check: parity-format-check parity-lint parity-typecheck parity-test parity-build parity-licenses
-
-# Pack the CLI and MCP tarballs, install them into an empty project, and run the installed bins.
-smoke: parity-build-packages
-    node scripts/smoke-pack.mjs
-
-# Standalone TypeScript executables for every supported platform into dist/binaries (what the release workflow still ships).
-parity-binaries: parity-build-packages
-    #!/usr/bin/env bash
-    set -euo pipefail
-    mkdir -p dist/binaries
-    for target in darwin-arm64 linux-x64 linux-arm64 windows-x64; do
-        ext=""; [ "${target%%-*}" = "windows" ] && ext=".exe"
-        bun build --compile --minify --target="bun-$target" packages/cli/src/bin.ts \
-            --outfile "dist/binaries/debuggatha-$target$ext"
-    done
-
-parity-bench: parity-build-packages
-    bun packages/cli/src/bin.ts --version
-    bun packages/cli/src/bin.ts review --files packages/core/src/index.ts --fail-on none --quiet --no-persist
-
-# Measure a local model on the labeled set of the semantic layer (needs Ollama; add `--provider lmstudio`, `--model <name>`, `--verbose`).
-semantic-eval *args:
-    bun packages/engine/src/semantic/eval/run.ts {{args}}
-
-# --- VS Code extension (the consumer) -------------------------------------------------------
-
-# Rebuild the packages, then run the extension in watch mode.
-dev: parity-build-packages
+# Run the extension in watch mode.
+dev:
     pnpm --dir {{vscode}} run dev
 
+# The extension's gate: contracts up to date, lint, types, and unit tests against the real binary.
+vscode-check: build-debug
+    pnpm --dir {{vscode}} run contracts:check
+    pnpm --dir {{vscode}} run lint
+    pnpm --dir {{vscode}} run typecheck
+    DEBUGGATHA_CLI='{{justfile_directory()}}/target/debug/debuggatha' pnpm --dir {{vscode}} run test
+    pnpm --dir {{vscode}} run build
+
+# The binary the extension's tests drive.
+build-debug:
+    cargo build -p debuggatha-cli --locked
+
 # Run the extension inside a real VS Code: the oldest one it supports (downloads it on first run; needs a display, so CI uses xvfb).
-test-vscode: parity-build-packages
-    pnpm --dir {{vscode}} run test:integration
+test-vscode: build-debug
+    DEBUGGATHA_CLI='{{justfile_directory()}}/target/debug/debuggatha' pnpm --dir {{vscode}} run test:integration
 
 # The same suite in the current stable VS Code.
-test-vscode-stable: parity-build-packages
-    VSCODE_TEST_VERSION=stable pnpm --dir {{vscode}} run test:integration
+test-vscode-stable: build-debug
+    DEBUGGATHA_CLI='{{justfile_directory()}}/target/debug/debuggatha' VSCODE_TEST_VERSION=stable pnpm --dir {{vscode}} run test:integration
 
 # Package the extension into a .vsix.
-package: parity-build
+vscode-package: vscode-build
     pnpm --dir {{vscode}} run package
 
-# --- Parity against the real corpus ---------------------------------------------------------
+# --- Distribution ---------------------------------------------------------------------------
 
-# The phase 2 gate on the real corpus: fetch the pinned repositories, then compare the Rust engine with the TypeScript goldens.
+# The version every published manifest must carry (the Cargo workspace's).
+version := `cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "debuggatha-cli") | .version'`
+
+# Every manifest agrees on one version: the crates, the npm launchers and platform packages, the MCP registry manifest and the extension.
+verify-version tag=version:
+    scripts/verify-version.sh {{tag}}
+
+# What the npm launchers would ship, without publishing.
+npm-check: (verify-version version)
+    cd npm/cli && npm pack --dry-run --silent
+    cd npm/mcp && npm pack --dry-run --silent
+
+# Pack the launchers and this machine's platform package, install them into an empty project, and run what a user would run.
+smoke: build
+    DEBUGGATHA_BINARY="{{justfile_directory()}}/target/release/debuggatha{{exe}}" node scripts/smoke-pack.mjs
+
+# The release archive of one target, built by `cargo build --release --target "$TARGET"`: TARGET and VERSION in the environment, the archive in dist/.
+package:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    : "${TARGET:?the Rust target triple}" "${VERSION:?the version}"
+    name="debuggatha-$VERSION-$TARGET"
+    stage="dist/$name"
+    rm -rf "$stage"; mkdir -p "$stage"
+    case "$TARGET" in
+        *windows*) cp "target/$TARGET/release/debuggatha.exe" "$stage/" ;;
+        *)         cp "target/$TARGET/release/debuggatha" "$stage/" ;;
+    esac
+    cp LICENSE README.md "$stage/"
+    case "$TARGET" in
+        *windows*) (cd dist && 7z a -tzip -bso0 "$name.zip" "$name") ;;
+        *)         tar -C dist -czf "dist/$name.tar.gz" "$name" ;;
+    esac
+    rm -rf "$stage"
+    ls dist
+
+# The release notes of VERSION, from the Conventional Commits since the previous tag, in RELEASE_NOTES.md.
+changelog:
+    : "${VERSION:?the version}"
+    git cliff --latest --tag "v$VERSION" --strip header --output RELEASE_NOTES.md
+
+# Measure a local model on the labeled set of the semantic layer (needs Ollama; `--runtime lmstudio`, `--model <name>`, `--verbose`).
+semantic-eval *args:
+    cargo run --release --locked -p debuggatha-engine --example semantic_eval -- {{args}}
+
+# --- Real-repository corpus (opt-in: clones the pinned repositories) ------------------------
+
+# The detectors and the ledger on the real corpus against the goldens in corpus/golden: fetch the pinned repositories, then run the gates.
 corpus-gate dest="/tmp/debuggatha-corpus":
-    node scripts/parity/fetch-corpus.mjs {{dest}}
+    scripts/fetch-corpus.sh {{dest}}
     DEBUGGATHA_CORPUS_DIR={{dest}} cargo test -p debuggatha-core --test corpus_gate -- --ignored --nocapture
-
-# The detector port on the real corpus: groups A to E detector by detector against the TypeScript detectors (needs the clones and bun), then the gate: every detector together against the golden findings.
-corpus-detectors dest="/tmp/debuggatha-corpus":
-    node scripts/parity/fetch-corpus.mjs {{dest}}
-    DEBUGGATHA_CORPUS_DIR={{dest}} cargo test -p debuggatha-engine --test corpus_parity_js_syntax --release -- --ignored --nocapture
-    bun scripts/parity/dump-detector-hits.ts {{dest}} {{dest}}/ts-hits-js-calls.json no-async-foreach no-shell-interpolation no-open-cors no-error-leak async-route-errors no-focused-tests no-empty-tests no-assertionless-tests
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_HITS={{dest}}/ts-hits-js-calls.json cargo test -p debuggatha-engine --test corpus_parity_js_calls --release -- --ignored --nocapture
-    bun scripts/parity/dump-detector-hits.ts {{dest}} {{dest}}/ts-hits-tree-sitter-rules.json no-unwrap-expect no-unsafe-blocks no-panic avoid-print no-eval
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_HITS={{dest}}/ts-hits-tree-sitter-rules.json cargo test -p debuggatha-engine --test corpus_parity_tree_sitter_rules --release -- --ignored --nocapture
-    bun scripts/parity/dump-detector-hits.ts {{dest}} {{dest}}/ts-hits-vue-template.json use-v-html-carefully
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_HITS={{dest}}/ts-hits-vue-template.json cargo test -p debuggatha-engine --test corpus_parity_vue_template --release -- --ignored --nocapture
-    bun scripts/parity/dump-detector-hits.ts {{dest}} {{dest}}/ts-hits-secrets.json no-hardcoded-secrets
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_HITS={{dest}}/ts-hits-secrets.json cargo test -p debuggatha-engine --test corpus_parity_secrets --release -- --ignored --nocapture
-    DEBUGGATHA_CORPUS_DIR={{dest}} cargo test -p debuggatha-engine --test corpus_gate --release -- --ignored --nocapture
-    DEBUGGATHA_CORPUS_DIR={{dest}} cargo test -p debuggatha-engine --test corpus_recall --release -- --ignored --nocapture
-
-# The analysis engine on the real corpus: boundaries, graph, layers, cycles, public API, dead code, ownership and impact against the TypeScript analysis (needs the clones and bun).
-corpus-analysis dest="/tmp/debuggatha-corpus":
-    node scripts/parity/fetch-corpus.mjs {{dest}}
-    bun scripts/parity/dump-analysis.ts {{dest}} {{dest}}/ts-analysis.json
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_ANALYSIS={{dest}}/ts-analysis.json cargo test -p debuggatha-engine --test corpus_graph --release -- --ignored --nocapture
-    DEBUGGATHA_CORPUS_DIR={{dest}} DEBUGGATHA_TS_ANALYSIS={{dest}}/ts-analysis.json cargo test -p debuggatha-engine --test corpus_module_api --release -- --ignored --nocapture
+    DEBUGGATHA_CORPUS_DIR={{dest}} cargo test -p debuggatha-engine --test corpus --release -- --ignored --nocapture
 
 clean:
     cargo clean
     rm -rf dist
-
-# Also remove the JavaScript build outputs.
-parity-clean: clean
-    bun run clean
     pnpm --dir {{vscode}} run clean

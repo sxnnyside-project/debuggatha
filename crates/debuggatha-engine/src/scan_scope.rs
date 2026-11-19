@@ -255,7 +255,7 @@ fn walk_repo_files(root: &Path, dir: &Path, into: &mut Vec<String>) {
 pub const MAX_REPO_FILE_BYTES: u64 = 1_048_576;
 
 /// The files of the project that are read for what they say about its configuration rather than
-/// reviewed as code (`detect::env_docs::doc_kind`): example dotenv files, READMEs, Dockerfiles,
+/// reviewed as code (`detect::rules::env_docs::doc_kind`): example dotenv files, READMEs, Dockerfiles,
 /// compose files, CI workflows and package manager manifests, as repository-relative POSIX paths
 /// in a stable order. Hidden directories count, dependency and build directories do not.
 #[must_use]
@@ -268,7 +268,7 @@ pub fn list_repo_files(root: &Path) -> Vec<String> {
     all.sort_by(|a, b| debuggatha_core::js::utf16_cmp(a, b));
     all.dedup();
     all.retain(|p| {
-        crate::detect::env_docs::doc_kind(p).is_some()
+        crate::detect::rules::env_docs::doc_kind(p).is_some()
             && !to_posix(p)
                 .split('/')
                 .any(|segment| IGNORED_DIRS.contains(&segment))

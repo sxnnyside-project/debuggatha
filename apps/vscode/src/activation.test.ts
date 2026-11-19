@@ -1,9 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { canTransitionFinding, type FindingLifecycleStatus } from '@debuggatha/engine';
-import { afterAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { LifecycleStatus as FindingLifecycleStatus } from './contracts/index.js';
 import { activate, deactivate } from './index.js';
-import { makeRepo, removeRepos, seedLedger } from './test/fixtures.js';
+import { CLI, makeRepo, removeRepos, seedLedger } from './test/fixtures.js';
 import { mock, openWorkspace, resetMock } from './test/vscode-mock.js';
 
 afterAll(removeRepos);
@@ -36,34 +36,62 @@ describe('activation', () => {
     expect(mock.commands.size).toBeGreaterThan(0);
   });
 
-  it('restores the previous session: findings in the editor and in the tree', () => {
+  it('restores the previous session: findings in the editor and in the tree', async () => {
     const { root, badFile } = makeRepo();
     seedLedger(root);
     resetMock();
     openWorkspace(root);
+    mock.settings['debuggatha.cliPath'] = CLI;
 
     activate(context());
 
-    expect(mock.collections.get('debuggatha')?.entries.has(badFile)).toBe(true);
+    await vi.waitFor(() =>
+      expect(mock.collections.get('debuggatha')?.entries.has(badFile)).toBe(true),
+    );
+    await deactivate();
   });
 
-  it('copes with a workspace that has never been reviewed', () => {
+  it('copes with a workspace that has never been reviewed', async () => {
     const { root } = makeRepo();
     openWorkspace(root);
+    mock.settings['debuggatha.cliPath'] = CLI;
     expect(() => activate(context())).not.toThrow();
+    await deactivate();
     expect(mock.collections.get('debuggatha')?.entries.size).toBe(0);
   });
 
-  it('clears diagnostics on deactivation', () => {
-    const { root } = makeRepo();
+  it('clears diagnostics on deactivation', async () => {
+    const { root, badFile } = makeRepo();
     seedLedger(root);
     resetMock();
     openWorkspace(root);
+    mock.settings['debuggatha.cliPath'] = CLI;
     activate(context());
-    deactivate();
+    await vi.waitFor(() =>
+      expect(mock.collections.get('debuggatha')?.entries.has(badFile)).toBe(true),
+    );
+    await deactivate();
     expect(mock.collections.get('debuggatha')?.entries.size).toBe(0);
   });
+
+  it('says once, with the setting that fixes it, when the CLI cannot be found', async () => {
+    const { root } = makeRepo();
+    openWorkspace(root);
+    mock.settings['debuggatha.cliPath'] = '/nonexistent/debuggatha';
+    activate(context());
+    await vi.waitFor(() => expect(mock.errors.length).toBe(1));
+    expect(mock.errors[0]).toContain('debuggatha.cliPath');
+    expect(mock.outputLines.join('\n')).not.toContain('/nonexistent');
+    await deactivate();
+  });
 });
+
+/** The lifecycle the ledger enforces (crates/debuggatha-core/src/findings_ledger/lifecycle.rs). */
+const canTransitionFinding = (from: FindingLifecycleStatus, to: FindingLifecycleStatus) =>
+  ((from === 'open' || from === 'reopened') &&
+    (to === 'acknowledged' || to === 'resolved' || to === 'dismissed')) ||
+  (from === 'acknowledged' && (to === 'resolved' || to === 'dismissed')) ||
+  ((from === 'resolved' || from === 'dismissed') && to === 'reopened');
 
 describe('finding context menu', () => {
   const STATUSES: FindingLifecycleStatus[] = [

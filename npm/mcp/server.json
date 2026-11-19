@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.sxnnyside-project/debuggatha",
+  "title": "Debuggatha",
+  "description": "Senior code reviewer that understands repository context; every finding cites a real source.",
+  "version": "0.3.0",
+  "repository": {
+    "url": "https://github.com/sxnnyside-project/debuggatha",
+    "source": "github",
+    "subfolder": "npm/mcp"
+  },
+  "websiteUrl": "https://github.com/sxnnyside-project/debuggatha#readme",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@sxnnyside/debuggatha-mcp",
+      "version": "0.3.0",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "DEBUGGATHA_REPOSITORY_ROOT",
+          "description": "Default repository to review when a tool call does not pass rootDir.",
+          "isRequired": false
+        },
+        {
+          "name": "DEBUGGATHA_CLI",
+          "description": "Path of the native debuggatha binary, when it is not the one of this platform's package or on PATH.",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

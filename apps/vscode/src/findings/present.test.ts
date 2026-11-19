@@ -1,6 +1,13 @@
-import { createFinding, type Finding, type LedgerEntry, loadLedger } from '@debuggatha/engine';
 import { afterEach, describe, expect, it } from 'vitest';
-import { makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
+import {
+  createFinding,
+  type Finding,
+  type LedgerEntry,
+  loadLedger,
+  makeRepo,
+  removeRepos,
+  seedLedger,
+} from '../test/fixtures.js';
 import {
   canSuppressInline,
   commandLink,
@@ -136,7 +143,8 @@ describe('suppression', () => {
   it("writes the comment above the line, indented like it, in the file's own comment style", () => {
     const { entries } = realEntries(`function f() {\n    ${VAR_LINE}\n}\n`);
     const finding = byRule(entries, 'no-var').latestFinding;
-    expect(suppressionEdit(finding, `    ${VAR_LINE}`, '  legacy code  ')).toEqual({
+    const template = '// debuggatha-ignore-next-line no-var -- <why this is acceptable>';
+    expect(suppressionEdit(finding, `    ${VAR_LINE}`, '  legacy code  ', template)).toEqual({
       line: 1,
       text: '    // debuggatha-ignore-next-line no-var -- legacy code\n',
     });
@@ -145,7 +153,8 @@ describe('suppression', () => {
       ...finding,
       locations: [{ file: 'tool.py', lines: { start: 3, end: 3 }, columns: undefined } as never],
     };
-    expect(suppressionEdit(python, 'x = 1', 'why').text).toBe(
+    const hash = '# debuggatha-ignore-next-line no-var -- <why this is acceptable>';
+    expect(suppressionEdit(python, 'x = 1', 'why', hash).text).toBe(
       '# debuggatha-ignore-next-line no-var -- why\n',
     );
   });

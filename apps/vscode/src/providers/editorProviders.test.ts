@@ -1,9 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { loadLedger } from '@debuggatha/engine';
 import { afterAll, beforeEach, describe, expect, it } from 'vitest';
 import { suppressInline } from '../commands/suppress.js';
 import { ruleOf } from '../findings/present.js';
-import { makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
+import type { Services } from '../services.js';
+import { loadLedger, makeRepo, removeRepos, seedLedger } from '../test/fixtures.js';
 import { harness } from '../test/harness.js';
 import {
   type CodeAction,
@@ -20,11 +20,11 @@ afterAll(removeRepos);
 
 const SOURCE = 'var x: any = 1;\nif (x == 2) { eval("1"); }\n';
 
-function setup() {
+async function setup() {
   const { root, badFile } = makeRepo(SOURCE);
   seedLedger(root);
   const { services } = harness(root);
-  services.refreshFromLedger();
+  await services.refreshFromLedger();
   const diagnostics = mock.collections.get('debuggatha')?.entries.get(badFile) ?? [];
   const document = () => documentFor(badFile);
   return { root, badFile, services, diagnostics, document };
@@ -47,8 +47,8 @@ const actionsFor = (
 describe('hover provider', () => {
   beforeEach(resetMock);
 
-  it('shows the finding under the cursor, only where it is', () => {
-    const { services, document } = setup();
+  it('shows the finding under the cursor, only where it is', async () => {
+    const { services, document } = await setup();
     const provider = new FindingHoverProvider(services.index);
     // `var` is columns 0-3 on line 0.
     const on = provider.provideHover(document() as never, new Position(0, 1) as never);
@@ -64,8 +64,8 @@ describe('hover provider', () => {
     expect(provider.provideHover(document() as never, new Position(5, 0) as never)).toBeUndefined();
   });
 
-  it("may run only Debuggatha's own commands from its links", () => {
-    const { services, document } = setup();
+  it("may run only Debuggatha's own commands from its links", async () => {
+    const { services, document } = await setup();
     const hover = new FindingHoverProvider(services.index).provideHover(
       document() as never,
       new Position(0, 1) as never,
@@ -83,8 +83,8 @@ describe('hover provider', () => {
 describe('code action provider', () => {
   beforeEach(resetMock);
 
-  it('offers the exact fix on a finding that has one, preferred only when it is safe', () => {
-    const { services, diagnostics, document } = setup();
+  it('offers the exact fix on a finding that has one, preferred only when it is safe', async () => {
+    const { services, diagnostics, document } = await setup();
     const provider = new FindingCodeActionProvider(services.index);
     const actions = actionsFor(provider, document(), diagnostics, 0);
 
@@ -100,8 +100,8 @@ describe('code action provider', () => {
     expect(review?.isPreferred).toBe(false); // never applied by an "apply all preferred fixes"
   });
 
-  it('does not offer an edit for a finding that has none, but still offers the rest', () => {
-    const { services, diagnostics, document } = setup();
+  it('does not offer an edit for a finding that has none, but still offers the rest', async () => {
+    const { services, diagnostics, document } = await setup();
     const onlyEval = diagnostics.filter((d) => d.code === 'no-eval');
     const actions = actionsFor(
       new FindingCodeActionProvider(services.index),
@@ -117,8 +117,8 @@ describe('code action provider', () => {
     expect(titles).toContain('Debuggatha: open detail');
   });
 
-  it('stops offering the edit once the line is not what the review read', () => {
-    const { services, diagnostics, badFile, document } = setup();
+  it('stops offering the edit once the line is not what the review read', async () => {
+    const { services, diagnostics, badFile, document } = await setup();
     writeFileSync(badFile, `var x: any = 2; // edited\n${SOURCE.split('\n')[1]}\n`);
     const actions = actionsFor(
       new FindingCodeActionProvider(services.index),
@@ -129,8 +129,8 @@ describe('code action provider', () => {
     expect(actions.some((action) => action.edit)).toBe(false);
   });
 
-  it('acts on the finding by its id, so the command survives a refresh', () => {
-    const { services, diagnostics, document } = setup();
+  it('acts on the finding by its id, so the command survives a refresh', async () => {
+    const { services, diagnostics, document } = await setup();
     const actions = actionsFor(
       new FindingCodeActionProvider(services.index),
       document(),
@@ -143,8 +143,8 @@ describe('code action provider', () => {
     expect(resolve?.command?.command).toBe('debuggatha.resolveFindingById');
   });
 
-  it("ignores diagnostics that are not Debuggatha's", () => {
-    const { services, document } = setup();
+  it("ignores diagnostics that are not Debuggatha's", async () => {
+    const { services, document } = await setup();
     const foreign = { source: 'eslint', code: 'no-var', range: new Range(0, 0, 0, 3) };
     expect(
       actionsFor(new FindingCodeActionProvider(services.index), document(), [foreign], 0),
@@ -155,18 +155,17 @@ describe('code action provider', () => {
 describe('accepting a finding in code', () => {
   beforeEach(resetMock);
 
-  const eval_ = (services: ReturnType<typeof setup>['services']) => {
+  const eval_ = (services: Services) => {
     const entry = [...loadLedgerEntries(services)].find(
       (e) => ruleOf(e.latestFinding) === 'no-eval',
     );
     if (!entry) throw new Error('no eval finding');
     return entry.id;
   };
-  const loadLedgerEntries = (services: ReturnType<typeof setup>['services']) =>
-    loadLedger(services.rootDir as string).entries;
+  const loadLedgerEntries = (services: Services) => loadLedger(services.rootDir as string).entries;
 
   it('inserts the reason above the line, indented like it, and asks for none when one is given', async () => {
-    const { services } = setup();
+    const { services } = await setup();
     const applied = await suppressInline(services, eval_(services), '  legacy path  ');
     expect(applied).toBe(true);
     const insertion = mock.applied[0]?.insertions[0];
@@ -175,7 +174,7 @@ describe('accepting a finding in code', () => {
   });
 
   it('asks why when no reason is given, and does nothing if the person declines', async () => {
-    const { services } = setup();
+    const { services } = await setup();
     mock.inputAnswer = undefined;
     expect(await suppressInline(services, eval_(services))).toBe(false);
     expect(mock.applied).toEqual([]);
@@ -186,13 +185,13 @@ describe('accepting a finding in code', () => {
   });
 
   it('refuses an empty reason', async () => {
-    const { services } = setup();
+    const { services } = await setup();
     expect(await suppressInline(services, eval_(services), '   ')).toBe(false);
     expect(mock.applied).toEqual([]);
   });
 
   it('says a comment cannot silence a finding that comes from an external tool', async () => {
-    const { root, services } = setup();
+    const { root, services } = await setup();
     // Turn one entry into an analyzer's finding in the ledger, as a review with Ruff would.
     const path = `${root}/.debuggatha/ledger.json`;
     const raw = JSON.parse(readFileSync(path, 'utf8'));
@@ -201,7 +200,7 @@ describe('accepting a finding in code', () => {
       { kind: 'external-analyzer', tool: 'ruff', ruleId: 'F401', license: 'MIT' },
     ];
     writeFileSync(path, JSON.stringify(raw));
-    services.refreshFromLedger();
+    await services.refreshFromLedger();
 
     expect(await suppressInline(services, entry.id, 'why')).toBe(false);
     expect(mock.infos.join(' ')).toContain('external tool');
@@ -209,7 +208,7 @@ describe('accepting a finding in code', () => {
   });
 
   it('reports a finding that is gone', async () => {
-    const { services } = setup();
+    const { services } = await setup();
     expect(await suppressInline(services, 'no-such-id', 'why')).toBe(false);
     expect(mock.errors).toEqual(['That finding is no longer in the ledger.']);
   });

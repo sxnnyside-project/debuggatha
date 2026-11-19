@@ -1,5 +1,5 @@
-import type { Severity } from '@debuggatha/engine';
 import * as vscode from 'vscode';
+import type { Severity } from '../contracts/index.js';
 
 /**
  * How much a review does:
@@ -23,6 +23,8 @@ export const SEVERITY_LEVELS: readonly Severity[] = [
 ];
 
 export interface ExtensionSettings {
+  /** The `debuggatha` binary: empty means the one on the PATH. Machine scope. */
+  cliPath: string | undefined;
   extraReviewPacks: string[];
   reviewDepth: ReviewDepth;
   logLevel: LogLevel;
@@ -47,6 +49,7 @@ export function getSettings(): ExtensionSettings {
     return value?.trim() ? value.trim() : undefined;
   };
   return {
+    cliPath: text('cliPath'),
     extraReviewPacks: config.get<string[]>('extraReviewPacks') ?? [],
     reviewDepth: pick(config.get<string>('reviewDepth'), REVIEW_DEPTHS, 'full'),
     logLevel: pick(config.get<string>('logLevel'), LOG_LEVELS, 'info'),

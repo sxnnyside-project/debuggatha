@@ -154,6 +154,29 @@ fn nothing_but_ping_works_before_initialize_and_the_handshake_names_the_server()
 }
 
 #[test]
+fn every_tool_declares_what_it_returns_and_what_it_does_to_the_repository() {
+    let repo = Repo::new("hints");
+    let mut server = Server::start(&repo);
+    server.initialize(&json!({}));
+    let listed = server.request("tools/list", &json!({}));
+    for tool in listed["result"]["tools"].as_array().unwrap() {
+        let name = tool["name"].as_str().unwrap();
+        assert_eq!(tool["outputSchema"]["type"], "object", "{name}");
+        let notes = &tool["annotations"];
+        if notes["readOnlyHint"] == true {
+            assert_eq!(notes["destructiveHint"], false, "{name}");
+            assert_eq!(notes["idempotentHint"], true, "{name}");
+        }
+    }
+    let called = server.request(
+        "tools/call",
+        &json!({ "name": "list_findings", "arguments": {} }),
+    );
+    let result = &called["result"]["structuredContent"];
+    assert!(result["entries"].is_array() && result["total"].is_number());
+}
+
+#[test]
 fn the_tools_of_the_typescript_server_are_all_here_with_schemas() {
     let repo = Repo::new("tools");
     let mut server = Server::start(&repo);
