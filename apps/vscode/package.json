@@ -371,14 +371,14 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.0.0",
+    "@biomejs/biome": "^2.6.8",
     "@debuggatha/engine": "link:../../packages/engine",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.0.0",
-    "@types/vscode": "^1.90.0",
+    "@types/vscode": "^1.146.0",
     "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.0.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.2",
     "mocha": "^10.8.2",
     "typescript": "^5.6.0",
     "vitest": "^2.0.0"
