@@ -28,4 +28,4 @@ uuid.workspace = true
 
 [dev-dependencies]
 flate2 = "1"
-jsonschema = { version = "0.61.1", default-features = false }
+jsonschema = { version = "0.63.1", default-features = false }
